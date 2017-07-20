@@ -1,4 +1,4 @@
-#Features
+# Features
 
         - Auto Routes [simple & Advanced]  
         - Handle Response Headers  
@@ -12,16 +12,28 @@
 `npm install isite --save`
 
 
-##Using
+## Using
 
 ```js
 var isite = require('isite')
-var site = isite({port:8080})
+var site = isite() // default port 80
+
+site.run()
+```
+Advanced Using
+
+```js
+var isite = require('isite')
+var site = isite({
+    port:8080 , 
+    dir:__dirname + '/site_files'
+    })
 
 site.run()
 ```
 
-##Routes
+
+## Routes
 
 Easy Site Routing
 
@@ -60,7 +72,20 @@ site.addRoute({
 
 ```
 
-##More
+## Sessions
+
+```js
+site.get('/login', function(req, res) {
+    req.session.set('username', 'amr barakat')
+    res.end('loged ok !! ')
+})
+
+site.get('/userInfo', function(req, res) {
+    var userName = req.session.get('username')
+    res.end(userName)
+})
+```
+## More
 
 Email : Absunstar@gmail.com
 Github : https://github.com/absunstar/

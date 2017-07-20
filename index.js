@@ -9,10 +9,10 @@ module.exports = function init(options) {
 
     let events = require('events');
     let eventEmitter = new events.EventEmitter();
-    site.on = function (name, callback) {
+    site.on = function(name, callback) {
         eventEmitter.on(name, callback)
     };
-    site.call = function (name) {
+    site.call = function(name) {
         eventEmitter.emit(name);
     };
 
@@ -51,13 +51,31 @@ module.exports = function init(options) {
     site.ips = []; // all ip send requests [ip , requets count]
     site.users = []; // all users [token , id , name , permissions , requests count]
     site.logs = []; // all log Messages if logEnabled = true
+    site.sessions = []; // all sessions info
+    site.trackSession = function(session) {
+
+        for (var i = 0; i < site.sessions.length; i++) {
+            var s = site.sessions[i];
+            if (s.token == session.token) {
+                s.data = session.data || s.data;
+                s.requestesCount++;
+                s.ip = session.ip;
+                return s;
+            }
+        }
+        session.data = [];
+        session.requestesCount = 1;
+        session.createdTime = new Date().getTime();
+        site.sessions.push(session);
+        return session;
+    }
 
 
-    site.reset = function () {
+    site.reset = function() {
 
     }
 
-    site.test = function () {
+    site.test = function() {
         console.log('Isite Test OK');
     };
 
