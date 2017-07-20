@@ -72,6 +72,19 @@ site.addRoute({
 
 ```
 
+## Sessions
+
+```
+site.get('/login', function(req, res) {
+    req.session.set('username', 'amr barakat')
+    res.end('loged ok !! ')
+})
+
+site.get('/userInfo', function(req, res) {
+    var userName = req.session.get('username')
+    res.end(userName)
+})
+```
 ## More
 
 Email : Absunstar@gmail.com
