@@ -16,10 +16,22 @@
 
 ```js
 var isite = require('isite')
-var site = isite({port:8080})
+var site = isite() // default port 80
 
 site.run()
 ```
+Advanced Using
+
+```js
+var isite = require('isite')
+var site = isite({
+    port:8080 , 
+    dir:__dirname + '/site_files'
+    })
+
+site.run()
+```
+
 
 ##Routes
 
