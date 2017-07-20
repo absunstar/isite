@@ -74,7 +74,7 @@ site.addRoute({
 
 ## Sessions
 
-```
+```js
 site.get('/login', function(req, res) {
     req.session.set('username', 'amr barakat')
     res.end('loged ok !! ')
