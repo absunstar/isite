@@ -9,10 +9,10 @@ module.exports = function init(options) {
 
     let events = require('events');
     let eventEmitter = new events.EventEmitter();
-    site.on = function(name, callback) {
+    site.on = function (name, callback) {
         eventEmitter.on(name, callback)
     };
-    site.call = function(name) {
+    site.call = function (name) {
         eventEmitter.emit(name);
     };
 
@@ -31,6 +31,8 @@ module.exports = function init(options) {
     let files = require(__dirname + '/lib/files.js');
     site.fs = files(site);
     site.readFile = site.fs.readFile;
+    site.readFileSync = site.fs.readFileSync;
+    site.readFiles = site.fs.readFiles;
     site.html = site.fs.html;
     site.js = site.fs.js;
     site.css = site.fs.css;
@@ -48,11 +50,17 @@ module.exports = function init(options) {
     site.md5 = require('md5');
 
     site.vars = []; // site variables[name , value]
+    site.addVar = function (key, value) {
+        site.vars.push({
+            key: key,
+            value: value
+        });
+    }
     site.ips = []; // all ip send requests [ip , requets count]
     site.users = []; // all users [token , id , name , permissions , requests count]
     site.logs = []; // all log Messages if logEnabled = true
     site.sessions = []; // all sessions info
-    site.trackSession = function(session) {
+    site.trackSession = function (session) {
 
         for (var i = 0; i < site.sessions.length; i++) {
             var s = site.sessions[i];
@@ -71,12 +79,12 @@ module.exports = function init(options) {
     }
 
 
-    site.reset = function() {
+    site.reset = function () {
 
     }
 
-    site.test = function() {
-        console.log('Isite Test OK');
+    site.test = function () {
+        console.log(' Isite Test OK !! ');
     };
 
 
