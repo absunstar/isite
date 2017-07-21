@@ -1,6 +1,6 @@
 {
     "name": "isite",
-    "version": "1.0.8",
+    "version": "1.0.9",
     "description": "Fast & Easy Full Web Site Management",
     "main": "index.js",
     "scripts": {

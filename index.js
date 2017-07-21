@@ -78,7 +78,16 @@ module.exports = function init(options) {
         return session;
     }
 
-
+    //Master Pages
+    site.masterPages = [];
+    site.addMasterPage = function (page) {
+        site.masterPages.push({
+            name: page.name,
+            header: page.header,
+            footer: page.footer
+        })
+    }
+    
     site.reset = function () {
 
     }

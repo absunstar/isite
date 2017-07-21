@@ -1,10 +1,13 @@
 # Features
 
         - Auto Routes [simple & Advanced]  
-        - Handle Response Headers & codes 
-        - Auto Configer Request Cookies & Query Strings  
+        - Handle Request & Response Headers [Cookies - Query Strings]
         - Auto Detect & Configer User Session  
+        - Easy Creating Master Pages
+        - Compain Multi Files Contents in One Route
         - Auto Caching Files in Memory 
+        - Fast Read Files Content [Site Folder Structure]
+        - Custom Html Attributes [imports]
         - MD5 Hash Function  
 
 ## Installation
@@ -122,14 +125,46 @@ site.json('items', function (err, content) {
 console.log(content);
 });
 ```
-## Imports
+## MasterPages
+
+add Custom Master Page And Using it ..
+
+```js
+
+site.addMasterPage({
+    name: 'masterPage1',
+    header: site.dir + '/html/header.html',
+    footer: site.dir + '/html/footer.html'
+})
+
+site.get({
+    name: '/ContactUs',
+    masterPage : 'masterPage1',
+    path: site.dir + '/html/contact.html',
+    parser: 'html'
+});
+
+```
+
+## Server Tags & Attributes
 
 Add Custom Html Content 
 
 ```html
 <h2 x-import="welcome.html"></h2>
 ```
-Page "welcome.html" Must Be In Html Site Dir ['/site_dir/html/welcome.html']
+Page "welcome.html" Must Be In HTML Site Dir ['/site_files/html/welcome.html']
+
+- Dynamic Varibles Sets
+
+```js
+site.addVar('siteName', 'First Site With Isite Library ');
+site.addVar('siteBrand', 'XSite');
+```
+```html
+<title>##var.siteName##</title>
+<h2>##var.siteBrand##</h2>
+```
 
 ## More
 
