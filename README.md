@@ -1,13 +1,13 @@
 # Features
 
-        - Auto Routes [simple & Advanced & Custom]  
-        - Handle Request & Response Headers [Cookies - Query Strings]
+        - Auto Routes [Simple & Advanced & Custom]  
+        - Compain Multi Files Contents in One Route
+        - Handle Request & Response Headers [Cookies - Parameters]
         - Auto Detect & Configer User Session  
         - Easy Creating Master Pages
-        - Compain Multi Files Contents in One Route
-        - Auto Caching Files in Memory 
+        - Auto Caching & Management Files in Memory 
         - Fast Read Files Content [Site Folder Structure]
-        - Custom Html Attributes [imports]
+        - Custom Html Attributes [Server Tags]
         - MD5 Hash Function  
 
 ## Installation
@@ -89,12 +89,17 @@ site.get('*', function(req, res) {
 })
 ```
 
-Request Parameters
+Request Parameters [GET , POST]
 
 ```js
 site.get('/employee', function(req, res) {
       res.end('ID : ' + req.url.query.id + ' , Name : ' + req.url.query.name)
 })
+
+site.post('/api/*', function(req, res) {
+    res.end('ID : ' + req.body.id + ' , Name : ' + req.body.name)
+})
+
 ```
 
 ## Cookies
@@ -168,12 +173,19 @@ site.get({
 
 ## Server Tags & Attributes
 
-Add Custom Html Content 
-
-```html
-<h2 x-import="welcome.html"></h2>
+Add Custom Html Content
+```js
+site.addRoute({name: '/',path:  site.dir + '/html/index.html' , parser:'html'});
 ```
-Page "welcome.html" Must Be In HTML Site Dir ['/site_files/html/welcome.html']
+```html
+<div x-import="navbar.html"></div>
+
+<div class="container">
+    <h2 > ... </h2>
+    <p x-import="info.html"></p>
+</div>
+```
+Page "navbar.html" & "info.html" Must Be In HTML Site Folder ['/site_files/html/']
 
 - Dynamic Varibles Sets
 
@@ -186,6 +198,10 @@ site.addVar('siteBrand', 'XSite');
 <h2>##var.siteBrand##</h2>
 ```
 
+## MD5
+```js
+site.md5('this content will be hashed as md5')
+```
 ## More
 
 - Email    : Absunstar@gmail.com
