@@ -1,6 +1,6 @@
 # Features
 
-        - Auto Routes [simple & Advanced]  
+        - Auto Routes [simple & Advanced & Custom]  
         - Handle Request & Response Headers [Cookies - Query Strings]
         - Auto Detect & Configer User Session  
         - Easy Creating Master Pages
@@ -77,6 +77,26 @@ site.addRoute({
 });
 
 ```
+
+Custom Route - Using * [any letters]
+
+```js
+site.get('/facebook/post/*', function(req, res) {
+    res.end('Any Route like /facebook/post/11212154545 ')
+})
+site.get('*', function(req, res) {
+    res.end('Any Route Requested Not Handled Before This Code')
+})
+```
+
+Request Parameters
+
+```js
+site.get('/employee', function(req, res) {
+      res.end('ID : ' + req.url.query.id + ' , Name : ' + req.url.query.name)
+})
+```
+
 ## Cookies
 
 ```js
