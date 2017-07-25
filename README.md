@@ -110,6 +110,29 @@ site.all('/api', function(req, res) {
     res.end('Any Request Type Not Handled : ' + req.method)
 })
 ```
+Dynamic Parameters
+
+```js
+site.get('/api/:post_id/category/:cat_id', function(req, res) {
+    res.end('GET | postId : ' + req.url.query.post_id + ', catId : ' + req.url.query.cat_id)
+})
+//Example : http://127.0.0.1:7070/api/123456/category/99
+```
+MVC Custom Route
+```js
+site.get("/:controller/:action/:arg1/:arg2", function(req, res) {
+    res.end(
+        "GET | Controller : " +
+        req.url.query.controller +
+        ", Action : " +
+        req.url.query.action +
+        ", Arg 1 : " +
+        req.url.query.arg1 +
+        ", Arg 2 : " +
+        req.url.query.arg2
+    );
+});
+```
 
 ## Cookies
 
