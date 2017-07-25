@@ -1,8 +1,10 @@
+Isite Help You To Create Your Node Js WebSite with Advanced Featuers
+
 # Features
 
         - Auto Routes [Simple & Advanced & Custom]  
-        - Get Multi Files Contents in One Route
-        - Handle Request & Response Headers [Cookies - Parameters]
+        - Merge Multi Files Contents in One Route
+        - Auto Handle Request & Response Headers [Cookies - Parameters]
         - Auto Detect & Configer User Session  
         - Easy Creating Master Pages
         - Auto Caching & Management Files in Memory 
