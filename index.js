@@ -23,6 +23,8 @@ module.exports = function init(options) {
     site.addRoute = site.route.add;
     site.get = site.route.get;
     site.post = site.route.post;
+    site.put = site.route.put;
+    site.delete = site.route.delete;
     site.run = site.route.run;
 
     let test_routes = require(__dirname + '/lib/test_routes.js');

@@ -1,7 +1,7 @@
 # Features
 
         - Auto Routes [Simple & Advanced & Custom]  
-        - Compain Multi Files Contents in One Route
+        - Get Multi Files Contents in One Route
         - Handle Request & Response Headers [Cookies - Parameters]
         - Auto Detect & Configer User Session  
         - Easy Creating Master Pages
@@ -81,23 +81,28 @@ site.addRoute({
 Custom Route - Using * [any letters]
 
 ```js
-site.get('/facebook/post/*', function(req, res) {
-    res.end('Any Route like /facebook/post/11212154545 ')
+site.get('/post/*', function(req, res) {
+    res.end('Any Route like /post/11212154545 ')
 })
 site.get('*', function(req, res) {
     res.end('Any Route Requested Not Handled Before This Code')
 })
 ```
 
-Request Parameters [GET , POST]
+Request Parameters [GET , POST | PUT | Delete]
 
 ```js
-site.get('/employee', function(req, res) {
-      res.end('ID : ' + req.url.query.id + ' , Name : ' + req.url.query.name)
+site.get('/api', function(req, res) {
+    res.end('GET | id : ' + req.url.query.id)
 })
-
-site.post('/api/*', function(req, res) {
-    res.end('ID : ' + req.body.id + ' , Name : ' + req.body.name)
+site.post('/api', function(req, res) {
+    res.end('POST | id : ' + req.body.id + ' , Name : ' + req.body.name)
+})
+site.put('/api', function(req, res) {
+    res.end('PUT | id : ' + req.body.id + ' , Name : ' + req.body.name)
+})
+site.delete('/api', function(req, res) {
+    res.end('Delete | id : ' + req.body.id)
 })
 
 ```
