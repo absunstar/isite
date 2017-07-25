@@ -40,6 +40,8 @@ site.run()
 
 ## Routes
 
+- Auto Convert All Routes URL & Parameters to Lower Case .
+
 Easy and Auto Site Routing
 
 ```js
