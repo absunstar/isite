@@ -1,4 +1,4 @@
-Isite Help You To Create Your Node Js WebSite with Advanced Featuers
+Isite Help You To Create Your Node Js WebSite with Advanced Development Featuers
 
 # Features
 
@@ -106,7 +106,9 @@ site.put('/api', function(req, res) {
 site.delete('/api', function(req, res) {
     res.end('Delete | id : ' + req.body.id)
 })
-
+site.all('/api', function(req, res) {
+    res.end('Any Request Type Not Handled : ' + req.method)
+})
 ```
 
 ## Cookies
