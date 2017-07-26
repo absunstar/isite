@@ -1,11 +1,12 @@
 {
     "name": "isite",
-    "version": "1.4.1",
+    "version": "1.4.2",
     "description": "Create Fast & Easy Web Site with Full Development Features",
     "main": "index.js",
     "keywords": [
         "http", "session", "cookie", "master page", "cache", "file",
-        "header", "body", "url", "route", "api", "framework", "restful"
+        "header", "body", "url", "route", "api", "framework", "restful",
+        "fonts" , "mongodb"
     ],
     "scripts": {
         "test": "echo \"Error: no test specified\" && exit 1"

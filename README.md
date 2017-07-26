@@ -2,7 +2,8 @@ Isite Help You To Create Your Node Js WebSite with Advanced Development Featuers
 
 # Features
 
-        - Auto Routes [Simple & Advanced & Custom]  
+        - Auto Routes [Simple & Advanced & Custom]
+        - Auto Handle File Types Encoding [Fonts - Images - ...]  
         - Merge Multi Files Contents in One Route
         - Auto Handle Request & Response Headers [Cookies - Parameters]
         - Auto Detect & Configer User Session  
