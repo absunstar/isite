@@ -5,15 +5,20 @@ module.exports = function init(options) {
     site.options = options || {};
     site.port = site.options.port || process.env.port || 80;
     site.dir = site.options.dir || './site_files';
+    site.savingTime = site.options.savingTime || 60 * 60;
+    site.sessionEnabled = typeof site.options.sessionEnabled == "undefined" ? true : site.options.sessionEnabled;
+    site.mongodbEnabled = typeof site.options.mongodbEnabled == "undefined" ? false : site.options.mongodbEnabled;
+    site.mongodbURL = site.options.mongodbURL || '127.0.0.1:27017';
+
 
     require(__dirname + '/lib/prototype.js')
 
     let events = require('events');
     let eventEmitter = new events.EventEmitter();
-    site.on = function(name, callback) {
+    site.on = function (name, callback) {
         eventEmitter.on(name, callback)
     };
-    site.call = function(name) {
+    site.call = function (name) {
         eventEmitter.emit(name);
     };
 
@@ -28,7 +33,7 @@ module.exports = function init(options) {
     site.all = site.route.all;
     site.run = site.route.run;
 
-    let test_routes = require(__dirname + '/lib/test_routes.js');
+    let test_routes = require(__dirname + '/lib/server_routes.js');
     test_routes(site);
 
     //Management Files [Fast Read Write , Memory Cach]
@@ -44,8 +49,11 @@ module.exports = function init(options) {
     site.files = site.fs.fileList;
 
     //DataBase Management Oprations
-    let mongo = require(__dirname + '/lib/mongo.js');
-    site.mongo = mongo(site);
+    if (site.mongodbEnabled) {
+        let mongodb = require(__dirname + '/lib/mongodb.js');
+        site.mongodb = mongodb(site);
+    }
+
 
     site.cookie = require(__dirname + '/lib/cookie.js');
     site.session = require(__dirname + '/lib/session.js');
@@ -54,7 +62,7 @@ module.exports = function init(options) {
     site.md5 = require('md5');
 
     site.vars = []; // site variables[name , value]
-    site.addVar = function(key, value) {
+    site.addVar = function (key, value) {
         site.vars.push({
             key: key,
             value: value
@@ -64,7 +72,7 @@ module.exports = function init(options) {
     site.users = []; // all users [token , id , name , permissions , requests count]
     site.logs = []; // all log Messages if logEnabled = true
     site.sessions = []; // all sessions info
-    site.trackSession = function(session) {
+    site.trackSession = function (session) {
 
         for (var i = 0; i < site.sessions.length; i++) {
             var s = site.sessions[i];
@@ -84,7 +92,7 @@ module.exports = function init(options) {
 
     //Master Pages
     site.masterPages = [];
-    site.addMasterPage = function(page) {
+    site.addMasterPage = function (page) {
         site.masterPages.push({
             name: page.name,
             header: page.header,
@@ -92,16 +100,21 @@ module.exports = function init(options) {
         })
     }
 
-    site.reset = function() {
+    site.reset = function () {
 
     }
 
-    site.test = function() {
+    site.test = function () {
         console.log(' Isite Test OK !! ');
     };
 
+    site.on('saveChanges', function () {
+        console.log('Site Will Save Changes Every ' + site.savingTime + ' s ')
+    })
 
-
+    setInterval(function () {
+        site.call('saveChanges')
+    }, site.savingTime * 1000)
     return site;
 
 }

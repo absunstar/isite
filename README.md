@@ -10,6 +10,7 @@ Isite Help You To Create Your Node Js WebSite with Advanced Development Featuers
         - Auto Caching & Management Files in Memory 
         - Fast Read Files Content [Site Folder Structure]
         - Custom Html Attributes [Server Tags]
+        - MongoDB Full Integration
         - MD5 Hash Function  
 
 ## Installation
@@ -29,10 +30,14 @@ Advanced Using
 
 ```js
 var isite = require('isite')
-var site = isite({
-    port:8080 , 
-    dir:__dirname + '/site_files' //folder contains site files structure
-    })
+site = isite({
+    port: 8080, // default 80
+    dir: __dirname + '/site_files', //default ./site_files
+    savingTime: 60 * 60, // default 60 * 60 - 1 hour
+    sessionEnabled: true, // default true
+    mongodbEnabled: true, // default false
+    mongodbURL: '127.0.0.1:27017' // default 127.0.0.1:27017 - local
+});
 
 site.run()
 ```
@@ -230,6 +235,105 @@ site.addVar('siteBrand', 'XSite');
 ```html
 <title>##var.siteName##</title>
 <h2>##var.siteBrand##</h2>
+```
+
+##MongoDB Integration
+
+```js
+//Create New Collection & Insert New Docs
+site.post({
+    name: '/db',
+    callback: function (req, res) {
+        site.mongodb.connectDB('company', function (err, db) {
+            if (!err) {
+                db.createCollection('employees')
+                db.collection('employees').insertMany([{
+                        name: 'Name 1',
+                        phone: 'xxx'
+                    },
+                    {
+                        name: 'Name 2',
+                        phone: 'xxxxxx'
+                    },
+                    {
+                        name: 'Name 3',
+                        phone: 'xxxxxxxxxxx'
+                    }
+                ], function (err, result) {
+                    db.close()
+                    res.end('Data Inserted : ' + result.insertedCount)
+                })
+
+            } else {
+                res.end(err.message)
+            }
+        })
+    }
+});
+
+//Select Docs
+site.get({
+    name: '/db',
+    callback: function (req, res) {
+        site.mongodb.connectDB('company', function (err, db) {
+            if (!err) {
+                db.collection("employees").find({}).toArray(function (err, result) {
+                    if (!err) {
+                        res.end(JSON.stringify(result))
+                    }
+                    db.close()
+                });
+            } else {
+                res.end(err.message)
+            }
+        })
+    }
+});
+
+// Update Docs
+site.put({
+    name: '/db',
+    callback: function (req, res) {
+        site.mongodb.connectDB('company', function (err, db) {
+            if (!err) {
+                db.collection("employees").updateMany({
+                    name: 'Name 1'
+                }, {
+                    $set: {
+                        name: "Updated Name"
+                    }
+                }, function (err, result) {
+                    if (!err) {
+                        res.end('Data Updated : ' + result.result.nModified)
+                    }
+                    db.close()
+                });
+            } else {
+                res.end(err.message)
+            }
+        })
+    }
+});
+
+//Delete Docs
+site.delete({
+    name: '/db',
+    callback: function (req, res) {
+        site.mongodb.connectDB('company', function (err, db) {
+            if (!err) {
+                db.collection("employees").deleteMany({}, function (err, result) {
+                    if (!err) {
+                        res.end('Data Deleted !!')
+                    }
+                    db.close()
+                });
+            } else {
+                res.end(err.message)
+            }
+        })
+    }
+});
+
 ```
 
 ## MD5
