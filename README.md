@@ -22,7 +22,7 @@ Isite Help You To Create Your Node Js WebSite with Advanced Development Featuers
 
 ```js
 var isite = require('isite')
-var site = isite() // default port = 80 & dir = ./site_files
+var site = isite() 
 
 site.run()
 ```
@@ -237,7 +237,7 @@ site.addVar('siteBrand', 'XSite');
 <h2>##var.siteBrand##</h2>
 ```
 
-##MongoDB Integration
+## MongoDB Integration
 
 ```js
 //Create New Collection & Insert New Docs
