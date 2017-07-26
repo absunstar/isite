@@ -58,6 +58,15 @@ site.addRoute({
 });
 site.addRoute({name: '/',path:  site.dir + '/html/index.html'});
 site.addRoute({name: '/api',path:  site.dir + '/json/employees.json' , method:'POST'});
+
+site.get({
+    name: '/fonts/fontawesome-webfont.woff2',
+    path: site.dir + '/fonts/fontawesome-webfont.woff2'
+})
+site.get({
+    name: '/favicon.png',
+    path: site.dir + '/images/logo.png'
+})
 ```
 
 Advanced Site Routing
