@@ -8,7 +8,7 @@ Isite Help You To Create Your Node Js WebSite with Advanced Development Featuers
         - Auto Handle Request & Response Headers [Cookies - Parameters]
         - Auto Detect & Configer User Session  
         - Easy Creating Master Pages
-        - Auto Caching & Management Files in Memory 
+        - Auto Caching & Management Site Files in Memory 
         - Fast Read Files Content [Site Folder Structure]
         - Custom Html Attributes [Server Tags]
         - MongoDB Full Integration
@@ -97,6 +97,11 @@ site.addRoute({
 
 ```
 
+Auto Route All Files in Folder
+```js
+site.get({name: '/js', path: __dirname + '/js'})
+site.get({name: '/css', path: __dirname + '/css'})
+```
 Custom Route - Using * [any letters]
 
 ```js

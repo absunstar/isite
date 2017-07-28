@@ -12,6 +12,23 @@ module.exports = function init(options) {
 
 
     require(__dirname + '/lib/prototype.js')
+    site.getFileEncode = function (path) {
+
+        if (path.endsWith('.woff2') ||
+            path.endsWith('.woff') ||
+            path.endsWith('.ttf') ||
+            path.endsWith('.svg') ||
+            path.endsWith('.otf') ||
+            path.endsWith('.png') ||
+            path.endsWith('.jpg') ||
+            path.endsWith('.jpeg') ||
+            path.endsWith('.ico') ||
+            path.endsWith('.bmp') ||
+            path.endsWith('.eot')) {
+            return 'binary';
+        }
+        return 'utf8'
+    }
 
     let events = require('events');
     let eventEmitter = new events.EventEmitter();
