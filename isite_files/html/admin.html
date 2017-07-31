@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="app">
+
+<head x-import="head.html">
+
+</head>
+
+<body ng-controller="body">
+
+  <nav x-import="navbar.html" class="navbar navbar-default">
+
+  </nav>
+
+  <div class="container">
+    <a ng-click="showSessions()" class="btn btn-primary">Show Sessions</a>
+    <a ng-click="showRoutes()" class="btn btn-primary">Show Routes</a>
+    <a ng-click="showFiles()" class="btn btn-primary">Show Files</a>
+    <a ng-click="showVars()"  class="btn btn-primary">Show Vars</a>
+  </div>
+  <br>
+  <div class="container">
+
+    <table class="table table-bordered" ng-show="sessionsDisplay">
+      <tr>
+        <th>User Token</th>
+        <th>IP</th>
+        <th>Requestes Count</th>
+
+      </tr>
+      <tr ng-repeat="s in sessions">
+        <td>{{s.token}}</td>
+        <td>{{s.ip}}</td>
+        <td>{{s.requestesCount}}</td>
+
+      </tr>
+    </table>
+
+    <table class="table table-bordered" ng-show="routesDisplay">
+      <tr>
+        <th>Route Name</th>
+        <th>Method</th>
+        <th>Requestes Count</th>
+
+      </tr>
+      <tr ng-repeat="r in routes">
+        <td>{{r.name}}</td>
+        <td>{{r.method}}</td>
+        <td>{{r.count}}</td>
+
+      </tr>
+    </table>
+
+     <table class="table table-bordered" ng-show="filesDisplay">
+      <tr>
+        <th>File Path</th>
+        <th>Requestes Count</th>
+      </tr>
+      <tr ng-repeat="f in files">
+        <td>{{f.path}}</td>
+        <td>{{f.count}}</td>
+      </tr>
+    </table>
+
+     <table class="table table-bordered" ng-show="varsDisplay">
+      <tr>
+        <th>Key</th>
+        <th>Value</th>
+      </tr>
+      <tr ng-repeat="v in vars">
+        <td>{{v.key}}</td>
+        <td>{{v.value}}</td>
+      </tr>
+    </table>
+
+  </div>
+
+
+  <script src="/js/script.js"></script>
+  <script>
+    var app = angular.module('app', []);
+    app.controller('body', function ($scope, $http) {
+      $scope.hideALL = function () {
+        $scope.sessionsDisplay = false;
+        $scope.routesDisplay = false;
+        $scope.filesDisplay = false;
+        $scope.varsDisplay = false;
+      }
+
+      $scope.showSessions = function () {
+        $scope.hideALL();
+        $http.get('/@server/sessions').then(function (response) {
+          $scope.sessionsDisplay = true;
+          $scope.sessions = response.data;
+        })
+      }
+
+      $scope.showRoutes = function () {
+        $scope.hideALL();
+        $http.get('/@server/routes').then(function (response) {
+          $scope.routesDisplay = true;
+          $scope.routes = response.data;
+        })
+      }
+
+       $scope.showFiles = function () {
+        $scope.hideALL();
+        $http.get('/@server/files').then(function (response) {
+          $scope.filesDisplay = true;
+          $scope.files = response.data;
+        })
+      }
+
+        $scope.showVars = function () {
+        $scope.hideALL();
+        $http.get('/@server/vars').then(function (response) {
+          $scope.varsDisplay = true;
+          $scope.vars = response.data;
+        })
+      }
+
+    });
+  </script>
+  <script>
+    $(function () {
+      $('[data-toggle="tooltip"]').tooltip()
+    })
+  </script>
+
+</body>
+
+</html>
