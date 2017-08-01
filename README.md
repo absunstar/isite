@@ -12,7 +12,7 @@ Isite Help You To Create Your Node Js WebSite with Advanced Development Featuers
         - Fast Read Files Content [Site Folder Structure]
         - Custom Html Attributes [Server Tags]
         - MongoDB Full Integration
-        - Bulitin Client libraries [jquery - bootstrap - font-awesome - angular]
+        - Client libraries [jquery - bootstrap - font-awesome - angular]
         - MD5 Hash Function  
 
 ## Installation
@@ -353,7 +353,7 @@ site.delete({
 ```
 
 ## Client libraries
-use bulitin client libraries - required fonts files auto added
+easy use client libraries - required fonts files auto added
 ```html
  <link rel="stylesheet" href="/xcss/bootstrap.css" >
  <link rel="stylesheet" href="/xcss/font-awesome.css" >

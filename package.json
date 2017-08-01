@@ -1,8 +1,12 @@
 {
     "name": "isite",
-    "version": "1.4.5",
+    "version": "1.4.6",
     "description": "Create Fast & Easy Web Site with Full Development Features",
     "main": "index.js",
+    "repository": {
+        "type": "git",
+        "url": "git://github.com/absunstar/isite"
+    },
     "keywords": [
         "http", "session", "cookie", "master page", "cache", "file",
         "header", "body", "url", "route", "api", "framework", "restful",
@@ -11,7 +15,10 @@
     "scripts": {
         "test": "echo \"Error: no test specified\" && exit 1"
     },
-    "author": "Amr Barakat",
+    "author": {
+        "name": "Amr Barakat",
+        "email": "Absunstar@gmail.com"
+    },
     "license": "ISC",
     "dependencies": {
         "cheerio": "^1.0.0-rc.2",
