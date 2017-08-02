@@ -1,7 +1,7 @@
 {
     "name": "isite",
-    "version": "1.4.6",
-    "description": "Create Fast & Easy Web Site with Full Development Features",
+    "version": "1.4.7",
+    "description": "Create Web Site with Full Development Features [Fast and Easy] ",
     "main": "index.js",
     "repository": {
         "type": "git",

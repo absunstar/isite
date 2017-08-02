@@ -13,7 +13,8 @@ Isite Help You To Create Your Node Js WebSite with Advanced Development Featuers
         - Custom Html Attributes [Server Tags]
         - MongoDB Full Integration
         - Client libraries [jquery - bootstrap - font-awesome - angular]
-        - MD5 Hash Function  
+        - Development Helper Function
+        - Site Dynamic Events Callback  
 
 ## Installation
 
@@ -35,16 +36,71 @@ var isite = require('isite')
 site = isite({
     port: 8080, // default 80
     dir: __dirname + '/site_files', //default ./site_files
-    savingTime: 60 * 60, // default 60 * 60 - 1 hour
+    savingTime: 60 * 2, // default  60 - 1 hour
     sessionEnabled: true, // default true
+    sessionTimeout: 60 * 6, // default 60 * 24 - 1 day
     mongodbEnabled: true, // default false
     mongodbURL: '127.0.0.1:27017' // default 127.0.0.1:27017 - local
 });
 
 site.run()
 ```
+## Site Folder Structure
 
+- Create Folder Name "site_files" ,
+inside it create these Sub folders [
+    html , css , js , json , fonts , images , xml , ...
+]
+- To Easy Read File Contents From "site_files" Folder
 
+```js
+site.html('index', function (err, content) {
+    console.log(content);
+});
+site.css('bootstrap', function (err, content) {
+    console.log(content);
+});
+site.js('jquery', function (err, content) {
+    console.log(content);
+});
+site.json('items', function (err, content) {
+    console.log(content);
+});
+site.xml('rss', function (err, content) {
+    console.log(content);
+});
+```
+-Custom Read Files
+
+```js
+//read file with custom header
+site.get("/rss", function(req, res) {
+    site.readFile(__dirname + "/site_files/xml/rss.xml", function(err, content) {
+        res.writeHead(200, { "content-type": "text/xml" })
+        res.end(content)
+    })
+})
+site.get("/rss2", function(req, res) {
+    site.xml("rss2", function(err, content) {
+        res.writeHead(200, { "content-type": "text/xml" })
+        res.end(content);
+    })
+})
+//read multi files with custom header
+site.get("/", function(req, res) {
+    site.readFiles(
+        [
+            __dirname + "/site_files/html/head.html",
+            __dirname + "/site_files/html/content.html",
+            __dirname + "/site_files/html/footer.html"
+        ],
+        function(err, content) {
+            res.writeHead(200, { "content-type": "text/html" });
+            res.end(content);
+        })
+})
+
+```
 ## Routes
 
 - Auto Convert All Routes URL & Parameters to Lower Case .
@@ -52,29 +108,31 @@ site.run()
 Easy and Auto Site Routing
 
 ```js
-site.addRoute({name: '/css/bootstrap.css',path:  site.dir + '/css/bootstrap.min.css'});
-site.addRoute({
-    name: '/js/script.js',
-    path: [site.dir + '/js/jquery.js' , site.dir + '/js/bootstrap.js']
-});
-site.addRoute({name: '/',path:  site.dir + '/html/index.html'});
-site.addRoute({name: '/api',path:  site.dir + '/json/employees.json' , method:'POST'});
-
-site.get({
-    name: '/fonts/fontawesome-webfont.woff2',
-    path: site.dir + '/fonts/fontawesome-webfont.woff2'
-})
-site.get({
-    name: '/favicon.png',
-    path: site.dir + '/images/logo.png'
-})
+site.get({name: '/',path:  site.dir + '/html/index.html'});
+site.get({name: '/css/bootstrap.css',path:  site.dir + '/css/bootstrap.min.css'});
+site.get({name: '/js/jquery.js',path: site.dir + '/js/jquery.js'});
+site.get({name: '/js/bootstrap.js',path: site.dir + '/js/bootstrap.js'});
+site.get({name: '/favicon.png',path: site.dir + '/images/logo.png'})
+site.post({name: '/api',path:  site.dir + '/json/employees.json' , method:'POST'});
 ```
+Merge Multi Files in one route
 
+```js
+site.get({
+    name: '/css/style.css',
+    path: [site.dir + '/css/bootstrap.css' , site.dir + '/css/custom.css']
+});
+site.get({
+    name: '/js/script.js',
+    path: [site.dir + '/js/jquery.js' , site.dir + '/js/bootstrap.js', site.dir + '/js/custom.js']
+});
+```
 Advanced Site Routing
 
 ```js
 site.addRoute({
     name: '/',
+    method : 'GET', // defeault
     callback: function (req, res) {
         res.setHeader('Content-type', 'text/html');
         res.writeHead(200);
@@ -86,7 +144,7 @@ site.addRoute({
 
 site.addRoute({
     name: '/api',
-    method: 'POST',
+    method: 'custom method',
     callback: function (req, res) {
         res.setHeader('Content-type', 'application/json');
         res.writeHead(200);
@@ -99,6 +157,7 @@ site.addRoute({
 ```
 
 Auto Route All Files in Folder
+
 ```js
 site.get({name: '/js', path: __dirname + '/js'})
 site.get({name: '/css', path: __dirname + '/css'})
@@ -118,7 +177,7 @@ Request Parameters [GET , POST | PUT | Delete]
 
 ```js
 site.get('/api', function(req, res) {
-    res.end('GET | id : ' + req.url.query.id)
+    res.end('GET | id : ' + req.query.id)
 })
 site.post('/api', function(req, res) {
     res.end('POST | id : ' + req.body.id + ' , Name : ' + req.body.name)
@@ -136,75 +195,53 @@ site.all('/api', function(req, res) {
 Dynamic Parameters
 
 ```js
-site.get('/api/:post_id/category/:cat_id', function(req, res) {
-    res.end('GET | postId : ' + req.url.query.post_id + ', catId : ' + req.url.query.cat_id)
+site.get('/post/:id/category/:cat_id', function(req, res) {
+    res.end('GET | Id : ' + req.params.id + ', catId : ' + req.params.cat_id)
 })
-//Example : http://127.0.0.1:7070/api/123456/category/99
+//example : /post/9999999/category/5
 ```
 MVC Custom Route
 ```js
-site.get("/:controller/:action/:arg1/:arg2", function(req, res) {
+site.get("/:controller/:action/:arg1", function(req, res) {
     res.end(
-        "GET | Controller : " +
-        req.url.query.controller +
-        ", Action : " +
-        req.url.query.action +
-        ", Arg 1 : " +
-        req.url.query.arg1 +
-        ", Arg 2 : " +
-        req.url.query.arg2
+        "GET | Controller : " + req.params.controller +
+        ", Action : " + req.params.action +
+        ", Arg 1 : " + req.params.arg1
     );
 });
+//example : /facebook/post/xxxxxxxxxx
 ```
 
 ## Cookies
 
 ```js
-site.get('/api/set' , function(req , res){
-    req.cookie.set('id' , 'userid')
-      res.end('cookie set ok !!')
+site.get("/setCookie", function(req, res) {
+        req.cookie.set('name', req.query.name)
+        res.end('cookie set')
 })
+//example : /setcookie?name=amr
 
-site.get('/api/get' , function(req , res){
-      res.end(' id : ' + req.cookie.get('id'))
+site.get("/getCookie", function(req, res) {
+        res.end('name from cookie : ' + req.cookie.get('name'))
 })
+//example : /getcookie
 ```
 
 ## Sessions
 
 ```js
-site.get('/login', function(req, res) {
-    req.session.set('username', 'amr barakat')
-    res.end('loged ok !! ')
+site.get('/setSession', function(req, res) {
+    req.session.set('user_name', req.query.user_name)
+    res.end('Session Set ok !! ')
 })
+//example : /setSession?user_name=absunstar
 
-site.get('/userInfo', function(req, res) {
-    var userName = req.session.get('username')
-    res.end(userName)
+site.get('/getSession', function(req, res) {
+    res.end('User Name from session : ' + req.session.get('user_name'))
 })
+//example : /getSession
 ```
-## Site Folder Structure
 
-- Create Folder Name "site_files" ,
-inside it create these Sub folders [
-    html , css , js , json
-]
-- To Easy Read File Contents From "site_files" Folder
-
-```js
-site.html('index', function (err, content) {
-console.log(content);
-});
-site.css('bootstrap', function (err, content) {
-console.log(content);
-});
-site.js('jquery', function (err, content) {
-console.log(content);
-});
-site.json('items', function (err, content) {
-console.log(content);
-});
-```
 ## MasterPages
 
 add Custom Master Page And Using it ..
@@ -362,12 +399,30 @@ easy use client libraries - required fonts files auto added
  <script src="/xjs/bootstrap.js"></script>
  <script src="/xjs/angular.js"></script>
 ```
-## MD5
+## Helper Functions
+
 ```js
-site.md5('this content will be hashed as md5')
+var hash = site.md5('this content will be hashed as md5')
+console.log(hash)
+
+var name = 'absunstar'
+if (name.like('*sun*')) {
+    console.log('yes')
+}
 ```
+
+##Events
+
+```js
+site.on('event name', function() {
+    console.log('you call event name')
+})
+
+site.call('event name')
+```
+
 ## More
 
 - Email    : Absunstar@gmail.com
-- Github   : https://github.com/absunstar/
-- Linkedin : https://www.linkedin.com/in/absunstar/
+- Linkedin : https://www.linkedin.com/in/absunstar
+- Github   : https://github.com/absunstar
