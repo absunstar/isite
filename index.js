@@ -93,7 +93,7 @@ module.exports = function init(options) {
 
     setInterval(function() {
         site.call('saveChanges')
-    }, site.savingTime * 1000)
+    }, site.savingTime * 1000 * 60)
 
     // developer tools
     site.developer_routes = require(__dirname + '/lib/developer_routes.js');

@@ -13,7 +13,7 @@ Isite Help You To Create Your Node Js WebSite with Advanced Development Featuers
         - Custom Html Attributes [Server Tags]
         - MongoDB Full Integration
         - Client libraries [jquery - bootstrap - font-awesome - angular]
-        - Development Helper Function
+        - Development Helper Functions
         - Site Dynamic Events Callback  
 
 ## Installation
@@ -113,7 +113,7 @@ site.get({name: '/css/bootstrap.css',path:  site.dir + '/css/bootstrap.min.css'}
 site.get({name: '/js/jquery.js',path: site.dir + '/js/jquery.js'});
 site.get({name: '/js/bootstrap.js',path: site.dir + '/js/bootstrap.js'});
 site.get({name: '/favicon.png',path: site.dir + '/images/logo.png'})
-site.post({name: '/api',path:  site.dir + '/json/employees.json' , method:'POST'});
+site.post({name: '/api',path:  site.dir + '/json/employees.json' });
 ```
 Merge Multi Files in one route
 
@@ -132,28 +132,23 @@ Advanced Site Routing
 ```js
 site.addRoute({
     name: '/',
-    method : 'GET', // defeault
-    callback: function (req, res) {
-        res.setHeader('Content-type', 'text/html');
-        res.writeHead(200);
-        site.html('index', function (err, content) {
-            res.end(content);
-        });
-    }
+    method: 'custom method', // dfeault - GET
+    path: site.dir + '/html/index.html', // default null
+    parser: 'html', // default static
+    cache: false // default true
 });
 
 site.addRoute({
-    name: '/api',
-    method: 'custom method',
-    callback: function (req, res) {
-        res.setHeader('Content-type', 'application/json');
+    name: '/',
+    method: 'custom method', // dfeault - GET
+    callback: function(req, res) {
+        res.setHeader('Content-type', 'text/html');
         res.writeHead(200);
-        site.json('index', function (err, content) {
+        site.html('index', function(err, content) {
             res.end(content);
         });
     }
 });
-
 ```
 
 Auto Route All Files in Folder
@@ -173,7 +168,7 @@ site.get('*', function(req, res) {
 })
 ```
 
-Request Parameters [GET , POST | PUT | Delete]
+Request Parameters [GET , POST | PUT | Delete] Restful API
 
 ```js
 site.get('/api', function(req, res) {
