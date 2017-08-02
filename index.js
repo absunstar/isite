@@ -88,7 +88,7 @@ module.exports = function init(options) {
     };
 
     site.on('saveChanges', function() {
-        console.log('Site Will Save Changes Every ' + site.savingTime + ' s ')
+        console.log('Site Will Save Changes Every ' + site.savingTime + ' minute ')
     })
 
     setInterval(function() {
