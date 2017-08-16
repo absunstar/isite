@@ -1,6 +1,9 @@
 * {
     font-size: 16px;
 }
+body{
+    margin-top: 70px;
+}
 
 p {
     padding: 7px;

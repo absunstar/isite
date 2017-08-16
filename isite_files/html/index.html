@@ -1,202 +1,28 @@
 <!DOCTYPE html>
-<html lang="en" data-ng-app="app">
+<html lang="en" data-ng-app="html">
 
-<head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Developer Tools</title>
+<head x-import="head.html">
 
-    <link href="/xcss/style.css" rel="stylesheet">
-    <link rel="icon" type="image/png" href="/ximages/favicon.png">
-    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
-    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-    <!--[if lt IE 9]>
-      <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
-      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
-    <![endif]-->
 </head>
 
 <body data-ng-controller="body">
 
-    <nav class="navbar navbar-default">
-        <div class="container-fluid">
-            <!-- Brand and toggle get grouped for better mobile display -->
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse-1" aria-expanded="false">
-        <span class="sr-only">Toggle navigation</span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-      </button>
-                <a class="navbar-brand" href="/@developer"> <i class="fa fa-desktop" aria-hidden="true"></i> Developer Tools</a>
-            </div>
-
-            <!-- Collect the nav links, forms, and other content for toggling -->
-            <div class="collapse navbar-collapse" id="navbar-collapse-1">
-                <ul class="nav navbar-nav">
-
-                    <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"> <i class="fa fa-tasks" aria-hidden="true"></i> Reports <span class="caret"></span></a>
-                        <ul class="dropdown-menu">
-                            <li><a href="#" ng-click="showSessions()">Show Sessions</a></li>
-                            <li><a href="#" ng-click="showRoutes()">Show Routes</a></li>
-                            <li><a href="#" ng-click="showFiles()">Show Files</a></li>
-                            <li><a href="#" ng-click="showVars()">Show Vars</a></li>
-                        </ul>
-                    </li>
-
-
-                </ul>
-
-
-
-
-            </div>
-            <!-- /.navbar-collapse -->
-        </div>
-        <!-- /.container-fluid -->
-
-    </nav>
-
+    <nav x-import="navbar.html" class="navbar navbar-default navbar-fixed-top"></nav>
 
     <br>
+
+
     <div class="container">
-
-        <table class="table table-bordered" ng-show="sessionsDisplay">
-            <tr>
-                <th>User Token</th>
-                <th>IP</th>
-                <th>Requestes Count</th>
-
-            </tr>
-            <tr ng-repeat="s in sessions">
-                <td>{{s.token}}</td>
-                <td>{{s.ip}}</td>
-                <td>{{s.requestesCount}}</td>
-
-            </tr>
-        </table>
-
-        <table class="table table-bordered" ng-show="routesDisplay">
-            <tr>
-                <th>Route Name</th>
-                <th>Method</th>
-                <th>Requestes Count</th>
-
-            </tr>
-            <tr ng-repeat="r in routes">
-                <td>{{r.name}}</td>
-                <td>{{r.method}}</td>
-                <td>{{r.count}}</td>
-
-            </tr>
-        </table>
-
-        <table class="table table-bordered" ng-show="filesDisplay">
-            <tr>
-                <th>File Path</th>
-                <th>Requestes Count</th>
-            </tr>
-            <tr ng-repeat="f in files">
-                <td>{{f.path}}</td>
-                <td>{{f.count}}</td>
-            </tr>
-        </table>
-
-        <table class="table table-bordered" ng-show="varsDisplay">
-            <tr>
-                <th>Key</th>
-                <th>Value</th>
-            </tr>
-            <tr ng-repeat="v in vars">
-                <td>{{v.key}}</td>
-                <td>{{v.value}}</td>
-            </tr>
-        </table>
-
-        <div>
-            <h1>I Site</h1>
-            <p class="bg-primary">I Site Help You to Create Your NodeJS WebSite with Advanced Development Featuers</p>
-            <h2>Installing</h2>
-            <p><kbd>npm install isite --save</kbd></p>
-            <h2>Features</h2>
-            <ul>
-                <li> Auto Routes [Simple & Advanced & Custom]</li>
-                <li> Auto Handle File Types Encoding [Fonts - Images - ...] </li>
-                <li> Merge Multi Files Contents in One Route</li>
-                <li> Auto Handle Request & Response Headers [Cookies - Parameters]</li>
-                <li> Auto Detect & Configer User Session </li>
-                <li> Easy Creating Master Pages</li>
-                <li> Auto Caching & Management Site Files in Memory </li>
-                <li> Fast Read Files Content [Site Folder Structure]</li>
-                <li> Custom Html Attributes [Server Tags]</li>
-                <li> MongoDB Full Integration</li>
-                <li> MD5 Hash Function </li>
-            </ul>
-
-            <h2>Using</h2>
-            <p>Fast Start with Default Options</p>
-            <pre><code class="language-javascript">var isite = require('isite')
-var site = isite() 
-site.run()
-</code></pre>
-            <p>Now Open <a href="http://127.0.0.1" target="_blank">http://127.0.0.1</a> in your browser </p>
-        </div>
-
+        <div x-import="installing.html" ng-show="installingDisplay"></div>
+        <div x-import="routes.html" ng-show="routesDisplay"></div>
+        <div x-import="vars.html" ng-show="varsDisplay"></div>
+        <div x-import="files.html" ng-show="filesDisplay"></div>
+        <div x-import="sessions.html" ng-show="sessionsDisplay"></div>
     </div>
 
 
-    <script src="/xjs/script.js"></script>
-    <script>
-        var app = angular.module('app', []);
-        app.controller('body', function($scope, $http) {
-            $scope.hideALL = function() {
-                $scope.sessionsDisplay = false;
-                $scope.routesDisplay = false;
-                $scope.filesDisplay = false;
-                $scope.varsDisplay = false;
-            }
-
-            $scope.showSessions = function() {
-                $scope.hideALL();
-                $http.get('/@developer/api/sessions').then(function(response) {
-                    $scope.sessionsDisplay = true;
-                    $scope.sessions = response.data;
-                })
-            }
-
-            $scope.showRoutes = function() {
-                $scope.hideALL();
-                $http.get('/@developer/api/routes').then(function(response) {
-                    $scope.routesDisplay = true;
-                    $scope.routes = response.data;
-                })
-            }
-
-            $scope.showFiles = function() {
-                $scope.hideALL();
-                $http.get('/@developer/api/files').then(function(response) {
-                    $scope.filesDisplay = true;
-                    $scope.files = response.data;
-                })
-            }
-
-            $scope.showVars = function() {
-                $scope.hideALL();
-                $http.get('/@developer/api/vars').then(function(response) {
-                    $scope.varsDisplay = true;
-                    $scope.vars = response.data;
-                })
-            }
-
-        });
-    </script>
-    <script>
-        $(function() {
-            $('[data-toggle="tooltip"]').tooltip()
-        })
-    </script>
+    <script src="/@js/script.js"></script>
+    <script x-import="custom.js"></script>
 
 </body>
 

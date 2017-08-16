@@ -28,9 +28,17 @@ module.exports = function init(options) {
 
 
     //DataBase Management Oprations
-    if (site.mongodbEnabled) {
+    if (site.options.mongodb.enabled) {
         let mongodb = require(__dirname + '/lib/mongodb.js');
         site.mongodb = mongodb(site);
+    }
+
+    if (site.options.security.enabled) {
+        let security = require(__dirname + '/lib/security.js');
+        security(site);
+        site.security.loadUsers(function (err, users) {
+            site.security.users = users
+        })
     }
 
 
@@ -41,37 +49,96 @@ module.exports = function init(options) {
     site.md5 = require('md5');
 
     site.vars = []; // site variables[name , value]
-    site.addVar = function(key, value) {
+    site.addVar = function (key, value) {
         site.vars.push({
             key: key,
             value: value
         });
     }
     site.ips = []; // all ip send requests [ip , requets count]
-    site.users = []; // all users [token , id , name , permissions , requests count]
     site.logs = []; // all log Messages if logEnabled = true
+
     site.sessions = []; // all sessions info
-    site.trackSession = function(session) {
+    site.loadSessions = function (callback) {
+        site.mongodb.find({
+            dbName: site.options.session.dbName,
+            collectionName: site.options.session.userSessionCollection,
+            where: {},
+            select: {}
+        }, function (err, sessions) {
+            callback(err, sessions)
+        })
+    }
+    site.loadSessions(function (err, sessions) {
+        if (!err) {
+            site.sessions = sessions
+        }
+    })
+    site.saveSessions = function (callback) {
+        site.mongodb.delete({
+            dbName: site.options.session.dbName,
+            collectionName: site.options.session.userSessionCollection,
+            where: {}
+        }, function (err, result) {
+            site.mongodb.insert({
+                dbName: site.options.session.dbName,
+                collectionName: site.options.session.userSessionCollection,
+                docs: site.sessions
+            }, function (err, docs) {
+                callback(err, docs)
+            })
+        })
+    }
+    site.on('saveChanges', function () {
+        site.saveSessions(function (err, sessions) {
+            if (err) {
+                console.log(err)
+            } else {
+                //console.log(sessions)
+            }
+        })
+    })
+
+
+    site.trackSession = function (session) {
 
         for (var i = 0; i < site.sessions.length; i++) {
-            var s = site.sessions[i];
-            if (s.token == session.token) {
-                s.data = session.data || s.data;
-                s.requestesCount++;
-                s.ip = session.ip;
-                return s;
+            var s = site.sessions[i]
+            if (s.accessToken == session.accessToken) {
+
+                session.createdTime = s.createdTime
+                session.data = session.data || s.data
+                session.requestesCount = s.requestesCount + 1
+
+                site.sessions[i] = {
+                    accessToken: session.accessToken,
+                    createdTime: session.createdTime,
+                    modifiedTime: session.modifiedTime,
+                    data: session.data,
+                    ip: session.ip,
+                    requestesCount: session.requestesCount
+                }
+                return session;
             }
         }
+
         session.data = [];
         session.requestesCount = 1;
         session.createdTime = new Date().getTime();
-        site.sessions.push(session);
+        site.sessions.push({
+            accessToken: session.accessToken,
+            createdTime: session.createdTime,
+            modifiedTime: session.modifiedTime,
+            data: session.data,
+            ip: session.ip,
+            requestesCount: session.requestesCount
+        });
         return session;
     }
 
     //Master Pages
     site.masterPages = [];
-    site.addMasterPage = function(page) {
+    site.addMasterPage = function (page) {
         site.masterPages.push({
             name: page.name,
             header: page.header,
@@ -79,25 +146,25 @@ module.exports = function init(options) {
         })
     }
 
-    site.reset = function() {
+    site.reset = function () {
 
     }
 
-    site.test = function() {
+    site.test = function () {
         console.log(' Isite Test OK !! ');
     };
 
-    site.on('saveChanges', function() {
-        console.log('Site Will Save Changes Every ' + site.savingTime + ' minute ')
+    site.on('saveChanges', function () {
+        console.log('Site Will Save Changes Every ' + site.options.savingTime + ' minute ')
     })
 
-    setInterval(function() {
+    setInterval(function () {
         site.call('saveChanges')
-    }, site.savingTime * 1000 * 60)
+    }, site.options.savingTime * 1000 * 60)
 
     // developer tools
-    site.developer_routes = require(__dirname + '/lib/developer_routes.js');
-    site.developer_routes(site);
+    site.dashboard = require(__dirname + '/lib/dashboard.js');
+    site.dashboard(site);
 
 
     return site;

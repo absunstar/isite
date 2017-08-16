@@ -1,6 +1,6 @@
 {
     "name": "isite",
-    "version": "1.4.9",
+    "version": "1.5.0",
     "description": "Create Web Site with Full Development Features [Fast and Easy] ",
     "main": "index.js",
     "repository": {
@@ -8,9 +8,21 @@
         "url": "git://github.com/absunstar/isite"
     },
     "keywords": [
-        "http", "session", "cookie", "master page", "cache", "file",
-        "header", "body", "url", "route", "api", "framework", "restful",
-        "fonts", "mongodb"
+        "http",
+        "session",
+        "cookie",
+        "master page",
+        "cache",
+        "file",
+        "header",
+        "body",
+        "url",
+        "route",
+        "api",
+        "framework",
+        "restful",
+        "fonts",
+        "mongodb"
     ],
     "scripts": {
         "test": "echo \"Error: no test specified\" && exit 1"
@@ -22,6 +34,7 @@
     "license": "ISC",
     "dependencies": {
         "cheerio": "^1.0.0-rc.2",
-        "md5": "^2.2.1"
+        "md5": "^2.2.1",
+        "mongodb": "^2.2.30"
     }
 }

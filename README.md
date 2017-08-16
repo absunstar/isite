@@ -1,6 +1,6 @@
 Isite Help You To Create Your Node Js WebSite with Advanced Development Featuers
 
-# Features
+# Features [All Features Enabled by Default]
 
         - Auto Routes [Simple & Advanced & Custom]
         - Auto Handle File Types Encoding [Fonts - Images - ...]  
@@ -23,24 +23,55 @@ Isite Help You To Create Your Node Js WebSite with Advanced Development Featuers
 
 ## Using
 
+Fast Startup Web Server
+
 ```js
 var isite = require('isite')
-var site = isite() 
+var site = isite({port:8080}) 
 
 site.run()
 ```
-Advanced Using
+
+Advanced Using with Custom Options
 
 ```js
 var isite = require('isite')
 site = isite({
-    port: 8080, // default 80
-    dir: __dirname + '/site_files', //default ./site_files
-    savingTime: 60 * 2, // default  60 - 1 hour
-    sessionEnabled: true, // default true
-    sessionTimeout: 60 * 6, // default 60 * 24 - 1 day
-    mongodbEnabled: true, // default false
-    mongodbURL: '127.0.0.1:27017' // default 127.0.0.1:27017 - local
+    port: 8080,
+    dir: __dirname + "/site_files",
+    savingTime: 60,
+    admin: {
+        name: 'admin',
+        password: 'admin'
+    },
+    cache: {
+        js: 60 * 24 * 30,
+        css: 60 * 24 * 30,
+        images: 60 * 24 * 30,
+        fonts: 60 * 24 * 30
+    },
+    session: {
+        enabled: true,
+        storage: "mongodb",
+        dbName: "sessions",
+        userSessionCollection: "user_sessions"
+    },
+    security: {
+        enabled: true,
+        storage: "mongodb",
+        dbName: "security",
+        userCollection: "users"
+    },
+    mongodb: {
+        enabled: true,
+        prefix : '',
+        url: "127.0.0.1",
+        port: "27017",
+        userName: "",
+        password: "",
+        dbName : '',
+        collectionName : ''
+    }
 });
 
 site.run()
@@ -71,6 +102,9 @@ site.xml('rss', function (err, content) {
 });
 ```
 -Custom Read Files
+
+    - Read From Local File in First Time
+    - Secound Read Will Read From Memory
 
 ```js
 //read file with custom header
@@ -287,112 +321,135 @@ site.addVar('siteBrand', 'XSite');
 
 ## MongoDB Integration
 
+    - Manage Closed Connections and Timeout
+    - Manage Multi Connections
+    - Manage Bulk Inserts & Updates & Deletes
+    - User Friendly Coding
+
 ```js
-//Create New Collection & Insert New Docs
-site.post({
-    name: '/db',
-    callback: function (req, res) {
-        site.mongodb.connectDB('company', function (err, db) {
-            if (!err) {
-                db.createCollection('employees')
-                db.collection('employees').insertMany([{
-                        name: 'Name 1',
-                        phone: 'xxx'
-                    },
-                    {
-                        name: 'Name 2',
-                        phone: 'xxxxxx'
-                    },
-                    {
-                        name: 'Name 3',
-                        phone: 'xxxxxxxxxxx'
-                    }
-                ], function (err, result) {
-                    db.close()
-                    res.end('Data Inserted : ' + result.insertedCount)
-                })
-
+// Insert One Doc
+   site.mongodb.insertOne({
+            dbName: 'company',
+            collectionName: 'employess',
+            doc:{name:'amr',salary:35000}
+        }, function (err, docInserted) {
+            if (err) {
+                console.log(err.message)
             } else {
-                res.end(err.message)
+                console.log(docInserted)
             }
         })
-    }
-});
 
-//Select Docs
-site.get({
-    name: '/db',
-    callback: function (req, res) {
-        site.mongodb.connectDB('company', function (err, db) {
-            if (!err) {
-                db.collection("employees").find({}).toArray(function (err, result) {
-                    if (!err) {
-                        res.end(JSON.stringify(result))
-                    }
-                    db.close()
-                });
+// Insert Many Docs
+   site.mongodb.insertMany({
+            dbName: 'company',
+            collectionName: 'employess',
+            docs:[
+                    {name:'amr',salary:35000} , 
+                    {name:'Gomana',salary:9000} ,
+                    {name:'Maryem',salary:7000}
+                ]
+        }, function (err, result) {
+            if (err) {
+                console.log(err.message)
             } else {
-                res.end(err.message)
+                console.log(result)
             }
         })
-    }
-});
 
-// Update Docs
-site.put({
-    name: '/db',
-    callback: function (req, res) {
-        site.mongodb.connectDB('company', function (err, db) {
-            if (!err) {
-                db.collection("employees").updateMany({
-                    name: 'Name 1'
-                }, {
-                    $set: {
-                        name: "Updated Name"
-                    }
-                }, function (err, result) {
-                    if (!err) {
-                        res.end('Data Updated : ' + result.result.nModified)
-                    }
-                    db.close()
-                });
+// Find One Doc
+ site.mongodb.findOne({
+            dbName: 'company',
+            collectionName: 'employees',
+            where:{},
+            select : {}
+        }, function (err, doc) {
+            if (err) {
+                console.log(err.message)
             } else {
-                res.end(err.message)
+                console.log(doc)
             }
         })
-    }
-});
 
-//Delete Docs
-site.delete({
-    name: '/db',
-    callback: function (req, res) {
-        site.mongodb.connectDB('company', function (err, db) {
-            if (!err) {
-                db.collection("employees").deleteMany({}, function (err, result) {
-                    if (!err) {
-                        res.end('Data Deleted !!')
-                    }
-                    db.close()
-                });
+// Find Many Docs
+ site.mongodb.findMany({
+            dbName: 'company',
+            collectionName: 'employees',
+            where:{},
+            select : {}
+        }, function (err, docs) {
+            if (err) {
+                console.log(err.message)
             } else {
-                res.end(err.message)
+                console.log(docs)
             }
         })
-    }
-});
 
+//Update One Doc
+           site.mongodb.updateOne({
+            dbName: 'company',
+            collectionName: 'employees',
+            where:{salary:7000},
+            set : {name:'New MARYEM'}
+        }, function (err, result) {
+            if (err) {
+                console.log(err.message)
+            } else {
+                console.log(result)
+            }
+        })
+
+// Update Many Docs
+           site.mongodb.updateMany({
+            dbName: 'company',
+            collectionName: 'employees',
+            where:{salary:9000},
+            set : {salary:9000 * .10}
+        }, function (err, result) {
+            if (err) {
+                console.log(err.message)
+            } else {
+                console.log(result)
+            }
+        })
+
+// Delete One Doc
+          site.mongodb.deleteOne({
+            dbName: 'company',
+            collectionName: 'employess',
+            where:{_id: new site.mongodb.ObjectID('df54fdt8h3n48ykd136vg')}
+        }, function (err, result) {
+            if (err) {
+                console.log(err.message)
+            } else {
+                console.log(result)
+            }
+        })
+// Delete Many Docs
+          site.mongodb.deleteMany({
+            dbName: 'company',
+            collectionName: 'employess',
+            where:{name : /a/}
+        }, function (err, result) {
+            if (err) {
+                console.log(err.message)
+            } else {
+                console.log(result)
+            }
+        })
 ```
 
 ## Client libraries
-easy use client libraries - required fonts files auto added
-```html
- <link rel="stylesheet" href="/xcss/bootstrap.css" >
- <link rel="stylesheet" href="/xcss/font-awesome.css" >
 
- <script src="/xjs/jquery.js"></script>
- <script src="/xjs/bootstrap.js"></script>
- <script src="/xjs/angular.js"></script>
+Easy Access Client libraries - Required Fonts files auto Added
+
+```html
+ <link rel="stylesheet" href="/@css/bootstrap3.css" >
+ <link rel="stylesheet" href="/@css/font-awesome.css" >
+
+ <script src="/@js/jquery.js"></script>
+ <script src="/@js/bootstrap3.js"></script>
+ <script src="/@js/angular.js"></script>
 ```
 ## Helper Functions
 

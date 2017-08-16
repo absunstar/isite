@@ -1,15 +1,28 @@
-(function(w, d, u) {
+(function (w, d, u) {
+    var client = {};
 
-    ajax = ajax = function(op, c, p) {
+    client.ajax = function (op, c, p) {
 
-        if (typeof(op) == u || op == null) { op = {}; }
-        if (typeof(op.url) == u) { op.url = '/api'; }
-        if (typeof(op.method) == u) { op.method = 'GET'; }
-        if (typeof(op.data) == u) { op.data = null; }
-        if (typeof(op.allowCookies) == u) { op.allowCookies = true; }
-        if (typeof(op.contentType) == u) { op.contentType = 'application/x-www-form-urlencoded' }
+        if (typeof (op) == u || op == null) {
+            op = {};
+        }
+        if (typeof (op.url) == u) {
+            op.url = '/api';
+        }
+        if (typeof (op.method) == u) {
+            op.method = 'GET';
+        }
+        if (typeof (op.data) == u) {
+            op.data = null;
+        }
+        if (typeof (op.allowCookies) == u) {
+            op.allowCookies = true;
+        }
+        if (typeof (op.contentType) == u) {
+            op.contentType = 'application/x-www-form-urlencoded'
+        }
 
-        if (typeof(op.file) == u) {
+        if (typeof (op.file) == u) {
             op.file = null;
         } else {
             op.method = 'POST';
@@ -29,15 +42,15 @@
             rs.xhr = xh;
             xh.withCredentials = op.allowCookies;
 
-            if (typeof(p) !== u) {
-                xh.upload.addEventListener("progress", function(evt) {
+            if (typeof (p) !== u) {
+                xh.upload.addEventListener("progress", function (evt) {
                     if (evt.lengthComputable) {
                         var percentComplete = evt.loaded / evt.total;
                         p(Math.round(percentComplete * 100) / 100);
                     }
                 }, false);
 
-                xh.addEventListener("progress", function(evt) {
+                xh.addEventListener("progress", function (evt) {
                     if (evt.lengthComputable) {
                         var percentComplete = evt.loaded / evt.total;
                         p(Math.round(percentComplete * 100) / 100);
@@ -46,29 +59,38 @@
             }
 
 
-            xh.onerror = function() { if (typeof(c) !== u) { c(rs); } };
-            xh.ontimeout = function() {
-                if (typeof(c) !== u) { c(rs); }
+            xh.onerror = function () {
+                if (typeof (c) !== u) {
+                    c({message : 'error while request'} , rs);
+                }
+            };
+            xh.ontimeout = function () {
+                if (typeof (c) !== u) {
+                    c({message : 'timeout while request'} , rs);
+                }
             };
 
 
-            xh.onreadystatechange = function() {
+            xh.onreadystatechange = function () {
                 rs.status = xh.status;
 
                 if (xh.readyState == 4 && xh.status == 200) {
-
 
                     rs.done = true;
                     rs.contentType = xh.getResponseHeader('Content-type');
                     rs.text = xh.responseText;
                     rs.xml = xh.responseXML;
 
-                    if (typeof(c) !== u) { c(rs); }
+                    if (typeof (c) !== u) {
+                        c(null , rs);
+                    }
 
                 }
                 if (xh.status == 404) {
 
-                    if (typeof(c) !== u) { c(rs); }
+                    if (typeof (c) !== u) {
+                        c({message:'404 error'} , rs);
+                    }
                 }
             };
 
@@ -87,7 +109,9 @@
 
 
             if (op.method == 'GET') {
-                if (q.length > 0) { q = '?' + q; }
+                if (q.length > 0) {
+                    q = '?' + q;
+                }
                 xh.open(op.method, op.url + q, true);
                 xh.send();
             } else {
@@ -104,27 +128,26 @@
 
             }
 
-
-
-
         } catch (e) {
             rs.status += ' , catch : ' + e;
-            if (typeof(c) !== u) { c(rs); }
+            if (typeof (c) !== u) {
+                c({message : e} , rs);
+            }
         }
 
     };
 
-    utf8_encode = function(strUni) {
+    utf8_encode = function (strUni) {
 
         if (!strUni || typeof strUni != "string")
             return strUni;
 
-        var strUtf = strUni.replace(/[\u0080-\u07ff]/g, function(c) {
+        var strUtf = strUni.replace(/[\u0080-\u07ff]/g, function (c) {
             var cc = c.charCodeAt(0);
             return String.fromCharCode(0xc0 | cc >> 6, 0x80 | cc & 0x3f);
         }).replace(
             /[\u0800-\uffff]/g,
-            function(c) {
+            function (c) {
                 var cc = c.charCodeAt(0);
                 return String.fromCharCode(0xe0 | cc >> 12,
                     0x80 | cc >> 6 & 0x3F, 0x80 | cc & 0x3f);
@@ -132,16 +155,17 @@
         return strUtf;
     };
 
-    encript = function(s) {
-        return btoa(utf8_encode(s));
+    client.encript = function (s) {
+        if(typeof s == 'string'){
+            return btoa(utf8_encode(s));
+        }else if(typeof s == 'object'){
+            return btoa(utf8_encode((JSON.stringify(s))));
+        }else{
+            return null
+        }
     };
 
-    ob_encript = function(ob) {
-        return encript(JSON.stringify(ob))
-    };
-
-    w.ajax = ajax;
-    w.encript = encript;
-    w.ob_encript = ob_encript;
+   
+    w.client = client;
 
 })(window, document, 'undefined');
