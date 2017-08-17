@@ -1,6 +1,6 @@
-Isite Help You To Create Your Node Js WebSite with Advanced Development Featuers
+[ I Site ] is Framework Help You To Create Your Node Js WebSite Fasting with Many Advanced Development Featuers
 
-# Features [All Features Enabled by Default]
+# Features  [ All Features Enabled by Default ]
 
         - Auto Routes [Simple & Advanced & Custom]
         - Auto Handle File Types Encoding [Fonts - Images - ...]  
@@ -23,7 +23,7 @@ Isite Help You To Create Your Node Js WebSite with Advanced Development Featuers
 
 ## Using
 
-Fast Startup Web Server
+ - Fast Startup Web Server.
 
 ```js
 var isite = require('isite')
@@ -32,7 +32,7 @@ var site = isite({port:8080})
 site.run()
 ```
 
-Advanced Using with Custom Options
+- Advanced Using with Custom Options.
 
 ```js
 var isite = require('isite')
@@ -78,10 +78,13 @@ site.run()
 ```
 ## Site Folder Structure
 
-- Create Folder Name "site_files" ,
-inside it create these Sub folders [
+- site stucture help you to manage you site easy and fast
+
+- Create Folder Name "site_files" 
+ - inside it create these Sub folders [
     html , css , js , json , fonts , images , xml , ...
 ]
+
 - To Easy Read File Contents From "site_files" Folder
 
 ```js
@@ -101,7 +104,7 @@ site.xml('rss', function (err, content) {
     console.log(content);
 });
 ```
--Custom Read Files
+- Custom Read Files
 
     - Read From Local File in First Time and save in memory
     - next time Read Will be From Memory
@@ -308,9 +311,12 @@ site.get('/getSession', function(req, res) {
 //example : /getSession
 ```
 
-## MasterPages
+## Master Pages
 
-add Custom Master Page And Using it ..
+    - master page help you to not repate you code
+    - master page make site layout look good with less code
+    - master page is tow parts header and footer
+    - master page put content between header and footer
 
 ```js
 
@@ -523,11 +529,11 @@ site.call('event name')
 
 ## More
 
-    - this is the first framework from developer to developers
-    - this framework will be free and supported for ever
-    - this framework will upgraded arround the clock for you
-    - this framework make security and saft in first place
-    - this framework develop by one developer
+    - This Framework make Security and Safty in the First Place
+    - This Framework from Developer to Developers
+    - This Framework will be Free and Supported For Ever
+    - This Framework will Upgraded Arround the Clock for You
+    - This Framework Development by One Developer
 
 - Email    : Absunstar@gmail.com
 - Linkedin : https://www.linkedin.com/in/absunstar
