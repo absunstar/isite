@@ -5,12 +5,12 @@ Isite Help You To Create Your Node Js WebSite with Advanced Development Featuers
         - Auto Routes [Simple & Advanced & Custom]
         - Auto Handle File Types Encoding [Fonts - Images - ...]  
         - Merge Multi Files Contents in One Route
-        - Auto Handle Request & Response Headers [Cookies - Parameters]
+        - Auto Handle Request & Response Headers [Cookies - Parameters - params]
         - Auto Detect & Configer User Session  
         - Easy Creating Master Pages
         - Auto Caching & Management Site Files in Memory 
         - Fast Read Files Content [Site Folder Structure]
-        - Custom Html Attributes [Server Tags]
+        - Custom Html Attributes [Server side Tags]
         - MongoDB Full Integration
         - Client libraries [jquery - bootstrap - font-awesome - angular]
         - Development Helper Functions
@@ -103,8 +103,8 @@ site.xml('rss', function (err, content) {
 ```
 -Custom Read Files
 
-    - Read From Local File in First Time
-    - Secound Read Will Read From Memory
+    - Read From Local File in First Time and save in memory
+    - next time Read Will be From Memory
 
 ```js
 //read file with custom header
@@ -137,8 +137,17 @@ site.get("/", function(req, res) {
 ```
 ## Routes
 
-- Auto Convert All Routes URL & Parameters to Lower Case .
-
+- Auto Convert All Routes URL & Parameters to Lower Case 
+- Auto Manage Reponse Headers and Files Types
+- Support Multi Files in One Route
+- Save Route Response in Memory to Reuse for Fast Response
+- Auto Handle URL parametes
+- Auto Handle Body Parameters in not get header [post , put , delete , ...]
+- Auto Handle URL params [custom parameters from url structure]
+- Auto cache Files Content in memory
+- support compress to remove unwanted spaces and tabs and empty lines ...etc
+- support parser to handle custom html server side tags
+ 
 Easy and Auto Site Routing
 
 ```js
@@ -164,17 +173,37 @@ site.get({
 Advanced Site Routing
 
 ```js
-site.addRoute({
+site.addRoute({ // can use [get , post , put , delete]
     name: '/',
     method: 'custom method', // dfeault - GET
     path: site.dir + '/html/index.html', // default null
     parser: 'html', // default static
+    compress : true , // default false
     cache: false // default true
 });
 
-site.addRoute({
+site.get({ // can use [get , post , put , delete]
+    name: '/',
+    path: site.dir + '/html/index.html', // default null
+    parser: 'html', // default static
+    compress : true , // default false
+    cache: false // default true
+});
+
+site.addRoute({ // can use [get , post , put , delete]
     name: '/',
     method: 'custom method', // dfeault - GET
+    callback: function(req, res) {
+        res.setHeader('Content-type', 'text/html');
+        res.writeHead(200);
+        site.html('index', function(err, content) {
+            res.end(content);
+        });
+    }
+});
+
+site.get({ // can use [get , post , put , delete]
+    name: '/',
     callback: function(req, res) {
         res.setHeader('Content-type', 'text/html');
         res.writeHead(200);
@@ -243,6 +272,9 @@ site.get("/:controller/:action/:arg1", function(req, res) {
 
 ## Cookies
 
+    - cookie is client side data per user
+    - cookie is enabled by default
+
 ```js
 site.get("/setCookie", function(req, res) {
         req.cookie.set('name', req.query.name)
@@ -257,6 +289,11 @@ site.get("/getCookie", function(req, res) {
 ```
 
 ## Sessions
+
+    - session is server side data per user
+    - every user has its own access token
+    - session is management automatic
+    - session save in memory by default
 
 ```js
 site.get('/setSession', function(req, res) {
@@ -292,11 +329,15 @@ site.get({
 
 ```
 
-## Server Tags & Attributes
+## HTML Server Tags & Attributes
+
+    - html server tags is html tags run in server side
+    - html server tags make html structure easy management
+    - html server tags is the next generation of html
 
 Add Custom Html Content
 ```js
-site.addRoute({name: '/',path:  site.dir + '/html/index.html' , parser:'html'});
+site.get({name: '/',path:  site.dir + '/html/index.html' , parser:'html'});
 ```
 ```html
 <div x-import="navbar.html"></div>
@@ -441,7 +482,12 @@ site.addVar('siteBrand', 'XSite');
 
 ## Client libraries
 
-Easy Access Client libraries - Required Fonts files auto Added
+Easy Access popular Client libraries 
+
+    - no need to install any client library
+    - no need to install any fonts
+    - no need to manage library routes
+    - just use it
 
 ```html
  <link rel="stylesheet" href="/@css/bootstrap3.css" >
@@ -463,7 +509,9 @@ if (name.like('*sun*')) {
 }
 ```
 
-##Events
+## Events
+
+    - Events is global actions across site using emit events
 
 ```js
 site.on('event name', function() {
@@ -474,6 +522,12 @@ site.call('event name')
 ```
 
 ## More
+
+    - this is the first framework from developer to developers
+    - this framework will be free and supported for ever
+    - this framework will upgraded arround the clock for you
+    - this framework make security and saft in first place
+    - this framework develop by one developer
 
 - Email    : Absunstar@gmail.com
 - Linkedin : https://www.linkedin.com/in/absunstar
