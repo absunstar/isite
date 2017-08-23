@@ -14,10 +14,12 @@
 
     <div class="container">
         <div x-import="installing.html" ng-show="installingDisplay"></div>
-        <div x-import="routes.html" ng-show="routesDisplay"></div>
-        <div x-import="vars.html" ng-show="varsDisplay"></div>
-        <div x-import="files.html" ng-show="filesDisplay"></div>
-        <div x-import="sessions.html" ng-show="sessionsDisplay"></div>
+        <div x-permission="admin" x-import="routes.html" ng-show="routesDisplay"></div>
+        <div x-permission="admin" x-import="vars.html" ng-show="varsDisplay"></div>
+        <div x-permission="admin" x-import="files.html" ng-show="filesDisplay"></div>
+        <div x-permission="admin" x-import="sessions.html" ng-show="sessionsDisplay"></div>
+        <div x-permission="!login" x-import="login.html" ></div>
+        <div x-permission="!login" x-import="register.html" ></div>
     </div>
 
 

@@ -14,14 +14,14 @@
             <div class="collapse navbar-collapse" id="navbar-collapse-1">
                 <ul class="nav navbar-nav">
 
-                     <li class="dropdown">
+                     <li  class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"> <i class="fa fa-play" aria-hidden="true"></i> Getting Started <span class="caret"></span></a>
                         <ul class="dropdown-menu">
                             <li><a href="#" ng-click="showInstalling()"> <i class="fa fa-hourglass-start" aria-hidden="true"></i> Installing</a></li>
                         </ul>
                     </li>
 
-                    <li class="dropdown">
+                    <li x-permission="admin" class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"> <i class="fa fa-tasks" aria-hidden="true"></i> Reports <span class="caret"></span></a>
                         <ul class="dropdown-menu">
                             <li><a href="#" ng-click="showSessions()">Show Sessions</a></li>
@@ -34,7 +34,16 @@
 
                 </ul>
 
-
+                <ul class="nav navbar-nav navbar-right">
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"> <i class="fa fa-tasks" aria-hidden="true"></i> <span x-permission="login"> [##user.email##] </span>Control Panel <span class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                            <li x-permission="!login"><a href="#" data-toggle="modal" data-target="#loginModal"> <i class="fa fa-sign-in" aria-hidden="true"></i>  Login </a></li>
+                            <li x-permission="!login"><a href="#" data-toggle="modal" data-target="#registerModal"> <i class="fa fa-user-plus" aria-hidden="true"></i>  Register </a></li>                            <li x-permission="login"><a href="#" ng-click="logout()"> <i class="fa fa-sign-out" aria-hidden="true"></i>  Logout </a></li>
+        
+                        </ul>
+                    </li>
+                </ul>
 
 
             </div>

@@ -28,10 +28,10 @@ module.exports = function init(options) {
 
 
     //DataBase Management Oprations
-    if (site.options.mongodb.enabled) {
-        let mongodb = require(__dirname + '/lib/mongodb.js');
-        site.mongodb = mongodb(site);
-    }
+
+    let mongodb = require(__dirname + '/lib/mongodb.js');
+    site.mongodb = mongodb(site);
+
 
     if (site.options.security.enabled) {
         let security = require(__dirname + '/lib/security.js');

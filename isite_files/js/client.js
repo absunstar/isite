@@ -80,6 +80,14 @@
                     rs.contentType = xh.getResponseHeader('Content-type');
                     rs.text = xh.responseText;
                     rs.xml = xh.responseXML;
+                    if(rs.contentType == 'application/json'){
+                        try{
+                            rs.data = JSON.parse(rs.text);
+                        }catch(ex){
+                            rs.data = null;
+                        }
+                        
+                    }
 
                     if (typeof (c) !== u) {
                         c(null , rs);

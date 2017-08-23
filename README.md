@@ -1,6 +1,6 @@
-[ I Site ] is Framework Help You To Create Your Node Js WebSite Fasting with Many Advanced Development Featuers
+## This is Framework help You to Create Node Js WebSite with Many Featuers
 
-# Features  [ All Features Enabled by Default ]
+# Features
 
         - Auto Routes [Simple & Advanced & Custom]
         - Auto Handle File Types Encoding [Fonts - Images - ...]  
@@ -37,13 +37,9 @@ site.run()
 ```js
 var isite = require('isite')
 site = isite({
-    port: 8080,
+    port: 54321,
     dir: __dirname + "/site_files",
     savingTime: 60,
-    admin: {
-        name: 'admin',
-        password: 'admin'
-    },
     cache: {
         js: 60 * 24 * 30,
         css: 60 * 24 * 30,
@@ -58,21 +54,32 @@ site = isite({
     },
     security: {
         enabled: true,
+        admin: {
+            email: 'admin@localhost',
+            password: 'p@ssw0rd'
+        },
+        users: [{
+            _id: '0001',
+            email: 'member1@localhost',
+            password: '123456',
+            permissions: ['showReports', 'addItems']
+        }],
         storage: "mongodb",
         dbName: "security",
         userCollection: "users"
     },
     mongodb: {
         enabled: true,
-        prefix : '',
+        prefix: '',
         url: "127.0.0.1",
         port: "27017",
         userName: "",
         password: "",
-        dbName : '',
-        collectionName : ''
+        dbName: '',
+        collectionName: ''
     }
 });
+
 
 site.run()
 ```
