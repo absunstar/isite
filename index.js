@@ -26,9 +26,18 @@ module.exports = function init(options) {
     site.route = require(__dirname + '/lib/route.js');
     site.route(site);
 
+    require(__dirname + '/lib/words.js')(site)
+    require(__dirname + '/lib/vars.js')(site)
+
+    site.addVar = function (name, value) {
+        site.vars.push({
+            name: name,
+            value: value
+        })
+    }
+
 
     //DataBase Management Oprations
-
     let mongodb = require(__dirname + '/lib/mongodb.js');
     site.mongodb = mongodb(site);
 
@@ -48,13 +57,7 @@ module.exports = function init(options) {
 
     site.md5 = require('md5');
 
-    site.vars = []; // site variables[name , value]
-    site.addVar = function (key, value) {
-        site.vars.push({
-            key: key,
-            value: value
-        });
-    }
+   
     site.ips = []; // all ip send requests [ip , requets count]
     site.logs = []; // all log Messages if logEnabled = true
 
@@ -108,6 +111,7 @@ module.exports = function init(options) {
 
                 session.createdTime = s.createdTime
                 session.data = session.data || s.data
+                session.lang = session.lang || s.lang || 'ar'
                 session.requestesCount = s.requestesCount + 1
 
                 site.sessions[i] = {
@@ -115,6 +119,7 @@ module.exports = function init(options) {
                     createdTime: session.createdTime,
                     modifiedTime: session.modifiedTime,
                     data: session.data,
+                    lang : session.lang,
                     ip: session.ip,
                     requestesCount: session.requestesCount
                 }
@@ -122,6 +127,7 @@ module.exports = function init(options) {
             }
         }
 
+        session.lang = 'ar'
         session.data = [];
         session.requestesCount = 1;
         session.createdTime = new Date().getTime();

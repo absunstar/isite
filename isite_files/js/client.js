@@ -1,6 +1,21 @@
 (function (w, d, u) {
     var client = {};
 
+    var eventList = [];
+
+    client.on = function(name , callback){
+        eventList.push({name : name , callback : callback});
+    };
+    
+    client.call = function(name){
+        for (var i = 0; i < eventList.length; i++) {
+            var ev = eventList[i];
+            if(ev.name == name){
+                ev.callback();
+            }
+        }
+    };
+
     client.ajax = function (op, c, p) {
 
         if (typeof (op) == u || op == null) {
