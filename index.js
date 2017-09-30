@@ -29,12 +29,6 @@ module.exports = function init(options) {
     require(__dirname + '/lib/words.js')(site)
     require(__dirname + '/lib/vars.js')(site)
 
-    site.addVar = function (name, value) {
-        site.vars.push({
-            name: name,
-            value: value
-        })
-    }
 
 
     //DataBase Management Oprations

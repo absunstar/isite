@@ -75,10 +75,13 @@ site = isite({
         port: "27017",
         userName: "",
         password: "",
-        dbName: '',
-        collectionName: ''
+        prefix: {
+            db: '',
+            collection: ''
+        }
+
     }
-});
+})
 
 
 site.run()
