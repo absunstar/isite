@@ -13,3 +13,5 @@ gulp.task('copyToSpeedBrowser' , ()=>{
 
 })
 
+gulp.task('default' , ['copyToSpeedBrowser'])
+
