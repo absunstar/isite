@@ -273,11 +273,13 @@ site.get('/post/:id/category/:cat_id', function(req, res) {
 ```
 MVC Custom Route
 ```js
-site.get("/:controller/:action/:arg1", function(req, res) {
+site.get("/:controller/:Action/:Arg1", function(req, res) {
     res.end(
         "GET | Controller : " + req.params.controller +
-        ", Action : " + req.params.action +
-        ", Arg 1 : " + req.params.arg1
+        ", Action : " + req.params.Action + /* Normal case*/
+         ", action : " + req.params.action + /* lower case*/
+        ", Arg 1 : " + req.params.Arg1 + /* Normal case*/
+        ", arg 1 : " + req.params.arg1 /* lower case*/
     );
 });
 //example : /facebook/post/xxxxxxxxxx
@@ -517,7 +519,11 @@ Easy Access popular Client libraries
 
 ```js
 var hash = site.md5('this content will be hashed as md5')
+var base64 = site.toBase64('this content will be encript as base64 string')
+var normal = site.fromBase64(base64)
 console.log(hash)
+console.log(base64)
+console.log(normal)
 
 var name = 'absunstar'
 if (name.like('*sun*')) {
