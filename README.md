@@ -7,6 +7,7 @@
         - Merge Multi Files Contents in One Route
         - Auto Handle Request & Response Headers [Cookies - Parameters - params]
         - Auto Detect & Configer User Session  
+        - Builtin Security System [register , login , permissions]
         - Easy Creating Master Pages
         - Auto Caching & Management Site Files in Memory 
         - Fast Read Files Content [Site Folder Structure]
@@ -19,6 +20,7 @@
 ## Installation
 
 `npm install isite --save`
+`npm install `
 
 
 ## Using
@@ -32,55 +34,51 @@ var site = isite({port:8080})
 site.run()
 ```
 
-- Advanced Using with Custom Options.
+- Default Options.
 
 ```js
 var isite = require('isite')
 site = isite({
-    port: 54321,
-    dir: __dirname + "/site_files",
-    savingTime: 60,
-    cache: {
-        js: 60 * 24 * 30,
-        css: 60 * 24 * 30,
-        images: 60 * 24 * 30,
-        fonts: 60 * 24 * 30
-    },
-    session: {
-        enabled: true,
-        storage: "mongodb",
-        dbName: "sessions",
-        userSessionCollection: "user_sessions"
-    },
-    security: {
-        enabled: true,
-        admin: {
-            email: 'admin@localhost',
-            password: 'p@ssw0rd'
+    port : process.env.port || 80,
+        dir : './site_files',
+        savingTime : 60,
+        session : {
+            timeout : 60 * 24 * 30 ,
+            enabled : true,
+            storage : 'mongodb',
+            dbName : 'sessions' ,
+            userSessionCollection : 'user_sessions'
         },
-        users: [{
-            _id: '0001',
-            email: 'member1@localhost',
-            password: '123456',
-            permissions: ['showReports', 'addItems']
-        }],
-        storage: "mongodb",
-        dbName: "security",
-        userCollection: "users"
-    },
-    mongodb: {
-        enabled: true,
-        prefix: '',
-        url: "127.0.0.1",
-        port: "27017",
-        userName: "",
-        password: "",
-        prefix: {
-            db: '',
-            collection: ''
+        mongodb : {
+            enabled : true,
+            url :'127.0.0.1',
+            port : '27017',
+            userName : null,
+            password : null,
+            prefix : {
+                db:'',
+                collection:''
+            }
+        },
+        security :{
+            enabled : true,
+            dbName : 'security',
+            userCollection :'users',
+            admin:{
+                email : 'admin@localhost',
+                password : 'admin'
+            },
+            users:[]
+        },
+        cache:{
+            enabled : true,
+            js : 60 * 24 * 30,
+            css : 60 * 24 * 30,
+            fonts : 60 * 24 * 30,
+            images : 60 * 24 * 30,
+            json : 60 * 24 * 30,
+            xml : 60 * 24 * 30,
         }
-
-    }
 })
 
 
@@ -186,16 +184,8 @@ site.get({
 Advanced Site Routing
 
 ```js
-site.addRoute({ // can use [get , post , put , delete]
-    name: '/',
-    method: 'custom method', // dfeault - GET
-    path: site.dir + '/html/index.html', // default null
-    parser: 'html', // default static
-    compress : true , // default false
-    cache: false // default true
-});
 
-site.get({ // can use [get , post , put , delete]
+site.get({ // can use [get , post , put , delete , all]
     name: '/',
     path: site.dir + '/html/index.html', // default null
     parser: 'html', // default static
@@ -203,28 +193,25 @@ site.get({ // can use [get , post , put , delete]
     cache: false // default true
 });
 
-site.addRoute({ // can use [get , post , put , delete]
+site.get({ 
     name: '/',
-    method: 'custom method', // dfeault - GET
     callback: function(req, res) {
         res.setHeader('Content-type', 'text/html');
         res.writeHead(200);
         site.html('index', function(err, content) {
             res.end(content);
-        });
+        })
     }
-});
+})
 
-site.get({ // can use [get , post , put , delete]
-    name: '/',
-    callback: function(req, res) {
+site.get('/', (req, res)=> {
         res.setHeader('Content-type', 'text/html');
         res.writeHead(200);
         site.html('index', function(err, content) {
             res.end(content);
-        });
+        })
     }
-});
+)
 ```
 
 Auto Route All Files in Folder
@@ -370,12 +357,54 @@ Page "navbar.html" & "info.html" Must Be In HTML Site Folder ['/site_files/html/
 - Dynamic Varibles Sets
 
 ```js
-site.addVar('siteName', 'First Site With Isite Library ');
-site.addVar('siteBrand', 'XSite');
+site.var('siteName', 'First Site With Isite Library ');
+site.var('siteBrand', 'XSite');
 ```
 ```html
+
 <title>##var.siteName##</title>
 <h2>##var.siteBrand##</h2>
+
+<h2>Lang : ##session.lang## , Theme : ##session.theme##</h2>
+//example : Read Data From User Session
+
+<h2>query name : ##query.name## , query age : ##query.age##</h2>
+//example : http://127.0.0.1?name=amr&age=33
+
+<h2>param category : ##param.category## , param name : ##param.name##</h2>
+//example : http://127.0.0.1/News/Egypt
+
+<div x-lang="ar">Show if Site Language is Arabic</div>
+<div x-lang="en">Show if Site Language is English</div>
+// auto detect user session language set
+
+<div x-permission="login">Only Login Users Can Show This Content</div>
+<div x-permission="!login">Only Not Login Users Can Show This Content</div>
+// auto detect user login status 
+
+<div x-feature="os.mobile">Only Users From Mobile Can Show This Content</div>
+<div x-feature="os.desktop">Only Users From Mobile Can Show This Content</div>
+
+<div x-feature="os.windows">Only Users From Windows Can Show This Content</div>
+<div x-feature="os.windowsxp">Only Users From Windows XP Can Show This Content</div>
+<div x-feature="os.windows7">Only Users From Windows 7 Can Show This Content</div>
+<div x-feature="os.windows8">Only Users From Windows 8 Can Show This Content</div>
+<div x-feature="os.windows10">Only Users From Windows 10 Can Show This Content</div>
+
+<div x-feature="os.linux">Only Users From Linux Systems Can Show This Content</div>
+<div x-feature="os.mac">Only Users From Mac Systems Can Show This Content</div>
+<div x-feature="os.android">Only Users From Android Systems Can Show This Content</div>
+
+<div x-feature="browser.edge">Only Users From Edge Browser Can Show This Content</div>
+<div x-feature="browser.firefox">Only Users From FireFox Browser Can Show This Content</div>
+<div x-feature="browser.chrome">Only Users From Chrome Browser Can Show This Content</div>
+<div x-feature="browser.explorer">Only Users From Explorer Browser Can Show This Content</div>
+
+<div x-feature="ip.xxx.xxx.xxx.xxx">Only Users From IP xxx.xxx.xxx.xxx Can Show This Content</div>
+
+
+//auto detect user browser
+
 ```
 
 ## MongoDB Integration
@@ -515,6 +544,127 @@ Easy Access popular Client libraries
  <script src="/@js/bootstrap3.js"></script>
  <script src="/@js/angular.js"></script>
 ```
+
+## Angular JS
+- All Function Auto Work
+
+```js
+var app = angular.module('html', []);
+
+app.controller('body', function ($scope, $http) {
+
+    /* Register */
+   $scope.register = function () {
+    
+        $http({
+            method: 'POST',
+            url: '/@security/api/user/register',
+            transformRequest: function (obj) {
+                var str = [];
+                for (var p in obj)
+                    str.push(encodeURIComponent(p) + "=" + encodeURIComponent(obj[p]));
+                return str.join("&");
+            },
+            data: {
+                email: $scope.userEmail,
+                password: $scope.userPassword
+            },
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded'
+            }
+        }).then(function (response) {
+           
+            if (response.data.error) {
+                $scope.error = response.data.error;
+            }
+            if (response.data.user) {
+                window.location.href = '/';
+            }
+        } , function(err){
+            $scope.error = err;
+        });
+
+    };
+
+        /* Login */
+    $scope.login = function () {
+      
+        $http({
+            method: 'POST',
+            url: '/@security/api/user/login',
+            transformRequest: function (obj) {
+                var str = [];
+                for (var p in obj)
+                    str.push(encodeURIComponent(p) + "=" + encodeURIComponent(obj[p]));
+                return str.join("&");
+            },
+            data: {
+                email: $scope.userEmail,
+                password: $scope.userPassword
+            },
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded'
+            }
+        }).then(function (response) {
+           
+            if (response.data.error) {
+                $scope.error = response.data.error;
+            }
+            if (response.data.user) {
+                window.location.href = '/';
+            }
+        } , function(err){
+            $scope.error = err;
+        });
+
+    };
+
+    /* Logout */
+    $scope.logout = function () {
+       
+        $http.post('/@security/api/user/logout').then(function (response) {
+           
+            if (response.data.done) {
+                window.location.href = '/';
+            }else{
+                $scope.error = response.data.error;
+            }
+        }, function (error) {
+            $scope.error = error;
+        });
+    };
+
+    /* Cahnge Site Language */
+
+  $scope.changeLang = function(lang){
+    $http({
+        method: 'POST',
+        url: '/@language/change',
+        transformRequest: function (obj) {
+            var str = [];
+            for (var p in obj)
+                str.push(encodeURIComponent(p) + "=" + encodeURIComponent(obj[p]));
+            return str.join("&");
+        },
+        data:{ name : lang},
+        headers: {
+            'Content-Type': 'application/x-www-form-urlencoded'
+        }
+    }).then(function (response) {
+        if (response.data.done) {
+          window.location.href = window.location.href;
+        }
+    });
+  };
+
+
+
+
+
+});
+
+```
+
 ## Helper Functions
 
 ```js
