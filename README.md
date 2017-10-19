@@ -20,7 +20,6 @@
 ## Installation
 
 `npm install isite --save`
-`npm install `
 
 
 ## Using
@@ -525,6 +524,33 @@ site.var('siteBrand', 'XSite');
                 console.log(result)
             }
         })
+```
+
+
+## Upload File
+```html
+ <form action="uploadFile" method="post" enctype="multipart/form-data">
+        <input type="file" name="fileToUpload"><br>
+        <input type="submit">
+    </form>
+```
+
+```js
+site.post("uploadFile", (req, res) => {
+  var response = {done:true}
+  var file = req.files.fileToUpload
+
+  var newpath = site.dir + "/../../uploads/" + file.name
+
+  site.mv(file.path, newpath, function(err) {
+      if(err){
+        response.error = err
+        response.done = false
+      }
+    
+    res.end(JSON.stringify(response))
+  })
+})
 ```
 
 ## Client libraries

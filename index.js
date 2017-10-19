@@ -6,6 +6,8 @@ module.exports = function init(options) {
   site.fs = require("fs")
   site.path = require("path")
   site.querystring = require("querystring")
+  site.formidable = require("formidable")
+  site.mv = require("mv")
 
   require("./lib/prototype.js")
 
