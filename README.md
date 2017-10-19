@@ -11,6 +11,7 @@
         - Easy Creating Master Pages
         - Auto Caching & Management Site Files in Memory 
         - Fast Read Files Content [Site Folder Structure]
+        - [ Upload / Download ] Files
         - Custom Html Attributes [Server side Tags]
         - MongoDB Full Integration
         - Client libraries [jquery - bootstrap - font-awesome - angular]
@@ -528,6 +529,8 @@ site.var('siteBrand', 'XSite');
 
 
 ## Upload File
+
+- upload File using HTML
 ```html
  <form action="uploadFile" method="post" enctype="multipart/form-data">
         <input type="file" name="fileToUpload"><br>
@@ -535,21 +538,71 @@ site.var('siteBrand', 'XSite');
     </form>
 ```
 
+- Upload File Using Angular js
+
+```html
+  <form class="form">
+        <label>Select File To Upload</label>
+        <input type="file" name="fileToUpload" onchange="angular.element(this).scope().uploadFile(this.files)" />
+        <p>{{uploadStatus}}</p>
+
+    </form>
+
+```
+
+```js
+    $scope.uploadFile = function (files) {
+        var fd = new FormData();
+        fd.append("fileToUpload", files[0]);
+        $http.post('/uploadFile', fd, {
+            withCredentials: true,
+            headers: {
+                'Content-Type': undefined
+            },
+            uploadEventHandlers: {
+                progress: function (e) {
+                    $scope.uploadStatus = "Uploading : " + Math.round((e.loaded * 100 / e.total)) + " %";
+                    if (e.loaded == e.total) {
+                        $scope.uploadStatus = "100%";
+                    }
+                }
+            },
+            transformRequest: angular.identity
+        }).then(function (res) {
+            if (res.data && res.data.done) {
+            $scope.uploadStatus = "File Uploaded"
+            }
+        }, function (error) {
+            $scope.uploadStatus = error;
+        });
+    };
+
+```
+- Recive Uploading File from [html , angular , jquery , ...]
+
 ```js
 site.post("uploadFile", (req, res) => {
   var response = {done:true}
   var file = req.files.fileToUpload
-
   var newpath = site.dir + "/../../uploads/" + file.name
-
   site.mv(file.path, newpath, function(err) {
       if(err){
         response.error = err
         response.done = false
       }
-    
     res.end(JSON.stringify(response))
   })
+})
+```
+## Download File
+
+- download any file from server
+- auto handle file content and size
+- force client browser to download file
+
+```js
+site.get('/files/file1.zip' , (req , res)=>{
+    site.downloadFile(site.dir + '/downloads/file1.zip' , req , res)
 })
 ```
 
@@ -571,13 +624,15 @@ Easy Access popular Client libraries
  <script src="/@js/angular.js"></script>
 ```
 
-## Angular JS
-- All Function Auto Work
+## Angular JS 
+
+- Login , Register , Logout
+- Change Site Language
 
 ```js
-var app = angular.module('html', []);
+var app = angular.module('myApp', []);
 
-app.controller('body', function ($scope, $http) {
+app.controller('myController', function ($scope, $http) {
 
     /* Register */
    $scope.register = function () {
