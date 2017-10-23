@@ -279,13 +279,13 @@ site.get("/:controller/:Action/:Arg1", function(req, res) {
 
 ```js
 site.get("/setCookie", function(req, res) {
-        req.cookie.set('name', req.query.name)
+        res.cookie('name', req.query.name)
         res.end('cookie set')
 })
 //example : /setcookie?name=amr
 
 site.get("/getCookie", function(req, res) {
-        res.end('name from cookie : ' + req.cookie.get('name'))
+        res.end('name from cookie : ' + req.cookie('name'))
 })
 //example : /getcookie
 ```
@@ -602,7 +602,7 @@ site.post("uploadFile", (req, res) => {
 
 ```js
 site.get('/files/file1.zip' , (req , res)=>{
-    site.downloadFile(site.dir + '/downloads/file1.zip' , req , res)
+    res.download(site.dir + '/downloads/file1.zip')
 })
 ```
 
@@ -749,6 +749,17 @@ app.controller('myController', function ($scope, $http) {
 ## Helper Functions
 
 ```js
+site.get('/' , (req , res)=>{
+    res.redirect('/URL') // Any URL 
+    res.send('HTML CONTENT') // Any HTML Content 
+    res.render('index') // html file name - auto parser [html and css content]
+    res.html('index') // like res.render
+    res.css('bootstrap') // css file name
+    res.js('jquery') // js file name
+    res.json(obj) // json file name or object
+})
+
+
 var hash = site.md5('this content will be hashed as md5')
 var base64 = site.toBase64('this content will be encript as base64 string')
 var normal = site.fromBase64(base64)
@@ -785,3 +796,4 @@ site.call('event name')
 - Email    : Absunstar@gmail.com
 - Linkedin : https://www.linkedin.com/in/absunstar
 - Github   : https://github.com/absunstar
+- Paypal   : https://paypal.me/absunstar

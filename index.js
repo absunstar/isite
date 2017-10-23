@@ -12,6 +12,7 @@ module.exports = function init(options) {
   require("./lib/prototype.js")
 
   const fn = require("./lib/fn.js")
+  fn.site = site
   site.copy = fn.copy
   site.from123 = fn.from123
   site.fromBase64 = fn.fromBase64
