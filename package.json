@@ -1,6 +1,6 @@
 {
   "name": "isite",
-  "version": "1.6.3",
+  "version": "1.6.4",
   "description": "Create Web Site with Full Development Features [Fast and Easy] ",
   "main": "index.js",
   "repository": {
@@ -8,21 +8,14 @@
     "url": "git://github.com/absunstar/isite"
   },
   "keywords": [
-    "http",
-    "session",
-    "cookie",
+    "http","route",
+    "cookie","session","security",
+    "upload","download",
     "master page",
-    "cache",
-    "file",
-    "header",
-    "body",
-    "url",
-    "route",
-    "api",
-    "framework",
-    "restful",
-    "fonts",
-    "mongodb"
+    "cache","memory","file",
+    "api","restful","framework",
+    "fonts","arabic" ,
+    "mongodb" 
   ],
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"

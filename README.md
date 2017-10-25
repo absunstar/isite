@@ -362,17 +362,12 @@ site.var('siteBrand', 'XSite');
 ```
 ```html
 
-<title>##var.siteName##</title>
-<h2>##var.siteBrand##</h2>
+<title> ##var.siteName## </title>
+<h2> ##var.siteBrand## </h2>
+<h2> Lang : ##session.lang## , Theme : ##session.theme## </h2>
+<h2> query name : ##query.name## , query age : ##query.age## </h2>
+<h2> param category : ##param.category## , param name : ##param.name## </h2>
 
-<h2>Lang : ##session.lang## , Theme : ##session.theme##</h2>
-//example : Read Data From User Session
-
-<h2>query name : ##query.name## , query age : ##query.age##</h2>
-//example : http://127.0.0.1?name=amr&age=33
-
-<h2>param category : ##param.category## , param name : ##param.name##</h2>
-//example : http://127.0.0.1/News/Egypt
 
 <div x-lang="ar">Show if Site Language is Arabic</div>
 <div x-lang="en">Show if Site Language is English</div>
@@ -601,9 +596,15 @@ site.post("uploadFile", (req, res) => {
 - force client browser to download file
 
 ```js
+// download any file
 site.get('/files/file1.zip' , (req , res)=>{
     res.download(site.dir + '/downloads/file1.zip')
 })
+//download and change file name
+site.get('/files/file1.zip' , (req , res)=>{
+    res.download(site.dir + '/downloads/file1.zip' , 'info.zip')
+})
+
 ```
 
 ## Client libraries
@@ -750,8 +751,10 @@ app.controller('myController', function ($scope, $http) {
 
 ```js
 site.get('/' , (req , res)=>{
+    res.status(301) // set response code to 301 and return response object
+    res.set('Content-Type', 'text/plain'); // add response header
     res.redirect('/URL') // Any URL 
-    res.send('HTML CONTENT') // Any HTML Content 
+    res.send('HTML CONTENT') // Any HTML Content
     res.render('index') // html file name - auto parser [html and css content]
     res.html('index') // like res.render
     res.css('bootstrap') // css file name
