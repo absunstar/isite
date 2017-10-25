@@ -1,4 +1,4 @@
-## This is Framework help You to Create Node Js WebSite with Many Featuers
+## Create Node Js WebSite [Fast & Easy] with Many Featuers
 
 # Features
 
@@ -72,6 +72,7 @@ site = isite({
         },
         cache:{
             enabled : true,
+            html : 60 * 24 * 30,
             js : 60 * 24 * 30,
             css : 60 * 24 * 30,
             fonts : 60 * 24 * 30,
