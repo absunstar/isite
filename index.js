@@ -9,6 +9,10 @@ module.exports = function init(options) {
   site.formidable = require("formidable")
   site.mv = require("mv")
 
+  site.require = function(file_path){
+    return require(file_path)(site)
+  }
+
   require("./lib/prototype.js")
 
   const fn = require("./lib/fn.js")
