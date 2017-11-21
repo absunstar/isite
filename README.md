@@ -310,13 +310,13 @@ site.get("/getCookie", function(req, res) {
 
 ```js
 site.get('/setSession', function(req, res) {
-    req.session.set('user_name', req.query.user_name)
+    req.session('user_name', req.query.user_name)
     res.end('Session Set ok !! ')
 })
 //example : /setSession?user_name=absunstar
 
 site.get('/getSession', function(req, res) {
-    res.end('User Name from session : ' + req.session.get('user_name'))
+    res.end('User Name from session : ' + req.session('user_name'))
 })
 //example : /getSession
 ```
