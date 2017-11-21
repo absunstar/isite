@@ -9,7 +9,7 @@
         - Auto Detect & Configer User Session  
         - Builtin Security System [register , login , permissions]
         - Easy Creating Master Pages
-        - Auto Caching & Management Site Files in Memory 
+        - Auto Caching All Routes & Management Site Files in Memory 
         - Fast Read Files Content [Site Folder Structure]
         - [ Upload / Download ] Files
         - Custom Html Attributes [Server side Tags]
@@ -56,14 +56,18 @@ site = isite({
       port: "27017",
       userName: null,
       password: null,
-      default :{
-        db : 'test',
-        collection : 'test'
-      },
+      db: "",
+      collection: "",
       prefix: {
         db: "",
         collection: ""
-      }
+      },
+    identity: {
+       enabled: true,
+        name: "id",
+        start : 1,
+        step : 1
+    }
     },
     security: {
       enabled: true,
@@ -194,8 +198,8 @@ Advanced Site Routing
 
 site.get({ // can use [get , post , put , delete , all]
     name: '/',
-    path: site.dir + '/html/index.html', // default null
-    parser: 'html', // default static
+    path: site.dir + '/html/index.html', //Required
+    parser: 'html', // default static [not paresed]
     compress : true , // default false
     cache: false // default true
 });
@@ -411,12 +415,53 @@ site.var('siteBrand', 'XSite');
 
 ## MongoDB Integration
 
+    - Auto Add [id] as auto increment number
     - Manage Closed Connections and Timeout
     - Manage Multi Connections
     - Manage Bulk Inserts & Updates & Deletes
     - User Friendly Coding
 
 ```js
+
+// use connect collection [Easy Way]
+
+$employees = site.connectCollection("employees")
+//or
+$employees = site.connectCollection({collection : "employees" , db : "company")
+
+// insert one doc [ can use [add , addOne , insert , insertOne]]
+$employees.insertOne({name : 'amr' , salary : 50000} , (err , _id , doc)=>{
+    console.log(doc.id) // number
+    console.log(_id) // mongodb object id
+})
+
+// select one doc [ can use [ find , findOne , selectOne , select]]
+$employees.findOne({where:{name : 'amr'} , select:{salary:1}} , (err , doc)=>{
+    console.log(doc)
+})
+
+// select Multi docs [ can use [findAll , findMany , selectAll , selectMany]]
+$employees.findMany({
+    where:{name : /a/i} , 
+    select:{name: 1 , salary:1} ,
+     sort:{salary : -1}} , (err , doc)=>{
+    console.log(doc)
+})
+
+// update one doc [ can use [updateOne , update , editOne , edit]]
+$employees.updateOne({
+    where:{name : /a/i} , 
+    set:{salary: 30000}} , (err , result)=>{
+    console.log(result)
+})
+
+// update one doc [ can use [deleteOne , delete , removeOne , remove]]
+$employees.deleteOne({where:{name : /a/i}} , (err , result)=>{
+    console.log(result)
+})
+
+// Low Level Access Database Functions
+
 // Insert One Doc
    site.mongodb.insertOne({
             dbName: 'company',

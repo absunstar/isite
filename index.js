@@ -65,9 +65,14 @@ module.exports = function init(options) {
   let mongodb = require( "./lib/mongodb.js")
   site.mongodb = mongodb(site)
 
+  let collection = require("./lib/collection")
+  site.connectCollection = function(option){
+    return collection(site , option)
+  }
+
   if (site.options.security.enabled) {
     let security = require( "./lib/security.js")
-    security(site)
+   site.security = security(site)
     site.security.loadUsers(function(err, users) {
       site.security.users = users
     })
@@ -125,9 +130,9 @@ module.exports = function init(options) {
   site.on("saveChanges", function() {
     site.saveSessions(function(err, sessions) {
       if (err) {
-        console.log(err)
+      
       } else {
-        //console.log(sessions)
+       
       }
     })
   })
