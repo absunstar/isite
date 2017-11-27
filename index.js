@@ -9,6 +9,7 @@ module.exports = function init(options) {
   site.formidable = require("formidable")
   site.mv = require("mv")
 
+
   site.require = function(file_path){
     return require(file_path)(site)
   }
@@ -33,6 +34,11 @@ module.exports = function init(options) {
   site.options = option
   site.port = option.port
   site.dir = option.dir
+
+  site.log = function(data){
+    if(site.options.log)
+    console.log(data)
+  }
 
   const fsm = require("./lib/fsm.js")
   fsm.dir = site.dir
@@ -91,7 +97,7 @@ module.exports = function init(options) {
   site.loadSessions = function(callback) {
     site.mongodb.find(
       {
-        dbName: site.options.session.dbName,
+        dbName: site.options.session.db,
         collectionName: site.options.session.userSessionCollection,
         where: {},
         select: {}
@@ -109,14 +115,14 @@ module.exports = function init(options) {
   site.saveSessions = function(callback) {
     site.mongodb.delete(
       {
-        dbName: site.options.session.dbName,
+        dbName: site.options.session.db,
         collectionName: site.options.session.userSessionCollection,
         where: {}
       },
       function(err, result) {
         site.mongodb.insert(
           {
-            dbName: site.options.session.dbName,
+            dbName: site.options.session.db,
             collectionName: site.options.session.userSessionCollection,
             docs: site.sessions
           },
@@ -194,7 +200,7 @@ module.exports = function init(options) {
   }
 
   site.on("saveChanges", function() {
-    console.log("Site Will Save Changes Every " + site.options.savingTime + " minute ")
+    console.log("Site saveChanges Event Fire Every " + site.options.savingTime + " minute ")
   })
 
   setInterval(function() {
