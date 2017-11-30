@@ -16,15 +16,14 @@ module.exports = function init(options) {
 
   require("./lib/prototype.js")
 
-  const fn = require("./lib/fn.js")
-  fn.site = site
-  site.copy = fn.copy
-  site.from123 = fn.from123
-  site.fromBase64 = fn.fromBase64
-  site.to123 = fn.to123
-  site.toBase64 = fn.toBase64
-  site.getContentType = fn.getContentType
-  site.getFileEncode = fn.getFileEncode
+  site.fn = require("./lib/fn.js")(site)
+  site.copy = site.fn.copy
+  site.from123 = site.fn.from123
+  site.fromBase64 = site.fn.fromBase64
+  site.to123 = site.fn.to123
+  site.toBase64 = site.fn.toBase64
+  site.getContentType = site.fn.getContentType
+  site.getFileEncode = site.fn.getFileEncode
 
   const event = require("./lib/event.js")
   site.call = event.call
@@ -40,30 +39,35 @@ module.exports = function init(options) {
     console.log(data)
   }
 
-  const fsm = require("./lib/fsm.js")
-  fsm.dir = site.dir
-  site.fsm = fsm
-  site.fileList = fsm.fileList
-  site.createDir = fsm.createDir
-  site.css = fsm.css
-  site.xml = fsm.xml
-  site.js = fsm.js
-  site.json = fsm.json
-  site.html = fsm.html
-  site.deleteFile = fsm.deleteFile
-  site.removeFile = fsm.removeFile
-  site.download = fsm.download
-  site.downloadFile = fsm.downloadFile
-  site.isFileExists = fsm.isFileExists
-  site.readFile = fsm.readFile
-  site.readFiles = fsm.readFiles
-  site.readFileSync = fsm.readFileSync
-  site.writeFile = fsm.writeFile
+  site.fsm = require("./lib/fsm.js")(site)
+  site.fileList = site.fsm.list
+  site.createDir = site.fsm.createDir
+  site.css = site.fsm.css
+  site.xml = site.fsm.xml
+  site.js = site.fsm.js
+  site.json = site.fsm.json
+  site.html = site.fsm.html
+  site.deleteFile = site.fsm.deleteFile
+  site.removeFile = site.fsm.removeFile
+  site.download = site.fsm.download
+  site.downloadFile = site.fsm.downloadFile
+  site.isFileExists = site.fsm.isFileExists
+  site.readFile = site.fsm.readFile
+  site.readFiles = site.fsm.readFiles
+  site.readFileSync = site.fsm.readFileSync
+  site.writeFile = site.fsm.writeFile
 
   
-  const routing = require( "./lib/routing.js")
-  routing(site)
+  const routing = require( "./lib/routing.js")(site)
+  site.get = routing.get
+  site.post = routing.post
+  site.put = routing.put
+  site.delete = routing.delete
+  site.all = routing.all
+  site.run =site.start =site.listen = routing.start
+  site.routing = routing
  
+
   require("./lib/words.js")(site)
   require("./lib/vars.js")(site)
 

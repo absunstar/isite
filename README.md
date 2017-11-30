@@ -39,15 +39,16 @@ site.run()
 ```js
 var isite = require('isite')
 site = isite({
-   port: process.env.port || 80,
+    port: process.env.port || 80,
     dir: "./site_files",
     name: "Your Site",
     savingTime: 60,
+    log : true,
     session: {
       timeout: 60 * 24 * 30,
       enabled: true,
       storage: "mongodb",
-      dbName: "sessions",
+      db: "sessions",
       userSessionCollection: "user_sessions"
     },
     mongodb: {
@@ -56,22 +57,21 @@ site = isite({
       port: "27017",
       userName: null,
       password: null,
-      db: "",
-      collection: "",
+      db: "test",
+      collection: "test",
       prefix: {
         db: "",
         collection: ""
       },
-    identity: {
-       enabled: true,
-        name: "id",
-        start : 1,
-        step : 1
-    }
+      identity: {
+        enabled: true,
+        start: 1,
+        step: 1
+      }
     },
     security: {
       enabled: true,
-      dbName: "security",
+      db: "security",
       userCollection: "users",
       admin: {
         email: "admin@localhost",
@@ -81,8 +81,8 @@ site = isite({
     },
     cache: {
       enabled: true,
-      html: 60 * 24 * 30,
-      txt: 60 * 24 * 30,        
+      html: 0,
+      txt: 60 * 24 * 30,
       js: 60 * 24 * 30,
       css: 60 * 24 * 30,
       fonts: 60 * 24 * 30,
