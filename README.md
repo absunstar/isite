@@ -415,52 +415,139 @@ site.var('siteBrand', 'XSite');
 
 ## MongoDB Integration
 
-    - Auto Add [id] as auto increment number
+    - Auto Add [ id ] as auto increment number [Like SQL]
+    - Handle [ _id ] Data Type
     - Manage Closed Connections and Timeout
     - Manage Multi Connections
-    - Manage Bulk Inserts & Updates & Deletes
+    - Manage Bulk [ Inserts & Updates & Deletes ]
+    - Global Database Events 
     - User Friendly Coding
 
 ```js
 
-// use connect collection [Easy Way]
+// use connect collection [ Best Way For Security ]
 
 $employees = site.connectCollection("employees")
 //or
 $employees = site.connectCollection({collection : "employees" , db : "company")
 
-// insert one doc [ can use [add , addOne , insert , insertOne]]
-$employees.insertOne({name : 'amr' , salary : 50000} , (err , _id , doc)=>{
+
+// insert one doc [ can use also [add , addOne , insert , insertOne]]
+$employees.insertOne({name : 'amr' , salary : 50000} , (err , doc)=>{
     console.log(doc.id) // number
-    console.log(_id) // mongodb object id
+    console.log(doc._id) // mongodb object id
 })
 
-// select one doc [ can use [ find , findOne , selectOne , select]]
-$employees.findOne({where:{name : 'amr'} , select:{salary:1}} , (err , doc)=>{
+// insert Many Docs [ can use also [ addMany , addAll , insertMany , insertAll]]
+$employee.insertMany([{name : 'a'} , {name : 'b'}] , (err , docs)=>{
+    site.log(docs , 'docs')
+})
+
+// select one doc [ can use also [ get , getOne , find , findOne , select , selectOne ]]
+$employees.findOne({where:{id : 5} , select:{salary:1}} , (err , doc)=>{
+    console.log(doc)
+})
+//or
+$employees.findOne({ id : 5 } , (err , doc)=>{
     console.log(doc)
 })
 
-// select Multi docs [ can use [findAll , findMany , selectAll , selectMany]]
+
+// select Multi docs [ can use also  [getAll , getMany , findAll , findMany , selectAll , selectMany ]]
 $employees.findMany({
     where:{name : /a/i} , 
     select:{name: 1 , salary:1} ,
-     sort:{salary : -1}} , (err , doc)=>{
-    console.log(doc)
+    limit : 50 ,
+    sort:{salary : -1}} , (err , docs)=>{
+    console.log(docs)
 })
 
-// update one doc [ can use [updateOne , update , editOne , edit]]
+// Update One Doc [ can use [ updateOne , update , editOne , edit]]
 $employees.updateOne({
+    where:{_id : 'df54fdt8h3n48ykd136vg'} , 
+    set:{salary: 30000}} , (err , result)=>{
+    console.log(result)
+})
+// or [ auto update by _id ]
+$employees.updateOne({_id : 'df54fdt8h3n48ykd136vg' , salary : 5000} , (err , result)=>{
+    console.log(result)
+})
+
+// Update Many Docs [ can use [ updateAll , updateMany , editAll , editMany]]
+$employees.updateMany({
     where:{name : /a/i} , 
     set:{salary: 30000}} , (err , result)=>{
     console.log(result)
 })
 
-// update one doc [ can use [deleteOne , delete , removeOne , remove]]
-$employees.deleteOne({where:{name : /a/i}} , (err , result)=>{
+// Delete One Doc [ can use [ deleteOne , delete , removeOne , remove]]
+$employees.deleteOne({where:{ _id : 'df54fdt8h3n48ykd136vg'}} , (err , result)=>{
+    console.log(result)
+})
+// or [ auto delete by _id]
+$employees.deleteOne('df54fdt8h3n48ykd136vg', (err , result)=>{
+    console.log(result)
+})
+// or
+$employees.deleteOne({name : /a/i} , (err , result)=>{
     console.log(result)
 })
 
-// Low Level Access Database Functions
+// Delete Many Docs [ can use [ deleteAll , deletManye , removeAll , removeMany ]]
+$employees.deleteMany({where:{name : /a/i}} , (err , result)=>{
+    console.log(result)
+})
+// or
+$employees.deleteMany({name : /a/i} , (err , result)=>{
+    console.log(result)
+})
+
+//==================================================================
+// Global Database Events
+// from here you can catch all transactions 
+
+
+site.mongodb.after_insert = function (result) {
+    if (result.collectionName == 'employees')
+        site.log(result, 'after_insert')
+}
+site.mongodb.after_insertMany = function (result) {
+    if (result.collectionName == 'employees')
+        site.log(result, 'after_insertMany')
+}
+
+site.mongodb.after_update = function (result) {
+    if (result.collectionName == 'employees')
+        site.log(result, 'after_update')
+}
+site.mongodb.after_updateMany = function (result) {
+    if (result.collectionName == 'employees')
+        site.log(result, 'after_updateMany')
+}
+
+site.mongodb.after_delete = function (result) {
+    if (result.collectionName == 'employees')
+        site.log(result, 'after_delete')
+}
+site.mongodb.after_deleteMany = function (result) {
+    if (result.collectionName == 'employees')
+        site.log(result, 'after_deleteMany')
+}
+
+site.mongodb.after_find = function (result) {
+    if (result.collectionName == 'employees')
+        site.log(result, 'after_find')
+}
+site.mongodb.after_findMany = function (result) {
+    if (result.collectionName == 'employees')
+        site.log(result, 'after_findMany')
+}
+
+
+
+
+// ==================================================================
+// Low Level Access Database Functions [ For Advanced Work ]
 
 // Insert One Doc
    site.mongodb.insertOne({
