@@ -1,5 +1,5 @@
 module.exports = function init(options) {
-  const site = function() {}
+  const site = function () {}
 
   site.http = require("http")
   site.url = require("url")
@@ -10,7 +10,7 @@ module.exports = function init(options) {
   site.mv = require("mv")
 
 
-  site.require = function(file_path){
+  site.require = function (file_path) {
     return require(file_path)(site)
   }
 
@@ -34,9 +34,20 @@ module.exports = function init(options) {
   site.port = option.port
   site.dir = option.dir
 
-  site.log = function(data){
-    if(site.options.log)
-    console.log(data)
+  site.log = function (data, title) {
+    let _data = site.copy(data)
+    let _title = site.copy(title)
+    if (site.options.log) {
+      title = title || ''
+      console.log('')
+      console.log('================ ' + _title + ' ================')
+      console.log('')
+      console.log(_data)
+      console.log('')
+      console.log('================ END')
+      console.log('')
+    }
+
   }
 
   site.fsm = require("./lib/fsm.js")(site)
@@ -57,35 +68,31 @@ module.exports = function init(options) {
   site.readFileSync = site.fsm.readFileSync
   site.writeFile = site.fsm.writeFile
 
-  
-  const routing = require( "./lib/routing.js")(site)
+
+  const routing = require("./lib/routing.js")(site)
   site.get = routing.get
   site.post = routing.post
   site.put = routing.put
   site.delete = routing.delete
   site.all = routing.all
-  site.run =site.start =site.listen = routing.start
+  site.run = site.start = site.listen = routing.start
   site.routing = routing
- 
+
 
   require("./lib/words.js")(site)
   require("./lib/vars.js")(site)
 
   //DataBase Management Oprations
-  let mongodb = require( "./lib/mongodb.js")
+  let mongodb = require("./lib/mongodb.js")
   site.mongodb = mongodb(site)
 
   let collection = require("./lib/collection")
-  site.connectCollection = function(option){
-    return collection(site , option)
+  site.connectCollection = function (option) {
+    return collection(site, option)
   }
 
   if (site.options.security.enabled) {
-    let security = require( "./lib/security.js")
-   site.security = security(site)
-    site.security.loadUsers(function(err, users) {
-      site.security.users = users
-    })
+    site.security = require("./lib/security.js")(site)    
   }
 
   site.cookie = require("./lib/cookie.js")
@@ -98,56 +105,53 @@ module.exports = function init(options) {
   site.logs = [] // all log Messages if logEnabled = true
 
   site.sessions = [] // all sessions info
-  site.loadSessions = function(callback) {
-    site.mongodb.find(
-      {
+  site.loadSessions = function (callback) {
+    site.mongodb.find({
         dbName: site.options.session.db,
         collectionName: site.options.session.userSessionCollection,
         where: {},
         select: {}
       },
-      function(err, sessions) {
+      function (err, sessions) {
         callback(err, sessions)
       }
     )
   }
-  site.loadSessions(function(err, sessions) {
+  site.loadSessions(function (err, sessions) {
     if (!err) {
       site.sessions = sessions
     }
   })
-  site.saveSessions = function(callback) {
-    site.mongodb.delete(
-      {
+  site.saveSessions = function (callback) {
+    site.mongodb.delete({
         dbName: site.options.session.db,
         collectionName: site.options.session.userSessionCollection,
         where: {}
       },
-      function(err, result) {
-        site.mongodb.insert(
-          {
+      function (err, result) {
+        site.mongodb.insert({
             dbName: site.options.session.db,
             collectionName: site.options.session.userSessionCollection,
             docs: site.sessions
           },
-          function(err, docs) {
+          function (err, docs) {
             callback(err, docs)
           }
         )
       }
     )
   }
-  site.on("saveChanges", function() {
-    site.saveSessions(function(err, sessions) {
+  site.on("saveChanges", function () {
+    site.saveSessions(function (err, sessions) {
       if (err) {
-      
+
       } else {
-       
+
       }
     })
   })
 
-  site.trackSession = function(session) {
+  site.trackSession = function (session) {
     for (var i = 0; i < site.sessions.length; i++) {
       var s = site.sessions[i]
       if (s.accessToken == session.accessToken) {
@@ -189,7 +193,7 @@ module.exports = function init(options) {
 
   //Master Pages
   site.masterPages = []
-  site.addMasterPage = function(page) {
+  site.addMasterPage = function (page) {
     site.masterPages.push({
       name: page.name,
       header: page.header,
@@ -197,17 +201,17 @@ module.exports = function init(options) {
     })
   }
 
-  site.reset = function() {}
+  site.reset = function () {}
 
-  site.test = function() {
+  site.test = function () {
     console.log(" Isite Test OK !! ")
   }
 
-  site.on("saveChanges", function() {
+  site.on("saveChanges", function () {
     console.log("Site saveChanges Event Fire Every " + site.options.savingTime + " minute ")
   })
 
-  setInterval(function() {
+  setInterval(function () {
     site.call("saveChanges")
   }, site.options.savingTime * 1000 * 60)
 
