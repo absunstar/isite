@@ -18,6 +18,8 @@ module.exports = function init(options) {
 
   site.fn = require("./lib/fn.js")(site)
   site.copy = site.fn.copy
+  site.fromJson = site.fn.fromJson
+  site.toJson = site.fn.toJson
   site.from123 = site.fn.from123
   site.fromBase64 = site.fn.fromBase64
   site.to123 = site.fn.to123

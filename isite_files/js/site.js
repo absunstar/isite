@@ -1,4 +1,5 @@
-;(function(window , document , undefined) {
+;
+(function (window, document, undefined) {
   let site = {}
   site.$base64Letter = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/="
   site.$base64Numbers = []
@@ -15,13 +16,16 @@
     if (typeof data === "object") {
       data = JSON.stringify(data)
     }
-    return btoa(data)
+
+    return btoa(unescape(encodeURIComponent(data)))
+
   }
   site.fromBase64 = data => {
     if (typeof data !== "string") {
       return ""
     }
-    return atob(data)
+    return decodeURIComponent(escape(atob(data)));
+
   }
 
   site.to123 = data => {
@@ -49,4 +53,4 @@
   }
 
   window.site = site
-})(window , document , 'undefined')
+})(window, document, 'undefined')
