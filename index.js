@@ -37,14 +37,12 @@ module.exports = function init(options) {
   site.dir = option.dir
 
   site.log = function (data, title) {
-    let _data = site.copy(data)
-    let _title = site.copy(title)
     if (site.options.log) {
       title = title || ''
       console.log('')
-      console.log('================ ' + _title + ' ================')
+      console.log('================ ' + title + ' ================')
       console.log('')
-      console.log(_data)
+      console.log(data)
       console.log('')
       console.log('================ END')
       console.log('')
@@ -54,7 +52,7 @@ module.exports = function init(options) {
 
   site.fsm = require("./lib/fsm.js")(site)
   site.fileList = site.fsm.list
-  site.createDir = site.fsm.createDir
+  site.createDir =  site.makeDir = site.fsm.createDir
   site.css = site.fsm.css
   site.xml = site.fsm.xml
   site.js = site.fsm.js
