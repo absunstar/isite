@@ -63,6 +63,7 @@ module.exports = function init(options) {
   site.download = site.fsm.download
   site.downloadFile = site.fsm.downloadFile
   site.isFileExists = site.fsm.isFileExists
+  site.isFileExistsSync = site.fsm.isFileExistsSync
   site.readFile = site.fsm.readFile
   site.readFiles = site.fsm.readFiles
   site.readFileSync = site.fsm.readFileSync
