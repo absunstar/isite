@@ -26,6 +26,7 @@ module.exports = function init(options) {
   site.toBase64 = site.fn.toBase64
   site.getContentType = site.fn.getContentType
   site.getFileEncode = site.fn.getFileEncode
+  site.typeOf = site.fn.typeOf
 
   const event = require("./lib/event.js")
   site.call = event.call
@@ -58,8 +59,7 @@ module.exports = function init(options) {
   site.js = site.fsm.js
   site.json = site.fsm.json
   site.html = site.fsm.html
-  site.deleteFile = site.fsm.deleteFile
-  site.removeFile = site.fsm.removeFile
+  site.removeFile = site.deleteFile = site.fsm.deleteFile
   site.download = site.fsm.download
   site.downloadFile = site.fsm.downloadFile
   site.isFileExists = site.fsm.isFileExists
@@ -97,100 +97,17 @@ module.exports = function init(options) {
   }
 
   site.cookie = require("./lib/cookie.js")
+  site.sessions = require("./lib/sessions")(site)
+  site.sessions.loadAll()
+
   site.session = require("./lib/session.js")
   site.parser = require("./lib/parser.js")
 
   site.md5 = require("md5")
+  
 
   site.ips = [] // all ip send requests [ip , requets count]
   site.logs = [] // all log Messages if logEnabled = true
-
-  site.sessions = [] // all sessions info
-  site.loadSessions = function (callback) {
-    site.mongodb.find({
-        dbName: site.options.session.db,
-        collectionName: site.options.session.userSessionCollection,
-        where: {},
-        select: {}
-      },
-      function (err, sessions) {
-        callback(err, sessions)
-      }
-    )
-  }
-  site.loadSessions(function (err, sessions) {
-    if (!err) {
-      site.sessions = sessions
-    }
-  })
-  site.saveSessions = function (callback) {
-    site.mongodb.delete({
-        dbName: site.options.session.db,
-        collectionName: site.options.session.userSessionCollection,
-        where: {}
-      },
-      function (err, result) {
-        site.mongodb.insert({
-            dbName: site.options.session.db,
-            collectionName: site.options.session.userSessionCollection,
-            docs: site.sessions
-          },
-          function (err, docs) {
-            callback(err, docs)
-          }
-        )
-      }
-    )
-  }
-  site.on("saveChanges", function () {
-    site.saveSessions(function (err, sessions) {
-      if (err) {
-
-      } else {
-
-      }
-    })
-  })
-
-  site.trackSession = function (session) {
-    for (var i = 0; i < site.sessions.length; i++) {
-      var s = site.sessions[i]
-      if (s.accessToken == session.accessToken) {
-        session.createdTime = s.createdTime
-        session.data = session.data || s.data
-        session.lang = session.lang || s.lang || "ar"
-        session.theme = session.theme || s.theme || "default"
-        session.requestesCount = s.requestesCount + 1
-
-        site.sessions[i] = {
-          accessToken: session.accessToken,
-          createdTime: session.createdTime,
-          modifiedTime: session.modifiedTime,
-          data: session.data,
-          lang: session.lang,
-          theme: session.theme,
-          ip: session.ip,
-          requestesCount: session.requestesCount
-        }
-        return session
-      }
-    }
-
-    session.lang = "ar"
-    session.theme = "default"
-    session.data = []
-    session.requestesCount = 1
-    session.createdTime = new Date().getTime()
-    site.sessions.push({
-      accessToken: session.accessToken,
-      createdTime: session.createdTime,
-      modifiedTime: session.modifiedTime,
-      data: session.data,
-      ip: session.ip,
-      requestesCount: session.requestesCount
-    })
-    return session
-  }
 
   //Master Pages
   site.masterPages = []
