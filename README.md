@@ -108,19 +108,19 @@ site.run()
 
 ```js
 site.html('index', function (err, content) {
-    console.log(content);
+    site.log(content);
 });
 site.css('bootstrap', function (err, content) {
-    console.log(content);
+    site.log(content);
 });
 site.js('jquery', function (err, content) {
-    console.log(content);
+    site.log(content);
 });
 site.json('items', function (err, content) {
-    console.log(content);
+    site.log(content);
 });
 site.xml('rss', function (err, content) {
-    console.log(content);
+    site.log(content);
 });
 ```
 - Custom Read Files
@@ -434,8 +434,8 @@ $employees = site.connectCollection({collection : "employees" , db : "company")
 
 // insert one doc [ can use also [add , addOne , insert , insertOne]]
 $employees.insertOne({name : 'amr' , salary : 50000} , (err , doc)=>{
-    console.log(doc.id) // number
-    console.log(doc._id) // mongodb object id
+    site.log(doc.id) // number
+    site.log(doc._id) // mongodb object id
 })
 
 // insert Many Docs [ can use also [ addMany , addAll , insertMany , insertAll]]
@@ -445,11 +445,11 @@ $employee.insertMany([{name : 'a'} , {name : 'b'}] , (err , docs)=>{
 
 // select one doc [ can use also [ get , getOne , find , findOne , select , selectOne ]]
 $employees.findOne({where:{id : 5} , select:{salary:1}} , (err , doc)=>{
-    console.log(doc)
+    site.log(doc)
 })
 //or
 $employees.findOne({ id : 5 } , (err , doc)=>{
-    console.log(doc)
+    site.log(doc)
 })
 
 
@@ -459,47 +459,47 @@ $employees.findMany({
     select:{name: 1 , salary:1} ,
     limit : 50 ,
     sort:{salary : -1}} , (err , docs)=>{
-    console.log(docs)
+    site.log(docs)
 })
 
 // Update One Doc [ can use [ updateOne , update , editOne , edit]]
 $employees.updateOne({
     where:{_id : 'df54fdt8h3n48ykd136vg'} , 
     set:{salary: 30000}} , (err , result)=>{
-    console.log(result)
+    site.log(result)
 })
 // or [ auto update by _id ]
 $employees.updateOne({_id : 'df54fdt8h3n48ykd136vg' , salary : 5000} , (err , result)=>{
-    console.log(result)
+    site.log(result)
 })
 
 // Update Many Docs [ can use [ updateAll , updateMany , editAll , editMany]]
 $employees.updateMany({
     where:{name : /a/i} , 
     set:{salary: 30000}} , (err , result)=>{
-    console.log(result)
+    site.log(result)
 })
 
 // Delete One Doc [ can use [ deleteOne , delete , removeOne , remove]]
 $employees.deleteOne({where:{ _id : 'df54fdt8h3n48ykd136vg'}} , (err , result)=>{
-    console.log(result)
+    site.log(result)
 })
 // or [ auto delete by _id]
 $employees.deleteOne('df54fdt8h3n48ykd136vg', (err , result)=>{
-    console.log(result)
+    site.log(result)
 })
 // or
 $employees.deleteOne({name : /a/i} , (err , result)=>{
-    console.log(result)
+    site.log(result)
 })
 
 // Delete Many Docs [ can use [ deleteAll , deletManye , removeAll , removeMany ]]
 $employees.deleteMany({where:{name : /a/i}} , (err , result)=>{
-    console.log(result)
+    site.log(result)
 })
 // or
 $employees.deleteMany({name : /a/i} , (err , result)=>{
-    console.log(result)
+    site.log(result)
 })
 
 //==================================================================
@@ -556,9 +556,9 @@ site.mongodb.after_findMany = function (result) {
             doc:{name:'amr',salary:35000}
         }, function (err, docInserted) {
             if (err) {
-                console.log(err.message)
+                site.log(err.message)
             } else {
-                console.log(docInserted)
+                site.log(docInserted)
             }
         })
 
@@ -573,9 +573,9 @@ site.mongodb.after_findMany = function (result) {
                 ]
         }, function (err, result) {
             if (err) {
-                console.log(err.message)
+                site.log(err.message)
             } else {
-                console.log(result)
+                site.log(result)
             }
         })
 
@@ -587,9 +587,9 @@ site.mongodb.after_findMany = function (result) {
             select : {}
         }, function (err, doc) {
             if (err) {
-                console.log(err.message)
+                site.log(err.message)
             } else {
-                console.log(doc)
+                site.log(doc)
             }
         })
 
@@ -601,9 +601,9 @@ site.mongodb.after_findMany = function (result) {
             select : {}
         }, function (err, docs) {
             if (err) {
-                console.log(err.message)
+                site.log(err.message)
             } else {
-                console.log(docs)
+                site.log(docs)
             }
         })
 
@@ -615,9 +615,9 @@ site.mongodb.after_findMany = function (result) {
             set : {name:'New MARYEM'}
         }, function (err, result) {
             if (err) {
-                console.log(err.message)
+                site.log(err.message)
             } else {
-                console.log(result)
+                site.log(result)
             }
         })
 
@@ -629,9 +629,9 @@ site.mongodb.after_findMany = function (result) {
             set : {salary:9000 * .10}
         }, function (err, result) {
             if (err) {
-                console.log(err.message)
+                site.log(err.message)
             } else {
-                console.log(result)
+                site.log(result)
             }
         })
 
@@ -642,9 +642,9 @@ site.mongodb.after_findMany = function (result) {
             where:{_id: new site.mongodb.ObjectID('df54fdt8h3n48ykd136vg')}
         }, function (err, result) {
             if (err) {
-                console.log(err.message)
+                site.log(err.message)
             } else {
-                console.log(result)
+                site.log(result)
             }
         })
 // Delete Many Docs
@@ -654,9 +654,9 @@ site.mongodb.after_findMany = function (result) {
             where:{name : /a/}
         }, function (err, result) {
             if (err) {
-                console.log(err.message)
+                site.log(err.message)
             } else {
-                console.log(result)
+                site.log(result)
             }
         })
 ```
@@ -780,18 +780,9 @@ app.controller('myController', function ($scope, $http) {
         $http({
             method: 'POST',
             url: '/@security/api/user/register',
-            transformRequest: function (obj) {
-                var str = [];
-                for (var p in obj)
-                    str.push(encodeURIComponent(p) + "=" + encodeURIComponent(obj[p]));
-                return str.join("&");
-            },
             data: {
                 email: $scope.userEmail,
                 password: $scope.userPassword
-            },
-            headers: {
-                'Content-Type': 'application/x-www-form-urlencoded'
             }
         }).then(function (response) {
            
@@ -813,18 +804,9 @@ app.controller('myController', function ($scope, $http) {
         $http({
             method: 'POST',
             url: '/@security/api/user/login',
-            transformRequest: function (obj) {
-                var str = [];
-                for (var p in obj)
-                    str.push(encodeURIComponent(p) + "=" + encodeURIComponent(obj[p]));
-                return str.join("&");
-            },
             data: {
                 email: $scope.userEmail,
                 password: $scope.userPassword
-            },
-            headers: {
-                'Content-Type': 'application/x-www-form-urlencoded'
             }
         }).then(function (response) {
            
@@ -861,16 +843,7 @@ app.controller('myController', function ($scope, $http) {
     $http({
         method: 'POST',
         url: '/@language/change',
-        transformRequest: function (obj) {
-            var str = [];
-            for (var p in obj)
-                str.push(encodeURIComponent(p) + "=" + encodeURIComponent(obj[p]));
-            return str.join("&");
-        },
-        data:{ name : lang},
-        headers: {
-            'Content-Type': 'application/x-www-form-urlencoded'
-        }
+        data:{ name : lang}
     }).then(function (response) {
         if (response.data.done) {
           window.location.href = window.location.href;
@@ -905,13 +878,19 @@ site.get('/' , (req , res)=>{
 var hash = site.md5('this content will be hashed as md5')
 var base64 = site.toBase64('this content will be encript as base64 string')
 var normal = site.fromBase64(base64)
-console.log(hash)
-console.log(base64)
-console.log(normal)
+site.log(hash)
+site.log(base64)
+site.log(normal)
+
+var person = {name : 'amr' , email : 'absunstar'}
+var person2 = site.copy(person)
+person2.name = 'Abd Allah'
+site.log(person)
+site.log(person2)
 
 var name = 'absunstar'
 if (name.like('*sun*')) {
-    console.log('yes')
+    site.log('yes')
 }
 ```
 
@@ -921,7 +900,7 @@ if (name.like('*sun*')) {
 
 ```js
 site.on('event name', function() {
-    console.log('you call event name')
+    site.log('you call event name')
 })
 
 site.call('event name')
