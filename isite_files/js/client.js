@@ -108,11 +108,10 @@
                         c(null , rs);
                     }
 
-                }
-                if (xh.status == 404) {
+                }else if (xh.readyState == 4 && xh.status != 200) {
 
                     if (typeof (c) !== u) {
-                        c({message:'404 error'} , rs);
+                        c({message:xh.status + ' ERROR'} , rs);
                     }
                 }
             };

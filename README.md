@@ -896,14 +896,20 @@ if (name.like('*sun*')) {
 
 ## Events
 
-    - Events is global actions across site using emit events
+    - Events is global actions across site using Custom callbacks
 
 ```js
-site.on('event name', function() {
-    site.log('you call event name')
+site.on('event name', function(obj) {
+   console.log('name : ' + obj.name )
 })
 
-site.call('event name')
+site.on('event name 2', function(list) {
+    console.log('name : ' + list[0].name )
+    console.log('name : ' + list[1].name )
+ })
+
+site.call('event name' , {name : 'x1'})
+site.call('event name 2' , {name : 'n1'} , {name : 'n2'})
 ```
 
 ## More

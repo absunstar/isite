@@ -53,7 +53,7 @@ module.exports = function init(options) {
 
   site.fsm = require("./lib/fsm.js")(site)
   site.fileList = site.fsm.list
-  site.createDir =  site.makeDir = site.fsm.createDir
+  site.createDir = site.makeDir = site.fsm.createDir
   site.css = site.fsm.css
   site.xml = site.fsm.xml
   site.js = site.fsm.js
@@ -80,7 +80,14 @@ module.exports = function init(options) {
   site.routing = routing
 
 
-  require("./lib/words.js")(site)
+  site.words = require("./lib/words.js")(site)
+  site.words.add({
+    name: 'user_name',
+    en: 'User Name',
+    ar: 'أسم المستخدم'
+  })
+  site.words.addList(site.dir + '/json/words.json')
+
   require("./lib/vars.js")(site)
 
   //DataBase Management Oprations
@@ -93,7 +100,7 @@ module.exports = function init(options) {
   }
 
   if (site.options.security.enabled) {
-    site.security = require("./lib/security.js")(site)    
+    site.security = require("./lib/security.js")(site)
   }
 
   site.cookie = require("./lib/cookie.js")
@@ -104,7 +111,7 @@ module.exports = function init(options) {
   site.parser = require("./lib/parser.js")
 
   site.md5 = require("md5")
-  
+
 
   site.ips = [] // all ip send requests [ip , requets count]
   site.logs = [] // all log Messages if logEnabled = true
