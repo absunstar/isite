@@ -60,5 +60,44 @@
     return newData;
   };
 
+  site.typeOf = site.typeof = function type(elem) {
+    return Object.prototype.toString.call(elem).slice(8, -1);
+  }
+
+  site.toHtmlTable = function (obj) {
+    if (obj === undefined || obj === null) {
+      return '';
+    }
+    if(site.typeOf(obj) == 'Object'){
+      let table = '<table class="table">';
+      for (let index = 0; index < Object.getOwnPropertyNames(obj).length; index++) {
+        let p = Object.getOwnPropertyNames(obj)[index];
+        table += '<tr>';
+        table += `<td> ${p} </td>`;
+        if(site.typeOf(obj[p]) == 'Object' || site.typeOf(obj[p]) == 'Array'){
+          table += `<td> ${site.toHtmlTable(obj[p])} </td>`;
+        }else{
+          table += `<td> ${obj[p]} </td>`;
+        }
+        
+        table += '</tr>';
+      }
+      table += '</table>';
+      return table;
+    }else if(site.typeOf(obj) == 'Array'){
+      let table = '<table class="table">';
+        for (let i = 0; i < obj.length; i++) {
+          if(site.typeOf(obj[i]) == 'Object' || site.typeOf(obj[i]) == 'Array'  ){
+            table += `<tr><td>${site.toHtmlTable(obj[i])}</td></tr>`;
+          }else{
+            table += `<tr><td>${obj[i]}</td></tr>`;
+          }
+        }
+      table += '</table>';
+      return table;
+    }
+    return ''
+  }
+
   window.site = site;
 })(window, document, 'undefined');

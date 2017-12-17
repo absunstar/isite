@@ -26,7 +26,9 @@ module.exports = function init(options) {
   site.toBase64 = site.fn.toBase64
   site.getContentType = site.fn.getContentType
   site.getFileEncode = site.fn.getFileEncode
-  site.typeOf = site.fn.typeOf
+  site.typeof = site.typeOf = site.fn.typeOf
+  site.objectDiff = site.fn.objectDiff
+  site.toHtmlTable = site.fn.toHtmlTable
 
   const event = require("./lib/event.js")
   site.call = event.call
