@@ -107,7 +107,6 @@ module.exports = function init(options) {
 
   site.cookie = require("./lib/cookie.js")
   site.sessions = require("./lib/sessions")(site)
-  site.sessions.loadAll()
 
   site.session = require("./lib/session.js")
   site.parser = require("./lib/parser.js")
