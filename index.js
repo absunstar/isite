@@ -55,6 +55,7 @@ module.exports = function init(options) {
 
   site.fsm = require("./lib/fsm.js")(site)
   site.fileList = site.fsm.list
+  site.fileStatSync = site.fsm.statSync
   site.createDir = site.makeDir = site.fsm.createDir
   site.css = site.fsm.css
   site.xml = site.fsm.xml
