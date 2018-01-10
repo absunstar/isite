@@ -131,18 +131,22 @@ site.xml('rss', function (err, content) {
 ```js
 //read file with custom header
 site.get("/rss", function(req, res) {
-    site.readFile(__dirname + "/site_files/xml/rss.xml", function(err, content) {
-        res.writeHead(200, { "content-type": "text/xml" })
-        res.end(content)
+    site.readFile(__dirname + "/site_files/xml/rss.xml", function(err, content , file) {
+        res.setHeader("content-type" , "text/xml")
+        res.setHeader("content-size" , file.stat.size)
+        res.status(200).end(content) // or res.end(content)
     })
 })
-site.get("/rss2", function(req, res) {
-    site.xml("rss2", function(err, content) {
-        res.writeHead(200, { "content-type": "text/xml" })
-        res.end(content);
+// or [ if file in site_files/xml folder]
+site.get("/rss", function(req, res) {
+    site.xml("rss", function(err, content , file) {
+        res.setHeader("content-type" , "text/xml")
+        res.setHeader("content-size" , file.stat.size)
+        res.status(200).end(content)
     })
 })
-//read multi files with custom header
+
+// Read and Merge multi files with custom header
 site.get("/", function(req, res) {
     site.readFiles(
         [
@@ -155,6 +159,42 @@ site.get("/", function(req, res) {
             res.end(content);
         })
 })
+
+// Check if File Exits
+site.isFileExists(path , (yes)=>{
+    if(yes){
+        // ...
+    }
+})
+// or
+let yes = site.isFileExistsSync(path)
+if(yes){
+    // ...
+}
+
+// Get File Info
+site.fileStat(path , (err , stats)=>{
+    console.log(stats)
+})
+// or
+let stats = site.fileStatSync(path)
+
+// Write Data to File
+site.writeFile(path , data , err =>{
+
+}
+// Delete File
+site.removeFile(path , err =>{
+
+}) // or site.deleteFile
+
+
+// Create New Dir 
+site.createDir(path , (err , path)=>{ 
+    if(!err){
+        // ...
+    }
+}) // or site.makeDir
 
 ```
 ## Routes

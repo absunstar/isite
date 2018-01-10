@@ -1,4 +1,20 @@
 module.exports = function init(options) {
+
+  process.on('uncaughtException', (err) => {
+    console.log(err)
+  })
+  process.on('exit', (code) => {
+    console.log(`Process exit with code: ${code}`)
+  })
+  process.on('unhandledRejection', (reason, p) => {
+    console.log('Unhandled Rejection at:', p, 'reason:', reason);
+  })
+  process.on('warning', (warning) => {
+    console.warn(warning.name)
+    console.warn(warning.message)
+    console.warn(warning.stack)
+  })
+
   const site = function () {}
 
   site.http = require("http")
@@ -56,6 +72,7 @@ module.exports = function init(options) {
   site.fsm = require("./lib/fsm.js")(site)
   site.fileList = site.fsm.list
   site.fileStatSync = site.fsm.statSync
+  site.fileStat = site.fsm.stat
   site.createDir = site.makeDir = site.fsm.createDir
   site.css = site.fsm.css
   site.xml = site.fsm.xml
