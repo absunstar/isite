@@ -1,4 +1,4 @@
-## Create Node Js WebSite [Fast & Easy] with Many Featuers
+## Create Node Js WebSite [ Fast & Easy ] with Many Featuers
 
 # Features
 
@@ -34,20 +34,30 @@ var site = isite({port:8080})
 site.run()
 ```
 
+- Multi port opens
+
+```js
+var isite = require('isite')
+var site = isite() 
+
+site.run([8080 , 5555 , 9090 , 12345])
+
+```
+
 - Default Options.
 
 ```js
 var isite = require('isite')
 site = isite({
     port: process.env.port || 80,
-    dir: "./site_files",
+    dir: process.cwd() +  "/site_files",
     name: "Your Site",
     savingTime: 60,
     log : true,
     session: {
       timeout: 60 * 24 * 30,
       enabled: true,
-      storage: "mongodb",
+      storage: "mongodb", /* or memory */
       db: "sessions",
       userSessionCollection: "user_sessions"
     },
@@ -59,6 +69,7 @@ site = isite({
       password: null,
       db: "test",
       collection: "test",
+      limit : 10,
       prefix: {
         db: "",
         collection: ""
@@ -90,14 +101,177 @@ site = isite({
       json: 60 * 24 * 30,
       xml: 60 * 24 * 30
     }
-})
+  })
 
 
 site.run()
 ```
+
+## Routes
+
+- Auto Convert All Routes URL & Parameters to Lower Case 
+- Auto Manage Reponse Headers and Files Types
+- Support Multi Files in One Route
+- Save Route Response in Memory to Reuse for Fast Response
+- Auto Handle URL parametes
+- Auto Handle Body Parameters in not get header [post , put , delete , ...]
+- Auto Handle URL params [custom parameters from url structure]
+- Auto cache Files Content in memory
+- support compress to remove unwanted spaces and tabs and empty lines ...etc
+- support parser to handle custom html server side tags
+ 
+Easy and Auto Site Routing
+
+```js
+/* site.dir = process.cwd() +  "/site_files"
+    You Can Change This Default Value when define isite
+    or set site.dir = new path
+*/
+
+site.get({name: '/',path:  site.dir + '/html/index.html'});
+site.get({name: '/css/bootstrap.css',path:  site.dir + '/css/bootstrap.min.css'});
+site.get({name: '/js/jquery.js',path: site.dir + '/js/jquery.js'});
+site.get({name: '/js/bootstrap.js',path: site.dir + '/js/bootstrap.js'});
+site.get({name: '/favicon.png',path: site.dir + '/images/logo.png'})
+site.post({name: '/api',path:  site.dir + '/json/employees.json' });
+```
+Merge Multi Files in one route
+
+```js
+site.get({
+    name: '/css/style.css',
+    path: [site.dir + '/css/bootstrap.css' , site.dir + '/css/custom.css']
+});
+site.get({
+    name: '/js/script.js',
+    path: [site.dir + '/js/jquery.js' , site.dir + '/js/bootstrap.js', site.dir + '/js/custom.js']
+});
+```
+Advanced Site Routing
+
+```js
+
+  site.get('/', (req, res)=> {
+        site.readFile(site.dir + '/html/index.html', function(err, content , file) {
+            res.setHeader('Content-type', 'text/html');
+            res.setHeader('Content-size', file.stat.size);
+            res.status(200).end(content);
+        })
+    })
+
+site.get('/', (req, res)=> {
+        site.html('index', function(err, content) {
+            res.setHeader('Content-type', 'text/html');
+            res.status(200).end(content);
+        })
+    })
+
+site.get({ // can use [get , post , put , delete , all]
+    name: '/',
+    path: site.dir + '/html/index.html', //Required
+    parser: 'html', // default static [not paresed]
+    compress : true , // default false
+    cache: false // default true
+});
+
+site.get({ 
+    name: '/',
+    callback: function(req, res) {
+        res.setHeader('Content-type', 'text/html');
+        site.html('index', function(err, content) {
+            res.status(200).end(content);
+        })
+    }
+})
+
+
+
+```
+
+Auto Route All Files in Folder
+
+```js
+site.get({name: '/js', path: site.dir + '/js'})
+site.get({name: '/css', path: site.dir + '/css'})
+```
+Custom Route - Using * [any letters]
+
+```js
+site.get('/post/*', function(req, res) {
+    res.end('Any Route like /post/11212154545 ')
+})
+site.get('*', function(req, res) {
+    res.end('Any Route Requested Not Handled Before This Code')
+})
+```
+
+Request Parameters [GET , POST | PUT | Delete] Restful API
+
+```js
+site.get('/api', function(req, res) {
+    res.end('GET | id : ' + req.query.id)
+})
+site.post('/api', function(req, res) {
+    res.end('POST | id : ' + req.body.id + ' , Name : ' + req.body.name)
+})
+site.put('/api', function(req, res) {
+    res.end('PUT | id : ' + req.body.id + ' , Name : ' + req.body.name)
+})
+site.delete('/api', function(req, res) {
+    res.end('Delete | id : ' + req.body.id)
+})
+site.all('/api', function(req, res) {
+    res.end('Any Request Type Not Handled : ' + req.method)
+})
+```
+Dynamic Parameters
+
+```js
+site.get('/post/:id/category/:cat_id', function(req, res) {
+    res.end('GET | Id : ' + req.params.id + ', catId : ' + req.params.cat_id)
+})
+//example : /post/9999999/category/5
+```
+MVC Custom Route
+```js
+site.get("/:controller/:Action/:Arg1", function(req, res) {
+    res.end(
+        "GET | Controller : " + req.params.controller +
+        ", Action : " + req.params.Action + /* Normal case*/
+         ", action : " + req.params.action + /* lower case*/
+        ", Arg 1 : " + req.params.Arg1 + /* Normal case*/
+        ", arg 1 : " + req.params.arg1 /* lower case*/
+    );
+});
+//example : /facebook/post/xxxxxxxxxx
+```
+
+
 ## Site Folder Structure
 
 - site stucture help you to manage you site easy and fast
+``` html
+    - server.js
+    - package.json
+    - README.md
+    -- site_files
+        --- css
+            - bootstrap.css
+            - custom.css
+        --- js
+            - jquery.js
+            - bootstrap.js
+            - custom.js
+        --- html
+            - index.html
+        --- fonts
+        --- images
+            - logo.png
+        --- json
+            - items.json
+        --- xml
+            - rss.xml
+```
 
 - Create Folder Name "site_files" 
  - inside it create these Sub folders [
@@ -196,131 +370,6 @@ site.createDir(path , (err , path)=>{
     }
 }) // or site.makeDir
 
-```
-## Routes
-
-- Auto Convert All Routes URL & Parameters to Lower Case 
-- Auto Manage Reponse Headers and Files Types
-- Support Multi Files in One Route
-- Save Route Response in Memory to Reuse for Fast Response
-- Auto Handle URL parametes
-- Auto Handle Body Parameters in not get header [post , put , delete , ...]
-- Auto Handle URL params [custom parameters from url structure]
-- Auto cache Files Content in memory
-- support compress to remove unwanted spaces and tabs and empty lines ...etc
-- support parser to handle custom html server side tags
- 
-Easy and Auto Site Routing
-
-```js
-site.get({name: '/',path:  site.dir + '/html/index.html'});
-site.get({name: '/css/bootstrap.css',path:  site.dir + '/css/bootstrap.min.css'});
-site.get({name: '/js/jquery.js',path: site.dir + '/js/jquery.js'});
-site.get({name: '/js/bootstrap.js',path: site.dir + '/js/bootstrap.js'});
-site.get({name: '/favicon.png',path: site.dir + '/images/logo.png'})
-site.post({name: '/api',path:  site.dir + '/json/employees.json' });
-```
-Merge Multi Files in one route
-
-```js
-site.get({
-    name: '/css/style.css',
-    path: [site.dir + '/css/bootstrap.css' , site.dir + '/css/custom.css']
-});
-site.get({
-    name: '/js/script.js',
-    path: [site.dir + '/js/jquery.js' , site.dir + '/js/bootstrap.js', site.dir + '/js/custom.js']
-});
-```
-Advanced Site Routing
-
-```js
-
-site.get({ // can use [get , post , put , delete , all]
-    name: '/',
-    path: site.dir + '/html/index.html', //Required
-    parser: 'html', // default static [not paresed]
-    compress : true , // default false
-    cache: false // default true
-});
-
-site.get({ 
-    name: '/',
-    callback: function(req, res) {
-        res.setHeader('Content-type', 'text/html');
-        res.writeHead(200);
-        site.html('index', function(err, content) {
-            res.end(content);
-        })
-    }
-})
-
-site.get('/', (req, res)=> {
-        res.setHeader('Content-type', 'text/html');
-        res.writeHead(200);
-        site.html('index', function(err, content) {
-            res.end(content);
-        })
-    }
-)
-```
-
-Auto Route All Files in Folder
-
-```js
-site.get({name: '/js', path: __dirname + '/js'})
-site.get({name: '/css', path: __dirname + '/css'})
-```
-Custom Route - Using * [any letters]
-
-```js
-site.get('/post/*', function(req, res) {
-    res.end('Any Route like /post/11212154545 ')
-})
-site.get('*', function(req, res) {
-    res.end('Any Route Requested Not Handled Before This Code')
-})
-```
-
-Request Parameters [GET , POST | PUT | Delete] Restful API
-
-```js
-site.get('/api', function(req, res) {
-    res.end('GET | id : ' + req.query.id)
-})
-site.post('/api', function(req, res) {
-    res.end('POST | id : ' + req.body.id + ' , Name : ' + req.body.name)
-})
-site.put('/api', function(req, res) {
-    res.end('PUT | id : ' + req.body.id + ' , Name : ' + req.body.name)
-})
-site.delete('/api', function(req, res) {
-    res.end('Delete | id : ' + req.body.id)
-})
-site.all('/api', function(req, res) {
-    res.end('Any Request Type Not Handled : ' + req.method)
-})
-```
-Dynamic Parameters
-
-```js
-site.get('/post/:id/category/:cat_id', function(req, res) {
-    res.end('GET | Id : ' + req.params.id + ', catId : ' + req.params.cat_id)
-})
-//example : /post/9999999/category/5
-```
-MVC Custom Route
-```js
-site.get("/:controller/:Action/:Arg1", function(req, res) {
-    res.end(
-        "GET | Controller : " + req.params.controller +
-        ", Action : " + req.params.Action + /* Normal case*/
-         ", action : " + req.params.action + /* lower case*/
-        ", Arg 1 : " + req.params.Arg1 + /* Normal case*/
-        ", arg 1 : " + req.params.arg1 /* lower case*/
-    );
-});
-//example : /facebook/post/xxxxxxxxxx
 ```
 
 ## Cookies
