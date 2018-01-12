@@ -610,48 +610,35 @@ $employees.deleteDuplicate({name : '$name' , mobile : '$mobile'} , (err , result
 
  }
 
+
 //==================================================================
 // Global Database Events
 // from here you can catch all transactions 
 
+site.on('mongodb after insert' , (result)=>{
 
-site.mongodb.after_insert = function (result) {
-    if (result.collectionName == 'employees')
-        site.log(result, 'after_insert')
-}
-site.mongodb.after_insertMany = function (result) {
-    if (result.collectionName == 'employees')
-        site.log(result, 'after_insertMany')
-}
+})
+site.on('mongodb after insert many' , (result)=>{
 
-site.mongodb.after_update = function (result) {
-    if (result.collectionName == 'employees')
-        site.log(result, 'after_update')
-}
-site.mongodb.after_updateMany = function (result) {
-    if (result.collectionName == 'employees')
-        site.log(result, 'after_updateMany')
-}
+})
+site.on('mongodb after find' , (result)=>{
 
-site.mongodb.after_delete = function (result) {
-    if (result.collectionName == 'employees')
-        site.log(result, 'after_delete')
-}
-site.mongodb.after_deleteMany = function (result) {
-    if (result.collectionName == 'employees')
-        site.log(result, 'after_deleteMany')
-}
+})
+site.on('mongodb after find many' , (result)=>{
 
-site.mongodb.after_find = function (result) {
-    if (result.collectionName == 'employees')
-        site.log(result, 'after_find')
-}
-site.mongodb.after_findMany = function (result) {
-    if (result.collectionName == 'employees')
-        site.log(result, 'after_findMany')
-}
+})
+site.on('mongodb after update' , (result)=>{
 
+})
+site.on('mongodb after update many' , (result)=>{
 
+})
+site.on('mongodb after delete' , (result)=>{
+
+})
+site.on('mongodb after delete many' , (result)=>{
+
+})
 
 
 // ==================================================================
