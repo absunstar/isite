@@ -89,6 +89,7 @@ module.exports = function init(options) {
   site.readFileSync = site.fsm.readFileSync
   site.writeFile = site.fsm.writeFile
 
+  site.storage = require("./lib/storage.js")(site).fn
 
   const routing = require("./lib/routing.js")(site)
   site.get = routing.get

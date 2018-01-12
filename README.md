@@ -582,7 +582,7 @@ $employees.deleteOne({name : /a/i} , (err , result)=>{
     site.log(result)
 })
 
-// Delete Many Docs [ can use [ deleteAll , deletManye , removeAll , removeMany ]]
+// Delete Many Docs [ can use [ deleteAll , deleteManye , removeAll , removeMany ]]
 $employees.deleteMany({where:{name : /a/i}} , (err , result)=>{
     site.log(result)
 })
@@ -590,6 +590,25 @@ $employees.deleteMany({where:{name : /a/i}} , (err , result)=>{
 $employees.deleteMany({name : /a/i} , (err , result)=>{
     site.log(result)
 })
+
+// Remove duplicate data [ can use [deleteDuplicate , removeDuplicate]]
+$employees.deleteDuplicate('name' , (err , result)=>{
+
+})
+// Remove Duplicate [ name and mobile ] Employee
+$employees.deleteDuplicate({name : '$name' , mobile : '$mobile'} , (err , result)=>{
+    
+})
+
+// Create Index Field
+ $employees.createIndex({name : 1} , (err , result)=>{
+
+ }
+
+// Create Unique Field
+ $employees.createUnique({name : 1} , (err , result)=>{
+
+ }
 
 //==================================================================
 // Global Database Events
