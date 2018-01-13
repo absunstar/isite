@@ -130,7 +130,7 @@ module.exports = function init(options) {
   site.session = require("./lib/session.js")
   site.parser = require("./lib/parser.js")
 
-  site.md5 = require("md5")
+  site.md5 = site.hash = require("md5")
 
 
   site.ips = [] // all ip send requests [ip , requets count]
