@@ -54,6 +54,7 @@ site = isite({
     name: "Your Site",
     savingTime: 60,
     log : true,
+    help : false,
     session: {
       timeout: 60 * 24 * 30,
       enabled: true,
@@ -153,15 +154,15 @@ Advanced Site Routing
 
   site.get('/', (req, res)=> {
         site.readFile(site.dir + '/html/index.html', function(err, content , file) {
-            res.setHeader('Content-type', 'text/html');
-            res.setHeader('Content-size', file.stat.size);
+            res.set('Content-type', 'text/html');
+            res.set('Content-size', file.stat.size);
             res.status(200).end(content);
         })
     })
 
 site.get('/', (req, res)=> {
         site.html('index', function(err, content) {
-            res.setHeader('Content-type', 'text/html');
+            res.set('Content-type', 'text/html');
             res.status(200).end(content);
         })
     })
@@ -177,7 +178,7 @@ site.get({ // can use [get , post , put , delete , all]
 site.get({ 
     name: '/',
     callback: function(req, res) {
-        res.setHeader('Content-type', 'text/html');
+        res.set('Content-type', 'text/html');
         site.html('index', function(err, content) {
             res.status(200).end(content);
         })
@@ -306,16 +307,16 @@ site.xml('rss', function (err, content) {
 //read file with custom header
 site.get("/rss", function(req, res) {
     site.readFile(__dirname + "/site_files/xml/rss.xml", function(err, content , file) {
-        res.setHeader("content-type" , "text/xml")
-        res.setHeader("content-size" , file.stat.size)
+        res.set("content-type" , "text/xml")
+        res.set("content-size" , file.stat.size)
         res.status(200).end(content) // or res.end(content)
     })
 })
 // or [ if file in site_files/xml folder]
 site.get("/rss", function(req, res) {
     site.xml("rss", function(err, content , file) {
-        res.setHeader("content-type" , "text/xml")
-        res.setHeader("content-size" , file.stat.size)
+        res.set("content-type" , "text/xml")
+        res.set("content-size" , file.stat.size)
         res.status(200).end(content)
     })
 })
@@ -968,8 +969,11 @@ app.controller('myController', function ($scope, $http) {
 site.get('/' , (req , res)=>{
     res.status(301) // set response code to 301 and return response object
     res.set('Content-Type', 'text/plain'); // add response header
+    res.remove('Content-Type'); // remove response header
+    res.delete('Content-Type'); // remove response header
     res.redirect('/URL') // Any URL 
     res.send('HTML CONTENT') // Any HTML Content
+    res.htmlContent('HTML CONTENT') // Any HTML Content
     res.render('index') // html file name - auto parser [html and css content]
     res.html('index') // like res.render
     res.css('bootstrap') // css file name
@@ -1003,24 +1007,34 @@ if (name.like('*sun*')) {
 
 ```js
 site.on('event name', function(obj) {
-   console.log('name : ' + obj.name )
-})
-
-site.on('event name 2', function(list) {
-    console.log('name : ' + list[0].name )
-    console.log('name : ' + list[1].name )
+    console.log('name : ' + obj.name )
  })
-
-site.call('event name' , {name : 'x1'})
-site.call('event name 2' , {name : 'n1'} , {name : 'n2'})
+ 
+ site.on('event name 2', function(list) {
+     console.log('name : ' + list[0].name )
+     console.log('name : ' + list[1].name )
+  })
+ 
+ site.on('event name 3', function(obj , callback) {
+    console.log('try long code : ' + obj.name )
+    setTimeout(function(){
+        callback()
+    } , 3000)
+ })
+ 
+ site.call('event name' , {name : 'x1'})
+ site.call('event name 2' , [{name : 'n1'} , {name : 'n2'}])
+ site.call('event name 3' , {name : 'some long code'} , ()=>{
+     console.log('after excute some long code')
+ })
 ```
 
 ## More
 
-    - This Framework make Security and Safty in the First Place
-    - This Framework from Developer to Developers
-    - This Framework will be Free and Supported For Ever
-    - This Framework will Upgraded Arround the Clock for You
+    - This Framework Make Security and Safty in the First Place
+    - This Framework From Developer to Developers
+    - This Framework Will be Free and Supported For Ever
+    - This Framework Will Upgraded Arround the Clock for You
     - This Framework Development by One Developer
 
 - Email    : Absunstar@gmail.com
