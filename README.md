@@ -596,7 +596,11 @@ $employees.deleteDuplicate('name' , (err , result)=>{
 
 })
 // Remove Duplicate [ name and mobile ] Employee
-$employees.deleteDuplicate({name : '$name' , mobile : '$mobile'} , (err , result)=>{
+$employees.deleteDuplicate({name : 1 , mobile : 1} , (err , result)=>{
+    
+})
+// Remove Duplicate [ profile.name ] Employee
+$employees.deleteDuplicate({'profile.name' : 1 } , (err , result)=>{
     
 })
 
@@ -607,6 +611,10 @@ $employees.deleteDuplicate({name : '$name' , mobile : '$mobile'} , (err , result
 
 // Create Unique Field
  $employees.createUnique({name : 1} , (err , result)=>{
+
+ }
+ // Create Unique Fields
+ $employees.createUnique({user_name : 1 , user_password : 1} , (err , result)=>{
 
  }
 

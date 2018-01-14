@@ -1,11 +1,29 @@
 module.exports = function init(options) {
 
+  const site = function () {}
+
+  process.stdin.resume();
+
   process.on('uncaughtException', (err) => {
     console.log(err)
   })
+  /* when app close */
   process.on('exit', (code) => {
-    console.log(`Process exit with code: ${code}`)
+    console.log(site.options.name + ` Closed `)
   })
+  /* when ctrl + c */
+  process.on('SIGINT', (code) => {
+    site.call('please close mongodb', null, () => {
+      process.exit()
+    })
+  })
+
+  process.on('SIGTERM', (code) => {
+    site.call('please close mongodb', null, () => {
+      process.exit()
+    })
+  })
+
   process.on('unhandledRejection', (reason, p) => {
     console.log('Unhandled Rejection at:', p, 'reason:', reason);
   })
@@ -15,7 +33,7 @@ module.exports = function init(options) {
     console.warn(warning.stack)
   })
 
-  const site = function () {}
+
 
   site.http = require("http")
   site.url = require("url")
