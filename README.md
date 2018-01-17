@@ -1,4 +1,9 @@
-## Create Node Js WebSite [ Fast & Easy ] with Many Featuers
+# Create [ Node Js Web Site ] Supporting Many Development Featuers
+- More Secure 
+- Best Performance
+- Less Time
+- Less Cost
+- Fast Development
 
 # Features
 
@@ -64,7 +69,7 @@ site = isite({
     },
     mongodb: {
       enabled: true,
-      url: "127.0.0.1",
+      host: "127.0.0.1",
       port: "27017",
       userName: null,
       password: null,
@@ -209,9 +214,15 @@ site.get('*', function(req, res) {
 Request Parameters [GET , POST | PUT | Delete] Restful API
 
 ```js
+// read query parameter lower case
 site.get('/api', function(req, res) {
-    res.end('GET | id : ' + req.query.id)
+    res.end('GET | name : ' + req.query.name)
 })
+// read query parameter default case as requested
+site.get('/api', function(req, res) {
+    res.end('GET | name : ' + req.queryRaw.name)
+})
+
 site.post('/api', function(req, res) {
     res.end('POST | id : ' + req.body.id + ' , Name : ' + req.body.name)
 })
@@ -222,16 +233,21 @@ site.delete('/api', function(req, res) {
     res.end('Delete | id : ' + req.body.id)
 })
 site.all('/api', function(req, res) {
-    res.end('Any Request Type Not Handled : ' + req.method)
+    res.end('Any Request Routing Type Not Handled Yet : ' + req.method)
 })
 ```
 Dynamic Parameters
 
 ```js
+// read params lower case
 site.get('/post/:id/category/:cat_id', function(req, res) {
     res.end('GET | Id : ' + req.params.id + ', catId : ' + req.params.cat_id)
 })
-//example : /post/9999999/category/5
+// read params default case as requested
+site.get('/post/:id/category/:cat_id', function(req, res) {
+    res.end('GET | Id : ' + req.paramsRaw.id + ', catId : ' + req.paramsRaw.cat_id)
+})
+//example : /post/AbCdEf/category/DDDDD
 ```
 MVC Custom Route
 ```js
@@ -375,48 +391,50 @@ site.createDir(path , (err , path)=>{
 
 ## Cookies
 
-    - cookie is client side data per user
-    - cookie is enabled by default
+- Cookie is Client Side Data Per User
+- Cookie is Enabled by Default
+- Support Multi Keys
 
 ```js
-site.get("/setCookie", function(req, res) {
+site.get("/testSetCookie", function(req, res) {
         res.cookie('name', req.query.name)
+        res.cookie('ip', req.ip)
+        res.cookie('more', 'any data')
         res.end('cookie set')
-})
-//example : /setcookie?name=amr
+})//example : /testSetCookie?name=amr
 
-site.get("/getCookie", function(req, res) {
+site.get("/testGetCookie", function(req, res) {
         res.end('name from cookie : ' + req.cookie('name'))
-})
-//example : /getcookie
+})//example : /testGetCookie
 ```
 
 ## Sessions
 
-    - session is server side data per user
-    - every user has its own access token
-    - session is management automatic
-    - session save in memory by default
+- Session is Server Side Data Per User
+- Every User has Unique Access Token
+- Session Management Automatic
+- Session Store in Database by Default
 
 ```js
-site.get('/setSession', function(req, res) {
+site.get('/testSetSession', function(req, res) {
     req.session('user_name', req.query.user_name)
+    res.session('ip', req.ip)
+    res.session('more', 'any data')
     res.end('Session Set ok !! ')
-})
-//example : /setSession?user_name=absunstar
+})//example : /testSetSession?user_name=absunstar
 
-site.get('/getSession', function(req, res) {
+site.get('/testGetSession', function(req, res) {
     res.end('User Name from session : ' + req.session('user_name'))
-})
-//example : /getSession
+})//example : /testGetSession
 ```
 
 ## Master Pages
 
-    - master page help you to not repate you code
-    - master page make site layout look good with less code
-    - master page is tow parts header and footer
-    - master page put content between header and footer
+- Master Page put content between header and footer
+- Master Page help you to not repate you code
+- Master Page make site layout look good with less code
+- Master Page has tow parts header and footer
+   
 
 ```js
 
@@ -424,6 +442,12 @@ site.addMasterPage({
     name: 'masterPage1',
     header: site.dir + '/html/header.html',
     footer: site.dir + '/html/footer.html'
+})
+
+site.addMasterPage({
+    name: 'masterPage2',
+    header: site.dir + '/html/header2.html',
+    footer: site.dir + '/html/footer2.html'
 })
 
 site.get({
@@ -437,25 +461,29 @@ site.get({
 
 ## HTML Server Tags & Attributes
 
-    - html server tags is html tags run in server side
-    - html server tags make html structure easy management
-    - html server tags is the next generation of html
+- html server tags is html tags run in server side
+- html server tags make html structure easy management
+- html server tags is the next generation of html
 
 Add Custom Html Content
 ```js
 site.get({name: '/',path:  site.dir + '/html/index.html' , parser:'html'});
 ```
 ```html
+<style x-import="page2.css"></style>
 <div x-import="navbar.html"></div>
-
 <div class="container">
-    <h2 > ... </h2>
+    <h2> Page Heading 2 </h2>
     <p x-import="info.html"></p>
 </div>
+<script x-import="custom.js"></script>
 ```
-Page "navbar.html" & "info.html" Must Be In HTML Site Folder ['/site_files/html/']
 
-- Dynamic Varibles Sets
+- Pages "navbar.html" & "info.html" Must Be In HTML Site Folder ['/site_files/html/']
+- Style "page2.css" Must Be In HTML Site Folder ['/site_files/css/']
+- Script "custom.js" Must Be In HTML Site Folder ['/site_files/js/']
+
+Dynamic Varibles Sets
 
 ```js
 site.var('siteName', 'First Site With Isite Library ');
@@ -467,21 +495,25 @@ site.var('siteBrand', 'XSite');
 <h2> ##var.siteBrand## </h2>
 <h2> Lang : ##session.lang## , Theme : ##session.theme## </h2>
 <h2> query name : ##query.name## , query age : ##query.age## </h2>
-<h2> param category : ##param.category## , param name : ##param.name## </h2>
+<h2> param category : ##params.category## , param post : ##params.post## </h2>
 
 
 <div x-lang="ar">Show if Site Language is Arabic</div>
 <div x-lang="en">Show if Site Language is English</div>
-// auto detect user session language set
+// auto detect user session language
 
-<div x-permission="login">Only Login Users Can Show This Content</div>
-<div x-permission="!login">Only Not Login Users Can Show This Content</div>
+<div x-permission="admin">Only Admi Users Can Show This Content</div>
+<div x-permission="accounting">Only Accounting Users Can Show This Content</div>
+
+<div x-feature="login">Only Login Users Can Show This Content</div>
+<div x-feature="!login">Only Not Login Users Can Show This Content</div>
 // auto detect user login status 
 
 <div x-feature="os.mobile">Only Users From Mobile Can Show This Content</div>
 <div x-feature="os.desktop">Only Users From Mobile Can Show This Content</div>
 
 <div x-feature="os.windows">Only Users From Windows Can Show This Content</div>
+<div x-feature="os.windows">Only Users From Not Windows Can Show This Content</div>
 <div x-feature="os.windowsxp">Only Users From Windows XP Can Show This Content</div>
 <div x-feature="os.windows7">Only Users From Windows 7 Can Show This Content</div>
 <div x-feature="os.windows8">Only Users From Windows 8 Can Show This Content</div>
@@ -972,28 +1004,40 @@ site.get('/' , (req , res)=>{
     res.remove('Content-Type'); // remove response header
     res.delete('Content-Type'); // remove response header
     res.redirect('/URL') // Any URL 
-    res.send('HTML CONTENT') // Any HTML Content
+    res.send('HTML CONTENT') // Any HTML Content or object
+    res.send(obj) // Any HTML Content or object
     res.htmlContent('HTML CONTENT') // Any HTML Content
     res.render('index') // html file name - auto parser [html and css content]
     res.html('index') // like res.render
     res.css('bootstrap') // css file name
     res.js('jquery') // js file name
+    res.json('items') // json file name or object
     res.json(obj) // json file name or object
+
+    req.ip // user ip
+    req.port // user port
+    req.ip2 // server ip
+    req.port2 // server port
+    req.features // array of user info [os , browser]
 })
-
-
-var hash = site.md5('this content will be hashed as md5')
-var base64 = site.toBase64('this content will be encript as base64 string')
-var normal = site.fromBase64(base64)
-site.log(hash)
-site.log(base64)
-site.log(normal)
 
 var person = {name : 'amr' , email : 'absunstar'}
 var person2 = site.copy(person)
 person2.name = 'Abd Allah'
 site.log(person)
 site.log(person2)
+
+var hash = site.md5('this content will be hashed as md5')
+var base64 = site.toBase64('this content will be encript as base64 string')
+var normal = site.fromBase64(base64)
+var jsonString = site.toJson(person)
+var jsonObj = site.fromJson(jsonString)
+site.log(hash)
+site.log(base64)
+site.log(normal)
+site.log(jsonString)
+site.log(jsonObj)
+
 
 var name = 'absunstar'
 if (name.like('*sun*')) {
@@ -1003,7 +1047,7 @@ if (name.like('*sun*')) {
 
 ## Events
 
-    - Events is global actions across site using Custom callbacks
+- Events Are Global Actions Across Site
 
 ```js
 site.on('event name', function(obj) {
@@ -1029,13 +1073,15 @@ site.on('event name', function(obj) {
  })
 ```
 
-## More
+## Hints
 
-    - This Framework Make Security and Safty in the First Place
-    - This Framework From Developer to Developers
-    - This Framework Will be Free and Supported For Ever
-    - This Framework Will Upgraded Arround the Clock for You
-    - This Framework Development by One Developer
+- This Framework Make Security and Safty in the First Place
+- This Framework From Developer to Developers
+- This Framework Free and Supported For Ever
+- This Framework Upgraded Arround the Clock
+- This Framework Development by One Developer
+
+# Contact Me
 
 - Email    : Absunstar@gmail.com
 - Linkedin : https://www.linkedin.com/in/absunstar

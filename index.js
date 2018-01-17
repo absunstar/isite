@@ -9,7 +9,11 @@ module.exports = function init(options) {
   })
   /* when app close */
   process.on('exit', (code) => {
-    console.log(site.options.name + ` Closed `)
+    console.log('----------------------------------------')
+    console.log('')
+    console.log('       ' + site.options.name + ` Closed `)
+    console.log('')
+    console.log('----------------------------------------')
   })
   /* when ctrl + c */
   process.on('SIGINT', (code) => {
@@ -42,6 +46,7 @@ module.exports = function init(options) {
   site.querystring = require("querystring")
   site.formidable = require("formidable")
   site.mv = require("mv")
+  site.$ = site.cheerio = require("cheerio")
 
 
   site.require = function (file_path) {
