@@ -15,7 +15,7 @@
     return JSON.stringify(obj);
   }
   site.fromJson = str =>{
-    if (typeof data !== "string") {
+    if (typeof str !== "string") {
       return "";
     }
     return JSON.parse(str);
