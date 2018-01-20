@@ -2,42 +2,6 @@ module.exports = function init(options) {
 
   const site = function () {}
 
-  process.stdin.resume();
-
-  process.on('uncaughtException', (err) => {
-    console.log(err)
-  })
-  /* when app close */
-  process.on('exit', (code) => {
-    console.log('----------------------------------------')
-    console.log('')
-    console.log('       ' + site.options.name + ` Closed `)
-    console.log('')
-    console.log('----------------------------------------')
-  })
-  /* when ctrl + c */
-  process.on('SIGINT', (code) => {
-    site.call('please close mongodb', null, () => {
-      process.exit()
-    })
-  })
-
-  process.on('SIGTERM', (code) => {
-    site.call('please close mongodb', null, () => {
-      process.exit()
-    })
-  })
-
-  process.on('unhandledRejection', (reason, p) => {
-    console.log('Unhandled Rejection at:', p, 'reason:', reason);
-  })
-  process.on('warning', (warning) => {
-    console.warn(warning.name)
-    console.warn(warning.message)
-    console.warn(warning.stack)
-  })
-
-
 
   site.http = require("http")
   site.url = require("url")
@@ -92,6 +56,48 @@ module.exports = function init(options) {
 
   }
 
+  if (site.options.stdin) {
+
+    if (process.stdin && process.stdin.resume) {
+      process.stdin.resume()
+    }
+
+
+    process.on('uncaughtException', (err) => {
+      console.log(err)
+    })
+    /* when app close */
+    process.on('exit', (code) => {
+      console.log('----------------------------------------')
+      console.log('')
+      console.log('       ' + site.options.name + ` Closed `)
+      console.log('')
+      console.log('----------------------------------------')
+    })
+    /* when ctrl + c */
+    process.on('SIGINT', (code) => {
+      site.call('please close mongodb', null, () => {
+        process.exit()
+      })
+    })
+
+    process.on('SIGTERM', (code) => {
+      site.call('please close mongodb', null, () => {
+        process.exit()
+      })
+    })
+
+    process.on('unhandledRejection', (reason, p) => {
+      console.log('Unhandled Rejection at:', p, 'reason:', reason);
+    })
+    process.on('warning', (warning) => {
+      console.warn(warning.name)
+      console.warn(warning.message)
+      console.warn(warning.stack)
+    })
+
+
+  }
   site.fsm = require("./lib/fsm.js")(site)
   site.fileList = site.fsm.list
   site.fileStatSync = site.fsm.statSync
