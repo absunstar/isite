@@ -16,7 +16,7 @@
   }
   site.fromJson = str =>{
     if (typeof str !== "string") {
-      return "";
+      return str;
     }
     return JSON.parse(str);
   }

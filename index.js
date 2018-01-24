@@ -17,6 +17,10 @@ module.exports = function init(options) {
     return require(file_path)(site)
   }
 
+  site.loadApp = function(name){
+    return require( site.dir + '/apps/' +  name + '/app.js')(site)
+  }
+
   require("./lib/prototype.js")
 
   site.fn = require("./lib/fn.js")(site)
