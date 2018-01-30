@@ -8,13 +8,29 @@
     }
   }
 
-  site.toJson = obj =>{
+  function censor(censor) {
+    var i = 0;
+
+    return function (key, value) {
+      if (i !== 0 && typeof (censor) === 'object' && typeof (value) == 'object' && censor == value)
+        return '[Circular]';
+
+      if (i >= 29)
+        return '[Unknown]';
+
+      ++i;
+
+      return value;
+    }
+  };
+
+  site.toJson = obj => {
     if (typeof obj === undefined || obj === null) {
       return "";
     }
     return JSON.stringify(obj);
   }
-  site.fromJson = str =>{
+  site.fromJson = str => {
     if (typeof str !== "string") {
       return str;
     }
@@ -22,17 +38,17 @@
   }
 
   site.toBase64 = str => {
-    if(typeof str === undefined || str === null || str === ''){
+    if (typeof str === undefined || str === null || str === '') {
       return '';
     }
-    if(typeof str !== 'string'){
+    if (typeof str !== 'string') {
       str = site.toJson(str);
     }
     return btoa(unescape(encodeURIComponent(str)));
   };
 
   site.fromBase64 = str => {
-    if(typeof str === undefined || str === null || str === ''){
+    if (typeof str === undefined || str === null || str === '') {
       return '';
     }
     return decodeURIComponent(escape(atob(str)));
@@ -68,31 +84,31 @@
     if (obj === undefined || obj === null) {
       return '';
     }
-    if(site.typeOf(obj) == 'Object'){
+    if (site.typeOf(obj) == 'Object') {
       let table = '<table class="table">';
       for (let index = 0; index < Object.getOwnPropertyNames(obj).length; index++) {
         let p = Object.getOwnPropertyNames(obj)[index];
         table += '<tr>';
         table += `<td> ${p} </td>`;
-        if(site.typeOf(obj[p]) == 'Object' || site.typeOf(obj[p]) == 'Array'){
+        if (site.typeOf(obj[p]) == 'Object' || site.typeOf(obj[p]) == 'Array') {
           table += `<td> ${site.toHtmlTable(obj[p])} </td>`;
-        }else{
+        } else {
           table += `<td> ${obj[p]} </td>`;
         }
-        
+
         table += '</tr>';
       }
       table += '</table>';
       return table;
-    }else if(site.typeOf(obj) == 'Array'){
+    } else if (site.typeOf(obj) == 'Array') {
       let table = '<table class="table">';
-        for (let i = 0; i < obj.length; i++) {
-          if(site.typeOf(obj[i]) == 'Object' || site.typeOf(obj[i]) == 'Array'  ){
-            table += `<tr><td>${site.toHtmlTable(obj[i])}</td></tr>`;
-          }else{
-            table += `<tr><td>${obj[i]}</td></tr>`;
-          }
+      for (let i = 0; i < obj.length; i++) {
+        if (site.typeOf(obj[i]) == 'Object' || site.typeOf(obj[i]) == 'Array') {
+          table += `<tr><td>${site.toHtmlTable(obj[i])}</td></tr>`;
+        } else {
+          table += `<tr><td>${obj[i]}</td></tr>`;
         }
+      }
       table += '</table>';
       return table;
     }
