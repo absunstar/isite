@@ -1,5 +1,12 @@
 (function (window, document, undefined) {
   let site = {}
+
+  site.toDateX = function(_time){
+    let date_time = new Date(_time).toLocaleString();
+    let date = date_time.split(',')[0].split('/');
+    return date[1] + '-' + date[0] + '-' + date[2];
+  };
+
   site.$base64Letter = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/=";
   site.$base64Numbers = [];
   for (let $i = 11; $i < 99; $i++) {
@@ -8,21 +15,6 @@
     }
   }
 
-  function censor(censor) {
-    var i = 0;
-
-    return function (key, value) {
-      if (i !== 0 && typeof (censor) === 'object' && typeof (value) == 'object' && censor == value)
-        return '[Circular]';
-
-      if (i >= 29)
-        return '[Unknown]';
-
-      ++i;
-
-      return value;
-    }
-  };
 
   site.toJson = obj => {
     if (typeof obj === undefined || obj === null) {
