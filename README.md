@@ -580,7 +580,7 @@ $employees.findMany({
     where:{name : /a/i} , 
     select:{name: 1 , salary:1} ,
     limit : 50 ,
-    sort:{salary : -1}} , (err , docs)=>{
+    sort:{salary : -1}} , (err , docs , count)=>{
     site.log(docs)
 })
 
@@ -735,7 +735,7 @@ site.on('mongodb after delete many' , (result)=>{
             collectionName: 'employees',
             where:{},
             select : {}
-        }, function (err, docs) {
+        }, function (err, docs , count) {
             if (err) {
                 site.log(err.message)
             } else {

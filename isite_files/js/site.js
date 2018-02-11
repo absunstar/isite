@@ -1,11 +1,24 @@
 (function (window, document, undefined) {
   let site = {}
 
-  site.toDateX = function(_time){
-    let date_time = new Date(_time).toLocaleString();
-    let date = date_time.split(',')[0].split('/');
-    return date[1] + '-' + date[0] + '-' + date[2];
+
+  site.toDateX = function (_time) {
+    if(typeof _time === undefined){
+      return '';
+    }
+    let date_time = new Date(_time);
+    return date_time.getFullYear() + '-' + (date_time.getMonth() + 1) + '-' + date_time.getDate();
   };
+
+  site.toDateOnly = function (_time) {
+    let date_time = new Date(_time);
+    return new Date(date_time.getFullYear(), date_time.getMonth(), date_time.getDate());
+  };
+
+  site.toDateTime = function (_time) {
+    let date_time = new Date(_time);
+  };
+
 
   site.$base64Letter = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/=";
   site.$base64Numbers = [];
