@@ -25,6 +25,7 @@ module.exports = function init(options) {
 
   site.fn = require("./lib/fn.js")(site)
   site.copy = site.fn.copy
+  site.toNumber = site.fn.toNumber
   site.toDateX = site.fn.toDateX
   site.toDateOnly = site.fn.toDateOnly
   site.toDateTime = site.fn.toDateTime
