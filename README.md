@@ -513,7 +513,7 @@ site.var('siteBrand', 'XSite');
 <div x-feature="os.desktop">Only Users From Mobile Can Show This Content</div>
 
 <div x-feature="os.windows">Only Users From Windows Can Show This Content</div>
-<div x-feature="os.windows">Only Users From Not Windows Can Show This Content</div>
+<div x-feature="!os.windows">Only Users From Not Windows Can Show This Content</div>
 <div x-feature="os.windowsxp">Only Users From Windows XP Can Show This Content</div>
 <div x-feature="os.windows7">Only Users From Windows 7 Can Show This Content</div>
 <div x-feature="os.windows8">Only Users From Windows 8 Can Show This Content</div>

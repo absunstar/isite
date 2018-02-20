@@ -1,6 +1,6 @@
 module.exports = function init(options) {
 
-  const site = function () {}
+  const site = function () { }
 
 
   site.http = require("http")
@@ -17,8 +17,8 @@ module.exports = function init(options) {
     return require(file_path)(site)
   }
 
-  site.loadApp = function(name){
-    return require( site.dir + '/apps/' +  name + '/app.js')(site)
+  site.loadApp = function (name) {
+    return require(site.dir + '/apps/' + name + '/app.js')(site)
   }
 
   require("./lib/prototype.js")
@@ -27,8 +27,10 @@ module.exports = function init(options) {
   site.copy = site.fn.copy
   site.toNumber = site.fn.toNumber
   site.toDateX = site.fn.toDateX
-  site.toDateOnly = site.fn.toDateOnly
+  site.toDateOnly = site.toDate = site.fn.toDateOnly
+  site.toDateT = site.fn.toDateT
   site.toDateTime = site.fn.toDateTime
+  site.toTime = site.fn.toTime
   site.fromJson = site.fn.fromJson
   site.toJson = site.fn.toJson
   site.from123 = site.fn.from123
@@ -184,7 +186,7 @@ module.exports = function init(options) {
     })
   }
 
-  site.reset = function () {}
+  site.reset = function () { }
 
   site.test = function () {
     console.log(" Isite Test OK !! ")
