@@ -7,6 +7,7 @@ module.exports = function init(options) {
   site.url = require("url")
   site.fs = require("fs")
   site.path = require("path")
+  site.zlib = require("zlib")
   site.querystring = require("querystring")
   site.formidable = require("formidable")
   site.mv = require("mv")
