@@ -18,14 +18,14 @@
 
   site.toDateT = function (_any) {
     return site.toDateOnly(_any).getTime();
- };
+  };
 
- site.toNumber = function (_num) {
-  if (_num) {
-    return parseFloat(_num);
-  }
-  return 0;
-};
+  site.toNumber = function (_num) {
+    if (_num) {
+      return parseFloat(_num);
+    }
+    return 0;
+  };
 
   site.$base64Letter = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/=";
   site.$base64Numbers = [];
@@ -126,6 +126,62 @@
     }
     return ''
   }
+
+
+
+  site.print = site.printHTML = function (options) {
+
+    options = options || {};
+
+    if (typeof options === 'string') {
+      options = { select: options };
+    }
+
+    var mywindow = window.open('', '_blank', '');
+
+    var content = '';
+    window.document.querySelectorAll('link[rel=stylesheet]').forEach(l => {
+      content += l.outerHTML;
+    });
+
+    window.document.querySelectorAll('style').forEach(s => {
+      content +=  s.outerHTML;
+    });
+
+
+    if (options.links) {
+      options.links.forEach(link => {
+        content += '<link rel="stylesheet" href="' + link + '" type="text/css" >';
+      });
+    }
+
+
+    content += window.document.querySelector(options.select).outerHTML;
+
+    mywindow.document.open();
+    mywindow.document.write(content);
+    mywindow.document.close();
+
+    mywindow.document.querySelector('body').style.margin = '0px';
+    mywindow.document.querySelector('body').style.padding = '5px';
+    mywindow.document.querySelector('body').contentEditable = true;
+    let arr = options.ignores || ['.not-print'];
+    arr.push('.not-print');
+    arr.forEach(n => {
+      mywindow.document.querySelectorAll(n).forEach(ele => {
+        ele.remove();
+      });
+
+    });
+
+    mywindow.focus();
+    mywindow.setTimeout(() => {
+      mywindow.print();
+    }, 1000);
+
+    return true;
+  }
+
 
   window.site = site;
 })(window, document, 'undefined');
