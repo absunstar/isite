@@ -1,5 +1,14 @@
 (function (window, document, undefined) {
-  let site = {}
+
+  String.prototype.like = function matchRuleShort(rule) {
+    return new RegExp("^" + rule.split("*").join(".*") + "$").test(this);
+  };
+
+  String.prototype.contains = function (name) {
+    return this.like('*' + name + '*');
+  };
+
+  let site = {};
 
 
   site.toDateTime = function (_any) {
@@ -41,13 +50,14 @@
       return "";
     }
     return JSON.stringify(obj);
-  }
+  };
+
   site.fromJson = str => {
     if (typeof str !== "string") {
       return str;
     }
     return JSON.parse(str);
-  }
+  };
 
   site.toBase64 = str => {
     if (typeof str === undefined || str === null || str === '') {
@@ -90,7 +100,7 @@
 
   site.typeOf = site.typeof = function type(elem) {
     return Object.prototype.toString.call(elem).slice(8, -1);
-  }
+  };
 
   site.toHtmlTable = function (obj) {
     if (obj === undefined || obj === null) {
@@ -125,9 +135,39 @@
       return table;
     }
     return ''
-  }
+  };
 
-
+  site.vControles = [];
+  site.validated = function (s) {
+    const res = { ok: true, messages: [] };
+    site.vControles.forEach(n => {
+      n.el.style.border = n.border;
+    });
+    site.vControles = [];
+    s = s || 'body';
+    const arr = document.querySelectorAll(s + ' [v]');
+    arr.forEach(el => {
+      const v = el.getAttribute('v');
+      const vList = v.split(' ');
+      vList.forEach(vl => {
+        if (vl === 'r') {
+          if ((el.nodeName === 'INPUT' || el.nodeName === 'SELECT') && (!el.value || el.value.like('*undefined*'))) {
+            site.vControles.push({
+              el: el,
+              border: el.style.border
+            });
+            el.style.border = '2px solid #ff1100';
+            res.ok = false;
+            res.messages.push({
+              en: 'Data Is Required',
+              ar: 'هذا البيان مطلوب'
+            });
+          }
+        }
+      });
+    });
+    return res;
+  };
 
   site.print = site.printHTML = function (options) {
 
@@ -145,7 +185,7 @@
     });
 
     window.document.querySelectorAll('style').forEach(s => {
-      content +=  s.outerHTML;
+      content += s.outerHTML;
     });
 
 
