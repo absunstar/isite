@@ -251,6 +251,7 @@
     mywindow.document.querySelector('body').style.margin = '0px';
     mywindow.document.querySelector('body').style.padding = '5px';
     mywindow.document.querySelector('body').contentEditable = true;
+    mywindow.document.querySelector('body').className = 'center';
     let arr = options.ignores || ['.not-print'];
     arr.push('.not-print');
     arr.forEach(n => {
