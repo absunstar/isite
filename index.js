@@ -1,6 +1,6 @@
 module.exports = function init(options) {
 
-  const site = function () { }
+  const site = function () {}
 
 
   site.http = require("http")
@@ -27,11 +27,13 @@ module.exports = function init(options) {
   site.fn = require("./lib/fn.js")(site)
   site.copy = site.fn.copy
   site.toNumber = site.fn.toNumber
- 
+
   site.toDateTime = site.fn.toDateTime
   site.toDateOnly = site.toDate = site.fn.toDateOnly
 
   site.toDateX = site.fn.toDateX
+  site.toDateXT = site.fn.toDateXT
+  site.toDateXF = site.fn.toDateXF
   site.toDateT = site.fn.toDateT
   site.toDateF = site.fn.toDateF
 
@@ -155,23 +157,26 @@ module.exports = function init(options) {
   require("./lib/vars.js")(site)
 
   //DataBase Management Oprations
-  let mongodb = require("./lib/mongodb.js")
-  site.mongodb = mongodb(site)
+  if (site.options.mongodb.enabled) {
+    let mongodb = require("./lib/mongodb.js")
+    site.mongodb = mongodb(site)
 
-  let collection = require("./lib/collection")
-  site.connectCollection = function (option) {
-    return collection(site, option)
+    let collection = require("./lib/collection")
+    site.connectCollection = function (option) {
+      return collection(site, option)
+    }
   }
-
 
   if (site.options.security.enabled) {
     site.security = require("./lib/security.js")(site)
   }
 
   site.cookie = require("./lib/cookie.js")
-  site.sessions = require("./lib/sessions")(site)
 
+  site.sessions = require("./lib/sessions")(site)
   site.session = require("./lib/session.js")
+
+  
   site.parser = require("./lib/parser.js")
 
   site.md5 = site.hash = require("md5")
@@ -190,7 +195,7 @@ module.exports = function init(options) {
     })
   }
 
-  site.reset = function () { }
+  site.reset = function () {}
 
   site.test = function () {
     console.log(" Isite Test OK !! ")

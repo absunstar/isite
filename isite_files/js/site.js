@@ -11,23 +11,39 @@
   let site = {};
 
 
+
   site.toDateTime = function (_any) {
     return new Date(_any);
   };
 
   site.toDateX = function (_any) {
-    let d = site.toDateTime(_any);
+    let d = site.toDateTime(_any)
     return d.getFullYear() + '-' + (d.getMonth() + 1) + '-' + d.getDate();
+  }
+
+  site.toDateXT = function (_any) {
+    let d = site.toDateTime(_any);
+    return d.getHours() + ':' + d.getMinutes() + ':' + d.getSeconds();
+  };
+
+  site.toDateXF = function (_any) {
+    let d = site.toDateTime(_any);
+    return d.getFullYear() + '-' + (d.getMonth() + 1) + '-' + d.getDate() + ' ' + d.getHours() + ':' + d.getMinutes() + ':' + d.getSeconds();
   };
 
   site.toDateOnly = function (_any) {
     let d = site.toDateTime(_any);
-    return new Date(d.getFullYear(), d.getMonth(), d.getDate());
+    return new Date(d.getFullYear(), d.getMonth(), d.getDate() , 0 , 0 , 0, 0);
   };
 
   site.toDateT = function (_any) {
     return site.toDateOnly(_any).getTime();
   };
+
+  site.toDateF = function (_any) {
+    return site.toDateTime(_any).getTime();
+  };
+
 
   site.toNumber = function (_num) {
     if (_num) {
