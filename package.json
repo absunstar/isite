@@ -1,6 +1,6 @@
 {
   "name": "isite",
-  "version": "1.7.11",
+  "version": "1.7.12",
   "description": "Create Web Site with Full Development Features [Fast and Easy] ",
   "main": "index.js",
   "repository": {
@@ -36,9 +36,9 @@
   "license": "ISC",
   "dependencies": {
     "cheerio": "^1.0.0-rc.2",
-    "formidable": "^1.1.1",
+    "formidable": "^1.2.0",
     "md5": "^2.2.1",
-    "mongodb": "^2.2.34",
+    "mongodb": "^2.2.35",
     "mv": "^2.1.1"
   }
 }

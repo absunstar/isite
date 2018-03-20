@@ -13,6 +13,7 @@
 
 
   site.toDateTime = function (_any) {
+    if(!_any)return new Date();
     return new Date(_any);
   };
 
