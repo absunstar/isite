@@ -1,3 +1,4 @@
+
 (function (window, document, undefined) {
 
   String.prototype.like = function matchRuleShort(rule) {
@@ -232,6 +233,8 @@
     return res;
   };
 
+  site.printDefaultCss = '';
+
   site.print = site.printHTML = function (options) {
 
     options = options || {};
@@ -258,6 +261,7 @@
       });
     }
 
+    content += '<style>' + site.printDefaultCss  +'</style>';
 
     content += window.document.querySelector(options.select).outerHTML;
 
