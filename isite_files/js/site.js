@@ -11,7 +11,9 @@
 
   let site = {};
 
-
+  site.typeOf = function type(elem) {
+    return Object.prototype.toString.call(elem).slice(8, -1);
+  };
 
   site.toDateTime = function (_any) {
     if(!_any)return new Date();
