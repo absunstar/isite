@@ -131,11 +131,11 @@
       for (let index = 0; index < Object.getOwnPropertyNames(obj).length; index++) {
         let p = Object.getOwnPropertyNames(obj)[index];
         table += '<tr>';
-        table += `<td> ${p} </td>`;
+        table += `<td><p> ${p} </p></td>`;
         if (site.typeOf(obj[p]) == 'Object' || site.typeOf(obj[p]) == 'Array') {
-          table += `<td> ${site.toHtmlTable(obj[p])} </td>`;
+          table += `<td><p> ${site.toHtmlTable(obj[p])} </p></td>`;
         } else {
-          table += `<td> ${obj[p]} </td>`;
+          table += `<td><p> ${obj[p]} </p></td>`;
         }
 
         table += '</tr>';
@@ -146,9 +146,9 @@
       let table = '<table class="table">';
       for (let i = 0; i < obj.length; i++) {
         if (site.typeOf(obj[i]) == 'Object' || site.typeOf(obj[i]) == 'Array') {
-          table += `<tr><td>${site.toHtmlTable(obj[i])}</td></tr>`;
+          table += `<tr><td><p>${site.toHtmlTable(obj[i])}</p></td></tr>`;
         } else {
-          table += `<tr><td>${obj[i]}</td></tr>`;
+          table += `<tr><td><p>${obj[i]}</p></td></tr>`;
         }
       }
       table += '</table>';

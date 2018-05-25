@@ -54,16 +54,19 @@ site.run([8080 , 5555 , 9090 , 12345])
 ```js
 var isite = require('isite')
 site = isite({
-    port: process.env.port || 80,
-    dir: process.cwd() +  "/site_files",
+     port: process.env.port || 80,
+    dir: process.cwd() + "/site_files",
     name: "Your Site",
     savingTime: 60,
-    log : true,
-    help : false,
+    log: true,
+    lang : 'ar',
+    theme : 'default',
+    help: true,
+    stdin: true,
     session: {
       timeout: 60 * 24 * 30,
       enabled: true,
-      storage: "mongodb", /* or memory */
+      storage: "mongodb",
       db: "sessions",
       userSessionCollection: "user_sessions"
     },
@@ -75,7 +78,7 @@ site = isite({
       password: null,
       db: "test",
       collection: "test",
-      limit : 10,
+      limit: 10,
       prefix: {
         db: "",
         collection: ""
@@ -495,6 +498,7 @@ site.var('siteBrand', 'XSite');
 <h2> ##var.siteBrand## </h2>
 <h2> Lang : ##session.lang## , Theme : ##session.theme## </h2>
 <h2> query name : ##query.name## , query age : ##query.age## </h2>
+<h2> data name : ##data.name## , data age : ##data.age## </h2>
 <h2> param category : ##params.category## , param post : ##params.post## </h2>
 
 
@@ -1007,7 +1011,7 @@ site.get('/' , (req , res)=>{
     res.send('HTML CONTENT') // Any HTML Content or object
     res.send(obj) // Any HTML Content or object
     res.htmlContent('HTML CONTENT') // Any HTML Content
-    res.render('index') // html file name - auto parser [html and css content]
+    res.render('index' , {name : 'amr' , age : '36'}) // html file name - auto parser [html and css content]
     res.html('index') // like res.render
     res.css('bootstrap') // css file name
     res.js('jquery') // js file name
