@@ -18,9 +18,7 @@ module.exports = function init(options) {
     return require(file_path)(site)
   }
 
-  site.loadApp = function (name) {
-    return require(site.dir + '/apps/' + name + '/app.js')(site)
-  }
+
 
   require("./lib/prototype.js")
 
@@ -154,7 +152,12 @@ module.exports = function init(options) {
   })
   site.words.addList(site.dir + '/json/words.json')
 
+ 
+
   require("./lib/vars.js")(site)
+
+
+
 
   //DataBase Management Oprations
   if (site.options.mongodb.enabled) {
@@ -176,7 +179,7 @@ module.exports = function init(options) {
   site.sessions = require("./lib/sessions")(site)
   site.session = require("./lib/session.js")
 
-  
+
   site.parser = require("./lib/parser.js")
 
   site.md5 = site.hash = require("md5")
@@ -212,6 +215,39 @@ module.exports = function init(options) {
   // developer tools
   site.dashboard = require(__dirname + "/lib/dashboard.js")
   site.dashboard(site)
+
+
+  site.loadApp = function (name) {
+
+    let app_path = site.options.apps_dir + '/' + name
+
+    if(site.isFileExistsSync(app_path+ '/site_files/json/words.json')){
+      site.words.addList(app_path + '/site_files/json/words.json')
+    }
+
+    if(site.isFileExistsSync(app_path+ '/site_files/json/vars.json')){
+      site.addVars(app_path + '/site_files/json/vars.json')
+    }
+
+    if(site.isFileExistsSync(app_path+ '/site_files/json/permissions.json')){
+      site.security.addPermissions(app_path + '/site_files/json/permissions.json')
+    }
+   
+    if(site.isFileExistsSync(app_path+ '/app.js')){
+      return require(app_path+ '/app.js')(site)
+    }
+   
+  }
+ 
+  if (site.options.apps) {
+    if (site.fs.lstatSync(site.options.apps_dir).isDirectory()) {
+      site.fs.readdir(site.options.apps_dir, (err, files) => {
+        files.forEach(file => {
+          site.loadApp(file)
+        })
+      })
+    }
+  }
 
   return site
 }
