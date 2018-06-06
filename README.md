@@ -55,9 +55,11 @@ site.run([8080 , 5555 , 9090 , 12345])
 var isite = require('isite')
 site = isite({
      port: process.env.port || 80,
-    dir: process.cwd() + "/site_files",
+    dir: process.cwd() + '/site_files',
+    apps : true,
+    apps_dir : process.cwd() + '/apps',
     name: "Your Site",
-    savingTime: 60,
+    saving_time: 60,
     log: true,
     lang : 'ar',
     theme : 'default',
@@ -986,7 +988,7 @@ app.controller('myController', function ($scope, $http) {
         data:{ name : lang}
     }).then(function (response) {
         if (response.data.done) {
-          window.location.href = window.location.href;
+          window.location.reload(true);
         }
     });
   };

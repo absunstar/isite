@@ -152,7 +152,7 @@ module.exports = function init(options) {
   })
   site.words.addList(site.dir + '/json/words.json')
 
- 
+
 
   require("./lib/vars.js")(site)
 
@@ -205,40 +205,55 @@ module.exports = function init(options) {
   }
 
   site.on("saveChanges", function () {
-    console.log("Site saveChanges Event Fire Every " + site.options.savingTime + " minute ")
+    console.log("Site saveChanges Event Fire Every " + site.options.saving_time + " minute ")
   })
 
   setInterval(function () {
     site.call("saveChanges")
-  }, site.options.savingTime * 1000 * 60)
+  }, site.options.saving_time * 1000 * 60)
 
   // developer tools
   site.dashboard = require(__dirname + "/lib/dashboard.js")
   site.dashboard(site)
 
+  site.apps = []
+  site.importApp = function (app_path) {
+
+    if (site.isFileExistsSync(app_path + '/site_files/json/words.json')) {
+      site.words.addList(app_path + '/site_files/json/words.json')
+    }
+
+    if (site.isFileExistsSync(app_path + '/site_files/json/vars.json')) {
+      site.addVars(app_path + '/site_files/json/vars.json')
+    }
+
+    if (site.isFileExistsSync(app_path + '/site_files/json/permissions.json')) {
+      site.security.addPermissions(app_path + '/site_files/json/permissions.json')
+    }
+
+    if (site.isFileExistsSync(app_path + '/site_files/json/roles.json')) {
+      site.security.addRoles(app_path + '/site_files/json/roles.json')
+    }
+
+    if (site.isFileExistsSync(app_path + '/app.js')) {
+      site.apps.push({
+        name : app_path.split('/').pop(),
+        path : app_path
+      })
+     let app =  require (app_path + '/app.js')
+     return app(site)
+    }
+
+  }
+
 
   site.loadApp = function (name) {
 
     let app_path = site.options.apps_dir + '/' + name
+    return site.importApp(app_path)
 
-    if(site.isFileExistsSync(app_path+ '/site_files/json/words.json')){
-      site.words.addList(app_path + '/site_files/json/words.json')
-    }
-
-    if(site.isFileExistsSync(app_path+ '/site_files/json/vars.json')){
-      site.addVars(app_path + '/site_files/json/vars.json')
-    }
-
-    if(site.isFileExistsSync(app_path+ '/site_files/json/permissions.json')){
-      site.security.addPermissions(app_path + '/site_files/json/permissions.json')
-    }
-   
-    if(site.isFileExistsSync(app_path+ '/app.js')){
-      return require(app_path+ '/app.js')(site)
-    }
-   
   }
- 
+
   if (site.options.apps) {
     if (site.fs.lstatSync(site.options.apps_dir).isDirectory()) {
       site.fs.readdir(site.options.apps_dir, (err, files) => {
