@@ -1,5 +1,8 @@
 ## Create [ Node Js Web Site ] Supporting Many Development Featuers
+
 - More Secure 
+- Multi Language
+- Custom Apps [Modules]
 - Best Performance
 - Less Time
 - Less Cost
@@ -7,25 +10,27 @@
 
 # Features
 
-        - Auto Routes [Simple & Advanced & Custom]
-        - Auto Handle File Types Encoding [Fonts - Images - ...]  
-        - Merge Multi Files Contents in One Route
-        - Auto Handle Request & Response Headers [Cookies - Parameters - params]
-        - Auto Detect & Configer User Session  
-        - Builtin Security System [register , login , permissions]
-        - Easy Creating Master Pages
-        - Auto Caching All Routes & Management Site Files in Memory 
-        - Fast Read Files Content [Site Folder Structure]
-        - [ Upload / Download ] Files
-        - Custom Html Attributes [Server side Tags]
-        - MongoDB Full Integration
-        - Client libraries [jquery - bootstrap - font-awesome - angular]
-        - Development Helper Functions
-        - Site Dynamic Events Callback  
+- Auto Routes [Simple & Advanced & Custom]
+- Auto Handle File Types Encoding [Fonts - Images - ...]  
+- Merge Multi Files Contents in One Route
+- Auto Handle Request & Response Headers [Cookies - Parameters - params]
+- Auto Detect & Configer User Session  
+- Built-in Security System [Users , Roles, Permissions]
+- Easy Creating Master Pages
+- Auto Caching All Routes & Management Site Files in Memory 
+- Fast Read Files Content [Site Folder Structure]
+- [ Upload / Download ] Files
+- Custom Html Attributes [Server side Tags]
+- MongoDB Full Integration
+- Client libraries [jquery - bootstrap - font-awesome - angular]
+- Development Helper Functions
+- Site Dynamic Events Callback  
 
 ## Installation
 
-`npm install isite --save`
+`npm install isite`
+
+ - Works Stand-Alone or With Other Libs
 
 
 ## Using
@@ -54,7 +59,7 @@ site.run([8080 , 5555 , 9090 , 12345])
 ```js
 var isite = require('isite')
 site = isite({
-     port: process.env.port || 80,
+    port: process.env.port || 80,
     dir: process.cwd() + '/site_files',
     apps : true,
     apps_dir : process.cwd() + '/apps',
@@ -118,156 +123,6 @@ site = isite({
 site.run()
 ```
 
-## Routes
-
-- Auto Convert All Routes URL & Parameters to Lower Case 
-- Auto Manage Reponse Headers and Files Types
-- Support Multi Files in One Route
-- Save Route Response in Memory to Reuse for Fast Response
-- Auto Handle URL parametes
-- Auto Handle Body Parameters in not get header [post , put , delete , ...]
-- Auto Handle URL params [custom parameters from url structure]
-- Auto cache Files Content in memory
-- support compress to remove unwanted spaces and tabs and empty lines ...etc
-- support parser to handle custom html server side tags
- 
-Easy and Auto Site Routing
-
-```js
-/* site.dir = process.cwd() +  "/site_files"
-    You Can Change This Default Value when define isite
-    or set site.dir = new path
-*/
-
-site.get({name: '/',path:  site.dir + '/html/index.html'});
-site.get({name: '/css/bootstrap.css',path:  site.dir + '/css/bootstrap.min.css'});
-site.get({name: '/js/jquery.js',path: site.dir + '/js/jquery.js'});
-site.get({name: '/js/bootstrap.js',path: site.dir + '/js/bootstrap.js'});
-site.get({name: '/favicon.png',path: site.dir + '/images/logo.png'})
-site.post({name: '/api',path:  site.dir + '/json/employees.json' });
-```
-Merge Multi Files in one route
-
-```js
-site.get({
-    name: '/css/style.css',
-    path: [site.dir + '/css/bootstrap.css' , site.dir + '/css/custom.css']
-});
-site.get({
-    name: '/js/script.js',
-    path: [site.dir + '/js/jquery.js' , site.dir + '/js/bootstrap.js', site.dir + '/js/custom.js']
-});
-```
-Advanced Site Routing
-
-```js
-
-  site.get('/', (req, res)=> {
-        site.readFile(site.dir + '/html/index.html', function(err, content , file) {
-            res.set('Content-type', 'text/html');
-            res.set('Content-size', file.stat.size);
-            res.status(200).end(content);
-        })
-    })
-
-site.get('/', (req, res)=> {
-        site.html('index', function(err, content) {
-            res.set('Content-type', 'text/html');
-            res.status(200).end(content);
-        })
-    })
-
-site.get({ // can use [get , post , put , delete , all]
-    name: '/',
-    path: site.dir + '/html/index.html', //Required
-    parser: 'html', // default static [not paresed]
-    compress : true , // default false
-    cache: false // default true
-});
-
-site.get({ 
-    name: '/',
-    callback: function(req, res) {
-        res.set('Content-type', 'text/html');
-        site.html('index', function(err, content) {
-            res.status(200).end(content);
-        })
-    }
-})
-
-
-
-```
-
-Auto Route All Files in Folder
-
-```js
-site.get({name: '/js', path: site.dir + '/js'})
-site.get({name: '/css', path: site.dir + '/css'})
-```
-Custom Route - Using * [any letters]
-
-```js
-site.get('/post/*', function(req, res) {
-    res.end('Any Route like /post/11212154545 ')
-})
-site.get('*', function(req, res) {
-    res.end('Any Route Requested Not Handled Before This Code')
-})
-```
-
-Request Parameters [GET , POST | PUT | Delete] Restful API
-
-```js
-// read query parameter lower case
-site.get('/api', function(req, res) {
-    res.end('GET | name : ' + req.query.name)
-})
-// read query parameter default case as requested
-site.get('/api', function(req, res) {
-    res.end('GET | name : ' + req.queryRaw.name)
-})
-
-site.post('/api', function(req, res) {
-    res.end('POST | id : ' + req.body.id + ' , Name : ' + req.body.name)
-})
-site.put('/api', function(req, res) {
-    res.end('PUT | id : ' + req.body.id + ' , Name : ' + req.body.name)
-})
-site.delete('/api', function(req, res) {
-    res.end('Delete | id : ' + req.body.id)
-})
-site.all('/api', function(req, res) {
-    res.end('Any Request Routing Type Not Handled Yet : ' + req.method)
-})
-```
-Dynamic Parameters
-
-```js
-// read params lower case
-site.get('/post/:id/category/:cat_id', function(req, res) {
-    res.end('GET | Id : ' + req.params.id + ', catId : ' + req.params.cat_id)
-})
-// read params default case as requested
-site.get('/post/:id/category/:cat_id', function(req, res) {
-    res.end('GET | Id : ' + req.paramsRaw.id + ', catId : ' + req.paramsRaw.cat_id)
-})
-//example : /post/AbCdEf/category/DDDDD
-```
-MVC Custom Route
-```js
-site.get("/:controller/:Action/:Arg1", function(req, res) {
-    res.end(
-        "GET | Controller : " + req.params.controller +
-        ", Action : " + req.params.Action + /* Normal case*/
-         ", action : " + req.params.action + /* lower case*/
-        ", Arg 1 : " + req.params.Arg1 + /* Normal case*/
-        ", arg 1 : " + req.params.arg1 /* lower case*/
-    );
-});
-//example : /facebook/post/xxxxxxxxxx
-```
-
 
 ## Site Folder Structure
 
@@ -276,6 +131,7 @@ site.get("/:controller/:Action/:Arg1", function(req, res) {
     - server.js
     - package.json
     - README.md
+    -- apps
     -- site_files
         --- css
             - bootstrap.css
@@ -291,6 +147,9 @@ site.get("/:controller/:Action/:Arg1", function(req, res) {
             - logo.png
         --- json
             - items.json
+            - words.json
+            - roles.json
+            - permissions.json
         --- xml
             - rss.xml
 ```
@@ -394,6 +253,156 @@ site.createDir(path , (err , path)=>{
 
 ```
 
+## Routes
+
+- Auto Convert All Routes URL & Parameters to Lower Case 
+- Auto Manage Reponse Headers and Files Types
+- Support Multi Files in One Route
+- Save Route Response in Memory to Reuse for Fast Response
+- Auto Handle URL parametes
+- Auto Handle Body Parameters in not get header [post , put , delete , ...]
+- Auto Handle URL params [custom parameters from url structure]
+- Auto cache Files Content in memory
+- support compress to remove unwanted spaces and tabs and empty lines ...etc
+- support parser to handle custom html server side tags
+ 
+Easy and Auto Site Routing
+
+```js
+/* site.dir = process.cwd() +  "/site_files"
+    You Can Change This Default Value when define isite
+    or set site.dir = new path
+*/
+
+site.get({name: '/',path:  site.dir + '/html/index.html'});
+site.get({name: '/css/bootstrap.css',path:  site.dir + '/css/bootstrap.min.css'});
+site.get({name: '/js/jquery.js',path: site.dir + '/js/jquery.js'});
+site.get({name: '/js/bootstrap.js',path: site.dir + '/js/bootstrap.js'});
+site.get({name: '/favicon.png',path: site.dir + '/images/logo.png'})
+site.post({name: '/api',path:  site.dir + '/json/employees.json' });
+```
+Merge Multi Files in one route
+
+```js
+site.get({
+    name: '/css/style.css',
+    path: [site.dir + '/css/bootstrap.css' , site.dir + '/css/custom.css']
+});
+site.get({
+    name: '/js/script.js',
+    path: [site.dir + '/js/jquery.js' , site.dir + '/js/bootstrap.js', site.dir + '/js/custom.js']
+});
+```
+Advanced Site Routing
+
+```js
+
+  site.get('/', (req, res)=> {
+        site.readFile(site.dir + '/html/index.html', function(err, content , file) {
+            res.set('Content-type', 'text/html');
+            res.set('Content-size', file.stat.size);
+            res.status(200).end(content);
+        })
+    })
+
+site.get('/', (req, res)=> {
+        site.html('index', function(err, content) {
+            res.set('Content-type', 'text/html');
+            res.status(200).end(content);
+        })
+    })
+
+site.get({ // can use [get , post , put , delete , all]
+    name: '/',
+    path: site.dir + '/html/index.html', //Required
+    parser: 'html', // default static [not paresed]
+    compress : true , // default false
+    cache: false // default true
+});
+
+site.get({ 
+    name: '/',
+    callback: function(req, res) {
+        res.set('Content-type', 'text/html');
+        site.html('index', function(err, content) {
+            res.status(200).end(content);
+        })
+    }
+})
+
+```
+
+Auto Route All Files in Folder
+
+```js
+site.get({name: '/js', path: site.dir + '/js'})
+site.get({name: '/css', path: site.dir + '/css'})
+```
+Custom Route - Using * [any letters]
+
+```js
+site.get('/post/*', function(req, res) {
+    res.end('Any Route like /post/11212154545 ')
+})
+site.get('*', function(req, res) {
+    res.end('Any Route Requested Not Handled Before This Code')
+})
+```
+
+Request Parameters [GET , POST | PUT | Delete] Restful API
+
+```js
+// read query parameter lower case
+site.get('/api', function(req, res) {
+    res.end('GET | name : ' + req.query.name)
+})
+// read query parameter default case as requested
+site.get('/api', function(req, res) {
+    res.end('GET | name : ' + req.queryRaw.name)
+})
+
+site.post('/api', function(req, res) {
+    res.end('POST | id : ' + req.body.id + ' , Name : ' + req.body.name)
+})
+site.put('/api', function(req, res) {
+    res.end('PUT | id : ' + req.body.id + ' , Name : ' + req.body.name)
+})
+site.delete('/api', function(req, res) {
+    res.end('Delete | id : ' + req.body.id)
+})
+site.all('/api', function(req, res) {
+    res.end('Any Request Routing Type Not Handled Yet : ' + req.method)
+})
+```
+Dynamic Parameters
+
+```js
+// read params lower case
+site.get('/post/:id/category/:cat_id', function(req, res) {
+    res.end('GET | Id : ' + req.params.id + ', catId : ' + req.params.cat_id)
+})
+// read params default case as requested
+site.get('/post/:id/category/:cat_id', function(req, res) {
+    res.end('GET | Id : ' + req.paramsRaw.id + ', catId : ' + req.paramsRaw.cat_id)
+})
+//example : /post/AbCdEf/category/DDDDD
+```
+MVC Custom Route
+```js
+site.get("/:controller/:Action/:Arg1", function(req, res) {
+    res.end(
+        "GET | Controller : " + req.params.controller +
+        ", Action : " + req.params.Action + /* Normal case*/
+         ", action : " + req.params.action + /* lower case*/
+        ", Arg 1 : " + req.params.Arg1 + /* Normal case*/
+        ", arg 1 : " + req.params.arg1 /* lower case*/
+    );
+});
+//example : /facebook/post/xxxxxxxxxx
+```
+
+
+
 ## Cookies
 
 - Cookie is Client Side Data Per User
@@ -432,6 +441,37 @@ site.get('/testGetSession', function(req, res) {
     res.end('User Name from session : ' + req.session('user_name'))
 })//example : /testGetSession
 ```
+
+## Custom App
+
+ - Custom App Help you to Easy Management Site Life-Cycle
+ - Easy Register & Integrated
+ - Best Solution when work with Team
+ 
+ ### How to make it
+
+  - Create your app folder in global apps folder 
+  - Add app.js file with this code
+  ```js
+    module.exports = function (site) {
+        // write here your custom code
+    }
+  ```
+  - App Will Be Auto Register And Integerated With Your Site
+
+### add App From github
+
+  - Add Apps from github to Your Site
+ ```sh
+    cd apps
+    git clone https://github.com/absunstar/isite-client
+    git clone https://github.com/absunstar/isite-security
+ ```
+
+ ### add App From Local Path
+ ```js
+    site.importApp(FOLDER_PATH)
+ ```
 
 ## Master Pages
 
@@ -888,99 +928,52 @@ site.get('/files/file1.zip' , (req , res)=>{
 
 ```
 
-## Client libraries
 
-Easy Access popular Client libraries 
+## Multi Languages
 
-    - no need to install any client library
-    - no need to install any fonts
-    - no need to manage library routes
-    - just use it
-
-```html
- <link rel="stylesheet" href="/@css/bootstrap3.css" >
- <link rel="stylesheet" href="/@css/font-awesome.css" >
-
- <script src="/@js/jquery.js"></script>
- <script src="/@js/bootstrap3.js"></script>
- <script src="/@js/angular.js"></script>
+- Can Add Any Custom Language You Want
+- Can Change Default Language on Site Options
+- Stores Words in Diffrent Language in words json file
+- Auto Detect Words.json
+- Folder Structure Like This 
+``` html
+    - apps
+    - server.js
+    - package.json
+    - README.md
+    -- site_files
+        --- json
+            - words.json
 ```
+- Words Json File Structure Like This
+```json
+[
+    {"name" : "user_name" , "en" : "User Name" , "ar" : "أسم المستخدم"},
+    {"name" : "user_email" , "en" : "Email" , "ar" : "البريد الالكترونى"},
+    {"name" : "user_password" , "en" : "Password" , "ar" : "كلمة المرور"}
+]
 
-## Angular JS 
+```
+- Use in html Like This
+```html
+    <form>
 
-- Login , Register , Logout
-- Change Site Language
+        <label> ##word.user_name## </label>
+        <input />
+        <br>
 
+        <label> ##word.user_email## </label>
+        <input />
+        <br>
+
+        <label> ##word.user_password## </label>
+        <input />
+        <br>
+
+    </form>
+```
+- Cahnge Site Language
 ```js
-var app = angular.module('myApp', []);
-
-app.controller('myController', function ($scope, $http) {
-
-    /* Register */
-   $scope.register = function () {
-    
-        $http({
-            method: 'POST',
-            url: '/@security/api/user/register',
-            data: {
-                email: $scope.userEmail,
-                password: $scope.userPassword
-            }
-        }).then(function (response) {
-           
-            if (response.data.error) {
-                $scope.error = response.data.error;
-            }
-            if (response.data.user) {
-                window.location.href = '/';
-            }
-        } , function(err){
-            $scope.error = err;
-        });
-
-    };
-
-        /* Login */
-    $scope.login = function () {
-      
-        $http({
-            method: 'POST',
-            url: '/@security/api/user/login',
-            data: {
-                email: $scope.userEmail,
-                password: $scope.userPassword
-            }
-        }).then(function (response) {
-           
-            if (response.data.error) {
-                $scope.error = response.data.error;
-            }
-            if (response.data.user) {
-                window.location.href = '/';
-            }
-        } , function(err){
-            $scope.error = err;
-        });
-
-    };
-
-    /* Logout */
-    $scope.logout = function () {
-       
-        $http.post('/@security/api/user/logout').then(function (response) {
-           
-            if (response.data.done) {
-                window.location.href = '/';
-            }else{
-                $scope.error = response.data.error;
-            }
-        }, function (error) {
-            $scope.error = error;
-        });
-    };
-
-    /* Cahnge Site Language */
-
   $scope.changeLang = function(lang){
     $http({
         method: 'POST',
@@ -992,15 +985,49 @@ app.controller('myController', function ($scope, $http) {
         }
     });
   };
-
-
-
-
-
-});
-
+```
+```html
+<a ng-click="changeLang('ar')"> Change To Arabic </a>
+<a ng-click="changeLang('en')"> Change To English </a>
+```
+- Show Content Depended on Language
+```html
+<div x-lang="ar"> This Content Will Display When Site Language is Arabic</div>
+<div x-lang="en"> This Content Will Display When Site Language is English</div>
 ```
 
+
+## Client libraries
+
+- install Custom App From https://github.com/absunstar/isite-client
+```sh
+    cd apps
+    git clone https://github.com/absunstar/isite-client
+```
+    - no need to install any client library
+    - no need to install any fonts
+    - no need to manage library routes
+    - just use it
+
+```html
+ <link rel="stylesheet" href="/x-css/bootstrap3.css" >
+ <link rel="stylesheet" href="/x-css/font-awesome.css" >
+
+ <script src="/x-js/jquery.js"></script>
+ <script src="/x-js/bootstrap3.js"></script>
+ <script src="/x-js/angular.js"></script>
+```
+
+## Security
+
+- Bulit-in Users Management System
+- Auto Detect Users Sessions & Permissions
+- install Custom Security App From https://github.com/absunstar/isite-security
+```sh
+    cd apps
+    git clone https://github.com/absunstar/isite-security
+```
+- Manage users From This Route [ /security ]
 ## Helper Functions
 
 ```js
