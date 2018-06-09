@@ -235,6 +235,10 @@ module.exports = function init(options) {
       site.security.addRoles(app_path + '/site_files/json/roles.json')
     }
 
+    if (site.isFileExistsSync(app_path + '/libs/notifications.js')) {
+      require(app_path + '/libs/notifications.js')(site)
+    }
+
     if (site.isFileExistsSync(app_path + '/app.js')) {
       site.apps.push({
         name : app_path.split('/').pop(),
