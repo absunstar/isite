@@ -670,6 +670,25 @@ $employees.deleteMany({name : /a/i} , (err , result)=>{
     site.log(result)
 })
 
+// Import Object Data From Json File
+$employees.import(FILE_PATH , (err , doc)=>{
+
+})
+
+// Import Array Data From Json File
+$employees.import(FILE_PATH , (errs , docs)=>{
+
+})
+
+// Export Object Data From Json File
+$employees.export( OPTONS , FILE_PATH , (err , docs)=>{
+
+})
+// Export 10 employees that salary more than 1000
+$employees.export({limit : 10 , where : {salary : {$gt : 1000}}} , (err , docs)=>{
+
+})
+
 // Remove duplicate data [ can use [deleteDuplicate , removeDuplicate]]
 $employees.deleteDuplicate('name' , (err , result)=>{
 
