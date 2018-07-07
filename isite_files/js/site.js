@@ -265,8 +265,19 @@
 
     content += '<style>' + site.printDefaultCss  +'</style>';
 
-    content += window.document.querySelector(options.select).outerHTML;
+    if(options.preappends){
+      options.preappends.forEach(el => {
+        content += window.document.querySelector(el).outerHTML;
+      });
+    }
 
+    content += window.document.querySelector(options.select).outerHTML;
+    if(options.appends){
+      options.appends.forEach(el => {
+        content += window.document.querySelector(el).outerHTML;
+      });
+    }
+    
     mywindow.document.open();
     mywindow.document.write(content);
     mywindow.document.close();
