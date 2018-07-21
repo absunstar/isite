@@ -280,7 +280,7 @@
     
     mywindow.document.open();
     mywindow.document.write(content);
-    mywindow.document.close();
+    // mywindow.document.close();
 
     mywindow.document.querySelector('body').style.margin = '0px';
     mywindow.document.querySelector('body').style.padding = '5px';
