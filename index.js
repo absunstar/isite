@@ -51,7 +51,7 @@ module.exports = function init(options) {
   site.call = event.call
   site.on = event.on
 
-  const option = require("./lib/option.js")(options)
+  const option = require("./lib/option.js")(options , site)
   site.options = option
   site.port = option.port
   site.dir = option.dir
@@ -259,7 +259,7 @@ module.exports = function init(options) {
   }
 
   if (site.options.apps) {
-    if (site.fs.lstatSync(site.options.apps_dir).isDirectory()) {
+    if (site.isFileExistsSync(site.options.apps_dir) && site.fs.lstatSync(site.options.apps_dir).isDirectory()) {
       site.fs.readdir(site.options.apps_dir, (err, files) => {
         files.forEach(file => {
           site.loadApp(file)
