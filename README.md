@@ -26,6 +26,14 @@
 - Development Helper Functions
 - Site Dynamic Events Callback  
 
+## Fast Startup
+
+- Download Startup Template
+
+```sh
+    git clone https://github.com/absunstar/isite-template && cd isite-template && npm run init
+```
+
 ## Installation
 
 `npm install isite`
