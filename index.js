@@ -1,6 +1,6 @@
 module.exports = function init(options) {
 
-  const site = function () {}
+  var site = function () {}
 
 
   site.http = require("http")
@@ -258,7 +258,7 @@ module.exports = function init(options) {
 
   }
 
-  if (site.options.apps) {
+  if (site.options.apps === true) {
     if (site.isFileExistsSync(site.options.apps_dir) && site.fs.lstatSync(site.options.apps_dir).isDirectory()) {
       site.fs.readdir(site.options.apps_dir, (err, files) => {
         files.forEach(file => {
