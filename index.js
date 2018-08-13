@@ -252,7 +252,7 @@ module.exports = function init(options) {
 
 
   site.loadApp = function (name) {
-
+    console.log('Loading App : ' + name)
     let app_path = site.options.apps_dir + '/' + name
     return site.importApp(app_path)
 
