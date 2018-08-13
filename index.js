@@ -252,7 +252,7 @@ module.exports = function init(options) {
 
 
   site.loadApp = function (name) {
-    console.log('Loading App : ' + name)
+   
     let app_path = site.options.apps_dir + '/' + name
     return site.importApp(app_path)
 
@@ -262,6 +262,7 @@ module.exports = function init(options) {
     if (site.isFileExistsSync(site.options.apps_dir) && site.fs.lstatSync(site.options.apps_dir).isDirectory()) {
       site.fs.readdir(site.options.apps_dir, (err, files) => {
         files.forEach(file => {
+          console.log('Auto Loading App : ' + file)
           site.loadApp(file)
         })
       })
