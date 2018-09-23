@@ -153,6 +153,14 @@ module.exports = function init(options) {
   site.words.addList(site.dir + '/json/words.json')
 
 
+  site.setting = require("./lib/setting.js")(site)
+  site.setting.set({
+    name: 'loaded',
+    value : true
+  })
+  site.setting.addList(site.dir + '/json/setting.json')
+
+
 
   require("./lib/vars.js")(site)
 
@@ -221,6 +229,10 @@ module.exports = function init(options) {
 
     if (site.isFileExistsSync(app_path + '/site_files/json/words.json')) {
       site.words.addList(app_path + '/site_files/json/words.json')
+    }
+
+    if (site.isFileExistsSync(app_path + '/site_files/json/setting.json')) {
+      site.setting.addList(app_path + '/site_files/json/setting.json')
     }
 
     if (site.isFileExistsSync(app_path + '/site_files/json/vars.json')) {
