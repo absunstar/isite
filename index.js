@@ -127,7 +127,7 @@ module.exports = function init(options) {
   
   site.download = site.fsm.download
   site.downloadFile = site.fsm.downloadFile
-  
+
   site.isFileExists = site.fsm.isFileExists
   site.isFileExistsSync = site.fsm.isFileExistsSync
 
@@ -225,7 +225,7 @@ module.exports = function init(options) {
   }
 
   site.on("[any] [saving data]", function () {
-    console.log("Saving Data :: " + site.options.saving_time + " minute ")
+    console.log("Saving Data :: " + site.options.saving_time + " Minute ")
   })
 
   setInterval(function () {
