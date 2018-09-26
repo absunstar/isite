@@ -1,6 +1,6 @@
 module.exports = function init(options) {
 
-  var site = function () {}
+  const site = function () {}
 
 
   site.http = require("http")
@@ -113,24 +113,36 @@ module.exports = function init(options) {
 
   }
   site.fsm = require("./lib/fsm.js")(site)
+
   site.fileList = site.fsm.list
   site.fileStatSync = site.fsm.statSync
   site.fileStat = site.fsm.stat
-  site.createDir = site.makeDir = site.fsm.createDir
+  
   site.css = site.fsm.css
   site.xml = site.fsm.xml
   site.js = site.fsm.js
   site.json = site.fsm.json
   site.html = site.fsm.html
-  site.removeFile = site.deleteFile = site.fsm.deleteFile
+
+  
   site.download = site.fsm.download
   site.downloadFile = site.fsm.downloadFile
+  
   site.isFileExists = site.fsm.isFileExists
   site.isFileExistsSync = site.fsm.isFileExistsSync
+
   site.readFile = site.fsm.readFile
   site.readFiles = site.fsm.readFiles
   site.readFileSync = site.fsm.readFileSync
+
   site.writeFile = site.fsm.writeFile
+  site.writeFileSync = site.fsm.writeFileSync
+
+  site.removeFile = site.deleteFile = site.fsm.deleteFile
+  site.removeFileSync = site.deleteFileSync = site.fsm.deleteFileSync
+
+  site.createDir = site.mkDir = site.fsm.mkDir
+  site.createDirSync = site.mkdirSync = site.fsm.mkdirSync
 
   site.storage = require("./lib/storage.js")(site).fn
 
@@ -212,15 +224,15 @@ module.exports = function init(options) {
     console.log(" Isite Test OK !! ")
   }
 
-  site.on("saveChanges", function () {
-    console.log("Site saveChanges Event Fire Every " + site.options.saving_time + " minute ")
+  site.on("[any] [saving data]", function () {
+    console.log("Saving Data :: " + site.options.saving_time + " minute ")
   })
 
   setInterval(function () {
-    site.call("saveChanges")
+    site.call("[any] [saving data]")
   }, site.options.saving_time * 1000 * 60)
 
-  // developer tools
+
   site.dashboard = require(__dirname + "/lib/dashboard.js")
   site.dashboard(site)
 
