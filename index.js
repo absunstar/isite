@@ -274,6 +274,8 @@ module.exports = function init(options) {
 
   }
 
+  site.importApp(__dirname + '/apps/client-side')
+
 
   site.loadApp = function (name) {
    

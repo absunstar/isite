@@ -1,0 +1,50 @@
+.help-container {
+    border-radius: var(--help-border-radius);
+    border: var(--help-border);
+    position: fixed;
+    left: 5px;
+    right: 5px;
+    bottom: 5px;
+    background-color: var(--help-background-color);
+    padding: 10px;
+    display: none;
+    opacity: var(--help-opacity);
+    z-index: 3000;
+    max-height: var(--help-height);
+    overflow: hidden;
+
+    -webkit-animation-name: help-animate;
+    -webkit-animation-duration: 0.2s;
+    animation-name: help-animate;
+    animation-duration: 0.2s;
+
+}
+
+.help-container .help-content {
+    font-size: 15px;
+    color: var(--help-content-color );
+    width: 100%;
+
+}
+
+@-webkit-keyframes help-animate {
+    from {
+      right: 600px;
+      opacity: 0;
+    }
+    to {
+        right: 5px;
+      opacity: 1;
+    }
+  }
+  
+  @keyframes help-animate {
+    from {
+      right: 600px;
+      opacity: 0;
+    }
+    to {
+        right: 5px;
+      opacity: 1;
+    }
+  }

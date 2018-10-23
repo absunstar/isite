@@ -1,0 +1,47 @@
+.treeview {
+    color: var(--treeview-color);
+    background: var(--treeview-background-color);
+    user-select: none;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+}
+
+.treeview .actions{
+    display: inline-block;
+}
+
+.treeview ul{
+    list-style: none;
+}
+
+.treeview .title {
+    cursor: pointer;
+    padding-bottom: 10px;
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.treenode li {
+    display: block;
+    padding: 3px;
+    cursor: pointer;
+    border-right: 1px solid #ffffff;
+}
+
+
+.treenode li span {
+    font-size: 16px;
+    font-weight: bold;
+    padding: 3px;
+    cursor: pointer;
+}
+
+.treenode li span:hover {
+    background: var(--treeview-background-color2);
+}
+
+.treenode li span.selected {
+    background: var(--treeview-background-color2);
+}
+

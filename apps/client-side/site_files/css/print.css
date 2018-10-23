@@ -1,0 +1,74 @@
+@media print {
+    body {
+        background: #fff;
+        font-size: 8px;
+        color: #333333;
+        margin-top: .1cm;
+        margin-right: .1cm;
+        margin-bottom: .2cm;
+        margin-left: .1cm
+    }
+    .small{
+        font-size: 6px;
+    }
+
+
+    input{
+        font-size: 8px;
+    }
+    textarea{
+        font-size: 8px;
+    }
+
+    .not-print {
+        display: none;
+    }
+    .dont-print {
+        display: none;
+    }
+    .print-break {
+        page-break-after: always;
+    }
+    .print-start {
+        page-break-before: always;
+    }
+    .print-content {
+        page-break-inside: avoid;
+    }
+
+    @page {
+        size: A4;
+        margin: .3cm;
+    }
+
+    @page: right {
+        @top-right {
+            content: "";
+        }
+    }
+    @page: right {
+        @bottom-right {
+            content: "";
+        }
+    }
+    @page: left {
+        @top-left {
+            content: "";
+        }
+    }
+    @page: left {
+        @bottom-left {
+            content: "";
+        }
+    }
+    a {
+        font-weight: bolder;
+        text-decoration: none;
+    }
+    a[href^=http]:after {
+        content: " [ " attr(href) " ] ";
+    }
+    a[href^="#"]:after {
+        content: "";
+    }
+}
