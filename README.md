@@ -31,7 +31,10 @@
 - Download Startup Template
 
 ```sh
-    git clone https://github.com/absunstar/isite-template && cd isite-template && npm run init
+    git clone https://github.com/absunstar/isite-template
+    cd isite-template
+    npm i
+    npm start
 ```
 
 ## Installation
@@ -69,13 +72,13 @@ var isite = require('isite')
 site = isite({
     port: process.env.port || 80,
     dir: process.cwd() + '/site_files',
-    apps : true,
-    apps_dir : process.cwd() + '/apps',
+    apps: true,
+    apps_dir: process.cwd() + '/apps',
     name: "Your Site",
     saving_time: 60,
     log: true,
-    lang : 'ar',
-    theme : 'default',
+    lang: 'ar',
+    theme: 'default',
     help: true,
     stdin: true,
     session: {
@@ -83,7 +86,7 @@ site = isite({
       enabled: true,
       storage: "mongodb",
       db: "sessions",
-      userSessionCollection: "user_sessions"
+      collection: "user_sessions"
     },
     mongodb: {
       enabled: true,
@@ -107,7 +110,7 @@ site = isite({
     security: {
       enabled: true,
       db: "security",
-      userCollection: "users",
+      collection: "users",
       admin: {
         email: "admin@localhost",
         password: "admin"

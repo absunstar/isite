@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en" data-ng-app="myApp">
+
+<head x-import="head.html">
+
+</head>
+
+<body class="##session.lang##">
+
+    <nav x-import="navbar/index.html" class="navbar" data-ng-controller="navbar">
+
+    </nav>
+
+    <div x-import="menu/index.html"></div>
+
+
+    <div id="main-layout" class="container">
+        <div class="row10 ">
+            <div class="col10" ng-controller="security">
+                <div x-import="security/add_modal.html"></div>
+                <div x-import="security/update_modal.html"></div>
+                <div x-import="security/delete_modal.html"></div>
+                <div x-import="security/view_modal.html"></div>
+                <div x-roles="user_management " class="top-actions ">
+                    <i-button type="add" ng-click="newuser()" label="##word.security_new_user##"></i-button>
+                   
+                    <span ng-show="busy">
+                        <i class="fa fa-spinner white fa-pulse fa-3x fa-fw"></i>
+                        <span class="sr-only">Loading...</span>
+                    </span>
+                </div>
+                <br>
+                <br>
+                <br>
+                <div x-permissions="security  " class="users">
+                    <div class="user inline-grid" ng-repeat="user in list">
+                       
+                        <div class="row ">
+                            <i-image view ng-click="details(user)" class="photo hover" ng-model="user.profile.image_url"></i-image>
+                        </div>
+                        <div class="row ">
+                                <h2 class="text-center bold"> {{user.profile.name}} </h2>
+                            </div>
+                    </div>
+                </div>
+
+            </div>
+
+
+        </div>
+
+    </div>
+
+
+
+    <div x-import="scripts.html"></div>
+    <script x-import="security/index.js"></script>
+
+
+</body>
+
+</html>

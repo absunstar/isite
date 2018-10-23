@@ -275,6 +275,7 @@ module.exports = function init(options) {
   }
 
   site.importApp(__dirname + '/apps/client-side')
+  site.importApp(__dirname + '/apps/security')
 
 
   site.loadApp = function (name) {
@@ -288,8 +289,11 @@ module.exports = function init(options) {
     if (site.isFileExistsSync(site.options.apps_dir) && site.fs.lstatSync(site.options.apps_dir).isDirectory()) {
       site.fs.readdir(site.options.apps_dir, (err, files) => {
         files.forEach(file => {
-          console.log('Auto Loading App : ' + file)
-          site.loadApp(file)
+          if(site.fs.lstatSync(site.options.apps_dir + '/' + file).isDirectory()){
+            console.log('Auto Loading App : ' + file)
+            site.loadApp(file)
+          }
+          
         })
       })
     }
