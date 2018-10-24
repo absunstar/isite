@@ -1115,6 +1115,10 @@ app.directive('iTreeview', function ($interval, $timeout, isite) {
             ngModel: '=',
             ngSearch: '=',
             ngChange: '&',
+            ngAdd: '&',
+            ngNode: '&',
+            ngEdit: '&',
+            ngDelete: '&',
             source: '='
         },
         link: function ($scope, element, attrs, ctrl) {
@@ -1133,11 +1137,9 @@ app.directive('iTreeview', function ($interval, $timeout, isite) {
             <li ng-dblclick="$event.preventDefault();$event.stopPropagation();source.$actions = true" ng-mouseleave="source.$actions = false">
                 <span ng-click="openTree = !openTree" class="title"> {{source[display]}} [ {{ngModel[display]}} ] </span>
                 <div class="actions" ng-show="source.$actions === true">
-                    <i-button type="add default" ></i-button>
-                    <i-button type="edit default" ></i-button>
-                    <i-button type="delete default" ></i-button>
+                    <i-button type="add default" ng-click="ngNode()"></i-button>
                 </div>
-                <i-treenode ng-show="openTree" ng-model="ngModel" items="source.items"></i-treenode>
+                <i-treenode ng-add="ngAdd()" ng-edit="ngEdit()" ng-delete="ngDelete()" ng-show="openTree" ng-model="ngModel" items="source.items"></i-treenode>
             </li>
         </ul>
         </div>
@@ -1161,6 +1163,9 @@ app.directive('iTreenode', function ($interval, $timeout, isite) {
             primary: '@',
             ngValue: '@',
             ngChange: '&',
+            ngAdd: '&',
+            ngEdit: '&',
+            ngDelete: '&',
             ngModel: '=',
             ngSearch: '=',
             items: '='
@@ -1247,12 +1252,12 @@ app.directive('iTreenode', function ($interval, $timeout, isite) {
 
                 <span ng-class="{'selected' : item.$selected == true}" ng-click="item.$expand = !item.$expand;selected(item);updateModal(item)"   > {{item[display]}} </span>
                 <div class="actions" ng-show="item.$actions === true">
-                    <i-button type="add default" ></i-button>
-                    <i-button type="edit default" ></i-button>
-                    <i-button type="delete default" ></i-button>
+                    <i-button type="add default" ng-click="ngAdd(item)"></i-button>
+                    <i-button type="edit default" ng-click="ngEdit(item)"></i-button>
+                    <i-button type="delete default" ng-click="ngDelete(item)"></i-button>
                 </div>
             </div>   
-                <i-treenode ng-show="item.$expand" ng-model="ngModel" items="item.items"></i-treenode>
+                <i-treenode ng-add="ngAdd()" ng-edit="ngEdit()" ng-delete="ngDelete()" ng-show="item.$expand" ng-model="ngModel" items="item.items"></i-treenode>
             </li>
         </ul>
         </div>
