@@ -138,19 +138,22 @@ module.exports = function init(site) {
       return
     }
 
-    let _id = req.body._id
-    if (_id) {
+    let id = req.body.id
+    if (id) {
       site.security.deleteUser({
-        _id: _id,
+        id: id,
         $req: req,
         $res: res
       }, (err, result) => {
         if (!err) {
           response.done = true
+        }else{
+          response.error = err.message
         }
         res.json(response)
       })
     } else {
+      response.error = 'No ID Requested'
       res.json(response)
     }
   })

@@ -208,6 +208,7 @@ app.controller("security", function ($scope, $http, $interval) {
         $scope.busy = false;
         if (response.data.done) {
           site.hideModal('#updateUserModal');
+          site.hideModal('#viewUserModal')
           $scope.loadAll();
         } else {
           $scope.error = response.data.error;
@@ -255,12 +256,13 @@ app.controller("security", function ($scope, $http, $interval) {
     $http({
       method: "POST",
       url: "/api/user/delete",
-      data: { _id: $scope.user._id, name: $scope.user.name }
+      data: { id: $scope.user.id, name: $scope.user.name }
     }).then(
       function (response) {
         $scope.busy = false;
         if (response.data.done) {
-          site.showModal('#deleteUserModal');
+          site.hideModal('#deleteUserModal');
+          site.hideModal('#viewUserModal')
           $scope.loadAll();
         } else {
           $scope.error = response.data.error;
