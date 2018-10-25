@@ -52,6 +52,9 @@
 var isite = require('isite')
 var site = isite({port:8080}) 
 
+site.loadLocalApp('client-side')
+site.loadLocalApp('security')
+
 site.run()
 ```
 
@@ -60,6 +63,9 @@ site.run()
 ```js
 var isite = require('isite')
 var site = isite() 
+
+site.loadLocalApp('client-side')
+site.loadLocalApp('security')
 
 site.run([8080 , 5555 , 9090 , 12345])
 

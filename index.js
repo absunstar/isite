@@ -274,8 +274,7 @@ module.exports = function init(options) {
 
   }
 
-  site.importApp(__dirname + '/apps/client-side')
-  site.importApp(__dirname + '/apps/security')
+
 
 
   site.loadApp = function (name) {
@@ -283,6 +282,10 @@ module.exports = function init(options) {
     let app_path = site.options.apps_dir + '/' + name
     return site.importApp(app_path)
 
+  }
+
+  site.loadLocalApp = function(name){
+    site.importApp(__dirname + '/apps/' + name)
   }
 
   if (site.options.apps === true) {
