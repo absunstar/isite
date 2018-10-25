@@ -19,7 +19,6 @@ module.exports = function init(options) {
   }
 
 
-
   require("./lib/prototype.js")
 
   site.fn = require("./lib/fn.js")(site)
