@@ -25,7 +25,7 @@ module.exports = function (site) {
     parser: "css2",
     compress: true,
     path: [
-      __dirname + "/site_files/css/theme1.css",
+      __dirname + "/site_files/css/theme.css",
       __dirname + "/site_files/css/layout.css",
       __dirname + "/site_files/css/scrollbar.css",
       __dirname + "/site_files/css/progress.css",
