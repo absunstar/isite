@@ -184,8 +184,8 @@ module.exports = function init(options) {
     site.mongodb = mongodb(site)
 
     let collection = require("./lib/collection")
-    site.connectCollection = function (option) {
-      return collection(site, option)
+    site.connectCollection = function (option , db) {
+      return collection(site, option , db)
     }
   }
 

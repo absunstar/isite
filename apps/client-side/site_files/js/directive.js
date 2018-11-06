@@ -1119,14 +1119,64 @@ app.directive('iTreeview', function ($interval, $timeout, isite) {
             ngNode: '&',
             ngEdit: '&',
             ngDelete: '&',
-            source: '='
+            nodes: '='
         },
         link: function ($scope, element, attrs, ctrl) {
 
-            attrs.display = attrs.display || 'name'
-            attrs.primary = attrs.primary || 'id'
-            attrs.space = attrs.space || ' '
-            attrs.ngValue = attrs.ngValue || ''
+            attrs.display = attrs.display || 'name';
+            attrs.primary = attrs.primary || 'id';
+            attrs.space = attrs.space || ' ';
+            attrs.ngValue = attrs.ngValue || '';
+
+            $scope.source = {};
+
+            $scope.setNodes = function(v_node){
+                v_node.nodes.forEach(v_node2 => {
+                    v_node2.nodes = v_node2.nodes || [];
+                    $scope.nodes.forEach(node => {
+                        if (node.$parent_id == v_node2.id) {
+                            node.$display = node.$display || '';
+                            node.$display += node[attrs.display];
+                            v_node2.nodes.push(node);
+                        }
+                    });
+                    $scope.setNodes(v_node2);
+                });
+            }
+
+
+            $scope.v_nodes = [];
+
+            $scope.$watch('nodes', (nodes) => {
+                $scope.v_nodes = [];
+                if (nodes) {
+                    nodes.forEach(node => {
+                        node.$parent_id = node.parent_id || 0;
+                        node.$display = node.$display || '';
+                        node.$display += node[attrs.display];
+                        if (node.$parent_id == 0) {
+                            $scope.v_nodes.push(node);
+                        }
+                    });
+
+                    $scope.v_nodes.forEach(v_node => {
+                        v_node.nodes = v_node.nodes || [];
+
+                        nodes.forEach(node => {
+                            node.$parent_id = node.parent_id || 0;
+                            if (node.$parent_id == v_node.id) {
+                                node.$display = node.$display || '';
+                                node.$display += node[attrs.display];
+                                v_node.nodes.push(node);
+                            }
+                        });
+
+                        $scope.setNodes(v_node);
+
+                    });
+
+                }
+            });
 
 
 
@@ -1135,11 +1185,15 @@ app.directive('iTreeview', function ($interval, $timeout, isite) {
         <div class="treeview">
         <ul >
             <li ng-dblclick="$event.preventDefault();$event.stopPropagation();source.$actions = true" ng-mouseleave="source.$actions = false">
-                <span ng-click="openTree = !openTree" class="title"> {{source[display]}} [ {{ngModel[display]}} ] </span>
+           
+            <i ng-hide="openTree" class="fa fa-folder"></i>  <i ng-show="openTree" class="fa fa-folder-o"></i> 
+           
+
+            <span ng-click="openTree = !openTree" class="title"> {{label}} <small class="display"> [ {{ngModel.$display}} ] </small>  </span>
                 <div class="actions" ng-show="source.$actions === true">
                     <i-button type="add default" ng-click="ngNode()"></i-button>
                 </div>
-                <i-treenode ng-add="ngAdd()" ng-edit="ngEdit()" ng-delete="ngDelete()" ng-show="openTree" ng-model="ngModel" items="source.items"></i-treenode>
+                <i-treenode ng-add="ngAdd()" ng-edit="ngEdit()" ng-delete="ngDelete()" ng-show="openTree" ng-model="ngModel" nodes="v_nodes" ></i-treenode>
             </li>
         </ul>
         </div>
@@ -1168,74 +1222,88 @@ app.directive('iTreenode', function ($interval, $timeout, isite) {
             ngDelete: '&',
             ngModel: '=',
             ngSearch: '=',
-            items: '='
+            nodes: '=',
+            nodes: '='
         },
         link: function ($scope, element, attrs, ctrl) {
 
-            attrs.display = attrs.display || 'name'
-            attrs.primary = attrs.primary || 'id'
-            attrs.space = attrs.space || ' '
-            attrs.ngValue = attrs.ngValue || ''
-            $scope.nodes = $scope.nodes || []
+            attrs.display = attrs.display || 'name';
+            attrs.primary = attrs.primary || 'id';
+            attrs.space = attrs.space || ' ';
+            attrs.ngValue = attrs.ngValue || '';
+            $scope.nodes = $scope.nodes || [];
 
-            if($scope.items){
-                $scope.items.forEach(itm=>{
-                    $scope.nodes.push(itm);
-                })
-            }
-          
+            $scope.v_nodes = [];
 
-            $scope.updateParentModal = function (parent, item) {
+            $scope.$watch('nodes', (nodes) => {
+                $scope.v_nodes = [];
+                if (nodes) {
+                    nodes.forEach((node, i) => {
+
+                        if (node.nodes) {
+                            node.nodes.forEach((node2, i) => {
+                                node2.$parent_id = node2.parent_id || node.id;
+                                node2.$display = node.$display || ' ';
+                                node2.$display += ' - ' + node2[attrs.display];
+                            })
+                        }
+                    })
+                }
+            });
+
+
+
+            $scope.updateParentModal = function (parent, node) {
                 if (parent) {
-                    parent.ngModel = item;
+                    parent.ngModel = node;
                     if (parent.$parent) {
-                        $scope.updateParentModal(parent.$parent, item);
+                        $scope.updateParentModal(parent.$parent, node);
                     }
                 }
-            }
+            };
 
 
             $scope.unSelectParent = function (parent) {
-                if (parent && parent.items) {
-                    parent.items.forEach(itm => {
-                        itm.$selected = false
+                if (parent && parent.nodes) {
+                    parent.nodes.forEach(node => {
+                        node.$selected = false;
                     })
                     if (parent.$parent) {
                         $scope.unSelectParent(parent.$parent);
                     }
                 }
-            }
+            };
 
             $scope.unSelectNodes = function (nodes) {
                 if (nodes) {
 
-                    nodes.forEach(itm => {
-                        itm.$selected = false
-                        if (itm.items) {
-                            $scope.unSelectNodes(itm.items);
+                    nodes.forEach(node => {
+                        node.$selected = false;
+                        if (node.nodes) {
+                            $scope.unSelectNodes(node.nodes);
                         }
-                    })
+                    });
 
                 }
+            };
+
+            $scope.updateModal = function (node) {
+                $scope.ngModel = node;
+                $scope.updateParentModal($scope.$parent, node);
             }
 
-            $scope.updateModal = function (item) {
-                $scope.ngModel = item;
-                $scope.updateParentModal($scope.$parent, item);
-            }
+            $scope.selected = function (node) {
 
-            $scope.selected = function (item) {
+                $scope.unSelectParent($scope.$parent);
+                $scope.unSelectNodes($scope.nodes);
 
-                $scope.unSelectParent ($scope.$parent);
-                $scope.unSelectNodes ($scope.nodes);
-
-                if (item.items) {
-                    item.items.forEach(itm => {
+                if (node.nodes) {
+                    node.nodes.forEach(itm => {
                         itm.$selected = false;
                     })
                 }
 
-                item.$selected = true;
+                node.$selected = true;
             }
 
 
@@ -1243,21 +1311,21 @@ app.directive('iTreenode', function ($interval, $timeout, isite) {
         template: `
         <div class="treenode"> 
         <ul >
-            <li  ng-repeat="item in items" >
-            <div class="row" ng-dblclick="$event.preventDefault();$event.stopPropagation();item.$actions = true;source.$actions = false" ng-mouseleave="item.$actions = false">
-            <span ng-show="item.items.length > 0" ng-click="item.$expand = !item.$expand;">
+            <li  ng-repeat="node in nodes" >
+            <div class="row" ng-dblclick="$event.preventDefault();$event.stopPropagation();node.$actions = true;source.$actions = false" ng-mouseleave="node.$actions = false">
+            <span ng-show="node.nodes.length > 0" ng-click="node.$expand = !node.$expand;">
             
-            <i ng-hide="item.$expand" class="fa fa-folder"></i>  <i ng-show="item.$expand" class="fa fa-folder-o"></i> 
+            <i ng-hide="node.$expand" class="fa fa-folder"></i>  <i ng-show="node.$expand" class="fa fa-folder-o"></i> 
             </span>
 
-                <span ng-class="{'selected' : item.$selected == true}" ng-click="item.$expand = !item.$expand;selected(item);updateModal(item)"   > {{item[display]}} </span>
-                <div class="actions" ng-show="item.$actions === true">
-                    <i-button type="add default" ng-click="ngAdd(item)"></i-button>
-                    <i-button type="edit default" ng-click="ngEdit(item)"></i-button>
-                    <i-button type="delete default" ng-click="ngDelete(item)"></i-button>
+                <span ng-class="{'selected' : node.$selected == true}" ng-click="node.$expand = !node.$expand;selected(node);updateModal(node)"   > {{node[display]}} </span>
+                <div class="actions" ng-show="node.$actions === true">
+                    <i-button type="add default" ng-click="ngAdd(node)"></i-button>
+                    <i-button type="edit default" ng-click="ngEdit(node)"></i-button>
+                    <i-button type="delete default" ng-click="ngDelete(node)"></i-button>
                 </div>
             </div>   
-                <i-treenode ng-add="ngAdd()" ng-edit="ngEdit()" ng-delete="ngDelete()" ng-show="item.$expand" ng-model="ngModel" items="item.items"></i-treenode>
+                <i-treenode ng-add="ngAdd()" ng-edit="ngEdit()" ng-delete="ngDelete()" ng-show="node.$expand" ng-model="ngModel" nodes="node.nodes" nodes="node.nodes"></i-treenode>
             </li>
         </ul>
         </div>

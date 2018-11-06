@@ -22,11 +22,15 @@
     font-weight: bold;
 }
 
+.treeview .display {
+   color : var(--treeview-display-color);
+}
+
 .treenode li {
     display: block;
     padding: 3px;
     cursor: pointer;
-    border-right: 1px solid #ffffff;
+    border-right: 1px solid var(--treeview-border-color);
 }
 
 
@@ -39,9 +43,11 @@
 
 .treenode li span:hover {
     background: var(--treeview-background-color2);
+    color: var(--treeview-color2);
 }
 
 .treenode li span.selected {
     background: var(--treeview-background-color2);
+    color: var(--treeview-color2);
 }
 
