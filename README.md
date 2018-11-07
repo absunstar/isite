@@ -882,6 +882,24 @@ site.on('mongodb after delete many' , (result)=>{
                 site.log(result)
             }
         })
+
+// ==================================================================
+// Mongodb Native Client Provider
+
+site.mongodb.client // = require("mongodb").MongoClient
+
+// Create a database called "mydb":
+
+var url = "mongodb://localhost:27017/mydb";
+
+site.mongodb.client.connect(url, function(err, db) {
+  if (err) throw err;
+  console.log("Database created!");
+  db.close();
+});
+
+// all code can be found in offical mongodb site or w3schools
+
 ```
 
 
