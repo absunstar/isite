@@ -613,14 +613,16 @@ site.var('siteBrand', 'XSite');
 // use connect collection [ Best Way For Security ]
 
 $employees = site.connectCollection("employees")
+
+// with database
+$employees = site.connectCollection("employees" ,  "company")
 //or
 $employees = site.connectCollection({collection : "employees" , db : "company")
 
 
 // insert one doc [ can use also [add , addOne , insert , insertOne]]
 $employees.insertOne({name : 'amr' , salary : 50000} , (err , doc)=>{
-    site.log(doc.id) // number
-    site.log(doc._id) // mongodb object id
+    site.log(doc) // doc after inserted
 })
 
 // insert Many Docs [ can use also [ addMany , addAll , insertMany , insertAll]]
