@@ -643,9 +643,12 @@ $employees.findMany({
     where:{name : /a/i} , 
     select:{name: 1 , salary:1} ,
     limit : 50 ,
-    sort:{salary : -1}} , (err , docs , count)=>{
-    site.log(docs)
-})
+    skip : 10 ,
+    sort:{salary : -1}
+    } , (err , docs , count)=>{
+        site.log(docs)
+    }
+)
 
 // Update One Doc [ can use [ updateOne , update , editOne , edit]]
 $employees.updateOne({
