@@ -50,7 +50,7 @@ module.exports = function init(options) {
   site.call = event.call
   site.on = event.on
 
-  const option = require("./lib/option.js")(options , site)
+  const option = require("./lib/option.js")(options, site)
   site.options = option
   site.port = option.port
   site.dir = option.dir
@@ -116,14 +116,14 @@ module.exports = function init(options) {
   site.fileList = site.fsm.list
   site.fileStatSync = site.fsm.statSync
   site.fileStat = site.fsm.stat
-  
+
   site.css = site.fsm.css
   site.xml = site.fsm.xml
   site.js = site.fsm.js
   site.json = site.fsm.json
   site.html = site.fsm.html
 
-  
+
   site.download = site.fsm.download
   site.downloadFile = site.fsm.downloadFile
 
@@ -167,7 +167,7 @@ module.exports = function init(options) {
   site.setting = require("./lib/setting.js")(site)
   site.setting.set({
     name: 'loaded',
-    value : true
+    value: true
   })
   site.setting.addList(site.dir + '/json/setting.json')
 
@@ -184,8 +184,8 @@ module.exports = function init(options) {
     site.mongodb = mongodb(site)
 
     let collection = require("./lib/collection")
-    site.connectCollection = function (option , db) {
-      return collection(site, option , db)
+    site.connectCollection = function (option, db) {
+      return collection(site, option, db)
     }
   }
 
@@ -264,11 +264,11 @@ module.exports = function init(options) {
 
     if (site.isFileExistsSync(app_path + '/app.js')) {
       site.apps.push({
-        name : app_path.split('/').pop(),
-        path : app_path
+        name: app_path.split('/').pop(),
+        path: app_path
       })
-     let app =  require (app_path + '/app.js')
-     return app(site)
+      let app = require(app_path + '/app.js')
+      return app(site)
     }
 
   }
@@ -277,26 +277,28 @@ module.exports = function init(options) {
 
 
   site.loadApp = function (name) {
-   
+
     let app_path = site.options.apps_dir + '/' + name
     return site.importApp(app_path)
 
   }
 
-  site.loadLocalApp = function(name){
+  site.loadLocalApp = function (name) {
     site.importApp(__dirname + '/apps/' + name)
   }
 
   if (site.options.apps === true) {
     if (site.isFileExistsSync(site.options.apps_dir) && site.fs.lstatSync(site.options.apps_dir).isDirectory()) {
       site.fs.readdir(site.options.apps_dir, (err, files) => {
-        files.forEach(file => {
-          if(site.fs.lstatSync(site.options.apps_dir + '/' + file).isDirectory()){
-            console.log('Auto Loading App : ' + file)
-            site.loadApp(file)
-          }
-          
-        })
+        if (!err && files && files.length > 0) {
+          site.log('Auto Loading Apps ...')
+          files.forEach(file => {
+            if (site.fs.lstatSync(site.options.apps_dir + '/' + file).isDirectory()) {
+              console.log('Auto Loading App : ' + file)
+              site.loadApp(file)
+            }
+          })
+        }
       })
     }
   }
