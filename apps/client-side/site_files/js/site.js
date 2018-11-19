@@ -27,9 +27,13 @@
 
     el[0].style.zIndex = modal_z_index;
     el[0].style.display = 'block';
-    el[0].addEventListener("click", function () {
-      site.hideModal(name);
-    });
+    let fixed = el[0].getAttribute('fixed');
+    if(fixed !== ''){
+      el[0].addEventListener("click", function () {
+        site.hideModal(name);
+      });
+    }
+ 
 
     let inputs = site.$(name + ' input');
     if(inputs.length > 0){
