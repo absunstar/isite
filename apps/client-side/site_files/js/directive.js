@@ -1193,7 +1193,7 @@ app.directive('iTreeview', function ($interval, $timeout, isite) {
                 <div class="actions" ng-show="source.$actions === true">
                     <i-button type="add default" ng-click="ngNode()"></i-button>
                 </div>
-                <i-treenode ng-add="ngAdd()" ng-edit="ngEdit()" ng-delete="ngDelete()" ng-show="openTree" ng-model="ngModel" nodes="v_nodes" ></i-treenode>
+                <i-treenode display="{{display}}" ng-add="ngAdd()" ng-edit="ngEdit()" ng-delete="ngDelete()" ng-show="openTree" ng-model="ngModel" nodes="v_nodes" ></i-treenode>
             </li>
         </ul>
         </div>
@@ -1325,7 +1325,7 @@ app.directive('iTreenode', function ($interval, $timeout, isite) {
                     <i-button type="delete default" ng-click="ngDelete(node)"></i-button>
                 </div>
             </div>   
-                <i-treenode ng-add="ngAdd()" ng-edit="ngEdit()" ng-delete="ngDelete()" ng-show="node.$expand" ng-model="ngModel" nodes="node.nodes" nodes="node.nodes"></i-treenode>
+                <i-treenode display="{{display}}" ng-add="ngAdd()" ng-edit="ngEdit()" ng-delete="ngDelete()" ng-show="node.$expand" ng-model="ngModel" nodes="node.nodes" nodes="node.nodes"></i-treenode>
             </li>
         </ul>
         </div>

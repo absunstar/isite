@@ -28,6 +28,7 @@
     el[0].style.zIndex = modal_z_index;
     el[0].style.display = 'block';
     let fixed = el[0].getAttribute('fixed');
+    
     if(fixed !== ''){
       el[0].addEventListener("click", function () {
         site.hideModal(name);
