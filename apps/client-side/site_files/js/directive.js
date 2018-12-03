@@ -1135,8 +1135,8 @@ app.directive('iTreeview', function ($interval, $timeout, isite) {
                     v_node2.nodes = v_node2.nodes || [];
                     $scope.nodes.forEach(node => {
                         if (node.$parent_id == v_node2.id) {
-                            node.$display = node.$display || '';
-                            node.$display += node[attrs.display];
+                            node.v_display = node.v_display || '';
+                            node.v_display += node[attrs.display];
                             v_node2.nodes.push(node);
                         }
                     });
@@ -1147,13 +1147,21 @@ app.directive('iTreeview', function ($interval, $timeout, isite) {
 
             $scope.v_nodes = [];
 
+            $scope.$watch('ngModel', (ngModel) => {
+                if(ngModel){
+                    $scope.ngModel = ngModel;
+                    $scope.ngModel.v_display = $scope.ngModel.v_display || ngModel[attrs.display];
+                }
+               
+            });
+
             $scope.$watch('nodes', (nodes) => {
                 $scope.v_nodes = [];
                 if (nodes) {
                     nodes.forEach(node => {
                         node.$parent_id = node.parent_id || 0;
-                        node.$display = node.$display || '';
-                        node.$display += node[attrs.display];
+                        node.v_display = node.v_display || '';
+                        node.v_display += node[attrs.display];
                         if (node.$parent_id == 0) {
                             $scope.v_nodes.push(node);
                         }
@@ -1165,8 +1173,8 @@ app.directive('iTreeview', function ($interval, $timeout, isite) {
                         nodes.forEach(node => {
                             node.$parent_id = node.parent_id || 0;
                             if (node.$parent_id == v_node.id) {
-                                node.$display = node.$display || '';
-                                node.$display += node[attrs.display];
+                                node.v_display = node.v_display || '';
+                                node.v_display += node[attrs.display];
                                 v_node.nodes.push(node);
                             }
                         });
@@ -1189,7 +1197,7 @@ app.directive('iTreeview', function ($interval, $timeout, isite) {
             <i ng-hide="openTree" class="fa fa-folder"></i>  <i ng-show="openTree" class="fa fa-folder-o"></i> 
            
 
-            <span ng-click="openTree = !openTree" class="title"> {{label}} <small class="display"> [ {{ngModel.$display}} ] </small>  </span>
+            <span ng-click="openTree = !openTree" class="title"> {{label}} <small class="display"> [ {{ngModel.v_display}} ] </small>  </span>
                 <div class="actions" ng-show="source.$actions === true">
                     <i-button type="add default" ng-click="ngNode()"></i-button>
                 </div>
@@ -1243,8 +1251,8 @@ app.directive('iTreenode', function ($interval, $timeout, isite) {
                         if (node.nodes) {
                             node.nodes.forEach((node2, i) => {
                                 node2.$parent_id = node2.parent_id || node.id;
-                                node2.$display = node.$display || ' ';
-                                node2.$display += ' - ' + node2[attrs.display];
+                                node2.v_display = node.v_display || ' ';
+                                node2.v_display += ' - ' + node2[attrs.display];
                             })
                         }
                     })
