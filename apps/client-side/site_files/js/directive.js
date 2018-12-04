@@ -691,7 +691,6 @@ app.directive('iList', function ($interval, $timeout, isite) {
             };
 
             $scope.$watch('items', (items) => {
-                input.val('');
                 if (items && $scope.ngModel) {
                     items.forEach(item => {
                         if (isite.getValue(item, $scope.primary) === $scope.getNgModelValue($scope.ngModel)) {
