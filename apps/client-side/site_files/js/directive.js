@@ -18,6 +18,10 @@ app.service('isite', function ($http) {
 
     this.getValue = function (obj, property) {
 
+        if(!property){
+            return null
+        }
+
         let arr = property.split('.');
 
         if (arr.length === 1) {
@@ -26,6 +30,10 @@ app.service('isite', function ($http) {
 
         if (arr.length === 2) {
             return obj[arr[0]][arr[1]];
+        }
+
+        if (arr.length === 3) {
+            return obj[arr[0]][arr[1]][arr[2]];
         }
 
         return null
@@ -694,6 +702,7 @@ app.directive('iList', function ($interval, $timeout, isite) {
                 if (items && $scope.ngModel) {
                     items.forEach(item => {
                         if (isite.getValue(item, $scope.primary) === $scope.getNgModelValue($scope.ngModel)) {
+                            $scope.ngModel = item;
                             input.val($scope.getValue(item) + attrs.space + $scope.getValue2(item));
                         }
                     });
