@@ -652,6 +652,8 @@ app.directive('iList', function ($interval, $timeout, isite) {
 
             $(input).focus(() => {
                 $('popup').hide();
+                $(popup).css('top' , $(popup).parent().css('top'));
+                $(popup).css('rigth' , $(popup).parent().css('rigth'));
                 $(popup).show();
                 $(popup).focus();
             });

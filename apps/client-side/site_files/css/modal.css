@@ -117,7 +117,7 @@ popup{
   box-shadow: 1px 1px 10px 1px #000;
   z-index: 4000;
   max-height: 400px;
-  position: absolute;
+  position: fixed;
   background: var(--modal-content-background);
   min-width: 250px;
   -webkit-animation-name: animatepopup;
