@@ -118,6 +118,7 @@ popup{
   z-index: 4000;
   max-height: 400px;
   position: fixed;
+  top: auto;
   background: var(--modal-content-background);
   min-width: 250px;
   -webkit-animation-name: animatepopup;
