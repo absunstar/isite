@@ -107,7 +107,6 @@ app.service('isite', function ($http) {
 
 });
 
-
 app.directive('iDate', function () {
 
     return {
@@ -247,6 +246,124 @@ app.directive('iDate2', function () {
               <option ng-repeat="y1 in years1" ng-value="y1"> {{y1}} </option>
               </select>
             </div>
+          </div>
+        </div>
+    
+  
+      </div>
+      `
+    };
+});
+
+app.directive('iDatetime2', function () {
+
+    return {
+        link: function ($scope, element, attrs) {
+
+            if (typeof attrs.disabled !== 'undefined') {
+                attrs.disabled = 'disabled';
+            } else {
+                attrs.disabled = '';
+            }
+
+            $scope.hour1 = [];
+            for (let i = 1; i < 25; i++) {
+                $scope.hour1.push(i);
+            }
+
+            $scope.minute_list = [];
+            for (let i = 1; i < 60; i++) {
+                $scope.minute_list.push({name : i});
+            }
+
+
+            $scope.days1 = [];
+            for (let i = 1; i < 32; i++) {
+                $scope.days1.push(i);
+
+            }
+            $scope.years1 = [];
+            for (let i = 1900; i < 2100; i++) {
+                $scope.years1.push(i);
+            }
+            $scope.monthes1 = ['يناير', 'فبراير', 'مارس', 'ابريل', 'مايو', 'يونيو', 'يوليو', 'اغسطس', 'سبتمبر', 'اكتوبر', 'نوفمبر', 'ديسمبر'];
+
+            $scope.model = null;
+
+            $(element).find('select').focus(() => {
+                $('popup').hide();
+            });
+
+            $scope.$watch('ngModel', function (ngModel) {
+                if (ngModel) {
+                    ngModel = new Date(ngModel);
+                    $scope.model = $scope.model || {};
+                    $scope.model.hour = ngModel.getHour();
+                    $scope.model.minute = ngModel.getMinute();
+                    $scope.model.day = ngModel.getDate();
+                    $scope.model.month = ngModel.getMonth();
+                    $scope.model.year = ngModel.getFullYear();
+                } else {
+                    $scope.model = $scope.model || {};
+                    $scope.model.hour = 0;
+                    $scope.model.minute = 0;
+                    $scope.model.day = 0;
+                    $scope.model.month = -1;
+                    $scope.model.year = 0;
+                }
+            });
+
+            $scope.updateDate = function () {
+                if ($scope.model && $scope.model.year && $scope.model.day) {
+                    $scope.ngModel = new Date($scope.model.year, $scope.model.month, $scope.model.day , $scope.model.hour , $scope.model.minute)
+                } else {
+                    delete $scope.ngModel;
+                }
+            };
+
+        },
+        restrict: 'E',
+        require: 'ngModel',
+        scope: {
+            v: '@',
+            disabled: '@',
+            label: '@',
+            ngModel: '='
+        },
+        template: `
+      <div class="row i-datetime2">
+  
+        <div class=" control">
+          <label> {{label}}  </label>
+          <div class="row">
+
+            <div class="col2 day"> 
+              <select v="{{v}}" ng-disabled="disabled" ng-model="model.day" ng-change="updateDate()" class="appearance-none no-border-left no-border-radius" >
+              <option ng-repeat="d1 in days1" ng-value="d1"> {{d1}} </option>
+              </select>
+            </div>
+            <div class="col5 month"> 
+              <select v="{{v}}" ng-disabled="disabled" ng-model="model.month" ng-change="updateDate()" class="appearance-none no-border-left no-border-right no-border-radius" >
+              <option ng-repeat="m1 in monthes1" ng-value="$index"> {{m1}} </option>
+              </select>
+            </div>
+            <div class="col3 year"> 
+              <select v="{{v}}" ng-disabled="disabled" ng-model="model.year" ng-change="updateDate()" class="appearance-none no-border-right no-border-radius" >
+              <option ng-repeat="y1 in years1" ng-value="y1"> {{y1}} </option>
+              </select>
+            </div>
+
+            <div class="col1 hour"> 
+                <select v="{{v}}" ng-disabled="disabled" ng-model="model.hour" ng-change="updateDate()" class="appearance-none  no-border-radius" >
+                <option ng-repeat="h1 in hour1" ng-value="h1"> {{h1}} </option>
+             </select>
+            </div>
+            <div class="col1 minute"> 
+                <select v="{{v}}" ng-disabled="disabled" ng-model="model.minute" ng-change="updateDate()" class="green appearance-none no-border-right no-border-radius" >
+                <option ng-repeat="m1 in minute_list" ng-value="m1.name" class="green"> {{m1.name}} </option>
+              </select>
+            </div>
+
           </div>
         </div>
     
@@ -603,7 +720,6 @@ app.directive('iButton', function () {
 
 });
 
-
 app.directive('iList', function ($interval, $timeout, isite) {
 
     return {
@@ -615,6 +731,7 @@ app.directive('iList', function ($interval, $timeout, isite) {
             display: '@',
             display2: '@',
             disabled: '@',
+            css: '@',
             space: '@',
             primary: '@',
             ngValue: '@',
@@ -734,7 +851,7 @@ app.directive('iList', function ($interval, $timeout, isite) {
         template: `
         <div class="control">
             <label> {{label}} </label>
-            <input ng-disabled="disabled" v="{{v}}" class="full-width" ng-model="ngModel[display]" readonly>
+            <input class="{{css}}" ng-disabled="disabled" v="{{v}}" class="full-width" ng-model="ngModel[display]" readonly>
             <popup>
             <div ng-show="showSearch" class="row search-box">
                 <div class="col2 center pointer" ng-click="hide()">
@@ -1071,7 +1188,6 @@ app.directive('iFiles', function ($interval, isite) {
 
 });
 
-
 app.directive('iDrag', function ($document) {
     return function (scope, element, attr) {
         var startX = 0,
@@ -1107,7 +1223,6 @@ app.directive('iDrag', function ($document) {
 
     };
 });
-
 
 app.directive('iTreeview', function ($interval, $timeout, isite) {
 
