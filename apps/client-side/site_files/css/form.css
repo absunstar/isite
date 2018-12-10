@@ -42,6 +42,7 @@ textarea {
 input,
 select,
 textarea {
+    width: inherit;
     text-align: var(--text-align);
     font-family: var(--font-family);
     height: var(--input-height);
