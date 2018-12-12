@@ -18,7 +18,7 @@ app.service('isite', function ($http) {
 
     this.getValue = function (obj, property) {
 
-        if(!property){
+        if (!property) {
             return null
         }
 
@@ -273,7 +273,9 @@ app.directive('iDatetime2', function () {
 
             $scope.minute_list = [];
             for (let i = 1; i < 60; i++) {
-                $scope.minute_list.push({name : i});
+                $scope.minute_list.push({
+                    name: i
+                });
             }
 
 
@@ -315,7 +317,7 @@ app.directive('iDatetime2', function () {
 
             $scope.updateDate = function () {
                 if ($scope.model && $scope.model.year && $scope.model.day) {
-                    $scope.ngModel = new Date($scope.model.year, $scope.model.month, $scope.model.day , $scope.model.hour , $scope.model.minute)
+                    $scope.ngModel = new Date($scope.model.year, $scope.model.month, $scope.model.day, $scope.model.hour, $scope.model.minute)
                 } else {
                     delete $scope.ngModel;
                 }
@@ -770,9 +772,9 @@ app.directive('iList', function ($interval, $timeout, isite) {
             $(input).focus(() => {
                 $('popup').hide();
                 $(popup).show();
-                
-                $(popup).css('top' , $(popup).parent().offset().top - $(window).scrollTop() + 80);
-              
+
+                $(popup).css('top', $(popup).parent().offset().top - $(window).scrollTop() + 80);
+
                 $(popup).focus();
             });
 
@@ -1256,14 +1258,23 @@ app.directive('iTreeview', function ($interval, $timeout, isite) {
 
             $scope.source = {};
 
-            $scope.setNodes = function(v_node){
+            $scope.setNodes = function (v_node) {
                 v_node.nodes.forEach(v_node2 => {
                     v_node2.nodes = v_node2.nodes || [];
                     $scope.nodes.forEach(node => {
                         if (node.$parent_id == v_node2.id) {
                             node.v_display = node.v_display || '';
                             node.v_display += node[attrs.display];
-                            v_node2.nodes.push(node);
+                           
+                            let exist = false;
+                            v_node2.nodes.forEach(n => {
+                                if (n.id == node.id) {
+                                    exist = true
+                                }
+                            })
+                            if (!exist) {
+                                v_node2.nodes.push(node);
+                            }
                         }
                     });
                     $scope.setNodes(v_node2);
@@ -1274,11 +1285,11 @@ app.directive('iTreeview', function ($interval, $timeout, isite) {
             $scope.v_nodes = [];
 
             $scope.$watch('ngModel', (ngModel) => {
-                if(ngModel){
+                if (ngModel) {
                     $scope.ngModel = ngModel;
                     $scope.ngModel.v_display = $scope.ngModel.v_display || ngModel[attrs.display];
                 }
-               
+
             });
 
             $scope.$watch('nodes', (nodes) => {
@@ -1289,7 +1300,16 @@ app.directive('iTreeview', function ($interval, $timeout, isite) {
                         node.v_display = node.v_display || '';
                         node.v_display += node[attrs.display];
                         if (node.$parent_id == 0) {
-                            $scope.v_nodes.push(node);
+
+                            let exist = false;
+                            $scope.v_nodes.forEach(n => {
+                                if (n.id == node.id) {
+                                    exist = true
+                                }
+                            })
+                            if (!exist) {
+                                $scope.v_nodes.push(node);
+                            }
                         }
                     });
 
@@ -1301,7 +1321,16 @@ app.directive('iTreeview', function ($interval, $timeout, isite) {
                             if (node.$parent_id == v_node.id) {
                                 node.v_display = node.v_display || '';
                                 node.v_display += node[attrs.display];
-                                v_node.nodes.push(node);
+
+                                let exist = false;
+                                v_node.nodes.forEach(n => {
+                                    if (n.id == node.id) {
+                                        exist = true
+                                    }
+                                })
+                                if (!exist) {
+                                    v_node.nodes.push(node);
+                                }
                             }
                         });
 
