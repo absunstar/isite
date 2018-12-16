@@ -83,9 +83,6 @@ textarea {
     border-width: var(--textarea-border-width);
 }
 
-textarea:focus {
-    border-color: var(--input-color);
-}
 
 input[type=checkbox],
 input[type=radio] {
@@ -134,7 +131,7 @@ input[type=date] {
 }
 
 input:focus,
-select:focus {
+select:focus , textarea:focus {
     border-width: var(--input-focus-border-width);
     border-color: var(--input-focus-border-color);
 }

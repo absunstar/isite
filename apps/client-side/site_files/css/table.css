@@ -27,7 +27,7 @@
 }
 .table th {
   background-color: var(--navbar-background-color);
-  color: var(--navbar-color);
+  color: var(--table-th-color);
   border: var(--table-border);
   padding: 5px;
   text-align: center;

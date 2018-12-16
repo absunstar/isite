@@ -17,7 +17,7 @@
 i-image img{
     width : 200px;
     height: 200px;
-    border:2px dashed var(--modal-header-background-color);
+    border:var(--i-image-border);
     padding: 5px;
     transition: all .5s ease;
     -moz-transition: all .5s ease;
@@ -28,7 +28,7 @@ i-image img{
 i-image.full img{
     width : 100%;
     height: auto;
-    border:2px dashed var(--modal-header-background-color);
+    border:var(--i-image-border);
     padding: 5px;
 }
 
@@ -47,6 +47,6 @@ i-image.hover img:hover{
 }
 
 i-image[view] img{
-    border:2px solid var(--modal-header-background-color);
+    border:var(--i-image-view-border);
 }
 

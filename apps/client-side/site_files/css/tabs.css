@@ -50,10 +50,10 @@
     display: none;
     padding: 6px 12px;
     width: 100%;
-    -webkit-animation-name: animatetabs;
-    -webkit-animation-duration: 0.5s;
-    animation-name: animatetabs;
-    animation-duration: 0.5s;
+    -webkit-animation-name: var( --tab-animation-name);
+    -webkit-animation-duration: var( --tab-animation-duration);
+    animation-name: var( --tab-animation-name);
+    animation-duration: var( --tab-animation-duration);
 }
 
 .tabs .full {

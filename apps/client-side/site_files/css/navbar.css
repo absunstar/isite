@@ -18,9 +18,10 @@
 	-webkit-box-shadow: 5px 10px 20px 2px var(--navbar-box-shadow-color);
 	box-shadow: 5px 10px 20px 2px var(--navbar-box-shadow-color);
 	background-color: var(--navbar-background-color);
-	-moz-border-radius: 8px;
-	-webkit-border-radius: 8px;
-	border-radius: 8px;
+	-moz-border-radius: var(--navbar-li-border-radius);
+	-webkit-border-radius: var(--navbar-li-border-radius);
+	border-radius:var(--navbar-li-border-radius);
+	border: var(--navbar-li-border);
 	display: inline-block;
 	cursor: pointer;
 	color: var(--navbar-color);
@@ -54,7 +55,7 @@
 .navbar .brand a span {
 	font-weight: bold;
 	font-size: 12px;
-	color: #ffe500;
+	color: var(--navbar-span-color);
 	text-shadow: 0px 0px 0px var(--navbar-box-shadow-color);
 }
 

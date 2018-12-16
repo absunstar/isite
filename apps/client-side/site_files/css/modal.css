@@ -71,6 +71,26 @@
   }
 }
 
+
+
+@-webkit-keyframes animateopacity {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes animateopacity {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
 .modal-header .close {
   color: var(--modal-color);
   float: right;

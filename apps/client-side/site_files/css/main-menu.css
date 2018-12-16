@@ -9,7 +9,7 @@
     display: inline-block;
     border: var(--main-menu-item-border);
     min-width: 200px;
-    padding: 5px;
+    padding: var(--main-menu-item-padding);
     text-align: center;
     text-decoration: none;
     color: #ffffff;

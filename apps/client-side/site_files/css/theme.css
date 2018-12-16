@@ -1,7 +1,7 @@
 :root {
  
   --theme-color : #283e4a;
-
+  --theme-color2 : #2f8033;
   --font-family : 'Droid Arabic Kufi', monospace, sans-serif, Tahoma, serif;
   --font-weight : normal;
   --font-size : 14px;
@@ -23,8 +23,11 @@
   --h-font-weight : normal;
 
   --navbar-color: #fff;
+  --navbar-span-color : #ffffff;
   --navbar-background-color: #283e4a;
   --navbar-box-shadow-color: #272727;
+  --navbar-li-border-radius : 8px;
+  --navbar-li-border : 1px solid #000;
 
   --tabs-color: #fff;
   --tabs-background-color: #283e4a;
@@ -37,11 +40,15 @@
   --tabs-header-link-border : none;
   --tabs-header-link-border-bottom : none;
   --tabs-header-link-radius : 4px;
+  --tab-animation-name : animatetabs;
+  --tab-animation-duration : 0.5s;
 
   --treeview-color : #ffffff;
+  --treeview-color2 : #ffffff;
   --treeview-background-color : none;
+  --treeview-border-color : #000000;
   --treeview-background-color2 : rgb(60, 85, 97);
-
+  --treeview-display-color : #0000ff;
 
   --form-color: #ffffff;
   --form-background-color: none;
@@ -89,9 +96,11 @@
   --btn-export-background-color: #ffffff;
   --btn-sgin-color: #283e4a;
   --btn-sgin-background-color: #ffffff;
-  
   --btn-box-shadow-color: #272727;
   --btn-border-radius : 5px;
+
+  --i-image-border : 2px dashed var(--modal-header-background-color);
+  --i-image-view-border : 2px solid var(--modal-header-background-color);
 
   --fieldset-border : 2px solid #283e4a;
   --fieldset-background: none;
@@ -117,7 +126,8 @@
   --table-background-color: #ffffff;
   --table-border: 1px solid #bbb;
   --table-hover-background-color: yellow;
-
+  --table-th-color : #030303;
+  
   --help-height : 110px;
   --help-border: none;
   --help-border-radius : 10px;
@@ -125,11 +135,14 @@
   --help-opacity: 1;
   --help-content-color : #ffffff;
 
+  --main-menu-item-padding : 2px;
   --main-menu-item-border : 1px solid #ddd;
   --main-menu-item-border-radius: 0px;
   --main-menu-item-background-color: #283e4a;
   --main-menu-h2-color: #ffffff;
   --main-menu-p-color: #ffffff;
 
-
+  --scrollbar-background-color: #000;
+  --scrollbar-color: #fff;
+  --scrollbar-box-shadow-color: #fff;
 }
