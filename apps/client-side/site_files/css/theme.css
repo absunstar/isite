@@ -27,7 +27,7 @@
   --navbar-background-color: #283e4a;
   --navbar-box-shadow-color: #272727;
   --navbar-li-border-radius : 8px;
-  --navbar-li-border : 1px solid #000;
+  --navbar-li-border : none;
 
   --tabs-color: #fff;
   --tabs-background-color: #283e4a;
@@ -126,7 +126,7 @@
   --table-background-color: #ffffff;
   --table-border: 1px solid #bbb;
   --table-hover-background-color: yellow;
-  --table-th-color : #030303;
+  --table-th-color : #fff;
   
   --help-height : 110px;
   --help-border: none;
