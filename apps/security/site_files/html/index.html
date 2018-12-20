@@ -39,7 +39,7 @@
                             <i-image view ng-click="details(user)" class="photo hover" ng-model="user.profile.image_url"></i-image>
                         </div>
                         <div class="row ">
-                                <h2 class="text-center bold"> {{user.profile.name}} </h2>
+                                <h2 class="text-center bold"> {{user.profile.name || user.email}} </h2>
                             </div>
                     </div>
                 </div>
