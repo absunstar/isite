@@ -112,6 +112,12 @@ app.directive('iDate', function () {
     return {
         link: function (scope, element, attrs) {
 
+            if (typeof attrs.disabled !== 'undefined') {
+                attrs.disabled = 'disabled';
+            } else {
+                attrs.disabled = '';
+            }
+
             $(element).find('select').focus(() => {
                 $('popup').hide();
             });
@@ -133,6 +139,7 @@ app.directive('iDate', function () {
         scope: {
             v: '@',
             label: '@',
+            disabled: '@',
             ngModel: '='
         },
         template: `
@@ -142,17 +149,17 @@ app.directive('iDate', function () {
           <label> {{label}} </label>
           <div class="row">
             <div class="col3 day"> 
-              <select v="{{v}}" ng-model="ngModel.day" class="appearance-none no-border-left no-border-radius" >
+              <select ng-disabled="disabled" v="{{v}}" ng-model="ngModel.day" class="appearance-none no-border-left no-border-radius" >
               <option ng-repeat="d1 in days1" ng-value="d1"> {{d1}} </option>
               </select>
             </div>
             <div class="col5 month"> 
-              <select v="{{v}}" ng-model="ngModel.month" class="appearance-none no-border-left no-border-right no-border-radius" >
+              <select ng-disabled="disabled" v="{{v}}" ng-model="ngModel.month" class="appearance-none no-border-left no-border-right no-border-radius" >
               <option ng-repeat="m1 in monthes1" ng-value="$index"> {{m1}} </option>
               </select>
             </div>
             <div class="col4 year"> 
-              <select v="{{v}}" ng-model="ngModel.year" class="appearance-none no-border-right no-border-radius" >
+              <select ng-disabled="disabled" v="{{v}}" ng-model="ngModel.year" class="appearance-none no-border-right no-border-radius" >
               <option ng-repeat="y1 in years1" ng-value="y1"> {{y1}} </option>
               </select>
             </div>
@@ -232,17 +239,17 @@ app.directive('iDate2', function () {
           <label> {{label}}  </label>
           <div class="row">
             <div class="col3 day"> 
-              <select v="{{v}}" ng-disabled="disabled" ng-model="model.day" ng-change="updateDate()" class="appearance-none no-border-left no-border-radius" >
+              <select  v="{{v}}" ng-disabled="disabled" ng-model="model.day" ng-change="updateDate()" class="appearance-none no-border-left no-border-radius" >
               <option ng-repeat="d1 in days1" ng-value="d1"> {{d1}} </option>
               </select>
             </div>
             <div class="col5 month"> 
-              <select v="{{v}}" ng-disabled="disabled" ng-model="model.month" ng-change="updateDate()" class="appearance-none no-border-left no-border-right no-border-radius" >
+              <select  v="{{v}}" ng-disabled="disabled" ng-model="model.month" ng-change="updateDate()" class="appearance-none no-border-left no-border-right no-border-radius" >
               <option ng-repeat="m1 in monthes1" ng-value="$index"> {{m1}} </option>
               </select>
             </div>
             <div class="col4 year"> 
-              <select v="{{v}}" ng-disabled="disabled" ng-model="model.year" ng-change="updateDate()" class="appearance-none no-border-right no-border-radius" >
+              <select  v="{{v}}" ng-disabled="disabled" ng-model="model.year" ng-change="updateDate()" class="appearance-none no-border-right no-border-radius" >
               <option ng-repeat="y1 in years1" ng-value="y1"> {{y1}} </option>
               </select>
             </div>
@@ -380,6 +387,11 @@ app.directive('iMonth2', function () {
     return {
         link: function ($scope, element, attrs) {
 
+            if (typeof attrs.disabled !== 'undefined') {
+                attrs.disabled = 'disabled';
+            } else {
+                attrs.disabled = '';
+            }
 
             $scope.years = [];
             for (let i = 1900; i < 2100; i++) {
@@ -424,6 +436,7 @@ app.directive('iMonth2', function () {
         scope: {
             v: '@',
             label: '@',
+            disabled: '@',
             ngModel: '='
         },
         template: `
@@ -434,13 +447,13 @@ app.directive('iMonth2', function () {
           <div class="row">
            
             <div class="col7 month"> 
-              <select v="{{v}}" ng-model="model.month" ng-change="updateDate()" class="appearance-none no-border-left  no-border-radius" >
+              <select ng-disabled="disabled" v="{{v}}" ng-model="model.month" ng-change="updateDate()" class="appearance-none no-border-left  no-border-radius" >
               <option ng-repeat="m1 in monthes" ng-value="$index"> {{m1}} </option>
               </select>
             </div>
 
             <div class="col5 year"> 
-              <select v="{{v}}" ng-model="model.year" ng-change="updateDate()" class="appearance-none no-border-right no-border-radius" >
+              <select ng-disabled="disabled" v="{{v}}" ng-model="model.year" ng-change="updateDate()" class="appearance-none no-border-right no-border-radius" >
               <option ng-repeat="y1 in years" ng-value="y1"> {{y1}} </option>
               </select>
             </div>
@@ -458,6 +471,13 @@ app.directive('iFulldate', function () {
 
     return {
         link: function (scope, element, attrs) {
+
+            if (typeof attrs.disabled !== 'undefined') {
+                attrs.disabled = 'disabled';
+            } else {
+                attrs.disabled = '';
+            }
+
 
             $(element).find('select').focus(() => {
                 $('popup').hide();
@@ -496,6 +516,7 @@ app.directive('iFulldate', function () {
             v: '@',
             label1: '@',
             label2: '@',
+            disabled: '@',
             ngModel: '='
         },
         template: `
@@ -505,17 +526,17 @@ app.directive('iFulldate', function () {
           <label> {{label1}} </label>
           <div class="row">
             <div class="col3 day"> 
-              <select v="{{v}}" ng-model="ngModel.day" class="appearance-none no-border-left no-border-radius">
+              <select ng-disabled="disabled" v="{{v}}" ng-model="ngModel.day" class="appearance-none no-border-left no-border-radius">
               <option ng-repeat="d1 in days1" ng-value="d1"> {{d1}} </option>
               </select>
             </div>
             <div class="col5 month"> 
-              <select v="{{v}}" ng-model="ngModel.month" class="appearance-none no-border-left no-border-right no-border-radius">
+              <select ng-disabled="disabled" v="{{v}}" ng-model="ngModel.month" class="appearance-none no-border-left no-border-right no-border-radius">
               <option ng-repeat="m1 in monthes1" ng-value="$index"> {{m1}} </option>
               </select>
             </div>
             <div class="col4 year"> 
-              <select v="{{v}}" ng-model="ngModel.year" class="appearance-none no-border-right no-border-radius">
+              <select ng-disabled="disabled" v="{{v}}" ng-model="ngModel.year" class="appearance-none no-border-right no-border-radius">
               <option ng-repeat="y1 in years1" ng-value="y1"> {{y1}} </option>
               </select>
             </div>
@@ -526,17 +547,17 @@ app.directive('iFulldate', function () {
           <label> {{label2}} </label>
           <div class="row">
             <div class="col3 day"> 
-              <select v="{{v}}" ng-model="ngModel.day2" class="appearance-none no-border-left no-border-radius">
+              <select ng-disabled="disabled" v="{{v}}" ng-model="ngModel.day2" class="appearance-none no-border-left no-border-radius">
               <option ng-repeat="d2 in days2" ng-value="d2"> {{d2}} </option>
               </select>
             </div>
             <div class="col5 month"> 
-              <select v="{{v}}" ng-model="ngModel.month2" class="appearance-none no-border-left no-border-right no-border-radius">
+              <select ng-disabled="disabled" v="{{v}}" ng-model="ngModel.month2" class="appearance-none no-border-left no-border-right no-border-radius">
               <option ng-repeat="m2 in monthes2" ng-value="$index"> {{m2}} </option>
               </select>
             </div>
             <div class="col4 year"> 
-              <select v="{{v}}" ng-model="ngModel.year2" class="appearance-none no-border-right no-border-radius">
+              <select ng-disabled="disabled" v="{{v}}" ng-model="ngModel.year2" class="appearance-none no-border-right no-border-radius">
               <option ng-repeat="y2 in years2" ng-value="y2"> {{y2}} </option>
               </select>
             </div>
@@ -663,6 +684,29 @@ app.directive('iRadio', function () {
             if (!attrs.group) {
                 attrs.group = attrs.ngModel;
             }
+
+            let input = $(element).find('input');
+
+            $scope.$watch('ngModel', (ngModel) => {
+                
+                if (ngModel) {
+                    $scope.ngModel = ngModel;
+                    if(ngModel == scope.ngValue){
+                        input.checked();
+                    }
+                }
+            });
+
+            $scope.$watch('ngValue', (ngValue) => {
+                
+                if (ngValue) {
+                   
+                    if(ngValue == scope.ngModel){
+                        input.checked();
+                    }
+                }
+            });
+
         },
         template: `
         <div class="control">
