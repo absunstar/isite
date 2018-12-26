@@ -687,17 +687,17 @@ app.directive('iRadio', function () {
 
             let input = $(element).find('input');
 
-            $scope.$watch('ngModel', (ngModel) => {
+            scope.$watch('ngModel', (ngModel) => {
                 
                 if (ngModel) {
-                    $scope.ngModel = ngModel;
+                    scope.ngModel = ngModel;
                     if(ngModel == scope.ngValue){
                         input.checked();
                     }
                 }
             });
 
-            $scope.$watch('ngValue', (ngValue) => {
+            scope.$watch('ngValue', (ngValue) => {
                 
                 if (ngValue) {
                    
