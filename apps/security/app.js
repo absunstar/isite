@@ -48,6 +48,7 @@ module.exports = function init(site) {
 
 
   site.post('/api/users/all', (req, res) => {
+
     let response = {
       done: false
     }
@@ -159,6 +160,7 @@ module.exports = function init(site) {
   })
 
   site.post("/api/user/view", (req, res) => {
+
     let response = {
       done: false
     }
@@ -174,7 +176,7 @@ module.exports = function init(site) {
     }, (err, doc) => {
       if (!err) {
         response.done = true
-        response.doc = doc
+        response.doc =doc
       } else {
         response.error = err.message
       }
