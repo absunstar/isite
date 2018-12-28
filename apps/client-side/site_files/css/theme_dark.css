@@ -102,7 +102,7 @@
     --i-image-border: 2px dashed #030303;
     --i-image-view-border: 2px solid #030303;
 
-    --fieldset-border: 2px solid #000;
+    --fieldset-border: 1px solid #151515;
     --fieldset-background: none;
     --legend-color: #fff;
     --legend-text-shadow: none;

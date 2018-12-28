@@ -692,7 +692,7 @@ app.directive('iRadio', function () {
                 if (ngModel) {
                     scope.ngModel = ngModel;
                     if(ngModel == scope.ngValue){
-                        input.checked();
+                        input.prop("checked", true);
                     }
                 }
             });
@@ -702,7 +702,7 @@ app.directive('iRadio', function () {
                 if (ngValue) {
                    
                     if(ngValue == scope.ngModel){
-                        input.checked();
+                        input.prop("checked", true);
                     }
                 }
             });
