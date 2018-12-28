@@ -136,7 +136,7 @@ popup{
   padding: 5px;
   box-shadow: 1px 1px 10px 1px #000;
   z-index: 4000;
-  max-height: 400px;
+  max-height: 250px;
   position: fixed;
   background: var(--modal-content-background);
   min-width: 250px;

@@ -816,8 +816,11 @@ app.directive('iList', function ($interval, $timeout, isite) {
             $(input).focus(() => {
                 $('popup').hide();
                 $(popup).show();
-
-                $(popup).css('top', $(popup).parent().offset().top - $(window).scrollTop() + 80);
+                let top = $(popup).parent().offset().top - $(window).scrollTop() + 80;
+                if(top > 450){
+                    top = $(popup).parent().offset().top - $(window).scrollTop()  + 80 -  $(popup).height();
+                }
+                $(popup).css('top', top);
 
                 $(popup).focus();
             });
@@ -865,6 +868,7 @@ app.directive('iList', function ($interval, $timeout, isite) {
             };
 
             $scope.$watch('items', (items) => {
+                input.val('');
                 if (items && $scope.ngModel) {
                     items.forEach(item => {
                         if (isite.getValue(item, $scope.primary) === $scope.getNgModelValue($scope.ngModel)) {
