@@ -37,7 +37,7 @@ module.exports = function init(site) {
   site.get({
     name: "security",
     path: __dirname + "/site_files/html/index.html",
-    parser: "html",
+    parser: "html css js",
     compress: false
   })
 
