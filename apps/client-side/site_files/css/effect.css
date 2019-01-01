@@ -49,6 +49,10 @@
     border: 1px solid #bbb;
 }
 
+.dashed {
+    border: 2px dashed #030303;
+}
+
 .margin {
     margin: 3px;
 }

@@ -104,8 +104,8 @@
 
   --fieldset-border : 2px solid #283e4a;
   --fieldset-background: none;
-  --legend-color : #ffffff;
-  --legend-text-shadow: 1px 1px 7px #000;
+  --legend-color : #fff;
+  --legend-text-shadow: none;
   --legend-font-size: 16px;
   --legend-font-weight: bold;
   --legend-border : none;

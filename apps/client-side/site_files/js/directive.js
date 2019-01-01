@@ -688,20 +688,20 @@ app.directive('iRadio', function () {
             let input = $(element).find('input');
 
             scope.$watch('ngModel', (ngModel) => {
-                
+
                 if (ngModel) {
                     scope.ngModel = ngModel;
-                    if(ngModel == scope.ngValue){
+                    if (ngModel == scope.ngValue) {
                         input.prop("checked", true);
                     }
                 }
             });
 
             scope.$watch('ngValue', (ngValue) => {
-                
+
                 if (ngValue) {
-                   
-                    if(ngValue == scope.ngModel){
+
+                    if (ngValue == scope.ngModel) {
                         input.prop("checked", true);
                     }
                 }
@@ -793,6 +793,7 @@ app.directive('iList', function ($interval, $timeout, isite) {
             attrs.space = attrs.space || ' '
             attrs.ngValue = attrs.ngValue || ''
 
+
             if (typeof attrs.disabled !== 'undefined') {
                 attrs.disabled = 'disabled';
             } else {
@@ -817,8 +818,8 @@ app.directive('iList', function ($interval, $timeout, isite) {
                 $('popup').hide();
                 $(popup).show();
                 let top = $(popup).parent().offset().top - $(window).scrollTop() + 80;
-                if(top > 450){
-                    top = $(popup).parent().offset().top - $(window).scrollTop()  + 80 -  $(popup).height();
+                if (top > 450) {
+                    top = $(popup).parent().offset().top - $(window).scrollTop() + 80 - $(popup).height();
                 }
                 $(popup).css('top', top);
 
@@ -869,14 +870,24 @@ app.directive('iList', function ($interval, $timeout, isite) {
 
             $scope.$watch('items', (items) => {
                 input.val('');
+
+
+                if (items) {
+                    items.forEach(item => {
+                        item.$display = $scope.getValue(item) + attrs.space + $scope.getValue2(item);
+                    });
+                }
+
                 if (items && $scope.ngModel) {
                     items.forEach(item => {
                         if (isite.getValue(item, $scope.primary) === $scope.getNgModelValue($scope.ngModel)) {
                             $scope.ngModel = item;
-                            input.val($scope.getValue(item) + attrs.space + $scope.getValue2(item));
+                            item.$display = $scope.getValue(item) + attrs.space + $scope.getValue2(item);
+                            input.val(item.$display);
                         }
                     });
                 }
+
             });
 
             $scope.$watch('ngModel', (ngModel) => {
@@ -914,7 +925,7 @@ app.directive('iList', function ($interval, $timeout, isite) {
                     <i class="fa fa-search center"></i>
                 </div>
             </div>
-                <item  ng-repeat="item in items | filter:ngSearch"" ng-click="updateModel(item)">
+                <item  ng-repeat="item in items | filter:{ $display : ngSearch}" ng-click="updateModel(item)">
                     {{getValue(item)}} <small class="left"> {{getValue2(item)}} </small>
                 </item>
             </popup>
@@ -1313,7 +1324,7 @@ app.directive('iTreeview', function ($interval, $timeout, isite) {
                         if (node.$parent_id == v_node2.id) {
                             node.v_display = node.v_display || '';
                             node.v_display += node[attrs.display];
-                           
+
                             let exist = false;
                             v_node2.nodes.forEach(n => {
                                 if (n.id == node.id) {

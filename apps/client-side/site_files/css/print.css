@@ -1,4 +1,10 @@
 @media print {
+    
+    :root {
+        --legend-color: #000;
+        --legend-text-shadow: none;
+    }
+
     body {
         background: #fff;
         font-size: 8px;
@@ -8,30 +14,41 @@
         margin-bottom: .2cm;
         margin-left: .1cm
     }
-    .small{
+
+    .small {
         font-size: 6px;
     }
 
+    .table th,
+    .table td {
+        color: #000 !important;
+        background: #fff !important;
+    }
 
-    input{
+    input {
         font-size: 8px;
     }
-    textarea{
+
+    textarea {
         font-size: 8px;
     }
 
     .not-print {
         display: none;
     }
+
     .dont-print {
         display: none;
     }
+
     .print-break {
         page-break-after: always;
     }
+
     .print-start {
         page-break-before: always;
     }
+
     .print-content {
         page-break-inside: avoid;
     }
@@ -46,28 +63,34 @@
             content: "";
         }
     }
+
     @page: right {
         @bottom-right {
             content: "";
         }
     }
+
     @page: left {
         @top-left {
             content: "";
         }
     }
+
     @page: left {
         @bottom-left {
             content: "";
         }
     }
+
     a {
         font-weight: bolder;
         text-decoration: none;
     }
+
     a[href^=http]:after {
-        content: " [ " attr(href) " ] ";
+        content: " [ "attr(href) " ] ";
     }
+
     a[href^="#"]:after {
         content: "";
     }
