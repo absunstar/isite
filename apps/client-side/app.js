@@ -18,6 +18,10 @@ module.exports = function (site) {
     name: '/x-fonts',
     path: __dirname + '/site_files/fonts'
   })
+  site.get({
+    name: '/x-css/x-fonts',
+    path: __dirname + '/site_files/fonts'
+  })
 
 
   site.get({

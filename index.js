@@ -187,6 +187,18 @@ module.exports = function init(options) {
     site.connectCollection = function (option, db) {
       return collection(site, option, db)
     }
+  }else{
+    site.connectCollection = function (option, db) {
+      return {
+        deleteDuplicate : function(){},
+        findOne : function(){},
+        get : function(){},
+        find : function(){},
+        add : function(){},
+        update : function(){},
+        delete : function(){},
+      }
+    }
   }
 
   if (site.options.security.enabled) {
