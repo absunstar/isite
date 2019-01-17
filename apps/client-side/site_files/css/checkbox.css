@@ -1,11 +1,12 @@
-.check-list label.checkbox{
+.check-list label.checkbox {
     text-align: var(--text-align);
 }
-.check-list .control{
+
+.check-list .control {
     padding: 0px;
 }
 
-.check-list .title{
+.check-list .title {
     font-size: 16px;
 }
 
@@ -31,7 +32,7 @@
     padding-right: 0px;
 }
 
-.checkbox span.title{
+.checkbox span.title {
     vertical-align: sub;
 }
 
@@ -52,11 +53,11 @@
     transition: color .1s ease;
 }
 
-.checkbox .checkbox:hover input ~ .checkmark {
+.checkbox .checkbox:hover input~.checkmark {
     border: 10px dashed var(--modal-header-background-color);
 }
 
-.checkbox input:checked ~ .checkmark {
+.checkbox input:checked~.checkmark {
     background-color: var(--modal-header-background-color);
     border: none;
     border-radius: 5px;
@@ -68,9 +69,11 @@
     position: absolute;
     display: none;
 }
-.checkbox input:checked ~ .checkmark:after {
+
+.checkbox input:checked~.checkmark:after {
     display: block;
 }
+
 .checkbox .checkmark:after {
     left: 7px;
     top: 2px;
@@ -81,4 +84,27 @@
     -webkit-transform: rotate(45deg);
     -ms-transform: rotate(45deg);
     transform: rotate(45deg);
+}
+
+
+div.selector {
+    user-select: none;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    cursor: pointer;
+    display: inline-block;
+    padding: 5px 9px;
+    margin: 5px;
+    min-width: 25px;
+    min-height: 25px;
+    border-radius: 5px;
+}
+
+div.selector.selected {
+    background: green;
+    color: #fff;
+}
+
+div.selector.un-selected {
+    background: #bbb;
 }

@@ -651,6 +651,28 @@ app.directive('iCheckbox', function () {
         require: 'ngModel',
         scope: {
             label: '@',
+            ngModel: '=',
+            ngChange: '&'
+        },
+        link: function (scope, element, attrs, ctrl) {
+
+        },
+        template: `
+        <div class="selector" ng-class="{'selected' : ngModel , 'un-selected' : !ngModel  }" ng-click="ngModel = !ngModel;ngChange($event , ngModel)">
+          <i ng-show="!ngModel" class="fa fa-square"></i>  <i ng-show="ngModel" class="fa fa-check"></i> {{label}}
+        </div>
+        `
+    };
+
+});
+
+app.directive('iCheckbox2', function () {
+
+    return {
+        restrict: 'E',
+        require: 'ngModel',
+        scope: {
+            label: '@',
             ngModel: '='
         },
         link: function (scope, element, attrs, ctrl) {
@@ -812,23 +834,50 @@ app.directive('iList', function ($interval, $timeout, isite) {
             let popup = $(element).find('popup');
             let search = $(element).find('.search');
 
-            $(popup).hide();
+            function handlePosition() {
 
-            $(input).focus(() => {
-                $('popup').hide();
-                $(popup).show();
+                console.log('handlePosition ...');
+                let rigth =  $(popup).offset().left + $(popup).width();
+                console.log(rigth);
+
+                $(popup).css('width', $(popup).closest('i-list').css('width'));
+
+                $(popup).css('right', $(popup).closest('i-list').right);
+
                 let top = $(popup).parent().offset().top - $(window).scrollTop() + 80;
                 if (top > 450) {
                     top = $(popup).parent().offset().top - $(window).scrollTop() + 80 - $(popup).height();
                 }
                 $(popup).css('top', top);
+            }
 
+            $(window).scroll(function () {
+                handlePosition();
+            });
+
+            
+            $('.modal').scroll(function () {
+                handlePosition();
+            });
+
+            $(popup).closest('table').closest('div').scroll(function () {
+                handlePosition();
+            });
+
+
+            $(popup).hide();
+
+            $(input).focus(() => {
+                $('popup').hide();
+                $(popup).show();
+                handlePosition();
                 $(popup).focus();
             });
 
             $scope.hide = function () {
                 $(popup).hide();
             };
+
 
             $scope.getValue = function (item) {
                 let v = isite.getValue(item, $scope.display);
@@ -935,7 +984,110 @@ app.directive('iList', function ($interval, $timeout, isite) {
 
 });
 
+
 app.directive('iChecklist', function ($interval) {
+
+    return {
+        restrict: 'E',
+        required: 'ngModel',
+        scope: {
+            label: '@',
+            primary: '@',
+            display: '@',
+            ngModel: '=',
+            items: '=',
+            like: '&'
+        },
+        link: function ($scope, element, attrs, ctrl) {
+            attrs.primary = attrs.primary || 'id';
+
+            $scope.selectedItems = [];
+
+            $scope.$watch('ngModel', (ngModel) => {
+                $scope.reload();
+            });
+
+
+            $scope.reload = function () {
+
+                $scope.selectedItems = []
+
+                if ($scope.ngModel) {
+
+                    $scope.ngModel.forEach(mitem => {
+                        $scope.selectedItems.push(mitem);
+                    });
+
+                    if ($scope.items) {
+                        $scope.items.forEach(mitem => {
+                            let exist = false
+                            $scope.selectedItems.forEach(sitem => {
+                                if (mitem[$scope.primary] === sitem[$scope.primary]) {
+                                    exist = true
+                                }
+                            });
+                            if (exist) {
+                                mitem.$selected = true;
+                            } else {
+                                mitem.$selected = false;
+
+                            }
+
+                        });
+                    }
+                }
+                if (!$scope.ngModel) {
+                    $scope.selectedItems = [];
+                    if ($scope.items) {
+                        $scope.items.forEach(mitem => {
+                            mitem.$selected = false;
+                        });
+                    }
+                }
+            }
+
+
+            $scope.change = function (item) {
+
+                item.$selected = !item.$selected;
+
+                if (item.$selected) {
+                    let exsits = false;
+                    $scope.selectedItems.forEach(sitem => {
+                        if (sitem[$scope.primary] === item[$scope.primary]) {
+                            exsits = true;
+                        }
+                    });
+                    if (!exsits) {
+                        $scope.selectedItems.push(item);
+                    }
+                } else {
+                    $scope.selectedItems.forEach((sitem, index) => {
+                        if (sitem[$scope.primary] === item[$scope.primary]) {
+                            $scope.selectedItems.splice(index, 1)
+                        }
+                    });
+                }
+
+
+                $scope.ngModel = $scope.selectedItems;
+
+            }
+
+        },
+        template: `
+       <div class="row padding check-list">
+            <label class="title"> {{label}} </label>
+                <div ng-repeat="item in items" ng-click="change(item);ngChange($event , item);" class="selector" ng-class="{'selected' : item.$selected , 'un-selected' : !item.$selected  }" >
+                    <i ng-show="!item.$selected" class="fa fa-square"></i>  <i ng-show="item.$selected" class="fa fa-check"></i> {{item[display]}}
+                </div>
+        </div>
+        `
+    };
+
+});
+
+app.directive('iChecklist2', function ($interval) {
 
     return {
         restrict: 'E',

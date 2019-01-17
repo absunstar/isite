@@ -1,3 +1,4 @@
+
 .table {
   border-collapse: collapse;
   width: 100%;
@@ -39,4 +40,10 @@
 }
 .table.center *{
   text-align: center !important;
+}
+
+.vw95{
+  width: 95vw;
+  height: 500px;
+  overflow: scroll;
 }

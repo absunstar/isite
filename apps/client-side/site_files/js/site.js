@@ -305,7 +305,7 @@
     for (i = 0; i < tablinks.length; i++) {
       tablinks[i].className = tablinks[i].className.replace(" active", "");
     }
-    document.querySelectorAll(tabContentSelector).forEach(el=>{
+    document.querySelectorAll(tabContentSelector + '.tab-content').forEach(el=>{
       el.style.display = 'inline-block';
     });
 
