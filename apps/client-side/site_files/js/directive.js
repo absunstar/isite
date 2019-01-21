@@ -1610,7 +1610,7 @@ app.directive('iTreeview', function ($interval, $timeout, isite) {
         <ul >
             <li ng-dblclick="$event.preventDefault();$event.stopPropagation();source.$actions = true" ng-mouseleave="source.$actions = false">
            
-            <i ng-hide="openTree" class="fa fa-folder"></i>  <i ng-show="openTree" class="fa fa-folder-o"></i> 
+            <i ng-hide="openTree" class="fa fa-caret-left"></i>  <i ng-show="openTree" class="fa fa-caret-left"></i> 
            
 
             <span ng-click="openTree = !openTree" class="title"> {{label}} <small class="display"> [ {{ngModel.v_display}} ] </small>  </span>
@@ -1739,10 +1739,10 @@ app.directive('iTreenode', function ($interval, $timeout, isite) {
             <div class="row" ng-dblclick="$event.preventDefault();$event.stopPropagation();node.$actions = true;source.$actions = false" ng-mouseleave="node.$actions = false">
             <span ng-show="node.nodes.length > 0" ng-click="node.$expand = !node.$expand;">
             
-            <i ng-hide="node.$expand" class="fa fa-folder"></i>  <i ng-show="node.$expand" class="fa fa-folder-o"></i> 
+            <i ng-hide="node.$expand" class="fa fa-caret-left"></i>  <i ng-show="node.$expand" class="fa fa-caret-down"></i> 
             </span>
 
-                <span ng-class="{'selected' : node.$selected == true}" ng-click="node.$expand = !node.$expand;selected(node);updateModal(node)"   > {{node[display]}} </span>
+                <span class="text" ng-class="{'selected' : node.$selected == true}" ng-click="node.$expand = !node.$expand;selected(node);updateModal(node)"   > {{node[display]}} </span>
                 <div class="actions" ng-show="node.$actions === true">
                     <i-button type="add default" ng-click="ngAdd(node)"></i-button>
                     <i-button type="edit default" ng-click="ngEdit(node)"></i-button>
