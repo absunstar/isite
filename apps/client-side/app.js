@@ -1,5 +1,21 @@
 module.exports = function (site) {
 
+  site.date = require(__dirname + '/site_files/js/hijri.js')
+
+  site.post('/api/get_hijri_date' , (req , res)=>{
+    res.json({
+        done : true,
+        hijri : site.date(req.data.date , 'YYYY/MM/DD').format('iYYYY/iMM/iDD')
+    })
+  })
+
+  site.post('/api/get_normal_date' , (req , res)=>{
+    res.json({
+        done : true,
+        date : site.date(req.data.hijri , 'iYYYY/iMM/iDD').format('YYYY/MM/DD')
+    })
+  })
+
   site.get({
     name: '/x-js',
     path: __dirname + '/site_files/js'

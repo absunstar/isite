@@ -18,51 +18,55 @@
   let modal_z_index = 2000;
   site.showModal = function (name) {
 
+    $(name).click(() => {
+      $('popup').hide();
+    });
+
     modal_z_index++;
 
     let el = site.$(name)
-    if(el.length === 0){
+    if (el.length === 0) {
       return;
     }
 
     el[0].style.zIndex = modal_z_index;
     el[0].style.display = 'block';
     let fixed = el[0].getAttribute('fixed');
-    
-    if(fixed !== ''){
+
+    if (fixed !== '') {
       el[0].addEventListener("click", function () {
         site.hideModal(name);
       });
     }
- 
+
 
     let inputs = site.$(name + ' input');
-    if(inputs.length > 0){
+    if (inputs.length > 0) {
       inputs[0].focus();
     }
-    
-    site.$(name + ' .close').forEach( cl =>{
+
+    site.$(name + ' .close').forEach(cl => {
       cl.addEventListener("click", function () {
         site.hideModal(name);
       });
     });
-    
-    site.$(name + ' .modal-header').forEach( he =>{
-      he.addEventListener("click",function (event) {
+
+    site.$(name + ' .modal-header').forEach(he => {
+      he.addEventListener("click", function (event) {
         event = event || window.event;
         event.stopPropagation();
       });
     });
 
-    site.$(name + ' .modal-body').forEach( bo =>{
-      bo.addEventListener("click",function (event) {
+    site.$(name + ' .modal-body').forEach(bo => {
+      bo.addEventListener("click", function (event) {
         event = event || window.event;
         event.stopPropagation();
       });
     });
 
-    site.$(name + ' .modal-footer').forEach( fo =>{
-      fo.addEventListener("click",function (event) {
+    site.$(name + ' .modal-footer').forEach(fo => {
+      fo.addEventListener("click", function (event) {
         event = event || window.event;
         event.stopPropagation();
       });
@@ -72,10 +76,10 @@
 
   site.hideModal = function (name) {
     let el = site.$(name);
-    if(el.length > 0){
+    if (el.length > 0) {
       el[0].style.display = 'none';
     }
-   
+
   };
 
   site.eventList = [];
@@ -294,7 +298,7 @@
     return Object.prototype.toString.call(elem).slice(8, -1);
   };
 
-  
+
   site.showTabContent = function (e, tabContentSelector) {
 
     let tabcontents = document.querySelectorAll(".tab-content");
@@ -305,7 +309,7 @@
     for (i = 0; i < tablinks.length; i++) {
       tablinks[i].className = tablinks[i].className.replace(" active", "");
     }
-    document.querySelectorAll(tabContentSelector + '.tab-content').forEach(el=>{
+    document.querySelectorAll(tabContentSelector + '.tab-content').forEach(el => {
       el.style.display = 'inline-block';
     });
 
@@ -313,7 +317,7 @@
       e.currentTarget.className += " active";
     }
   };
-  
+
 
   site.toHtmlTable = function (obj) {
     if (obj === undefined || obj === null) {

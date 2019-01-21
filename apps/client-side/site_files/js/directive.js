@@ -467,10 +467,10 @@ app.directive('iMonth2', function () {
     };
 });
 
-app.directive('iFulldate', function () {
+app.directive('iFulldate', function ($http) {
 
     return {
-        link: function (scope, element, attrs) {
+        link: function ($scope, element, attrs , ngModel) {
 
             if (typeof attrs.disabled !== 'undefined') {
                 attrs.disabled = 'disabled';
@@ -483,32 +483,83 @@ app.directive('iFulldate', function () {
                 $('popup').hide();
             });
 
-            scope.days1 = [];
+            $scope.days1 = [];
             for (let i = 1; i < 32; i++) {
-                scope.days1.push(i)
+                $scope.days1.push(i)
 
             }
-            scope.years1 = [];
+            $scope.years1 = [];
             for (let i = 1900; i < 2100; i++) {
-                scope.years1.push(i)
+                $scope.years1.push(i)
 
             }
-            scope.monthes1 = ['يناير', 'فبراير', 'مارس', 'ابريل', 'مايو', 'يونيو', 'يوليو', 'اغسطس', 'سبتمبر', 'اكتوبر', 'نوفمبر', 'ديسمبر'];
+            $scope.monthes1 = ['يناير', 'فبراير', 'مارس', 'ابريل', 'مايو', 'يونيو', 'يوليو', 'اغسطس', 'سبتمبر', 'اكتوبر', 'نوفمبر', 'ديسمبر'];
 
-            scope.days2 = [];
+            $scope.days2 = [];
             for (let i = 1; i < 31; i++) {
-                scope.days2.push(i)
+                $scope.days2.push(i)
 
             }
-            scope.years2 = [];
+            $scope.years2 = [];
             for (let i = 1400; i < 1450; i++) {
-                scope.years2.push(i)
+                $scope.years2.push(i)
 
             }
-            scope.monthes2 = ['صفر', 'محرم', 'ربيع اول', 'ربيع ثان', 'جمادى اول', 'جمادى ثان', 'رجب', 'شعبان', 'رمضان', 'شوال', 'ذى القعدة', 'ذى الحجة'];
+            $scope.monthes2 = ['محرم','صفر', 'ربيع اول', 'ربيع ثان', 'جمادى اول', 'جمادى ثان', 'رجب', 'شعبان', 'رمضان', 'شوال', 'ذى القعدة', 'ذى الحجة'];
 
+            $scope.model =  {};
 
-            scope.date = new Date(attrs.value);
+            $scope.$watch('ngModel', function (ngModel) {
+                if (ngModel) {
+                    $scope.model = ngModel;
+                }else{
+                    $scope.model = {};
+                }
+            });
+
+            $scope.get_hijri_date = function () {
+                
+                if ($scope.model && $scope.model.year && $scope.model.day) {
+                    ngModel.$setViewValue($scope.model);
+                    $scope.model.date = new Date($scope.model.year, $scope.model.month, $scope.model.day);
+                    $http({
+                        method : 'POST',
+                        url : '/api/get_hijri_date',
+                        data : {date : $scope.model.year + '/' + ($scope.model.month + 1) + '/' + $scope.model.day}
+                    }).then(response=>{
+                        if(response.data.done){
+                            $scope.model.hijri = response.data.hijri;
+                            $scope.model.day2 = parseInt($scope.model.hijri.split('/')[2]);
+                            $scope.model.month2 = parseInt($scope.model.hijri.split('/')[1]) - 1;
+                            $scope.model.year2 = parseInt($scope.model.hijri.split('/')[0]);
+                            ngModel.$setViewValue($scope.model);
+                        }
+                    });
+                   
+                }
+            };
+
+            $scope.get_normal_date = function () {
+                
+                if ($scope.model && $scope.model.year2 && $scope.model.day2) {
+                    ngModel.$setViewValue($scope.model);
+                    $http({
+                        method : 'POST',
+                        url : '/api/get_normal_date',
+                        data : {hijri : $scope.model.year2 + '/' + ($scope.model.month2 + 1) + '/' + $scope.model.day2}
+                    }).then(response=>{
+                        if(response.data.done){
+                            $scope.model.date = new Date(response.data.date);
+                            $scope.model.day = parseInt(response.data.date.split('/')[2]);
+                            $scope.model.month = parseInt(response.data.date.split('/')[1]) - 1;
+                            $scope.model.year = parseInt(response.data.date.split('/')[0]);
+                            ngModel.$setViewValue($scope.model);
+                        }
+                    });
+                   
+                }
+            };
+
         },
         restrict: 'E',
         require: 'ngModel',
@@ -517,7 +568,8 @@ app.directive('iFulldate', function () {
             label1: '@',
             label2: '@',
             disabled: '@',
-            ngModel: '='
+            ngModel: '=',
+            ngChange: '&'
         },
         template: `
       <div class="row i-date">
@@ -526,17 +578,17 @@ app.directive('iFulldate', function () {
           <label> {{label1}} </label>
           <div class="row">
             <div class="col3 day"> 
-              <select ng-disabled="disabled" v="{{v}}" ng-model="ngModel.day" class="appearance-none no-border-left no-border-radius">
+              <select ng-change="get_hijri_date()" ng-disabled="disabled" v="{{v}}" ng-model="model.day" class="appearance-none no-border-left no-border-radius">
               <option ng-repeat="d1 in days1" ng-value="d1"> {{d1}} </option>
               </select>
             </div>
             <div class="col5 month"> 
-              <select ng-disabled="disabled" v="{{v}}" ng-model="ngModel.month" class="appearance-none no-border-left no-border-right no-border-radius">
+              <select ng-change="get_hijri_date()" ng-disabled="disabled" v="{{v}}" ng-model="model.month" class="appearance-none no-border-left no-border-right no-border-radius">
               <option ng-repeat="m1 in monthes1" ng-value="$index"> {{m1}} </option>
               </select>
             </div>
             <div class="col4 year"> 
-              <select ng-disabled="disabled" v="{{v}}" ng-model="ngModel.year" class="appearance-none no-border-right no-border-radius">
+              <select ng-change="get_hijri_date()" ng-disabled="disabled" v="{{v}}" ng-model="model.year" class="appearance-none no-border-right no-border-radius">
               <option ng-repeat="y1 in years1" ng-value="y1"> {{y1}} </option>
               </select>
             </div>
@@ -547,17 +599,17 @@ app.directive('iFulldate', function () {
           <label> {{label2}} </label>
           <div class="row">
             <div class="col3 day"> 
-              <select ng-disabled="disabled" v="{{v}}" ng-model="ngModel.day2" class="appearance-none no-border-left no-border-radius">
+              <select ng-change="get_normal_date()" ng-disabled="disabled" v="{{v}}" ng-model="model.day2" class="appearance-none no-border-left no-border-radius">
               <option ng-repeat="d2 in days2" ng-value="d2"> {{d2}} </option>
               </select>
             </div>
             <div class="col5 month"> 
-              <select ng-disabled="disabled" v="{{v}}" ng-model="ngModel.month2" class="appearance-none no-border-left no-border-right no-border-radius">
+              <select ng-change="get_normal_date()" ng-disabled="disabled" v="{{v}}" ng-model="model.month2" class="appearance-none no-border-left no-border-right no-border-radius">
               <option ng-repeat="m2 in monthes2" ng-value="$index"> {{m2}} </option>
               </select>
             </div>
             <div class="col4 year"> 
-              <select ng-disabled="disabled" v="{{v}}" ng-model="ngModel.year2" class="appearance-none no-border-right no-border-radius">
+              <select ng-change="get_normal_date()" ng-disabled="disabled" v="{{v}}" ng-model="model.year2" class="appearance-none no-border-right no-border-radius">
               <option ng-repeat="y2 in years2" ng-value="y2"> {{y2}} </option>
               </select>
             </div>
@@ -836,9 +888,7 @@ app.directive('iList', function ($interval, $timeout, isite) {
 
             function handlePosition() {
 
-                console.log('handlePosition ...');
                 let rigth =  $(popup).offset().left + $(popup).width();
-                console.log(rigth);
 
                 $(popup).css('width', $(popup).closest('i-list').css('width'));
 
