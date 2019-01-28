@@ -5,17 +5,14 @@
     -webkit-user-select: none;
     -moz-user-select: none;
     -ms-user-select: none;
-    transition: all linear .5s;
-    -webkit-transition:all linear .5s;
 }
 
 .treeview i-treenode ul{
-    transition: all linear .5s;
-    -webkit-transition:all linear .5s;
+    transition: all linear .3s;
+    -webkit-transition:all linear .3s;
 }
 
 .treeview i-treenode.ng-hide ul {
-    height: 0;
     opacity:0;
 }
 

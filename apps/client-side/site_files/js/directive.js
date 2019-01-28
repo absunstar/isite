@@ -470,7 +470,7 @@ app.directive('iMonth2', function () {
 app.directive('iFulldate', function ($http) {
 
     return {
-        link: function ($scope, element, attrs , ngModel) {
+        link: function ($scope, element, attrs, ngModel) {
 
             if (typeof attrs.disabled !== 'undefined') {
                 attrs.disabled = 'disabled';
@@ -485,14 +485,14 @@ app.directive('iFulldate', function ($http) {
 
             $scope.days1 = [];
             for (let i = 1; i < 32; i++) {
-                $scope.days1.push(i)
+                $scope.days1.push(i);
 
             }
             $scope.years1 = [];
-            for (let i = 1900; i < 2100; i++) {
-                $scope.years1.push(i)
-
+            for (let i = 1950; i < 2030; i++) {
+                $scope.years1.push(i);
             }
+
             $scope.monthes1 = ['يناير', 'فبراير', 'مارس', 'ابريل', 'مايو', 'يونيو', 'يوليو', 'اغسطس', 'سبتمبر', 'اكتوبر', 'نوفمبر', 'ديسمبر'];
 
             $scope.days2 = [];
@@ -501,33 +501,35 @@ app.directive('iFulldate', function ($http) {
 
             }
             $scope.years2 = [];
-            for (let i = 1400; i < 1450; i++) {
+            for (let i = 1370; i < 1450; i++) {
                 $scope.years2.push(i)
 
             }
-            $scope.monthes2 = ['محرم','صفر', 'ربيع اول', 'ربيع ثان', 'جمادى اول', 'جمادى ثان', 'رجب', 'شعبان', 'رمضان', 'شوال', 'ذى القعدة', 'ذى الحجة'];
+            $scope.monthes2 = ['محرم', 'صفر', 'ربيع اول', 'ربيع ثان', 'جمادى اول', 'جمادى ثان', 'رجب', 'شعبان', 'رمضان', 'شوال', 'ذى القعدة', 'ذى الحجة'];
 
-            $scope.model =  {};
+            $scope.model = {};
 
             $scope.$watch('ngModel', function (ngModel) {
                 if (ngModel) {
                     $scope.model = ngModel;
-                }else{
+                } else {
                     $scope.model = {};
                 }
             });
 
             $scope.get_hijri_date = function () {
-                
+
                 if ($scope.model && $scope.model.year && $scope.model.day) {
                     ngModel.$setViewValue($scope.model);
                     $scope.model.date = new Date($scope.model.year, $scope.model.month, $scope.model.day);
                     $http({
-                        method : 'POST',
-                        url : '/api/get_hijri_date',
-                        data : {date : $scope.model.year + '/' + ($scope.model.month + 1) + '/' + $scope.model.day}
-                    }).then(response=>{
-                        if(response.data.done){
+                        method: 'POST',
+                        url: '/api/get_hijri_date',
+                        data: {
+                            date: $scope.model.year + '/' + ($scope.model.month + 1) + '/' + $scope.model.day
+                        }
+                    }).then(response => {
+                        if (response.data.done) {
                             $scope.model.hijri = response.data.hijri;
                             $scope.model.day2 = parseInt($scope.model.hijri.split('/')[2]);
                             $scope.model.month2 = parseInt($scope.model.hijri.split('/')[1]) - 1;
@@ -535,20 +537,22 @@ app.directive('iFulldate', function ($http) {
                             ngModel.$setViewValue($scope.model);
                         }
                     });
-                   
+
                 }
             };
 
             $scope.get_normal_date = function () {
-                
+
                 if ($scope.model && $scope.model.year2 && $scope.model.day2) {
                     ngModel.$setViewValue($scope.model);
                     $http({
-                        method : 'POST',
-                        url : '/api/get_normal_date',
-                        data : {hijri : $scope.model.year2 + '/' + ($scope.model.month2 + 1) + '/' + $scope.model.day2}
-                    }).then(response=>{
-                        if(response.data.done){
+                        method: 'POST',
+                        url: '/api/get_normal_date',
+                        data: {
+                            hijri: $scope.model.year2 + '/' + ($scope.model.month2 + 1) + '/' + $scope.model.day2
+                        }
+                    }).then(response => {
+                        if (response.data.done) {
                             $scope.model.date = new Date(response.data.date);
                             $scope.model.day = parseInt(response.data.date.split('/')[2]);
                             $scope.model.month = parseInt(response.data.date.split('/')[1]) - 1;
@@ -556,7 +560,7 @@ app.directive('iFulldate', function ($http) {
                             ngModel.$setViewValue($scope.model);
                         }
                     });
-                   
+
                 }
             };
 
@@ -754,6 +758,53 @@ app.directive('iRadio', function () {
             group: '@',
             ngModel: '='
         },
+        link: function ($scope, element, attrs, ctrl) {
+
+            if (!attrs.group) {
+                attrs.group = attrs.ngModel;
+            }
+
+
+            $scope.changeModal = function(ngValue) {
+                $scope.ngModel = ngValue;
+            }
+
+
+            $scope.$watch('ngModel', (ngModel) => {
+                if (ngModel) {
+                    if (ngModel == $scope.ngValue) {
+                    }
+                }
+            });
+
+            $scope.$watch('ngValue', (ngValue) => {
+                if (ngValue) {
+                    if (ngValue == $scope.ngModel) {
+                    }
+                }
+            });
+
+        },
+        template: `
+        <div group="{{group}}" class="selector" ng-class="{'selected' : ngModel == ngValue , 'un-selected' : ngModel != ngValue  }" ng-click="changeModal(ngValue);ngChange($event , ngModel , ngValue)">
+          <i ng-show="ngModel != ngValue" class="fa fa-circle"></i>  <i ng-show="ngModel == ngValue" class="fa fa-circle"></i> {{label}}
+        </div>
+        `
+    };
+
+});
+
+app.directive('iRadio2', function () {
+
+    return {
+        restrict: 'E',
+        require: 'ngModel',
+        scope: {
+            label: '@',
+            ngValue: '@',
+            group: '@',
+            ngModel: '='
+        },
         link: function (scope, element, attrs, ctrl) {
             if (!attrs.group) {
                 attrs.group = attrs.ngModel;
@@ -888,7 +939,7 @@ app.directive('iList', function ($interval, $timeout, isite) {
 
             function handlePosition() {
 
-                let rigth =  $(popup).offset().left + $(popup).width();
+                let rigth = $(popup).offset().left + $(popup).width();
 
                 $(popup).css('width', $(popup).closest('i-list').css('width'));
 
@@ -905,7 +956,7 @@ app.directive('iList', function ($interval, $timeout, isite) {
                 handlePosition();
             });
 
-            
+
             $('.modal').scroll(function () {
                 handlePosition();
             });
@@ -1011,7 +1062,7 @@ app.directive('iList', function ($interval, $timeout, isite) {
         template: `
         <div class="control">
             <label> {{label}} </label>
-            <input class="{{css}}" ng-disabled="disabled" v="{{v}}" class="full-width" ng-model="ngModel[display]" readonly>
+            <input class="full-width text {{css}}" ng-disabled="disabled" v="{{v}}" ng-model="ngModel[display]" readonly>
             <popup>
             <div ng-show="showSearch" class="row search-box">
                 <div class="col2 center pointer" ng-click="hide()">

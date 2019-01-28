@@ -22,10 +22,13 @@
   border: var(--table-border);
   padding: 5px;
   vertical-align:top;
+  min-width: 100px !important;
 }
+
 .table td div, .table td p, .table td label, .table td h1, .table td h2, .table td h3, .table td span, .table td b{
   color: var(--table-color);
 }
+
 .table th {
   background-color: var(--navbar-background-color);
   color: var(--table-th-color);
@@ -38,12 +41,26 @@
 .table.center{
   text-align: center !important;
 }
+
 .table.center *{
   text-align: center !important;
 }
 
-.vw95{
+.table input{
+  font-size: 13px !important;
+}
+
+
+.table tr i-list{
+  min-width: 300px !important;
+}
+
+.table tr i-list input.text{
+  min-width: 220px !important;
+}
+
+.grid{
   width: 95vw;
-  height: 500px;
+  max-height: 500px;
   overflow: scroll;
 }

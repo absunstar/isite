@@ -54,6 +54,7 @@ module.exports = function (site) {
       __dirname + "/site_files/css/images.css",
       __dirname + "/site_files/css/navbar.css",
       __dirname + "/site_files/css/form.css",
+      __dirname + "/site_files/css/selector.css",
       __dirname + "/site_files/css/checkbox.css",
       __dirname + "/site_files/css/radio.css",
       __dirname + "/site_files/css/modal.css",

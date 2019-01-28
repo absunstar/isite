@@ -87,7 +87,7 @@
 }
 
 
-div.selector {
+i-checkbox .selector {
     user-select: none;
     -webkit-user-select: none;
     -moz-user-select: none;
@@ -100,11 +100,18 @@ div.selector {
     border-radius: 5px;
 }
 
-div.selector.selected {
+i-checkbox .selector.selected .fa{
+    color: #FFEB3B;
+}
+i-checkbox .selector.un-selected .fa{
+    color: #fff;
+}
+
+i-checkbox .selector.selected {
     background: green;
     color: #fff;
 }
 
-div.selector.un-selected {
-    background: #bbb;
+i-checkbox .selector.un-selected {
+    background: #787d72;
 }

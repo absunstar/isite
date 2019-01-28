@@ -70,3 +70,35 @@
 	border-radius: 50%;
 	background: white;
 }
+
+
+
+i-radio .selector {
+    user-select: none;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    cursor: pointer;
+    display: inline-block;
+    padding: 5px 9px;
+    margin: 5px;
+    min-width: 25px;
+    min-height: 25px;
+    border-radius: 5px;
+}
+
+i-radio .selector.selected {
+    background: green;
+    color: #fff;
+    transform: scale(1.1);
+}
+
+i-radio .selector.selected .fa{
+    color: #FFEB3B;
+}
+i-radio .selector.un-selected .fa{
+    color: #fff;
+}
+
+i-radio .selector.un-selected {
+    background: #787d72;
+}

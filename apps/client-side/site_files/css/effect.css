@@ -17,12 +17,12 @@
 .center b,
 .center i,
 .center img {
-    margin: 0 auto ;
-    text-align: center ;
+    margin: 0 auto;
+    text-align: center;
 }
 
-.center i.center{
-   vertical-align: text-bottom; 
+.center i.center {
+    vertical-align: text-bottom;
 }
 
 .left {
@@ -77,7 +77,7 @@
     display: inline-block;
 }
 
-.inline-grid{
+.inline-grid {
     display: inline-grid;
 }
 
@@ -113,7 +113,7 @@
     font-size: x-large;
 }
 
-.error{
+.error {
     text-align: center;
     color: red;
 }
@@ -122,27 +122,33 @@
     font-size: xx-large;
 }
 
-.appearance-none{
+.appearance-none {
     -moz-appearance: none;
     -webkit-appearance: none;
     appearance: none;
 }
-.no-border{
-    border:none !important;
+
+.no-border {
+    border: none !important;
 }
-.no-border-left{
+
+.no-border-left {
     border-left: none !important;
 }
-.no-border-right{
+
+.no-border-right {
     border-right: none !important;
 }
-.no-border-top{
+
+.no-border-top {
     border-top: none !important;
 }
-.no-border-bottom{
+
+.no-border-bottom {
     border-bottom: none !important;
 }
-.no-border-radius{
+
+.no-border-radius {
     border-radius: 0px !important;
 }
 
@@ -155,10 +161,55 @@
         0 20px 1px -9px rgba(0, 0, 0, 0.15);
 }
 
-.full-width{
-    width:100%;
+.full-width {
+    width: 100%;
 }
 
-.hover-scale:hover{
+.hover-scale:hover {
     transform: scale(1.1);
+}
+
+.w100,
+.w100 input {
+    width: 100px !important;
+}
+
+.w125,
+.w125 input {
+    width: 125px !important;
+}
+
+.w150,
+.w150 input {
+    width: 150px !important;
+}
+
+.w175,
+.w175 input {
+    width: 175px !important;
+}
+
+.w200,
+.w200 input {
+    width: 200px !important;
+}
+
+.w225,
+.w225 input {
+    width: 225px !important;
+}
+
+.w250,
+.w250 input {
+    width: 250px !important;
+}
+
+.w275,
+.w275 input {
+    width: 275px !important;
+}
+
+.w300,
+.w300 input {
+    width: 300px !important;
 }
