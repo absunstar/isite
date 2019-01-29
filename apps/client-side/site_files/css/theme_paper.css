@@ -18,7 +18,7 @@
 
   --body-background : #ffffff;
   --body-margin-top : 70px;
-  --body-margin-bottom : 200px;
+  --body-margin-bottom : 300px;
 
   --h-font-weight : normal;
 
@@ -129,9 +129,9 @@
   --table-th-color: #fff;
 
   --help-height: 110px;
-  --help-border: 5px solid #272727;
+  --help-border: 1px solid #272727;
   --help-border-radius: 0px;
-  --help-background-color: #292929;
+  --help-background-color: #3F51B5;
   --help-opacity: 1;
   --help-content-color: #ffffff;
 

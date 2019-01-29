@@ -38,6 +38,7 @@
 
 .treenode li {
     display: block;
+    margin: 10px;
     padding: 3px;
     cursor: pointer;
     border-right: 1px dashed var(--treeview-border-color);
