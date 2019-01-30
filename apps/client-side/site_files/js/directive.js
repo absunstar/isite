@@ -521,13 +521,7 @@ app.directive('iFulldate', function ($http) {
 
             $scope.$watch('ngModel.date', function (date) {
              
-
                 if (date) {
-                    
-                    if(_busy){
-                        return;
-                    }
-                   
                     $scope.model = $scope.model || {};
                     $scope.model.date = date;
                     $scope.model.day = date.getDate();
@@ -538,12 +532,13 @@ app.directive('iFulldate', function ($http) {
             });
 
             $scope.get_hijri_date = function () {
-                if(_busy){
-                    return;
-                }
-                _busy = true;
+               
                 if ($scope.model && $scope.model.year && $scope.model.day) {
                     ngModel.$setViewValue($scope.model);
+                    if(_busy){
+                        return;
+                    }
+                    _busy = true;
                     $scope.model.date = new Date($scope.model.year, $scope.model.month, $scope.model.day);
                     $http({
                         method: 'POST',
@@ -560,7 +555,9 @@ app.directive('iFulldate', function ($http) {
                             ngModel.$setViewValue($scope.model);
                             _busy = false;
                         }
-                    });
+                    }).catch(()=>{
+                        _busy = false;
+                    })
 
                 }
             };
@@ -569,6 +566,10 @@ app.directive('iFulldate', function ($http) {
 
                 if ($scope.model && $scope.model.year2 && $scope.model.day2) {
                     ngModel.$setViewValue($scope.model);
+                    if(_busy){
+                        return;
+                    }
+                    _busy = true;
                     $http({
                         method: 'POST',
                         url: '/api/get_normal_date',
@@ -582,9 +583,11 @@ app.directive('iFulldate', function ($http) {
                             $scope.model.month = parseInt(response.data.date.split('/')[1]) - 1;
                             $scope.model.year = parseInt(response.data.date.split('/')[0]);
                             ngModel.$setViewValue($scope.model);
+                            _busy = false;
                         }
-                    });
-
+                    }).catch(()=>{
+                        _busy = false;
+                    })
                 }
             };
 
