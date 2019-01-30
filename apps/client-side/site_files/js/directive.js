@@ -472,6 +472,8 @@ app.directive('iFulldate', function ($http) {
     return {
         link: function ($scope, element, attrs, ngModel) {
 
+            let _busy = false;
+
             if (typeof attrs.disabled !== 'undefined') {
                 attrs.disabled = 'disabled';
             } else {
@@ -517,8 +519,29 @@ app.directive('iFulldate', function ($http) {
                 }
             });
 
-            $scope.get_hijri_date = function () {
+            $scope.$watch('ngModel.date', function (date) {
+             
 
+                if (date) {
+                    
+                    if(_busy){
+                        return;
+                    }
+                   
+                    $scope.model = $scope.model || {};
+                    $scope.model.date = date;
+                    $scope.model.day = date.getDate();
+                    $scope.model.month = date.getMonth();
+                    $scope.model.year = date.getFullYear();
+                    $scope.get_hijri_date();
+                }
+            });
+
+            $scope.get_hijri_date = function () {
+                if(_busy){
+                    return;
+                }
+                _busy = true;
                 if ($scope.model && $scope.model.year && $scope.model.day) {
                     ngModel.$setViewValue($scope.model);
                     $scope.model.date = new Date($scope.model.year, $scope.model.month, $scope.model.day);
@@ -535,6 +558,7 @@ app.directive('iFulldate', function ($http) {
                             $scope.model.month2 = parseInt($scope.model.hijri.split('/')[1]) - 1;
                             $scope.model.year2 = parseInt($scope.model.hijri.split('/')[0]);
                             ngModel.$setViewValue($scope.model);
+                            _busy = false;
                         }
                     });
 
