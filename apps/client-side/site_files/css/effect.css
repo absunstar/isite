@@ -213,3 +213,22 @@
 .w300 input {
     width: 300px !important;
 }
+
+.w350,
+.w350 input {
+    width: 350px !important;
+}
+
+.w400,
+.w400 input {
+    width: 400px !important;
+}
+
+.w450,
+.w450 input {
+    width: 450px !important;
+}
+.w500,
+.w500 input {
+    width: 500px !important;
+}
