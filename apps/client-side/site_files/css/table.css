@@ -22,7 +22,7 @@
   border: var(--table-border);
   padding: 5px;
   vertical-align:top;
-  min-width: 100px !important;
+  min-width: 100px;
 }
 
 .table td div, .table td p, .table td label, .table td h1, .table td h2, .table td h3, .table td span, .table td b{
