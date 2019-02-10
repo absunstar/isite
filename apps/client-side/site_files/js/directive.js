@@ -520,7 +520,7 @@ app.directive('iFulldate', function ($http) {
             });
 
             $scope.$watch('ngModel.date', function (date) {
-             
+
                 if (date) {
                     $scope.model = $scope.model || {};
                     $scope.model.date = date;
@@ -532,10 +532,10 @@ app.directive('iFulldate', function ($http) {
             });
 
             $scope.get_hijri_date = function () {
-               
+
                 if ($scope.model && $scope.model.year && $scope.model.day) {
                     ngModel.$setViewValue($scope.model);
-                    if(_busy){
+                    if (_busy) {
                         return;
                     }
                     _busy = true;
@@ -555,7 +555,7 @@ app.directive('iFulldate', function ($http) {
                             ngModel.$setViewValue($scope.model);
                             _busy = false;
                         }
-                    }).catch(()=>{
+                    }).catch(() => {
                         _busy = false;
                     })
 
@@ -566,7 +566,7 @@ app.directive('iFulldate', function ($http) {
 
                 if ($scope.model && $scope.model.year2 && $scope.model.day2) {
                     ngModel.$setViewValue($scope.model);
-                    if(_busy){
+                    if (_busy) {
                         return;
                     }
                     _busy = true;
@@ -585,7 +585,7 @@ app.directive('iFulldate', function ($http) {
                             ngModel.$setViewValue($scope.model);
                             _busy = false;
                         }
-                    }).catch(()=>{
+                    }).catch(() => {
                         _busy = false;
                     })
                 }
@@ -792,22 +792,20 @@ app.directive('iRadio', function () {
             }
 
 
-            $scope.changeModal = function(ngValue) {
+            $scope.changeModal = function (ngValue) {
                 $scope.ngModel = ngValue;
             }
 
 
             $scope.$watch('ngModel', (ngModel) => {
                 if (ngModel) {
-                    if (ngModel == $scope.ngValue) {
-                    }
+                    if (ngModel == $scope.ngValue) {}
                 }
             });
 
             $scope.$watch('ngValue', (ngValue) => {
                 if (ngValue) {
-                    if (ngValue == $scope.ngModel) {
-                    }
+                    if (ngValue == $scope.ngModel) {}
                 }
             });
 
@@ -972,14 +970,28 @@ app.directive('iList', function ($interval, $timeout, isite) {
 
                 $(popup).css('right', $(popup).closest('i-list').right);
 
-                let top = $(popup).parent().offset().top - $(window).scrollTop() + 80;
+                let d_top = 80;
+                let $modal_body = $(popup).closest('.modal-body');
+                if ($modal_body.length > 0) {
+                    let m1 = $modal_body.scrollTop();
+                    let m2 = $(window).scrollTop();
+                    d_top += m1 + m2;
+                } else {
+                    d_top += $(window).scrollTop();
+                }
+                let m3 = $(popup).parent().offset().top;
+                let top = m3 + d_top;
                 if (top > 450) {
-                    top = $(popup).parent().offset().top - $(window).scrollTop() + 80 - $(popup).height();
+                    top = m3 - d_top - $(popup).height();
                 }
                 $(popup).css('top', top);
             }
 
             $(window).scroll(function () {
+                handlePosition();
+            });
+
+            $('.modal-body').scroll(function () {
                 handlePosition();
             });
 
