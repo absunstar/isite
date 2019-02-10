@@ -970,20 +970,26 @@ app.directive('iList', function ($interval, $timeout, isite) {
 
                 $(popup).css('right', $(popup).closest('i-list').right);
 
-                let d_top = 80;
+                let top = 0;
+                let parent_top = $(popup).parent().offset().top;
+                let body_scroll = 0;
+                let window_scroll = $(window).scrollTop();
+
                 let $modal_body = $(popup).closest('.modal-body');
                 if ($modal_body.length > 0) {
-                    let m1 = $modal_body.scrollTop();
-                    let m2 = $(window).scrollTop();
-                    d_top += m1 + m2;
-                } else {
-                    d_top += $(window).scrollTop();
+                    let body_scroll = $modal_body.scrollTop();
                 }
-                let m3 = $(popup).parent().offset().top;
-                let top = m3 + d_top;
-                if (top > 450) {
-                    top = m3 - d_top - $(popup).height();
+
+                top = window_scroll;
+                top = body_scroll;
+                top = parent_top;
+
+                if (window_scroll) {
+                    top = parent_top - window_scroll + 80
+                } else if (parent_top) {
+                    top = parent_top + 80
                 }
+
                 $(popup).css('top', top);
             }
 
