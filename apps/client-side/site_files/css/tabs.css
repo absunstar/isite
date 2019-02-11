@@ -75,8 +75,15 @@
     }
 
     .tabs .tab-link {
-        display: inline !important;
-        margin: 20px;
+        display: inline-block !important;
+        margin: 0px;
+        padding: 0px;
+    }
+
+    .tabs .tabs-header .tab-link:hover {
+        background-color: var(--tabs-background-color2);
+        color: var(--tabs-header-link-color2);
+        padding-right: 12px;
     }
 }
 
