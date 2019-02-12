@@ -964,25 +964,26 @@ app.directive('iList', function ($interval, $timeout, isite) {
 
             function handlePosition() {
 
-                let rigth = $(popup).offset().left + $(popup).width();
+                let $modal_body = $(popup).closest('.modal-body');
+                let $icontrol = $(popup).parent();
+                let $ilist = $icontrol.parent();
+                let width = $icontrol.width();
+                let offset = $ilist.offset();
+                let rigth = $(document).width() - offset.left - width;
 
-                $(popup).css('width', $(popup).closest('i-list').css('width'));
-
-                $(popup).css('right', $(popup).closest('i-list').right);
+                $(popup).css('width', width);
+                $(popup).css('right', rigth);
 
                 let top = 0;
-                let parent_top = $(popup).parent().offset().top;
+                let parent_top = $icontrol.offset().top;
                 let body_scroll = 0;
                 let window_scroll = $(window).scrollTop();
 
-                let $modal_body = $(popup).closest('.modal-body');
+               
                 if ($modal_body.length > 0) {
-                    let body_scroll = $modal_body.scrollTop();
+                     body_scroll = $modal_body.scrollTop();
                 }
 
-                top = window_scroll;
-                top = body_scroll;
-                top = parent_top;
 
                 if (window_scroll) {
                     top = parent_top - window_scroll + 80
