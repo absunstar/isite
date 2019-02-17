@@ -1601,6 +1601,7 @@ app.directive('iTreeview', function ($interval, $timeout, isite) {
             ngModel: '=',
             ngSearch: '=',
             ngChange: '&',
+            ngClick: '&',
             ngAdd: '&',
             ngNode: '&',
             ngEdit: '&',
@@ -1712,9 +1713,9 @@ app.directive('iTreeview', function ($interval, $timeout, isite) {
 
             <span ng-click="openTree = !openTree" class="title"> {{label}} <small class="display"> [ {{ngModel.v_display}} ] </small>  </span>
                 <div class="actions" ng-show="source.$actions === true">
-                    <i-button type="add default" ng-click="ngNode()"></i-button>
+                    <i-button type="add default" ng-click="ngClick($event , ngModel);ngNode($event , ngModel)"></i-button>
                 </div>
-                <i-treenode display="{{display}}" ng-add="ngAdd()" ng-edit="ngEdit()" ng-delete="ngDelete()" ng-show="openTree" ng-model="ngModel" nodes="v_nodes" ></i-treenode>
+                <i-treenode display="{{display}}" ng-click="ngClick($event)" ng-add="ngAdd()" ng-edit="ngEdit()" ng-delete="ngDelete()" ng-show="openTree" ng-model="ngModel" nodes="v_nodes" ></i-treenode>
             </li>
         </ul>
         </div>
@@ -1738,6 +1739,7 @@ app.directive('iTreenode', function ($interval, $timeout, isite) {
             primary: '@',
             ngValue: '@',
             ngChange: '&',
+            ngClick: '&',
             ngAdd: '&',
             ngEdit: '&',
             ngDelete: '&',
@@ -1841,14 +1843,14 @@ app.directive('iTreenode', function ($interval, $timeout, isite) {
                     <i class="fa fa-file"></i>
             </span>
 
-                <span class="text" ng-class="{'selected' : node.$selected == true}" ng-click="node.$expand = !node.$expand;selected(node);updateModal(node)"   > {{node[display]}} </span>
+                <span class="text" ng-class="{'selected' : node.$selected == true}" ng-click="ngClick($event , node);node.$expand = !node.$expand;selected(node);updateModal(node)"   > {{node[display]}} </span>
                 <div class="actions" ng-show="node.$actions === true">
                     <i-button type="add default" ng-click="ngAdd(node)"></i-button>
                     <i-button type="edit default" ng-click="ngEdit(node)"></i-button>
                     <i-button type="delete default" ng-click="ngDelete(node)"></i-button>
                 </div>
             </div>   
-                <i-treenode display="{{display}}" ng-add="ngAdd()" ng-edit="ngEdit()" ng-delete="ngDelete()" ng-show="node.$expand" ng-model="ngModel" nodes="node.nodes" nodes="node.nodes"></i-treenode>
+                <i-treenode display="{{display}}" ng-click="ngClick($event)" ng-add="ngAdd()" ng-edit="ngEdit()" ng-delete="ngDelete()" ng-show="node.$expand" ng-model="ngModel" nodes="node.nodes" nodes="node.nodes"></i-treenode>
             </li>
         </ul>
         </div>
