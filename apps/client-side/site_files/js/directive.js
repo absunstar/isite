@@ -522,12 +522,12 @@ app.directive('iFulldate', function ($http) {
             $scope.$watch('ngModel.date', function (date) {
 
                 if (date) {
-                    date = new Date(date);
+                   let date2 = new Date(date);
                     $scope.model = $scope.model || {};
-                    $scope.model.date = date;
-                    $scope.model.day = date.getDate();
-                    $scope.model.month = date.getMonth();
-                    $scope.model.year = date.getFullYear();
+                    $scope.model.date = date2;
+                    $scope.model.day = date2.getDate();
+                    $scope.model.month = date2.getMonth();
+                    $scope.model.year = date2.getFullYear();
                     $scope.get_hijri_date();
                 }
             });
