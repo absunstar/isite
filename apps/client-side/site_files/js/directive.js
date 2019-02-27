@@ -939,7 +939,7 @@ app.directive('iList', function ($interval, $timeout, isite) {
         link: function ($scope, element, attrs, ctrl) {
 
             attrs.display = attrs.display || 'name'
-            attrs.primary = attrs.primary || 'id'
+            $scope.primary = attrs.primary = attrs.primary || 'id'
             attrs.space = attrs.space || ' '
             attrs.ngValue = attrs.ngValue || ''
 
