@@ -522,6 +522,7 @@ app.directive('iFulldate', function ($http) {
             $scope.$watch('ngModel.date', function (date) {
 
                 if (date) {
+                    date = new Date(date);
                     $scope.model = $scope.model || {};
                     $scope.model.date = date;
                     $scope.model.day = date.getDate();
