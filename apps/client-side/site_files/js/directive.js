@@ -945,7 +945,6 @@ app.directive('iList', function ($interval, $timeout, isite) {
             $scope.primary = attrs.primary = attrs.primary || 'id'
             attrs.space = attrs.space || ' '
             attrs.ngValue = attrs.ngValue || ''
-            $scope.primary_id = 'id';
 
             if (typeof attrs.disabled !== 'undefined') {
                 attrs.disabled = 'disabled';
@@ -1079,7 +1078,7 @@ app.directive('iList', function ($interval, $timeout, isite) {
 
                 if (items && $scope.ngModel) {
                     items.forEach(item => {
-                        if (isite.getValue(item, $scope.primary_id) == isite.getValue($scope.ngModel, $scope.primary_id)) {
+                        if (isite.getValue(item, $scope.primary) == isite.getValue($scope.ngModel, $scope.primary)) {
                             $scope.ngModel = item;
                             item.$display = $scope.getValue(item) + attrs.space + $scope.getValue2(item);
                             input.val(item.$display);
