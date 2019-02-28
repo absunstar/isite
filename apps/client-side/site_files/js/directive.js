@@ -1079,7 +1079,7 @@ app.directive('iList', function ($interval, $timeout, isite) {
 
                 if (items && $scope.ngModel) {
                     items.forEach(item => {
-                        if (isite.getValue(item, $scope.primary_id) === isite.getValue($scope.ngModel, $scope.primary_id)) {
+                        if (isite.getValue(item, $scope.primary_id) == isite.getValue($scope.ngModel, $scope.primary_id)) {
                             $scope.ngModel = item;
                             item.$display = $scope.getValue(item) + attrs.space + $scope.getValue2(item);
                             input.val(item.$display);
