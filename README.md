@@ -87,21 +87,14 @@ site = isite({
     theme: 'default',
     help: true,
     stdin: true,
-    session: {
-      timeout: 60 * 24 * 30,
-      enabled: true,
-      storage: "mongodb",
-      db: "sessions",
-      collection: "user_sessions"
-    },
     mongodb: {
       enabled: true,
       host: "127.0.0.1",
       port: "27017",
       userName: null,
       password: null,
-      db: "test",
-      collection: "test",
+      db: "default_db",
+      collection: "default_collection",
       limit: 10,
       prefix: {
         db: "",
@@ -113,10 +106,18 @@ site = isite({
         step: 1
       }
     },
+    session: {
+      timeout: 60 * 24 * 30,
+      enabled: true,
+      storage: "mongodb",
+      db: "default_db",
+      collection: "users_sessions"
+    },
     security: {
       enabled: true,
-      db: "security",
-      collection: "users",
+      db: "default_db",
+      users_collection: "users_info",
+      roles_collection: "users_roles",
       admin: {
         email: "admin@localhost",
         password: "admin"
