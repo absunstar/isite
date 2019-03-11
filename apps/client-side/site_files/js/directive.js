@@ -19,7 +19,11 @@ app.service('isite', function ($http) {
     this.getValue = function (obj, property) {
 
         if (!property) {
-            return null
+            return null;
+        }
+
+        if(property == '_'){
+            return obj;
         }
 
         let arr = property.split('.');
@@ -262,6 +266,81 @@ app.directive('iDate2', function () {
     };
 });
 
+app.directive('iTime', function () {
+
+    return {
+        link: function ($scope, element, attrs) {
+
+            if (typeof attrs.disabled !== 'undefined') {
+                attrs.disabled = 'disabled';
+            } else {
+                attrs.disabled = '';
+            }
+
+          
+            $scope.model = {};
+
+            $(element).find('select').focus(() => {
+                $('popup').hide();
+            });
+
+            $scope.$watch('ngModel', function (ngModel) {
+                if (ngModel && ngModel.date) {
+                    ngModel.date = new Date(ngModel.date);
+                    $scope.model = $scope.model || {};
+                    $scope.model.hour = ngModel.date.getHours();
+                    $scope.model.minute = ngModel.date.getMinutes();
+                } else {
+                    $scope.model = $scope.model || {};
+                    $scope.model.hour = 0;
+                    $scope.model.minute = 0;
+                }
+            });
+
+            $scope.updateTime = function () {
+             
+                if ($scope.model ) {
+                   
+                    $scope.ngModel = $scope.ngModel || {};
+                    $scope.ngModel.hour = $scope.model.hour;
+                    $scope.ngModel.minute = $scope.model.minute;
+                    $scope.ngModel.date = new Date( null , null , null , $scope.model.hour, $scope.model.minute, null);
+                  
+                } else {
+                    delete $scope.ngModel;
+                }
+            };
+
+        },
+        restrict: 'E',
+        require: 'ngModel',
+        scope: {
+            v: '@',
+            disabled: '@',
+            label: '@',
+            ngModel: '='
+        },
+        template: `
+      <div class="row i-time">
+
+        <div class=" block text-center">
+          <label> {{label}}  </label>
+        <div class="row text-center">
+        <form class="form">
+            <input  class="col5" type="number"  ng-model="model.minute" ng-change="updateTime()"/>
+            <div class="col2 space"> : </div>
+            <input class="col5" type="number"  ng-model="model.hour" ng-change="updateTime()"/>
+
+        </form>
+       
+
+        </div>
+  
+      </div>
+      `
+    };
+});
+
 app.directive('iDatetime2', function () {
 
     return {
@@ -307,8 +386,8 @@ app.directive('iDatetime2', function () {
                 if (ngModel) {
                     ngModel = new Date(ngModel);
                     $scope.model = $scope.model || {};
-                    $scope.model.hour = ngModel.getHour();
-                    $scope.model.minute = ngModel.getMinute();
+                    $scope.model.hour = ngModel.getHours();
+                    $scope.model.minute = ngModel.getMinutes();
                     $scope.model.day = ngModel.getDate();
                     $scope.model.month = ngModel.getMonth();
                     $scope.model.year = ngModel.getFullYear();
@@ -1110,7 +1189,7 @@ app.directive('iList', function ($interval, $timeout, isite) {
         template: `
         <div class="control">
             <label> {{label}} </label>
-            <input class="full-width text {{css}}" ng-disabled="disabled" v="{{v}}" ng-model="ngModel[display]" readonly>
+            <input class="full-width text {{css}}" ng-disabled="disabled" v="{{v}}" ng-model="ngModel[$display]" readonly>
             <popup>
             <div ng-show="showSearch" class="row search-box">
                 <div class="col2 center pointer" ng-click="hide()">

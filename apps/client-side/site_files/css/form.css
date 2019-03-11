@@ -131,7 +131,8 @@ input[type=date] {
 }
 
 input:focus,
-select:focus , textarea:focus {
+select:focus,
+textarea:focus {
     border-width: var(--input-focus-border-width);
     border-color: var(--input-focus-border-color);
 }
@@ -142,7 +143,7 @@ select:focus , textarea:focus {
     webkit-user-select: none;
     moz-user-select: none;
     ms-user-select: none;
-    
+
     text-decoration: none;
     text-align: center;
     vertical-align: middle;
@@ -276,4 +277,10 @@ fieldset legend {
 
 .i-date .year select {
     border-bottom-color: #000000;
+}
+
+.i-time .space {
+    padding: 5px;
+    font-size: 16px;
+    color: #000;
 }

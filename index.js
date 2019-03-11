@@ -55,6 +55,7 @@ module.exports = function init(options) {
   site.port = option.port
   site.dir = option.dir
 
+
   site.log = function (data, title) {
     if (site.options.log) {
       title = title || ''

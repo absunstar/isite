@@ -18,6 +18,8 @@
   let modal_z_index = 2000;
   site.showModal = function (name) {
 
+   
+
     $(name).click(() => {
       $('popup').hide();
     });
@@ -40,10 +42,12 @@
     }
 
 
-    let inputs = site.$(name + ' input');
+    let inputs = site.$(name + ' i-control input');
     if (inputs.length > 0) {
       inputs[0].focus();
     }
+
+   
 
     site.$(name + ' .close').forEach(cl => {
       cl.addEventListener("click", function () {
@@ -75,6 +79,9 @@
   };
 
   site.hideModal = function (name) {
+
+    $('popup').hide();
+
     let el = site.$(name);
     if (el.length > 0) {
       el[0].style.display = 'none';

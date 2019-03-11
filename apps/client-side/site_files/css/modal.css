@@ -67,6 +67,28 @@
   }
 }
 
+@-webkit-keyframes animatebottom {
+  from {
+    top: 1000px;
+    opacity: 0;
+  }
+  to {
+    top: 0;
+    opacity: 1;
+  }
+}
+
+@keyframes animatebottom {
+  from {
+    top: 1000px;
+    opacity: 0;
+  }
+  to {
+    top: 0;
+    opacity: 1;
+  }
+}
+
 @-webkit-keyframes animateleft {
   from {
     left: -300px;
