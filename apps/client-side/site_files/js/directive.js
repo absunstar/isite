@@ -285,11 +285,11 @@ app.directive('iTime', function () {
             });
 
             $scope.$watch('ngModel', function (ngModel) {
-                if (ngModel && ngModel.date) {
+                if (ngModel) {
                     ngModel.date = new Date(ngModel.date);
-                    $scope.model = $scope.model || {};
-                    $scope.model.hour = ngModel.date.getHours();
-                    $scope.model.minute = ngModel.date.getMinutes();
+                    $scope.model = $scope.model || {}
+                    $scope.model.hour = ngModel.hour;
+                    $scope.model.minute = ngModel.minute;
                 } else {
                     $scope.model = $scope.model || {};
                     $scope.model.hour = 0;
