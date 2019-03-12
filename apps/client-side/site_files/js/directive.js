@@ -1020,7 +1020,7 @@ app.directive('iList', function ($interval, $timeout, isite) {
         },
         link: function ($scope, element, attrs, ctrl) {
 
-            attrs.display = attrs.display || 'name'
+            $scope.display = attrs.display = attrs.display || 'name'
             $scope.primary = attrs.primary = attrs.primary || 'id'
             attrs.space = attrs.space || ' '
             attrs.ngValue = attrs.ngValue || ''
@@ -1169,9 +1169,11 @@ app.directive('iList', function ($interval, $timeout, isite) {
 
             $scope.$watch('ngModel', (ngModel) => {
                 input.val('');
+
+                $scope.ngModel = ngModel;
+
                 if (ngModel) {
-                    $scope.ngModel = ngModel;
-                    input.val($scope.getNgModelValue($scope.ngModel) + attrs.space + $scope.getNgModelValue2($scope.ngModel));
+                    input.val(' ' + $scope.getNgModelValue(ngModel) + attrs.space + $scope.getNgModelValue2(ngModel));
                 }
             });
 
@@ -1189,7 +1191,8 @@ app.directive('iList', function ($interval, $timeout, isite) {
         template: `
         <div class="control">
             <label> {{label}} </label>
-            <input class="full-width text {{css}}" ng-disabled="disabled" v="{{v}}" ng-model="ngModel[$display]" readonly>
+            <input class="full-width text {{css}}" ng-disabled="disabled" v="{{v}}"  readonly>
+            <input type="hidden" ng-model="ngModel.$display">
             <popup>
             <div ng-show="showSearch" class="row search-box">
                 <div class="col2 center pointer" ng-click="hide()">
