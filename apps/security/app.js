@@ -254,12 +254,7 @@ module.exports = function init(site) {
       function (err, user) {
         if (!err) {
 
-          response.user = {
-            id: user.id,
-            _id: user._id,
-            email: user.email,
-            permissions: user.permissions
-          }
+          response.user = user
 
           response.done = true
 
