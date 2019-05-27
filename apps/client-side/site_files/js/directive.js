@@ -821,9 +821,24 @@ app.directive('iCheckbox', function () {
         },
         link: function (scope, element, attrs, ctrl) {
 
+            if (typeof attrs.disabled !== 'undefined') {
+                attrs.disabled = 'disabled';
+            } else {
+                attrs.disabled = '';
+            }
+
+            scope.updateModal = function(ngModel){
+                if(attrs.disabled == 'disabled'){
+                    return false;
+                }else{
+                    scope.ngModel = !ngModel;
+                    return true;
+                }
+                
+            }
         },
         template: `
-        <div class="selector" ng-class="{'selected' : ngModel , 'un-selected' : !ngModel  }" ng-click="ngModel = !ngModel;ngChange($event , ngModel)">
+        <div class="selector" ng-class="{'selected' : ngModel , 'un-selected' : !ngModel  }" ng-click="updateModal(ngModel);ngChange($event , ngModel)">
           <i ng-show="!ngModel" class="fa fa-square"></i>  <i ng-show="ngModel" class="fa fa-check"></i> {{label}}
         </div>
         `
@@ -1016,6 +1031,7 @@ app.directive('iList', function ($interval, $timeout, isite) {
             ngModel: '=',
             ngSearch: '=',
             ngChange: '&',
+            ngAdd: '&',
             items: '='
         },
         link: function ($scope, element, attrs, ctrl) {
@@ -1187,6 +1203,7 @@ app.directive('iList', function ($interval, $timeout, isite) {
                 });
             };
 
+
         },
         template: `
         <div class="control">
@@ -1201,8 +1218,8 @@ app.directive('iList', function ($interval, $timeout, isite) {
                 <div class="col8">
                     <input ng-disabled="disabled" class="full-width search" ng-model="ngSearch" >
                 </div>
-                <div class="col2 center">
-                    <i class="fa fa-search center"></i>
+                <div class="col2 center pointer" ng-click="ngAdd()">
+                    <i class="fa fa-plus center"></i>
                 </div>
             </div>
                 <item  ng-repeat="item in items | filter:{ $display : ngSearch}" ng-click="updateModel(item)">
