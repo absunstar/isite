@@ -50,7 +50,7 @@ module.exports = function init(options) {
   site.call = event.call
   site.on = event.on
 
-  const option = require("./lib/option.js")(options, site)
+  const option = require("object-options")(options, site)
   site.options = option
   site.port = option.port
   site.dir = option.dir

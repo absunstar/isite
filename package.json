@@ -1,6 +1,6 @@
 {
   "name": "isite",
-  "version": "1.8.22",
+  "version": "1.9.0",
   "description": "Create Web Site with Full Development Features [Fast and Easy] ",
   "main": "index.js",
   "repository": {
@@ -33,10 +33,11 @@
     "name": "Amr Barakat",
     "email": "Absunstar@gmail.com"
   },
-  "license": "ISC",
+  "license": "UNLICENSED",
   "dependencies": {
     "cheerio": "^1.0.0-rc.2",
     "formidable": "^1.2.0",
+    "object-options": "1.0.0",
     "md5": "^2.2.1",
     "mongodb": "^2.2.35",
     "mv": "^2.1.1"
