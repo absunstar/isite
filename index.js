@@ -19,41 +19,8 @@ module.exports = function init(options) {
   }
 
 
-  require("./lib/prototype.js")
-
-  site.fn = require("./lib/fn.js")(site)
-  site.copy = site.fn.copy
-  site.toNumber = site.fn.toNumber
-
-  site.toDateTime = site.fn.toDateTime
-  site.toDateOnly = site.toDate = site.fn.toDateOnly
-
-  site.toDateX = site.fn.toDateX
-  site.toDateXT = site.fn.toDateXT
-  site.toDateXF = site.fn.toDateXF
-  site.toDateT = site.fn.toDateT
-  site.toDateF = site.fn.toDateF
-
-  site.fromJson = site.fn.fromJson
-  site.toJson = site.fn.toJson
-  site.from123 = site.fn.from123
-  site.fromBase64 = site.fn.fromBase64
-  site.to123 = site.fn.to123
-  site.toBase64 = site.fn.toBase64
-  site.getContentType = site.fn.getContentType
-  site.getFileEncode = site.fn.getFileEncode
-  site.typeof = site.typeOf = site.fn.typeOf
-  site.objectDiff = site.fn.objectDiff
-  site.toHtmlTable = site.fn.toHtmlTable
-
-  const event = require("./lib/event.js")
-  site.call = event.call
-  site.on = event.on
-
-  const option = require("object-options")(options, site)
-  site.options = option
-  site.port = option.port
-  site.dir = option.dir
+ require("object-options")(options, site)
+  
 
 
   site.log = function (data, title) {
