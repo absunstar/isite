@@ -1,30 +1,30 @@
 module.exports = function init(options) {
 
-  const site = function () {}
+  const _s_ = function () {}
 
 
-  site.http = require("http")
-  site.url = require("url")
-  site.fs = require("fs")
-  site.path = require("path")
-  site.zlib = require("zlib")
-  site.querystring = require("querystring")
-  site.formidable = require("formidable")
-  site.mv = require("mv")
-  site.$ = site.cheerio = require("cheerio")
+  _s_.http = require("http")
+  _s_.url = require("url")
+  _s_.fs = require("fs")
+  _s_.path = require("path")
+  _s_.zlib = require("zlib")
+  _s_.querystring = require("querystring")
+  _s_.formidable = require("formidable")
+  _s_.mv = require("mv")
+  _s_.$ = _s_.cheerio = require("cheerio")
 
 
-  site.require = function (file_path) {
-    return require(file_path)(site)
+  _s_.require = function (file_path) {
+    return require(file_path)(_s_)
   }
 
 
- require("object-options")(options, site)
+ require("object-options")(options, _s_)
   
 
 
-  site.log = function (data, title) {
-    if (site.options.log) {
+  _s_.log = function (data, title) {
+    if (_s_.options.log) {
       title = title || ''
       console.log('')
       console.log('================ ' + title + ' ================')
@@ -37,7 +37,7 @@ module.exports = function init(options) {
 
   }
 
-  if (site.options.stdin) {
+  if (_s_.options.stdin) {
 
     if (process.stdin && process.stdin.resume) {
       process.stdin.resume()
@@ -51,19 +51,19 @@ module.exports = function init(options) {
     process.on('exit', (code) => {
       console.log('----------------------------------------')
       console.log('')
-      console.log('       ' + site.options.name + ` Closed `)
+      console.log('       ' + _s_.options.name + ` Closed `)
       console.log('')
       console.log('----------------------------------------')
     })
     /* when ctrl + c */
     process.on('SIGINT', (code) => {
-      site.call('please close mongodb', null, () => {
+      _s_.call('please close mongodb', null, () => {
         process.exit()
       })
     })
 
     process.on('SIGTERM', (code) => {
-      site.call('please close mongodb', null, () => {
+      _s_.call('please close mongodb', null, () => {
         process.exit()
       })
     })
@@ -79,84 +79,84 @@ module.exports = function init(options) {
 
 
   }
-  site.fsm = require("./lib/fsm.js")(site)
+  _s_.fsm = require("./lib/fsm.js")(_s_)
 
-  site.fileList = site.fsm.list
-  site.fileStatSync = site.fsm.statSync
-  site.fileStat = site.fsm.stat
+  _s_.fileList = _s_.fsm.list
+  _s_.fileStatSync = _s_.fsm.statSync
+  _s_.fileStat = _s_.fsm.stat
 
-  site.css = site.fsm.css
-  site.xml = site.fsm.xml
-  site.js = site.fsm.js
-  site.json = site.fsm.json
-  site.html = site.fsm.html
-
-
-  site.download = site.fsm.download
-  site.downloadFile = site.fsm.downloadFile
-
-  site.isFileExists = site.fsm.isFileExists
-  site.isFileExistsSync = site.fsm.isFileExistsSync
-
-  site.readFile = site.fsm.readFile
-  site.readFiles = site.fsm.readFiles
-  site.readFileSync = site.fsm.readFileSync
-
-  site.writeFile = site.fsm.writeFile
-  site.writeFileSync = site.fsm.writeFileSync
-
-  site.removeFile = site.deleteFile = site.fsm.deleteFile
-  site.removeFileSync = site.deleteFileSync = site.fsm.deleteFileSync
-
-  site.createDir = site.mkDir = site.fsm.mkDir
-  site.createDirSync = site.mkdirSync = site.fsm.mkdirSync
-
-  site.storage = require("./lib/storage.js")(site).fn
-
-  const routing = require("./lib/routing.js")(site)
-  site.get = routing.get
-  site.post = routing.post
-  site.put = routing.put
-  site.delete = routing.delete
-  site.all = routing.all
-  site.run = site.start = site.listen = routing.start
-  site.routing = routing
+  _s_.css = _s_.fsm.css
+  _s_.xml = _s_.fsm.xml
+  _s_.js = _s_.fsm.js
+  _s_.json = _s_.fsm.json
+  _s_.html = _s_.fsm.html
 
 
-  site.words = require("./lib/words.js")(site)
-  site.words.add({
+  _s_.download = _s_.fsm.download
+  _s_.downloadFile = _s_.fsm.downloadFile
+
+  _s_.isFileExists = _s_.fsm.isFileExists
+  _s_.isFileExistsSync = _s_.fsm.isFileExistsSync
+
+  _s_.readFile = _s_.fsm.readFile
+  _s_.readFiles = _s_.fsm.readFiles
+  _s_.readFileSync = _s_.fsm.readFileSync
+
+  _s_.writeFile = _s_.fsm.writeFile
+  _s_.writeFileSync = _s_.fsm.writeFileSync
+
+  _s_.removeFile = _s_.deleteFile = _s_.fsm.deleteFile
+  _s_.removeFileSync = _s_.deleteFileSync = _s_.fsm.deleteFileSync
+
+  _s_.createDir = _s_.mkDir = _s_.fsm.mkDir
+  _s_.createDirSync = _s_.mkdirSync = _s_.fsm.mkdirSync
+
+  _s_.storage = require("./lib/storage.js")(_s_).fn
+
+  const routing = require("./lib/routing.js")(_s_)
+  _s_.get = routing.get
+  _s_.post = routing.post
+  _s_.put = routing.put
+  _s_.delete = routing.delete
+  _s_.all = routing.all
+  _s_.run = _s_.start = _s_.listen = routing.start
+  _s_.routing = routing
+
+
+  _s_.words = require("./lib/words.js")(_s_)
+  _s_.words.add({
     name: 'user_name',
     en: 'User Name',
     ar: 'أسم المستخدم'
   })
-  site.words.addList(site.dir + '/json/words.json')
+  _s_.words.addList(_s_.dir + '/json/words.json')
 
 
-  site.setting = require("./lib/setting.js")(site)
-  site.setting.set({
+  _s_.setting = require("./lib/setting.js")(_s_)
+  _s_.setting.set({
     name: 'loaded',
     value: true
   })
-  site.setting.addList(site.dir + '/json/setting.json')
+  _s_.setting.addList(_s_.dir + '/json/setting.json')
 
 
 
-  require("./lib/vars.js")(site)
+  require("./lib/vars.js")(_s_)
 
 
 
 
   //DataBase Management Oprations
-  if (site.options.mongodb.enabled) {
+  if (_s_.options.mongodb.enabled) {
     let mongodb = require("./lib/mongodb.js")
-    site.mongodb = mongodb(site)
+    _s_.mongodb = mongodb(_s_)
 
     let collection = require("./lib/collection")
-    site.connectCollection = function (option, db) {
-      return collection(site, option, db)
+    _s_.connectCollection = function (option, db) {
+      return collection(_s_, option, db)
     }
   }else{
-    site.connectCollection = function (option, db) {
+    _s_.connectCollection = function (option, db) {
       return {
         deleteDuplicate : function(){},
         findOne : function(){},
@@ -169,86 +169,86 @@ module.exports = function init(options) {
     }
   }
 
-  if (site.options.security.enabled) {
-    site.security = require("./lib/security.js")(site)
+  if (_s_.options.security.enabled) {
+    _s_.security = require("./lib/security.js")(_s_)
   }
 
-  site.cookie = require("./lib/cookie.js")
+  _s_.cookie = require("./lib/cookie.js")
 
-  site.sessions = require("./lib/sessions")(site)
-  site.session = require("./lib/session.js")
-
-
-  site.parser = require("./lib/parser.js")
-
-  site.md5 = site.hash = require("md5")
+  _s_.sessions = require("./lib/sessions")(_s_)
+  _s_.session = require("./lib/session.js")
 
 
-  site.ips = [] // all ip send requests [ip , requets count]
-  site.logs = [] // all log Messages if logEnabled = true
+  _s_.parser = require("./lib/parser.js")
+
+  _s_.md5 = _s_.hash = require("md5")
+
+
+  _s_.ips = [] // all ip send requests [ip , requets count]
+  _s_.logs = [] // all log Messages if logEnabled = true
 
   //Master Pages
-  site.masterPages = []
-  site.addMasterPage = function (page) {
-    site.masterPages.push({
+  _s_.masterPages = []
+  _s_.addMasterPage = function (page) {
+    _s_.masterPages.push({
       name: page.name,
       header: page.header,
       footer: page.footer
     })
   }
 
-  site.reset = function () {}
+  _s_.reset = function () {}
 
-  site.test = function () {
-    console.log(" Isite Test OK !! ")
+  _s_.test = function () {
+    console.log(" I_s_ Test OK !! ")
   }
 
-  site.on("[any] [saving data]", function () {
-    console.log("Saving Data :: " + site.options.saving_time + " Minute ")
+  _s_.on("[any] [saving data]", function () {
+    console.log("Saving Data :: " + _s_.options.saving_time + " Minute ")
   })
 
   setInterval(function () {
-    site.call("[any] [saving data]")
-  }, site.options.saving_time * 1000 * 60)
+    _s_.call("[any] [saving data]")
+  }, _s_.options.saving_time * 1000 * 60)
 
 
-  site.dashboard = require(__dirname + "/lib/dashboard.js")
-  site.dashboard(site)
+  _s_.dashboard = require(__dirname + "/lib/dashboard.js")
+  _s_.dashboard(_s_)
 
-  site.apps = []
-  site.importApp = function (app_path) {
+  _s_.apps = []
+  _s_.importApp = function (app_path) {
 
-    if (site.isFileExistsSync(app_path + '/site_files/json/words.json')) {
-      site.words.addList(app_path + '/site_files/json/words.json')
+    if (_s_.isFileExistsSync(app_path + '/site_files/json/words.json')) {
+      _s_.words.addList(app_path + '/site_files/json/words.json')
     }
 
-    if (site.isFileExistsSync(app_path + '/site_files/json/setting.json')) {
-      site.setting.addList(app_path + '/site_files/json/setting.json')
+    if (_s_.isFileExistsSync(app_path + '/site_files/json/setting.json')) {
+      _s_.setting.addList(app_path + '/site_files/json/setting.json')
     }
 
-    if (site.isFileExistsSync(app_path + '/site_files/json/vars.json')) {
-      site.addVars(app_path + '/site_files/json/vars.json')
+    if (_s_.isFileExistsSync(app_path + '/site_files/json/vars.json')) {
+      _s_.addVars(app_path + '/site_files/json/vars.json')
     }
 
-    if (site.isFileExistsSync(app_path + '/site_files/json/permissions.json')) {
-      site.security.addPermissions(app_path + '/site_files/json/permissions.json')
+    if (_s_.isFileExistsSync(app_path + '/site_files/json/permissions.json')) {
+      _s_.security.addPermissions(app_path + '/site_files/json/permissions.json')
     }
 
-    if (site.isFileExistsSync(app_path + '/site_files/json/roles.json')) {
-      site.security.addRoles(app_path + '/site_files/json/roles.json')
+    if (_s_.isFileExistsSync(app_path + '/site_files/json/roles.json')) {
+      _s_.security.addRoles(app_path + '/site_files/json/roles.json')
     }
 
-    if (site.isFileExistsSync(app_path + '/libs/notifications.js')) {
-      require(app_path + '/libs/notifications.js')(site)
+    if (_s_.isFileExistsSync(app_path + '/libs/notifications.js')) {
+      require(app_path + '/libs/notifications.js')(_s_)
     }
 
-    if (site.isFileExistsSync(app_path + '/app.js')) {
-      site.apps.push({
+    if (_s_.isFileExistsSync(app_path + '/app.js')) {
+      _s_.apps.push({
         name: app_path.split('/').pop(),
         path: app_path
       })
       let app = require(app_path + '/app.js')
-      return app(site)
+      return app(_s_)
     }
 
   }
@@ -256,26 +256,26 @@ module.exports = function init(options) {
 
 
 
-  site.loadApp = function (name) {
+  _s_.loadApp = function (name) {
 
-    let app_path = site.options.apps_dir + '/' + name
-    return site.importApp(app_path)
+    let app_path = _s_.options.apps_dir + '/' + name
+    return _s_.importApp(app_path)
 
   }
 
-  site.loadLocalApp = function (name) {
-    site.importApp(__dirname + '/apps/' + name)
+  _s_.loadLocalApp = function (name) {
+    _s_.importApp(__dirname + '/apps/' + name)
   }
 
-  if (site.options.apps === true) {
-    if (site.isFileExistsSync(site.options.apps_dir) && site.fs.lstatSync(site.options.apps_dir).isDirectory()) {
-      site.fs.readdir(site.options.apps_dir, (err, files) => {
+  if (_s_.options.apps === true) {
+    if (_s_.isFileExistsSync(_s_.options.apps_dir) && _s_.fs.lstatSync(_s_.options.apps_dir).isDirectory()) {
+      _s_.fs.readdir(_s_.options.apps_dir, (err, files) => {
         if (!err && files && files.length > 0) {
-          site.log('Auto Loading Apps ...')
+          _s_.log('Auto Loading Apps ...')
           files.forEach(file => {
-            if (site.fs.lstatSync(site.options.apps_dir + '/' + file).isDirectory()) {
+            if (_s_.fs.lstatSync(_s_.options.apps_dir + '/' + file).isDirectory()) {
               console.log('Auto Loading App : ' + file)
-              site.loadApp(file)
+              _s_.loadApp(file)
             }
           })
         }
@@ -283,5 +283,5 @@ module.exports = function init(options) {
     }
   }
 
-  return site
+  return _s_
 }
