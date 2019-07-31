@@ -36,7 +36,7 @@
 .modal-body {
   padding: 2px 16px;
   color: var(--modal-color);
-  overflow-y: scroll;
+  overflow-y: auto;
   max-height: 85vh;
 }
 

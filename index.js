@@ -11,6 +11,7 @@ module.exports = function init(options) {
   _s_.querystring = require("querystring")
   _s_.formidable = require("formidable")
   _s_.mv = require("mv")
+  _s_.request = require("request")
   _s_.$ = _s_.cheerio = require("cheerio")
 
 
