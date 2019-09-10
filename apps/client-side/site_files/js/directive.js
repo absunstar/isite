@@ -18,7 +18,7 @@ app.service('isite', function ($http) {
 
     this.getValue = function (obj, property) {
 
-        if (!property) {
+        if (!obj || !property) {
             return null;
         }
 
