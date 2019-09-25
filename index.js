@@ -13,15 +13,15 @@ module.exports = function init(options) {
   _s_.mv = require("mv")
   _s_.request = require("request")
   _s_.$ = _s_.cheerio = require("cheerio")
-
+  _s_.features = []
 
   _s_.require = function (file_path) {
     return require(file_path)(_s_)
   }
 
 
- require("object-options")(options, _s_)
-  
+  require("object-options")(options, _s_)
+
 
 
   _s_.log = function (data, title) {
@@ -156,16 +156,16 @@ module.exports = function init(options) {
     _s_.connectCollection = function (option, db) {
       return collection(_s_, option, db)
     }
-  }else{
+  } else {
     _s_.connectCollection = function (option, db) {
       return {
-        deleteDuplicate : function(){},
-        findOne : function(){},
-        get : function(){},
-        find : function(){},
-        add : function(){},
-        update : function(){},
-        delete : function(){},
+        deleteDuplicate: function () {},
+        findOne: function () {},
+        get: function () {},
+        find: function () {},
+        add: function () {},
+        update: function () {},
+        delete: function () {},
       }
     }
   }
