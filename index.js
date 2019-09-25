@@ -23,7 +23,6 @@ module.exports = function init(options) {
   require("object-options")(options, _s_)
 
 
-
   _s_.log = function (data, title) {
     if (_s_.options.log) {
       title = title || ''
