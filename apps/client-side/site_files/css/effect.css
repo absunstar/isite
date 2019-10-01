@@ -163,6 +163,7 @@
 
 .full-width {
     width: 100%;
+    margin: 0px;
 }
 
 .hover-scale:hover {

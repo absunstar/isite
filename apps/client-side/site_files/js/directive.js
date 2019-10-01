@@ -1047,6 +1047,13 @@ app.directive('iList', function ($interval, $timeout, isite) {
                 attrs.disabled = '';
             }
 
+            if (typeof attrs.ngAdd == 'undefined') {
+                $scope.fa_add = 'fa-search';
+            } else {
+                $scope.fa_add = 'fa-plus';
+            }
+
+            
 
             if (typeof attrs.ngSearch == 'undefined') {
                 $scope.showSearch = false;
@@ -1219,12 +1226,16 @@ app.directive('iList', function ($interval, $timeout, isite) {
                     <input ng-disabled="disabled" class="full-width search" ng-model="ngSearch" >
                 </div>
                 <div class="col2 center pointer" ng-click="ngAdd()">
-                    <i class="fa fa-plus center"></i>
+                    <i class="fa {{fa_add}} center"></i>
                 </div>
             </div>
                 <item  ng-repeat="item in items | filter:{ $display : ngSearch}" ng-click="updateModel(item)">
                     {{getValue(item)}} <small class="left"> {{getValue2(item)}} </small>
                 </item>
+                <br>
+                <div class="row center bg-red padding pointer" ng-click="updateModel({})">
+                     <i class="fa fa-trash white" aria-hidden="true"></i>
+                </div>
             </popup>
         </div>
         `

@@ -15,7 +15,7 @@
     return arr;
   };
 
-  let modal_z_index = 2000;
+  let modal_z_index = 999999;
   site.showModal = function (name) {
 
    
