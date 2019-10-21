@@ -203,12 +203,12 @@ module.exports = function init(options) {
     console.log(" I_s_ Test OK !! ")
   }
 
-  _s_.on("[any] [saving data]", function () {
+  _s_.on("[any][saving data]", function () {
     console.log("Saving Data :: " + _s_.options.saving_time + " Minute ")
   })
 
   setInterval(function () {
-    _s_.call("[any] [saving data]")
+    _s_.call("[any][saving data]")
   }, _s_.options.saving_time * 1000 * 60)
 
 
@@ -221,9 +221,10 @@ module.exports = function init(options) {
     if (_s_.isFileExistsSync(app_dir) && _s_.fs.lstatSync(app_dir).isDirectory()) {
       _s_.fs.readdir(app_dir, (err, files) => {
         if (!err && files && files.length > 0) {
-          _s_.log('Auto Loading Apps ...')
+          _s_.log('=== Auto Importing Apps ===')
           files.forEach(file => {
             if(_s_.fs.lstatSync(app_dir + '/' + file).isDirectory()){
+              console.log('===  Importing App : ' + file)
               _s_.importApp(app_dir + '/' + file)
             }
           })

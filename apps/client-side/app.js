@@ -107,6 +107,7 @@ module.exports = function (site) {
   })
 
   site.get("/api/image/:category/:name", (req, res) => {
+    res.set('Cache-Control' , 'public, max-age=2592000')
     res.download(site.dir + "/../../uploads/" + req.params.category + "/images/" + req.params.name)
   })
 
