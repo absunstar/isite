@@ -2,7 +2,7 @@ module.exports = function init(options) {
 
   const _s_ = function () {}
 
-
+  _s_.ready = true
   _s_.http = require("http")
   _s_.url = require("url")
   _s_.fs = require("fs")
