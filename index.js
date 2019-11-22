@@ -4,6 +4,7 @@ module.exports = function init(options) {
 
   _s_.ready = true
   _s_.http = require("http")
+  _s_.https = require("https")
   _s_.url = require("url")
   _s_.fs = require("fs")
   _s_.path = require("path")
