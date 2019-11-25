@@ -23,6 +23,7 @@
 - Custom Html Attributes [Server side Tags]
 - MongoDB Full Integration
 - Client libraries [jquery - bootstrap - font-awesome - angular]
+- Local Multi Charts Apps
 - Development Helper Functions
 - Site Dynamic Events Callback  
 
@@ -1077,6 +1078,51 @@ site.get('/files/file1.zip' , (req , res)=>{
  <script src="/x-js/bootstrap3.js"></script>
  <script src="/x-js/angular.js"></script>
 ```
+
+## Charts
+
+- Server Side
+```js
+site.loadLocalApp('charts');
+```
+
+- Client Site
+```html
+<div id="chart1"></div>
+<script src="/js/charts.js"></script>
+```
+
+```js
+    var data =[{
+        "item": "item 1",
+        "count": 500
+      }, {
+       "item": "item 2",
+        "count": 200
+      }, {
+       "item": "item 3",
+        "count": 700
+      }, {
+       "item": "item 4",
+        "count": 300
+      }, {
+       "item": "item 5",
+        "count": 800
+      }, {
+        "item": "item 6",
+        "count": 60
+      }]
+
+    site.create_chart({
+      type : 'xy',
+      x : 'item',
+      y : 'count',
+      data : data,
+      selector : '#chart1'
+    })
+
+```
+
 
 ## Security
 

@@ -2,6 +2,9 @@ module.exports = function init(options) {
 
   const _s_ = function () {}
 
+
+  _s_.package = require(__dirname + '/package.json')
+
   _s_.ready = true
   _s_.http = require("http")
   _s_.https = require("https")
@@ -217,14 +220,14 @@ module.exports = function init(options) {
   _s_.dashboard(_s_)
 
   _s_.apps = []
-  _s_.importApps = function(app_dir){
+  _s_.importApps = function (app_dir) {
 
     if (_s_.isFileExistsSync(app_dir) && _s_.fs.lstatSync(app_dir).isDirectory()) {
       _s_.fs.readdir(app_dir, (err, files) => {
         if (!err && files && files.length > 0) {
           _s_.log('=== Auto Importing Apps ===')
           files.forEach(file => {
-            if(_s_.fs.lstatSync(app_dir + '/' + file).isDirectory()){
+            if (_s_.fs.lstatSync(app_dir + '/' + file).isDirectory()) {
               console.log('===  Importing App : ' + file)
               _s_.importApp(app_dir + '/' + file)
             }
@@ -233,7 +236,7 @@ module.exports = function init(options) {
       })
     }
   }
-  _s_.importApp = function (app_path , name2) {
+  _s_.importApp = function (app_path, name2) {
 
     if (_s_.isFileExistsSync(app_path + '/site_files/json/words.json')) {
       _s_.words.addList(app_path + '/site_files/json/words.json')
@@ -262,7 +265,7 @@ module.exports = function init(options) {
     if (_s_.isFileExistsSync(app_path + '/app.js')) {
       _s_.apps.push({
         name: app_path.split('/').pop(),
-        name2 : name2 ,
+        name2: name2,
         path: app_path
       })
       let app = require(app_path + '/app.js')
@@ -274,15 +277,15 @@ module.exports = function init(options) {
 
 
 
-  _s_.loadApp = function (name , name2) {
+  _s_.loadApp = function (name, name2) {
 
     let app_path = _s_.options.apps_dir + '/' + name
-    return _s_.importApp(app_path , name2)
+    return _s_.importApp(app_path, name2)
 
   }
 
-  _s_.loadLocalApp = function (name , name2) {
-    _s_.importApp(__dirname + '/apps/' + name , name2)
+  _s_.loadLocalApp = function (name, name2) {
+    _s_.importApp(__dirname + '/apps/' + name, name2)
   }
 
   if (_s_.options.apps === true) {
@@ -301,5 +304,15 @@ module.exports = function init(options) {
     }
   }
 
+  _s_.createDir(_s_.options.upload_dir)
+  _s_.createDir(_s_.options.download_dir)
+
+
+
+  console.log('')
+  console.log('************************************')
+  console.log(`****** isite version ${_s_.package.version} *******`)
+  console.log('************************************')
+  console.log('')
   return _s_
 }
