@@ -196,7 +196,8 @@ app.directive('iDate2', function () {
             for (let i = 1900; i < 2100; i++) {
                 $scope.years1.push(i);
             }
-            $scope.monthes1 = ['يناير', 'فبراير', 'مارس', 'ابريل', 'مايو', 'يونيو', 'يوليو', 'اغسطس', 'سبتمبر', 'اكتوبر', 'نوفمبر', 'ديسمبر'];
+            $scope.monthes1 = ['يناير / Jan', 'فبراير / Feb', 'مارس / Mar', 'ابريل / Aper', 'مايو / May', 'يونيو / June', 'يوليو / Jule', 'اغسطس / Aug', 'سبتمبر / Sep', 'اكتوبر / Oct', 'نوفمبر / Nov', 'ديسمبر / Des'];
+            $scope.monthes0 = ['يناير', 'فبراير', 'مارس', 'ابريل', 'مايو', 'يونيو', 'يوليو', 'اغسطس', 'سبتمبر', 'اكتوبر', 'نوفمبر', 'ديسمبر'];
 
             $scope.model = null;
 
@@ -277,8 +278,18 @@ app.directive('iTime', function () {
                 attrs.disabled = '';
             }
 
-          
             $scope.model = {};
+
+            $scope.hours = [];
+            for (let i = 1; i < 25; i++) {
+                $scope.hours.push(i);
+            }
+
+            $scope.minutes = [];
+            for (let i = 0; i < 60; i++) {
+                $scope.minutes.push(i);
+            }
+
 
             $(element).find('select').focus(() => {
                 $('popup').hide();
@@ -322,20 +333,36 @@ app.directive('iTime', function () {
         },
         template: `
       <div class="row i-time">
-
-        <div class=" block text-center">
-          <label> {{label}}  </label>
-        <div class="row text-center">
-        <form class="form">
-            <input  class="col5" type="number"  ng-model="model.minute" ng-change="updateTime()"/>
-            <div class="col2 space"> : </div>
-            <input class="col5" type="number"  ng-model="model.hour" ng-change="updateTime()"/>
-
-        </form>
-       
-
+        <div class=" control ">
+          <label class="text-center"> {{label}}  </label>
+        <div class="row">
+            <div class="col6 right">
+            <div class="row">
+            <div class="col2"></div>
+            <div class="col8">
+            <select ng-disabled="disabled" ng-model="model.minute" ng-change="updateTime()" class="small appearance-none no-border-left no-border-radius" >
+                    <option ng-repeat="m in minutes" ng-value="m"> {{m}}</option>
+                </select>
+            </div>
+            <div class="col2"></div>
+            </div>
+                
+            </div>
+            <div class="col6">
+            <div class="row">
+            <div class="col2 space right">
+            <span> : </span>
+            </div>
+            <div class="col8">
+                <select ng-disabled="disabled" ng-model="model.hour" ng-change="updateTime()" class="large blue appearance-none no-border-left no-border-radius" >
+                    <option ng-repeat="h in hours" ng-value="h"> {{h}} </option>
+                </select>
+            </div>
+           
+            </div>
+           
+            </div>
         </div>
-  
       </div>
       `
     };

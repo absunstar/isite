@@ -27,6 +27,10 @@
   animation-duration: var(--modal-animation-duration);
 }
 
+.modal-content.small{
+  width: 50%;
+}
+
 .modal-header {
   padding: 8px 16px;
   background-color: var(--modal-header-background-color);

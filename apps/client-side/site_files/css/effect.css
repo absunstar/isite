@@ -17,8 +17,8 @@
 .center b,
 .center i,
 .center img {
-    margin: 0 auto;
-    text-align: center;
+    margin: 0 auto !important;
+    text-align: center !important;
 }
 
 .center i.center {
@@ -26,23 +26,23 @@
 }
 
 .left {
-    float: left;
+    float: left !important;
 }
 
 .right {
-    float: right;
+    float: right !important;
 }
 
 .text-center {
-    text-align: center;
+    text-align: center !important;
 }
 
 .text-left {
-    text-align: left;
+    text-align: left !important;
 }
 
 .text-right {
-    text-align: right;
+    text-align: right !important;
 }
 
 .border {
