@@ -108,6 +108,36 @@ app.service('isite', function ($http) {
         callback();
     };
 
+    this.upload = function (files, options, callback) {
+        options = Object.assign({
+            api : '/api/upload/file'
+        }, options);
+        callback = callback || function () {};
+
+        var fd = new FormData();
+        fd.append("fileToUpload", files[0]);
+        $http.post(options.api, fd, {
+            withCredentials: true,
+            headers: {
+                'Content-Type': undefined
+            },
+            uploadEventHandlers: {
+                progress: function (e) {
+                    callback(null, null, e);
+                }
+            },
+            transformRequest: angular.identity
+        }).then(function (res) {
+            if (res.data && res.data.done && res.data.file) {
+                callback(null, {
+                    name: res.data.file.name,
+                    url: res.data.file.url
+                });
+            }
+        }, function (error) {
+            callback(error, null, null);
+        });
+    };
 
 });
 
@@ -1576,6 +1606,74 @@ app.directive('iImage', function ($interval, isite) {
         <form class="form text-center pointer">
             <input  class="hidden" type="file" name="file" />
             <img class="bg-white"  ng-src="{{ngModel}}" ngClick="ngClick()" onerror="this.src='/images/no.jpg'" />
+            <progress class="row"></progress>
+        </form>
+        `
+    };
+
+});
+
+app.directive('iUpload', function ($interval, isite) {
+
+    return {
+        restrict: 'E',
+        required: 'ngModel',
+        scope: {
+            label: '@',
+            api: '@',
+            type: '@',
+            ngModel: '=',
+            ngClick: '&'
+        },
+        link: function (scope, element, attrs, ctrl) {
+            scope.type = scope.type || 'bg-green';
+
+            let input = $(element).find('input')[0];
+            let a = $(element).find('a')[0];
+            let progress = $(element).find('progress')[0];
+            $(progress).hide();
+
+            if (attrs.view !== '') {
+                a.addEventListener('click', function () {
+                    input.click();
+                });
+            }
+
+           
+                input.addEventListener('change', function () {
+                    isite.upload(this.files, {
+                        api: scope.api
+                    }, (err, file, e) => {
+
+                        if (e) {
+                            $(progress).show();
+                            progress.value = e.loaded;
+                            progress.max = e.total;
+                        }
+
+                        if (file) {
+                            if (typeof scope.ngModel === 'undefined') {
+                                scope.ngModel = [];
+                            }
+                            scope.ngModel.push(file)
+                        }
+                    });
+                });
+            
+
+
+            scope.$watch('ngModel', (ngModel) => {
+                if (ngModel) {
+                    a.setAttribute('url', ngModel);
+                }
+            });
+
+
+        },
+        template: `
+        <form class="form text-center pointer">
+            <input  class="hidden" type="file" name="file" />
+            <a class="btn {{type}}" ngClick="ngClick()" url="{{ngModel}}"> {{label}} </a>
             <progress class="row"></progress>
         </form>
         `

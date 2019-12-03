@@ -1,6 +1,6 @@
 {
   "name": "isite",
-  "version": "1.13.20",
+  "version": "1.13.21",
   "description": "Create Enterprise Multi-Language Web Site [Fast and Easy] ",
   "main": "index.js",
   "repository": {
@@ -22,6 +22,7 @@
     "api",
     "restful",
     "framework",
+    "charts",
     "fonts",
     "arabic",
     "mongodb"
