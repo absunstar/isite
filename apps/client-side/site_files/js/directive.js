@@ -1623,7 +1623,8 @@ app.directive('iUpload', function ($interval, isite) {
             api: '@',
             type: '@',
             ngModel: '=',
-            ngClick: '&'
+            ngClick: '&',
+            onUploaded: '&'
         },
         link: function (scope, element, attrs, ctrl) {
             scope.type = scope.type || 'bg-green';
@@ -1652,10 +1653,9 @@ app.directive('iUpload', function ($interval, isite) {
                         }
 
                         if (file) {
-                            if (typeof scope.ngModel === 'undefined') {
-                                scope.ngModel = [];
-                            }
-                            scope.ngModel.push(file)
+                            scope.ngModel = file;
+                            
+                            scope.onUploaded();
                         }
                     });
                 });
