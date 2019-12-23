@@ -78,7 +78,10 @@ site.run([8080 , 5555 , 9090 , 12345])
 var isite = require('isite')
 site = isite({
     port: process.env.port || 80,
+    cwd: process.cwd(),
     dir: process.cwd() + '/site_files',
+    upload_dir : process.cwd() + '/../uploads',
+    download_dir : process.cwd() + '/../downloads',
     apps: true,
     apps_dir: process.cwd() + '/apps',
     name: "Your Site",
@@ -88,6 +91,13 @@ site = isite({
     theme: 'default',
     help: true,
     stdin: true,
+    https : {
+      enabled : false,
+      port : null,
+      ports : [],
+      key :  null,
+      cert : null
+    },
     mongodb: {
       enabled: true,
       host: "127.0.0.1",
@@ -111,12 +121,12 @@ site = isite({
       timeout: 60 * 24 * 30,
       enabled: true,
       storage: "mongodb",
-      db: "default_db",
+      db: null,
       collection: "users_sessions"
     },
     security: {
       enabled: true,
-      db: "default_db",
+      db: null,
       users_collection: "users_info",
       roles_collection: "users_roles",
       admin: {

@@ -17,7 +17,6 @@ module.exports = function init(options) {
   _s_.mv = require("mv")
   _s_.request = require("request")
   _s_.$ = _s_.cheerio = require("cheerio")
-  _s_.features = []
 
   _s_.require = function (file_path) {
     return require(file_path)(_s_)
@@ -146,7 +145,7 @@ module.exports = function init(options) {
 
 
   require("./lib/vars.js")(_s_)
-
+  require("./lib/features.js")(_s_)
 
 
 
