@@ -232,9 +232,9 @@
   };
 
 
-  site.toNumber = function (_num) {
+  site.to_number = site.toNumber = function (_num) {
     if (_num) {
-      return parseFloat(_num);
+      return parseFloat(_num).toFixed(3);
     }
     return 0;
   };
