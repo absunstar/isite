@@ -1331,7 +1331,9 @@ app.directive('iChecklist', function ($interval) {
                 if ($scope.ngModel) {
 
                     $scope.ngModel.forEach(mitem => {
-                        $scope.selectedItems.push(mitem);
+                      
+                      $scope.selectedItems.push(mitem);
+                        
                     });
 
                     if ($scope.items) {

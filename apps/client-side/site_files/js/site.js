@@ -239,6 +239,20 @@
     return 0;
   };
 
+  site.to_float = site.toFloat = function (_num) {
+    if (_num) {
+      return parseFloat(_num);
+    }
+    return 0;
+  };
+
+  site.to_int = site.toInt = function (_num) {
+    if (_num) {
+      return parseInt(_num);
+    }
+    return 0;
+  };
+
   site.$base64Letter = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/=";
   site.$base64Numbers = [];
   for (let $i = 11; $i < 99; $i++) {
