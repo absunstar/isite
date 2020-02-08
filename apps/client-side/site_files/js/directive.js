@@ -798,6 +798,7 @@ app.directive('iControl', function () {
         require: 'ngModel',
         scope: {
             v: '@',
+            id2: '@',
             label: '@',
             type: '@',
             disabled: '@',
@@ -823,7 +824,7 @@ app.directive('iControl', function () {
         template: `
         <div class="control">
             <label> {{label}} </label>
-            <input ng-disabled="disabled" autofocus v="{{v}}"  type="{{type}}" ng-model="ngModel" ng-change="ngChange()" ngKeydown="ngKeydown()">
+            <input id="{{id2}}" ng-disabled="disabled" autofocus v="{{v}}"  type="{{type}}" ng-model="ngModel" ng-change="ngChange()" ngKeydown="ngKeydown()">
         </div>
         `
     };
