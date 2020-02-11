@@ -1229,12 +1229,13 @@ site.on('event name', function(obj) {
 - This Framework Free for Education and Supported For Ever
 - This Framework Upgraded Arround the Clock
 - This Framework Development by One Developer
-- For Producation Contract what's up (01090061266)
+- For Producation Contract what's up (+201090061266)
 
 # Contact Me
 
+- Patreon  : https://www.patreon.com/bePatron?u=30482516
 - Email    : Absunstar@gmail.com
 - Linkedin : https://www.linkedin.com/in/absunstar
 - Github   : https://github.com/absunstar
 - Paypal   : https://paypal.me/absunstar
-- What's up: 01090061266
+- What's up: +201090061266
