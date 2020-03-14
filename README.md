@@ -1233,7 +1233,7 @@ site.on('event name', function(obj) {
 
 # Contact Me
 
-- Patreon  : https://www.patreon.com/bePatron?u=30482516
+- Patreon  : https://www.patreon.com/next_corporation
 - Email    : Absunstar@gmail.com
 - Linkedin : https://www.linkedin.com/in/absunstar
 - Github   : https://github.com/absunstar

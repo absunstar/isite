@@ -108,6 +108,17 @@
     }
   };
 
+  site.translate = function(op ,callback){
+    if (typeof op === 'string') {
+      op = {
+        text: op,
+        lang : 'ar'
+      }
+    }
+    op.url = `https://translate.googleapis.com/translate_a/single?client=gtx&sl=auto&tl=${op.lang}&dt=t&dt=bd&dj=1&q=${op.text}`;
+    site.getData(op , callback);
+  };
+
   site.getData = function (op, callback, error) {
     callback = callback || function () {};
     error = error || function () {};
