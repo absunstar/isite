@@ -584,6 +584,12 @@ site.var('siteBrand', 'XSite');
 <div x-feature="!login">Only Not Login Users Can Show This Content</div>
 // auto detect user login status 
 
+
+<div x-features="os.mobile || os.android">Only Users From Mobile or Android Can Show This Content</div>
+<div x-features="os.mobile && os.android">Only Users From Mobile and Android Can Show This Content</div>
+// Using || , && to Multi Features
+
+
 <div x-feature="os.mobile">Only Users From Mobile Can Show This Content</div>
 <div x-feature="os.desktop">Only Users From Mobile Can Show This Content</div>
 
