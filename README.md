@@ -1154,6 +1154,9 @@ site.loadLocalApp('charts');
 
 ```js
 site.get('/' , (req , res)=>{
+    res.render('index.html' , {name : 'amr' , age : '36'} , {compress : true , cache : false , parser : 'html css js'}) 
+    res.render('custom.css' , {'font-size' : '18px'} , {parser : 'css'}) 
+    res.render('custom.js' , {'allow-ads' : true} , {parser : 'js'}) 
     res.status(301) // set response code to 301 and return response object
     res.set('Content-Type', 'text/plain'); // add response header
     res.remove('Content-Type'); // remove response header
@@ -1162,7 +1165,6 @@ site.get('/' , (req , res)=>{
     res.send('HTML CONTENT') // Any HTML Content or object
     res.send(obj) // Any HTML Content or object
     res.htmlContent('HTML CONTENT') // Any HTML Content
-    res.render('index' , {name : 'amr' , age : '36'}) // html file name - auto parser [html and css content]
     res.html('index') // like res.render
     res.css('bootstrap') // css file name
     res.js('jquery') // js file name
@@ -1227,6 +1229,10 @@ site.on('event name', function(obj) {
      console.log('after excute some long code')
  })
 ```
+
+## Must Update
+
+- You Must Update This Lib Every Month
 
 ## Hints
 
