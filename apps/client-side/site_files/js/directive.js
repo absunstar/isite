@@ -14,7 +14,7 @@ app.filter('xdate', function () {
     };
 });
 
-app.service('isite', function ($http) {
+app.service('isite',['$http', function ($http) {
 
     this.getValue = function (obj, property) {
 
@@ -139,7 +139,7 @@ app.service('isite', function ($http) {
         });
     };
 
-});
+}]);
 
 app.directive('iDate', function () {
 
@@ -603,7 +603,7 @@ app.directive('iMonth2', function () {
     };
 });
 
-app.directive('iFulldate', function ($http) {
+app.directive('iFulldate',['$http', function ($http) {
 
     return {
         link: function ($scope, element, attrs, ngModel) {
@@ -789,7 +789,7 @@ app.directive('iFulldate', function ($http) {
       </div>
       `
     };
-});
+}]);
 
 app.directive('iControl', function () {
 
@@ -1071,7 +1071,7 @@ app.directive('iButton', function () {
 
 });
 
-app.directive('iList', function ($interval, $timeout, isite) {
+app.directive('iList',['$interval','a$timeout','isite', function ($interval, $timeout, isite) {
 
     return {
         restrict: 'E',
@@ -1299,10 +1299,10 @@ app.directive('iList', function ($interval, $timeout, isite) {
         `
     };
 
-});
+}]);
 
 
-app.directive('iChecklist', function ($interval) {
+app.directive('iChecklist', ['$interval',function ($interval) {
 
     return {
         restrict: 'E',
@@ -1404,9 +1404,9 @@ app.directive('iChecklist', function ($interval) {
         `
     };
 
-});
+}]);
 
-app.directive('iChecklist2', function ($interval) {
+app.directive('iChecklist2', ['$interval',function ($interval) {
 
     return {
         restrict: 'E',
@@ -1508,9 +1508,9 @@ app.directive('iChecklist2', function ($interval) {
         `
     };
 
-});
+}]);
 
-app.directive('iRadiolist', function ($interval) {
+app.directive('iRadiolist', ['$interval',function ($interval) {
 
 
     return {
@@ -1553,9 +1553,9 @@ app.directive('iRadiolist', function ($interval) {
         `
     };
 
-});
+}]);
 
-app.directive('iImage', function ($interval, isite) {
+app.directive('iImage', ['$interval' ,'isite',function ($interval, isite) {
 
     return {
         restrict: 'E',
@@ -1614,9 +1614,9 @@ app.directive('iImage', function ($interval, isite) {
         `
     };
 
-});
+}]);
 
-app.directive('iUpload', function ($interval, isite) {
+app.directive('iUpload', ['$interval' ,'isite',function ($interval, isite) {
 
     return {
         restrict: 'E',
@@ -1682,9 +1682,9 @@ app.directive('iUpload', function ($interval, isite) {
         `
     };
 
-});
+}]);
 
-app.directive('iFiles', function ($interval, isite) {
+app.directive('iFiles', ['$interval' ,'isite',function ($interval, isite) {
 
     return {
         restrict: 'E',
@@ -1786,9 +1786,9 @@ app.directive('iFiles', function ($interval, isite) {
         `
     };
 
-});
+}]);
 
-app.directive('iDrag', function ($document) {
+app.directive('iDrag', ['$document' ,function ($document) {
     return function (scope, element, attr) {
         var startX = 0,
             startY = 0,
@@ -1822,9 +1822,9 @@ app.directive('iDrag', function ($document) {
         };
 
     };
-});
+}]);
 
-app.directive('iTreeview', function ($interval, $timeout, isite) {
+app.directive('iTreeview', ['$interval' ,'$timeout' ,'isite',function ($interval, $timeout, isite) {
 
     return {
         restrict: 'E',
@@ -1962,9 +1962,9 @@ app.directive('iTreeview', function ($interval, $timeout, isite) {
         `
     };
 
-});
+}]);
 
-app.directive('iTreenode', function ($interval, $timeout, isite) {
+app.directive('iTreenode', ['$interval','$timeout' ,'isite',function ($interval, $timeout, isite) {
 
     return {
         restrict: 'E',
@@ -2097,4 +2097,4 @@ app.directive('iTreenode', function ($interval, $timeout, isite) {
         `
     };
 
-});
+}]);
