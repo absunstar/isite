@@ -27,7 +27,7 @@
   animation-duration: var(--modal-animation-duration);
 }
 
-.modal-content.small{
+.modal.small .modal-content,.modal-content.small{
   width: 50%;
 }
 

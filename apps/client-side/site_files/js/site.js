@@ -1,4 +1,4 @@
-(function (window, document, undefined) {
+(function (window, document, undefined , $) {
 
   String.prototype.like = function matchRuleShort(rule) {
     return new RegExp("^" + rule.split("*").join(".*") + "$").test(this);
@@ -470,4 +470,4 @@
 
   window.site = site;
 
-})(window, document, 'undefined');
+})(window, document, 'undefined' , jQuery);

@@ -1,5 +1,5 @@
 var app = app || angular.module('myApp', []);
-
+window.$ = window.jQuery;
 
 app.filter('xdate', function () {
     return function (item) {
@@ -1071,7 +1071,7 @@ app.directive('iButton', function () {
 
 });
 
-app.directive('iList',['$interval','a$timeout','isite', function ($interval, $timeout, isite) {
+app.directive('iList',['$interval','$timeout','isite', function ($interval, $timeout, isite) {
 
     return {
         restrict: 'E',
