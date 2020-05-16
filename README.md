@@ -603,11 +603,13 @@ site.var('siteBrand', 'XSite');
 <div x-feature="os.linux">Only Users From Linux Systems Can Show This Content</div>
 <div x-feature="os.mac">Only Users From Mac Systems Can Show This Content</div>
 <div x-feature="os.android">Only Users From Android Systems Can Show This Content</div>
+<div x-feature="os.unknown">Only Users From unknown Systems Can Show This Content</div>
 
 <div x-feature="browser.edge">Only Users From Edge Browser Can Show This Content</div>
 <div x-feature="browser.firefox">Only Users From FireFox Browser Can Show This Content</div>
 <div x-feature="browser.chrome">Only Users From Chrome Browser Can Show This Content</div>
-<div x-feature="browser.explorer">Only Users From Explorer Browser Can Show This Content</div>
+<div x-feature="browser.opera">Only Users From Opera Browser Can Show This Content</div>
+<div x-feature="browser.unknown">Only Users From unknown Browser Can Show This Content</div>
 
 <div x-feature="ip.xxx.xxx.xxx.xxx">Only Users From IP xxx.xxx.xxx.xxx Can Show This Content</div>
 
@@ -1170,6 +1172,21 @@ site.get('/' , (req , res)=>{
     res.js('jquery') // js file name
     res.json('items') // json file name or object
     res.json(obj) // json file name or object
+
+    if(req.hasFeature('browser.chrome')){}
+    if(req.hasFeature('browser.firefox')){}
+    if(req.hasFeature('browser.edge')){}
+    if(req.hasFeature('browser.opera')){}
+    if(req.hasFeature('browser.ucbrowser')){}
+    if(req.hasFeature('browser.baidu')){}
+    if(req.hasFeature('browser.chromium')){}
+    if(req.hasFeature('browser.unknown')){}
+
+    if(req.hasFeature('os.windows')){}
+    if(req.hasFeature('os.linux')){}
+    if(req.hasFeature('os.mac')){}
+    if(req.hasFeature('os.android')){}
+    if(req.hasFeature('os.unknown')){}
 
     req.ip // user ip
     req.port // user port
