@@ -17,6 +17,7 @@ module.exports = function init(options) {
   _s_.mv = require("mv")
   _s_.request = require("request")
   _s_.$ = _s_.cheerio = require("cheerio")
+  _s_.md5 = _s_.hash = require("md5")
 
   _s_.require = function (file_path) {
     return require(file_path)(_s_)
@@ -184,7 +185,7 @@ module.exports = function init(options) {
 
   _s_.parser = require("./lib/parser.js")
 
-  _s_.md5 = _s_.hash = require("md5")
+ 
 
 
   _s_.ips = [] // all ip send requests [ip , requets count]
