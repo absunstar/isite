@@ -2,17 +2,17 @@ module.exports = function (site) {
 
   site.date = require(__dirname + '/site_files/js/hijri.js')
 
-  site.post('/api/get_hijri_date' , (req , res)=>{
+  site.post('/api/get_hijri_date', (req, res) => {
     res.json({
-        done : true,
-        hijri : site.date(req.data.date , 'YYYY/MM/DD').format('iYYYY/iMM/iDD')
+      done: true,
+      hijri: site.date(req.data.date, 'YYYY/MM/DD').format('iYYYY/iMM/iDD')
     })
   })
 
-  site.post('/api/get_normal_date' , (req , res)=>{
+  site.post('/api/get_normal_date', (req, res) => {
     res.json({
-        done : true,
-        date : site.date(req.data.hijri , 'iYYYY/iMM/iDD').format('YYYY/MM/DD')
+      done: true,
+      date: site.date(req.data.hijri, 'iYYYY/iMM/iDD').format('YYYY/MM/DD')
     })
   })
 
@@ -20,7 +20,14 @@ module.exports = function (site) {
     name: '/x-js',
     path: __dirname + '/site_files/js'
   })
-
+  site.get({
+    name: '/x-js/all.js',
+    path: [__dirname + '/site_files/js/jquery.js',
+      __dirname + '/site_files/js/mustache.js',
+      __dirname + '/site_files/js/angular.min.js',
+       __dirname + '/site_files/js/site.min.js'
+    ]
+  })
   site.get({
     name: '/x-css',
     path: __dirname + '/site_files/css'
@@ -107,7 +114,7 @@ module.exports = function (site) {
   })
 
   site.get("/api/image/:category/:name", (req, res) => {
-    res.set('Cache-Control' , 'public, max-age=2592000')
+    res.set('Cache-Control', 'public, max-age=2592000')
     res.download(site.dir + "/../../uploads/" + req.params.category + "/images/" + req.params.name)
   })
 

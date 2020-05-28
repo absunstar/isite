@@ -1,4 +1,4 @@
-(function (window, document, undefined , $) {
+(function (window, document, undefined, $) {
 
   String.prototype.like = function matchRuleShort(rule) {
     return new RegExp("^" + rule.split("*").join(".*") + "$").test(this);
@@ -9,7 +9,22 @@
   };
 
   let site = {};
+  site.render = function (selector, data) {
+    let template = document.querySelector(selector).innerHTML
+    return Mustache.render(template, data)
+  };
 
+  site.html = function (template, data) {
+    return Mustache.render(template, data)
+  };
+
+  site.getUniqueObjects = function (arr, comp) {
+    const unique = arr.map(e => e[comp])
+      .map((e, i, final) => final.indexOf(e) === i && i)
+      .filter((e) => arr[e]).map(e => arr[e]);
+    return unique;
+  };
+  
   site.$ = function (name) {
     let arr = document.querySelectorAll(name)
     return arr;
@@ -18,7 +33,7 @@
   let modal_z_index = 999999;
   site.showModal = function (name) {
 
-   
+
 
     $(name).click(() => {
       $('popup').hide();
@@ -47,7 +62,7 @@
       inputs[0].focus();
     }
 
-   
+
 
     site.$(name + ' .close').forEach(cl => {
       cl.addEventListener("click", function () {
@@ -108,15 +123,15 @@
     }
   };
 
-  site.translate = function(op ,callback){
+  site.translate = function (op, callback) {
     if (typeof op === 'string') {
       op = {
         text: op,
-        lang : 'ar'
+        lang: 'ar'
       }
     }
     op.url = `https://translate.googleapis.com/translate_a/single?client=gtx&sl=auto&tl=${op.lang}&dt=t&dt=bd&dj=1&q=${op.text}`;
-    site.getData(op , callback);
+    site.getData(op, callback);
   };
 
   site.getData = function (op, callback, error) {
@@ -470,4 +485,4 @@
 
   window.site = site;
 
-})(window, document, 'undefined' , jQuery);
+})(window, document, 'undefined', jQuery);
