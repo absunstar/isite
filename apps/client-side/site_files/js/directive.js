@@ -1291,9 +1291,14 @@ app.directive('iList',['$interval','$timeout','isite', function ($interval, $tim
                     {{getValue(item)}} <small class="left"> {{getValue2(item)}} </small>
                 </item>
                 <br>
-                <div class="row center bg-red padding pointer" ng-click="updateModel({})">
-                     <i class="fa fa-trash white" aria-hidden="true"></i>
+                <div ng-show="items.length > 0" class="row">
+                <div class="col4"></div>
+                    <div class="col4 center bg-red padding pointer" ng-click="updateModel({})">
+                            <i class="fa fa-trash white" aria-hidden="true"></i>
+                    </div>
+                    <div class="col4"></div>
                 </div>
+                
             </popup>
         </div>
         `

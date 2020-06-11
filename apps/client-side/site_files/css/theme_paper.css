@@ -146,3 +146,9 @@
   --scrollbar-color: #fff;
   --scrollbar-box-shadow-color: #fff;
 }
+
+i-checkbox .selector.un-selected {
+  background: #787d72;
+  border: 1px solid #000;
+  color: #fff;
+}
