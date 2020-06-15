@@ -366,7 +366,7 @@
   };
 
   site.showTabs = function (e, tabSelector) {
-    $(".tabs").hide();
+    $(".main-menu .tabs").hide();
     $(tabSelector).show(200);
   };
 
