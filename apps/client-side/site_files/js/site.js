@@ -366,8 +366,12 @@
   };
 
   site.showTabs = function (e, tabSelector) {
+    if(e){
+      e.stopPropagation();
+    }
+   
     $(".main-menu .tabs").hide();
-    $(tabSelector).show(200);
+    $(tabSelector).show(100);
   };
 
   site.toHtmlTable = function (obj) {
