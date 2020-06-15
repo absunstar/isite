@@ -365,6 +365,10 @@
     }
   };
 
+  site.showTabs = function (e, tabSelector) {
+    $(".tabs").hide();
+    $(tabSelector).show(200);
+  };
 
   site.toHtmlTable = function (obj) {
     if (obj === undefined || obj === null) {

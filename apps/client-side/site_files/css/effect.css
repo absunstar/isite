@@ -73,6 +73,10 @@
     display: block;
 }
 
+.none {
+    display: none;
+}
+
 .inline {
     display: inline-block;
 }
