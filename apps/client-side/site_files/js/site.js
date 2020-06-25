@@ -24,7 +24,7 @@
       .filter((e) => arr[e]).map(e => arr[e]);
     return unique;
   };
-  
+
   site.$ = function (name) {
     let arr = document.querySelectorAll(name)
     return arr;
@@ -257,12 +257,34 @@
     return site.toDateTime(_any).getTime();
   };
 
-
-  site.to_number = site.toNumber = function (_num) {
-    if (_num) {
-      return parseFloat(parseFloat(_num).toFixed(3));
+  site.addZero = function (code, number) {
+    let c = number - code.toString().length;
+    for (let i = 0; i < c; i++) {
+      code = '0' + code.toString();
     }
-    return 0;
+    return code;
+  }
+  site.addSubZero = function (n, fixed) {
+    let c = fixed;
+    if (n.toString().split('.').length == 2) {
+      let c = fixed - n.toString().split('.')[1].length;
+      n = n.toString();
+    } else {
+      n = n.toString() + '.';
+    }
+    for (let i = 0; i < c; i++) {
+      n = n.toString() + 0;
+    }
+    return n;
+  }
+  site.fixed = 3;
+  site.to_number = site.toNumber = function (_num, fixed) {
+    let _fixed = fixed || site.fixed;
+    let n = 0;
+    if (_num) {
+      n = parseFloat(_num).toFixed(_fixed);
+    }
+    return parseFloat(n);
   };
 
   site.to_float = site.toFloat = function (_num) {
@@ -366,10 +388,10 @@
   };
 
   site.showTabs = function (e, tabSelector) {
-    if(e){
+    if (e) {
       e.stopPropagation();
     }
-   
+
     $(".main-menu .tabs").hide();
     $(tabSelector).show(100);
   };
