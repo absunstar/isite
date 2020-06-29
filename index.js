@@ -122,6 +122,7 @@ module.exports = function init(options) {
   _s_.post = routing.post
   _s_.put = routing.put
   _s_.delete = routing.delete
+  _s_.test = routing.test
   _s_.all = routing.all
   _s_.run = _s_.start = _s_.listen = routing.start
   _s_.routing = routing

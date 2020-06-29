@@ -130,8 +130,8 @@ site = isite({
       users_collection: "users_info",
       roles_collection: "users_roles",
       admin: {
-        email: "admin@localhost",
-        password: "admin"
+        email: "admin@isite",
+        password: "P@$$w0rd"
       },
       users: []
     },
