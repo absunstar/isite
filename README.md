@@ -792,7 +792,7 @@ site.on('mongodb after delete many' , (result)=>{
 // ==================================================================
 // Low Level Access Database Functions [ For Advanced Work ]
 
-// Insert One Doc
+// Insert One Doc 
    site.mongodb.insertOne({
             dbName: 'company',
             collectionName: 'employess',
@@ -803,7 +803,7 @@ site.on('mongodb after delete many' , (result)=>{
             } else {
                 site.log(docInserted)
             }
-        })
+        } , /* default waiting Sync or true for Async*/)
 
 // Insert Many Docs
    site.mongodb.insertMany({
@@ -820,7 +820,7 @@ site.on('mongodb after delete many' , (result)=>{
             } else {
                 site.log(result)
             }
-        })
+        }/* default waiting Sync or true for Async*/)
 
 // Find One Doc
  site.mongodb.findOne({
@@ -834,7 +834,7 @@ site.on('mongodb after delete many' , (result)=>{
             } else {
                 site.log(doc)
             }
-        })
+        }/* default waiting Sync or true for Async*/)
 
 // Find Many Docs
  site.mongodb.findMany({
@@ -848,7 +848,7 @@ site.on('mongodb after delete many' , (result)=>{
             } else {
                 site.log(docs)
             }
-        })
+        }/* default waiting Sync or true for Async*/)
 
 //Update One Doc
            site.mongodb.updateOne({
@@ -862,7 +862,7 @@ site.on('mongodb after delete many' , (result)=>{
             } else {
                 site.log(result)
             }
-        })
+        }/* default waiting Sync or true for Async*/)
 
 // Update Many Docs
            site.mongodb.updateMany({
@@ -876,7 +876,7 @@ site.on('mongodb after delete many' , (result)=>{
             } else {
                 site.log(result)
             }
-        })
+        }/* default waiting Sync or true for Async*/)
 
 // Delete One Doc
           site.mongodb.deleteOne({
@@ -889,7 +889,7 @@ site.on('mongodb after delete many' , (result)=>{
             } else {
                 site.log(result)
             }
-        })
+        }/* default waiting Sync or true for Async*/)
 // Delete Many Docs
           site.mongodb.deleteMany({
             dbName: 'company',
@@ -901,7 +901,7 @@ site.on('mongodb after delete many' , (result)=>{
             } else {
                 site.log(result)
             }
-        })
+        }/* default waiting Sync or true for Async*/)
 
 // ==================================================================
 // Mongodb Native Client Provider

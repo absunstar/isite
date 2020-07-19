@@ -7,6 +7,7 @@
     min-height: 1px;
     text-align: var(--text-align);
     direction: var(--direction);
+    max-width: 100%;
 }
 
 html {
