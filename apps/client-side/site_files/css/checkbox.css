@@ -113,7 +113,7 @@ i-checkbox .selector.selected {
 }
 
 i-checkbox .selector.un-selected {
-    background: #00000000;
+    background: #414240;
     border: 1px solid #000;
     color: #fff;
 }
