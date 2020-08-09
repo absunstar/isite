@@ -1,3 +1,6 @@
+const { resolve } = require("path")
+const { rejects } = require("assert")
+
 module.exports = function init(options) {
 
   const _s_ = function () {}
@@ -22,7 +25,24 @@ module.exports = function init(options) {
   _s_.require = function (file_path) {
     return require(file_path)(_s_)
   }
+  _s_.close = function(callback){
+    callback = callback || function(){}
 
+      let count = 0
+      _s_.servers.forEach(s=>{
+        s.close(()=>{
+          count++
+          if(count == _s_.servers.length){
+            _s_.call('please close mongodb', null, () => {
+              process.exit(0)
+            })
+           
+          }
+        })
+      })
+
+
+  }
 
   require("object-options")(options, _s_)
 
@@ -49,36 +69,34 @@ module.exports = function init(options) {
 
 
     process.on('uncaughtException', (err) => {
-      console.log(err)
+      console.error('uncaughtException ' + err.message)
+      // process.exit(1)
     })
     /* when app close */
     process.on('exit', (code) => {
       console.log('----------------------------------------')
       console.log('')
-      console.log('       ' + _s_.options.name + ` Closed `)
+      console.log('       ' + _s_.options.name + ` Closed with code : ${code}`)
       console.log('')
       console.log('----------------------------------------')
     })
+
+    
     /* when ctrl + c */
     process.on('SIGINT', (code) => {
-      _s_.call('please close mongodb', null, () => {
-        process.exit()
-      })
+      _s_.close()
     })
 
     process.on('SIGTERM', (code) => {
-      _s_.call('please close mongodb', null, () => {
-        process.exit()
-      })
+      _s_.close()
     })
 
     process.on('unhandledRejection', (reason, p) => {
-      console.log('Unhandled Rejection at:', p, 'reason:', reason);
+      console.error('Unhandled Rejection at:', p, 'reason:', reason);
+       // process.exit(1)
     })
     process.on('warning', (warning) => {
-      console.warn(warning.name)
-      console.warn(warning.message)
-      console.warn(warning.stack)
+      console.warn(`warning : ${warning.name} \n ${warning.message}  \n ${warning.stack}`)
     })
 
 
@@ -186,7 +204,7 @@ module.exports = function init(options) {
 
   _s_.parser = require("./lib/parser.js")
 
- 
+
 
 
   _s_.ips = [] // all ip send requests [ip , requets count]
@@ -205,7 +223,7 @@ module.exports = function init(options) {
   _s_.reset = function () {}
 
   _s_.test = function () {
-    console.log(" I_s_ Test OK !! ")
+    console.log(" Isite Test OK !! ")
   }
 
   _s_.on("[any][saving data]", function () {
