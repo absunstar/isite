@@ -2,6 +2,9 @@
 <html lang="en" data-ng-app="myApp">
   <head x-import="head.html">
     <style>
+      :root{
+        --navbar-background-color : #272727;
+      }
         i-image.photo img {
           width: 128px;
           height: 128px;
@@ -28,12 +31,13 @@
   </head>
 
   <body class="##session.lang##">
-    <nav class="sitebar" x-import="security/sitebar.html" ng-controller="sitebar"></nav>
-
+   
+    <nav class="navbar" x-import="security/navbar.html" ng-controller="navbar"></nav>
     <h2 class="center">Security</h2>
     <div id="main-layout" class="container">
       <div class="row">
         <div class="row" ng-controller="security">
+         
           <div x-import="security/add_modal.html"></div>
           <div x-import="security/update_modal.html"></div>
           <div x-import="security/delete_modal.html"></div>
@@ -68,5 +72,6 @@
 
     <div x-import="scripts.html"></div>
     <script x-import="security/index.js"></script>
+  
   </body>
 </html>
