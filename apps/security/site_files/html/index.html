@@ -23,6 +23,9 @@
         .user:hover {
           transform: scale(1.1);
         }
+        .user .email{
+          font-size: 14px;
+        }
         .title {
           font-weight: bold;
           color: #000 !important;
@@ -61,7 +64,7 @@
               <div class="row">
                 <h2 class="text-center bold blue">
                   {{user.profile.name}}
-                  <p class="text-center black">{{user.email}}</p>
+                  <p class="text-center black email">{{user.email}}</p>
                 </h2>
               </div>
             </div>
