@@ -69,7 +69,7 @@ module.exports = function init(options) {
 
 
     process.on('uncaughtException', (err) => {
-      console.error('uncaughtException ' + err.message)
+      console.error('uncaughtException :: ' + err.message)
       // process.exit(1)
     })
     /* when app close */
@@ -92,7 +92,7 @@ module.exports = function init(options) {
     })
 
     process.on('unhandledRejection', (reason, p) => {
-      console.error('Unhandled Rejection at:', p, 'reason:', reason);
+      console.error('Unhandled Rejection at :: ', p, 'reason :: ', reason);
        // process.exit(1)
     })
     process.on('warning', (warning) => {
