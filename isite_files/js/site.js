@@ -1,12 +1,16 @@
-
 (function (window, document, undefined) {
 
+  String.prototype.test = function matchRuleShort(reg) {
+    return new RegExp(reg).test(this);
+  };
+
   String.prototype.like = function matchRuleShort(rule) {
-    return new RegExp("^" + rule.split("*").join(".*") + "$").test(this);
+    rule = rule.replace('.', '\.')
+    return this.test("^" + rule.split("*").join(".*") + "$", "gium")
   };
 
   String.prototype.contains = function (name) {
-    return this.like('*' + name + '*');
+    return this.like('*' + name + '*')
   };
 
   let site = {};
@@ -16,7 +20,7 @@
   };
 
   site.toDateTime = function (_any) {
-    if(!_any)return new Date();
+    if (!_any) return new Date();
     return new Date(_any);
   };
 
@@ -37,7 +41,7 @@
 
   site.toDateOnly = function (_any) {
     let d = site.toDateTime(_any);
-    return new Date(d.getFullYear(), d.getMonth(), d.getDate() , 0 , 0 , 0, 0);
+    return new Date(d.getFullYear(), d.getMonth(), d.getDate(), 0, 0, 0, 0);
   };
 
   site.toDateT = function (_any) {
@@ -159,7 +163,10 @@
 
   site.vControles = [];
   site.validated = function (s) {
-    const res = { ok: true, messages: [] };
+    const res = {
+      ok: true,
+      messages: []
+    };
     site.vControles.forEach(n => {
       n.el.style.border = n.border;
     });
@@ -242,7 +249,9 @@
     options = options || {};
 
     if (typeof options === 'string') {
-      options = { select: options };
+      options = {
+        select: options
+      };
     }
 
     var mywindow = window.open('', '_blank', '');
@@ -263,21 +272,21 @@
       });
     }
 
-    content += '<style>' + site.printDefaultCss  +'</style>';
+    content += '<style>' + site.printDefaultCss + '</style>';
 
-    if(options.preappends){
+    if (options.preappends) {
       options.preappends.forEach(el => {
         content += window.document.querySelector(el).outerHTML;
       });
     }
 
     content += window.document.querySelector(options.select).outerHTML;
-    if(options.appends){
+    if (options.appends) {
       options.appends.forEach(el => {
         content += window.document.querySelector(el).outerHTML;
       });
     }
-    
+
     mywindow.document.open();
     mywindow.document.write(content);
     // mywindow.document.close();

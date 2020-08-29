@@ -1,12 +1,18 @@
 (function (window, document, undefined, $) {
 
-  String.prototype.like = function matchRuleShort(rule) {
-    return new RegExp("^" + rule.split("*").join(".*") + "$").test(this);
-  };
+  String.prototype.test = function matchRuleShort(reg) {
+        return new RegExp(reg).test(this);
+    };
 
-  String.prototype.contains = function (name) {
-    return this.like('*' + name + '*');
-  };
+    String.prototype.like = function matchRuleShort(rule) {
+        rule = rule.replace('.', '\.')
+        return this.test("^" + rule.split("*").join(".*") + "$", "gium")
+    };
+
+    String.prototype.contains = function (name) {
+        return this.like('*' + name + '*')
+    };
+
 
   let site = {};
   site.render = function (selector, data) {
