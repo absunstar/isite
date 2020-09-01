@@ -713,12 +713,12 @@ $employees.deleteMany({name : /a/i} , (err , result)=>{
 })
 
 // Import Object Data From Json File
-$employees.import(FILE_PATH , (err , doc)=>{
+$employees.import(FILE_PATH , (result)=>{
 
 })
 
 // Import Array Data From Json File
-$employees.import(FILE_PATH , (errs , docs)=>{
+$employees.import(FILE_PATH , (result)=>{
 
 })
 
@@ -727,7 +727,7 @@ $employees.export( OPTONS , FILE_PATH , (err , docs)=>{
 
 })
 // Export 10 employees that salary more than 1000
-$employees.export({limit : 10 , where : {salary : {$gt : 1000}}} , (err , docs)=>{
+$employees.export({limit : 10 , where : {salary : {$gt : 1000}}} , FILE_PATH , (err , docs)=>{
 
 })
 
