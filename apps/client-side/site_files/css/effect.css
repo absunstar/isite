@@ -173,7 +173,11 @@
   .multi-lines{
     white-space: pre-wrap
   }
-  
+
+  .ww{
+    width: 250px !important;
+    white-space: pre-line !important;
+  }
   .w0 {
     width: 1px !important;
     white-space: nowrap !important;
