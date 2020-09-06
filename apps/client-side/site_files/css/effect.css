@@ -170,6 +170,10 @@
     transform: scale(1.1);
   }
 
+  .multi-lines{
+    white-space: pre-wrap
+  }
+  
   .w0 {
     width: 1px !important;
     white-space: nowrap !important;

@@ -537,7 +537,7 @@
     {
       n: 2,
       i0: {
-        ar: 'اثنان'
+        ar: 'اثنان '
       },
       i1: {
         ar: 'عشرون'
@@ -668,7 +668,7 @@
     }
   ];
 
-  let strings = {
+  site.strings = {
     'and': {
       ar: 'و'
     },
@@ -676,10 +676,22 @@
       ar: ' '
     },
     '10': {
-      ar: 'الااف'
+      ar: 'آلاف'
     },
     '20': {
-      ar: 'الف'
+      ar: 'ألفاً'
+    },
+    'currency': {
+      ar: ' جنيها مصريا فقط لاغير '
+    },
+    'from10': {
+      ar: ' قروش '
+    },
+    'from100': {
+      ar: ' قرش '
+    },
+    'from1000': {
+      ar: ' من الف '
     }
   };
 
@@ -718,7 +730,7 @@
       numbers.forEach(n => {
         if (n.n == num[0]) {
           if (num[1] > 0 && num[0] > 1) {
-            s += strings['and'][lang];
+            s += site.strings['and'][lang];
           } else {
             s += '';
           }
@@ -733,14 +745,14 @@
     let s = '';
     numbers.forEach(n => {
       if (n.n == num[0]) {
-        s = n.i2[lang] + strings['space'][lang];
+        s = n.i2[lang] + site.strings['space'][lang];
       }
     });
 
     let n2 = get2num(num.substring(1), lang);
     if (n2) {
       if (s) {
-        s += strings['and'][lang];
+        s += site.strings['and'][lang];
       }
       s += n2;
     }
@@ -751,23 +763,29 @@
     let s = '';
     numbers.forEach(n => {
       if (n.n == num[0]) {
-        s = n.i3[lang] + strings['space'][lang];
+        s = n.i3[lang] + site.strings['space'][lang];
       }
     });
 
     let n3 = get3num(num.substring(1), lang);
     if (n3) {
       if (s) {
-        s += strings['and'][lang];
+        s += site.strings['and'][lang];
       }
       s += n3;
     }
     return s;
   };
 
-  site.stringfiy = function (num, lang) {
+  site.stringfiy = function (_num, lang) {
+
+    _num = _num || ''
     lang = lang || 'ar';
-    num = num.toString();
+    _num = _num.toString().split('.')
+
+    let num = _num[0];
+    let num2 = _num[1];
+
     let s = '';
     if (num.length == 1) {
       s = get1num(num, lang);
@@ -778,17 +796,39 @@
     } else if (num.length == 4) {
       s = get4num(num, lang);
     } else if (num.length == 5) {
-      s = get2num(num.substring(0, 2), lang);
+      s = get2num(num.substring(0, 2), lang) + site.strings['space'][lang];
       if (num[0] == 1) {
-        s += strings['10'][lang] + strings['space'][lang];
+        s += site.strings['10'][lang] + site.strings['space'][lang];
       } else {
-        s += strings['20'][lang] + strings['space'][lang];
+        s += site.strings['20'][lang] + site.strings['space'][lang];
       }
       let n3 = get3num(num.substring(2), lang)
       if (n3) {
-        s += strings['and'][lang] + n3;
+        s += site.strings['and'][lang] + n3;
       }
 
+    }
+
+    let s2 = ''
+
+    if (num2) {
+      if(num2.length == 1){
+        num2+='0'
+      }
+
+      if (num2.length == 1) {
+        s2 = get1num(num2, lang) + site.strings['from10'][lang];
+      } else if (num2.length == 2) {
+        s2 = get2num(num2, lang) + site.strings['from100'][lang];
+      } else if (num2.length == 3) {
+        s2 = get3num(num2, lang) + site.strings['from1000'][lang];
+      }
+    }
+
+    s += site.strings['currency'][lang]
+
+    if (s2) {
+      s += site.strings['space'][lang] + site.strings['and'][lang] + site.strings['space'][lang] + s2
     }
     return s;
   }
