@@ -1,104 +1,117 @@
-.print-only{
-    visibility: collapse;
+.print-only {
+  visibility: collapse;
 }
 @media print {
-    
-    :root {
-        --legend-color: #000;
-        --legend-text-shadow: none;
-    }
+  :root {
+    --legend-color: #000;
+    --legend-text-shadow: none;
+  }
 
-    body {
-        background: #fff;
-        font-size: 8px;
-        color: #333333;
-        margin-top: .1cm;
-        margin-right: .1cm;
-        margin-bottom: .2cm;
-        margin-left: .1cm
-    }
+  html,
+  body {
+    width: 210mm;
+    height: 297mm;
+    font-style: 12pt;
+  }
 
-    .print-only{
-        visibility: visible;
-    }
+  body {
+    background: white;
+    color: #000;
+    margin-top: 1mm;
+    margin-right: 1mm;
+    margin-bottom: 2mm;
+    margin-left: 1mm;
+  }
+  body[size="A4"] {
+    width: 210mm;
+    height: 297mm;
+  }
 
-    .small {
-        font-size: 6px;
-    }
+  .print-only {
+    visibility: visible;
+  }
 
-    .table th,
-    .table td {
-        color: #000 !important;
-        background: #fff !important;
-    }
+  .small {
+    font-size: 6px;
+  }
+  .table {
+    table-layout: fixed;
+    max-width: 200mm !important;
+  }
+  .table th {
+    color: #000 !important;
+    background: #bbb !important;
+  }
 
-    input {
-        font-size: 8px;
-    }
+  .table td {
+    color: #000 !important;
+    background: #fff !important;
+  }
 
-    textarea {
-        font-size: 8px;
-    }
+  input {
+    font-size: 8px;
+  }
 
-    .not-print {
-        display: none;
-    }
+  textarea {
+    font-size: 8px;
+  }
 
-    .dont-print {
-        display: none;
-    }
+  .not-print,
+  .dont-print {
+    display: none;
+  }
 
-    .print-break {
-        page-break-after: always;
-    }
+  .print-break {
+    page-break-after: always;
+  }
 
-    .print-start {
-        page-break-before: always;
-    }
+  .print-start {
+    page-break-before: always;
+  }
 
-    .print-content {
-        page-break-inside: avoid;
-    }
+  .print-content {
+    page-break-inside: avoid;
+  }
 
-    @page {
-        size: A4;
-        margin: .3cm;
-    }
+  @page {
+    size: A4;
+    margin: 0;
+  }
 
-    @page: right {
-        @top-right {
-            content: "";
-        }
+  @page: right {
+    @top-right {
+      content: "";
     }
+  }
 
-    @page: right {
-        @bottom-right {
-            content: "";
-        }
+  @page: right {
+    @bottom-right {
+      content: "";
     }
+  }
 
-    @page: left {
-        @top-left {
-            content: "";
-        }
+  @page: left {
+    @top-left {
+      content: "";
     }
+  }
 
-    @page: left {
-        @bottom-left {
-            content: "";
-        }
+  @page: left {
+    @bottom-left {
+      content: "";
     }
+  }
 
-    a {
-        font-weight: bolder;
-        text-decoration: none;
-    }
+  a {
+    font-weight: bolder;
+    text-decoration: none;
+  }
 
-    a[href^=http]:after {
-        content: " [ "attr(href) " ] ";
-    }
+  a[href^="http"]:after {
+    content: " [ " attr(href) " ] ";
+  }
 
-    a[href^="#"]:after {
-        content: "";
-    }
+  a[href^="#"]:after {
+    content: "";
+  }
 }
