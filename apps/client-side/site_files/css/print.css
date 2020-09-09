@@ -1,30 +1,51 @@
 .print-only {
   visibility: collapse;
 }
+
+html.a4,
+body.a4 {
+  width: 210mm;
+  margin: 0cm;
+  padding: 0cm;
+  background: white;
+  color: #000;
+}
+body.a4 {
+  margin: 0.2cm;
+  padding: 0px;
+  height: 297mm;
+}
+body.print-mode .hide {
+  visibility: visible;
+}
+body.print-mode .not-print,
+body.print-mode .dont-print {
+  display: none;
+}
+body.print-mode .print-only {
+  visibility: visible;
+}
+body.print-mode .table {
+  table-layout: fixed;
+  max-width: 200mm !important;
+  border-collapse: collapse;
+  border: 1px solid black;
+}
+body.print-mode .table th {
+  color: #000 !important;
+  background: #bbb !important;
+  border-collapse: collapse;
+}
+body.print-mode .table td {
+  color: #000 !important;
+  background: #fff !important;
+  border-collapse: collapse;
+}
+
 @media print {
   :root {
     --legend-color: #000;
     --legend-text-shadow: none;
-  }
-
-  html,
-  body {
-    width: 210mm;
-    height: 297mm;
-    font-style: 12pt;
-  }
-
-  body {
-    background: white;
-    color: #000;
-    margin-top: 1mm;
-    margin-right: 1mm;
-    margin-bottom: 2mm;
-    margin-left: 1mm;
-  }
-  body[size="A4"] {
-    width: 210mm;
-    height: 297mm;
   }
 
   .print-only {
@@ -37,6 +58,8 @@
   .table {
     table-layout: fixed;
     max-width: 200mm !important;
+    /* tables don't split across pages if possible. */
+    page-break-inside: avoid;
   }
   .table th {
     color: #000 !important;
@@ -61,11 +84,18 @@
     display: none;
   }
 
+  .page {
+    /* this section always occupies it's own page or pages. */
+    page-break-before: always;
+    page-break-after: always;
+  }
+
   .print-break {
     page-break-after: always;
   }
 
   .print-start {
+    /* elements always start on the top of a new page. */
     page-break-before: always;
   }
 
@@ -73,6 +103,23 @@
     page-break-inside: avoid;
   }
 
+  h1,
+  h2,
+  h3,
+  h4,
+  h5 {
+    page-break-after: avoid;
+  }
+
+  @page: first {
+    /* No margin on the first page. */
+    margin: 0;
+  }
+  @page: blank {
+    @top-center {
+      content: "This page is intentionally left blank.";
+    }
+  }
   @page {
     size: A4;
     margin: 0;
@@ -96,11 +143,11 @@
     }
   }
 
-  @page: left {
+  @page: left{
     @bottom-left {
-      content: "";
+      content: "Page " counter(page) " of " counter(pages);
     }
-  }
+  };
 
   a {
     font-weight: bolder;
