@@ -1,18 +1,23 @@
 .print-only {
   visibility: collapse;
 }
-
-html.a4,
-body.a4 {
+.page-width-a4 {
   width: 210mm;
-  margin: 0cm;
-  padding: 0cm;
+  padding: 2mm;
+  margin: 0mm;
+}
+html {
+  background: white;
+  color: #000;
+  margin: 0;
+  padding: 0;
+}
+
+body.a4 {
   background: white;
   color: #000;
 }
 body.a4 {
-  margin: 0.2cm;
-  padding: 0px;
   height: 297mm;
 }
 body.print-mode .hide {
@@ -27,13 +32,19 @@ body.print-mode .print-only {
 }
 body.print-mode .table {
   table-layout: fixed;
-  max-width: 200mm !important;
+  max-width: 206mm !important;
   border-collapse: collapse;
   border: 1px solid black;
+  font-size: 8pt;
+  page-break-inside: avoid;
+}
+body.print-mode .table.wide {
+  min-width: 206mm !important;
+  width: 206mm !important;
 }
 body.print-mode .table th {
   color: #000 !important;
-  background: #bbb !important;
+  background: #fff !important;
   border-collapse: collapse;
 }
 body.print-mode .table td {
@@ -41,47 +52,17 @@ body.print-mode .table td {
   background: #fff !important;
   border-collapse: collapse;
 }
-
+body.print-mode input,
+body.print-mode textarea {
+  font-size: 8pt;
+}
+body.print-mode .small {
+  font-size: 6pt;
+}
 @media print {
   :root {
     --legend-color: #000;
     --legend-text-shadow: none;
-  }
-
-  .print-only {
-    visibility: visible;
-  }
-
-  .small {
-    font-size: 6px;
-  }
-  .table {
-    table-layout: fixed;
-    max-width: 200mm !important;
-    /* tables don't split across pages if possible. */
-    page-break-inside: avoid;
-  }
-  .table th {
-    color: #000 !important;
-    background: #bbb !important;
-  }
-
-  .table td {
-    color: #000 !important;
-    background: #fff !important;
-  }
-
-  input {
-    font-size: 8px;
-  }
-
-  textarea {
-    font-size: 8px;
-  }
-
-  .not-print,
-  .dont-print {
-    display: none;
   }
 
   .page {
@@ -111,18 +92,17 @@ body.print-mode .table td {
     page-break-after: avoid;
   }
 
-  @page: first {
-    /* No margin on the first page. */
+  /* @page: first {
     margin: 0;
   }
   @page: blank {
     @top-center {
       content: "This page is intentionally left blank.";
     }
-  }
+  } */
+
   @page {
     size: A4;
-    margin: 0;
   }
 
   @page: right {
@@ -143,11 +123,11 @@ body.print-mode .table td {
     }
   }
 
-  @page: left{
+  @page: left {
     @bottom-left {
       content: "Page " counter(page) " of " counter(pages);
     }
-  };
+  }
 
   a {
     font-weight: bolder;

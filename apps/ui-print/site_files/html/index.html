@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" class="a4">
+<html lang="en" >
 
 <head>
     <meta charset="UTF-8">
@@ -8,7 +8,7 @@
     <title> Print </title>
 </head>
 
-<body class="print-mode a4">
+<body class="print-mode page-width-a4 a4">
     ##data.content##
     
     <style>
@@ -19,7 +19,7 @@
             el.remove()
         })
         window.addEventListener('load' , ()=>{
-            print()
+            window.print({})
         })
         /*
         Repeat table headers in every page if table too large
