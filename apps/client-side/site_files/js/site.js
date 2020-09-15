@@ -1,17 +1,36 @@
 (function (window, document, undefined, $) {
 
-  String.prototype.test = function matchRuleShort(reg) {
-    return new RegExp(reg).test(this);
+  function escape(s) {
+    return s.replace(/[\/\\^$*+?.()[\]{}]/g, '\\$&');
   };
 
-  String.prototype.like = function matchRuleShort(rule) {
-    rule = rule.replace('.', '\.')
-    return this.test("^" + rule.split("*").join(".*") + "$", "gium")
-  };
+  Object.defineProperty(String.prototype, 'test', {
+    value: function (reg, flag = "gium") {
+      try {
+        return new RegExp(reg, flag).test(this);
+      } catch (error) {
+        return false
+      }
 
-  String.prototype.contains = function (name) {
-    return this.like('*' + name + '*')
-  };
+    }
+  });
+
+  Object.defineProperty(String.prototype, 'like', {
+    value: function (name) {
+      name = name.split("*")
+      name.forEach((n, i) => {
+        name[i] = escape(n)
+      })
+      name = name.join(".*")
+      return this.test("^" + name + "$", "gium")
+    }
+  });
+
+  Object.defineProperty(String.prototype, 'contains', {
+    value: function (name) {
+      return this.test("^.*" + escape(name) + ".*$", "gium")
+    }
+  });
 
 
   let site = {};
@@ -812,8 +831,8 @@
     let s2 = ''
 
     if (num2) {
-      if(num2.length == 1){
-        num2+='0'
+      if (num2.length == 1) {
+        num2 += '0'
       }
 
       if (num2.length == 1) {
