@@ -1,37 +1,45 @@
 (function (window, document, undefined, $) {
 
   function escape(s) {
+    if (!s) {
+      return ''
+    }
     return s.replace(/[\/\\^$*+?.()[\]{}]/g, '\\$&');
   };
 
-  Object.defineProperty(String.prototype, 'test', {
-    value: function (reg, flag = "gium") {
-      try {
-        return new RegExp(reg, flag).test(this);
-      } catch (error) {
-        return false
+  if (!String.prototype.test) {
+    Object.defineProperty(String.prototype, 'test', {
+      value: function (reg, flag = "gium") {
+        try {
+          return new RegExp(reg, flag).test(this);
+        } catch (error) {
+          return false
+        }
+
       }
+    });
+  }
 
-    }
-  });
+  if (!String.prototype.like) {
+    Object.defineProperty(String.prototype, 'like', {
+      value: function (name) {
+        name = name.split("*")
+        name.forEach((n, i) => {
+          name[i] = escape(n)
+        })
+        name = name.join(".*")
+        return this.test("^" + name + "$", "gium")
+      }
+    });
+  }
 
-  Object.defineProperty(String.prototype, 'like', {
-    value: function (name) {
-      name = name.split("*")
-      name.forEach((n, i) => {
-        name[i] = escape(n)
-      })
-      name = name.join(".*")
-      return this.test("^" + name + "$", "gium")
-    }
-  });
-
-  Object.defineProperty(String.prototype, 'contains', {
-    value: function (name) {
-      return this.test("^.*" + escape(name) + ".*$", "gium")
-    }
-  });
-
+  if (!String.prototype.contains) {
+    Object.defineProperty(String.prototype, 'contains', {
+      value: function (name) {
+        return this.test("^.*" + escape(name) + ".*$", "gium")
+      }
+    });
+  }
 
   let site = {};
   site.render = function (selector, data) {
