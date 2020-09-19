@@ -167,7 +167,7 @@ h5 {
   .col8,
   .col9 {
     vertical-align: top;
-    width: calc(12 / 12 * 100%);
+    width: calc(12 / 12 * 100%) !important;
   }
 
   .desktop {
