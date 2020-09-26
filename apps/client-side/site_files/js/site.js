@@ -3,7 +3,7 @@
     if (!s) {
       return "";
     }
-    if (typeof s !== "String") {
+    if (typeof s !== "string") {
       s = s.toString();
     }
     return s.replace(/[\/\\^$*+?.()\[\]{}]/g, "\\$&");
