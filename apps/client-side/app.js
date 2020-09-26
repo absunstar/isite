@@ -127,6 +127,12 @@ module.exports = function (site) {
           done: true
         }
         let file = req.files.fileToUpload
+        if(!file){
+          response.done = false
+          response.error = 'no file uploaded'
+          res.json(response)
+          return
+        }
         let newName = "file_" + new Date().getTime() + '.' + site.path.extname(file.name)
         let newpath = site.dir + "/../../uploads/" + req.params.category + "/files/" + newName
         site.mv(file.path, newpath, function (err) {

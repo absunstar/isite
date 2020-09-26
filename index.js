@@ -69,7 +69,7 @@ module.exports = function init(options) {
 
 
     process.on('uncaughtException', (err) => {
-      console.error('uncaughtException :: ' + err.message)
+      console.error('uncaughtException :: ' , err)
       // process.exit(1)
     })
     /* when app close */
@@ -333,5 +333,6 @@ module.exports = function init(options) {
   console.log(`****** isite version ${_s_.package.version} *******`)
   console.log('************************************')
   console.log('')
+  
   return _s_
 }
