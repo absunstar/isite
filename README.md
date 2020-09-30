@@ -1,3 +1,6 @@
+isite now integrated with Social Browser https://social-browser.com
+so your site work on Social Browser by default
+
 ## Create [ Node Js Web Site ] Supporting Many Development Featuers
 
 - More Secure 
@@ -43,6 +46,7 @@
 `npm install isite`
 
  - Works Stand-Alone or With Other Libs
+ - updated every 1 month at least ( npm i isite ) for production apps
 
 
 ## Using
@@ -85,6 +89,7 @@ site = isite({
     apps: true,
     apps_dir: process.cwd() + '/apps',
     name: "Your Site",
+    dynamic : false, // (auto set )dynamic db & prot based on folder name [ smart-pos-3000 ]
     saving_time: 60,
     log: true,
     lang: 'ar',
@@ -145,6 +150,17 @@ site = isite({
       images: 60 * 24 * 30,
       json: 60 * 24 * 30,
       xml: 60 * 24 * 30
+    },
+    proto: {
+      object: true,
+    },
+    require: {
+      features: ['browser.social'],
+      permissions: [],
+    },
+    default: {
+      features: [],
+      permissions: [],
     }
   })
 
@@ -188,99 +204,6 @@ site.run()
     html , css , js , json , fonts , images , xml , ...
 ]
 
-- To Easy Read File Contents From "site_files" Folder
-
-```js
-site.html('index', function (err, content) {
-    site.log(content);
-});
-site.css('bootstrap', function (err, content) {
-    site.log(content);
-});
-site.js('jquery', function (err, content) {
-    site.log(content);
-});
-site.json('items', function (err, content) {
-    site.log(content);
-});
-site.xml('rss', function (err, content) {
-    site.log(content);
-});
-```
-- Custom Read Files
-
-    - Read From Local File in First Time and save in memory
-    - next time Read Will be From Memory
-
-```js
-//read file with custom header
-site.get("/rss", function(req, res) {
-    site.readFile(__dirname + "/site_files/xml/rss.xml", function(err, content , file) {
-        res.set("content-type" , "text/xml")
-        res.set("content-size" , file.stat.size)
-        res.status(200).end(content) // or res.end(content)
-    })
-})
-// or [ if file in site_files/xml folder]
-site.get("/rss", function(req, res) {
-    site.xml("rss", function(err, content , file) {
-        res.set("content-type" , "text/xml")
-        res.set("content-size" , file.stat.size)
-        res.status(200).end(content)
-    })
-})
-
-// Read and Merge multi files with custom header
-site.get("/", function(req, res) {
-    site.readFiles(
-        [
-            __dirname + "/site_files/html/head.html",
-            __dirname + "/site_files/html/content.html",
-            __dirname + "/site_files/html/footer.html"
-        ],
-        function(err, content) {
-            res.writeHead(200, { "content-type": "text/html" });
-            res.end(content);
-        })
-})
-
-// Check if File Exits
-site.isFileExists(path , (yes)=>{
-    if(yes){
-        // ...
-    }
-})
-// or
-let yes = site.isFileExistsSync(path)
-if(yes){
-    // ...
-}
-
-// Get File Info
-site.fileStat(path , (err , stats)=>{
-    console.log(stats)
-})
-// or
-let stats = site.fileStatSync(path)
-
-// Write Data to File
-site.writeFile(path , data , err =>{
-
-}
-// Delete File
-site.removeFile(path , err =>{
-
-}) // or site.deleteFile
-
-
-// Create New Dir 
-site.createDir(path , (err , path)=>{ 
-    if(!err){
-        // ...
-    }
-}) // or site.makeDir
-
-```
 
 ## Routes
 
@@ -303,7 +226,7 @@ Easy and Auto Site Routing
     or set site.dir = new path
 */
 
-site.get({name: '/',path:  site.dir + '/html/index.html'});
+site.get({name: ['/' , '/home' , '/index'],path:  site.dir + '/html/index.html'});
 site.get({name: '/css/bootstrap.css',path:  site.dir + '/css/bootstrap.min.css'});
 site.get({name: '/js/jquery.js',path: site.dir + '/js/jquery.js'});
 site.get({name: '/js/bootstrap.js',path: site.dir + '/js/bootstrap.js'});
@@ -430,6 +353,101 @@ site.get("/:controller/:Action/:Arg1", function(req, res) {
 //example : /facebook/post/xxxxxxxxxx
 ```
 
+
+
+- To Easy Read File Contents From "site_files" Folder
+
+```js
+site.html('index', function (err, content) {
+    site.log(content);
+});
+site.css('bootstrap', function (err, content) {
+    site.log(content);
+});
+site.js('jquery', function (err, content) {
+    site.log(content);
+});
+site.json('items', function (err, content) {
+    site.log(content);
+});
+site.xml('rss', function (err, content) {
+    site.log(content);
+});
+```
+- Custom Read Files
+
+    - Read From Local File in First Time and save in memory
+    - next time Read Will be From Memory
+
+```js
+//read file with custom header
+site.get("/rss", function(req, res) {
+    site.readFile(__dirname + "/site_files/xml/rss.xml", function(err, content , file) {
+        res.set("content-type" , "text/xml")
+        res.set("content-size" , file.stat.size)
+        res.status(200).end(content) // or res.end(content)
+    })
+})
+// or [ if file in site_files/xml folder]
+site.get("/rss", function(req, res) {
+    site.xml("rss", function(err, content , file) {
+        res.set("content-type" , "text/xml")
+        res.set("content-size" , file.stat.size)
+        res.status(200).end(content)
+    })
+})
+
+// Read and Merge multi files with custom header
+site.get("/", function(req, res) {
+    site.readFiles(
+        [
+            __dirname + "/site_files/html/head.html",
+            __dirname + "/site_files/html/content.html",
+            __dirname + "/site_files/html/footer.html"
+        ],
+        function(err, content) {
+            res.writeHead(200, { "content-type": "text/html" });
+            res.end(content);
+        })
+})
+
+// Check if File Exits
+site.isFileExists(path , (yes)=>{
+    if(yes){
+        // ...
+    }
+})
+// or
+let yes = site.isFileExistsSync(path)
+if(yes){
+    // ...
+}
+
+// Get File Info
+site.fileStat(path , (err , stats)=>{
+    console.log(stats)
+})
+// or
+let stats = site.fileStatSync(path)
+
+// Write Data to File
+site.writeFile(path , data , err =>{
+
+}
+// Delete File
+site.removeFile(path , err =>{
+
+}) // or site.deleteFile
+
+
+// Create New Dir 
+site.createDir(path , (err , path)=>{ 
+    if(!err){
+        // ...
+    }
+}) // or site.makeDir
+
+```
 
 
 ## Cookies
@@ -1159,7 +1177,8 @@ site.get('/' , (req , res)=>{
     res.render('index.html' , {name : 'amr' , age : '36'} , {compress : true , cache : false , parser : 'html css js'}) 
     res.render('custom.css' , {'font-size' : '18px'} , {parser : 'css'}) 
     res.render('custom.js' , {'allow-ads' : true} , {parser : 'js'}) 
-    res.status(301) // set response code to 301 and return response object
+    res.code = 301  // set response code to 301
+    res.status(301) // set response code if not set to 301 and return response object
     res.set('Content-Type', 'text/plain'); // add response header
     res.remove('Content-Type'); // remove response header
     res.delete('Content-Type'); // remove response header
@@ -1239,17 +1258,28 @@ site.on('event name', function(obj) {
         callback()
     } , 3000)
  })
- 
+
+ site.on('sync event name 1', function(obj , callback , next) {
+    console.log('name : ' + obj.name )
+    next() // to run next event
+ })
+ site.on('sync event name 2', function(obj , callback , next) {
+    console.log('name : ' + obj.name )
+    next()  // to run next event
+ })
  site.call('event name' , {name : 'x1'})
  site.call('event name 2' , [{name : 'n1'} , {name : 'n2'}])
  site.call('event name 3' , {name : 'some long code'} , ()=>{
      console.log('after excute some long code')
  })
+
+ site.quee('sync event name 1' , {name : 'x1'})
+ site.quee('sync event name 2' , {name : 'x2'})
 ```
 
 ## Must Update
 
-- You Must Update This Lib Every Month
+- You Must Update This Lib Every Month ( npm i isite )
 
 ## Hints
 
