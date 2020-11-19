@@ -1,6 +1,3 @@
-const { resolve } = require('path');
-const { rejects } = require('assert');
-
 module.exports = function init(options) {
   const _s_ = function () {};
 
@@ -16,7 +13,7 @@ module.exports = function init(options) {
   _s_.querystring = require('querystring');
   _s_.formidable = require('formidable');
   _s_.mv = require('mv');
-  _s_.request = require('request');
+  _s_.request = _s_.fetch = require('node-fetch');
   _s_.$ = _s_.cheerio = require('cheerio');
   _s_.md5 = _s_.hash = require('md5');
 
@@ -39,7 +36,7 @@ module.exports = function init(options) {
     });
   };
 
-  require('object-options')(options, _s_);
+  require('./object-options')(options, _s_);
 
   _s_.log = function (data, title) {
     if (_s_.options.log) {
@@ -120,7 +117,7 @@ module.exports = function init(options) {
   _s_.createDir = _s_.mkDir = _s_.fsm.mkDir;
   _s_.createDirSync = _s_.mkdirSync = _s_.fsm.mkdirSync;
 
-  _s_.storage = require('./lib/storage.js')(_s_).fn;
+
 
   const routing = require('./lib/routing.js')(_s_);
   _s_.get = routing.get;
@@ -173,6 +170,9 @@ module.exports = function init(options) {
     };
   }
 
+  _s_.storage = require('./lib/storage.js')(_s_).fn;
+  _s_.logs = require('./lib/logs.js')(_s_).fn;
+
   if (_s_.options.security.enabled) {
     _s_.security = require('./lib/security.js')(_s_);
   }
@@ -185,7 +185,6 @@ module.exports = function init(options) {
   _s_.parser = require('./lib/parser.js');
 
   _s_.ips = []; // all ip send requests [ip , requets count]
-  _s_.logs = []; // all log Messages if logEnabled = true
 
   //Master Pages
   _s_.masterPages = [];
