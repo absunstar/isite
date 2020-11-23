@@ -1,3 +1,7 @@
+## function return or callback
+   - must return response object {done : false , error : ''}
+
+   
 ## Apps Store
     - Start App
     - Stop  App

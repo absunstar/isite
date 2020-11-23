@@ -117,8 +117,6 @@ module.exports = function init(options) {
   _s_.createDir = _s_.mkDir = _s_.fsm.mkDir;
   _s_.createDirSync = _s_.mkdirSync = _s_.fsm.mkdirSync;
 
-
-
   const routing = require('./lib/routing.js')(_s_);
   _s_.get = routing.get;
   _s_.post = routing.post;
@@ -129,13 +127,7 @@ module.exports = function init(options) {
   _s_.run = _s_.start = _s_.listen = routing.start;
   _s_.routing = routing;
 
-  _s_.words = require('./lib/words.js')(_s_);
-  _s_.words.add({
-    name: 'user_name',
-    en: 'User Name',
-    ar: 'أسم المستخدم',
-  });
-  _s_.words.addList(_s_.dir + '/json/words.json');
+
 
   _s_.setting = require('./lib/setting.js')(_s_);
   _s_.setting.set({
@@ -159,9 +151,13 @@ module.exports = function init(options) {
   } else {
     _s_.connectCollection = function (option, db) {
       return {
+        busy: true,
         deleteDuplicate: function () {},
+        createUnique: function () {},
         findOne: function () {},
+        findAll: function () {},
         get: function () {},
+        getAll: function () {},
         find: function () {},
         add: function () {},
         update: function () {},
@@ -169,6 +165,14 @@ module.exports = function init(options) {
       };
     };
   }
+
+  _s_.words = require('./lib/words.js')(_s_);
+  _s_.words.add({
+    name: 'user_name',
+    en: 'User Name',
+    ar: 'أسم المستخدم',
+  });
+  _s_.words.addList(_s_.dir + '/json/words.json');
 
   _s_.storage = require('./lib/storage.js')(_s_).fn;
   _s_.logs = require('./lib/logs.js')(_s_).fn;
@@ -231,7 +235,7 @@ module.exports = function init(options) {
   };
   _s_.importApp = function (app_path, name2) {
     if (_s_.isFileExistsSync(app_path + '/site_files/json/words.json')) {
-      _s_.words.addList(app_path + '/site_files/json/words.json');
+      _s_.words.addApp(app_path);
     }
 
     if (_s_.isFileExistsSync(app_path + '/site_files/json/setting.json')) {

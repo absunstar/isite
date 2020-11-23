@@ -52,21 +52,23 @@
   if (typeof SOCIALBROWSER === 'object') {
     SOCIALBROWSER.var = SOCIALBROWSER.var || {};
     SOCIALBROWSER.var.white_list = SOCIALBROWSER.var.white_list || [];
-    let h = `*${document.location.hostname}*`;
-    let h_exists = false;
-    SOCIALBROWSER.var.white_list.forEach((w) => {
-      if (w.url == h) {
-        h_exists = true;
+    if (document.location.hostname) {
+      let h = `*${document.location.hostname}*`;
+      let h_exists = false;
+      SOCIALBROWSER.var.white_list.forEach((w) => {
+        if (w.url == h) {
+          h_exists = true;
+        }
+      });
+      if (!h_exists) {
+        SOCIALBROWSER.var.white_list.push({
+          url: h,
+        });
+        SOCIALBROWSER.call('set_var', {
+          name: 'white_list',
+          data: SOCIALBROWSER.var.white_list,
+        });
       }
-    });
-    if (!h_exists) {
-      SOCIALBROWSER.var.white_list.push({
-        url: h,
-      });
-      SOCIALBROWSER.call('set_var', {
-        name: 'white_list',
-        data: SOCIALBROWSER.var.white_list,
-      });
     }
 
     SOCIALBROWSER.var.blocking = SOCIALBROWSER.var.blocking || {};
