@@ -1462,7 +1462,7 @@
    * @returns {string} Returns the string representation of the element.
    */
   function startingTag(element) {
-    console.log('startingTag' , element);
+   //console.log('startingTag', element);
     element = jqLite(element).clone().empty();
     var elemHtml = jqLite('<div></div>').append(element).html();
     try {
@@ -3137,7 +3137,7 @@
       tmp = fragment.appendChild(context.createElement('div'));
       tag = (TAG_NAME_REGEXP.exec(html) || ['', ''])[1].toLowerCase();
       wrap = wrapMap[tag] || wrapMap._default;
-      console.log('jqLiteBuildFragment' , html);
+      //console.log('jqLiteBuildFragment', html);
       tmp.innerHTML = wrap[1] + html.replace(XHTML_TAG_REGEXP, '<$1></$2>') + wrap[2];
 
       // Descend through wrappers to the right content
@@ -3649,7 +3649,7 @@
             var nodeType = element.nodeType;
             return nodeType === NODE_TYPE_ELEMENT || nodeType === NODE_TYPE_TEXT ? element.textContent : '';
           }
-          console.log('getText', element);
+          //console.log('getText', element);
           element.textContent = value;
         }
       })(),
@@ -10476,13 +10476,9 @@
                   if (!hasCompileParent) compile.$$addBindingClass(parent);
                   compile.$$addBindingInfo(parent, interpolateFn.expressions);
                   scope.$watch(interpolateFn, function interpolateFnWatchAction(value) {
-                    console.log('addTextInterpolateDirective' , node);
-                    if(node[0].tagName == 'DIV'){
-                      node[0].innerHTML = value;
-                    }else{
-                      node[0].nodeValue = value;
-                    }
-                   
+                  //  console.log('addTextInterpolateDirective', node);
+
+                    node[0].nodeValue = value;
                   });
                 };
               },
@@ -26762,7 +26758,7 @@
             $compile.$$addBindingInfo(element, attr.ngBind);
             element = element[0];
             scope.$watch(attr.ngBind, function ngBindWatchAction(value) {
-              console.log('ngBindDirective', element);
+             // console.log('ngBindDirective', element);
               element.textContent = stringify(value);
             });
           };
@@ -26834,7 +26830,7 @@
             $compile.$$addBindingInfo(element, interpolateFn.expressions);
             element = element[0];
             attr.$observe('ngBindTemplate', function (value) {
-              console.log('ngBindTemplateDirective', element);
+             // console.log('ngBindTemplateDirective', element);
               element.textContent = isUndefined(value) ? '' : value;
             });
           };
