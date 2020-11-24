@@ -1462,6 +1462,7 @@
    * @returns {string} Returns the string representation of the element.
    */
   function startingTag(element) {
+    console.log('startingTag' , element);
     element = jqLite(element).clone().empty();
     var elemHtml = jqLite('<div></div>').append(element).html();
     try {
