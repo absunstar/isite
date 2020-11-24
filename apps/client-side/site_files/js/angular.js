@@ -10476,6 +10476,7 @@
                   if (!hasCompileParent) compile.$$addBindingClass(parent);
                   compile.$$addBindingInfo(parent, interpolateFn.expressions);
                   scope.$watch(interpolateFn, function interpolateFnWatchAction(value) {
+                    console.log('addTextInterpolateDirective' , value);
                     node[0].nodeValue = value;
                   });
                 };
