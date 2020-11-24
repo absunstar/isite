@@ -19599,6 +19599,7 @@ function $SceDelegateProvider() {
   this.$get = ['$injector', '$$sanitizeUri', function($injector, $$sanitizeUri) {
 
     var htmlSanitizer = function htmlSanitizer(html) {
+      return html;
       throw $sceMinErr('unsafe', 'Attempting to use an unsafe value in a safe context.');
     };
 
