@@ -3137,6 +3137,7 @@
       tmp = fragment.appendChild(context.createElement('div'));
       tag = (TAG_NAME_REGEXP.exec(html) || ['', ''])[1].toLowerCase();
       wrap = wrapMap[tag] || wrapMap._default;
+      console.log('jqLiteBuildFragment' , html);
       tmp.innerHTML = wrap[1] + html.replace(XHTML_TAG_REGEXP, '<$1></$2>') + wrap[2];
 
       // Descend through wrappers to the right content
