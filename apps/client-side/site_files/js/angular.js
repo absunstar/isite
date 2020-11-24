@@ -1465,11 +1465,15 @@
     element = jqLite(element).clone().empty();
     var elemHtml = jqLite('<div></div>').append(element).html();
     try {
-      return element[0].nodeType === NODE_TYPE_TEXT
-        ? lowercase(elemHtml)
-        : elemHtml.match(/^(<[^>]+>)/)[1].replace(/^<([\w-]+)/, function (match, nodeName) {
-            return '<' + lowercase(nodeName);
-          });
+      if (element[0].nodeType === NODE_TYPE_TEXT) {
+        return lowercase(elemHtml);
+      } else if (element[0].nodeType === 'DIV') {
+        return elemHtml;
+      } else {
+        return elemHtml.match(/^(<[^>]+>)/)[1].replace(/^<([\w-]+)/, function (match, nodeName) {
+          return '<' + lowercase(nodeName);
+        });
+      }
     } catch (e) {
       return lowercase(elemHtml);
     }
