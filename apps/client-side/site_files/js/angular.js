@@ -26766,6 +26766,7 @@ var ngBindDirective = ['$compile', function($compile) {
         $compile.$$addBindingInfo(element, attr.ngBind);
         element = element[0];
         scope.$watch(attr.ngBind, function ngBindWatchAction(value) {
+          console.log(element);
           element.textContent = stringify(value);
         });
       };
