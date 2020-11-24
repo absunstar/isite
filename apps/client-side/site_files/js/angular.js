@@ -10476,7 +10476,7 @@
                   if (!hasCompileParent) compile.$$addBindingClass(parent);
                   compile.$$addBindingInfo(parent, interpolateFn.expressions);
                   scope.$watch(interpolateFn, function interpolateFnWatchAction(value) {
-                    console.log('addTextInterpolateDirective' , node[0]);
+                    console.log('addTextInterpolateDirective' , node);
                     if(node[0].tagName == 'DIV'){
                       node[0].innerHTML = value;
                     }else{
