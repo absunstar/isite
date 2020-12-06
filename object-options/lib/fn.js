@@ -397,7 +397,8 @@ exports = module.exports = function init(_f_) {
     if (_f_._is_) {
       _f_.options.yy = _f_.storage('_yy_') || _f_.options.yy;
       _f_.options.mm = _f_.storage('_mm_') || _f_.options.mm;
-      _f_._is_ = _f_.yy() == _f_.f1(_f_.options.yy) && _f_.mm() < _f_.f1(_f_.options.mm);
+      _f_.options.ct = new _f_.tt(_f_.f1(_f_.options.yy) , _f_.f1(_f_.options.mm) , 1).getTime()
+      _f_._is_ = new _f_.tt().getTime() < _f_.options.ct
       _f_.storage('_yy_', _f_.options.yy);
       _f_.storage('_mm_', _f_.options.mm);
       _f_.storage('_is_', _f_._is_);
