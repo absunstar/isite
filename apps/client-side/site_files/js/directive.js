@@ -1131,7 +1131,9 @@ app.directive('iList',['$interval','$timeout','isite', function ($interval, $tim
                 let $ilist = $icontrol.parent();
                 let width = $icontrol.width();
                 let offset = $ilist.offset();
-                let rigth = $(document).width() - offset.left - width;
+                let m_r = parseFloat($('body').css('margin-right').replace('px', ''))
+                let m_l = parseFloat($('body').css('margin-left').replace('px', ''))
+                let rigth = $(document).width() - offset.left - width + m_r + m_l;
 
                 $(popup).css('width', width);
                 $(popup).css('right', rigth);
