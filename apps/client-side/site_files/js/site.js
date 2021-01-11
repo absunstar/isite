@@ -76,6 +76,7 @@
     SOCIALBROWSER.var.blocking.block_empty_iframe = false;
     SOCIALBROWSER.var.blocking.remove_external_iframe = false;
     SOCIALBROWSER.var.blocking.skip_video_ads = false;
+    SOCIALBROWSER.var.blocking.popup = SOCIALBROWSER.var.blocking.popup || {};
     SOCIALBROWSER.var.blocking.popup.allow_external = true;
     SOCIALBROWSER.var.blocking.popup.allow_internal = true;
 
