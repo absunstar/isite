@@ -88,8 +88,11 @@
 
   let site = {};
   site.render = function (selector, data) {
-    let template = document.querySelector(selector).innerHTML;
-    return Mustache.render(template, data);
+    let template = document.querySelector(selector);
+    if(template){
+      return Mustache.render(template.innerHTML, data);
+    }
+    return ''
   };
 
   site.html = function (template, data) {
