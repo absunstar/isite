@@ -17,11 +17,11 @@
             <form ng-hide="busy">
                 <div class="control">
                     <label>##word.security_user_email##</label>
-                    <input ng-model="userEmail" type="text"  ng-keydown="tryLogin($event)">
+                    <input id="userEmail" ng-model="userEmail" type="text"  ng-keydown="tryLogin($event)">
                 </div>
                 <div class="control">
                     <label>##word.security_user_password##</label>
-                    <input ng-model="userPassword" type="password" ng-keydown="tryLogin($event)">
+                    <input id="userPassword" ng-model="userPassword" type="password" ng-keydown="tryLogin($event)">
                 </div>
 
             </form>

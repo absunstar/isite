@@ -127,8 +127,6 @@ module.exports = function init(options) {
   _s_.run = _s_.start = _s_.listen = routing.start;
   _s_.routing = routing;
 
-
-
   _s_.setting = require('./lib/setting.js')(_s_);
   _s_.setting.set({
     name: 'loaded',
@@ -270,11 +268,13 @@ module.exports = function init(options) {
   };
 
   _s_.loadApp = function (name, name2) {
+    console.log(`Load Local App ${name} as ${name2 || name}`);
     let app_path = _s_.options.apps_dir + '/' + name;
     return _s_.importApp(app_path, name2);
   };
 
   _s_.loadLocalApp = function (name, name2) {
+    console.log(`Load Local App ${name} as ${name2 || name}`);
     _s_.importApp(__dirname + '/apps/' + name, name2);
   };
 
@@ -282,10 +282,9 @@ module.exports = function init(options) {
     if (_s_.isFileExistsSync(_s_.options.apps_dir) && _s_.fs.lstatSync(_s_.options.apps_dir).isDirectory()) {
       _s_.fs.readdir(_s_.options.apps_dir, (err, files) => {
         if (!err && files && files.length > 0) {
-          _s_.log('Auto Loading Apps ...');
+          console.log('Auto Loading Apps ...');
           files.forEach((file) => {
             if (_s_.fs.lstatSync(_s_.options.apps_dir + '/' + file).isDirectory()) {
-              console.log('Auto Loading App : ' + file);
               _s_.loadApp(file);
             }
           });
