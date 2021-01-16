@@ -20,7 +20,7 @@ app.controller('register', function ($scope, $http) {
                 $scope.busy = false;
             }
             if (response.data.user) {
-                window.location.reload(true);
+                window.location.href = '/';
             }
         } , function(err){
             $scope.busy = false;

@@ -10,7 +10,7 @@ app.controller('logout', function ($scope, $http) {
         $http.post('/api/user/logout').then(function (response) {
            
             if (response.data.done) {
-                window.location.reload(true);
+                window.location.href = '/';
             }else{
                 $scope.error = response.data.error;
                 $scope.busy = false;
