@@ -66,45 +66,41 @@ exports = module.exports = function init(_p_) {
   }
 
   if (!String.prototype.test) {
-    Object.defineProperty(String.prototype, 'test', {
-      value: function (reg, flag = 'gium') {
-        try {
-          return new RegExp(reg, flag).test(this);
-        } catch (error) {
-          return false;
-        }
-      },
-    });
+    String.prototype.test = function (reg, flag = 'gium') {
+      try {
+        return new RegExp(reg, flag).test(this);
+      } catch (error) {
+        return false;
+      }
+    };
   }
 
   if (!String.prototype.like) {
-    Object.defineProperty(String.prototype, 'like', {
-      value: function (name) {
-        if (!name) {
-          return false;
+    String.prototype.like = function (name) {
+      if (!name) {
+        return false;
+      }
+      let r = false;
+      name.split('|').forEach((n) => {
+        n = n.split('*');
+        n.forEach((w, i) => {
+          n[i] = escape(w);
+        });
+        n = n.join('.*');
+        if (this.test('^' + n + '$', 'gium')) {
+          r = true;
         }
-        if (name.indexOf('*') !== -1) {
-          name = name.split('*');
-          name.forEach((n, i) => {
-            name[i] = escape(n);
-          });
-          name = name.join('.*');
-        } else {
-          name = escape(name);
-        }
-        return this.test('^' + name + '$', 'gium');
-      },
-    });
+      });
+      return r;
+    };
   }
 
   if (!String.prototype.contains) {
-    Object.defineProperty(String.prototype, 'contains', {
-      value: function (name) {
-        if (!name) {
-          return false;
-        }
-        return this.test('^.*' + escape(name) + '.*$', 'gium');
-      },
-    });
+    String.prototype.contains = function (name) {
+      if (!name) {
+        return false;
+      }
+      return this.test('^.*' + escape(name) + '.*$', 'gium');
+    };
   }
 };
