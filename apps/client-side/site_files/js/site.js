@@ -41,10 +41,16 @@
 
   if (!String.prototype.contains) {
     String.prototype.contains = function (name) {
+      let r = false;
       if (!name) {
-        return false;
+        return r;
       }
-      return this.test('^.*' + escape(name) + '.*$', 'gium');
+      name.split('|').forEach((n) => {
+          if(n && this.test('^.*' + escape(n) + '.*$', 'gium')){
+            r = true
+          }
+      })
+      return r;
     };
   }
 
