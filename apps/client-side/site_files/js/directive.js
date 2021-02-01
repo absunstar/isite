@@ -284,7 +284,7 @@ app.directive('iDate2', function () {
 
       $scope.updateDate = function () {
         if ($scope.model && $scope.model.year && $scope.model.day) {
-          $scope.ngModel = new Date($scope.model.year, $scope.model.month, $scope.model.day);
+          $scope.ngModel = new Date($scope.model.year, $scope.model.month, $scope.model.day , 0 , 0 , 0);
         } else {
           delete $scope.ngModel;
         }
