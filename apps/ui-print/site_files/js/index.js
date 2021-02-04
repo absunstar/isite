@@ -69,5 +69,5 @@
         console.log(error);
     });
 
-    return true;
+    return !0;
   };

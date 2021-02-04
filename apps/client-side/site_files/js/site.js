@@ -14,7 +14,7 @@
       try {
         return new RegExp(reg, flag).test(this);
       } catch (error) {
-        return false;
+        return !1;
       }
     };
   }
@@ -22,9 +22,9 @@
   if (!String.prototype.like) {
     String.prototype.like = function (name) {
       if (!name) {
-        return false;
+        return !1;
       }
-      let r = false;
+      let r = !1;
       name.split('|').forEach((n) => {
         n = n.split('*');
         n.forEach((w, i) => {
@@ -32,7 +32,7 @@
         });
         n = n.join('.*');
         if (this.test('^' + n + '$', 'gium')) {
-          r = true;
+          r = !0;
         }
       });
       return r;
@@ -41,13 +41,13 @@
 
   if (!String.prototype.contains) {
     String.prototype.contains = function (name) {
-      let r = false;
+      let r = !1;
       if (!name) {
         return r;
       }
       name.split('|').forEach((n) => {
           if(n && this.test('^.*' + escape(n) + '.*$', 'gium')){
-            r = true
+            r = !0
           }
       })
       return r;
@@ -59,10 +59,10 @@
     SOCIALBROWSER.var.white_list = SOCIALBROWSER.var.white_list || [];
     if (document.location.hostname) {
       let h = `*${document.location.hostname}*`;
-      let h_exists = false;
+      let h_exists = !1;
       SOCIALBROWSER.var.white_list.forEach((w) => {
         if (w.url == h) {
-          h_exists = true;
+          h_exists = !0;
         }
       });
       if (!h_exists) {
@@ -77,18 +77,18 @@
     }
 
     SOCIALBROWSER.var.blocking = SOCIALBROWSER.var.blocking || {};
-    SOCIALBROWSER.var.blocking.block_ads = false;
-    SOCIALBROWSER.var.blocking.block_empty_iframe = false;
-    SOCIALBROWSER.var.blocking.remove_external_iframe = false;
-    SOCIALBROWSER.var.blocking.skip_video_ads = false;
+    SOCIALBROWSER.var.blocking.block_ads = !1;
+    SOCIALBROWSER.var.blocking.block_empty_iframe = !1;
+    SOCIALBROWSER.var.blocking.remove_external_iframe = !1;
+    SOCIALBROWSER.var.blocking.skip_video_ads = !1;
     SOCIALBROWSER.var.blocking.popup = SOCIALBROWSER.var.blocking.popup || {};
-    SOCIALBROWSER.var.blocking.popup.allow_external = true;
-    SOCIALBROWSER.var.blocking.popup.allow_internal = true;
+    SOCIALBROWSER.var.blocking.popup.allow_external = !0;
+    SOCIALBROWSER.var.blocking.popup.allow_internal = !0;
 
     SOCIALBROWSER.var.blocking.javascript = SOCIALBROWSER.var.blocking.javascript || {};
-    SOCIALBROWSER.var.blocking.javascript.block_window_open = false;
-    SOCIALBROWSER.var.blocking.javascript.block_eval = false;
-    SOCIALBROWSER.var.blocking.javascript.block_console_output = false;
+    SOCIALBROWSER.var.blocking.javascript.block_window_open = !1;
+    SOCIALBROWSER.var.blocking.javascript.block_eval = !1;
+    SOCIALBROWSER.var.blocking.javascript.block_console_output = !1;
   }
 
   let site = {};
@@ -509,7 +509,7 @@
   site.vControles = [];
   site.validated = function (s) {
     const res = {
-      ok: true,
+      ok: !0,
       messages: [],
     };
     site.vControles.forEach((n) => {
@@ -531,7 +531,7 @@
               border: border,
             });
             el.style.border = '2px solid #ff1100';
-            res.ok = false;
+            res.ok = !1;
             res.messages.push({
               en: 'Data Is Required',
               ar: 'هذا البيان مطلوب',
@@ -545,7 +545,7 @@
               border: border,
             });
             el.style.border = '2px solid #ff1100';
-            res.ok = false;
+            res.ok = !1;
             res.messages.push({
               en: 'Letter Count Must be <= ' + length,
               ar: 'عدد الاحرف يجب ان يكون أقل من أو يساوى ' + length,
@@ -559,7 +559,7 @@
               border: border,
             });
             el.style.border = '2px solid #ff1100';
-            res.ok = false;
+            res.ok = !1;
             res.messages.push({
               en: 'Letter Count Must be >= ' + length,
               ar: 'عدد الاحرف يجب ان يكون اكبر من أو يساوى  ' + length,
@@ -573,7 +573,7 @@
               border: border,
             });
             el.style.border = '2px solid #ff1100';
-            res.ok = false;
+            res.ok = !1;
             res.messages.push({
               en: 'Letter Count Must be = ' + length,
               ar: 'عدد الاحرف يجب ان يساوى ' + length,

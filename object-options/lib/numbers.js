@@ -1,4 +1,4 @@
-exports = module.exports = function init(_n_) {
+exports = module.exports = function init(___0) {
 
     let numbers = [{
             n: 1,
@@ -241,7 +241,7 @@ exports = module.exports = function init(_n_) {
         }
         return s
     }
-    _n_.stringfiy = function (num, lang) {
+    ___0.stringfiy = function (num, lang) {
         lang = lang || 'ar'
         num = num.toString()
         let s = ''

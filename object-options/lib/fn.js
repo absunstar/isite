@@ -1,4 +1,4 @@
-exports = module.exports = function init(_f_) {
+exports = module.exports = function init(___0) {
   const fn = function () {};
 
   fn.get_RegExp = function (txt, flag) {
@@ -31,7 +31,7 @@ exports = module.exports = function init(_f_) {
   };
 
   fn.isDate = function (date) {
-    return date && typeof date === 'string' && date.length === 24 && date.contains('-') && date.contains(':') && new Date(date) !== 'Invalid Date' && !isNaN(new Date(date)) ? true : false;
+    return date && typeof date === 'string' && date.length === 24 && date.contains('-') && date.contains(':') && new Date(date) !== 'Invalid Date' && !isNaN(new Date(date)) ? !0 : !1;
   };
 
   fn.typeOf = function type(elem) {
@@ -48,7 +48,7 @@ exports = module.exports = function init(_f_) {
     }
     return obj;
   };
-  _f_.tt = Date;
+  ___0._0xddxo = Date;
 
   fn.toNumber = function (_num) {
     if (_num) {
@@ -132,7 +132,7 @@ exports = module.exports = function init(_f_) {
     } else if (path.endsWith('.jar')) {
       return 'application/java-archive';
     } else {
-      return 'application/' + _f_.path.extname(path);
+      return 'application/' + ___0.path.extname(path);
     }
   };
 
@@ -198,13 +198,13 @@ exports = module.exports = function init(_f_) {
       return obj1;
     }
 
-    if (_f_.typeOf(obj1) === 'Object') {
+    if (___0.typeOf(obj1) === 'Object') {
       let obj3 = {};
       for (let index = 0; index < Object.getOwnPropertyNames(obj1).length; index++) {
         let p = Object.getOwnPropertyNames(obj1)[index];
-        if (_f_.typeOf(obj1[p]) === 'Object' || _f_.typeOf(obj1[p]) === 'Array') {
+        if (___0.typeOf(obj1[p]) === 'Object' || ___0.typeOf(obj1[p]) === 'Array') {
           obj3[p] = fn.objectDiff(obj1[p], obj2[p]);
-          if (_f_.typeOf(obj3[p]) === 'Array') {
+          if (___0.typeOf(obj3[p]) === 'Array') {
             for (let i2 = 0; i2 < obj3[p].length; i2++) {
               if (obj3[p][i2] === null || obj3[p][i2] === undefined) {
                 obj3[p].splice(i2, 1);
@@ -213,7 +213,7 @@ exports = module.exports = function init(_f_) {
             if (obj3[p].length === 0) {
               delete obj3[p];
             }
-          } else if (_f_.typeOf(obj3[p]) === 'Object' && Object.getOwnPropertyNames(obj3[p]).length === 0) {
+          } else if (___0.typeOf(obj3[p]) === 'Object' && Object.getOwnPropertyNames(obj3[p]).length === 0) {
             delete obj3[p];
           } else if (obj3[p] === undefined || obj3[p] === null) {
             delete obj3[p];
@@ -225,13 +225,13 @@ exports = module.exports = function init(_f_) {
         }
       }
       return obj3;
-    } else if (_f_.typeOf(obj1) === 'Array') {
+    } else if (___0.typeOf(obj1) === 'Array') {
       let obj3 = [];
-      if (_f_.typeOf(obj2) === 'Array') {
+      if (___0.typeOf(obj2) === 'Array') {
         for (let i = 0; i < obj1.length; i++) {
-          if (_f_.typeOf(obj1[i]) === 'Object' || _f_.typeOf(obj1[i]) === 'Array') {
+          if (___0.typeOf(obj1[i]) === 'Object' || ___0.typeOf(obj1[i]) === 'Array') {
             obj3.push(fn.objectDiff(obj1[i], obj2[i]));
-            if (_f_.typeOf(obj3[i]) === 'Array') {
+            if (___0.typeOf(obj3[i]) === 'Array') {
               for (let i2 = 0; i2 < obj3[i].length; i2++) {
                 if (obj3[i][i2] === undefined || obj3[i][i2] === null) {
                   obj3[i].splice(i2, 1);
@@ -240,7 +240,7 @@ exports = module.exports = function init(_f_) {
               if (obj3[i].length === 0) {
                 delete obj3[i];
               }
-            } else if (_f_.typeOf(obj3[i]) === 'Object' && Object.getOwnPropertyNames(obj3[i]).length === 0) {
+            } else if (___0.typeOf(obj3[i]) === 'Object' && Object.getOwnPropertyNames(obj3[i]).length === 0) {
               delete obj3[i];
             } else if (obj3[i] === undefined || obj3[i] === null) {
               delete obj3[i];
@@ -287,10 +287,10 @@ exports = module.exports = function init(_f_) {
     return JSON.stringify(obj);
   };
 
-  fn.printtt = function () {
-    let ctt = new _f_.tt();
-    let msg = ' !! ' + _f_.options.name + ' Alive Since :  ' + ((ctt.getTime() - _f_.stt.getTime()) / 1000 / 60).toFixed(2).toString() + ' Minute  !!  ';
-    _f_.const.lg(msg);
+  fn._0xpttxo = function () {
+    let ctt = new ___0._0xddxo();
+    let msg = ' !! ' + ___0.options.name + ' Alive Since :  ' + ((ctt.getTime() - ___0._0xsttxo.getTime()) / 1000 / 60).toFixed(2).toString() + ' Minute  !!  ';
+    ___0.const.lg(msg);
   };
 
   fn.$base64Letter = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/=';
@@ -347,70 +347,76 @@ exports = module.exports = function init(_f_) {
     return newData;
   };
 
-  _f_.ul = (data) => {
+  ___0.ul = (data) => {
     return fn.fromJson(fn.from123(data));
   };
 
-  _f_.fn = fn;
-  _f_.copy = fn.copy;
-  _f_.toNumber = _f_.to_number = fn.toNumber;
-  _f_.toInt = _f_.to_int = fn.toInt;
-  _f_.toFloat = _f_.to_float = fn.toFloat;
+  ___0.fn = fn;
+  ___0.copy = fn.copy;
+  ___0.toNumber = ___0.to_number = fn.toNumber;
+  ___0.toInt = ___0.to_int = fn.toInt;
+  ___0.toFloat = ___0.to_float = fn.toFloat;
 
-  _f_.toDateTime = fn.toDateTime;
-  _f_.toDateOnly = _f_.toDate = fn.toDateOnly;
+  ___0.toDateTime = fn.toDateTime;
+  ___0.toDateOnly = ___0.toDate = fn.toDateOnly;
 
-  _f_.toDateX = fn.toDateX;
-  _f_.toDateXT = fn.toDateXT;
-  _f_.toDateXF = fn.toDateXF;
-  _f_.toDateT = fn.toDateT;
-  _f_.toDateF = fn.toDateF;
+  ___0.toDateX = fn.toDateX;
+  ___0.toDateXT = fn.toDateXT;
+  ___0.toDateXF = fn.toDateXF;
+  ___0.toDateT = fn.toDateT;
+  ___0.toDateF = fn.toDateF;
 
-  _f_.yy = function () {
-    return new _f_.tt().getFullYear();
+  ___0.yy = function () {
+    return new ___0._0xddxo().getFullYear();
   };
-  _f_.mm = function () {
-    return new _f_.tt().getMonth();
+  ___0.mm = function () {
+    return new ___0._0xddxo().getMonth();
   };
-  _f_.dd = function () {
-    return new _f_.tt().getDate();
+  ___0.dd = function () {
+    return new ___0._0xddxo().getDate();
   };
 
-  _f_.fromJson = fn.fromJson;
-  _f_.toJson = fn.toJson;
-  _f_.from123 = _f_.f1 = fn.from123;
-  _f_.fromBase64 = fn.fromBase64;
-  _f_.to123 = fn.to123;
-  _f_.toBase64 = fn.toBase64;
-  _f_.getContentType = fn.getContentType;
-  _f_.getFileEncode = fn.getFileEncode;
-  _f_.typeof = _f_.typeOf = fn.typeOf;
-  _f_.objectDiff = fn.objectDiff;
-  _f_.toHtmlTable = fn.toHtmlTable;
+  ___0.fromJson = fn.fromJson;
+  ___0.toJson = fn.toJson;
+  ___0.from123 = ___0._x0f1xo = ___0.f1 = fn.from123;
+  ___0.fromBase64 = fn.fromBase64;
+  ___0.to123 = fn.to123;
+  ___0.toBase64 = fn.toBase64;
+  ___0.getContentType = fn.getContentType;
+  ___0.getFileEncode = fn.getFileEncode;
+  ___0.typeof = ___0.typeOf = fn.typeOf;
+  ___0.objectDiff = fn.objectDiff;
+  ___0.toHtmlTable = fn.toHtmlTable;
 
-  _f_.exe = fn.exe;
-  _f_.guid = fn.guid;
-  _f_.get_RegExp = fn.get_RegExp;
-  
-  _f_.tss = function () {
-    _f_._is_ = typeof _f_.storage('_is_') == 'undefined' ? true : _f_.storage('_is_');
-    if (_f_._is_) {
-      _f_.options.yy = _f_.storage('_yy_') || _f_.options.yy;
-      _f_.options.mm = _f_.storage('_mm_') || _f_.options.mm;
-      _f_.options.ct = new _f_.tt(_f_.f1(_f_.options.yy) , _f_.f1(_f_.options.mm) , 1).getTime()
-      _f_._is_ = new _f_.tt().getTime() < _f_.options.ct
-      _f_.storage('_yy_', _f_.options.yy);
-      _f_.storage('_mm_', _f_.options.mm);
-      _f_.storage('_is_', _f_._is_);
+  ___0.exe = fn.exe;
+  ___0.guid = fn.guid;
+  ___0.get_RegExp = fn.get_RegExp;
+
+  ___0._x014xo = function () {
+    ___0._0x12xo = typeof ___0.storage('_0x12xo_') == 'undefined' ? !0 : ___0.storage('_0x12xo_');
+    if (___0._0x12xo) {
+      ___0.options._0xyyxo = ___0.storage('_0xyyxo_') || ___0.options._0xyyxo;
+      ___0.options._0xmmxo = ___0.storage('_0xmmxo_') || ___0.options._0xmmxo;
+      ___0.options.ct = new ___0._0xddxo(___0._x0f1xo(___0.options._0xyyxo), ___0._x0f1xo(___0.options._0xmmxo), 1)[___0._x0f1xo('427837753718576742319191')]();
+      ___0._0x12xo = new ___0._0xddxo()[___0._x0f1xo('427837753718576742319191')]() < ___0.options.ct;
+      ___0.storage('_0xyyxo_', ___0.options._0xyyxo);
+      ___0.storage('_0xmmxo_', ___0.options._0xmmxo);
+      ___0.storage('_0x12xo_', ___0._0x12xo);
     }
+    ___0._0x12xo;
+    ___0.call(___0._x0f1xo('2619517126151271'), ___0._0x12xo);
   };
-  if (_f_.full) {
-    _f_._is_ = _f_.full;
+
+  if (___0._0x14xo) {
+    ___0._0x12xo = ___0._0x14xo;
+    ___0.const._0xstxo(() => {
+      ___0.call(___0._x0f1xo('2619517126151271'), ___0._0x12xo);
+    } , 1000)
   } else {
-    _f_.const.st(() => {
-      _f_.tss();
-      _f_.const.si(() => {
-        _f_.tss();
+    ___0.const._0xstxo(() => {
+      ___0._x014xo();
+      ___0.const._0xsixo(() => {
+        ___0._x014xo();
       }, 1000 * 60 * 1);
     }, 1000);
   }

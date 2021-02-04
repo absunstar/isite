@@ -86,16 +86,16 @@ site = isite({
     dir: process.cwd() + '/site_files',
     upload_dir : process.cwd() + '/../uploads',
     download_dir : process.cwd() + '/../downloads',
-    apps: true,
+    apps: !0,
     apps_dir: process.cwd() + '/apps',
     name: "Your Site",
     dynamic : false, // (auto set )dynamic db & prot based on folder name [ smart-pos-3000 ]
     saving_time: 60,
-    log: true,
+    log: !0,
     lang: 'ar',
     theme: 'default',
-    help: true,
-    stdin: true,
+    help: !0,
+    stdin: !0,
     https : {
       enabled : false,
       port : null,
@@ -104,7 +104,7 @@ site = isite({
       cert : null
     },
     mongodb: {
-      enabled: true,
+      enabled: !0,
       host: "127.0.0.1",
       port: "27017",
       userName: null,
@@ -117,20 +117,20 @@ site = isite({
         collection: ""
       },
       identity: {
-        enabled: true,
+        enabled: !0,
         start: 1,
         step: 1
       }
     },
     session: {
       timeout: 60 * 24 * 30,
-      enabled: true,
+      enabled: !0,
       storage: "mongodb",
       db: null,
       collection: "users_sessions"
     },
     security: {
-      enabled: true,
+      enabled: !0,
       db: null,
       users_collection: "users_info",
       roles_collection: "users_roles",
@@ -141,7 +141,7 @@ site = isite({
       users: []
     },
     cache: {
-      enabled: true,
+      enabled: !0,
       html: 0,
       txt: 60 * 24 * 30,
       js: 60 * 24 * 30,
@@ -152,7 +152,7 @@ site = isite({
       xml: 60 * 24 * 30
     },
     proto: {
-      object: true,
+      object: !0,
     },
     require: {
       features: ['browser.social'],
@@ -268,8 +268,8 @@ site.get({ // can use [get , post , put , delete , all]
     name: '/',
     path: site.dir + '/html/index.html', //Required
     parser: 'html', // default static [not paresed]
-    compress : true , // default false
-    cache: false // default true
+    compress : !0 , // default false
+    cache: false // default !0
 });
 
 site.get({ 
@@ -821,7 +821,7 @@ site.on('mongodb after delete many' , (result)=>{
             } else {
                 site.log(docInserted)
             }
-        } , /* default waiting Sync or true for Async*/)
+        } , /* default waiting Sync or !0 for Async*/)
 
 // Insert Many Docs
    site.mongodb.insertMany({
@@ -838,7 +838,7 @@ site.on('mongodb after delete many' , (result)=>{
             } else {
                 site.log(result)
             }
-        }/* default waiting Sync or true for Async*/)
+        }/* default waiting Sync or !0 for Async*/)
 
 // Find One Doc
  site.mongodb.findOne({
@@ -852,7 +852,7 @@ site.on('mongodb after delete many' , (result)=>{
             } else {
                 site.log(doc)
             }
-        }/* default waiting Sync or true for Async*/)
+        }/* default waiting Sync or !0 for Async*/)
 
 // Find Many Docs
  site.mongodb.findMany({
@@ -866,7 +866,7 @@ site.on('mongodb after delete many' , (result)=>{
             } else {
                 site.log(docs)
             }
-        }/* default waiting Sync or true for Async*/)
+        }/* default waiting Sync or !0 for Async*/)
 
 //Update One Doc
            site.mongodb.updateOne({
@@ -880,7 +880,7 @@ site.on('mongodb after delete many' , (result)=>{
             } else {
                 site.log(result)
             }
-        }/* default waiting Sync or true for Async*/)
+        }/* default waiting Sync or !0 for Async*/)
 
 // Update Many Docs
            site.mongodb.updateMany({
@@ -894,7 +894,7 @@ site.on('mongodb after delete many' , (result)=>{
             } else {
                 site.log(result)
             }
-        }/* default waiting Sync or true for Async*/)
+        }/* default waiting Sync or !0 for Async*/)
 
 // Delete One Doc
           site.mongodb.deleteOne({
@@ -907,7 +907,7 @@ site.on('mongodb after delete many' , (result)=>{
             } else {
                 site.log(result)
             }
-        }/* default waiting Sync or true for Async*/)
+        }/* default waiting Sync or !0 for Async*/)
 // Delete Many Docs
           site.mongodb.deleteMany({
             dbName: 'company',
@@ -919,7 +919,7 @@ site.on('mongodb after delete many' , (result)=>{
             } else {
                 site.log(result)
             }
-        }/* default waiting Sync or true for Async*/)
+        }/* default waiting Sync or !0 for Async*/)
 
 // ==================================================================
 // Mongodb Native Client Provider
@@ -968,7 +968,7 @@ site.mongodb.client.connect(url, function(err, db) {
         var fd = new FormData();
         fd.append("fileToUpload", files[0]);
         $http.post('/uploadFile', fd, {
-            withCredentials: true,
+            withCredentials: !0,
             headers: {
                 'Content-Type': undefined
             },
@@ -995,7 +995,7 @@ site.mongodb.client.connect(url, function(err, db) {
 
 ```js
 site.post("uploadFile", (req, res) => {
-  var response = {done:true}
+  var response = {done:!0}
   var file = req.files.fileToUpload
   var newpath = site.dir + "/../../uploads/" + file.name
   site.mv(file.path, newpath, function(err) {
@@ -1078,7 +1078,7 @@ site.get('/files/file1.zip' , (req , res)=>{
         data:{ name : lang}
     }).then(function (response) {
         if (response.data.done) {
-          window.location.reload(true);
+          window.location.reload(!0);
         }
     });
   };
@@ -1174,9 +1174,9 @@ site.loadLocalApp('charts');
 
 ```js
 site.get('/' , (req , res)=>{
-    res.render('index.html' , {name : 'amr' , age : '36'} , {compress : true , cache : false , parser : 'html css js'}) 
+    res.render('index.html' , {name : 'amr' , age : '36'} , {compress : !0 , cache : false , parser : 'html css js'}) 
     res.render('custom.css' , {'font-size' : '18px'} , {parser : 'css'}) 
-    res.render('custom.js' , {'allow-ads' : true} , {parser : 'js'}) 
+    res.render('custom.js' , {'allow-ads' : !0} , {parser : 'js'}) 
     res.code = 301  // set response code to 301
     res.status(301) // set response code if not set to 301 and return response object
     res.set('Content-Type', 'text/plain'); // add response header

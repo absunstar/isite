@@ -55,7 +55,7 @@ app.service('isite', [
       fd.append('fileToUpload', files[0]);
       $http
         .post('/api/upload/image/' + options.category, fd, {
-          withCredentials: true,
+          withCredentials: !0,
           headers: {
             'Content-Type': undefined,
           },
@@ -91,7 +91,7 @@ app.service('isite', [
       fd.append('fileToUpload', files[0]);
       $http
         .post('/api/upload/file/' + options.category, fd, {
-          withCredentials: true,
+          withCredentials: !0,
           headers: {
             'Content-Type': undefined,
           },
@@ -135,7 +135,7 @@ app.service('isite', [
       fd.append('fileToUpload', files[0]);
       $http
         .post(options.api, fd, {
-          withCredentials: true,
+          withCredentials: !0,
           headers: {
             'Content-Type': undefined,
           },
@@ -628,7 +628,7 @@ app.directive('iFulldate', [
   function ($http) {
     return {
       link: function ($scope, element, attrs, ngModel) {
-        let _busy = false;
+        let _busy = !1;
 
         if (typeof attrs.disabled !== 'undefined') {
           attrs.disabled = 'disabled';
@@ -693,7 +693,7 @@ app.directive('iFulldate', [
             if (_busy) {
               return;
             }
-            _busy = true;
+            _busy = !0;
             $scope.model.date = new Date($scope.model.year, $scope.model.month, $scope.model.day);
             $http({
               method: 'POST',
@@ -709,11 +709,11 @@ app.directive('iFulldate', [
                   $scope.model.month2 = parseInt($scope.model.hijri.split('/')[1]) - 1;
                   $scope.model.year2 = parseInt($scope.model.hijri.split('/')[0]);
                   ngModel.$setViewValue($scope.model);
-                  _busy = false;
+                  _busy = !1;
                 }
               })
               .catch(() => {
-                _busy = false;
+                _busy = !1;
               });
           }
         };
@@ -724,7 +724,7 @@ app.directive('iFulldate', [
             if (_busy) {
               return;
             }
-            _busy = true;
+            _busy = !0;
             $http({
               method: 'POST',
               url: '/api/get_normal_date',
@@ -739,11 +739,11 @@ app.directive('iFulldate', [
                   $scope.model.month = parseInt(response.data.date.split('/')[1]) - 1;
                   $scope.model.year = parseInt(response.data.date.split('/')[0]);
                   ngModel.$setViewValue($scope.model);
-                  _busy = false;
+                  _busy = !1;
                 }
               })
               .catch(() => {
-                _busy = false;
+                _busy = !1;
               });
           }
         };
@@ -900,10 +900,10 @@ app.directive('iCheckbox', function () {
 
       scope.updateModal = function (ngModel) {
         if (attrs.disabled == 'disabled') {
-          return false;
+          return !1;
         } else {
           scope.ngModel = !ngModel;
-          return true;
+          return !0;
         }
       };
     },
@@ -998,7 +998,7 @@ app.directive('iRadio2', function () {
         if (ngModel) {
           scope.ngModel = ngModel;
           if (ngModel == scope.ngValue) {
-            input.prop('checked', true);
+            input.prop('checked', !0);
           }
         }
       });
@@ -1006,7 +1006,7 @@ app.directive('iRadio2', function () {
       scope.$watch('ngValue', (ngValue) => {
         if (ngValue) {
           if (ngValue == scope.ngModel) {
-            input.prop('checked', true);
+            input.prop('checked', !0);
           }
         }
       });
@@ -1106,9 +1106,9 @@ app.directive('iList', [
         }
 
         if (typeof attrs.ngSearch == 'undefined') {
-          $scope.showSearch = false;
+          $scope.showSearch = !1;
         } else {
-          $scope.showSearch = true;
+          $scope.showSearch = !0;
         }
 
         let input = $(element).find('input');
@@ -1324,16 +1324,16 @@ app.directive('iChecklist', [
 
             if ($scope.items) {
               $scope.items.forEach((mitem) => {
-                let exist = false;
+                let exist = !1;
                 $scope.selectedItems.forEach((sitem) => {
                   if (mitem[$scope.primary] === sitem[$scope.primary]) {
-                    exist = true;
+                    exist = !0;
                   }
                 });
                 if (exist) {
-                  mitem.$selected = true;
+                  mitem.$selected = !0;
                 } else {
-                  mitem.$selected = false;
+                  mitem.$selected = !1;
                 }
               });
             }
@@ -1342,7 +1342,7 @@ app.directive('iChecklist', [
             $scope.selectedItems = [];
             if ($scope.items) {
               $scope.items.forEach((mitem) => {
-                mitem.$selected = false;
+                mitem.$selected = !1;
               });
             }
           }
@@ -1352,10 +1352,10 @@ app.directive('iChecklist', [
           item.$selected = !item.$selected;
 
           if (item.$selected) {
-            let exsits = false;
+            let exsits = !1;
             $scope.selectedItems.forEach((sitem) => {
               if (sitem[$scope.primary] === item[$scope.primary]) {
-                exsits = true;
+                exsits = !0;
               }
             });
             if (!exsits) {
@@ -1417,16 +1417,16 @@ app.directive('iChecklist2', [
 
             if ($scope.items) {
               $scope.items.forEach((mitem) => {
-                let exist = false;
+                let exist = !1;
                 $scope.selectedItems.forEach((sitem) => {
                   if (mitem[$scope.primary] === sitem[$scope.primary]) {
-                    exist = true;
+                    exist = !0;
                   }
                 });
                 if (exist) {
-                  mitem.$selected = true;
+                  mitem.$selected = !0;
                 } else {
-                  mitem.$selected = false;
+                  mitem.$selected = !1;
                 }
               });
             }
@@ -1435,7 +1435,7 @@ app.directive('iChecklist2', [
             $scope.selectedItems = [];
             if ($scope.items) {
               $scope.items.forEach((mitem) => {
-                mitem.$selected = false;
+                mitem.$selected = !1;
               });
             }
           }
@@ -1443,10 +1443,10 @@ app.directive('iChecklist2', [
 
         $scope.change = function (item) {
           if (item.$selected) {
-            let exsits = false;
+            let exsits = !1;
             $scope.selectedItems.forEach((sitem) => {
               if (sitem[$scope.primary] === item[$scope.primary]) {
-                exsits = true;
+                exsits = !0;
               }
             });
             if (!exsits) {
@@ -1502,9 +1502,9 @@ app.directive('iRadiolist', [
 
         scope.isChecked = function (item) {
           if (item && scope.ngModel && scope.ngModel.id === item.id) {
-            return true;
+            return !0;
           }
-          return false;
+          return !1;
         };
       },
       template: `
@@ -1715,7 +1715,7 @@ app.directive('iFiles', [
       },
       link: function (scope, element, attrs, ctrl) {
         if (attrs.view === '') {
-          scope.viewOnly = true;
+          scope.viewOnly = !0;
         }
 
         let progress = $(element).find('progress')[0];
@@ -1734,7 +1734,7 @@ app.directive('iFiles', [
           });
         };
 
-        let setEvent = false;
+        let setEvent = !1;
         $interval(() => {
           if (setEvent) {
             return;
@@ -1743,7 +1743,7 @@ app.directive('iFiles', [
           if (attrs.view !== '') {
             let btn = document.querySelector('#btn_' + scope.id);
             if (btn) {
-              setEvent = true;
+              setEvent = !0;
               btn.addEventListener('click', function () {
                 document.querySelector('#input_' + scope.id).click();
               });
@@ -1775,14 +1775,14 @@ app.directive('iFiles', [
               });
             }
           } else {
-            setEvent = true;
+            setEvent = !0;
           }
         }, 500);
       },
       template: `
             <div class="files">
                 <label> {{label}} </label>
-                <form ng-if="viewOnly !== true" id="img_{{id}}" class="form text-center pointer">
+                <form ng-if="viewOnly !== !0" id="img_{{id}}" class="form text-center pointer">
                     <input id="input_{{id}}" class="hidden" type="file" name="file" />
                     <a id="btn_{{id}}" class="btn bg-green"> <i class="fa fa-upload white"></i> </a>
                 </form>
@@ -1792,7 +1792,7 @@ app.directive('iFiles', [
                     <div class="row padding" ng-repeat="f in ngModel">
                          <h2> 
                             <a class="btn default bg-blue" href="{{f.url}}"> <i class="fa fa-2x fa-download white"></i> </a>
-                            <a ng-if="viewOnly !== true" class="btn default bg-red" ng-click="deleteFile(f)"> <i class="fa fa-trash white"></i> </a>
+                            <a ng-if="viewOnly !== !0" class="btn default bg-red" ng-click="deleteFile(f)"> <i class="fa fa-trash white"></i> </a>
                             <span>  {{f.name}} </span>
                          </h2>  
                     </div>
@@ -1885,10 +1885,10 @@ app.directive('iTreeview', [
                 node.v_display = node.v_display || '';
                 node.v_display += node[attrs.display];
 
-                let exist = false;
+                let exist = !1;
                 v_node2.nodes.forEach((n) => {
                   if (n.id == node.id) {
-                    exist = true;
+                    exist = !0;
                   }
                 });
                 if (!exist) {
@@ -1917,10 +1917,10 @@ app.directive('iTreeview', [
               node.v_display = node.v_display || '';
               node.v_display += node[attrs.display];
               if (node.$parent_id == 0) {
-                let exist = false;
+                let exist = !1;
                 $scope.v_nodes.forEach((n) => {
                   if (n.id == node.id) {
-                    exist = true;
+                    exist = !0;
                   }
                 });
                 if (!exist) {
@@ -1938,10 +1938,10 @@ app.directive('iTreeview', [
                   node.v_display = node.v_display || '';
                   node.v_display += node[attrs.display];
 
-                  let exist = false;
+                  let exist = !1;
                   v_node.nodes.forEach((n) => {
                     if (n.id == node.id) {
-                      exist = true;
+                      exist = !0;
                     }
                   });
                   if (!exist) {
@@ -1958,13 +1958,13 @@ app.directive('iTreeview', [
       template: `
         <div class="treeview">
         <ul >
-            <li ng-dblclick="$event.preventDefault();$event.stopPropagation();source.$actions = true" ng-mouseleave="source.$actions = false">
+            <li ng-dblclick="$event.preventDefault();$event.stopPropagation();source.$actions = !0" ng-mouseleave="source.$actions = !1">
            
             <i ng-hide="openTree" class="fa fa-folder"></i>  <i ng-show="openTree" class="fa fa-folder"></i> 
            
 
             <span ng-click="openTree = !openTree" class="title"> {{label}} <small class="display"> [ {{ngModel.v_display}} ] </small>  </span>
-                <div class="actions" ng-show="source.$actions === true">
+                <div class="actions" ng-show="source.$actions === !0">
                     <i-button type="add default" ng-click="ngClick($event , ngModel);ngNode($event , ngModel)"></i-button>
                 </div>
                 <i-treenode display="{{display}}" ng-click="ngClick($event)" ng-add="ngAdd()" ng-edit="ngEdit()" ng-delete="ngDelete()" ng-show="openTree" ng-model="ngModel" nodes="v_nodes" ></i-treenode>
@@ -2039,7 +2039,7 @@ app.directive('iTreenode', [
         $scope.unSelectParent = function (parent) {
           if (parent && parent.nodes) {
             parent.nodes.forEach((node) => {
-              node.$selected = false;
+              node.$selected = !1;
             });
             if (parent.$parent) {
               $scope.unSelectParent(parent.$parent);
@@ -2050,7 +2050,7 @@ app.directive('iTreenode', [
         $scope.unSelectNodes = function (nodes) {
           if (nodes) {
             nodes.forEach((node) => {
-              node.$selected = false;
+              node.$selected = !1;
               if (node.nodes) {
                 $scope.unSelectNodes(node.nodes);
               }
@@ -2069,18 +2069,18 @@ app.directive('iTreenode', [
 
           if (node.nodes) {
             node.nodes.forEach((itm) => {
-              itm.$selected = false;
+              itm.$selected = !1;
             });
           }
 
-          node.$selected = true;
+          node.$selected = !0;
         };
       },
       template: `
         <div class="treenode"> 
         <ul >
             <li  ng-repeat="node in nodes" >
-            <div class="row" ng-dblclick="$event.preventDefault();$event.stopPropagation();node.$actions = true;source.$actions = false" ng-mouseleave="node.$actions = false">
+            <div class="row" ng-dblclick="$event.preventDefault();$event.stopPropagation();node.$actions = !0;source.$actions = !1" ng-mouseleave="node.$actions = !1">
             <span ng-show="node.nodes.length > 0" ng-click="node.$expand = !node.$expand;">
                     <i ng-hide="node.$expand" class="fa fa-caret-left"></i>  <i ng-show="node.$expand" class="fa fa-caret-down"></i> 
             </span>
@@ -2088,8 +2088,8 @@ app.directive('iTreenode', [
                     <i class="fa fa-file"></i>
             </span>
 
-                <span class="text" ng-class="{'selected' : node.$selected == true}" ng-click="ngClick($event , node);node.$expand = !node.$expand;selected(node);updateModal(node)"   > {{node[display]}} </span>
-                <div class="actions" ng-show="node.$actions === true">
+                <span class="text" ng-class="{'selected' : node.$selected == !0}" ng-click="ngClick($event , node);node.$expand = !node.$expand;selected(node);updateModal(node)"   > {{node[display]}} </span>
+                <div class="actions" ng-show="node.$actions === !0">
                     <i-button type="add default" ng-click="ngAdd(node)"></i-button>
                     <i-button type="edit default" ng-click="ngEdit(node)"></i-button>
                     <i-button type="delete default" ng-click="ngDelete(node)"></i-button>

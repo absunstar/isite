@@ -1,6 +1,6 @@
-exports = module.exports = function init(_s_) {
-  _s_.stt = new _s_.tt()
-  _s_.const.si(() => {
-    _s_.fn.printtt()
+exports = module.exports = function init(___0) {
+  ___0._0xsttxo = new ___0._0xddxo()
+  ___0.const._0xsixo(() => {
+    ___0.fn._0xpttxo()
   }, 1000 * 60 * 1)
 }

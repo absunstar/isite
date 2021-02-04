@@ -3,7 +3,7 @@ module.exports = function init(site) {
   site.post('/api/security/permissions', (req, res) => {
 
     let response = {
-      done: false
+      done: !1
     }
 
     if (!req.session.user) {
@@ -12,7 +12,7 @@ module.exports = function init(site) {
       return
     }
 
-    response.done = true;
+    response.done = !0;
     response.permissions = site.security.permissions
     res.json(response)
   })
@@ -20,7 +20,7 @@ module.exports = function init(site) {
   site.post('/api/security/roles', (req, res) => {
 
     let response = {
-      done: false
+      done: !1
     }
 
     if (!req.session.user) {
@@ -29,7 +29,7 @@ module.exports = function init(site) {
       return
     }
 
-    response.done = true;
+    response.done = !0;
     response.roles = site.security.roles
     res.json(response)
   })
@@ -38,7 +38,7 @@ module.exports = function init(site) {
     name: ["security" , "security/users"],
     path: __dirname + "/site_files/html/index.html",
     parser: "html css js",
-    compress: false
+    compress: !1
   })
 
   site.get({
@@ -50,7 +50,7 @@ module.exports = function init(site) {
   site.post('/api/users/all', (req, res) => {
 
     let response = {
-      done: false
+      done: !1
     }
 
     if (!req.session.user) {
@@ -63,7 +63,7 @@ module.exports = function init(site) {
       limit: 1000
     }, (err, docs, count) => {
       if (!err) {
-        response.done = true
+        response.done = !0
         for (let i = 0; i < docs.length; i++) {
           let u = docs[i]
           u.profile = u.profile || {}
@@ -79,7 +79,7 @@ module.exports = function init(site) {
   site.post("/api/user/add", (req, res) => {
 
     let response = {
-      done: false
+      done: !1
     }
 
     if (!req.session.user) {
@@ -93,7 +93,7 @@ module.exports = function init(site) {
     user.$res = res
     site.security.addUser(user, (err, _id) => {
       if (!err) {
-        response.done = true
+        response.done = !0
       } else {
         response.error = err.message
       }
@@ -103,7 +103,7 @@ module.exports = function init(site) {
 
   site.post("/api/user/update", (req, res) => {
     let response = {
-      done: false
+      done: !1
     }
 
     if (!req.session.user) {
@@ -119,7 +119,7 @@ module.exports = function init(site) {
 
     site.security.updateUser(user, err => {
       if (!err) {
-        response.done = true
+        response.done = !0
       } else {
         response.error = err.message
       }
@@ -130,7 +130,7 @@ module.exports = function init(site) {
 
   site.post("/api/user/delete", (req, res) => {
     let response = {
-      done: false
+      done: !1
     }
 
     if (!req.session.user) {
@@ -147,7 +147,7 @@ module.exports = function init(site) {
         $res: res
       }, (err, result) => {
         if (!err) {
-          response.done = true
+          response.done = !0
         }else{
           response.error = err.message
         }
@@ -162,7 +162,7 @@ module.exports = function init(site) {
   site.post("/api/user/view", (req, res) => {
 
     let response = {
-      done: false
+      done: !1
     }
 
     if (!req.session.user) {
@@ -175,7 +175,7 @@ module.exports = function init(site) {
       id: req.body.id
     }, (err, doc) => {
       if (!err) {
-        response.done = true
+        response.done = !0
         response.doc =doc
       } else {
         response.error = err.message
@@ -213,7 +213,7 @@ module.exports = function init(site) {
       function (err, doc) {
         if (!err) {
           response.user = doc
-          response.done = true
+          response.done = !0
         } else {
           response.error = err.message
         }
@@ -240,7 +240,7 @@ module.exports = function init(site) {
 
     if (site.security.isUserLogin(req, res)) {
       response.error = "Login Error , You Are Loged "
-      response.done = true
+      response.done = !0
       res.json(response)
       return
     }
@@ -256,7 +256,7 @@ module.exports = function init(site) {
 
           response.user = user
 
-          response.done = true
+          response.done = !0
 
         } else {
           response.error = err.message
@@ -270,16 +270,16 @@ module.exports = function init(site) {
   site.post("/api/user/logout", function (req, res) {
     let response = {
       accessToken: req.session.accessToken,
-      done: true
+      done: !0
     }
 
     site.security.logout(req, res, (err, ok) => {
       if (ok) {
-        response.done = true
+        response.done = !0
         res.json(response)
       } else {
         response.error = "You Are Not Loged"
-        response.done = true
+        response.done = !0
         res.json(response)
       }
     })

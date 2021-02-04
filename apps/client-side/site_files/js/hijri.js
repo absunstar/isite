@@ -422,7 +422,7 @@
 			if (a != null)
 				datePartArray[1] = a
 			else
-				config._isValid = false
+				config._isValid = !1
 			break
 		case 'iD':
 		case 'iDD':
@@ -439,7 +439,7 @@
 			datePartArray[0] = ~~input
 		}
 		if (input == null)
-			config._isValid = false
+			config._isValid = !1
 	}
 
 	function dateFromArray(config) {
@@ -453,7 +453,7 @@
 		hm = hm || 0
 		hd = hd || 1
 		if (hd < 1 || hd > hMoment.iDaysInMonth(hy, hm))
-			config._isValid = false
+			config._isValid = !1
 		g = toGregorian(hy, hm, hd)
 		h = toHijri(g.gy, g.gm, g.gd)
 		config._hDiff = 0
@@ -595,8 +595,8 @@
 			m = moment.utc(input, format, lang)
 		else
 			m = moment(input, format, lang)
-		if (config._isValid === false)
-			m._isValid = false
+		if (config._isValid === !1)
+			m._isValid = !1
 		m._hDiff = config._hDiff || 0
 		hm = objectCreate(hMoment.fn)
 		extend(hm, m)
@@ -604,14 +604,14 @@
 	}
 
 	function hMoment(input, format, lang) {
-		return makeMoment(input, format, lang, false)
+		return makeMoment(input, format, lang, !1)
 	}
 
 	extend(hMoment, moment)
 	hMoment.fn = objectCreate(moment.fn)
 
 	hMoment.utc = function (input, format, lang) {
-		return makeMoment(input, format, lang, true)
+		return makeMoment(input, format, lang, !0)
 	}
 
 	/************************************

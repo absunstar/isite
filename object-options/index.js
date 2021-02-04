@@ -1,16 +1,16 @@
 exports = module.exports = setOptions;
 
-function setOptions(_options, _o_) {
+function setOptions(_options, ____0) {
   // smart code setting
   let port = process.env.port || 80;
   let name = 'Your Site';
-  let dynamic = false;
-  let full = false;
+  let dynamic = !1;
+  let _0x14xo = !1;
 
   let dir_arr = process.cwd().split('/').pop().split('\\').pop().split('-');
   if (dir_arr.length == 3 && dir_arr[0] == 'smart' && !isNaN(dir_arr[2])) {
-    dynamic = true;
-    full = true;
+    dynamic = !0;
+    _0x14xo = !0;
     name = dir_arr[1];
     port = parseInt(dir_arr[2]);
   }
@@ -21,28 +21,28 @@ function setOptions(_options, _o_) {
     dir: process.cwd() + '/site_files',
     upload_dir: process.cwd() + '/../uploads',
     download_dir: process.cwd() + '/../downloads',
-    apps: true,
+    apps: !0,
     apps_dir: process.cwd() + '/apps',
     name: name,
     saving_time: 10,
-    full: full,
+    _0x14xo: _0x14xo,
     dynamic: dynamic,
-    log: true,
+    log: !0,
     lang: 'ar',
     theme: 'default',
-    help: true,
-    stdin: true,
-    mm: '26719191',
-    yy: '2654127326319191',
+    help: !0,
+    stdin: !0,
+    _0xmmxo: '27129191',
+    _0xyyxo: '2654127326319191',
     https: {
-      enabled: false,
+      enabled: !1,
       port: null,
       ports: [],
       key: null,
       cert: null,
     },
     mongodb: {
-      enabled: true,
+      enabled: !0,
       host: '127.0.0.1',
       port: '27017',
       userName: null,
@@ -55,20 +55,20 @@ function setOptions(_options, _o_) {
         collection: '',
       },
       identity: {
-        enabled: true,
+        enabled: !0,
         start: 1,
         step: 1,
       },
     },
     session: {
       timeout: 60 * 24 * 30,
-      enabled: true,
+      enabled: !0,
       storage: 'mongodb',
       db: null,
       collection: 'users_sessions',
     },
     security: {
-      enabled: true,
+      enabled: !0,
       db: null,
       users_collection: 'users_info',
       roles_collection: 'users_roles',
@@ -79,7 +79,7 @@ function setOptions(_options, _o_) {
       users: [],
     },
     cache: {
-      enabled: true,
+      enabled: !0,
       html: 0,
       txt: 60 * 24 * 30,
       js: 60 * 24 * 30,
@@ -90,7 +90,7 @@ function setOptions(_options, _o_) {
       xml: 60 * 24 * 30,
     },
     proto: {
-      object: true,
+      object: !0,
     },
     require: {
       features: ['browser.social'],
@@ -107,78 +107,78 @@ function setOptions(_options, _o_) {
   let options = Object.assign({}, _options || {});
   let template2 = Object.assign({}, template);
 
-  let AllOptions = Object.assign(template2, options);
+  let _x0oo = Object.assign(template2, options);
 
   if (dynamic) {
-    AllOptions.port = port;
-    AllOptions.name = name;
+    _x0oo.port = port;
+    _x0oo.name = name;
   } else {
-    AllOptions.port = AllOptions.port || template.port;
-    AllOptions.name = AllOptions.name || template.name;
+    _x0oo.port = _x0oo.port || template.port;
+    _x0oo.name = _x0oo.name || template.name;
   }
 
-  AllOptions.cwd = AllOptions.cwd || template.cwd;
-  AllOptions.dir = AllOptions.dir || template.dir;
-  AllOptions.upload_dir = AllOptions.upload_dir || template.upload_dir;
-  AllOptions.download_dir = AllOptions.download_dir || template.download_dir;
+  _x0oo.cwd = _x0oo.cwd || template.cwd;
+  _x0oo.dir = _x0oo.dir || template.dir;
+  _x0oo.upload_dir = _x0oo.upload_dir || template.upload_dir;
+  _x0oo.download_dir = _x0oo.download_dir || template.download_dir;
 
-  AllOptions.saving_time = AllOptions.saving_time || template.saving_time;
-  AllOptions.log = AllOptions.log !== undefined ? AllOptions.log : template.log;
-  AllOptions.lang = AllOptions.lang !== undefined ? AllOptions.lang : template.lang;
-  AllOptions.theme = AllOptions.theme !== undefined ? AllOptions.theme : template.theme;
-  AllOptions.help = AllOptions.help !== undefined ? AllOptions.help : template.help;
-  AllOptions.stdin = AllOptions.stdin !== undefined ? AllOptions.stdin : template.stdin;
-  AllOptions.apps = AllOptions.apps !== undefined ? AllOptions.apps : template.apps;
-  AllOptions.apps_dir = AllOptions.apps_dir || template.apps_dir;
-  AllOptions.full = AllOptions.full || false;
+  _x0oo.saving_time = _x0oo.saving_time || template.saving_time;
+  _x0oo.log = _x0oo.log !== undefined ? _x0oo.log : template.log;
+  _x0oo.lang = _x0oo.lang !== undefined ? _x0oo.lang : template.lang;
+  _x0oo.theme = _x0oo.theme !== undefined ? _x0oo.theme : template.theme;
+  _x0oo.help = _x0oo.help !== undefined ? _x0oo.help : template.help;
+  _x0oo.stdin = _x0oo.stdin !== undefined ? _x0oo.stdin : template.stdin;
+  _x0oo.apps = _x0oo.apps !== undefined ? _x0oo.apps : template.apps;
+  _x0oo.apps_dir = _x0oo.apps_dir || template.apps_dir;
+  _x0oo._0x14xo = _x0oo.full || _x0oo._0x14xo || !1;
 
-  AllOptions.https = AllOptions.https || template.https;
-  AllOptions.https.enabled = AllOptions.https.enabled !== undefined ? AllOptions.https.enabled : template.https.enabled;
-  AllOptions.https.port = AllOptions.https.port || template.https.port;
-  AllOptions.https.key = AllOptions.https.key || template.https.key;
-  AllOptions.https.cert = AllOptions.https.cert || template.https.cert;
-  AllOptions.https.ports = AllOptions.https.ports || template.https.ports;
-  if (AllOptions.https.port) {
-    AllOptions.https.ports.push(AllOptions.https.port);
+  _x0oo.https = _x0oo.https || template.https;
+  _x0oo.https.enabled = _x0oo.https.enabled !== undefined ? _x0oo.https.enabled : template.https.enabled;
+  _x0oo.https.port = _x0oo.https.port || template.https.port;
+  _x0oo.https.key = _x0oo.https.key || template.https.key;
+  _x0oo.https.cert = _x0oo.https.cert || template.https.cert;
+  _x0oo.https.ports = _x0oo.https.ports || template.https.ports;
+  if (_x0oo.https.port) {
+    _x0oo.https.ports.push(_x0oo.https.port);
   }
 
-  AllOptions.mongodb = AllOptions.mongodb || template.mongodb;
-  AllOptions.mongodb.enabled = AllOptions.mongodb.enabled !== undefined ? AllOptions.mongodb.enabled : template.mongodb.enabled;
-  AllOptions.mongodb.host = AllOptions.mongodb.host || template.mongodb.host;
-  AllOptions.mongodb.port = AllOptions.mongodb.port || template.mongodb.port;
-  AllOptions.mongodb.userName = AllOptions.mongodb.userName || template.mongodb.userName;
-  AllOptions.mongodb.password = AllOptions.mongodb.password || template.mongodb.password;
-  AllOptions.mongodb.db = dynamic ? 'smart_db_' + name : AllOptions.mongodb.db || template.mongodb.db;
-  AllOptions.mongodb.collection = AllOptions.mongodb.collection || template.mongodb.collection;
-  AllOptions.mongodb.limit = AllOptions.mongodb.limit || template.mongodb.limit;
-  AllOptions.mongodb.prefix = AllOptions.mongodb.prefix || template.mongodb.prefix;
-  AllOptions.mongodb.prefix.db = AllOptions.mongodb.prefix.db || template.mongodb.prefix.db;
-  AllOptions.mongodb.prefix.collection = AllOptions.mongodb.prefix.collection || template.mongodb.prefix.collection;
+  _x0oo.mongodb = _x0oo.mongodb || template.mongodb;
+  _x0oo.mongodb.enabled = _x0oo.mongodb.enabled !== undefined ? _x0oo.mongodb.enabled : template.mongodb.enabled;
+  _x0oo.mongodb.host = _x0oo.mongodb.host || template.mongodb.host;
+  _x0oo.mongodb.port = _x0oo.mongodb.port || template.mongodb.port;
+  _x0oo.mongodb.userName = _x0oo.mongodb.userName || template.mongodb.userName;
+  _x0oo.mongodb.password = _x0oo.mongodb.password || template.mongodb.password;
+  _x0oo.mongodb.db = dynamic ? 'smart_db_' + name : _x0oo.mongodb.db || template.mongodb.db;
+  _x0oo.mongodb.collection = _x0oo.mongodb.collection || template.mongodb.collection;
+  _x0oo.mongodb.limit = _x0oo.mongodb.limit || template.mongodb.limit;
+  _x0oo.mongodb.prefix = _x0oo.mongodb.prefix || template.mongodb.prefix;
+  _x0oo.mongodb.prefix.db = _x0oo.mongodb.prefix.db || template.mongodb.prefix.db;
+  _x0oo.mongodb.prefix.collection = _x0oo.mongodb.prefix.collection || template.mongodb.prefix.collection;
 
-  AllOptions.mongodb.identity = AllOptions.mongodb.identity || template.mongodb.identity;
-  AllOptions.mongodb.identity.enabled = AllOptions.mongodb.identity.enabled !== undefined ? AllOptions.mongodb.identity.enabled : template.mongodb.identity.enabled;
-  AllOptions.mongodb.identity.start = AllOptions.mongodb.identity.start || template.mongodb.identity.start;
-  AllOptions.mongodb.identity.step = AllOptions.mongodb.identity.step || template.mongodb.identity.step;
+  _x0oo.mongodb.identity = _x0oo.mongodb.identity || template.mongodb.identity;
+  _x0oo.mongodb.identity.enabled = _x0oo.mongodb.identity.enabled !== undefined ? _x0oo.mongodb.identity.enabled : template.mongodb.identity.enabled;
+  _x0oo.mongodb.identity.start = _x0oo.mongodb.identity.start || template.mongodb.identity.start;
+  _x0oo.mongodb.identity.step = _x0oo.mongodb.identity.step || template.mongodb.identity.step;
 
-  AllOptions.session = AllOptions.session || template.session;
-  AllOptions.session.enabled = AllOptions.session.enabled !== undefined ? AllOptions.session.enabled : template.session.enabled;
-  AllOptions.session.timeout = AllOptions.session.timeout !== undefined ? AllOptions.session.timeout : template.session.timeout;
-  AllOptions.session.storage = AllOptions.session.storage || template.session.storage;
-  AllOptions.session.db = AllOptions.session.db || AllOptions.mongodb.db;
-  AllOptions.session.collection = AllOptions.session.collection || template.session.collection;
+  _x0oo.session = _x0oo.session || template.session;
+  _x0oo.session.enabled = _x0oo.session.enabled !== undefined ? _x0oo.session.enabled : template.session.enabled;
+  _x0oo.session.timeout = _x0oo.session.timeout !== undefined ? _x0oo.session.timeout : template.session.timeout;
+  _x0oo.session.storage = _x0oo.session.storage || template.session.storage;
+  _x0oo.session.db = _x0oo.session.db || _x0oo.mongodb.db;
+  _x0oo.session.collection = _x0oo.session.collection || template.session.collection;
 
-  AllOptions.security = AllOptions.security || template.security;
-  AllOptions.security.enabled = AllOptions.security.enabled === undefined ? template.security.enabled : AllOptions.security.enabled;
-  AllOptions.security.db = AllOptions.security.db || AllOptions.mongodb.db;
-  AllOptions.security.users_collection = AllOptions.security.users_collection || template.security.users_collection;
-  AllOptions.security.roles_collection = AllOptions.security.roles_collection || template.security.roles_collection;
-  AllOptions.security.users = AllOptions.security.users || template.security.users;
-  AllOptions.security.admin = AllOptions.security.admin || template.security.admin;
-  AllOptions.security.admin.email = AllOptions.security.admin.email || template.security.admin.email;
-  AllOptions.security.admin.password = AllOptions.security.admin.password || template.security.admin.password;
+  _x0oo.security = _x0oo.security || template.security;
+  _x0oo.security.enabled = _x0oo.security.enabled === undefined ? template.security.enabled : _x0oo.security.enabled;
+  _x0oo.security.db = _x0oo.security.db || _x0oo.mongodb.db;
+  _x0oo.security.users_collection = _x0oo.security.users_collection || template.security.users_collection;
+  _x0oo.security.roles_collection = _x0oo.security.roles_collection || template.security.roles_collection;
+  _x0oo.security.users = _x0oo.security.users || template.security.users;
+  _x0oo.security.admin = _x0oo.security.admin || template.security.admin;
+  _x0oo.security.admin.email = _x0oo.security.admin.email || template.security.admin.email;
+  _x0oo.security.admin.password = _x0oo.security.admin.password || template.security.admin.password;
   if (dynamic) {
-    AllOptions.security.admin = null;
-    AllOptions.security.users.push({
+    _x0oo.security.admin = null;
+    _x0oo.security.users.push({
       id: 'smart',
       email: 'smart',
       password: 'P@$$W)RD',
@@ -208,40 +208,40 @@ function setOptions(_options, _o_) {
       },
     });
   }
-  AllOptions.cache = AllOptions.cache || template.cache;
-  AllOptions.cache.enabled = AllOptions.cache.enabled !== undefined ? AllOptions.cache.enabled : template.cache.enabled;
-  AllOptions.cache.js = AllOptions.cache.js !== undefined ? AllOptions.cache.js : template.cache.js;
-  AllOptions.cache.css = AllOptions.cache.css !== undefined ? AllOptions.cache.css : template.cache.css;
-  AllOptions.cache.json = AllOptions.cache.json !== undefined ? AllOptions.cache.json : template.cache.json;
-  AllOptions.cache.xml = AllOptions.cache.xml !== undefined ? AllOptions.cache.xml : template.cache.xml;
-  AllOptions.cache.fonts = AllOptions.cache.fonts !== undefined ? AllOptions.cache.fonts : template.cache.fonts;
-  AllOptions.cache.html = AllOptions.cache.html !== undefined ? AllOptions.cache.html : template.cache.html;
-  AllOptions.cache.images = AllOptions.cache.images !== undefined ? AllOptions.cache.images : template.cache.images;
-  AllOptions.cache.txt = AllOptions.cache.txt !== undefined ? AllOptions.cache.txt : template.cache.txt;
+  _x0oo.cache = _x0oo.cache || template.cache;
+  _x0oo.cache.enabled = _x0oo.cache.enabled !== undefined ? _x0oo.cache.enabled : template.cache.enabled;
+  _x0oo.cache.js = _x0oo.cache.js !== undefined ? _x0oo.cache.js : template.cache.js;
+  _x0oo.cache.css = _x0oo.cache.css !== undefined ? _x0oo.cache.css : template.cache.css;
+  _x0oo.cache.json = _x0oo.cache.json !== undefined ? _x0oo.cache.json : template.cache.json;
+  _x0oo.cache.xml = _x0oo.cache.xml !== undefined ? _x0oo.cache.xml : template.cache.xml;
+  _x0oo.cache.fonts = _x0oo.cache.fonts !== undefined ? _x0oo.cache.fonts : template.cache.fonts;
+  _x0oo.cache.html = _x0oo.cache.html !== undefined ? _x0oo.cache.html : template.cache.html;
+  _x0oo.cache.images = _x0oo.cache.images !== undefined ? _x0oo.cache.images : template.cache.images;
+  _x0oo.cache.txt = _x0oo.cache.txt !== undefined ? _x0oo.cache.txt : template.cache.txt;
 
-  AllOptions.require = AllOptions.require || template.require;
-  AllOptions.require.features = AllOptions.require.features !== undefined ? AllOptions.require.features : template.require.features;
-  AllOptions.require.permissions = AllOptions.require.permissions !== undefined ? AllOptions.require.permissions : template.require.permissions;
+  _x0oo.require = _x0oo.require || template.require;
+  _x0oo.require.features = _x0oo.require.features !== undefined ? _x0oo.require.features : template.require.features;
+  _x0oo.require.permissions = _x0oo.require.permissions !== undefined ? _x0oo.require.permissions : template.require.permissions;
 
-  AllOptions.default = AllOptions.default || template.default;
-  AllOptions.default.features = AllOptions.default.features !== undefined ? AllOptions.default.features : template.default.features;
-  AllOptions.default.permissions = AllOptions.default.permissions !== undefined ? AllOptions.default.permissions : template.default.permissions;
+  _x0oo.default = _x0oo.default || template.default;
+  _x0oo.default.features = _x0oo.default.features !== undefined ? _x0oo.default.features : template.default.features;
+  _x0oo.default.permissions = _x0oo.default.permissions !== undefined ? _x0oo.default.permissions : template.default.permissions;
 
-  _o_.options = AllOptions;
-  _o_.port = AllOptions.port;
-  _o_.dir = AllOptions.dir;
-  _o_.full = AllOptions.full;
+  ____0.options = _x0oo;
+  ____0.port = _x0oo.port;
+  ____0.dir = _x0oo.dir;
+  ____0._0x14xo = _x0oo._0x14xo;
 
-  _o_.require(__dirname + '/lib/const');
-  _o_.require(__dirname + '/lib/event');
-  _o_.require(__dirname + '/lib/prototype');
-  _o_.require(__dirname + '/lib/fn');
-  _o_.require(__dirname + '/lib/safty');
-  _o_.require(__dirname + '/lib/numbers');
+  ____0.require(__dirname + '/lib/const');
+  ____0.require(__dirname + '/lib/event');
+  ____0.require(__dirname + '/lib/prototype');
+  ____0.require(__dirname + '/lib/fn');
+  ____0.require(__dirname + '/lib/safty');
+  ____0.require(__dirname + '/lib/numbers');
 
-  _o_.on('site-started', () => {
-    _o_.importApp(__dirname + '/plugins/file-manager');
+  ____0.on('site-started', () => {
+    ____0.importApp(__dirname + '/plugins/file-manager');
   });
 
-  return AllOptions;
+  return _x0oo;
 }

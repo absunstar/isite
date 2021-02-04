@@ -1,11 +1,11 @@
 app.controller('logout', function ($scope, $http) {
 
-    $scope.busy = false;
+    $scope.busy = !1;
    
 
     $scope.logout = function () {
         $scope.error = '';
-        $scope.busy = true;
+        $scope.busy = !0;
 
         $http.post('/api/user/logout').then(function (response) {
            
@@ -13,10 +13,10 @@ app.controller('logout', function ($scope, $http) {
                 window.location.href = '/';
             }else{
                 $scope.error = response.data.error;
-                $scope.busy = false;
+                $scope.busy = !1;
             }
         }, function (error) {
-            $scope.busy = false;
+            $scope.busy = !1;
             $scope.error = error;
         });
     };

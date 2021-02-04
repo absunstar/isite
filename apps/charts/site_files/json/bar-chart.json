@@ -82,7 +82,7 @@
       },
   
 
-      "sequencedInterpolation": true,
+      "sequencedInterpolation": !0,
       "sequencedInterpolationDelay": 100,
   
 

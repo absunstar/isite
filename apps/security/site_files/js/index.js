@@ -43,7 +43,7 @@ app.controller("security", function ($scope, $http, $interval) {
     var fd = new FormData();
     fd.append("fileToUpload", files[0]);
     $http.post('/api/user/upload/image', fd, {
-      withCredentials: true,
+      withCredentials: !0,
       headers: {
         'Content-Type': undefined
       },
@@ -70,7 +70,7 @@ app.controller("security", function ($scope, $http, $interval) {
     var fd = new FormData();
     fd.append("fileToUpload", files[0]);
     $http.post('/api/user/upload/file', fd, {
-      withCredentials: true,
+      withCredentials: !0,
       headers: {
         'Content-Type': undefined
       },
@@ -164,21 +164,21 @@ app.controller("security", function ($scope, $http, $interval) {
   };
 
   $scope.newuser = function () {
-    $scope.permissionEditor = false;
-    $scope.imageEditor = false;
-    $scope.fileEditor = false;
+    $scope.permissionEditor = !1;
+    $scope.imageEditor = !1;
+    $scope.fileEditor = !1;
     $scope.user = { profile: { image_url: '/images/user.png', files: [] }, permissions: [], roles: [] };
     site.showModal('#addUserModal');
   };
   $scope.add = function () {
-    $scope.busy = true;
+    $scope.busy = !0;
     $http({
       method: "POST",
       url: "/api/user/add",
       data: $scope.user
     }).then(
       function (response) {
-        $scope.busy = false;
+        $scope.busy = !1;
         if (response.data.done) {
           site.hideModal('#addUserModal');
           $scope.loadAll();
@@ -198,14 +198,14 @@ app.controller("security", function ($scope, $http, $interval) {
     site.showModal('#updateUserModal');
   };
   $scope.update = function () {
-    $scope.busy = true;
+    $scope.busy = !0;
     $http({
       method: "POST",
       url: "/api/user/update",
       data: $scope.user
     }).then(
       function (response) {
-        $scope.busy = false;
+        $scope.busy = !1;
         if (response.data.done) {
           site.hideModal('#updateUserModal');
           site.hideModal('#viewUserModal')
@@ -227,14 +227,14 @@ app.controller("security", function ($scope, $http, $interval) {
   };
 
   $scope.view = function (user) {
-    $scope.busy = true;
+    $scope.busy = !0;
     $http({
       method: "POST",
       url: "/api/user/view",
       data: { id: user.id }
     }).then(
       function (response) {
-        $scope.busy = false;
+        $scope.busy = !1;
         if (response.data.done) {
           $scope.user = response.data.doc;
         } else {
@@ -252,14 +252,14 @@ app.controller("security", function ($scope, $http, $interval) {
     site.showModal('#viewUserModal');
   };
   $scope.delete = function () {
-    $scope.busy = true;
+    $scope.busy = !0;
     $http({
       method: "POST",
       url: "/api/user/delete",
       data: { id: $scope.user.id, name: $scope.user.name }
     }).then(
       function (response) {
-        $scope.busy = false;
+        $scope.busy = !1;
         if (response.data.done) {
           site.hideModal('#deleteUserModal');
           site.hideModal('#viewUserModal')

@@ -1,4 +1,4 @@
-exports = module.exports = function init(_p_) {
+exports = module.exports = function init(___0) {
   function escape(s) {
     if (!s) {
       return '';
@@ -9,12 +9,12 @@ exports = module.exports = function init(_p_) {
     return s.replace(/[\/\\^$*+?.()\[\]{}]/g, '\\$&');
   }
 
-  if (_p_.options.proto.object) {
+  if (___0.options.proto.object) {
     if (!Object.prototype.test) {
       Object.defineProperty(Object.prototype, 'test', {
         value: function (reg, flag = 'gium') {
           if (this === undefined || this === null) {
-            return false;
+            return !1;
           }
           let txt = '';
 
@@ -29,7 +29,7 @@ exports = module.exports = function init(_p_) {
           try {
             return new RegExp(reg, flag).test(txt);
           } catch (error) {
-            return false;
+            return !1;
           }
         },
       });
@@ -38,7 +38,7 @@ exports = module.exports = function init(_p_) {
       Object.defineProperty(Object.prototype, 'like', {
         value: function (name) {
           if (!name) {
-            return false;
+            return !1;
           }
           if (name.indexOf('*') !== -1) {
             name = name.split('*');
@@ -57,7 +57,7 @@ exports = module.exports = function init(_p_) {
       Object.defineProperty(Object.prototype, 'contains', {
         value: function (name) {
           if (!name) {
-            return false;
+            return !1;
           }
           return this.test('^.*' + escape(name) + '.*$', 'gium');
         },
@@ -70,7 +70,7 @@ exports = module.exports = function init(_p_) {
       try {
         return new RegExp(reg, flag).test(this);
       } catch (error) {
-        return false;
+        return !1;
       }
     };
   }
@@ -78,9 +78,9 @@ exports = module.exports = function init(_p_) {
   if (!String.prototype.like) {
     String.prototype.like = function (name) {
       if (!name) {
-        return false;
+        return !1;
       }
-      let r = false;
+      let r = !1;
       name.split('|').forEach((n) => {
         n = n.split('*');
         n.forEach((w, i) => {
@@ -88,7 +88,7 @@ exports = module.exports = function init(_p_) {
         });
         n = n.join('.*');
         if (this.test('^' + n + '$', 'gium')) {
-          r = true;
+          r = !0;
         }
       });
       return r;
@@ -97,13 +97,13 @@ exports = module.exports = function init(_p_) {
 
   if (!String.prototype.contains) {
     String.prototype.contains = function (name) {
-      let r = false;
+      let r = !1;
       if (!name) {
         return r;
       }
       name.split('|').forEach((n) => {
           if(n && this.test('^.*' + escape(n) + '.*$', 'gium')){
-            r = true
+            r = !0
           }
       })
       return r;

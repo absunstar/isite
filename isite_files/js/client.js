@@ -31,7 +31,7 @@
             op.data = null;
         }
         if (typeof (op.allowCookies) == u) {
-            op.allowCookies = true;
+            op.allowCookies = !0;
         }
         if (typeof (op.contentType) == u) {
             op.contentType = 'application/x-www-form-urlencoded'
@@ -46,7 +46,7 @@
 
 
         var rs = {};
-        rs.done = false;
+        rs.done = !1;
         rs.object = this;
         rs.status = '';
         rs.xhr = null;
@@ -63,14 +63,14 @@
                         var percentComplete = evt.loaded / evt.total;
                         p(Math.round(percentComplete * 100) / 100);
                     }
-                }, false);
+                }, !1);
 
                 xh.addEventListener("progress", function (evt) {
                     if (evt.lengthComputable) {
                         var percentComplete = evt.loaded / evt.total;
                         p(Math.round(percentComplete * 100) / 100);
                     }
-                }, false);
+                }, !1);
             }
 
 
@@ -91,7 +91,7 @@
 
                 if (xh.readyState == 4 && xh.status == 200) {
 
-                    rs.done = true;
+                    rs.done = !0;
                     rs.contentType = xh.getResponseHeader('Content-type');
                     rs.text = xh.responseText;
                     rs.xml = xh.responseXML;
@@ -134,10 +134,10 @@
                 if (q.length > 0) {
                     q = '?' + q;
                 }
-                xh.open(op.method, op.url + q, true);
+                xh.open(op.method, op.url + q, !0);
                 xh.send();
             } else {
-                xh.open(op.method, op.url, true);
+                xh.open(op.method, op.url, !0);
                 if (op.file !== null) {
                     var formData = new FormData();
                     formData.append("thefile", op.file);

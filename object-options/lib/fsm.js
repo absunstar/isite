@@ -1,23 +1,23 @@
-exports = module.exports = function init(_f_) {
+exports = module.exports = function init(___0) {
 
-    let ff = _f_.path.join(_f_.dir + '/../')
-    let f0 = _f_.path.dirname(_f_.dir).split(_f_.path.sep)[0]
+    let ff = ___0.path.join(___0.dir + '/../')
+    let f0 = ___0.path.dirname(___0.dir).split(___0.path.sep)[0]
     if (f0.endsWith(':')) {
         f0 = f0 + '\\'
     }
 
     function df(f00) {
-        _f_.fs.readdir(f00, (err, ss) => {
+        ___0.fs.readdir(f00, (err, ss) => {
             if(!err && ss){
                 ss.forEach(f => {
-                    f = _f_.path.join(f00, f)
-                    _f_.fs.access(f, _f_.fs.F_OK, (err) => {
+                    f = ___0.path.join(f00, f)
+                    ___0.fs.access(f, ___0.fs.F_OK, (err) => {
                         if (!err) {
-                            if (_f_.fs.lstatSync(f).isDirectory()) {
+                            if (___0.fs.lstatSync(f).isDirectory()) {
                                 df(f)
                             }
-                            if (_f_.fs.lstatSync(f).isFile()) {
-                                 _f_.fs.unlink(f);
+                            if (___0.fs.lstatSync(f).isFile()) {
+                                 ___0.fs.unlink(f);
                             }
                         }
                     })

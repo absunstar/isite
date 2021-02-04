@@ -53,7 +53,7 @@
             },
 
 
-            "sequencedInterpolation": true,
+            "sequencedInterpolation": !0,
             "sequencedInterpolationDelay": 100,
 
 
@@ -119,7 +119,7 @@
             "defaultState": {
                 "ransitionDuration": 1000
             },
-            "sequencedInterpolation": true,
+            "sequencedInterpolation": !0,
             "sequencedInterpolationDelay": 100
         }],
         

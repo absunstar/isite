@@ -19,7 +19,7 @@ app.controller('navbar' , ($scope , $http)=>{
             data:{ name : lang}
         }).then(function (response) {
             if (response.data.done) {
-              window.location.reload(true);
+              window.location.reload(!0);
             }
         });
       };

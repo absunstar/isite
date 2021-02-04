@@ -1840,7 +1840,7 @@
     "yAxes": [{
       "type": "ValueAxis",
       "tooltip": {
-        "disabled": true
+        "disabled": !0
       },
       "renderer": {
         "minWidth": 35

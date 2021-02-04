@@ -1,10 +1,10 @@
 app.controller('register', function ($scope, $http) {
 
-    $scope.busy = false;
+    $scope.busy = !1;
   
     $scope.register = function () {
         $scope.error = '';
-        $scope.busy = true;
+        $scope.busy = !0;
         $http({
             method: 'POST',
             url: '/api/user/register',
@@ -17,13 +17,13 @@ app.controller('register', function ($scope, $http) {
            
             if (response.data.error) {
                 $scope.error = response.data.error;
-                $scope.busy = false;
+                $scope.busy = !1;
             }
             if (response.data.user) {
                 window.location.href = '/';
             }
         } , function(err){
-            $scope.busy = false;
+            $scope.busy = !1;
             $scope.error = err;
         });
 

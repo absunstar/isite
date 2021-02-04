@@ -12,7 +12,7 @@ module.exports = function(site){
         })
 
         res.json({
-            done : true,
+            done : !0,
             url : '/view/print/' + id
         })
     })

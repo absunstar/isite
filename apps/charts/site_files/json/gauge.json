@@ -4,7 +4,7 @@
     "type": "ValueAxis",
     "min": 0,
     "max": 100,
-    "strictMinMax": true,
+    "strictMinMax": !0,
 
     "axisRanges": [{
       "value": 0,

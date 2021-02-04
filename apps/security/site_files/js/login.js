@@ -1,6 +1,6 @@
 app.controller('login', function ($scope, $http) {
 
-    $scope.busy = false;
+    $scope.busy = !1;
     $scope.tryLogin= function(ev){
         if (ev.which == 13){
           $scope.login();
@@ -9,7 +9,7 @@ app.controller('login', function ($scope, $http) {
 
     $scope.login = function () {
         $scope.error = '';
-        $scope.busy = true;
+        $scope.busy = !0;
         $http({
             method: 'POST',
             url: '/api/user/login',
@@ -24,11 +24,11 @@ app.controller('login', function ($scope, $http) {
                 $scope.error = response.data.error;
             }
             if (response.data.done) {
-                window.location.reload(true);
+                window.location.reload(!0);
             }
-            $scope.busy = false;
+            $scope.busy = !1;
         } , function(err){
-            $scope.busy = false;
+            $scope.busy = !1;
             $scope.error = err;
         });
 

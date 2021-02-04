@@ -5,7 +5,7 @@
   var app = angular.module('html', []);
   app.controller('body', function ($scope, $http) {
         
-                    $scope.isLoged = false;
+                    $scope.isLoged = !1;
                     $scope.error = '';
 
 
@@ -37,7 +37,7 @@
                             }
                             if (response.data.user) {
                                 $scope.user = response.data.user
-                                $scope.isLoged = true
+                                $scope.isLoged = !0
                                 $('#registerModal').modal('hide')
                                 window.location.href = '/@admin'
                             }
@@ -72,7 +72,7 @@
                             }
                             if (response.data.user) {
                                 $scope.user = response.data.user
-                                $scope.isLoged = true
+                                $scope.isLoged = !0
                                 $('#loginModal').modal('hide')
                                 window.location.href = '/@admin'
                             }
@@ -103,22 +103,22 @@
                     }
                 
       $scope.hideALL = function () {
-          $scope.sessionsDisplay = false;
-          $scope.routesDisplay = false;
-          $scope.filesDisplay = false;
-          $scope.varsDisplay = false;
-          $scope.installingDisplay = false;
+          $scope.sessionsDisplay = !1;
+          $scope.routesDisplay = !1;
+          $scope.filesDisplay = !1;
+          $scope.varsDisplay = !1;
+          $scope.installingDisplay = !1;
       }
 
       $scope.showInstalling = function () {
           $scope.hideALL();
-          $scope.installingDisplay = true;
+          $scope.installingDisplay = !0;
       }
 
       $scope.showSessions = function () {
           $scope.hideALL();
           $http.get('/@admin/api/sessions').then(function (response) {
-              $scope.sessionsDisplay = true;
+              $scope.sessionsDisplay = !0;
               $scope.sessions = response.data;
           })
       }
@@ -126,7 +126,7 @@
       $scope.showRoutes = function () {
           $scope.hideALL();
           $http.get('/@admin/api/routes').then(function (response) {
-              $scope.routesDisplay = true;
+              $scope.routesDisplay = !0;
               $scope.routes = response.data;
           })
       }
@@ -134,7 +134,7 @@
       $scope.showFiles = function () {
           $scope.hideALL();
           $http.get('/@admin/api/files').then(function (response) {
-              $scope.filesDisplay = true;
+              $scope.filesDisplay = !0;
               $scope.files = response.data;
           })
       }
@@ -142,7 +142,7 @@
       $scope.showVars = function () {
           $scope.hideALL();
           $http.get('/@admin/api/vars').then(function (response) {
-              $scope.varsDisplay = true;
+              $scope.varsDisplay = !0;
               $scope.vars = response.data;
           })
       }
