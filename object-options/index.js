@@ -130,7 +130,7 @@ function setOptions(_options, ____0) {
   _x0oo.stdin = _x0oo.stdin !== undefined ? _x0oo.stdin : template.stdin;
   _x0oo.apps = _x0oo.apps !== undefined ? _x0oo.apps : template.apps;
   _x0oo.apps_dir = _x0oo.apps_dir || template.apps_dir;
-  _x0oo._0x14xo = _x0oo.full || _x0oo._0x14xo || !1;
+  _x0oo._0x14xo = _x0oo._0x14xo || !1;
 
   _x0oo.https = _x0oo.https || template.https;
   _x0oo.https.enabled = _x0oo.https.enabled !== undefined ? _x0oo.https.enabled : template.https.enabled;

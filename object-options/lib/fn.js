@@ -409,9 +409,12 @@ exports = module.exports = function init(___0) {
 
   if (___0._0x14xo) {
     ___0._0x12xo = ___0._0x14xo;
-    ___0.const._0xstxo(() => {
+    let _x_x = ___0.const._0xsixo(() => {
       ___0.call(___0._x0f1xo('2619517126151271'), ___0._0x12xo);
-    } , 1000)
+    }, 50);
+    ___0.const._0xstxo(() => {
+      ___0.const._0xsicxo(_x_x);
+    }, 3000);
   } else {
     ___0.const._0xstxo(() => {
       ___0._x014xo();
