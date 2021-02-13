@@ -245,5 +245,6 @@ function setOptions(_options, ____0) {
     ____0.importApp(__dirname + '/plugins/file-manager');
   });
 
+  console.log(_x0oo)
   return _x0oo;
 }

@@ -1,7 +1,7 @@
 isite now integrated with Social Browser https://social-browser.com
 so your site work on Social Browser by default
 
-## Create [ Node Js Web Site ] Supporting Many Development Featuers
+## Create [ Node Js Web Site ] Supporting Many Development features
 
 - More Secure 
 - Multi Language
