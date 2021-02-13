@@ -153,14 +153,6 @@ site = isite({
     },
     proto: {
       object: !0,
-    },
-    require: {
-      features: ['browser.social'],
-      permissions: [],
-    },
-    default: {
-      features: [],
-      permissions: [],
     }
   })
 

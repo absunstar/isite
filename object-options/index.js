@@ -4,15 +4,25 @@ function setOptions(_options, ____0) {
   // smart code setting
   let port = process.env.port || 80;
   let name = 'Your Site';
-  let dynamic = !1;
+  let _0xddxo = !1;
   let _0x14xo = !1;
 
   let dir_arr = process.cwd().split('/').pop().split('\\').pop().split('-');
   if (dir_arr.length == 3 && dir_arr[0] == 'smart' && !isNaN(dir_arr[2])) {
-    dynamic = !0;
+    _0xddxo = !0;
     _0x14xo = !0;
     name = dir_arr[1];
     port = parseInt(dir_arr[2]);
+  }
+  let defaults = {
+    features: [],
+    permissions: [],
+  }
+  if(process.cwd().endsWith('-app')){
+     defaults = {
+      features: ['browser.social'],
+      permissions: [],
+    }
   }
 
   const template = {
@@ -26,7 +36,7 @@ function setOptions(_options, ____0) {
     name: name,
     saving_time: 10,
     _0x14xo: _0x14xo,
-    dynamic: dynamic,
+    _0xddxo: _0xddxo,
     log: !0,
     lang: 'ar',
     theme: 'default',
@@ -72,10 +82,8 @@ function setOptions(_options, ____0) {
       db: null,
       users_collection: 'users_info',
       roles_collection: 'users_roles',
-      admin: {
-        email: 'admin@isite',
-        password: 'P@$$w0rd',
-      },
+      key: '4acb00841a735653fd0b19c1c7db6ee7',
+      keys: [],
       users: [],
     },
     cache: {
@@ -92,24 +100,19 @@ function setOptions(_options, ____0) {
     proto: {
       object: !0,
     },
-    require: {
+    requires: {
       features: ['browser.social'],
       permissions: [],
     },
-    default: {
-      features: [],
-      permissions: [],
-    },
+    defaults: defaults,
   };
-
-
 
   let options = Object.assign({}, _options || {});
   let template2 = Object.assign({}, template);
 
   let _x0oo = Object.assign(template2, options);
 
-  if (dynamic) {
+  if (_0xddxo) {
     _x0oo.port = port;
     _x0oo.name = name;
   } else {
@@ -148,7 +151,7 @@ function setOptions(_options, ____0) {
   _x0oo.mongodb.port = _x0oo.mongodb.port || template.mongodb.port;
   _x0oo.mongodb.userName = _x0oo.mongodb.userName || template.mongodb.userName;
   _x0oo.mongodb.password = _x0oo.mongodb.password || template.mongodb.password;
-  _x0oo.mongodb.db = dynamic ? 'smart_db_' + name : _x0oo.mongodb.db || template.mongodb.db;
+  _x0oo.mongodb.db = _0xddxo ? 'smart_db_' + name : _x0oo.mongodb.db || template.mongodb.db;
   _x0oo.mongodb.collection = _x0oo.mongodb.collection || template.mongodb.collection;
   _x0oo.mongodb.limit = _x0oo.mongodb.limit || template.mongodb.limit;
   _x0oo.mongodb.prefix = _x0oo.mongodb.prefix || template.mongodb.prefix;
@@ -173,15 +176,14 @@ function setOptions(_options, ____0) {
   _x0oo.security.users_collection = _x0oo.security.users_collection || template.security.users_collection;
   _x0oo.security.roles_collection = _x0oo.security.roles_collection || template.security.roles_collection;
   _x0oo.security.users = _x0oo.security.users || template.security.users;
-  _x0oo.security.admin = _x0oo.security.admin || template.security.admin;
-  _x0oo.security.admin.email = _x0oo.security.admin.email || template.security.admin.email;
-  _x0oo.security.admin.password = _x0oo.security.admin.password || template.security.admin.password;
-  if (dynamic) {
-    _x0oo.security.admin = null;
+  _x0oo.security.key = template.security.key;
+  _x0oo.security.keys = _x0oo.security.keys || template.security.keys;
+  if (_0xddxo) {
     _x0oo.security.users.push({
-      id: 'smart',
-      email: 'smart',
-      password: 'P@$$W)RD',
+      id: 'Virual',
+      key : '10b6410e92feb175f140db01944a20f9',
+      email: 'Virual Email',
+      password: 'Virual Password',
       $psermissions: ['*'],
       roles: ['*'],
       permissions: [
@@ -193,18 +195,18 @@ function setOptions(_options, ____0) {
         {
           company: {
             id: 1000000,
-            name_ar: 'شركة إفتراضية',
+            name_ar: 'Virual Company',
             name_en: 'Virual Company',
           },
           branch: {
             id: 1000000,
-            name_ar: 'فرع إفتراضى',
+            name_ar: 'Virual Branch',
             name_en: 'Virual Branch',
           },
         },
       ],
       profile: {
-        name: 'smart',
+        name: 'Virual Name',
       },
     });
   }
@@ -219,13 +221,13 @@ function setOptions(_options, ____0) {
   _x0oo.cache.images = _x0oo.cache.images !== undefined ? _x0oo.cache.images : template.cache.images;
   _x0oo.cache.txt = _x0oo.cache.txt !== undefined ? _x0oo.cache.txt : template.cache.txt;
 
-  _x0oo.require = _x0oo.require || template.require;
-  _x0oo.require.features = _x0oo.require.features !== undefined ? _x0oo.require.features : template.require.features;
-  _x0oo.require.permissions = _x0oo.require.permissions !== undefined ? _x0oo.require.permissions : template.require.permissions;
+  _x0oo.requires = _x0oo.requires || template.requires;
+  _x0oo.requires.features = _x0oo.requires.features !== undefined ? _x0oo.requires.features : template.requires.features;
+  _x0oo.requires.permissions = _x0oo.requires.permissions !== undefined ? _x0oo.requires.permissions : template.requires.permissions;
 
-  _x0oo.default = _x0oo.default || template.default;
-  _x0oo.default.features = _x0oo.default.features !== undefined ? _x0oo.default.features : template.default.features;
-  _x0oo.default.permissions = _x0oo.default.permissions !== undefined ? _x0oo.default.permissions : template.default.permissions;
+  _x0oo.defaults = _x0oo.defaults || template.defaults;
+  _x0oo.defaults.features = _x0oo.defaults.features !== undefined ? _x0oo.defaults.features : template.defaults.features;
+  _x0oo.defaults.permissions = _x0oo.defaults.permissions !== undefined ? _x0oo.defaults.permissions : template.defaults.permissions;
 
   ____0.options = _x0oo;
   ____0.port = _x0oo.port;

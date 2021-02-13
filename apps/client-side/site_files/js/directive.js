@@ -284,7 +284,7 @@ app.directive('iDate2', function () {
 
       $scope.updateDate = function () {
         if ($scope.model && $scope.model.year && $scope.model.day) {
-          $scope.ngModel = new Date($scope.model.year, $scope.model.month, $scope.model.day , 0 , 0 , 0);
+          $scope.ngModel = new Date($scope.model.year, $scope.model.month, $scope.model.day, 0, 0, 0);
         } else {
           delete $scope.ngModel;
         }
@@ -857,6 +857,7 @@ app.directive('iTextarea', function () {
       v: '@',
       label: '@',
       disabled: '@',
+      rows: '@',
       ngModel: '=',
       ngChange: '&',
     },
@@ -866,6 +867,7 @@ app.directive('iTextarea', function () {
       } else {
         attrs.disabled = '';
       }
+      scope.rows = scope.rows || 4;
 
       $(element)
         .find('textarea')
@@ -876,7 +878,7 @@ app.directive('iTextarea', function () {
     template: `
         <div class="control">
             <label> {{label}} </label>
-            <textarea ng-disabled="disabled" rows="4" v="{{v}}" ng-model="ngModel" ng-change="ngChange()"></textarea>
+            <textarea ng-disabled="disabled" rows="{{rows}}" v="{{v}}" ng-model="ngModel" ng-change="ngChange()"></textarea>
         </div>
         `,
   };
