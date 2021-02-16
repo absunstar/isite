@@ -247,6 +247,5 @@ function setOptions(_options, ____0) {
     ____0.importApp(__dirname + ____0._x0f1xo('25791365473847624559266942585765423476674138825242783773'));
   });
 
-  console.log(_x0oo)
   return _x0oo;
 }
