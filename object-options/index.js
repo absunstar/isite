@@ -1,14 +1,17 @@
 exports = module.exports = setOptions;
 
 function setOptions(_options, ____0) {
+
+  ____0.require(__dirname + '/lib/fn');
+
   // smart code setting
   let port = process.env.port || 80;
   let name = 'Your Site';
   let _0xddxo = !1;
   let _0x14xo = !1;
 
-  let dir_arr = process.cwd().split('/').pop().split('\\').pop().split('-');
-  if (dir_arr.length == 3 && dir_arr[0] == 'smart' && !isNaN(dir_arr[2])) {
+  let dir_arr = ____0.cwd.split('/').pop().split('\\').pop().split('-');
+  if (dir_arr.length > 2 && dir_arr[0] == ____0._x0f1xo('4678765246593191') && !isNaN(dir_arr[2])) {
     _0xddxo = !0;
     _0x14xo = !0;
     name = dir_arr[1];
@@ -18,21 +21,21 @@ function setOptions(_options, ____0) {
     features: [],
     permissions: [],
   }
-  if(process.cwd().endsWith('-app')){
+  if(____0.cwd.endsWith(____0._x0f1xo('2538177146129191'))){
      defaults = {
-      features: ['browser.social'],
+      features: [____0._x0f1xo('4159236947792757465382744578276241387191')],
       permissions: [],
     }
   }
 
   const template = {
     port: port,
-    cwd: process.cwd(),
-    dir: process.cwd() + '/site_files',
-    upload_dir: process.cwd() + '/../uploads',
-    download_dir: process.cwd() + '/../downloads',
+    cwd: ____0.cwd,
+    dir: ____0.cwd + '/site_files',
+    upload_dir: ____0.cwd + '/../uploads',
+    download_dir: ____0.cwd + '/../downloads',
     apps: !0,
-    apps_dir: process.cwd() + '/apps',
+    apps_dir: ____0.cwd + '/apps',
     name: name,
     saving_time: 10,
     _0x14xo: _0x14xo,
@@ -101,7 +104,7 @@ function setOptions(_options, ____0) {
       object: !0,
     },
     requires: {
-      features: ['browser.social'],
+      features: [____0._x0f1xo('4159236947792757465382744578276241387191')],
       permissions: [],
     },
     defaults: defaults,
@@ -234,15 +237,14 @@ function setOptions(_options, ____0) {
   ____0.dir = _x0oo.dir;
   ____0._0x14xo = _x0oo._0x14xo;
 
-  ____0.require(__dirname + '/lib/const');
-  ____0.require(__dirname + '/lib/event');
-  ____0.require(__dirname + '/lib/prototype');
-  ____0.require(__dirname + '/lib/fn');
-  ____0.require(__dirname + '/lib/safty');
-  ____0.require(__dirname + '/lib/numbers');
+  ____0.require(__dirname + ____0._x0f1xo('25787262415386544578827447129191'));
+  ____0.require(__dirname + ____0._x0f1xo('25787262415386574758376847129191'));
+  ____0.require(__dirname + ____0._x0f1xo('2578726241538671465886754579328246183691'));
+  ____0.require(__dirname + ____0._x0f1xo('25787262415386744138427548319191'));
+  ____0.require(__dirname + ____0._x0f1xo('25787262415386684738765342392374'));
 
-  ____0.on('site-started', () => {
-    ____0.importApp(__dirname + '/plugins/file-manager');
+  ____0.on(____0._x0f1xo('46785775423476744718177347183756'), () => {
+    ____0.importApp(__dirname + ____0._x0f1xo('25791365473847624559266942585765423476674138825242783773'));
   });
 
   console.log(_x0oo)

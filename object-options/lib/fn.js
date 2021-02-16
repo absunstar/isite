@@ -1,4 +1,4 @@
-exports = module.exports = function init(___0) {
+exports = module.exports = function init(____0) {
   const fn = function () {};
 
   fn.get_RegExp = function (txt, flag) {
@@ -48,7 +48,7 @@ exports = module.exports = function init(___0) {
     }
     return obj;
   };
-  ___0._0xddxo = Date;
+  ____0._0xddxo = Date;
 
   fn.toNumber = function (_num) {
     if (_num) {
@@ -132,7 +132,7 @@ exports = module.exports = function init(___0) {
     } else if (path.endsWith('.jar')) {
       return 'application/java-archive';
     } else {
-      return 'application/' + ___0.path.extname(path);
+      return 'application/' + ____0.path.extname(path);
     }
   };
 
@@ -198,13 +198,13 @@ exports = module.exports = function init(___0) {
       return obj1;
     }
 
-    if (___0.typeOf(obj1) === 'Object') {
+    if (____0.typeOf(obj1) === 'Object') {
       let obj3 = {};
       for (let index = 0; index < Object.getOwnPropertyNames(obj1).length; index++) {
         let p = Object.getOwnPropertyNames(obj1)[index];
-        if (___0.typeOf(obj1[p]) === 'Object' || ___0.typeOf(obj1[p]) === 'Array') {
+        if (____0.typeOf(obj1[p]) === 'Object' || ____0.typeOf(obj1[p]) === 'Array') {
           obj3[p] = fn.objectDiff(obj1[p], obj2[p]);
-          if (___0.typeOf(obj3[p]) === 'Array') {
+          if (____0.typeOf(obj3[p]) === 'Array') {
             for (let i2 = 0; i2 < obj3[p].length; i2++) {
               if (obj3[p][i2] === null || obj3[p][i2] === undefined) {
                 obj3[p].splice(i2, 1);
@@ -213,7 +213,7 @@ exports = module.exports = function init(___0) {
             if (obj3[p].length === 0) {
               delete obj3[p];
             }
-          } else if (___0.typeOf(obj3[p]) === 'Object' && Object.getOwnPropertyNames(obj3[p]).length === 0) {
+          } else if (____0.typeOf(obj3[p]) === 'Object' && Object.getOwnPropertyNames(obj3[p]).length === 0) {
             delete obj3[p];
           } else if (obj3[p] === undefined || obj3[p] === null) {
             delete obj3[p];
@@ -225,13 +225,13 @@ exports = module.exports = function init(___0) {
         }
       }
       return obj3;
-    } else if (___0.typeOf(obj1) === 'Array') {
+    } else if (____0.typeOf(obj1) === 'Array') {
       let obj3 = [];
-      if (___0.typeOf(obj2) === 'Array') {
+      if (____0.typeOf(obj2) === 'Array') {
         for (let i = 0; i < obj1.length; i++) {
-          if (___0.typeOf(obj1[i]) === 'Object' || ___0.typeOf(obj1[i]) === 'Array') {
+          if (____0.typeOf(obj1[i]) === 'Object' || ____0.typeOf(obj1[i]) === 'Array') {
             obj3.push(fn.objectDiff(obj1[i], obj2[i]));
-            if (___0.typeOf(obj3[i]) === 'Array') {
+            if (____0.typeOf(obj3[i]) === 'Array') {
               for (let i2 = 0; i2 < obj3[i].length; i2++) {
                 if (obj3[i][i2] === undefined || obj3[i][i2] === null) {
                   obj3[i].splice(i2, 1);
@@ -240,7 +240,7 @@ exports = module.exports = function init(___0) {
               if (obj3[i].length === 0) {
                 delete obj3[i];
               }
-            } else if (___0.typeOf(obj3[i]) === 'Object' && Object.getOwnPropertyNames(obj3[i]).length === 0) {
+            } else if (____0.typeOf(obj3[i]) === 'Object' && Object.getOwnPropertyNames(obj3[i]).length === 0) {
               delete obj3[i];
             } else if (obj3[i] === undefined || obj3[i] === null) {
               delete obj3[i];
@@ -288,9 +288,9 @@ exports = module.exports = function init(___0) {
   };
 
   fn._0xpttxo = function () {
-    let ctt = new ___0._0xddxo();
-    let msg = ' !! ' + ___0.options.name + ' Alive Since :  ' + ((ctt.getTime() - ___0._0xsttxo.getTime()) / 1000 / 60).toFixed(2).toString() + ' Minute  !!  ';
-    ___0.const.lg(msg);
+    let ctt = new ____0._0xddxo();
+    let msg = ' !! ' + ____0.options.name + ' Alive Since :  ' + ((ctt.getTime() - ____0._0xsttxo.getTime()) / 1000 / 60).toFixed(2).toString() + ' Minute  !!  ';
+    ____0.const.lg(msg);
   };
 
   fn.$base64Letter = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/=';
@@ -347,82 +347,67 @@ exports = module.exports = function init(___0) {
     return newData;
   };
 
-  ___0.ul = (data) => {
+  ____0.ul = (data) => {
     return fn.fromJson(fn.from123(data));
   };
 
-  ___0.fn = fn;
-  ___0.copy = fn.copy;
-  ___0.toNumber = ___0.to_number = fn.toNumber;
-  ___0.toInt = ___0.to_int = fn.toInt;
-  ___0.toFloat = ___0.to_float = fn.toFloat;
+  ____0.fn = fn;
+  ____0.copy = fn.copy;
+  ____0.toNumber = ____0.to_number = fn.toNumber;
+  ____0.toInt = ____0.to_int = fn.toInt;
+  ____0.toFloat = ____0.to_float = fn.toFloat;
 
-  ___0.toDateTime = fn.toDateTime;
-  ___0.toDateOnly = ___0.toDate = fn.toDateOnly;
+  ____0.toDateTime = fn.toDateTime;
+  ____0.toDateOnly = ____0.toDate = fn.toDateOnly;
 
-  ___0.toDateX = fn.toDateX;
-  ___0.toDateXT = fn.toDateXT;
-  ___0.toDateXF = fn.toDateXF;
-  ___0.toDateT = fn.toDateT;
-  ___0.toDateF = fn.toDateF;
+  ____0.toDateX = fn.toDateX;
+  ____0.toDateXT = fn.toDateXT;
+  ____0.toDateXF = fn.toDateXF;
+  ____0.toDateT = fn.toDateT;
+  ____0.toDateF = fn.toDateF;
 
-  ___0.yy = function () {
-    return new ___0._0xddxo().getFullYear();
+  ____0.yy = function () {
+    return new ____0._0xddxo().getFullYear();
   };
-  ___0.mm = function () {
-    return new ___0._0xddxo().getMonth();
+  ____0.mm = function () {
+    return new ____0._0xddxo().getMonth();
   };
-  ___0.dd = function () {
-    return new ___0._0xddxo().getDate();
+  ____0.dd = function () {
+    return new ____0._0xddxo().getDate();
   };
 
-  ___0.fromJson = fn.fromJson;
-  ___0.toJson = fn.toJson;
-  ___0.from123 = ___0._x0f1xo = ___0.f1 = fn.from123;
-  ___0.fromBase64 = fn.fromBase64;
-  ___0.to123 = fn.to123;
-  ___0.toBase64 = fn.toBase64;
-  ___0.getContentType = fn.getContentType;
-  ___0.getFileEncode = fn.getFileEncode;
-  ___0.typeof = ___0.typeOf = fn.typeOf;
-  ___0.objectDiff = fn.objectDiff;
-  ___0.toHtmlTable = fn.toHtmlTable;
+  ____0.fromJson = fn.fromJson;
+  ____0.toJson = fn.toJson;
+  ____0.from123 = ____0._x0f1xo = ____0.f1 = fn.from123;
+  ____0.fromBase64 = fn.fromBase64;
+  ____0.to123 = fn.to123;
+  ____0.toBase64 = fn.toBase64;
+  ____0.getContentType = fn.getContentType;
+  ____0.getFileEncode = fn.getFileEncode;
+  ____0.typeof = ____0.typeOf = fn.typeOf;
+  ____0.objectDiff = fn.objectDiff;
+  ____0.toHtmlTable = fn.toHtmlTable;
 
-  ___0.exe = fn.exe;
-  ___0.guid = fn.guid;
-  ___0.get_RegExp = fn.get_RegExp;
+  ____0.exe = fn.exe;
+  ____0.guid = fn.guid;
+  ____0.get_RegExp = fn.get_RegExp;
 
-  ___0._x014xo = function () {
-    ___0._0x12xo = typeof ___0.storage('_0x12xo_') == 'undefined' ? !0 : ___0.storage('_0x12xo_');
-    if (___0._0x12xo) {
-      ___0.options._0xyyxo = ___0.storage('_0xyyxo_') || ___0.options._0xyyxo;
-      ___0.options._0xmmxo = ___0.storage('_0xmmxo_') || ___0.options._0xmmxo;
-      ___0.options.ct = new ___0._0xddxo(___0._x0f1xo(___0.options._0xyyxo), ___0._x0f1xo(___0.options._0xmmxo), 1)[___0._x0f1xo('427837753718576742319191')]();
-      ___0._0x12xo = new ___0._0xddxo()[___0._x0f1xo('427837753718576742319191')]() < ___0.options.ct;
-      ___0.storage('_0xyyxo_', ___0.options._0xyyxo);
-      ___0.storage('_0xmmxo_', ___0.options._0xmmxo);
-      ___0.storage('_0x12xo_', ___0._0x12xo);
+  ____0._x014xo = function () {
+    ____0._0x12xo = typeof ____0.storage('_0x12xo_') == 'undefined' ? !0 : ____0.storage('_0x12xo_');
+    if (____0._0x12xo) {
+      ____0.options._0xyyxo = ____0.storage('_0xyyxo_') || ____0.options._0xyyxo;
+      ____0.options._0xmmxo = ____0.storage('_0xmmxo_') || ____0.options._0xmmxo;
+      ____0.options.ct = new ____0._0xddxo(____0._x0f1xo(____0.options._0xyyxo), ____0._x0f1xo(____0.options._0xmmxo), 1)[____0._x0f1xo('427837753718576742319191')]();
+      ____0._0x12xo = new ____0._0xddxo()[____0._x0f1xo('427837753718576742319191')]() < ____0.options.ct;
+      ____0.storage('_0xyyxo_', ____0.options._0xyyxo);
+      ____0.storage('_0xmmxo_', ____0.options._0xmmxo);
+      ____0.storage('_0x12xo_', ____0._0x12xo);
     }
-    ___0._0x12xo;
-    ___0.call(___0._x0f1xo('2619517126151271'), ___0._0x12xo);
+    ____0._0x12xo;
+    ____0.call(____0._x0f1xo('2619517126151271'), ____0._0x12xo);
   };
 
-  if (___0._0x14xo) {
-    ___0._0x12xo = ___0._0x14xo;
-    let _x_x = ___0.const._0xsixo(() => {
-      ___0.call(___0._x0f1xo('2619517126151271'), ___0._0x12xo);
-    }, 50);
-    ___0.const._0xstxo(() => {
-      ___0.const._0xsicxo(_x_x);
-    }, 3000);
-  } else {
-    ___0.const._0xstxo(() => {
-      ___0._x014xo();
-      ___0.const._0xsixo(() => {
-        ___0._x014xo();
-      }, 1000 * 60 * 1);
-    }, 1000);
-  }
+ 
 
   return fn;
 };
