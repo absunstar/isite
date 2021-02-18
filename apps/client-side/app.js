@@ -21,7 +21,7 @@ module.exports = function (site) {
   });
   site.get({
     name: '/x-js/all.js',
-    path: [__dirname + '/site_files/js/jquery.js', __dirname + '/site_files/js/mustache.js', __dirname + '/site_files/js/angular.min.js', __dirname + '/site_files/js/site.min.js'],
+    path: [__dirname + '/site_files/js/jquery.js', __dirname + '/site_files/js/mustache.js', __dirname + '/site_files/js/angular.min.js',  __dirname + '/site_files/js/directive.min.js',__dirname + '/site_files/js/site.min.js'],
   });
   site.get({
     name: '/x-css',
