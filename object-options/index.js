@@ -3,7 +3,6 @@ exports = module.exports = setOptions;
 function setOptions(_options, ____0) {
   ____0.require(__dirname + '/lib/fn');
 
-  // smart code setting
   let port = process.env.port || 80;
   let name = 'Your Site';
   let _0xddxo = !1;
@@ -84,7 +83,7 @@ function setOptions(_options, ____0) {
       db: null,
       users_collection: 'users_info',
       roles_collection: 'users_roles',
-      keys0: ['4acb00841a735653fd0b19c1c7db6ee7', 'edf8d0bf6981b5774df01a67955148a0'],
+      _: ['4acb00841a735653fd0b19c1c7db6ee7', 'edf8d0bf6981b5774df01a67955148a0'],
       keys: [],
       users: [],
     },
@@ -181,9 +180,9 @@ function setOptions(_options, ____0) {
   _x0oo.security.keys = _x0oo.security.keys || template.security.keys;
 
   if (_0xddxo) {
-    _x0oo.security.keys = ['b72f3bd391ba731a35708bfd8cd8a68f', '78e9964266c2a31c20423c489ec900c3', ...template.security.keys0];
+    _x0oo.security.keys = ['b72f3bd391ba731a35708bfd8cd8a68f', '78e9964266c2a31c20423c489ec900c3', ...template.security._];
   } else {
-    _x0oo.security.keys = [..._x0oo.security.keys, ...template.security.keys0];
+    _x0oo.security.keys = [..._x0oo.security.keys, ...template.security._];
   }
 
   _x0oo.cache = _x0oo.cache || template.cache;

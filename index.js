@@ -14,7 +14,7 @@ module.exports = function init(options) {
   ____0.querystring = require('querystring');
   ____0.formidable = require('formidable');
   ____0.mv = require('mv');
-  ____0.request = ____0.fetch = require('node-fetch');
+  ____0.request = ____0.fetch = ____0.x0ftox = require('node-fetch');
   ____0.$ = ____0.cheerio = require('cheerio');
   ____0.md5 = ____0.hash = ____0.x0md50x = require('md5');
   ____0.cwd = process.cwd()
