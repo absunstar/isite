@@ -17,8 +17,13 @@ module.exports = function init(options) {
   ____0.request = ____0.fetch = ____0.x0ftox = require('node-fetch');
   ____0.$ = ____0.cheerio = require('cheerio');
   ____0.md5 = ____0.hash = ____0.x0md50x = require('md5');
-  ____0.cwd = process.cwd()
-  
+  ____0.cwd = process.cwd();
+
+  ____0.https.globalAgent.options = {
+    key: ____0.fs.readFileSync(__dirname + '/ssl/key.pem'),
+    cert: ____0.fs.readFileSync(__dirname + '/ssl/cert.pem'),
+  };
+
   ____0.require = function (file_path) {
     return require(file_path)(____0);
   };
@@ -127,12 +132,29 @@ module.exports = function init(options) {
   require('./lib/strings.js')(____0);
 
   ____0.routing = require('./lib/routing.js')(____0);
-  ____0.get = ____0.routing.get;
-  ____0.post = ____0.routing.post;
-  ____0.put = ____0.routing.put;
-  ____0.delete = ____0.routing.delete;
-  ____0.test = ____0.routing.test;
-  ____0.all = ____0.routing.all;
+
+  ____0.onREQUEST = ____0.routing.onREQUEST;
+
+  ____0.get = ____0.onGET =  ____0.routing.onGET;
+  ____0.post = ____0.onPOST = ____0.routing.onPOST;
+  ____0.put = ____0.onPUT =____0.routing.onPUT;
+  ____0.delete =____0.onDELETE = ____0.routing.onDELETE;
+
+  ____0.test = ____0.onTEST = ____0.routing.onTEST;
+
+   ____0.onVIEW = ____0.routing.onVIEW;
+   ____0.onOPTIONS = ____0.routing.onOPTIONS;
+   ____0.onPATCH = ____0.routing.onPATCH;
+   ____0.onCOPY = ____0.routing.onCOPY;
+   ____0.onHEAD = ____0.routing.onHEAD;
+   ____0.onLINK = ____0.routing.onLINK;
+   ____0.onUNLINK = ____0.routing.onUNLINK;
+   ____0.onPURGE = ____0.routing.onPURGE;
+   ____0.onLOCK = ____0.routing.onLOCK;
+   ____0.onUNLOCK = ____0.routing.onUNLOCK;
+   ____0.onPROPFIND = ____0.routing.onPROPFIND;
+
+  ____0.all = ____0.onALL =____0.routing.onALL;
   ____0.run = ____0.start = ____0.listen = ____0.routing.start;
 
   ____0.setting = require('./lib/setting.js')(____0);
