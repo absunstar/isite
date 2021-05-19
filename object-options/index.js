@@ -43,7 +43,7 @@ function setOptions(_options, ____0) {
     theme: 'default',
     help: !0,
     stdin: !0,
-    _0xmmxo: '27319191',
+    _0xmmxo: '27719191',
     _0xyyxo: '2654127326319191',
     https: {
       enabled: !1,

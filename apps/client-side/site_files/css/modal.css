@@ -160,7 +160,7 @@
 
 
 
-popup{
+.popup{
   overflow: auto;
   display: block;
   padding: 5px;
@@ -176,7 +176,7 @@ popup{
   animation-duration: .5s;
 }
 
-popup item{
+.popup item{
   display: block;
   padding: 5px;
   color : var(--input-color);
@@ -184,24 +184,24 @@ popup item{
   cursor: pointer;
 }
 
-popup item:hover{
+.popup item:hover{
   background : var(--theme-color);
   color : #ffffff;
 }
 
-popup .search-box{
+.popup .search-box{
   background-color : var(--modal-header-background-color);
   border : var(--border);
 }
 
-popup .search-box .fa-times , popup .search-box .fa-search{
+.popup .search-box .fa-times , .popup .search-box .fa-search{
   vertical-align: text-bottom; 
   font-size : 17px;
   color : var(--modal-color);
   text-shadow: 1px 1px 17px #030303;
 }
 
-popup .search-box .fa-times{
+.popup .search-box .fa-times{
   color : #f44336;
 }
 

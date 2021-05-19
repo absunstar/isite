@@ -175,7 +175,7 @@ app.directive('iDate', function () {
       $(element)
         .find('select')
         .focus(() => {
-          $('popup').hide();
+          $('.popup').hide();
         });
 
       scope.days1 = [];
@@ -264,7 +264,7 @@ app.directive('iDate2', function () {
       $(element)
         .find('select')
         .focus(() => {
-          $('popup').hide();
+          $('.popup').hide();
         });
 
       $scope.$watch('ngModel', function (ngModel) {
@@ -352,7 +352,7 @@ app.directive('iTime', function () {
       $(element)
         .find('select')
         .focus(() => {
-          $('popup').hide();
+          $('.popup').hide();
         });
 
       $scope.$watch('ngModel', function (ngModel) {
@@ -460,7 +460,7 @@ app.directive('iDatetime2', function () {
       $(element)
         .find('select')
         .focus(() => {
-          $('popup').hide();
+          $('.popup').hide();
         });
 
       $scope.$watch('ngModel', function (ngModel) {
@@ -561,7 +561,7 @@ app.directive('iMonth2', function () {
       $(element)
         .find('select')
         .focus(() => {
-          $('popup').hide();
+          $('.popup').hide();
         });
 
       $scope.$watch('ngModel', function (ngModel) {
@@ -639,7 +639,7 @@ app.directive('iFulldate', [
         $(element)
           .find('select')
           .focus(() => {
-            $('popup').hide();
+            $('.popup').hide();
           });
 
         $scope.days1 = [];
@@ -835,7 +835,7 @@ app.directive('iControl', function () {
       $(element)
         .find('input')
         .focus(() => {
-          $('popup').hide();
+          $('.popup').hide();
         });
 
       scope.$watch(attrs.ngModel, function (v) {});
@@ -872,7 +872,7 @@ app.directive('iTextarea', function () {
       $(element)
         .find('textarea')
         .focus(() => {
-          $('popup').hide();
+          $('.popup').hide();
         });
     },
     template: `
@@ -1114,7 +1114,7 @@ app.directive('iList', [
         }
 
         let input = $(element).find('input');
-        let popup = $(element).find('popup');
+        let popup = $(element).find('.popup');
         let search = $(element).find('.search');
 
         function handlePosition() {
@@ -1170,7 +1170,7 @@ app.directive('iList', [
         $(popup).hide();
 
         $(input).focus(() => {
-          $('popup').hide();
+          $('.popup').hide();
           $(popup).show();
           handlePosition();
           $(popup).focus();
@@ -1262,7 +1262,7 @@ app.directive('iList', [
             <label> {{label}} </label>
             <input class="full-width text {{css}}" ng-disabled="disabled" v="{{v}}"  readonly>
             <input type="hidden" ng-model="ngModel.$display">
-            <popup>
+            <div class="popup">
             <div ng-show="showSearch" class="row search-box">
                 <div class="col2 center pointer" ng-click="hide()">
                     <i class="fa fa-times center"></i>
@@ -1286,7 +1286,7 @@ app.directive('iList', [
                     <div class="col4"></div>
                 </div>
                 
-            </popup>
+            </div>
         </div>
         `,
     };
