@@ -196,6 +196,7 @@ module.exports = function init(options) {
   }
 
   ____0.words = require('./lib/words.js')(____0);
+  ____0.word = ____0.words.word;
   ____0.words.add({
     name: 'user_name',
     en: 'User Name',
