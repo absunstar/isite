@@ -108,10 +108,7 @@ function setOptions(_options, ____0) {
     defaults: defaults,
   };
 
-  let options = Object.assign({}, _options || {});
-  let template2 = Object.assign({}, template);
-
-  let _x0oo = Object.assign(template2, options);
+  let _x0oo = { ...template, ..._options };
 
   if (_0xddxo) {
     _x0oo.port = port;
@@ -127,17 +124,17 @@ function setOptions(_options, ____0) {
   _x0oo.download_dir = _x0oo.download_dir || template.download_dir;
 
   _x0oo.saving_time = _x0oo.saving_time || template.saving_time;
-  _x0oo.log = _x0oo.log !== undefined ? _x0oo.log : template.log;
-  _x0oo.lang = _x0oo.lang !== undefined ? _x0oo.lang : template.lang;
-  _x0oo.theme = _x0oo.theme !== undefined ? _x0oo.theme : template.theme;
-  _x0oo.help = _x0oo.help !== undefined ? _x0oo.help : template.help;
-  _x0oo.stdin = _x0oo.stdin !== undefined ? _x0oo.stdin : template.stdin;
-  _x0oo.apps = _x0oo.apps !== undefined ? _x0oo.apps : template.apps;
+  _x0oo.log = _x0oo.log ?? template.log;
+  _x0oo.lang = _x0oo.lang ?? template.lang;
+  _x0oo.theme = _x0oo.theme ?? template.theme;
+  _x0oo.help = _x0oo.help ?? template.help;
+  _x0oo.stdin = _x0oo.stdin ?? template.stdin;
+  _x0oo.apps = _x0oo.apps ?? template.apps;
   _x0oo.apps_dir = _x0oo.apps_dir || template.apps_dir;
   _x0oo._0x14xo = _x0oo._0x14xo || !1;
 
   _x0oo.https = _x0oo.https || template.https;
-  _x0oo.https.enabled = _x0oo.https.enabled !== undefined ? _x0oo.https.enabled : template.https.enabled;
+  _x0oo.https.enabled = _x0oo.https.enabled ?? template.https.enabled;
   _x0oo.https.port = _x0oo.https.port || template.https.port;
   _x0oo.https.key = _x0oo.https.key || template.https.key;
   _x0oo.https.cert = _x0oo.https.cert || template.https.cert;
@@ -147,7 +144,7 @@ function setOptions(_options, ____0) {
   }
 
   _x0oo.mongodb = _x0oo.mongodb || template.mongodb;
-  _x0oo.mongodb.enabled = _x0oo.mongodb.enabled !== undefined ? _x0oo.mongodb.enabled : template.mongodb.enabled;
+  _x0oo.mongodb.enabled = _x0oo.mongodb.enabled ?? template.mongodb.enabled;
   _x0oo.mongodb.host = _x0oo.mongodb.host || template.mongodb.host;
   _x0oo.mongodb.port = _x0oo.mongodb.port || template.mongodb.port;
   _x0oo.mongodb.userName = _x0oo.mongodb.userName || template.mongodb.userName;
@@ -160,19 +157,19 @@ function setOptions(_options, ____0) {
   _x0oo.mongodb.prefix.collection = _x0oo.mongodb.prefix.collection || template.mongodb.prefix.collection;
 
   _x0oo.mongodb.identity = _x0oo.mongodb.identity || template.mongodb.identity;
-  _x0oo.mongodb.identity.enabled = _x0oo.mongodb.identity.enabled !== undefined ? _x0oo.mongodb.identity.enabled : template.mongodb.identity.enabled;
+  _x0oo.mongodb.identity.enabled = _x0oo.mongodb.identity.enabled ?? template.mongodb.identity.enabled;
   _x0oo.mongodb.identity.start = _x0oo.mongodb.identity.start || template.mongodb.identity.start;
   _x0oo.mongodb.identity.step = _x0oo.mongodb.identity.step || template.mongodb.identity.step;
 
   _x0oo.session = _x0oo.session || template.session;
-  _x0oo.session.enabled = _x0oo.session.enabled !== undefined ? _x0oo.session.enabled : template.session.enabled;
-  _x0oo.session.timeout = _x0oo.session.timeout !== undefined ? _x0oo.session.timeout : template.session.timeout;
+  _x0oo.session.enabled = _x0oo.session.enabled ?? template.session.enabled;
+  _x0oo.session.timeout = _x0oo.session.timeout ?? template.session.timeout;
   _x0oo.session.storage = _x0oo.session.storage || template.session.storage;
   _x0oo.session.db = _x0oo.session.db || _x0oo.mongodb.db;
   _x0oo.session.collection = _x0oo.session.collection || template.session.collection;
 
   _x0oo.security = _x0oo.security || template.security;
-  _x0oo.security.enabled = _x0oo.security.enabled === undefined ? template.security.enabled : _x0oo.security.enabled;
+  _x0oo.security.enabled = _x0oo.security.enabled ?? _x0oo.security.enabled;
   _x0oo.security.db = _x0oo.security.db || _x0oo.mongodb.db;
   _x0oo.security.users_collection = _x0oo.security.users_collection || template.security.users_collection;
   _x0oo.security.roles_collection = _x0oo.security.roles_collection || template.security.roles_collection;
@@ -186,23 +183,23 @@ function setOptions(_options, ____0) {
   }
 
   _x0oo.cache = _x0oo.cache || template.cache;
-  _x0oo.cache.enabled = _x0oo.cache.enabled !== undefined ? _x0oo.cache.enabled : template.cache.enabled;
-  _x0oo.cache.js = _x0oo.cache.js !== undefined ? _x0oo.cache.js : template.cache.js;
-  _x0oo.cache.css = _x0oo.cache.css !== undefined ? _x0oo.cache.css : template.cache.css;
-  _x0oo.cache.json = _x0oo.cache.json !== undefined ? _x0oo.cache.json : template.cache.json;
-  _x0oo.cache.xml = _x0oo.cache.xml !== undefined ? _x0oo.cache.xml : template.cache.xml;
-  _x0oo.cache.fonts = _x0oo.cache.fonts !== undefined ? _x0oo.cache.fonts : template.cache.fonts;
-  _x0oo.cache.html = _x0oo.cache.html !== undefined ? _x0oo.cache.html : template.cache.html;
-  _x0oo.cache.images = _x0oo.cache.images !== undefined ? _x0oo.cache.images : template.cache.images;
-  _x0oo.cache.txt = _x0oo.cache.txt !== undefined ? _x0oo.cache.txt : template.cache.txt;
+  _x0oo.cache.enabled = _x0oo.cache.enabled ?? template.cache.enabled;
+  _x0oo.cache.js = _x0oo.cache.js ?? template.cache.js;
+  _x0oo.cache.css = _x0oo.cache.css ?? template.cache.css;
+  _x0oo.cache.json = _x0oo.cache.json ?? template.cache.json;
+  _x0oo.cache.xml = _x0oo.cache.xml ?? template.cache.xml;
+  _x0oo.cache.fonts = _x0oo.cache.fonts ?? template.cache.fonts;
+  _x0oo.cache.html = _x0oo.cache.html ?? template.cache.html;
+  _x0oo.cache.images = _x0oo.cache.images ?? template.cache.images;
+  _x0oo.cache.txt = _x0oo.cache.txt ?? template.cache.txt;
 
   _x0oo.requires = _x0oo.requires || template.requires;
-  _x0oo.requires.features = _x0oo.requires.features !== undefined ? _x0oo.requires.features : template.requires.features;
-  _x0oo.requires.permissions = _x0oo.requires.permissions !== undefined ? _x0oo.requires.permissions : template.requires.permissions;
+  _x0oo.requires.features = _x0oo.requires.features ?? template.requires.features;
+  _x0oo.requires.permissions = _x0oo.requires.permissions ?? template.requires.permissions;
 
   _x0oo.defaults = _x0oo.defaults || template.defaults;
-  _x0oo.defaults.features = _x0oo.defaults.features !== undefined ? _x0oo.defaults.features : template.defaults.features;
-  _x0oo.defaults.permissions = _x0oo.defaults.permissions !== undefined ? _x0oo.defaults.permissions : template.defaults.permissions;
+  _x0oo.defaults.features = _x0oo.defaults.features ?? template.defaults.features;
+  _x0oo.defaults.permissions = _x0oo.defaults.permissions ?? template.defaults.permissions;
 
   ____0.options = _x0oo;
   ____0.port = _x0oo.port;

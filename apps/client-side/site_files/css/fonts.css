@@ -1,24 +1,32 @@
 @font-face {
-  font-family: 'Droid Arabic Kufi';
+  font-family: 'Droid';
   font-style: normal;
-  font-weight: 400;
+  font-weight: normal;
   src: url(/x-fonts/DroidKufi-Regular.eot);
-  src: url(/x-fonts/DroidKufi-Regular.eot?#iefix) format('embedded-opentype'),
-    url(/x-fonts/DroidKufi-Regular.woff2) format('woff2'),
-    url(/x-fonts/DroidKufi-Regular.woff) format('woff'),
+  src: url(/x-fonts/DroidKufi-Regular.eot?#iefix) format('embedded-opentype'), url(/x-fonts/DroidKufi-Regular.woff2) format('woff2'), url(/x-fonts/DroidKufi-Regular.woff) format('woff'),
     url(/x-fonts/DroidKufi-Regular.ttf) format('!0type');
 }
 
 @font-face {
-  font-family: 'Droid Arabic Kufi';
+  font-family: 'Droid';
   font-style: normal;
-  font-weight: 700;
+  font-weight: bold;
   src: url(/x-fonts/DroidKufi-Bold.eot);
-  src: url(/x-fonts/DroidKufi-Bold.eot?#iefix) format('embedded-opentype'),
-    url(/x-fonts/DroidKufi-Bold.woff) format('woff'),
-    url(/x-fonts/DroidKufi-Bold.ttf) format('!0type');
+  src: url(/x-fonts/DroidKufi-Bold.eot?#iefix) format('embedded-opentype'), url(/x-fonts/DroidKufi-Bold.woff) format('woff'), url(/x-fonts/DroidKufi-Bold.ttf) format('!0type');
 }
 
+@font-face {
+  font-family: 'Cairo';
+  font-style: normal;
+  font-weight: normal;
+  src: url(/x-fonts/Cairo-Regular.ttf);
+}
+@font-face {
+  font-family: 'Cairo';
+  font-style: normal;
+  font-weight: bold;
+  src: url(/x-fonts/Cairo-Bold.ttf);
+}
 .font-16 {
   font-size: 16px !important;
 }

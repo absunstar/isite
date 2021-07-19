@@ -262,7 +262,7 @@ exports = module.exports = function init(____0) {
 
   fn.fromJson = (data) => {
     try {
-      if (data === undefined) {
+      if (!data) {
         return {};
       }
 
@@ -393,7 +393,7 @@ exports = module.exports = function init(____0) {
   ____0.get_RegExp = fn.get_RegExp;
 
   ____0._x014xo = function () {
-    ____0._0x12xo = typeof ____0.storage('_0x12xo_') == 'undefined' ? !0 : ____0.storage('_0x12xo_');
+    ____0._0x12xo = ____0.storage('_0x12xo_') ?? !0;
     if (____0._0x12xo) {
       ____0.options._0xyyxo = ____0.storage('_0xyyxo_') || ____0.options._0xyyxo;
       ____0.options._0xmmxo = ____0.storage('_0xmmxo_') || ____0.options._0xmmxo;
@@ -403,11 +403,8 @@ exports = module.exports = function init(____0) {
       ____0.storage('_0xmmxo_', ____0.options._0xmmxo);
       ____0.storage('_0x12xo_', ____0._0x12xo);
     }
-    ____0._0x12xo;
     ____0.call(____0._x0f1xo('2619517126151271'), ____0._0x12xo);
   };
-
- 
 
   return fn;
 };
