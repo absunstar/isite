@@ -169,7 +169,7 @@ function setOptions(_options, ____0) {
   _x0oo.session.collection = _x0oo.session.collection || template.session.collection;
 
   _x0oo.security = _x0oo.security || template.security;
-  _x0oo.security.enabled = _x0oo.security.enabled ?? _x0oo.security.enabled;
+  _x0oo.security.enabled = _x0oo.security.enabled ?? template.security.enabled;
   _x0oo.security.db = _x0oo.security.db || _x0oo.mongodb.db;
   _x0oo.security.users_collection = _x0oo.security.users_collection || template.security.users_collection;
   _x0oo.security.roles_collection = _x0oo.security.roles_collection || template.security.roles_collection;
