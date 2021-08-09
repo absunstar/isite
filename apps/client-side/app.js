@@ -140,7 +140,7 @@ module.exports = function (site) {
     });
   });
 
-  site.get('/api/image/:category/:name', (req, res) => {
+  site.get({name : '/api/image/:category/:name', public : true}, (req, res) => {
     res.set('Cache-Control', 'public, max-age=2592000');
     res.download(site.dir + '/../../uploads/' + req.params.category + '/images/' + req.params.name);
   });
@@ -174,7 +174,7 @@ module.exports = function (site) {
     });
   });
 
-  site.get('/api/file/:category/:name', (req, res) => {
+  site.get({ name : '/api/file/:category/:name' , public : true }, (req, res) => {
     res.download(site.dir + '/../../uploads/' + req.params.category + '/files/' + req.params.name);
   });
 };
