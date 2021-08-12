@@ -20,7 +20,7 @@ module.exports = function (site) {
     path: __dirname + '/site_files/js',
   });
   site.get({
-    name: '/x-js/all.js',
+    name: ['/x-js/all.js' ,'/x-js/site.js' ],
     path: [
       __dirname + '/site_files/js/jquery.js',
       __dirname + '/site_files/js/mustache.js',
@@ -28,6 +28,7 @@ module.exports = function (site) {
       __dirname + '/site_files/js/app.js',
       __dirname + '/site_files/js/directive.min.js',
       __dirname + '/site_files/js/site.min.js',
+      __dirname + '/site_files/js/dom-to-image.js',
     ],
   });
   site.get({

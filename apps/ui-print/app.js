@@ -8,7 +8,8 @@ module.exports = function(site){
 
         site.printList.push({
             id : id ,
-            content : req.data.content
+            content : req.data.content,
+            type : req.data.type ?? 'html'
         })
 
         res.json({
@@ -19,14 +20,20 @@ module.exports = function(site){
 
     site.get('/view/print/:id' , (req , res)=>{
         let content = ''
-
+        let type = 'html'
         site.printList.forEach(item => {
             if(item.id.toString() == req.params.id){
                 content = item.content
+                type = item.type ?? 'html'
             }
         })
         
-        let html = site.readFileSync(__dirname + '/site_files/html/index.html')
+        let html = ''
+        if(type == 'image'){
+             html = site.readFileSync(__dirname + '/site_files/html/image.html')
+        }else{
+             html = site.readFileSync(__dirname + '/site_files/html/index.html')
+        }
         html = html.replace('##data.content##' , content)
         res.htmlContent(html)
     })
