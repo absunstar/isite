@@ -7,16 +7,15 @@ site.print = site.printHTML = function (options) {
     };
   }
 
-
   if (!options.selector) {
     console.error('No Selector sets ...');
     return false;
   }
-  if(!options.ip){
-    options.ip = '127.0.0.1'
+  if (!options.ip) {
+    options.ip = '127.0.0.1';
   }
-  if(!options.port){
-    options.port = '60080'
+  if (!options.port) {
+    options.port = '60080';
   }
 
   let content = '';
@@ -89,12 +88,12 @@ site.print = site.printHTML = function (options) {
                   },
                 },
                 (res) => {
-                  console.log(res)
+                  console.log(res);
                 },
               );
             })
             .catch((err) => {
-              console.error(err)
+              console.error(err);
               error(err);
             });
         } else {
@@ -122,63 +121,72 @@ site.printAsImage = function (options, callback) {
     console.error('No Selector sets ...');
     return false;
   }
-  if(!options.ip){
-    options.ip = '127.0.0.1'
+  if (!options.ip) {
+    options.ip = '127.0.0.1';
   }
-  if(!options.port){
-    options.port = '60080'
+  if (!options.port) {
+    options.port = '60080';
   }
+  if (!options.type) {
+    options.type = 'image';
+  }
+
   let node = document.querySelector(options.selector);
   if (!node) {
     console.error('No Node Selector ');
     return false;
   }
   domtoimage
-    .toPng(node)
+    .toJpeg(node, { quality: 0.95, bgcolor: '#ffffff' })
     .then(function (dataUrl) {
       var img = new Image();
       img.src = dataUrl;
       if (callback) {
         callback(img);
       }
-      site.postData(
-        { url: '/api/print', data: { content: dataUrl, type: 'image' } },
-        (response) => {
-          if (response.done) {
-            if (options.printer) {
-              fetch(response.url, {
-                mode: 'cors',
-                method: 'get',
-              })
-                .then((res) => res.text())
-                .then((html) => {
-                  site.postData(
-                    {
-                      url: `http://${options.ip}:${options.port}/print`,
-                      data: {
-                        html: html,
-                        type: 'html',
-                        printer: options.printer,
-                        width: options.width ?? 320,
-                      },
-                    },
-                    (res) => {},
-                  );
-                })
-                .catch((err) => {
-                  error(err);
-                });
-            } else {
-              window.open(response.url);
-            }
-          }
-        },
-        (error) => {
-          console.log(error);
-        },
-      );
+      options.dataUrl = dataUrl;
+      site.printDataUrl(options);
     })
-    .catch(function (error) {
-      console.error('oops, something went wrong!', error);
+    .catch(function (erro) {
+      console.error(error);
     });
+};
+
+site.printDataUrl = function (options) {
+  site.postData(
+    { url: '/api/print', data: { content: options.dataUrl, type: options.type } },
+    (response) => {
+      if (response.done) {
+        if (options.printer) {
+          fetch(response.url, {
+            mode: 'cors',
+            method: 'get',
+          })
+            .then((res) => res.text())
+            .then((html) => {
+              site.postData(
+                {
+                  url: `http://${options.ip}:${options.port}/print`,
+                  data: {
+                    html: html,
+                    type: 'html',
+                    printer: options.printer,
+                    width: options.width ?? 320,
+                  },
+                },
+                (res) => {},
+              );
+            })
+            .catch((err) => {
+              error(err);
+            });
+        } else {
+          window.open(response.url);
+        }
+      }
+    },
+    (error) => {
+      console.log(error);
+    },
+  );
 };
