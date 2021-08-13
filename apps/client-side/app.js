@@ -20,7 +20,7 @@ module.exports = function (site) {
     path: __dirname + '/site_files/js',
   });
   site.get({
-    name: ['/x-js/all.js' ,'/x-js/site.js' ],
+    name: ['/x-js/all.js'  ],
     path: [
       __dirname + '/site_files/js/jquery.js',
       __dirname + '/site_files/js/mustache.js',
@@ -29,6 +29,7 @@ module.exports = function (site) {
       __dirname + '/site_files/js/directive.min.js',
       __dirname + '/site_files/js/site.min.js',
       __dirname + '/site_files/js/dom-to-image.js',
+      __dirname + '/site_files/js/barcode.js',
     ],
   });
   site.get({
@@ -50,7 +51,7 @@ module.exports = function (site) {
   });
 
   site.get({
-    name: '/x-css/all.css',
+    name: ['/x-css/all.css' , '/x-css/site.css'],
     parser: 'css2',
     compress: !0,
     path: [
@@ -81,36 +82,6 @@ module.exports = function (site) {
     ],
   });
 
-  site.get({
-    name: '/x-css/site.css',
-    parser: 'css2',
-    compress: !0,
-    path: [
-      __dirname + '/site_files/css/theme.css',
-      __dirname + '/site_files/css/layout.css',
-      __dirname + '/site_files/css/scrollbar.css',
-      __dirname + '/site_files/css/progress.css',
-      __dirname + '/site_files/css/treeview.css',
-      __dirname + '/site_files/css/main-menu.css',
-      __dirname + '/site_files/css/images.css',
-      __dirname + '/site_files/css/navbar.css',
-      __dirname + '/site_files/css/form.css',
-      __dirname + '/site_files/css/selector.css',
-      __dirname + '/site_files/css/checkbox.css',
-      __dirname + '/site_files/css/radio.css',
-      __dirname + '/site_files/css/modal.css',
-      __dirname + '/site_files/css/fixed_menu.css',
-      __dirname + '/site_files/css/color.css',
-      __dirname + '/site_files/css/fonts.css',
-      __dirname + '/site_files/css/effect.css',
-      __dirname + '/site_files/css/table.css',
-      __dirname + '/site_files/css/tabs.css',
-      __dirname + '/site_files/css/help.css',
-      __dirname + '/site_files/css/print.css',
-      __dirname + '/site_files/css/ui.css',
-      __dirname + '/site_files/css/tableExport.css',
-    ],
-  });
 
   site.createDir(site.dir + '/../../uploads');
 
