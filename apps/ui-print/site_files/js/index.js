@@ -150,7 +150,7 @@ site.printAsImage = function (options, callback) {
   }
 
   domtoimage
-    .toJpeg(node, { quality: 0.95, bgcolor: '#ffffff' })
+    .toJpeg(node, { quality: 1, bgcolor: '#ffffff' })
     .then(function (dataUrl) {
       var img = new Image();
       img.src = dataUrl;
