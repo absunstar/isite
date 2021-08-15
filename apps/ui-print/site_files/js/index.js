@@ -109,7 +109,17 @@ site.print = site.printHTML = function (options) {
   return !0;
 };
 
+site.printAsImageBusy = false;
+
 site.printAsImage = function (options, callback) {
+  if (site.printAsImageBusy) {
+    setTimeout(() => {
+      site.printAsImage(options, callback);
+    }, 1000);
+    return false;
+  }
+
+  site.printAsImageBusy = true;
   options = options || {};
 
   if (typeof options === 'string') {
@@ -119,6 +129,7 @@ site.printAsImage = function (options, callback) {
   }
   if (!options.selector) {
     console.error('No Selector sets ...');
+    site.printAsImageBusy = false;
     return false;
   }
   if (!options.ip) {
@@ -131,11 +142,13 @@ site.printAsImage = function (options, callback) {
     options.type = 'image';
   }
 
-  let node = typeof options.selector === 'string' ?  document.querySelector(options.selector) : options.selector ;
+  let node = typeof options.selector === 'string' ? document.querySelector(options.selector) : options.selector;
   if (!node) {
     console.error('No Node Selector ');
+    site.printAsImageBusy = false;
     return false;
   }
+
   domtoimage
     .toJpeg(node, { quality: 0.95, bgcolor: '#ffffff' })
     .then(function (dataUrl) {
@@ -146,9 +159,11 @@ site.printAsImage = function (options, callback) {
       }
       options.dataUrl = dataUrl;
       site.printDataUrl(options);
+      site.printAsImageBusy = false;
     })
     .catch(function (erro) {
       console.error(error);
+      site.printAsImageBusy = false;
     });
 };
 
