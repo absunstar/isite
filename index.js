@@ -212,6 +212,7 @@ module.exports = function init(options) {
   ____0.session = require('./lib/session.js');
 
   ____0.parser = require('./lib/parser.js');
+  require('./lib/ws.js')(____0);
 
   ____0.ips = []; // all ip send requests [ip , requets count]
 

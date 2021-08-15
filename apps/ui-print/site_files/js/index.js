@@ -131,7 +131,7 @@ site.printAsImage = function (options, callback) {
     options.type = 'image';
   }
 
-  let node = document.querySelector(options.selector);
+  let node = typeof options.selector === 'string' ?  document.querySelector(options.selector) : options.selector ;
   if (!node) {
     console.error('No Node Selector ');
     return false;

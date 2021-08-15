@@ -1,6 +1,19 @@
 .print-only {
   visibility: collapse;
 }
+
+.page-a4 {
+  width: 210mm !important;
+  height: 297mm !important;
+  padding: 2mm !important;
+  margin: 0mm !important;
+  background: white !important;
+  color: #000 !important;
+  page-break-before: always !important;
+  page-break-after: always !important;
+  page-break-inside: avoid !important;
+}
+
 .page-width-a4 {
   width: 210mm;
   padding: 2mm;

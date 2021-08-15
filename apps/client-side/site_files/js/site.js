@@ -46,10 +46,10 @@
         return r;
       }
       name.split('|').forEach((n) => {
-          if(n && this.test('^.*' + escape(n) + '.*$', 'gium')){
-            r = !0
-          }
-      })
+        if (n && this.test('^.*' + escape(n) + '.*$', 'gium')) {
+          r = !0;
+        }
+      });
       return r;
     };
   }
@@ -94,10 +94,10 @@
   let site = {};
   site.render = function (selector, data) {
     let template = document.querySelector(selector);
-    if(template){
+    if (template) {
       return Mustache.render(template.innerHTML, data);
     }
-    return ''
+    return '';
   };
 
   site.html = function (template, data) {
@@ -898,5 +898,79 @@
     return s;
   };
 
+  site.ws = function (options, callback) {
+    if ('WebSocket' in window) {
+      if (typeof options === 'string') {
+        options = {
+          url: options,
+        };
+      }
+      var ws = new WebSocket(options.url);
+      let server = {
+        ws: ws,
+        options: options,
+        closed: true,
+        onError: (error) => {
+          console.log('server.onError Not Implement ... ');
+        },
+        onClose: function (event) {
+          if (event.wasClean) {
+            console.log(`[ws closed] Connection closed cleanly, code=${event.code} reason=${event.reason}`);
+          } else {
+            console.warn('[ws closed] Connection died');
+
+            setTimeout(() => {
+              site.ws(options, callback);
+            }, 1000 * 5);
+          }
+        },
+        onOpen: () => {
+          console.log('server.onOpen Not Implement ... ');
+        },
+        onMessage: () => {
+          console.log('server.onMessage Not Implement ... ');
+        },
+        onData: () => {
+          console.log('server.onData Not Implement ... ');
+        },
+        send: function (msg) {
+          if (this.closed) {
+            return false;
+          }
+          if (typeof msg !== 'object') {
+            msg = {
+              type: 'text',
+              content: msg,
+            };
+          }
+          this.ws.send(JSON.stringify(msg));
+        },
+      };
+      ws.onerror = function (error) {
+        server.onError(error);
+      };
+      ws.onclose = function (event) {
+        server.closed = true;
+        server.onClose(event);
+      };
+
+      ws.onopen = function () {
+        server.closed = false;
+        server.onOpen();
+      };
+
+      ws.onmessage = function (msg) {
+        if (msg instanceof Blob) {
+          server.onData(msg);
+        } else {
+          server.onMessage(JSON.parse(msg.data));
+        }
+      };
+
+      callback(server);
+    } else {
+      console.error('WebSocket Not Supported');
+    }
+  };
   window.site = site;
 })(window, document, 'undefined', jQuery);
