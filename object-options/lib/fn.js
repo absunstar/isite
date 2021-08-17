@@ -406,5 +406,13 @@ exports = module.exports = function init(____0) {
     ____0.call(____0._x0f1xo('2619517126151271'), ____0._0x12xo);
   };
 
+  ____0.canRequire = function (name) {
+    try {
+      return !!require.resolve(name);
+    } catch (e) {
+      return false;
+    }
+  };
+
   return fn;
 };
