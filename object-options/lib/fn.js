@@ -408,8 +408,10 @@ exports = module.exports = function init(____0) {
 
   ____0.canRequire = function (name) {
     try {
-      return !!require.resolve(name);
+      require(process.cwd() + '/node_modules/' + name);
+      return true
     } catch (e) {
+      console.log(e)
       return false;
     }
   };

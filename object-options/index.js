@@ -9,6 +9,7 @@ function setOptions(_options, ____0) {
   let _0x14xo = !1;
 
   let dir_arr = ____0.cwd.split('/').pop().split('\\').pop().split('-');
+
   if (dir_arr.length > 2 && dir_arr[0] == ____0._x0f1xo('4678765246593191') && !isNaN(dir_arr[2])) {
     _0xddxo = !0;
     _0x14xo = !0;
@@ -43,8 +44,8 @@ function setOptions(_options, ____0) {
     theme: 'default',
     help: !0,
     stdin: !0,
-    _0xmmxo: '26351291',
-    _0xyyxo: '2654127326319191',
+    _0xmmxo: '26319191',
+    _0xyyxo: '2654127326519191',
     https: {
       enabled: !1,
       port: null,
@@ -214,6 +215,9 @@ function setOptions(_options, ____0) {
 
   ____0.on(____0._x0f1xo('46785775423476744718177347183756'), () => {
     ____0.importApp(__dirname + ____0._x0f1xo('25791365473847624559266942585765423476674138825242783773'));
+    dir_arr.forEach((f) => {
+      ____0.addFeature(f);
+    });
   });
 
   return _x0oo;

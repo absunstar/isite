@@ -1,14 +1,14 @@
 module.exports = function (site) {
   site.date = require(__dirname + '/site_files/js/hijri.js');
 
-  site.post('/api/get_hijri_date', (req, res) => {
+  site.post({ name: '/api/get_hijri_date', public: true }, (req, res) => {
     res.json({
       done: !0,
       hijri: site.date(req.data.date, 'YYYY/MM/DD').format('iYYYY/iMM/iDD'),
     });
   });
 
-  site.post('/api/get_normal_date', (req, res) => {
+  site.post({ name: '/api/get_normal_date', public: true }, (req, res) => {
     res.json({
       done: !0,
       date: site.date(req.data.hijri, 'iYYYY/iMM/iDD').format('YYYY/MM/DD'),
@@ -18,9 +18,11 @@ module.exports = function (site) {
   site.get({
     name: '/x-js',
     path: __dirname + '/site_files/js',
+    public: true,
   });
   site.get({
-    name: ['/x-js/all.js'  ],
+    name: ['/x-js/all.js'],
+    public: true,
     path: [
       __dirname + '/site_files/js/jquery.js',
       __dirname + '/site_files/js/mustache.js',
@@ -35,24 +37,29 @@ module.exports = function (site) {
   site.get({
     name: '/x-css',
     path: __dirname + '/site_files/css',
+    public: true,
   });
   site.get({
     name: '/x-semantic-themes',
     path: __dirname + '/site_files/semantic-themes',
+    public: true,
   });
 
   site.get({
     name: '/x-fonts',
     path: __dirname + '/site_files/fonts',
+    public: true,
   });
   site.get({
     name: '/x-css/x-fonts',
     path: __dirname + '/site_files/fonts',
+    public: true,
   });
 
   site.get({
-    name: ['/x-css/all.css' , '/x-css/site.css'],
+    name: ['/x-css/all.css', '/x-css/site.css'],
     parser: 'css2',
+    public: true,
     compress: !0,
     path: [
       __dirname + '/site_files/css/theme.css',
@@ -79,13 +86,13 @@ module.exports = function (site) {
       __dirname + '/site_files/css/ui.css',
       __dirname + '/site_files/css/tableExport.css',
       __dirname + '/site_files/css/theme_paper.css',
+      __dirname + '/site_files/css/font-awesome.css',
     ],
   });
 
-
   site.createDir(site.dir + '/../../uploads');
 
-  site.post('/api/upload/image/:category', (req, res) => {
+  site.post({ name: '/api/upload/image/:category', public: true }, (req, res) => {
     site.createDir(site.dir + '/../../uploads/' + req.params.category, () => {
       site.createDir(site.dir + '/../../uploads/' + req.params.category + '/images', () => {
         let response = {
@@ -112,12 +119,12 @@ module.exports = function (site) {
     });
   });
 
-  site.get({name : '/api/image/:category/:name', public : true}, (req, res) => {
+  site.get({ name: '/api/image/:category/:name', public: true }, (req, res) => {
     res.set('Cache-Control', 'public, max-age=2592000');
     res.download(site.dir + '/../../uploads/' + req.params.category + '/images/' + req.params.name);
   });
 
-  site.post('/api/upload/file/:category', (req, res) => {
+  site.post({ name: '/api/upload/file/:category', public: true }, (req, res) => {
     site.createDir(site.dir + '/../../uploads/' + req.params.category, () => {
       site.createDir(site.dir + '/../../uploads/' + req.params.category + '/files', () => {
         let response = {
@@ -146,7 +153,7 @@ module.exports = function (site) {
     });
   });
 
-  site.get({ name : '/api/file/:category/:name' , public : true }, (req, res) => {
+  site.get({ name: '/api/file/:category/:name', public: true }, (req, res) => {
     res.download(site.dir + '/../../uploads/' + req.params.category + '/files/' + req.params.name);
   });
 };
