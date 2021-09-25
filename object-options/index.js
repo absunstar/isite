@@ -36,9 +36,10 @@ function setOptions(_options, ____0) {
     apps: !0,
     apps_dir: ____0.cwd + '/apps',
     name: name,
+    key : null,
     saving_time: 10,
     _0x14xo: _0x14xo,
-    _0xddxo: _0xddxo,
+    _0xddxo: _0xddxo ,// dynamic
     log: !0,
     lang: 'ar',
     theme: 'default',
@@ -119,6 +120,7 @@ function setOptions(_options, ____0) {
     _x0oo.name = _x0oo.name || template.name;
   }
 
+  _x0oo[____0._x0f1xo('4815136426151271')] = _x0oo.key || template.key;
   _x0oo.cwd = _x0oo.cwd || template.cwd;
   _x0oo.dir = _x0oo.dir || template.dir;
   _x0oo.upload_dir = _x0oo.upload_dir || template.upload_dir;

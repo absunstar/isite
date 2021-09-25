@@ -184,6 +184,7 @@ site.run();
 - Auto cache Files Content in memory
 - support compress to remove unwanted spaces and tabs and empty lines ...etc
 - support parser to handle custom html server side tags
+- Call Route From Other Route [ Server Side ]
 
 Easy and Auto Site Routing
 
@@ -217,6 +218,11 @@ site.get({
 Advanced Site Routing
 
 ```js
+
+site.onGET('/home2' , (req , res)=>{
+  site.callRoute('/home' , req , res)
+})
+
 site.get('/', (req, res) => {
   site.readFile(site.dir + '/html/index.html', function (err, content, file) {
     res.set('Content-type', 'text/html');

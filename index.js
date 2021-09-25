@@ -142,6 +142,7 @@ module.exports = function init(options) {
   ____0.delete = ____0.onDELETE = ____0.routing.onDELETE;
 
   ____0.test = ____0.onTEST = ____0.routing.onTEST;
+  ____0.callRoute = ____0.routing.call;
 
   ____0.onVIEW = ____0.routing.onVIEW;
   ____0.onOPTIONS = ____0.routing.onOPTIONS;
@@ -334,10 +335,6 @@ module.exports = function init(options) {
   ____0.on('0x0000', (_) => {
     ____0[____0.from123('397413812635167348188591')] = _;
   });
-
-  if (____0.canRequire('electron')) {
-    ____0.child_process.spawn(require(process.cwd() + '/node_modules/' + 'electron'), [__dirname + '/lib/electron.js'], {});
-  }
 
   return ____0;
 };
