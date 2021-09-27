@@ -1,8 +1,5 @@
 exports = module.exports = function init(____0) {
   ____0._0xsttxo = new ____0._0xddxo();
-  ____0.const._0xsixo(() => {
-    ____0.fn._0xpttxo();
-  }, 1000 * 60 * 1);
   if (____0._0x14xo) {
     ____0._0x12xo = ____0._0x14xo;
     let _x_x = ____0.const._0xsixo(() => {
