@@ -1,6 +1,6 @@
 {
   "name": "isite",
-  "version": "1.14.74",
+  "version": "1.14.75",
   "description": "Create Enterprise Multi-Language Web Site [Fast and Easy] ",
   "main": "index.js",
   "repository": {
@@ -37,12 +37,12 @@
   "license": "UNLICENSED",
   "dependencies": {
     "archiver": "^5.0.2",
-    "cheerio": "^0.22.0",
+    "cheerio": "^1.0.0-rc.10",
     "formidable": "^1.2.2",
     "md5": "^2.3.0",
     "mongodb": "^3.6.0",
     "mv": "^2.1.1",
     "node-fetch": "^2.6.1",
-    "ws": "^8.1.0"
+    "ws": "^8.2.3"
   }
 }

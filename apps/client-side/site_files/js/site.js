@@ -355,7 +355,7 @@
     }
     return n;
   };
-  site.fixed = 3;
+  site.fixed = 2;
   site.to_number = site.toNumber = function (_num, fixed) {
     let _fixed = fixed || site.fixed;
     let n = 0;
