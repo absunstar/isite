@@ -3,6 +3,7 @@ module.exports = function init(options) {
 
   ____0.package = require(__dirname + '/package.json');
 
+  ____0.lib = {};
   ____0._0x13xo = !0;
   ____0.strings = [];
   ____0.http = require('http');
