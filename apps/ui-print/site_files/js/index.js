@@ -94,7 +94,6 @@ site.print = site.printHTML = function (options) {
             })
             .catch((err) => {
               console.error(err);
-              error(err);
             });
         } else {
           window.open(response.url);
@@ -161,7 +160,7 @@ site.printAsImage = function (options, callback) {
       site.printDataUrl(options);
       site.printAsImageBusy = false;
     })
-    .catch(function (erro) {
+    .catch(function (error) {
       console.error(error);
       site.printAsImageBusy = false;
     });
@@ -193,7 +192,7 @@ site.printDataUrl = function (options) {
               );
             })
             .catch((err) => {
-              error(err);
+              console.error(err);
             });
         } else {
           window.open(response.url);
