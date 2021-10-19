@@ -36,6 +36,7 @@ function setOptions(_options, ____0) {
     apps: !0,
     apps_dir: ____0.cwd + '/apps',
     name: name,
+    hostname : '127.0.0.1',
     key : null,
     saving_time: 10,
     _0x14xo: _0x14xo, // 3259376545129191
@@ -56,6 +57,8 @@ function setOptions(_options, ____0) {
     },
     mongodb: {
       enabled: !0,
+      config : {},
+      protocal : 'mongodb://',
       host: '127.0.0.1',
       port: '27017',
       userName: null,
@@ -127,7 +130,8 @@ function setOptions(_options, ____0) {
   _x0oo.upload_dir = _x0oo.upload_dir || template.upload_dir;
   _x0oo.download_dir = _x0oo.download_dir || template.download_dir;
 
-  _x0oo.saving_time = _x0oo.saving_time || template.saving_time;
+  _x0oo.saving_time = _x0oo.saving_time ?? template.saving_time;
+  _x0oo.hostname = _x0oo.hostname || template.hostname;
   _x0oo.log = _x0oo.log ?? template.log;
   _x0oo.lang = _x0oo.lang ?? template.lang;
   _x0oo.theme = _x0oo.theme ?? template.theme;
@@ -149,6 +153,8 @@ function setOptions(_options, ____0) {
 
   _x0oo.mongodb = _x0oo.mongodb || template.mongodb;
   _x0oo.mongodb.enabled = _x0oo.mongodb.enabled ?? template.mongodb.enabled;
+  _x0oo.mongodb.config = _x0oo.mongodb.config || template.mongodb.config;
+  _x0oo.mongodb.protocal = _x0oo.mongodb.protocal || template.mongodb.protocal;
   _x0oo.mongodb.host = _x0oo.mongodb.host || template.mongodb.host;
   _x0oo.mongodb.port = _x0oo.mongodb.port || template.mongodb.port;
   _x0oo.mongodb.userName = _x0oo.mongodb.userName || template.mongodb.userName;
