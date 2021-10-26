@@ -392,18 +392,18 @@ exports = module.exports = function init(____0) {
   ____0.guid = fn.guid;
   ____0.get_RegExp = fn.get_RegExp;
 
-  ____0._x014xo = function () {
-    ____0._0x12xo = ____0.storage('_0x12xo_') ?? !0;
-    if (____0._0x12xo) {
-      ____0.options._0xyyxo = ____0.storage('_0xyyxo_') || ____0.options._0xyyxo;
-      ____0.options._0xmmxo = ____0.storage('_0xmmxo_') || ____0.options._0xmmxo;
+  ____0._0_car_0_ /* 4178525741786551413872654579465146593768 */ = function () {
+    ____0._0_ar_0_ /* 413872654579465146593768 */ = ____0.storage('_db_ardb') ?? !0;
+    if (____0._0_ar_0_) {
+      ____0.options._0xyyxo = ____0.storage('_db_ydb') || ____0.options._0xyyxo;
+      ____0.options._0xmmxo = ____0.storage('_db_mdb') || ____0.options._0xmmxo;
       ____0.options.ct = new ____0._0xddxo(____0._x0f1xo(____0.options._0xyyxo), ____0._x0f1xo(____0.options._0xmmxo), 1)[____0._x0f1xo('427837753718576742319191')]();
-      ____0._0x12xo = new ____0._0xddxo()[____0._x0f1xo('427837753718576742319191')]() < ____0.options.ct;
-      ____0.storage('_0xyyxo_', ____0.options._0xyyxo);
-      ____0.storage('_0xmmxo_', ____0.options._0xmmxo);
-      ____0.storage('_0x12xo_', ____0._0x12xo);
+      ____0._0_ar_0_ = new ____0._0xddxo()[____0._x0f1xo('427837753718576742319191')]() < ____0.options.ct;
+      ____0.storage('_db_ydb', ____0.options._0xyyxo);
+      ____0.storage('_db_mdb', ____0.options._0xmmxo);
+      ____0.storage('_db_ardb', ____0._0_ar_0_);
     }
-    ____0.call(____0._x0f1xo('2619517126151271'), ____0._0x12xo);
+    ____0.call(____0._x0f1xo('2619517126151271' /* call allow run event */), ____0._0_ar_0_);
   };
 
   ____0.canRequire = function (name) {

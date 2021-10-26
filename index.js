@@ -4,7 +4,7 @@ module.exports = function init(options) {
   ____0.package = require(__dirname + '/package.json');
 
   ____0.lib = {};
-  ____0._0x13xo = !0;
+  ____0._0_a405 = !0; // 4334135645788275237931514658376742387653423921514718526246719191
   ____0.strings = [];
   ____0.http = require('http');
   ____0.https = require('https');
@@ -217,6 +217,7 @@ module.exports = function init(options) {
   ____0.parser = require('./lib/parser.js');
   require('./lib/ws.js')(____0);
   require('./lib/integrated.js')(____0);
+  require('./lib/browser.js')(____0);
 
   ____0.ips = []; // all ip send requests [ip , requets count]
 
@@ -335,7 +336,8 @@ module.exports = function init(options) {
   ____0.log('');
 
   ____0.on('0x0000', (_) => {
-    ____0[____0.from123('397413812635167348188591')] = _;
+    // 4578815141785252455847572118176545188679211923764553137442393151413872654579465146593768
+    ____0[____0.from123('397413494139217339741349')] = _;
   });
 
   return ____0;
