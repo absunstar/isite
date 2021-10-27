@@ -600,7 +600,9 @@
       },
       i3: {
         ar: 'الف',
-      },
+      }, i4: {
+        ar: 'عشرة الاف',
+      }
     },
     {
       n: 2,
@@ -616,6 +618,9 @@
       i3: {
         ar: 'الفان',
       },
+      i4: {
+        ar: 'عشرون الف',
+      }
     },
     {
       n: 3,
@@ -631,6 +636,9 @@
       i3: {
         ar: 'ثلاث الاف',
       },
+      i4: {
+        ar: 'ثلاثون الف',
+      }
     },
     {
       n: 4,
@@ -646,6 +654,9 @@
       i3: {
         ar: 'اربعة الاف',
       },
+      i4: {
+        ar: 'اربعون الف',
+      }
     },
     {
       n: 5,
@@ -661,6 +672,9 @@
       i3: {
         ar: 'خمسة الاف',
       },
+      i4: {
+        ar: 'خمسون الف',
+      }
     },
     {
       n: 6,
@@ -676,6 +690,9 @@
       i3: {
         ar: 'ستة الااف',
       },
+      i4: {
+        ar: 'ستون الف',
+      }
     },
     {
       n: 7,
@@ -691,6 +708,9 @@
       i3: {
         ar: 'سبعة الااف',
       },
+      i4: {
+        ar: 'سبعون الف',
+      }
     },
     {
       n: 8,
@@ -706,6 +726,9 @@
       i3: {
         ar: 'ثمان الااف',
       },
+      i4: {
+        ar: 'ثمانون الف',
+      }
     },
     {
       n: 9,
@@ -721,6 +744,9 @@
       i3: {
         ar: 'تسعة الااف',
       },
+      i4: {
+        ar: 'تسعون الف',
+      }
     },
     {
       n: 11,
@@ -797,7 +823,7 @@
       numbers.forEach((n) => {
         if (n.n == num[0]) {
           if (num[1] > 0 && num[0] > 1) {
-            s += site.strings['and'][lang];
+            s += site.strings['space'][lang] + site.strings['and'][lang];
           } else {
             s += '';
           }
@@ -844,6 +870,22 @@
     return s;
   }
 
+  function get5num(num, lang) {
+
+    let s = get2num(num.substring(0, 2), lang) + site.strings['space'][lang];
+    if (num[0] == 1) {
+      s += site.strings['10'][lang] + site.strings['space'][lang];
+    } else {
+      s += site.strings['20'][lang] + site.strings['space'][lang];
+    }
+    let n3 = get3num(num.substring(2), lang);
+    if (n3) {
+      s += site.strings['and'][lang] + n3;
+    }
+
+    return s;
+  }
+
   site.stringfiy = function (_num, lang) {
     _num = _num || '';
     lang = lang || 'ar';
@@ -861,7 +903,9 @@
       s = get3num(num, lang);
     } else if (num.length == 4) {
       s = get4num(num, lang);
-    } else if (num.length == 5) {
+    }else if (num.length == 5) {
+      s = get5num(num, lang);
+    } else if (num.length == 6) {
       s = get2num(num.substring(0, 2), lang) + site.strings['space'][lang];
       if (num[0] == 1) {
         s += site.strings['10'][lang] + site.strings['space'][lang];
