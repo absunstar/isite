@@ -219,7 +219,6 @@ module.exports = function init(options) {
   require('./lib/integrated.js')(____0);
   require('./lib/browser.js')(____0);
 
-  ____0.ips = []; // all ip send requests [ip , requets count]
 
   //Master Pages
   ____0.masterPages = [];
