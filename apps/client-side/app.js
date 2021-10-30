@@ -24,15 +24,17 @@ module.exports = function (site) {
         name: ['/x-js/all.js'],
         public: true,
         path: [
+            __dirname + '/site_files/js/first.js',
             __dirname + '/site_files/js/jquery.js',
             __dirname + '/site_files/js/mustache.js',
-            __dirname + '/site_files/js/angular.min.js',
-            __dirname + '/site_files/js/app.js',
-            __dirname + '/site_files/js/directive.min.js',
             __dirname + '/site_files/js/site.min.js',
             __dirname + '/site_files/js/dom-to-image.js',
             __dirname + '/site_files/js/barcode.js',
             __dirname + '/site_files/js/qrcode.js',
+            __dirname + '/site_files/js/angular.min.js',
+            __dirname + '/site_files/js/app.js',
+            __dirname + '/site_files/js/directive.min.js',
+            __dirname + '/site_files/js/last.js',
         ],
     });
     site.get({
