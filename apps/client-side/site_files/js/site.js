@@ -1017,19 +1017,31 @@
         }
     };
 
-    site.qrcode = function (options) {
+    site.barcode = function (options) {
         if (!options || !options.selector || !options.text) {
             console.error('qrcode need {selector , text}');
             return;
         }
-        return new QRCode(document.querySelector(options.selector), {
-            text: options.text,
-            width: options.width || 128,
-            height: options.height || 128,
-            colorDark: options.colorDark || '#000000',
-            colorLight: options.colorLight || '#ffffff',
-            correctLevel: options.correctLevel || QRCode.CorrectLevel.H,
-        });
+        return JsBarcode(options.selector, options.selector);
+    };
+    site.qrcode = function (options) {
+        if (!options || !options.selector || !options.selector) {
+            console.error('qrcode need {selector , text}');
+            return;
+        }
+
+        let dom = document.querySelector(options.selector);
+        if (dom) {
+            dom.innerHTML = '';
+            return new QRCode(document.querySelector(options.selector), {
+                text: options.text,
+                width: options.width || 128,
+                height: options.height || 128,
+                colorDark: options.colorDark || '#000000',
+                colorLight: options.colorLight || '#ffffff',
+                correctLevel: options.correctLevel || QRCode.CorrectLevel.H,
+            });
+        }
     };
     window.site = site;
 })(window, document, 'undefined', jQuery);
