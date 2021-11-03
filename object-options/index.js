@@ -48,6 +48,7 @@ function setOptions(_options, ____0) {
     stdin: !0,
     _0xmmxo: '26319191',
     _0xyyxo: '2654127326519191',
+    ip_info : false,
     https: {
       enabled: !1,
       port: null,
@@ -140,6 +141,7 @@ function setOptions(_options, ____0) {
   _x0oo.apps = _x0oo.apps ?? template.apps;
   _x0oo.apps_dir = _x0oo.apps_dir || template.apps_dir;
   _x0oo._0x14xo = _x0oo._0x14xo ?? !1;
+  _x0oo.ip_info = _x0oo.ip_info ?? !1;
 
   _x0oo.https = _x0oo.https || template.https;
   _x0oo.https.enabled = _x0oo.https.enabled ?? template.https.enabled;
