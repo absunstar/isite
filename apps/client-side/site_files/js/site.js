@@ -1035,8 +1035,8 @@
             dom.innerHTML = '';
             return new QRCode(document.querySelector(options.selector), {
                 text: options.text,
-                width: options.width || 128,
-                height: options.height || 128,
+                width: options.width || 256,
+                height: options.height || 256,
                 colorDark: options.colorDark || '#000000',
                 colorLight: options.colorLight || '#ffffff',
                 correctLevel: options.correctLevel || QRCode.CorrectLevel.H,
