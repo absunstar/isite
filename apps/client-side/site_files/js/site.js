@@ -1025,7 +1025,7 @@
         return JsBarcode(options.selector, options.selector);
     };
     site.qrcode = function (options) {
-        if (!options || !options.selector || !options.selector) {
+        if (!options || !options.selector || !options.text) {
             console.error('qrcode need {selector , text}');
             return;
         }
@@ -1033,6 +1033,11 @@
         let dom = document.querySelector(options.selector);
         if (dom) {
             dom.innerHTML = '';
+            console.log(options.text, options.text.length);
+            if (192 <= options.text.length <= 217) {
+                options.text = options.text.padEnd(220);
+            }
+
             return new QRCode(document.querySelector(options.selector), {
                 text: options.text,
                 width: options.width || 256,
