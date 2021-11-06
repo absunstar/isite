@@ -104,7 +104,7 @@ site = isite({
   },
   mongodb: {
     enabled: !0,
-    host: '127.0.0.1',
+    host: 'localhost',
     port: '27017',
     userName: null,
     password: null,
@@ -454,7 +454,7 @@ site.onWS('/chat', (client) => {
 ```
 
 ```js
-site.ws('ws://127.0.0.1/chat', (server) => {
+site.ws('ws://localhost/chat', (server) => {
   window.server = server;
   server.onOpen = () => {
     server.send({ type: 'accessToken', content: '##session.accessToken##' });
@@ -466,7 +466,7 @@ site.ws('ws://127.0.0.1/chat', (server) => {
 
 // or
 
-var ws = new WebSocket('ws://127.0.0.1/chat');
+var ws = new WebSocket('ws://localhost/chat');
 
 ws.onerror = function (error) {};
 ws.onclose = function () {};

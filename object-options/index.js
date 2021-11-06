@@ -36,7 +36,7 @@ function setOptions(_options, ____0) {
     apps: !0,
     apps_dir: ____0.cwd + '/apps',
     name: name,
-    hostname : '127.0.0.1',
+    hostname : 'localhost',
     key : null,
     saving_time: 10,
     _0x14xo: _0x14xo, // 3259376545129191
@@ -60,7 +60,7 @@ function setOptions(_options, ____0) {
       enabled: !0,
       config : {},
       protocal : 'mongodb://',
-      host: '127.0.0.1',
+      host: 'localhost',
       port: '27017',
       userName: null,
       password: null,

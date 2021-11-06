@@ -12,7 +12,7 @@ site.print = site.printHTML = function (options) {
     return false;
   }
   if (!options.ip) {
-    options.ip = '127.0.0.1';
+    options.ip = 'localhost';
   }
   if (!options.port) {
     options.port = '60080';
@@ -132,7 +132,7 @@ site.printAsImage = function (options, callback) {
     return false;
   }
   if (!options.ip) {
-    options.ip = '127.0.0.1';
+    options.ip = 'localhost';
   }
   if (!options.port) {
     options.port = '60080';
