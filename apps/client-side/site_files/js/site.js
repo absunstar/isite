@@ -1033,7 +1033,6 @@
         let dom = document.querySelector(options.selector);
         if (dom) {
             dom.innerHTML = '';
-            console.log(options.text, options.text.length);
             if (192 <= options.text.length <= 217) {
                 options.text = options.text.padEnd(220);
             }
