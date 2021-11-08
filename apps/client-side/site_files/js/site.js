@@ -274,9 +274,12 @@
             };
         }
 
+        let body = JSON.stringify(op.data);
+
         op.headers = op.headers || {
             Accept: 'application/json',
             'Content-Type': 'application/json',
+            'Content-Length': body.length.toString(),
         };
 
         op.data = op.data || {
@@ -287,10 +290,12 @@
             mode: 'cors',
             method: 'POST',
             headers: op.headers,
-            body: JSON.stringify(op.data),
-            redirect: 'follow'
+            body: body,
+            redirect: 'follow',
         })
-            .then((res) => res.json())
+            .then((res) => {
+                res.ok ? res.json() : Promise.reject(undefined);
+            })
             .then((data) => {
                 callback(data);
             })
