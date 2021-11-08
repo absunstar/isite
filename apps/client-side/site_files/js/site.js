@@ -288,6 +288,7 @@
             method: 'POST',
             headers: op.headers,
             body: JSON.stringify(op.data),
+            redirect: 'follow'
         })
             .then((res) => res.json())
             .then((data) => {

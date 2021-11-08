@@ -1,206 +1,209 @@
 site.print = site.printHTML = function (options) {
-  options = options || {};
+    options = options || {};
 
-  if (typeof options === 'string') {
-    options = {
-      selector: options,
-    };
-  }
+    if (typeof options === 'string') {
+        options = {
+            selector: options,
+        };
+    }
 
-  if (!options.selector) {
-    console.error('No Selector sets ...');
-    return false;
-  }
-  if (!options.ip) {
-    options.ip = 'localhost';
-  }
-  if (!options.port) {
-    options.port = '60080';
-  }
+    if (!options.selector) {
+        console.error('No Selector sets ...');
+        return false;
+    }
+    if (!options.ip) {
+        options.ip = 'localhost';
+    }
+    if (!options.port) {
+        options.port = '60080';
+    }
 
-  let content = '';
-  window.document.querySelectorAll('link[rel=stylesheet]').forEach((l) => {
-    content += l.outerHTML;
-  });
-
-  window.document.querySelectorAll('style').forEach((s) => {
-    content += s.outerHTML;
-  });
-
-  if (options.links) {
-    options.links.forEach((link) => {
-      content += '<link rel="stylesheet" href="' + link + '" type="text/css" >';
+    let content = '';
+    window.document.querySelectorAll('link[rel=stylesheet]').forEach((l) => {
+        content += l.outerHTML;
     });
-  }
 
-  if (options.preappends) {
-    options.preappends.forEach((el) => {
-      el = window.document.querySelector(el);
-      if (el) {
+    window.document.querySelectorAll('style').forEach((s) => {
+        content += s.outerHTML;
+    });
+
+    if (options.links) {
+        options.links.forEach((link) => {
+            content += '<link rel="stylesheet" href="' + link + '" type="text/css" >';
+        });
+    }
+
+    if (options.preappends) {
+        options.preappends.forEach((el) => {
+            el = window.document.querySelector(el);
+            if (el) {
+                content += el.outerHTML;
+            }
+        });
+    }
+
+    document.querySelectorAll(options.selector + ' input').forEach((el) => {
+        el.setAttribute('value', el.value);
+    });
+
+    document.querySelectorAll(options.selector + ' textarea').forEach((el) => {
+        el.innerText = el.value;
+    });
+
+    document.querySelectorAll(options.selector).forEach((el) => {
+        let display = el.style.display;
+        el.style.display = 'block';
         content += el.outerHTML;
-      }
+        el.style.display = display;
     });
-  }
 
-  document.querySelectorAll(options.selector + ' input').forEach((el) => {
-    el.setAttribute('value', el.value);
-  });
+    if (options.appends) {
+        options.appends.forEach((el) => {
+            el = window.document.querySelector(el);
+            if (el) {
+                content += el.outerHTML;
+            }
+        });
+    }
 
-  document.querySelectorAll(options.selector + ' textarea').forEach((el) => {
-    el.innerText = el.value;
-  });
+    site.postData(
+        { url: '/api/print', data: { content: content } },
+        (response) => {
+            if (response.done) {
+                if (options.printer) {
+                    fetch(response.url, {
+                        mode: 'cors',
+                        method: 'get',
+                    })
+                        .then((res) => res.text())
+                        .then((html) => {
+                            site.postData(
+                                {
+                                    url: `http://${options.ip}:${options.port}/print`,
+                                    data: {
+                                        html: html,
+                                        type: 'html',
+                                        printer: options.printer,
+                                        width: options.width ?? 320,
+                                    },
+                                },
+                                (res) => {
+                                    console.log(res);
+                                },
+                                (err) => {
+                                    console.log(res);
+                                },
+                            );
+                        })
+                        .catch((err) => {
+                            console.error(err);
+                        });
+                } else {
+                    window.open(response.url);
+                }
+            }
+        },
+        (error) => {
+            console.log(error);
+        },
+    );
 
-  document.querySelectorAll(options.selector).forEach((el) => {
-    let display = el.style.display;
-    el.style.display = 'block';
-    content += el.outerHTML;
-    el.style.display = display;
-  });
-
-  if (options.appends) {
-    options.appends.forEach((el) => {
-      el = window.document.querySelector(el);
-      if (el) {
-        content += el.outerHTML;
-      }
-    });
-  }
-
-  site.postData(
-    { url: '/api/print', data: { content: content } },
-    (response) => {
-      if (response.done) {
-        if (options.printer) {
-          fetch(response.url, {
-            mode: 'cors',
-            method: 'get',
-          })
-            .then((res) => res.text())
-            .then((html) => {
-              site.postData(
-                {
-                  url: `http://${options.ip}:${options.port}/print`,
-                  data: {
-                    html: html,
-                    type: 'html',
-                    printer: options.printer,
-                    width: options.width ?? 320,
-                  },
-                },
-                (res) => {
-                  console.log(res);
-                },
-              );
-            })
-            .catch((err) => {
-              console.error(err);
-            });
-        } else {
-          window.open(response.url);
-        }
-      }
-    },
-    (error) => {
-      console.log(error);
-    },
-  );
-
-  return !0;
+    return !0;
 };
 
 site.printAsImageBusy = false;
 
 site.printAsImage = function (options, callback) {
-  if (site.printAsImageBusy) {
-    setTimeout(() => {
-      site.printAsImage(options, callback);
-    }, 1000);
-    return false;
-  }
+    if (site.printAsImageBusy) {
+        setTimeout(() => {
+            site.printAsImage(options, callback);
+        }, 1000);
+        return false;
+    }
 
-  site.printAsImageBusy = true;
-  options = options || {};
+    site.printAsImageBusy = true;
+    options = options || {};
 
-  if (typeof options === 'string') {
-    options = {
-      selector: options,
-    };
-  }
-  if (!options.selector) {
-    console.error('No Selector sets ...');
-    site.printAsImageBusy = false;
-    return false;
-  }
-  if (!options.ip) {
-    options.ip = 'localhost';
-  }
-  if (!options.port) {
-    options.port = '60080';
-  }
-  if (!options.type) {
-    options.type = 'image';
-  }
+    if (typeof options === 'string') {
+        options = {
+            selector: options,
+        };
+    }
+    if (!options.selector) {
+        console.error('No Selector sets ...');
+        site.printAsImageBusy = false;
+        return false;
+    }
+    if (!options.ip) {
+        options.ip = 'localhost';
+    }
+    if (!options.port) {
+        options.port = '60080';
+    }
+    if (!options.type) {
+        options.type = 'image';
+    }
 
-  let node = typeof options.selector === 'string' ? document.querySelector(options.selector) : options.selector;
-  if (!node) {
-    console.error('No Node Selector ');
-    site.printAsImageBusy = false;
-    return false;
-  }
+    let node = typeof options.selector === 'string' ? document.querySelector(options.selector) : options.selector;
+    if (!node) {
+        console.error('No Node Selector ');
+        site.printAsImageBusy = false;
+        return false;
+    }
 
-  domtoimage
-    .toJpeg(node, { quality: 1, bgcolor: '#ffffff' })
-    .then(function (dataUrl) {
-      var img = new Image();
-      img.src = dataUrl;
-      if (callback) {
-        callback(img);
-      }
-      options.dataUrl = dataUrl;
-      site.printDataUrl(options);
-      site.printAsImageBusy = false;
-    })
-    .catch(function (error) {
-      console.error(error);
-      site.printAsImageBusy = false;
-    });
+    domtoimage
+        .toJpeg(node, { quality: 1, bgcolor: '#ffffff' })
+        .then(function (dataUrl) {
+            var img = new Image();
+            img.src = dataUrl;
+            if (callback) {
+                callback(img);
+            }
+            options.dataUrl = dataUrl;
+            site.printDataUrl(options);
+            site.printAsImageBusy = false;
+        })
+        .catch(function (error) {
+            console.error(error);
+            site.printAsImageBusy = false;
+        });
 };
 
 site.printDataUrl = function (options) {
-  site.postData(
-    { url: '/api/print', data: { content: options.dataUrl, type: options.type } },
-    (response) => {
-      if (response.done) {
-        if (options.printer) {
-          fetch(response.url, {
-            mode: 'cors',
-            method: 'get',
-          })
-            .then((res) => res.text())
-            .then((html) => {
-              site.postData(
-                {
-                  url: `http://${options.ip}:${options.port}/print`,
-                  data: {
-                    html: html,
-                    type: 'html',
-                    printer: options.printer,
-                    width: options.width ?? 320,
-                  },
-                },
-                (res) => {},
-              );
-            })
-            .catch((err) => {
-              console.error(err);
-            });
-        } else {
-          window.open(response.url);
-        }
-      }
-    },
-    (error) => {
-      console.log(error);
-    },
-  );
+    site.postData(
+        { url: '/api/print', data: { content: options.dataUrl, type: options.type } },
+        (response) => {
+            if (response.done) {
+                if (options.printer) {
+                    fetch(response.url, {
+                        mode: 'cors',
+                        method: 'get',
+                    })
+                        .then((res) => res.text())
+                        .then((html) => {
+                            site.postData(
+                                {
+                                    url: `http://${options.ip}:${options.port}/print`,
+                                    data: {
+                                        html: html,
+                                        type: 'html',
+                                        printer: options.printer,
+                                        width: options.width ?? 320,
+                                    },
+                                },
+                                (res) => {},
+                            );
+                        })
+                        .catch((err) => {
+                            console.error(err);
+                        });
+                } else {
+                    window.open(response.url);
+                }
+            }
+        },
+        (error) => {
+            console.log(error);
+        },
+    );
 };
