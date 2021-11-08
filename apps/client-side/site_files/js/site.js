@@ -293,9 +293,7 @@
             body: body,
             redirect: 'follow',
         })
-            .then((res) => {
-                res.ok ? res.json() : Promise.reject(undefined);
-            })
+            .then((res) => res.json())
             .then((data) => {
                 callback(data);
             })
