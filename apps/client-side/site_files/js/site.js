@@ -1034,7 +1034,7 @@
             return;
         }
 
-        let dom = document.querySelector(options.selector);
+        let dom = typeof options.selector == 'string' ? document.querySelector(options.selector) : options.selector;
         if (dom) {
             dom.innerHTML = '';
             if (192 <= options.text.length <= 217) {
