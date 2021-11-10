@@ -1041,7 +1041,7 @@
                 options.text = options.text.padEnd(220);
             }
 
-            return new QRCode(document.querySelector(options.selector), {
+            return new QRCode(dom, {
                 text: options.text,
                 width: options.width || 256,
                 height: options.height || 256,
