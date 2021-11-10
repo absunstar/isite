@@ -290,8 +290,8 @@
         op.redirect = 'follow';
         op.mode = 'cors';
 
-        if (SOCIALBROWSER && SOCIALBROWSER.fetchJson) {
-            SOCIALBROWSER.fetchJson({ op }, (data) => {
+        if (window.SOCIALBROWSER && window.SOCIALBROWSER.fetchJson) {
+            SOCIALBROWSER.fetchJson(op, (data) => {
                 callback(data);
             });
         } else {
