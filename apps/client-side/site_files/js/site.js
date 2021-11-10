@@ -264,6 +264,22 @@
             });
     };
 
+    site.handle_url = function (u) {
+        if (typeof u !== 'string') {
+            return u;
+        }
+        u = u.trim();
+        if (u.like('http*') || u.indexOf('//') === 0 || u.indexOf('data:') === 0) {
+            u = u;
+        } else if (u.indexOf('/') === 0) {
+            u = window.location.origin + u;
+        } else if (u.split('?')[0].split('.').length < 3) {
+            let page = window.location.pathname.split('/').pop();
+            u = window.location.origin + window.location.pathname.replace(page, '') + u;
+        }
+        return u;
+    };
+
     site.postData = function (op, callback, error) {
         callback = callback || function () {};
         error = error || function () {};
@@ -274,9 +290,10 @@
             };
         }
 
-        op.data = op.data || {
-            xInfo: 'No Data',
-        };
+        op.data = op.data ||
+            op.body || {
+                xInfo: 'No Data',
+            };
 
         let body = JSON.stringify(op.data);
 
@@ -289,6 +306,7 @@
         op.method = 'post';
         op.redirect = 'follow';
         op.mode = 'cors';
+        op.url = site.handle_url(op.url);
 
         if (window.SOCIALBROWSER && window.SOCIALBROWSER.fetchJson) {
             SOCIALBROWSER.fetchJson(op, (data) => {
