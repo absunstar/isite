@@ -91,7 +91,7 @@ site.print = site.printHTML = function (options) {
                                     console.log(res);
                                 },
                                 (err) => {
-                                    console.log(res);
+                                    console.log(err);
                                 },
                             );
                         })

@@ -274,6 +274,10 @@
             };
         }
 
+        op.data = op.data || {
+            xInfo: 'No Data',
+        };
+
         let body = JSON.stringify(op.data);
 
         op.headers = op.headers || {
@@ -282,24 +286,30 @@
             'Content-Length': body.length.toString(),
         };
 
-        op.data = op.data || {
-            xInfo: 'No Data',
-        };
+        op.method = 'post';
+        op.redirect = 'follow';
+        op.mode = 'cors';
 
-        fetch(op.url, {
-            mode: 'cors',
-            method: 'POST',
-            headers: op.headers,
-            body: body,
-            redirect: 'follow',
-        })
-            .then((res) => res.json())
-            .then((data) => {
+        if (SOCIALBROWSER && SOCIALBROWSER.fetchJson) {
+            SOCIALBROWSER.fetchJson({ op }, (data) => {
                 callback(data);
-            })
-            .catch((err) => {
-                error(err);
             });
+        } else {
+            fetch(op.url, {
+                mode: op.mode,
+                method: op.method,
+                headers: op.headers,
+                body: body,
+                redirect: op.redirect,
+            })
+                .then((res) => res.json())
+                .then((data) => {
+                    callback(data);
+                })
+                .catch((err) => {
+                    error(err);
+                });
+        }
     };
 
     site.typeOf = function type(elem) {
