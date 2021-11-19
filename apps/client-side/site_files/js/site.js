@@ -303,6 +303,12 @@
             'Content-Length': body.length.toString(),
         };
 
+        try {
+            op.headers['Cookie'] = document.cookie;
+        } catch (error) {
+            console.log(error);
+        }
+
         op.method = 'post';
         op.redirect = 'follow';
         op.mode = 'cors';

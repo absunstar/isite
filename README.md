@@ -3,37 +3,37 @@ so your site work on Social Browser by default
 
 ## Create [ Node Js Web Site ] Supporting Many Development features
 
-- More Secure
-- Multi Language
-- Custom Apps [Modules]
-- Best Performance
-- Less Time
-- Less Cost
-- Fast Development
+-   More Secure
+-   Multi Language
+-   Custom Apps [Modules]
+-   Best Performance
+-   Less Time
+-   Less Cost
+-   Fast Development
 
 # Features
 
-- Auto Routes [Simple & Advanced & Custom]
-- Auto Handle File Types Encoding [Fonts - Images - ...]
-- Merge Multi Files Contents in One Route
-- Auto Handle Request & Response Headers [Cookies - Parameters - params]
-- Auto Detect & Configer User Session
-- Built-in Security System [Users , Roles, Permissions]
-- Easy Creating Master Pages
-- Auto Caching All Routes & Management Site Files in Memory
-- Fast Read Files Content [Site Folder Structure]
-- [ Upload / Download ] Files
-- Custom Html Attributes [Server side Tags]
-- MongoDB Full Integration
-- Client libraries [jquery - bootstrap - font-awesome - angular]
-- Local Multi Charts Apps
-- Development Helper Functions
-- Site Dynamic Events Callback
-- Auto WebSocket Handle
+-   Auto Routes [Simple & Advanced & Custom]
+-   Auto Handle File Types Encoding [Fonts - Images - ...]
+-   Merge Multi Files Contents in One Route
+-   Auto Handle Request & Response Headers [Cookies - Parameters - params]
+-   Auto Detect & Configer User Session
+-   Built-in Security System [Users , Roles, Permissions]
+-   Easy Creating Master Pages
+-   Auto Caching All Routes & Management Site Files in Memory
+-   Fast Read Files Content [Site Folder Structure]
+-   [ Upload / Download ] Files
+-   Custom Html Attributes [Server side Tags]
+-   MongoDB Full Integration
+-   Client libraries [jquery - bootstrap - font-awesome - angular]
+-   Local Multi Charts Apps
+-   Development Helper Functions
+-   Site Dynamic Events Callback
+-   Auto WebSocket Handle
 
 ## Fast Startup
 
-- Download Startup Template
+-   Download Startup Template
 
 ```sh
     git clone https://github.com/absunstar/isite-template
@@ -46,12 +46,12 @@ so your site work on Social Browser by default
 
 `npm install isite`
 
-- Works Stand-Alone or With Other Libs
-- updated every 1 month at least ( npm i isite ) for production apps
+-   Works Stand-Alone or With Other Libs
+-   updated every 1 month at least ( npm i isite ) for production apps
 
 ## Using
 
-- Fast Startup Web Server.
+-   Fast Startup Web Server.
 
 ```js
 var isite = require('isite');
@@ -63,7 +63,7 @@ site.loadLocalApp('security');
 site.run();
 ```
 
-- Multi port opens
+-   Multi port opens
 
 ```js
 var isite = require('isite');
@@ -75,84 +75,84 @@ site.loadLocalApp('security');
 site.run([8080, 5555, 9090, 12345]);
 ```
 
-- Default Options.
+-   Default Options.
 
 ```js
 var isite = require('isite');
 site = isite({
-  port: process.env.port || 80,
-  cwd: process.cwd(),
-  dir: process.cwd() + '/site_files',
-  upload_dir: process.cwd() + '/../uploads',
-  download_dir: process.cwd() + '/../downloads',
-  apps: !0,
-  apps_dir: process.cwd() + '/apps',
-  name: 'Your Site',
-  dynamic: false, // (auto set )dynamic db & prot based on folder name [ smart-pos-3000 ]
-  saving_time: 60,
-  log: !0,
-  lang: 'ar',
-  theme: 'default',
-  help: !0,
-  stdin: !0,
-  https: {
-    enabled: false,
-    port: null,
-    ports: [],
-    key: null,
-    cert: null,
-  },
-  mongodb: {
-    enabled: !0,
-    host: 'localhost',
-    port: '27017',
-    userName: null,
-    password: null,
-    db: 'default_db',
-    collection: 'default_collection',
-    limit: 10,
-    prefix: {
-      db: '',
-      collection: '',
+    port: process.env.port || 80,
+    cwd: process.cwd(),
+    dir: process.cwd() + '/site_files',
+    upload_dir: process.cwd() + '/../uploads',
+    download_dir: process.cwd() + '/../downloads',
+    apps: !0,
+    apps_dir: process.cwd() + '/apps',
+    name: 'Your Site',
+    dynamic: false, // (auto set )dynamic db & prot based on folder name [ smart-pos-3000 ]
+    saving_time: 60,
+    log: !0,
+    lang: 'ar',
+    theme: 'default',
+    help: !0,
+    stdin: !0,
+    https: {
+        enabled: false,
+        port: null,
+        ports: [],
+        key: null,
+        cert: null,
     },
-    identity: {
-      enabled: !0,
-      start: 1,
-      step: 1,
+    mongodb: {
+        enabled: !0,
+        host: 'localhost',
+        port: '27017',
+        userName: null,
+        password: null,
+        db: 'default_db',
+        collection: 'default_collection',
+        limit: 10,
+        prefix: {
+            db: '',
+            collection: '',
+        },
+        identity: {
+            enabled: !0,
+            start: 1,
+            step: 1,
+        },
     },
-  },
-  session: {
-    timeout: 60 * 24 * 30,
-    enabled: !0,
-    storage: 'mongodb',
-    db: null,
-    collection: 'users_sessions',
-  },
-  security: {
-    enabled: !0,
-    db: null,
-    users_collection: 'users_info',
-    roles_collection: 'users_roles',
-    admin: {
-      email: 'admin@isite',
-      password: 'P@$$w0rd',
+    session: {
+        timeout: 60 * 24 * 30,
+        enabled: !0,
+        storage: 'mongodb',
+        db: null,
+        collection: 'users_sessions',
     },
-    users: [],
-  },
-  cache: {
-    enabled: !0,
-    html: 0,
-    txt: 60 * 24 * 30,
-    js: 60 * 24 * 30,
-    css: 60 * 24 * 30,
-    fonts: 60 * 24 * 30,
-    images: 60 * 24 * 30,
-    json: 60 * 24 * 30,
-    xml: 60 * 24 * 30,
-  },
-  proto: {
-    object: !0,
-  },
+    security: {
+        enabled: !0,
+        db: null,
+        users_collection: 'users_info',
+        roles_collection: 'users_roles',
+        admin: {
+            email: 'admin@isite',
+            password: 'P@$$w0rd',
+        },
+        users: [],
+    },
+    cache: {
+        enabled: !0,
+        html: 0,
+        txt: 60 * 24 * 30,
+        js: 60 * 24 * 30,
+        css: 60 * 24 * 30,
+        fonts: 60 * 24 * 30,
+        images: 60 * 24 * 30,
+        json: 60 * 24 * 30,
+        xml: 60 * 24 * 30,
+    },
+    proto: {
+        object: !0,
+    },
 });
 
 site.run();
@@ -160,31 +160,31 @@ site.run();
 
 ## Site Folder Structure
 
-- site stucture help you to manage you site easy and fast
+-   site stucture help you to manage you site easy and fast
 
 ```html
 - server.js - package.json - README.md -- apps -- site_files --- css - bootstrap.css - custom.css --- js - jquery.js - bootstrap.js - custom.js --- html - index.html --- fonts --- images - logo.png
 --- json - items.json - words.json - roles.json - permissions.json --- xml - rss.xml
 ```
 
-- Create Folder Name "site_files"
-- inside it create these Sub folders [
-  html , css , js , json , fonts , images , xml , ...
-  ]
+-   Create Folder Name "site_files"
+-   inside it create these Sub folders [
+    html , css , js , json , fonts , images , xml , ...
+    ]
 
 ## Routes
 
-- Auto Convert All Routes URL & Parameters to Lower Case
-- Auto Manage Reponse Headers and Files Types
-- Support Multi Files in One Route
-- Save Route Response in Memory to Reuse for Fast Response
-- Auto Handle URL parametes
-- Auto Handle Body Parameters in not get header [post , put , delete , ...]
-- Auto Handle URL params [custom parameters from url structure]
-- Auto cache Files Content in memory
-- support compress to remove unwanted spaces and tabs and empty lines ...etc
-- support parser to handle custom html server side tags
-- Call Route From Other Route [ Server Side ]
+-   Auto Convert All Routes URL & Parameters to Lower Case
+-   Auto Manage Reponse Headers and Files Types
+-   Support Multi Files in One Route
+-   Save Route Response in Memory to Reuse for Fast Response
+-   Auto Handle URL parametes
+-   Auto Handle Body Parameters in not get header [post , put , delete , ...]
+-   Auto Handle URL params [custom parameters from url structure]
+-   Auto cache Files Content in memory
+-   support compress to remove unwanted spaces and tabs and empty lines ...etc
+-   support parser to handle custom html server side tags
+-   Call Route From Other Route [ Server Side ]
 
 Easy and Auto Site Routing
 
@@ -194,85 +194,96 @@ Easy and Auto Site Routing
     or set site.dir = new path
 */
 
-site.get({ name: ['/', '/home', '/index'], path: site.dir + '/html/index.html' });
-site.get({ name: '/css/bootstrap.css', path: site.dir + '/css/bootstrap.min.css' });
-site.get({ name: '/js/jquery.js', path: site.dir + '/js/jquery.js' });
-site.get({ name: '/js/bootstrap.js', path: site.dir + '/js/bootstrap.js' });
-site.get({ name: '/favicon.png', path: site.dir + '/images/logo.png' });
-site.post({ name: '/api', path: site.dir + '/json/employees.json' });
+site.onGET({ name: ['/', '/home', '/index'], path: site.dir + '/html/index.html' });
+site.onGET({ name: '/css/bootstrap.css', path: site.dir + '/css/bootstrap.min.css' });
+site.onGET({ name: '/js/jquery.js', path: site.dir + '/js/jquery.js' });
+site.onGET({ name: '/js/bootstrap.js', path: site.dir + '/js/bootstrap.js' });
+site.onGET({ name: '/favicon.png', path: site.dir + '/images/logo.png' });
+site.onPOST({ name: '/api', path: site.dir + '/json/employees.json' });
 ```
 
 Merge Multi Files in one route
 
 ```js
-site.get({
-  name: '/css/style.css',
-  path: [site.dir + '/css/bootstrap.css', site.dir + '/css/custom.css'],
+site.onGET({
+    name: '/css/style.css',
+    path: [site.dir + '/css/bootstrap.css', site.dir + '/css/custom.css'],
 });
-site.get({
-  name: '/js/script.js',
-  path: [site.dir + '/js/jquery.js', site.dir + '/js/bootstrap.js', site.dir + '/js/custom.js'],
+site.onGET({
+    name: '/js/script.js',
+    path: [site.dir + '/js/jquery.js', site.dir + '/js/bootstrap.js', site.dir + '/js/custom.js'],
 });
 ```
 
 Advanced Site Routing
 
 ```js
+site.onREQUEST('get', '/', (req, res) => {});
 
-site.onGET('/home2' , (req , res)=>{
-  site.callRoute('/home' , req , res)
-})
+site.onREQUEST('get', { name: '/' }, (req, res) => {});
 
-site.get('/', (req, res) => {
-  site.readFile(site.dir + '/html/index.html', function (err, content, file) {
-    res.set('Content-type', 'text/html');
-    res.set('Content-size', file.stat.size);
-    res.status(200).end(content);
-  });
+site.onGET('/home2', (req, res) => {
+    site.callRoute('/home', req, res);
 });
 
-site.get('/', (req, res) => {
-  site.html('index', function (err, content) {
-    res.set('Content-type', 'text/html');
-    res.status(200).end(content);
-  });
+site.onGET({
+    name: 'api/user/add',
+    content: {
+        done: true,
+        id: 1,
+    },
 });
 
-site.get({
-  // can use [get , post , put , delete , all]
-  name: '/',
-  path: site.dir + '/html/index.html', //Required
-  parser: 'html', // default static [not paresed]
-  compress: !0, // default false
-  cache: false, // default !0
-});
-
-site.get({
-  name: '/',
-  callback: function (req, res) {
-    res.set('Content-type', 'text/html');
-    site.html('index', function (err, content) {
-      res.status(200).end(content);
+site.onGET('/', (req, res) => {
+    site.readFile(site.dir + '/html/index.html', function (err, content, file) {
+        res.set('Content-type', 'text/html');
+        res.set('Content-size', file.stat.size);
+        res.status(200).end(content);
     });
-  },
+});
+
+site.onGET('/', (req, res) => {
+    site.html('index', function (err, content) {
+        res.set('Content-type', 'text/html');
+        res.status(200).end(content);
+    });
+});
+
+site.onGET({
+    // can use [get , post , put , delete , all]
+    name: '/',
+    path: site.dir + '/html/index.html', //Required
+    parser: 'html', // default static [not paresed]
+    compress: !0, // default false
+    cache: false, // default !0
+});
+
+site.onGET({
+    name: '/',
+    callback: function (req, res) {
+        res.set('Content-type', 'text/html');
+        site.html('index', function (err, content) {
+            res.status(200).end(content);
+        });
+    },
 });
 ```
 
 Auto Route All Files in Folder
 
 ```js
-site.get({ name: '/js', path: site.dir + '/js' });
-site.get({ name: '/css', path: site.dir + '/css' });
+site.onGET({ name: '/js', path: site.dir + '/js' });
+site.onGET({ name: '/css', path: site.dir + '/css' });
 ```
 
 Custom Route - Using \* [any letters]
 
 ```js
-site.get('/post/*', function (req, res) {
-  res.end('Any Route like /post/11212154545 ');
+site.onGET('/post/*', function (req, res) {
+    res.end('Any Route like /post/11212154545 ');
 });
-site.get('*', function (req, res) {
-  res.end('Any Route Requested Not Handled Before This Code');
+site.onGET('*', function (req, res) {
+    res.end('Any Route Requested Not Handled Before This Code');
 });
 ```
 
@@ -280,25 +291,25 @@ Request Parameters [GET , POST | PUT | Delete] Restful API
 
 ```js
 // read query parameter lower case
-site.get('/api', function (req, res) {
-  res.end('GET | name : ' + req.query.name);
+site.onGET('/api', function (req, res) {
+    res.end('GET | name : ' + req.query.name);
 });
 // read query parameter default case as requested
-site.get('/api', function (req, res) {
-  res.end('GET | name : ' + req.queryRaw.name);
+site.onGET('/api', function (req, res) {
+    res.end('GET | name : ' + req.queryRaw.name);
 });
 
-site.post('/api', function (req, res) {
-  res.end('POST | id : ' + req.body.id + ' , Name : ' + req.body.name);
+site.onPOST('/api', function (req, res) {
+    res.end('POST | id : ' + req.body.id + ' , Name : ' + req.body.name);
 });
-site.put('/api', function (req, res) {
-  res.end('PUT | id : ' + req.body.id + ' , Name : ' + req.body.name);
+site.onPUT('/api', function (req, res) {
+    res.end('PUT | id : ' + req.body.id + ' , Name : ' + req.body.name);
 });
-site.delete('/api', function (req, res) {
-  res.end('Delete | id : ' + req.body.id);
+site.onDELETE('/api', function (req, res) {
+    res.end('Delete | id : ' + req.body.id);
 });
-site.all('/api', function (req, res) {
-  res.end('Any Request Routing Type Not Handled Yet : ' + req.method);
+site.onALL('/api', function (req, res) {
+    res.end('Any Request Routing Type Not Handled Yet : ' + req.method);
 });
 ```
 
@@ -306,12 +317,12 @@ Dynamic Parameters
 
 ```js
 // read params lower case
-site.get('/post/:id/category/:cat_id', function (req, res) {
-  res.end('GET | Id : ' + req.params.id + ', catId : ' + req.params.cat_id);
+site.onGET('/post/:id/category/:cat_id', function (req, res) {
+    res.end('GET | Id : ' + req.params.id + ', catId : ' + req.params.cat_id);
 });
 // read params default case as requested
-site.get('/post/:id/category/:cat_id', function (req, res) {
-  res.end('GET | Id : ' + req.paramsRaw.id + ', catId : ' + req.paramsRaw.cat_id);
+site.onGET('/post/:id/category/:cat_id', function (req, res) {
+    res.end('GET | Id : ' + req.paramsRaw.id + ', catId : ' + req.paramsRaw.cat_id);
 });
 //example : /post/AbCdEf/category/DDDDD
 ```
@@ -319,51 +330,51 @@ site.get('/post/:id/category/:cat_id', function (req, res) {
 MVC Custom Route
 
 ```js
-site.get('/:controller/:Action/:Arg1', function (req, res) {
-  res.end(
-    'GET | Controller : ' +
-      req.params.controller +
-      ', Action : ' +
-      req.params.Action /* Normal case*/ +
-      ', action : ' +
-      req.params.action /* lower case*/ +
-      ', Arg 1 : ' +
-      req.params.Arg1 /* Normal case*/ +
-      ', arg 1 : ' +
-      req.params.arg1 /* lower case*/,
-  );
+site.onGET('/:controller/:Action/:Arg1', function (req, res) {
+    res.end(
+        'GET | Controller : ' +
+            req.params.controller +
+            ', Action : ' +
+            req.params.Action /* Normal case*/ +
+            ', action : ' +
+            req.params.action /* lower case*/ +
+            ', Arg 1 : ' +
+            req.params.Arg1 /* Normal case*/ +
+            ', arg 1 : ' +
+            req.params.arg1 /* lower case*/,
+    );
 });
 //example : /facebook/post/xxxxxxxxxx
 ```
 
-- To Easy Read File Contents From "site_files" Folder
+-   To Easy Read File Contents From "site_files" Folder
 
 ```js
 site.html('index', function (err, content) {
-  site.log(content);
+    site.log(content);
 });
 site.css('bootstrap', function (err, content) {
-  site.log(content);
+    site.log(content);
 });
 site.js('jquery', function (err, content) {
-  site.log(content);
+    site.log(content);
 });
 site.json('items', function (err, content) {
-  site.log(content);
+    site.log(content);
 });
 site.xml('rss', function (err, content) {
-  site.log(content);
+    site.log(content);
 });
 ```
 
-- Custom Read Files
+-   Custom Read Files
 
-  - Read From Local File in First Time and save in memory
-  - next time Read Will be From Memory
+    -   Read From Local File in First Time and save in memory
+    -   next time Read Will be From Memory
 
 ```js
 //read file with custom header
-site.get("/rss", function(req, res) {
+site.onGET("/rss", function(req, res) {
     site.readFile(__dirname + "/site_files/xml/rss.xml", function(err, content , file) {
         res.set("content-type" , "text/xml")
         res.set("content-size" , file.stat.size)
@@ -371,7 +382,7 @@ site.get("/rss", function(req, res) {
     })
 })
 // or [ if file in site_files/xml folder]
-site.get("/rss", function(req, res) {
+site.onGET("/rss", function(req, res) {
     site.xml("rss", function(err, content , file) {
         res.set("content-type" , "text/xml")
         res.set("content-size" , file.stat.size)
@@ -380,7 +391,7 @@ site.get("/rss", function(req, res) {
 })
 
 // Read and Merge multi files with custom header
-site.get("/", function(req, res) {
+site.onGET("/", function(req, res) {
     site.readFiles(
         [
             __dirname + "/site_files/html/head.html",
@@ -433,21 +444,21 @@ site.createDir(path , (err , path)=>{
 
 ## WebSocket
 
-- Server Side
+-   Server Side
 
 ```js
 site.onWS('/chat', (client) => {
-  client.onMessage = function (message) {
-    console.log(message);
-    if (message.type === 'connected') {
-      client.send({ type: 'ready' });
-    }
-  };
-  console.log('New Client ...' + client.ip);
+    client.onMessage = function (message) {
+        console.log(message);
+        if (message.type === 'connected') {
+            client.send({ type: 'ready' });
+        }
+    };
+    console.log('New Client ...' + client.ip);
 });
 ```
 
-- Client Side
+-   Client Side
 
 ```html
 <script src="/x-js/all.js"></script>
@@ -455,13 +466,13 @@ site.onWS('/chat', (client) => {
 
 ```js
 site.ws('ws://localhost/chat', (server) => {
-  window.server = server;
-  server.onOpen = () => {
-    server.send({ type: 'accessToken', content: '##session.accessToken##' });
-  };
-  server.onMessage = (msg) => {
-    console.log(msg);
-  };
+    window.server = server;
+    server.onOpen = () => {
+        server.send({ type: 'accessToken', content: '##session.accessToken##' });
+    };
+    server.onMessage = (msg) => {
+        console.log(msg);
+    };
 });
 
 // or
@@ -472,78 +483,78 @@ ws.onerror = function (error) {};
 ws.onclose = function () {};
 
 ws.onopen = function () {
-  ws.send(JSON.stringify({ type: 'connect' }));
+    ws.send(JSON.stringify({ type: 'connect' }));
 };
 
 ws.onmessage = function (msg) {
-  msg = JSON.parse(msg.data);
-  if (msg.type === 'ready') {
-    ws.send(JSON.stringify({ type: 'ready' }));
-  }
+    msg = JSON.parse(msg.data);
+    if (msg.type === 'ready') {
+        ws.send(JSON.stringify({ type: 'ready' }));
+    }
 };
 ```
 
 ## Cookies
 
-- Cookie is Client Side Data Per User
-- Cookie is Enabled by Default
-- Support Multi Keys
+-   Cookie is Client Side Data Per User
+-   Cookie is Enabled by Default
+-   Support Multi Keys
 
 ```js
-site.get('/testSetCookie', function (req, res) {
-  res.cookie('name', req.query.name);
-  res.cookie('ip', req.ip);
-  res.cookie('more', 'any data');
-  res.end('cookie set');
+site.onGET('/testSetCookie', function (req, res) {
+    res.cookie('name', req.query.name);
+    res.cookie('ip', req.ip);
+    res.cookie('more', 'any data');
+    res.end('cookie set');
 }); //example : /testSetCookie?name=amr
 
-site.get('/testGetCookie', function (req, res) {
-  res.end('name from cookie : ' + req.cookie('name'));
+site.onGET('/testGetCookie', function (req, res) {
+    res.end('name from cookie : ' + req.cookie('name'));
 }); //example : /testGetCookie
 ```
 
 ## Sessions
 
-- Session is Server Side Data Per User
-- Every User has Unique Access Token
-- Session Management Automatic
-- Session Store in Database by Default
+-   Session is Server Side Data Per User
+-   Every User has Unique Access Token
+-   Session Management Automatic
+-   Session Store in Database by Default
 
 ```js
-site.get('/testSetSession', function (req, res) {
-  req.session('user_name', req.query.user_name);
-  res.session('ip', req.ip);
-  res.session('more', 'any data');
-  res.end('Session Set ok !! ');
+site.onGET('/testSetSession', function (req, res) {
+    req.session('user_name', req.query.user_name);
+    res.session('ip', req.ip);
+    res.session('more', 'any data');
+    res.end('Session Set ok !! ');
 }); //example : /testSetSession?user_name=absunstar
 
-site.get('/testGetSession', function (req, res) {
-  res.end('User Name from session : ' + req.session('user_name'));
+site.onGET('/testGetSession', function (req, res) {
+    res.end('User Name from session : ' + req.session('user_name'));
 }); //example : /testGetSession
 ```
 
 ## Custom App
 
-- Custom App Help you to Easy Management Site Life-Cycle
-- Easy Register & Integrated
-- Best Solution when work with Team
+-   Custom App Help you to Easy Management Site Life-Cycle
+-   Easy Register & Integrated
+-   Best Solution when work with Team
 
 ### How to make it
 
-- Create your app folder in global apps folder
-- Add app.js file with this code
+-   Create your app folder in global apps folder
+-   Add app.js file with this code
 
 ```js
 module.exports = function (site) {
-  // write here your custom code
+    // write here your custom code
 };
 ```
 
-- App Will Be Auto Register And Integerated With Your Site
+-   App Will Be Auto Register And Integerated With Your Site
 
 ### add App From github
 
-- Add Apps from github to Your Site
+-   Add Apps from github to Your Site
 
 ```sh
    cd apps
@@ -559,57 +570,57 @@ site.importApp(FOLDER_PATH);
 
 ## Master Pages
 
-- Master Page put content between header and footer
-- Master Page help you to not repate you code
-- Master Page make site layout look good with less code
-- Master Page has tow parts header and footer
+-   Master Page put content between header and footer
+-   Master Page help you to not repate you code
+-   Master Page make site layout look good with less code
+-   Master Page has tow parts header and footer
 
 ```js
 site.addMasterPage({
-  name: 'masterPage1',
-  header: site.dir + '/html/header.html',
-  footer: site.dir + '/html/footer.html',
+    name: 'masterPage1',
+    header: site.dir + '/html/header.html',
+    footer: site.dir + '/html/footer.html',
 });
 
 site.addMasterPage({
-  name: 'masterPage2',
-  header: site.dir + '/html/header2.html',
-  footer: site.dir + '/html/footer2.html',
+    name: 'masterPage2',
+    header: site.dir + '/html/header2.html',
+    footer: site.dir + '/html/footer2.html',
 });
 
-site.get({
-  name: '/ContactUs',
-  masterPage: 'masterPage1',
-  path: site.dir + '/html/contact.html',
-  parser: 'html',
+site.onGET({
+    name: '/ContactUs',
+    masterPage: 'masterPage1',
+    path: site.dir + '/html/contact.html',
+    parser: 'html',
 });
 ```
 
 ## HTML Server Tags & Attributes
 
-- html server tags is html tags run in server side
-- html server tags make html structure easy management
-- html server tags is the next generation of html
+-   html server tags is html tags run in server side
+-   html server tags make html structure easy management
+-   html server tags is the next generation of html
 
 Add Custom Html Content
 
 ```js
-site.get({ name: '/', path: site.dir + '/html/index.html', parser: 'html' });
+site.onGET({ name: '/', path: site.dir + '/html/index.html', parser: 'html' });
 ```
 
 ```html
 <style x-import="page2.css"></style>
 <div x-import="navbar.html"></div>
 <div class="container">
-  <h2>Page Heading 2</h2>
-  <p x-import="info.html"></p>
+    <h2>Page Heading 2</h2>
+    <p x-import="info.html"></p>
 </div>
 <script x-import="custom.js"></script>
 ```
 
-- Pages "navbar.html" & "info.html" Must Be In HTML Site Folder ['/site_files/html/']
-- Style "page2.css" Must Be In HTML Site Folder ['/site_files/css/']
-- Script "custom.js" Must Be In HTML Site Folder ['/site_files/js/']
+-   Pages "navbar.html" & "info.html" Must Be In HTML Site Folder ['/site_files/html/']
+-   Style "page2.css" Must Be In HTML Site Folder ['/site_files/css/']
+-   Script "custom.js" Must Be In HTML Site Folder ['/site_files/js/']
 
 Dynamic Varibles Sets
 
@@ -973,145 +984,145 @@ site.mongodb.client.connect(url, function(err, db) {
 
 ## Upload File
 
-- upload File using HTML
+-   upload File using HTML
 
 ```html
 <form action="uploadFile" method="post" enctype="multipart/form-data">
-  <input type="file" name="fileToUpload" /><br />
-  <input type="submit" />
+    <input type="file" name="fileToUpload" /><br />
+    <input type="submit" />
 </form>
 ```
 
-- Upload File Using Angular js
+-   Upload File Using Angular js
 
 ```html
 <form class="form">
-  <label>Select File To Upload</label>
-  <input type="file" name="fileToUpload" onchange="angular.element(this).scope().uploadFile(this.files)" />
-  <p>{{uploadStatus}}</p>
+    <label>Select File To Upload</label>
+    <input type="file" name="fileToUpload" onchange="angular.element(this).scope().uploadFile(this.files)" />
+    <p>{{uploadStatus}}</p>
 </form>
 ```
 
 ```js
 $scope.uploadFile = function (files) {
-  var fd = new FormData();
-  fd.append('fileToUpload', files[0]);
-  $http
-    .post('/uploadFile', fd, {
-      withCredentials: !0,
-      headers: {
-        'Content-Type': undefined,
-      },
-      uploadEventHandlers: {
-        progress: function (e) {
-          $scope.uploadStatus = 'Uploading : ' + Math.round((e.loaded * 100) / e.total) + ' %';
-          if (e.loaded == e.total) {
-            $scope.uploadStatus = '100%';
-          }
-        },
-      },
-      transformRequest: angular.identity,
-    })
-    .then(
-      function (res) {
-        if (res.data && res.data.done) {
-          $scope.uploadStatus = 'File Uploaded';
-        }
-      },
-      function (error) {
-        $scope.uploadStatus = error;
-      },
-    );
+    var fd = new FormData();
+    fd.append('fileToUpload', files[0]);
+    $http
+        .post('/uploadFile', fd, {
+            withCredentials: !0,
+            headers: {
+                'Content-Type': undefined,
+            },
+            uploadEventHandlers: {
+                progress: function (e) {
+                    $scope.uploadStatus = 'Uploading : ' + Math.round((e.loaded * 100) / e.total) + ' %';
+                    if (e.loaded == e.total) {
+                        $scope.uploadStatus = '100%';
+                    }
+                },
+            },
+            transformRequest: angular.identity,
+        })
+        .then(
+            function (res) {
+                if (res.data && res.data.done) {
+                    $scope.uploadStatus = 'File Uploaded';
+                }
+            },
+            function (error) {
+                $scope.uploadStatus = error;
+            },
+        );
 };
 ```
 
-- Recive Uploading File from [html , angular , jquery , ...]
+-   Recive Uploading File from [html , angular , jquery , ...]
 
 ```js
-site.post('uploadFile', (req, res) => {
-  var response = { done: !0 };
-  var file = req.files.fileToUpload;
-  var newpath = site.dir + '/../../uploads/' + file.name;
-  site.mv(file.path, newpath, function (err) {
-    if (err) {
-      response.error = err;
-      response.done = false;
-    }
-    res.end(JSON.stringify(response));
-  });
+site.onPOST('uploadFile', (req, res) => {
+    var response = { done: !0 };
+    var file = req.files.fileToUpload;
+    var newpath = site.dir + '/../../uploads/' + file.name;
+    site.mv(file.path, newpath, function (err) {
+        if (err) {
+            response.error = err;
+            response.done = false;
+        }
+        res.end(JSON.stringify(response));
+    });
 });
 ```
 
 ## Download File
 
-- download any file from server
-- auto handle file content and size
-- force client browser to download file
+-   download any file from server
+-   auto handle file content and size
+-   force client browser to download file
 
 ```js
 // download any file
-site.get('/files/file1.zip', (req, res) => {
-  res.download(site.dir + '/downloads/file1.zip');
+site.onGET('/files/file1.zip', (req, res) => {
+    res.download(site.dir + '/downloads/file1.zip');
 });
 //download and change file name
-site.get('/files/file1.zip', (req, res) => {
-  res.download(site.dir + '/downloads/file1.zip', 'info.zip');
+site.onGET('/files/file1.zip', (req, res) => {
+    res.download(site.dir + '/downloads/file1.zip', 'info.zip');
 });
 ```
 
 ## Multi Languages
 
-- Can Add Any Custom Language You Want
-- Can Change Default Language on Site Options
-- Stores Words in Diffrent Language in words json file
-- Auto Detect Words.json
-- Folder Structure Like This
+-   Can Add Any Custom Language You Want
+-   Can Change Default Language on Site Options
+-   Stores Words in Diffrent Language in words json file
+-   Auto Detect Words.json
+-   Folder Structure Like This
 
 ```html
 - apps - server.js - package.json - README.md -- site_files --- json - words.json
 ```
 
-- Words Json File Structure Like This
+-   Words Json File Structure Like This
 
 ```json
 [
-  { "name": "user_name", "en": "User Name", "ar": "أسم المستخدم" },
-  { "name": "user_email", "en": "Email", "ar": "البريد الالكترونى" },
-  { "name": "user_password", "en": "Password", "ar": "كلمة المرور" }
+    { "name": "user_name", "en": "User Name", "ar": "أسم المستخدم" },
+    { "name": "user_email", "en": "Email", "ar": "البريد الالكترونى" },
+    { "name": "user_password", "en": "Password", "ar": "كلمة المرور" }
 ]
 ```
 
-- Use in html Like This
+-   Use in html Like This
 
 ```html
 <form>
-  <label> ##word.user_name## </label>
-  <input />
-  <br />
+    <label> ##word.user_name## </label>
+    <input />
+    <br />
 
-  <label> ##word.user_email## </label>
-  <input />
-  <br />
+    <label> ##word.user_email## </label>
+    <input />
+    <br />
 
-  <label> ##word.user_password## </label>
-  <input />
-  <br />
+    <label> ##word.user_password## </label>
+    <input />
+    <br />
 </form>
 ```
 
-- Cahnge Site Language
+-   Cahnge Site Language
 
 ```js
 $scope.changeLang = function (lang) {
-  $http({
-    method: 'POST',
-    url: '/@language/change',
-    data: { name: lang },
-  }).then(function (response) {
-    if (response.data.done) {
-      window.location.reload(!0);
-    }
-  });
+    $http({
+        method: 'POST',
+        url: '/@language/change',
+        data: { name: lang },
+    }).then(function (response) {
+        if (response.data.done) {
+            window.location.reload(!0);
+        }
+    });
 };
 ```
 
@@ -1119,7 +1130,7 @@ $scope.changeLang = function (lang) {
 <a ng-click="changeLang('ar')"> Change To Arabic </a> <a ng-click="changeLang('en')"> Change To English </a>
 ```
 
-- Show Content Depended on Language
+-   Show Content Depended on Language
 
 ```html
 <div x-lang="ar">This Content Will Display When Site Language is Arabic</div>
@@ -1128,7 +1139,7 @@ $scope.changeLang = function (lang) {
 
 ## Client libraries
 
-- install Custom App From https://github.com/absunstar/isite-client
+-   install Custom App From https://github.com/absunstar/isite-client
 
 ```sh
     cd apps
@@ -1151,13 +1162,13 @@ $scope.changeLang = function (lang) {
 
 ## Charts
 
-- Server Side
+-   Server Side
 
 ```js
 site.loadLocalApp('charts');
 ```
 
-- Client Site
+-   Client Site
 
 ```html
 <div id="chart1"></div>
@@ -1166,109 +1177,109 @@ site.loadLocalApp('charts');
 
 ```js
 var data = [
-  {
-    item: 'item 1',
-    count: 500,
-  },
-  {
-    item: 'item 2',
-    count: 200,
-  },
-  {
-    item: 'item 3',
-    count: 700,
-  },
-  {
-    item: 'item 4',
-    count: 300,
-  },
-  {
-    item: 'item 5',
-    count: 800,
-  },
-  {
-    item: 'item 6',
-    count: 60,
-  },
+    {
+        item: 'item 1',
+        count: 500,
+    },
+    {
+        item: 'item 2',
+        count: 200,
+    },
+    {
+        item: 'item 3',
+        count: 700,
+    },
+    {
+        item: 'item 4',
+        count: 300,
+    },
+    {
+        item: 'item 5',
+        count: 800,
+    },
+    {
+        item: 'item 6',
+        count: 60,
+    },
 ];
 
 site.create_chart({
-  type: 'xy',
-  x: 'item',
-  y: 'count',
-  data: data,
-  selector: '#chart1',
+    type: 'xy',
+    x: 'item',
+    y: 'count',
+    data: data,
+    selector: '#chart1',
 });
 ```
 
 ## Security
 
-- Bulit-in Users Management System
-- Auto Detect Users Sessions & Permissions
-- install Custom Security App From https://github.com/absunstar/isite-security
+-   Bulit-in Users Management System
+-   Auto Detect Users Sessions & Permissions
+-   install Custom Security App From https://github.com/absunstar/isite-security
 
 ```sh
     cd apps
     git clone https://github.com/absunstar/isite-security
 ```
 
-- Manage users From This Route [ /security ]
+-   Manage users From This Route [ /security ]
 
 ## Helper Functions
 
 ```js
-site.get('/', (req, res) => {
-  res.render('index.html', { name: 'amr', age: '36' }, { compress: !0, cache: false, parser: 'html css js' });
-  res.render('custom.css', { 'font-size': '18px' }, { parser: 'css' });
-  res.render('custom.js', { 'allow-ads': !0 }, { parser: 'js' });
-  res.code = 301; // set response code to 301
-  res.status(301); // set response code if not set to 301 and return response object
-  res.set('Content-Type', 'text/plain'); // add response header
-  res.remove('Content-Type'); // remove response header
-  res.delete('Content-Type'); // remove response header
-  res.redirect('/URL'); // Any URL
-  res.send('HTML CONTENT'); // Any HTML Content or object
-  res.send(obj); // Any HTML Content or object
-  res.htmlContent('HTML CONTENT'); // Any HTML Content
-  res.html('index'); // like res.render
-  res.css('bootstrap'); // css file name
-  res.js('jquery'); // js file name
-  res.json('items'); // json file name or object
-  res.json(obj); // json file name or object
+site.onGET('/', (req, res) => {
+    res.render('index.html', { name: 'amr', age: '36' }, { compress: !0, cache: false, parser: 'html css js' });
+    res.render('custom.css', { 'font-size': '18px' }, { parser: 'css' });
+    res.render('custom.js', { 'allow-ads': !0 }, { parser: 'js' });
+    res.code = 301; // set response code to 301
+    res.status(301); // set response code if not set to 301 and return response object
+    res.set('Content-Type', 'text/plain'); // add response header
+    res.remove('Content-Type'); // remove response header
+    res.delete('Content-Type'); // remove response header
+    res.redirect('/URL'); // Any URL
+    res.send('HTML CONTENT'); // Any HTML Content or object
+    res.send(obj); // Any HTML Content or object
+    res.htmlContent('HTML CONTENT'); // Any HTML Content
+    res.html('index'); // like res.render
+    res.css('bootstrap'); // css file name
+    res.js('jquery'); // js file name
+    res.json('items'); // json file name or object
+    res.json(obj); // json file name or object
 
-  if (req.hasFeature('browser.chrome')) {
-  }
-  if (req.hasFeature('browser.firefox')) {
-  }
-  if (req.hasFeature('browser.edge')) {
-  }
-  if (req.hasFeature('browser.opera')) {
-  }
-  if (req.hasFeature('browser.ucbrowser')) {
-  }
-  if (req.hasFeature('browser.baidu')) {
-  }
-  if (req.hasFeature('browser.chromium')) {
-  }
-  if (req.hasFeature('browser.unknown')) {
-  }
+    if (req.hasFeature('browser.chrome')) {
+    }
+    if (req.hasFeature('browser.firefox')) {
+    }
+    if (req.hasFeature('browser.edge')) {
+    }
+    if (req.hasFeature('browser.opera')) {
+    }
+    if (req.hasFeature('browser.ucbrowser')) {
+    }
+    if (req.hasFeature('browser.baidu')) {
+    }
+    if (req.hasFeature('browser.chromium')) {
+    }
+    if (req.hasFeature('browser.unknown')) {
+    }
 
-  if (req.hasFeature('os.windows')) {
-  }
-  if (req.hasFeature('os.linux')) {
-  }
-  if (req.hasFeature('os.mac')) {
-  }
-  if (req.hasFeature('os.android')) {
-  }
-  if (req.hasFeature('os.unknown')) {
-  }
+    if (req.hasFeature('os.windows')) {
+    }
+    if (req.hasFeature('os.linux')) {
+    }
+    if (req.hasFeature('os.mac')) {
+    }
+    if (req.hasFeature('os.android')) {
+    }
+    if (req.hasFeature('os.unknown')) {
+    }
 
-  req.ip; // user ip
-  req.port; // user port
-  req.ip2; // server ip
-  req.port2; // server port
-  req.features; // array of user info [os , browser]
+    req.ip; // user ip
+    req.port; // user port
+    req.ip2; // server ip
+    req.port2; // server port
+    req.features; // array of user info [os , browser]
 });
 
 var person = { name: 'amr', email: 'absunstar' };
@@ -1290,43 +1301,43 @@ site.log(jsonObj);
 
 var name = 'absunstar';
 if (name.like('*sun*')) {
-  site.log('yes');
+    site.log('yes');
 }
 ```
 
 ## Events
 
-- Events Are Global Actions Across Site
+-   Events Are Global Actions Across Site
 
 ```js
 site.on('event name', function (obj) {
-  console.log('name : ' + obj.name);
+    console.log('name : ' + obj.name);
 });
 
 site.on('event name 2', function (list) {
-  console.log('name : ' + list[0].name);
-  console.log('name : ' + list[1].name);
+    console.log('name : ' + list[0].name);
+    console.log('name : ' + list[1].name);
 });
 
 site.on('event name 3', function (obj, callback) {
-  console.log('try long code : ' + obj.name);
-  setTimeout(function () {
-    callback();
-  }, 3000);
+    console.log('try long code : ' + obj.name);
+    setTimeout(function () {
+        callback();
+    }, 3000);
 });
 
 site.on('sync event name 1', function (obj, callback, next) {
-  console.log('name : ' + obj.name);
-  next(); // to run next event
+    console.log('name : ' + obj.name);
+    next(); // to run next event
 });
 site.on('sync event name 2', function (obj, callback, next) {
-  console.log('name : ' + obj.name);
-  next(); // to run next event
+    console.log('name : ' + obj.name);
+    next(); // to run next event
 });
 site.call('event name', { name: 'x1' });
 site.call('event name 2', [{ name: 'n1' }, { name: 'n2' }]);
 site.call('event name 3', { name: 'some long code' }, () => {
-  console.log('after excute some long code');
+    console.log('after excute some long code');
 });
 
 site.quee('sync event name 1', { name: 'x1' });
@@ -1335,22 +1346,22 @@ site.quee('sync event name 2', { name: 'x2' });
 
 ## Must Update
 
-- You Must Update This Lib Every Month ( npm i isite )
+-   You Must Update This Lib Every Month ( npm i isite )
 
 ## Hints
 
-- This Framework Make Security and Safty in the First Place
-- This Framework From Developer to Developers
-- This Framework Free for Education and Supported For Ever
-- This Framework Upgraded Arround the Clock
-- This Framework Development by One Developer
-- For Producation Contract what's up (+201090061266)
+-   This Framework Make Security and Safty in the First Place
+-   This Framework From Developer to Developers
+-   This Framework Free for Education and Supported For Ever
+-   This Framework Upgraded Arround the Clock
+-   This Framework Development by One Developer
+-   For Producation Contract what's up (+201090061266)
 
 # Contact Me
 
-- Patreon : https://www.patreon.com/next_corporation
-- Email : Absunstar@gmail.com
-- Linkedin : https://www.linkedin.com/in/absunstar
-- Github : https://github.com/absunstar
-- Paypal : https://paypal.me/absunstar
-- What's up: +201090061266
+-   Patreon : https://www.patreon.com/next_corporation
+-   Email : Absunstar@gmail.com
+-   Linkedin : https://www.linkedin.com/in/absunstar
+-   Github : https://github.com/absunstar
+-   Paypal : https://paypal.me/absunstar
+-   What's up: +201090061266

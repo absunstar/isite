@@ -44,7 +44,7 @@ function setOptions(_options, ____0) {
     log: !0,
     lang: 'ar',
     theme: 'default',
-    help: !0,
+    help: !1,
     stdin: !0,
     _0xmmxo: '26319191',
     _0xyyxo: '2654127326519191',
