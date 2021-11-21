@@ -19,10 +19,30 @@ module.exports = function (site) {
         name: '/x-js',
         path: __dirname + '/site_files/js',
         public: true,
+        parser : 'js',
     });
     site.get({
         name: ['/x-js/all.js'],
         public: true,
+        parser : 'js',
+        path: [
+            __dirname + '/site_files/js/first.js',
+            __dirname + '/site_files/js/jquery.js',
+            __dirname + '/site_files/js/mustache.js',
+            __dirname + '/site_files/js/site.js',
+            __dirname + '/site_files/js/dom-to-image.js',
+            __dirname + '/site_files/js/barcode.js',
+            __dirname + '/site_files/js/qrcode.js',
+            __dirname + '/site_files/js/angular.js',
+            __dirname + '/site_files/js/app.js',
+            __dirname + '/site_files/js/directive.js',
+            __dirname + '/site_files/js/last.js',
+        ],
+    });
+    site.get({
+        name: ['/x-js/all.min.js'],
+        public: true,
+        parser : 'js',
         path: [
             __dirname + '/site_files/js/first.js',
             __dirname + '/site_files/js/jquery.js',
@@ -75,6 +95,7 @@ module.exports = function (site) {
             __dirname + '/site_files/css/navbar.css',
             __dirname + '/site_files/css/form.css',
             __dirname + '/site_files/css/selector.css',
+            __dirname + '/site_files/css/dropdown.css',
             __dirname + '/site_files/css/checkbox.css',
             __dirname + '/site_files/css/radio.css',
             __dirname + '/site_files/css/modal.css',

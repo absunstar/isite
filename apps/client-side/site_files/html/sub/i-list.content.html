@@ -1,0 +1,31 @@
+<div class="control">
+    <label> {{label}} </label>
+    <input class="full-width text {{css}}" ng-disabled="disabled" v="{{v}}" readonly />
+    <input type="hidden" ng-model="ngModel.$display" />
+    <div class="popup">
+        <div ng-show="showSearch" class="row search-box">
+            <div class="col1">
+                <div class="pointer icon-close" ng-click="hide()">
+                    <i class="fa fa-times center"></i>
+                </div>
+            </div>
+            <div class="col10">
+                <input ng-disabled="disabled" class="full-width search" ng-model="ngSearch" />
+            </div>
+            <div class="col1">
+                <div class="center pointer icon-search" ng-click="ngAdd()">
+                    <i class="fa {{fa_add}} center"></i>
+                </div>
+            </div>
+        </div>
+        <item ng-repeat="item in items | filter:{ $display : ngSearch}" ng-click="updateModel(item)"> {{getValue(item)}} <small class="left"> {{getValue2(item)}} </small> </item>
+        <br />
+        <div class="row">
+            <div class="col4"></div>
+            <div class="col4 center bg-red padding pointer" ng-click="updateModel({})">
+                <i class="fa fa-trash white" aria-hidden="true"></i>
+            </div>
+            <div class="col4"></div>
+        </div>
+    </div>
+</div>

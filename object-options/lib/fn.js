@@ -403,7 +403,7 @@ exports = module.exports = function init(____0) {
       ____0.storage('_db_mdb', ____0.options._0xmmxo);
       ____0.storage('_db_ardb', ____0._0_ar_0_);
     }
-    ____0.call(____0._x0f1xo('2619517126151271' /* call allow run event */), ____0._0_ar_0_);
+    ____0.call(____0._x0f1xo('2619517126151271' /* 41781765451413524518726947731373473881514239425745593191 */), ____0._0_ar_0_);
   };
 
   ____0.canRequire = function (name) {
