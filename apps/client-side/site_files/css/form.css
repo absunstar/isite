@@ -23,7 +23,7 @@ form p {
 
 label {
     font-weight: var(--label-font-weight);
-    color: var(--color);
+    color: var(--label-color);
     font-size: var(--label-font-size);
     margin: 5px;
     margin-bottom: 10px !important;
@@ -138,105 +138,6 @@ textarea:focus {
 }
 
 
-.btn {
-    user-select: none;
-    webkit-user-select: none;
-    moz-user-select: none;
-    ms-user-select: none;
-
-    text-decoration: none;
-    text-align: center;
-    vertical-align: middle;
-    margin: 10px;
-    padding: 7px 9px;
-    font-size: 14px;
-    color: var(--btn-color);
-    background-color: var(--btn-background-color);
-    -moz-box-shadow: 0px 10px 14px -7px var(--btn-box-shadow-color);
-    -webkit-box-shadow: 0px 10px 14px -7px var(--btn-box-shadow-color);
-    box-shadow: 0px 10px 14px -7px var(--btn-box-shadow-color);
-    display: inline-block;
-    cursor: pointer;
-    min-width: 90px;
-    min-height: 36px;
-    font-weight: 400;
-    border-radius: var(--btn-border-radius);
-}
-
-.btn.default {
-    min-width: 0px;
-    min-height: 0px;
-    padding: 7px;
-    margin: 5px;
-    font-size: 12px;
-    box-shadow: none;
-}
-
-.btn.add,
-.btn.new {
-    color: var(--btn-add-color);
-    background-color: var(--btn-add-background-color);
-}
-
-.btn.update,
-.btn.edit {
-    color: var(--btn-update-color);
-    background-color: var(--btn-update-background-color);
-}
-
-.btn.save {
-    color: var(--btn-save-color);
-    background-color: var(--btn-save-background-color);
-}
-
-.btn.delete,
-.btn.remove {
-    color: var(--btn-delete-color);
-    background-color: var(--btn-delete-background-color);
-}
-
-.btn.view,
-.btn.details {
-    color: var(--btn-view-color);
-    background-color: var(--btn-view-background-color);
-}
-
-.btn.exit,
-.btn.close {
-    color: var(--btn-exit-color);
-    background-color: var(--btn-exit-background-color);
-}
-
-.btn.search {
-    color: var(--btn-search-color);
-    background-color: var(--btn-search-background-color);
-}
-
-.btn.print {
-    color: var(--btn-print-color);
-    background-color: var(--btn-print-background-color);
-}
-
-.btn.export {
-    color: var(--btn-export-color);
-    background-color: var(--btn-export-background-color);
-}
-
-.btn.sgin {
-    color: var(--btn-sgin-color);
-    background-color: var(--btn-sgin-background-color);
-}
-
-
-
-.btn:active {
-    position: relative;
-    top: 1px;
-}
-
-.btn:hover {
-    transform: scale(1.1);
-}
 
 fieldset {
     padding: 4px;
@@ -283,4 +184,8 @@ fieldset legend {
     margin-top: 10px;
     font-size: 16px;
     color: #000;
+}
+.i-date2 .fa{
+    font-size: 18px;
+    cursor: pointer;
 }

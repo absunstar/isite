@@ -30,8 +30,8 @@
     cursor: pointer;
     padding: 10px 12px;
     transition: 0.3s;
-    font-size: 14px;
-    font-weight: bold;
+    font-size: var(--tabs-header-link-font-size);
+    font-weight: var(--tabs-header-link-font-weight);
     color: var(--tabs-header-link-color);
     margin: 10px;
     display: block;
@@ -41,7 +41,6 @@
 .tabs .tabs-header .tab-link:hover {
     background-color: var(--tabs-background-color2);
     color: var(--tabs-header-link-color2);
-    padding-right: 30px;
 }
 
 .tabs .tabs-header .tab-link.active {
@@ -58,6 +57,7 @@
     display: none;
     padding: 6px 12px;
     width: 100%;
+    overflow: visible;
     -webkit-animation-name: var( --tab-animation-name);
     -webkit-animation-duration: var( --tab-animation-duration);
     animation-name: var( --tab-animation-name);

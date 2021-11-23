@@ -75,7 +75,7 @@
     --select-height: 35px;
 
     --btn-color: #ffffff;
-    --btn-background-color: var(--theme-color);
+    --btn-background: var(--theme-color);
     --btn-add-color: #ffffff;
     --btn-add-background-color: #118011;
     --btn-update-color: #ffffff;

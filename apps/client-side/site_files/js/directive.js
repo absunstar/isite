@@ -235,55 +235,79 @@ app.directive('iDate2', function () {
                 attrs.disabled = '';
             }
 
+            $scope.y_search = attrs.year || '202';
+            $scope.m_search = attrs.month || '';
+            $scope.d_search = attrs.day || '';
+
             $scope.days1 = [];
             for (let i = 1; i < 32; i++) {
-                $scope.days1.push(i);
+                $scope.days1.push({
+                    id: i,
+                    name: i,
+                });
             }
             $scope.years1 = [];
             for (let i = 1900; i < 2100; i++) {
-                $scope.years1.push(i);
+                $scope.years1.push({
+                    id: i,
+                    name: i,
+                });
             }
+
             $scope.monthes1 = [
-                'يناير / Jan',
-                'فبراير / Feb',
-                'مارس / Mar',
-                'ابريل / Aper',
-                'مايو / May',
-                'يونيو / June',
-                'يوليو / Jule',
-                'اغسطس / Aug',
-                'سبتمبر / Sep',
-                'اكتوبر / Oct',
-                'نوفمبر / Nov',
-                'ديسمبر / Des',
+                { id: 0, name: 'يناير / Jan' },
+                { id: 1, name: 'فبراير / Feb' },
+                { id: 2, name: 'مارس / Mar' },
+                { id: 3, name: 'ابريل / Aper' },
+                { id: 4, name: 'مايو / May' },
+                { id: 5, name: 'يونيو / June' },
+                { id: 6, name: 'يوليو / Jule' },
+                { id: 7, name: 'اغسطس / Aug' },
+                { id: 8, name: 'سبتمبر / Sep' },
+                { id: 9, name: 'اكتوبر / Oct' },
+                { id: 10, name: 'نوفمبر / Nov' },
+                { id: 11, name: 'ديسمبر / Des' },
             ];
-            $scope.monthes0 = ['يناير', 'فبراير', 'مارس', 'ابريل', 'مايو', 'يونيو', 'يوليو', 'اغسطس', 'سبتمبر', 'اكتوبر', 'نوفمبر', 'ديسمبر'];
 
             $scope.model = null;
-
-            $(element)
-                .find('select')
-                .focus(() => {
-                    $('.popup').hide();
-                });
 
             $scope.$watch('ngModel', function (ngModel) {
                 if (ngModel) {
                     ngModel = new Date(ngModel);
                     $scope.model = $scope.model || {};
                     $scope.model.day = ngModel.getDate();
+                    $scope.model.day_name = $scope.model.day;
                     $scope.model.month = ngModel.getMonth();
+                    $scope.model.month_name = $scope.monthes1.find((m) => m.id == $scope.model.month).name;
                     $scope.model.year = ngModel.getFullYear();
+                    $scope.model.year_name = $scope.model.year;
                 } else {
                     $scope.model = $scope.model || {};
                     $scope.model.day = 0;
+                    $scope.model.day_name = '';
                     $scope.model.month = -1;
+                    $scope.model.month_name = '';
                     $scope.model.year = 0;
+                    $scope.model.year_name = '';
                 }
             });
 
-            $scope.updateDate = function () {
-                if ($scope.model && $scope.model.year && $scope.model.day) {
+            $scope.setDay = function () {
+                $scope.ngModel = new Date();
+            };
+            $scope.updateDate = function (date) {
+                if (date.year) {
+                    $scope.model.year = date.year.id;
+                    $scope.model.year_name = date.year.name;
+                } else if (date.month) {
+                    $scope.model.month = date.month.id;
+                    $scope.model.month_name = date.month.name;
+                } else if (date.day) {
+                    $scope.model.day = date.day.id;
+                    $scope.model.day_name = date.day.name;
+                }
+
+                if ($scope.model && $scope.model.year && $scope.model.day && $scope.model.month > -1) {
                     $scope.ngModel = new Date($scope.model.year, $scope.model.month, $scope.model.day, 0, 0, 0);
                 } else {
                     delete $scope.ngModel;
@@ -298,33 +322,7 @@ app.directive('iDate2', function () {
             label: '@',
             ngModel: '=',
         },
-        template: `
-      <div class="row i-date2">
-  
-        <div class=" control">
-          <label> {{label}}  </label>
-          <div class="row">
-            <div class="col3 day"> 
-              <select  v="{{v}}" ng-disabled="disabled" ng-model="model.day" ng-change="updateDate()" class="appearance-none no-border-left no-border-radius" >
-              <option ng-repeat="d1 in days1" ng-value="d1"> {{d1}} </option>
-              </select>
-            </div>
-            <div class="col5 month"> 
-              <select  v="{{v}}" ng-disabled="disabled" ng-model="model.month" ng-change="updateDate()" class="appearance-none no-border-left no-border-right no-border-radius" >
-              <option ng-repeat="m1 in monthes1" ng-value="$index"> {{m1}} </option>
-              </select>
-            </div>
-            <div class="col4 year"> 
-              <select  v="{{v}}" ng-disabled="disabled" ng-model="model.year" ng-change="updateDate()" class="appearance-none no-border-right no-border-radius" >
-              <option ng-repeat="y1 in years1" ng-value="y1"> {{y1}} </option>
-              </select>
-            </div>
-          </div>
-        </div>
-    
-  
-      </div>
-      `,
+        template: `/*##client-side/sub/i-date2.content.html*/`,
     };
 });
 
@@ -835,7 +833,7 @@ app.directive('iControl', function () {
             $(element)
                 .find('input')
                 .focus(() => {
-                    $('.popup').hide();
+                    $('.i-list .dropdown-content').css('display', 'none');
                 });
 
             scope.$watch(attrs.ngModel, function (v) {});
@@ -1043,7 +1041,7 @@ app.directive('iButton', function () {
                 } else if (attrs.type.like('*add*') || attrs.type.like('*new*')) {
                     attrs.fa = 'plus-circle';
                 } else if (attrs.type.like('*update*') || attrs.type.like('*edit*')) {
-                    attrs.fa = 'pencil';
+                    attrs.fa = 'edit';
                 } else if (attrs.type.like('*save*')) {
                     attrs.fa = 'save';
                 } else if (attrs.type.like('*delete*') || attrs.type.like('*remove*')) {
@@ -1095,6 +1093,9 @@ app.directive('iList', [
                 attrs.space = attrs.space || ' ';
                 attrs.ngValue = attrs.ngValue || '';
 
+                $scope.searchElement = $(element).find('.dropdown .search');
+                $scope.popupElement = $(element).find('.dropdown .dropdown-content');
+
                 if (typeof attrs.disabled !== 'undefined') {
                     attrs.disabled = 'disabled';
                 } else {
@@ -1114,70 +1115,21 @@ app.directive('iList', [
                 }
 
                 let input = $(element).find('input');
-                let popup = $(element).find('.popup');
-                let search = $(element).find('.search');
-
-                function handlePosition() {
-                    let $modal_body = $(popup).closest('.modal-body');
-                    let $icontrol = $(popup).parent();
-                    let $ilist = $icontrol.parent();
-                    let width = $icontrol.width();
-                    let offset = $ilist.offset();
-                    let m_r = parseFloat($('body').css('margin-right').replace('px', ''));
-                    let m_l = parseFloat($('body').css('margin-left').replace('px', ''));
-                    let rigth = $(document).width() - offset.left - width + m_r + m_l;
-
-                    $(popup).css('width', width);
-                    $(popup).css('right', rigth);
-
-                    let top = 0;
-                    let parent_top = $icontrol.offset().top;
-                    let body_scroll = 0;
-                    let window_scroll = $(window).scrollTop();
-
-                    if ($modal_body.length > 0) {
-                        body_scroll = $modal_body.scrollTop();
-                    }
-
-                    if (window_scroll) {
-                        top = parent_top - window_scroll + 80;
-                    } else if (parent_top) {
-                        top = parent_top + 80;
-                    }
-
-                    $(popup).css('top', top);
-                }
-
-                $(window).scroll(function () {
-                    handlePosition();
-                });
-
-                $('.modal-body').scroll(function () {
-                    handlePosition();
-                });
-
-                $('.modal').scroll(function () {
-                    handlePosition();
-                });
-
-                $(popup)
-                    .closest('table')
-                    .closest('div')
-                    .scroll(function () {
-                        handlePosition();
-                    });
-
-                $(popup).hide();
-
-                $(input).focus(() => {
-                    $('.popup').hide();
-                    $(popup).show();
-                    handlePosition();
-                    $(popup).focus();
-                });
-
+                $(element).hover(
+                    () => {
+                        $scope.popupElement.css('display', 'block');
+                    },
+                    () => {
+                        $scope.popupElement.css('display', 'none');
+                    },
+                );
+                $scope.focus = function () {
+                    $('.i-list .dropdown-content').css('display', 'none');
+                    $scope.popupElement.css('display', 'block');
+                    $scope.searchElement.focus();
+                };
                 $scope.hide = function () {
-                    $(popup).hide();
+                    $scope.popupElement.css('display', 'none');
                 };
 
                 $scope.getValue = function (item) {
@@ -1250,11 +1202,10 @@ app.directive('iList', [
                 $scope.updateModel = function (item) {
                     $scope.ngModel = $scope.getNgValue(item, $scope.ngValue);
                     input.val($scope.getNgModelValue($scope.ngModel) + attrs.space + $scope.getNgModelValue2($scope.ngModel));
-                    $(popup).hide();
-                    $(input).show();
                     $timeout(() => {
                         $scope.ngChange();
                     });
+                    $scope.hide();
                 };
             },
             template: `/*##client-side/sub/i-list2.content.html*/`,

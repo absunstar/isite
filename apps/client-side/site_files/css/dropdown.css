@@ -8,6 +8,7 @@
 .dropdown-content {
     display: none;
     position: absolute;
+    top: 40px;
     background-color: #ffffff;
     width: 100%;
     box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
@@ -29,11 +30,13 @@
 }
 
 /* Change color of dropdown links on hover */
-.dropdown-content p:hover {
+.dropdown-content .dropdown-item:hover {
     background-color: var(--theme-color);
     color: #fff;
 }
-
+.dropdown-content .dropdown-item:hover p , .dropdown-content .dropdown-item:hover small{
+    color: #fff;
+}
 /* Show the dropdown menu on hover */
 .dropdown:hover .dropdown-content {
     display: block;
@@ -45,4 +48,14 @@
 
 .dropdown-item {
     cursor: pointer;
+    background: var(--dropdown-background);
+}
+.dropdown-item p{
+    color: var(--dropdown-color);
+    font-size: var(--dropdown-font-size);
+    background: transparent;
+}
+.dropdown-item small{
+    color: var(--dropdown-color2);
+    font-size: var(--dropdown-font-size2);
 }

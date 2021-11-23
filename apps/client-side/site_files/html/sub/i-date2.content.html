@@ -1,0 +1,64 @@
+<div class="row i-date2">
+    <div class="control">
+        <label> {{label}} </label>
+        <div class="row">
+          <div class="col1 center" ng-click="setDay()">
+            <i class="fa fa-calendar-day"></i>
+          </div>
+            <div class="col2 day">
+                <div class="dropdown">
+                    <div class="control">
+                        <input class="full-width text dropdown-text {{css}}" ng-disabled="disabled" v="{{v}}" readonly ng-model="model.day_name" />
+                    </div>
+
+                    <div class="dropdown-content">
+                        <div class="row padding" >
+                            <input class="full-width search" ng-model="d_search" />
+                            <br />
+                        </div>
+
+                        <div class="row padding dropdown-item" ng-repeat="d in days1| filter : d_search">
+                            <p class="center" ng-click="updateDate({day : d})">{{d.name}}</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col5 month">
+                <div class="dropdown">
+                    <div class="control">
+                        <input class="full-width text dropdown-text {{css}}" ng-disabled="disabled" v="{{v}}" readonly ng-model="model.month_name" />
+                    </div>
+
+                    <div class="dropdown-content">
+                        <div class="row padding" >
+                            <input class="full-width search" ng-model="m_search" />
+                            <br />
+                        </div>
+
+                        <div class="row padding dropdown-item" ng-repeat="m in monthes1 | filter : m_search">
+                            <p class="center" ng-click="updateDate({month : m})">{{m.name}}</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col4 year">
+                <div class="dropdown">
+                    <div class="control">
+                        <input class="full-width text dropdown-text {{css}}" ng-disabled="disabled" v="{{v}}" readonly ng-model="model.year_name" />
+                    </div>
+
+                    <div class="dropdown-content">
+                        <div class="row padding">
+                            <input class="full-width search" ng-model="y_search" />
+                            <br />
+                        </div>
+
+                        <div class="row padding dropdown-item" ng-repeat="y in years1 | filter : y_search">
+                            <p class="center" ng-click="updateDate({year : y})">{{y.name}}</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

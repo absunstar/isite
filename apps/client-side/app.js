@@ -78,7 +78,11 @@ module.exports = function (site) {
         path: __dirname + '/site_files/fonts',
         public: true,
     });
-
+    site.get({
+        name: '/webfonts',
+        path: __dirname + '/site_files/webfonts',
+        public: true,
+    });
     site.get({
         name: ['/x-css/all.css', '/x-css/site.css'],
         parser: 'css2',
@@ -96,6 +100,7 @@ module.exports = function (site) {
             __dirname + '/site_files/css/form.css',
             __dirname + '/site_files/css/selector.css',
             __dirname + '/site_files/css/dropdown.css',
+            __dirname + '/site_files/css/btn.css',
             __dirname + '/site_files/css/checkbox.css',
             __dirname + '/site_files/css/radio.css',
             __dirname + '/site_files/css/modal.css',
