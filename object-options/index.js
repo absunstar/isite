@@ -38,7 +38,7 @@ function setOptions(_options, ____0) {
     name: name,
     hostname : 'localhost',
     key : null,
-    saving_time: 10,
+    savingTime: 10,
     _0x14xo: _0x14xo, // 3259376545129191
     _0xddxo: _0xddxo ,// 421957684138766241719191
     log: !0,
@@ -131,7 +131,7 @@ function setOptions(_options, ____0) {
   _x0oo.upload_dir = _x0oo.upload_dir || template.upload_dir;
   _x0oo.download_dir = _x0oo.download_dir || template.download_dir;
 
-  _x0oo.saving_time = _x0oo.saving_time ?? template.saving_time;
+  _x0oo.savingTime = _x0oo.savingTime ?? template.savingTime;
   _x0oo.hostname = _x0oo.hostname || template.hostname;
   _x0oo.log = _x0oo.log ?? template.log;
   _x0oo.lang = _x0oo.lang ?? template.lang;

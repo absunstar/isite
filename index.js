@@ -237,12 +237,12 @@ module.exports = function init(options) {
   };
 
   ____0.on('[any][saving data]', function () {
-    ____0.log('Saving Data :: ' + ____0.options.saving_time + ' Minute ');
+    ____0.log('Saving Data :: ' + ____0.options.savingTime + ' Minute ');
   });
 
   setInterval(function () {
     ____0.call('[any][saving data]');
-  }, ____0.options.saving_time * 1000 * 60);
+  }, ____0.options.savingTime * 1000 * 60);
 
   ____0.dashboard = require(__dirname + '/lib/dashboard.js');
   ____0.dashboard(____0);

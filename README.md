@@ -89,7 +89,7 @@ site = isite({
     apps_dir: process.cwd() + '/apps',
     name: 'Your Site',
     dynamic: false, // (auto set )dynamic db & prot based on folder name [ smart-pos-3000 ]
-    saving_time: 60,
+    savingTime: 60,
     log: !0,
     lang: 'ar',
     theme: 'default',
