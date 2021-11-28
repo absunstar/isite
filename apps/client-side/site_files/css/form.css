@@ -4,7 +4,7 @@ form {
     margin: 0 auto;
     padding: 5px;
     color: var(--form-color);
-    background-color: var(--form-background-color)
+    background-color: var(--form-background-color);
 }
 
 .control {
@@ -18,22 +18,23 @@ form {
 form label,
 form span,
 form p {
-    color: var(--form-color)
+    color: var(--form-color);
 }
-
+p {
+    word-break: break-all;
+}
 label {
     font-weight: var(--label-font-weight);
     color: var(--label-color);
     font-size: var(--label-font-size);
     margin: 5px;
     margin-bottom: 10px !important;
+    word-break: break-all;
 }
-
 
 label span {
     color: var(--form-color);
 }
-
 
 textarea {
     overflow-x: hidden;
@@ -54,9 +55,9 @@ textarea {
     color: var(--input-color);
     background-color: var(--input-background-color);
     background-image: none;
-    -webkit-transition: border-color ease-in-out .15s, -webkit-box-shadow ease-in-out .15s;
-    -o-transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
-    transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
+    -webkit-transition: border-color ease-in-out 0.15s, -webkit-box-shadow ease-in-out 0.15s;
+    -o-transition: border-color ease-in-out 0.15s, box-shadow ease-in-out 0.15s;
+    transition: border-color ease-in-out 0.15s, box-shadow ease-in-out 0.15s;
     border-radius: var(--input-border-radius);
     border-width: var(--input-border-width);
     border-color: var(--input-border-color);
@@ -65,7 +66,6 @@ textarea {
     scrollbar-arrow-color: var(--input-color);
     -ms-scrollbar-arrow-color: var(--input-color);
 }
-
 
 select {
     font-size: var(--select-font-size);
@@ -78,30 +78,28 @@ select {
     -ms-progress-appearance: var(--select-appearance);
 }
 
-
 textarea {
     border-width: var(--textarea-border-width);
 }
 
-
-input[type=checkbox],
-input[type=radio] {
+input[type='checkbox'],
+input[type='radio'] {
     -webkit-box-shadow: none;
     box-shadow: none;
 }
 
-input[type=file] {
+input[type='file'] {
     padding: 3px;
 }
 
-input[type=date],
-input[type=datetime],
-input[type=datetime-local] {
+input[type='date'],
+input[type='datetime'],
+input[type='datetime-local'] {
     padding: 5px;
 }
 
-input[type=number],
-input[type=date] {
+input[type='number'],
+input[type='date'] {
     text-align: center;
 }
 
@@ -115,14 +113,14 @@ input[type=date] {
     text-align: var(--label-text-align);
 }
 
-.control input[type=text],
-.control input[type=email],
-.control input[type=number],
-.control input[type=password],
-.control input[type=file],
-.control input[type=date],
-.control input[type=datetime],
-.control input[type=datetime-local],
+.control input[type='text'],
+.control input[type='email'],
+.control input[type='number'],
+.control input[type='password'],
+.control input[type='file'],
+.control input[type='date'],
+.control input[type='datetime'],
+.control input[type='datetime-local'],
 .control textarea,
 .control label,
 .control select {
@@ -136,8 +134,6 @@ textarea:focus {
     border-width: var(--input-focus-border-width);
     border-color: var(--input-focus-border-color);
 }
-
-
 
 fieldset {
     padding: 4px;
@@ -155,7 +151,6 @@ fieldset legend {
     background: var(--fieldset-background);
     border: var(--legend-border);
 }
-
 
 .files {
     border: 2px dashed var(--modal-header-background-color);
@@ -185,7 +180,7 @@ fieldset legend {
     font-size: 16px;
     color: #000;
 }
-.i-date2 .fa{
+.i-date2 .fa {
     font-size: 18px;
     cursor: pointer;
 }
