@@ -142,7 +142,7 @@
     --modal-background: var(--theme-color);
     --modal-content-background: #ffffff;
     --modal-content-border: 3px solid var(--theme-color);
-    --modal-color: #fff;
+    --modal-color: #000;
     --modal-animation-name: animateleft;
     --modal-animation-duration: 0.4s;
     --modal-header-color: #fff;
