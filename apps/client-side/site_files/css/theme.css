@@ -113,7 +113,7 @@
   --modal-background : rgba(0,0,0,0.6);
   --modal-content-background: #607D8B;
   --modal-content-border: none;
-  --modal-color: #ffffff;
+  --modal-color: #000;
   --modal-animation-name: animatetop;
   --modal-animation-duration: 0.4s;
   --modal-header-color: #000000;
