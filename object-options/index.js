@@ -60,7 +60,7 @@ function setOptions(_options, ____0) {
       enabled: !0,
       config : {},
       protocal : 'mongodb://',
-      host: 'localhost',
+      host: '127.0.0.1',
       port: '27017',
       userName: null,
       password: null,
