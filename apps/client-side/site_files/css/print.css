@@ -3,7 +3,6 @@
 }
 
 .page-a4 {
-  width: 210mm !important;
   height: 297mm !important;
   padding: 2mm !important;
   margin: 0mm !important;
@@ -15,7 +14,6 @@
 }
 
 .page-width-a4 {
-  width: 210mm;
   padding: 2mm;
   margin: 0mm;
 }
@@ -26,6 +24,10 @@ body.a4 {
 }
 body.a4 {
   height: 297mm;
+}
+body.print-mode{
+  padding: 0px !important;
+  margin: 2mm !important;
 }
 body.print-mode .hide {
   visibility: visible;
@@ -39,7 +41,6 @@ body.print-mode .print-only {
 }
 body.print-mode .table {
   table-layout: fixed;
-  max-width: 206mm !important;
   border-collapse: collapse;
   border: 1px solid black;
   font-size: 8pt;
@@ -66,6 +67,12 @@ body.print-mode textarea {
 body.print-mode .small {
   font-size: 6pt;
 }
+
+.page {
+  page-break-before: always;
+  page-break-after: always;
+  page-break-inside: avoid !important;
+}
 @media print {
   :root {
     --legend-color: #000;
@@ -76,6 +83,7 @@ body.print-mode .small {
     /* this section always occupies it's own page or pages. */
     page-break-before: always;
     page-break-after: always;
+    page-break-inside: avoid !important;
   }
 
   .print-break {

@@ -12,7 +12,7 @@ site.print = site.printHTML = function (options) {
         return false;
     }
     if (!options.ip) {
-        options.ip = 'localhost';
+        options.ip = '127.0.0.1';
     }
     if (!options.port) {
         options.port = '60080';
@@ -25,7 +25,9 @@ site.print = site.printHTML = function (options) {
     });
 
     window.document.querySelectorAll('style').forEach((s) => {
-        content += s.outerHTML;
+        if (s.innerHTML.indexOf('ng-') === -1) {
+            content += s.outerHTML;
+        }
     });
 
     if (options.links) {
@@ -78,15 +80,12 @@ site.print = site.printHTML = function (options) {
                     })
                         .then((res) => res.text())
                         .then((html) => {
+                            options.html = html;
+                            options.type = 'html';
                             site.postData(
                                 {
                                     url: `http://${options.ip}:${options.port}/print`,
-                                    data: {
-                                        html: html,
-                                        type: 'html',
-                                        printer: options.printer,
-                                        width: options.width ?? 320,
-                                    },
+                                    data: options,
                                 },
                                 (res) => {
                                     console.log(res);
