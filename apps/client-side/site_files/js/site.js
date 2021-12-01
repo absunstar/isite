@@ -318,8 +318,10 @@
         op.url = site.handle_url(op.url);
 
         if (window.SOCIALBROWSER && window.SOCIALBROWSER.fetchJson) {
+            console.log(' ( SOCIALBROWSER.fetchJson ) ', op);
             SOCIALBROWSER.fetchJson(op, (data) => {
                 callback(data);
+                console.log(' ( SOCIALBROWSER.fetchJson callback ) ', data);
             });
         } else {
             fetch(op.url, {
