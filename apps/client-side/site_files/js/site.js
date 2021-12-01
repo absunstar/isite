@@ -290,18 +290,21 @@
             };
         }
 
-        op.data = op.data ||
-            op.body || {
-                xInfo: 'No Data',
-            };
+        op.data = op.data || op.body;
+        delete op.body;
 
-        let body = JSON.stringify(op.data);
+        if (op.data && typeof op.data == 'object') {
+            op.data = JSON.stringify(op.data);
+        }
 
         op.headers = op.headers || {
             Accept: 'application/json',
             'Content-Type': 'application/json',
-            'Content-Length': body.length.toString(),
         };
+
+        if (op.data && typeof op.data == 'string') {
+            op.headers['Content-Length'] = op.data.length.toString();
+        }
 
         try {
             op.headers['Cookie'] = document.cookie;
@@ -323,7 +326,7 @@
                 mode: op.mode,
                 method: op.method,
                 headers: op.headers,
-                body: body,
+                body: op.data,
                 redirect: op.redirect,
             })
                 .then((res) => res.json())
