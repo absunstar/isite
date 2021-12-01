@@ -227,7 +227,7 @@
             Accept: 'application/json',
             'Content-Type': 'application/json',
         };
-
+        op.url = site.handle_url(op.url);
         fetch(op.url, {
             mode: 'cors',
             method: 'get',
@@ -251,7 +251,7 @@
                 url: op,
             };
         }
-
+        op.url = site.handle_url(op.url);
         fetch(op.url, {
             mode: 'cors',
             method: 'get',

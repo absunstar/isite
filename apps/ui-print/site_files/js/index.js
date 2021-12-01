@@ -20,6 +20,7 @@ site.print = site.printHTML = function (options) {
 
     let content = '';
     window.document.querySelectorAll('link[rel=stylesheet]').forEach((l) => {
+        l.href = site.handle_url(l.href);
         content += l.outerHTML;
     });
 
