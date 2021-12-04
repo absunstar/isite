@@ -1084,9 +1084,9 @@
                 text: options.text,
                 width: options.width || 256,
                 height: options.height || 256,
-                colorDark: options.colorDark || '#000000',
+                colorDark: options.colorDark || '#345BD1',
                 colorLight: options.colorLight || '#ffffff',
-                correctLevel: options.correctLevel || QRCode.CorrectLevel.H,
+                correctLevel: options.correctLevel || QRCode.CorrectLevel.L,
             });
         }
     };

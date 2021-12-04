@@ -25,9 +25,7 @@ site.print = site.printHTML = function (options) {
     });
 
     window.document.querySelectorAll('style').forEach((s) => {
-        if (s.innerHTML.indexOf('ng-') === -1) {
-            content += s.outerHTML;
-        }
+        content += s.outerHTML;
     });
 
     if (options.links) {
@@ -135,7 +133,7 @@ site.printAsImage = function (options, callback) {
         return false;
     }
     if (!options.ip) {
-        options.ip = 'localhost';
+        options.ip = '127.0.0.1';
     }
     if (!options.port) {
         options.port = '60080';
@@ -152,14 +150,14 @@ site.printAsImage = function (options, callback) {
     }
 
     domtoimage
-        .toPng(node, { quality: 1, bgcolor: '#ffffff' })
+        .toPng(node, { quality: 1, bgcolor: '#ffffff', cacheBust: true })
         .then(function (dataUrl) {
             var img = new Image();
             img.src = dataUrl;
             if (callback) {
                 callback(img);
             }
-            options.dataUrl = dataUrl;
+            options.content = dataUrl;
             site.printDataUrl(options);
             site.printAsImageBusy = false;
         })
@@ -171,7 +169,7 @@ site.printAsImage = function (options, callback) {
 
 site.printDataUrl = function (options) {
     site.postData(
-        { url: '/api/print', data: { content: options.dataUrl, type: options.type } },
+        { url: '/api/print', data: options },
         (response) => {
             if (response.done) {
                 if (options.printer) {
@@ -181,15 +179,12 @@ site.printDataUrl = function (options) {
                     })
                         .then((res) => res.text())
                         .then((html) => {
+                            options.html = html;
+                            options.type = 'html';
                             site.postData(
                                 {
                                     url: `http://${options.ip}:${options.port}/print`,
-                                    data: {
-                                        html: html,
-                                        type: 'html',
-                                        printer: options.printer,
-                                        width: options.width ?? 320,
-                                    },
+                                    data: options,
                                 },
                                 (res) => {},
                             );
