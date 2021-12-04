@@ -150,7 +150,7 @@ site.printAsImage = function (options, callback) {
     }
 
     domtoimage
-        .toPng(node, { quality: 1, bgcolor: '#ffffff', cacheBust: true })
+        .toPng(node, { quality: 1, bgcolor: '#ffffff' })
         .then(function (dataUrl) {
             var img = new Image();
             img.src = dataUrl;
