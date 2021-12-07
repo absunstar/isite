@@ -408,6 +408,38 @@
         return parseFloat(n);
     };
 
+    site.to_money = site.toMoney = function (_num, fixed) {
+        let n = 0;
+        if (_num) {
+            _num = _num.toFixed(2).split('.');
+            let n1 = _num[0];
+            let n2 = _num[1];
+            if (n2) {
+                let n3 = n2[0];
+                let n4 = n2[1];
+                if (n4 && parseInt(n4) > 5) {
+                    n3 = parseInt(n3) + 1;
+                    n3 = n3 * 10;
+                    if (n3 == 100) {
+                        n3 = 0;
+                        _num[0] = parseInt(_num[0]) + 1;
+                        _num[1] = '';
+                    }else{
+                        _num[1] = n3;
+                    }
+                } else if (n4 && parseInt(n4) < 5) {
+                    n3 = parseInt(n3);
+                    n3 = n3 * 10;
+                    _num[1] = n3;
+                } else {
+                    _num[1] = n2;
+                }
+            }
+            n = _num.join('.');
+        }
+        return parseFloat(n);
+    };
+
     site.to_float = site.toFloat = function (_num) {
         if (_num) {
             return parseFloat(_num);
