@@ -424,15 +424,16 @@
                         n3 = 0;
                         _num[0] = parseInt(_num[0]) + 1;
                         _num[1] = '';
-                    }else{
+                    } else {
                         _num[1] = n3;
                     }
-                } else if (n4 && parseInt(n4) < 5) {
-                    n3 = parseInt(n3);
-                    n3 = n3 * 10;
-                    _num[1] = n3;
-                } else {
+                } else if (n4 && parseInt(n4) == 5) {
                     _num[1] = n2;
+                } else if (n4 && parseInt(n4) > 2) {
+                    n4 = 5;
+                    _num[1] = n3 + n4;
+                } else {
+                    _num[1] = n3;
                 }
             }
             n = _num.join('.');
