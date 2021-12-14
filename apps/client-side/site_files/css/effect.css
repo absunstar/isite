@@ -190,96 +190,82 @@
     .w50 input {
         min-width: 50px !important;
         width: 50px !important;
-        white-space: pre-line !important;
     }
 
     .w100,
     .w100 input {
         width: 100px !important;
         min-width: 100px !important;
-        white-space: pre-line !important;
     }
 
     .w125,
     .w125 input {
         width: 125px !important;
         min-width: 125px !important;
-        white-space: pre-line !important;
     }
 
     .w150,
     .w150 input {
         width: 150px !important;
         min-width: 150px !important;
-        white-space: pre-line !important;
     }
 
     .w175,
     .w175 input {
         width: 175px !important;
         min-width: 175px !important;
-        white-space: pre-line !important;
     }
 
     .w200,
     .w200 input {
         width: 200px !important;
         min-width: 200px !important;
-        white-space: pre-line !important;
     }
 
     .w225,
     .w225 input {
         width: 225px !important;
         min-width: 225px !important;
-        white-space: pre-line !important;
     }
 
     .w250,
     .w250 input {
         width: 250px !important;
         min-width: 250px !important;
-        white-space: pre-line !important;
     }
 
     .w275,
     .w275 input {
         width: 275px !important;
         min-width: 275px !important;
-        white-space: pre-line !important;
     }
 
     .w300,
     .w300 input {
         width: 300px !important;
         min-width: 300px !important;
-        white-space: pre-line !important;
     }
 
     .w350,
     .w350 input {
         width: 350px !important;
         min-width: 350px !important;
-        white-space: pre-line !important;
     }
 
     .w400,
     .w400 input {
         width: 400px !important;
         min-width: 400px !important;
-        white-space: pre-line !important;
     }
 
     .w450,
     .w450 input {
         width: 450px !important;
         min-width: 450px !important;
-        white-space: pre-line !important;
     }
     .w500,
     .w500 input {
         width: 500px !important;
         min-width: 500px !important;
-        white-space: pre-line !important;
     }
 }
