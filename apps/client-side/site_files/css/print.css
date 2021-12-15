@@ -17,25 +17,25 @@
 .width-15-mm {
     min-width: 15mm !important;
     width: 15mm !important;
-    white-space: nowrap;
+    white-space: normal;
     max-width: 15mm !important;
 }
 .width-30-mm {
     min-width: 30mm !important;
     width: 30mm !important;
-    white-space: nowrap;
+    white-space: normal;
     max-width: 30mm !important;
 }
 .width-60-mm {
     min-width: 60mm !important;
     width: 60mm !important;
-    white-space: nowrap;
+    white-space: normal;
     max-width: 60mm !important;
 }
 .width-90-mm {
     min-width: 90mm !important;
     width: 90mm !important;
-    white-space: nowrap;
+    white-space: normal;
     max-width: 90mm !important;
 }
 

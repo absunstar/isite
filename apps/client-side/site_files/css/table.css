@@ -42,6 +42,7 @@
   padding: 5px;
   text-align: center;
   font-weight: bold;
+  white-space: nowrap;
 }
 
 .table.center {
@@ -74,10 +75,3 @@
   border: none !important;
 }
 
-@media print {
-
-  table.details {
-    font-size: 85%;
-  }
-
-}
