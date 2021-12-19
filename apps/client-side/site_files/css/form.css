@@ -21,7 +21,7 @@ form p {
     color: var(--form-color);
 }
 p {
-    word-break: break-all;
+    word-break: break-word;
 }
 label {
     font-weight: var(--label-font-weight);
