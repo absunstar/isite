@@ -16,7 +16,7 @@
         
                         $http({
                             method: 'POST',
-                            url: '/@security/api/user/register',
+                            url: '/x-security/api/user/register',
                             transformRequest: function (obj) {
                                 var str = [];
                                 for (var p in obj)
@@ -51,7 +51,7 @@
         
                         $http({
                             method: 'POST',
-                            url: '/@security/api/user/login',
+                            url: '/x-security/api/user/login',
                             transformRequest: function (obj) {
                                 var str = [];
                                 for (var p in obj)
@@ -83,7 +83,7 @@
         
                         $http({
                             method: 'POST',
-                            url: '/@security/api/user/logout',
+                            url: '/x-security/api/user/logout',
                             transformRequest: function (obj) {
                                 var str = [];
                                 for (var p in obj)

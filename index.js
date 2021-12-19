@@ -135,6 +135,7 @@ module.exports = function init(options) {
 
   ____0.routing = require('./lib/routing.js')(____0);
 
+  ____0.off = ____0.routing.off;
   ____0.onREQUEST = ____0.routing.onREQUEST;
 
   ____0.get = ____0.onGET = ____0.routing.onGET;

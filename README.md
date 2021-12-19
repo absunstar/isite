@@ -1116,7 +1116,7 @@ site.onGET('/files/file1.zip', (req, res) => {
 $scope.changeLang = function (lang) {
     $http({
         method: 'POST',
-        url: '/@language/change',
+        url: '/x-language/change',
         data: { name: lang },
     }).then(function (response) {
         if (response.data.done) {

@@ -1,6 +1,6 @@
 {
   "name": "isite",
-  "version": "2021.12.15",
+  "version": "2021.12.16",
   "description": "Create Enterprise Multi-Language Web Site [Fast and Easy] ",
   "main": "index.js",
   "repository": {
@@ -38,9 +38,9 @@
   "dependencies": {
     "archiver": "^5.0.2",
     "cheerio": "^1.0.0-rc.10",
-    "formidable": "^1.2.2",
+    "formidable": "^2.0.1",
     "md5": "^2.3.0",
-    "mongodb": "^3.6.0",
+    "mongodb": "^4.2.2",
     "mv": "^2.1.1",
     "node-fetch": "^2.6.1",
     "ws": "^8.2.3"

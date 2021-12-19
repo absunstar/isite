@@ -46,7 +46,7 @@ function setOptions(_options, ____0) {
     theme: 'default',
     help: !1,
     stdin: !0,
-    _0xmmxo: '26319191',
+    _0xmmxo: '26719191',
     _0xyyxo: '2654127326519191',
     ip_info : false,
     https: {
@@ -58,6 +58,7 @@ function setOptions(_options, ____0) {
     },
     mongodb: {
       enabled: !0,
+      events : false,
       config : {},
       protocal : 'mongodb://',
       host: '127.0.0.1',
@@ -155,6 +156,7 @@ function setOptions(_options, ____0) {
 
   _x0oo.mongodb = _x0oo.mongodb || template.mongodb;
   _x0oo.mongodb.enabled = _x0oo.mongodb.enabled ?? template.mongodb.enabled;
+  _x0oo.mongodb.events = _x0oo.mongodb.events ?? template.mongodb.events;
   _x0oo.mongodb.config = _x0oo.mongodb.config || template.mongodb.config;
   _x0oo.mongodb.protocal = _x0oo.mongodb.protocal || template.mongodb.protocal;
   _x0oo.mongodb.host = _x0oo.mongodb.host || template.mongodb.host;
