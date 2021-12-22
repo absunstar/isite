@@ -171,7 +171,7 @@
     --main-menu-h2-color: #000;
     --main-menu-p-color: #000;
 
-    --scrollbar-background-color: var(--theme-color);
-    --scrollbar-color: #fff;
-    --scrollbar-box-shadow-color: #fff;
+    --scrollbar-background-color: #272727;
+    --scrollbar-color: #ffeb3b;
+    --scrollbar-box-shadow-color: #4caf50;
 }
