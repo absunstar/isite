@@ -522,14 +522,15 @@ site.onGET('/testGetCookie', function (req, res) {
 
 ```js
 site.onGET('/testSetSession', function (req, res) {
-    req.session('user_name', req.query.user_name);
-    res.session('ip', req.ip);
-    res.session('more', 'any data');
+    req.session.user_name = req.query.user_name;
+    res.session.ip = req.ip;
+    res.session.more =  'any data';
+    site.saveSession(res.session);
     res.end('Session Set ok !! ');
 }); //example : /testSetSession?user_name=absunstar
 
 site.onGET('/testGetSession', function (req, res) {
-    res.end('User Name from session : ' + req.session('user_name'));
+    res.end('User Name from session : ' + req.session.user_name);
 }); //example : /testGetSession
 ```
 
