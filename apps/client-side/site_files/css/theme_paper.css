@@ -133,6 +133,8 @@
 
     --fieldset-border: 1px solid var(--theme-color);
     --fieldset-background: none;
+    --fieldset-margin : 10px;
+    --fieldset-padding : 5px;
     --legend-color: var(--theme-color);
     --legend-text-shadow: none;
     --legend-font-size: 18px;
