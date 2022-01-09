@@ -1,7 +1,8 @@
 /* The container <div> - needed to position the dropdown content */
 .dropdown {
     position: relative;
-    display: block;
+    display: inline-block;
+    width: 100%;
 }
 
 /* Dropdown Content (Hidden by Default) */
@@ -34,7 +35,8 @@
     background-color: var(--theme-color);
     color: #fff;
 }
-.dropdown-content .dropdown-item:hover p , .dropdown-content .dropdown-item:hover small{
+.dropdown-content .dropdown-item:hover p,
+.dropdown-content .dropdown-item:hover small {
     color: #fff;
 }
 /* Show the dropdown menu on hover */
@@ -50,12 +52,12 @@
     cursor: pointer;
     background: var(--dropdown-background);
 }
-.dropdown-item p{
+.dropdown-item p {
     color: var(--dropdown-color);
     font-size: var(--dropdown-font-size);
     background: transparent;
 }
-.dropdown-item small{
+.dropdown-item small {
     color: var(--dropdown-color2);
     font-size: var(--dropdown-font-size2);
 }
