@@ -19,12 +19,12 @@ module.exports = function (site) {
         name: '/x-js',
         path: __dirname + '/site_files/js',
         public: true,
-        parser : 'js',
+        parser: 'js',
     });
     site.get({
         name: ['/x-js/all.js'],
         public: true,
-        parser : 'js',
+        parser: 'js',
         path: [
             __dirname + '/site_files/js/first.js',
             __dirname + '/site_files/js/jquery.js',
@@ -42,7 +42,7 @@ module.exports = function (site) {
     site.get({
         name: ['/x-js/all.min.js'],
         public: true,
-        parser : 'js',
+        parser: 'js',
         path: [
             __dirname + '/site_files/js/first.js',
             __dirname + '/site_files/js/jquery.js',
@@ -130,9 +130,10 @@ module.exports = function (site) {
                 };
                 let file = req.files.fileToUpload;
                 if (file) {
+                    console.log(file);
                     let newName = 'image_' + new Date().getTime().toString().replace('.', '_') + '.png';
                     let newpath = site.dir + '/../../uploads/' + req.params.category + '/images/' + newName;
-                    site.mv(file.path, newpath, function (err) {
+                    site.mv(file.filepath, newpath, function (err) {
                         if (err) {
                             response.error = err;
                             response.done = !1;
@@ -169,14 +170,16 @@ module.exports = function (site) {
                 }
                 let newName = 'file_' + new Date().getTime() + '.' + site.path.extname(file.name);
                 let newpath = site.dir + '/../../uploads/' + req.params.category + '/files/' + newName;
-                site.mv(file.path, newpath, function (err) {
+                site.mv(file.filepath, newpath, function (err) {
                     if (err) {
                         response.error = err;
                         response.done = !1;
                     }
                     response.file = {};
                     response.file.url = '/api/file/' + req.params.category + '/' + newName;
-                    response.file.name = file.name;
+                    response.file.name = file.originalFilename;
+                    response.file.mimetype = file.mimetype;
+                    response.file.size = file.size;
                     res.json(response);
                 });
             });
