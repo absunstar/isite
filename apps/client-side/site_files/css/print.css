@@ -104,9 +104,12 @@ body.print-mode .small {
         --legend-color: #000;
         --legend-text-shadow: none;
     }
-
+    html,
+    body,
     .page {
-        /* this section always occupies it's own page or pages. */
+        margin: 0;
+    }
+    .page {
         page-break-before: always;
         page-break-after: always;
         page-break-inside: avoid !important;
@@ -117,57 +120,11 @@ body.print-mode .small {
     }
 
     .print-start {
-        /* elements always start on the top of a new page. */
         page-break-before: always;
     }
 
     .print-content {
         page-break-inside: avoid;
-    }
-
-    h1,
-    h2,
-    h3,
-    h4,
-    h5 {
-        page-break-after: avoid;
-    }
-
-    /* @page: first {
-    margin: 0;
-  }
-  @page: blank {
-    @top-center {
-      content: "This page is intentionally left blank.";
-    }
-  } */
-
-    @page {
-        size: A4;
-    }
-
-    @page: right {
-        @top-right {
-            content: '';
-        }
-    }
-
-    @page: right {
-        @bottom-right {
-            content: '';
-        }
-    }
-
-    @page: left {
-        @top-left {
-            content: '';
-        }
-    }
-
-    @page: left {
-        @bottom-left {
-            content: 'Page ' counter(page) ' of ' counter(pages);
-        }
     }
 
     a {
