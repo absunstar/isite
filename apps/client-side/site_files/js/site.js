@@ -406,15 +406,15 @@
         return parseFloat(n);
     };
 
-    site.to_money = site.toMoney = function (_num, fixed) {
+    site.to_money = site.toMoney = function (_num, float = true) {
         let n = 0;
         if (_num) {
             _num = _num.toFixed(2).split('.');
             let n1 = _num[0];
-            let n2 = _num[1];
+            let n2 = _num[1] || '00';
             if (n2) {
-                let n3 = n2[0];
-                let n4 = n2[1];
+                let n3 = n2[0] || '0';
+                let n4 = n2[1] || '0';
                 if (n4 && parseInt(n4) > 5) {
                     n3 = parseInt(n3) + 1;
                     n3 = n3 * 10;
@@ -431,12 +431,16 @@
                     n4 = 5;
                     _num[1] = n3 + n4;
                 } else {
-                    _num[1] = n3;
+                    _num[1] = n3 + '0';
                 }
             }
             n = _num.join('.');
         }
-        return parseFloat(n);
+        if (!float) {
+            return n;
+        } else {
+            return site.to_float(n);
+        }
     };
 
     site.to_float = site.toFloat = function (_num) {
