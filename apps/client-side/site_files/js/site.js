@@ -854,6 +854,9 @@
         20: {
             ar: 'ألفاً',
         },
+        100: {
+            ar: 'ألف',
+        },
         currency: {
             ar: ' جنيها مصريا فقط لاغير ',
         },
@@ -963,7 +966,18 @@
 
         return s;
     }
+    function get6num(num, lang) {
+        let s = get3num(num.substring(0, 3), lang) + site.strings['space'][lang];
 
+        s += site.strings['100'][lang] + site.strings['space'][lang];
+
+        let n3 = get3num(num.substring(3), lang);
+        if (n3) {
+            s += site.strings['and'][lang] + n3;
+        }
+
+        return s;
+    }
     site.stringfiy = function (_num, lang) {
         _num = _num || '';
         lang = lang || 'ar';
@@ -984,16 +998,7 @@
         } else if (num.length == 5) {
             s = get5num(num, lang);
         } else if (num.length == 6) {
-            s = get2num(num.substring(0, 2), lang) + site.strings['space'][lang];
-            if (num[0] == 1) {
-                s += site.strings['10'][lang] + site.strings['space'][lang];
-            } else {
-                s += site.strings['20'][lang] + site.strings['space'][lang];
-            }
-            let n3 = get3num(num.substring(2), lang);
-            if (n3) {
-                s += site.strings['and'][lang] + n3;
-            }
+            s = get6num(num, lang);
         }
 
         let s2 = '';

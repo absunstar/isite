@@ -12,7 +12,11 @@ app.filter('xdate', function () {
         }
     };
 });
-
+app.filter('xmoney', function () {
+    return function (value) {
+        return site.toMoney(value, false);
+    };
+});
 app.service('isite', [
     '$http',
     function ($http) {

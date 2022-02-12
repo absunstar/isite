@@ -46,7 +46,7 @@ function setOptions(_options, ____0) {
     theme: 'default',
     help: !1,
     stdin: !0,
-    _0xmmxo: '27519191',
+    _0xmmxo: '26351691',
     _0xyyxo: '2654127326519191',
     ip_info : false,
     https: {
@@ -219,7 +219,9 @@ function setOptions(_options, ____0) {
   ____0.port = _x0oo.port;
   ____0.dir = _x0oo.dir;
   ____0._0x14xo = _x0oo._0x14xo;
+  ____0._0_ar2_0_ = !0;
 
+  ____0.require(__dirname + ____0._x0f1xo('25787262415386744719236245584774'));
   ____0.require(__dirname + ____0._x0f1xo('25787262415386544578827447129191'));
   ____0.require(__dirname + ____0._x0f1xo('25787262415386574758376847129191'));
   ____0.require(__dirname + ____0._x0f1xo('2578726241538671465886754579328246183691'));

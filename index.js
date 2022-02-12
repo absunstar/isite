@@ -132,8 +132,6 @@ module.exports = function init(options) {
     ____0.createDir = ____0.mkDir = ____0.fsm.mkDir;
     ____0.createDirSync = ____0.mkdirSync = ____0.fsm.mkdirSync;
 
-    require('./lib/strings.js')(____0);
-
     ____0.routing = require('./lib/routing.js')(____0);
 
     ____0.off = ____0.routing.off;
