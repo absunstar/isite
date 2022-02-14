@@ -486,14 +486,14 @@
         if (typeof str !== 'string') {
             str = site.toJson(str);
         }
-        return btoa(unescape(encodeURIComponent(str)));
+        return btoa(unescape(str));
     };
 
     site.fromBase64 = (str) => {
         if (typeof str === undefined || str === null || str === '') {
             return '';
         }
-        return decodeURIComponent(escape(atob(str)));
+        return escape(atob(str));
     };
 
     site.to123 = (data) => {
