@@ -487,7 +487,7 @@
             str = site.toJson(str);
         }
 
-        return Base64.btoa(str);
+        return Base64.encode(str);
         return window.btoa(unescape(encodeURIComponent(str)));
     };
 
@@ -495,7 +495,7 @@
         if (typeof str === undefined || str === null || str === '') {
             return '';
         }
-        return Base64.atob(str);
+        return Base64.decode(str);
         return decodeURIComponent(escape(window.atob(str)));
     };
 
