@@ -493,7 +493,7 @@
         if (typeof str === undefined || str === null || str === '') {
             return '';
         }
-        return decodeURIComponent(escape(window.atob(b64)));
+        return decodeURIComponent(escape(window.atob(str)));
     };
 
     site.to123 = (data) => {
