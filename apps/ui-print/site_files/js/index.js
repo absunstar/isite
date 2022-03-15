@@ -60,7 +60,7 @@ site.print = site.printHTML = function (options) {
             });
         }
     } else {
-        options.type = 'content'
+        options.type = 'content';
         content = options.content;
     }
 
@@ -72,7 +72,7 @@ site.print = site.printHTML = function (options) {
     }
 
     site.postData(
-        { url: '/api/print', data: { content: content , type : options.type} },
+        { url: '/api/print', data: { content: content, type: options.type } },
         (response) => {
             if (response.done) {
                 if (options.printer) {
