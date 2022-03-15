@@ -1,16 +1,69 @@
 site.print = site.printHTML = function (options) {
     options = options || {};
+    let content = '';
 
     if (typeof options === 'string') {
         options = {
             selector: options,
         };
     }
+    if (!options.content) {
+        if (!options.selector) {
+            console.error('No Selector sets ...');
+            return false;
+        }
+        window.document.querySelectorAll('link[rel=stylesheet]').forEach((l) => {
+            l.href = site.handle_url(l.href);
+            content += l.outerHTML;
+        });
 
-    if (!options.selector) {
-        console.error('No Selector sets ...');
-        return false;
+        window.document.querySelectorAll('style').forEach((s) => {
+            content += s.outerHTML;
+        });
+
+        if (options.links) {
+            options.links.forEach((link) => {
+                content += '<link rel="stylesheet" href="' + link + '" type="text/css" >';
+            });
+        }
+
+        if (options.preappends) {
+            options.preappends.forEach((el) => {
+                el = window.document.querySelector(el);
+                if (el) {
+                    content += el.outerHTML;
+                }
+            });
+        }
+
+        document.querySelectorAll(options.selector + ' input').forEach((el) => {
+            el.setAttribute('value', el.value);
+        });
+
+        document.querySelectorAll(options.selector + ' textarea').forEach((el) => {
+            el.innerText = el.value;
+        });
+
+        document.querySelectorAll(options.selector).forEach((el) => {
+            let display = el.style.display;
+            el.style.display = 'block';
+            content += el.outerHTML;
+            el.style.display = display;
+        });
+
+        if (options.appends) {
+            options.appends.forEach((el) => {
+                el = window.document.querySelector(el);
+                if (el) {
+                    content += el.outerHTML;
+                }
+            });
+        }
+    } else {
+        options.type = 'content'
+        content = options.content;
     }
+
     if (!options.ip) {
         options.ip = '127.0.0.1';
     }
@@ -18,57 +71,8 @@ site.print = site.printHTML = function (options) {
         options.port = '60080';
     }
 
-    let content = '';
-    window.document.querySelectorAll('link[rel=stylesheet]').forEach((l) => {
-        l.href = site.handle_url(l.href);
-        content += l.outerHTML;
-    });
-
-    window.document.querySelectorAll('style').forEach((s) => {
-        content += s.outerHTML;
-    });
-
-    if (options.links) {
-        options.links.forEach((link) => {
-            content += '<link rel="stylesheet" href="' + link + '" type="text/css" >';
-        });
-    }
-
-    if (options.preappends) {
-        options.preappends.forEach((el) => {
-            el = window.document.querySelector(el);
-            if (el) {
-                content += el.outerHTML;
-            }
-        });
-    }
-
-    document.querySelectorAll(options.selector + ' input').forEach((el) => {
-        el.setAttribute('value', el.value);
-    });
-
-    document.querySelectorAll(options.selector + ' textarea').forEach((el) => {
-        el.innerText = el.value;
-    });
-
-    document.querySelectorAll(options.selector).forEach((el) => {
-        let display = el.style.display;
-        el.style.display = 'block';
-        content += el.outerHTML;
-        el.style.display = display;
-    });
-
-    if (options.appends) {
-        options.appends.forEach((el) => {
-            el = window.document.querySelector(el);
-            if (el) {
-                content += el.outerHTML;
-            }
-        });
-    }
-
     site.postData(
-        { url: '/api/print', data: { content: content } },
+        { url: '/api/print', data: { content: content , type : options.type} },
         (response) => {
             if (response.done) {
                 if (options.printer) {

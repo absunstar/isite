@@ -1108,7 +1108,7 @@
             console.error('qrcode need {selector , text}');
             return;
         }
-        return JsBarcode(options.selector, options.selector);
+        return JsBarcode(options.selector, options.selector , options.options);
     };
     site.qrcode = function (options) {
         if (!options || !options.selector || !options.text) {

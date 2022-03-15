@@ -10,7 +10,6 @@
     <body class="print-mode">
         ##data.content##
 
-        <style></style>
         <script>
             document.querySelectorAll('.not-print').forEach((el) => {
                 el.remove();
@@ -18,10 +17,6 @@
             window.addEventListener('load', () => {
                 window.print({});
             });
-            /*
-        Repeat table headers in every page if table too large
-        use thead & tbody
-        */
         </script>
     </body>
 </html>
