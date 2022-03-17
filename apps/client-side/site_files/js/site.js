@@ -1103,12 +1103,46 @@
         }
     };
 
+    site.hex = function (txt) {
+        if (typeof txt == 'string') {
+            const encoder = new TextEncoder();
+            return Array.from(encoder.encode(txt))
+                .map((b) => b.toString(16).padStart(2, '0'))
+                .join('');
+        } else if (typeof txt == 'number') {
+            let value = txt.toString(16);
+            if (value.length == 1) {
+                value = '0' + value;
+            }
+            return value;
+        }
+    };
+    site.zakat = function (obj) {
+        let value = '';
+        if (obj.name) {
+            value += '01' + site.hex(obj.name.length) + site.hex(obj.name);
+        }
+        if (obj.vat_number) {
+            value += '02' + site.hex(obj.vat_number.length) + site.hex(obj.vat_number);
+        }
+        if (obj.time) {
+            value += '03' + site.hex(obj.time.length) + site.hex(obj.time);
+        }
+        if (obj.total) {
+            value += '04' + site.hex(obj.total.length) + site.hex(obj.total);
+        }
+        if (obj.vat_total) {
+            value += '05' + site.hex(obj.vat_total.length) + site.hex(obj.vat_total);
+        }
+        return site.toBase64(value);
+    };
+
     site.barcode = function (options) {
         if (!options || !options.selector || !options.text) {
             console.error('qrcode need {selector , text}');
             return;
         }
-        return JsBarcode(options.selector, options.selector , options.options);
+        return JsBarcode(options.selector, options.selector, options.options);
     };
     site.qrcode = function (options) {
         if (!options || !options.selector || !options.text) {

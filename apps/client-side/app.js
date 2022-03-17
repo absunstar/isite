@@ -191,4 +191,11 @@ module.exports = function (site) {
     site.get({ name: '/api/file/:category/:name', public: true }, (req, res) => {
         res.download(site.dir + '/../../uploads/' + req.params.category + '/files/' + req.params.name);
     });
+
+    site.onPOST('/x-api/convert', (req, res) => {
+        res.json({
+            done: true,
+            value: Buffer.from(req.data.text, 'utf8').toString('hex'),
+        });
+    });
 };
