@@ -192,10 +192,33 @@ module.exports = function (site) {
         res.download(site.dir + '/../../uploads/' + req.params.category + '/files/' + req.params.name);
     });
 
-    site.onPOST('/x-api/convert', (req, res) => {
+    site.getTLV = function (name, value) {
+        return Buffer.concat([Buffer.from([name], 'utf8'), Buffer.from([value.length], 'utf8'), Buffer.from(value, 'utf8')]);
+    };
+    site.onPOST('/x-api/zakat', (req, res) => {
+        let obj = req.data || {};
+        let value = [];
+        if (obj.name) {
+            value.push(site.getTLV('1', obj.name));
+        }
+        if (obj.vat_number) {
+            value.push(site.getTLV('2', obj.vat_number));
+        }
+        if (obj.time) {
+            value.push(site.getTLV('3', obj.time));
+        }
+        if (obj.total) {
+            value.push(site.getTLV('4', obj.total));
+        }
+        if (obj.vat_total) {
+            value.push(site.getTLV('5', obj.vat_total));
+        }
+        console.log(obj);
+        console.log(value);
+        value = Buffer.concat([...value]).toString('base64');
         res.json({
             done: true,
-            value: Buffer.from(req.data.text, 'utf8').toString('hex'),
+            value: value,
         });
     });
 };

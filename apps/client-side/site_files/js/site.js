@@ -1137,6 +1137,14 @@
         return site.toBase64(value);
     };
 
+    site.zakat2 = function (obj, callback) {
+        fetch('/x-api/zakat', { method: 'POST', body: JSON.stringify(obj) })
+            .then((res) => res.json())
+            .then((data) => {
+                callback(data);
+            });
+    };
+
     site.barcode = function (options) {
         if (!options || !options.selector || !options.text) {
             console.error('qrcode need {selector , text}');
@@ -1163,7 +1171,7 @@
                 height: options.height || 256,
                 colorDark: options.colorDark || '#000000',
                 colorLight: options.colorLight || '#ffffff',
-                correctLevel: options.correctLevel || QRCode.CorrectLevel.L,
+                correctLevel: options.correctLevel || QRCode.CorrectLevel.H,
             });
         }
     };
