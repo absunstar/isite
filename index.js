@@ -169,7 +169,6 @@ module.exports = function init(options) {
     ____0.setting.addList(____0.dir + '/json/setting.json');
 
     require('./lib/vars.js')(____0);
-    require('./lib/features.js')(____0);
 
     //DataBase Management Oprations
     if (____0.options.mongodb.enabled) {
@@ -309,6 +308,7 @@ module.exports = function init(options) {
 
     ____0.createDir(____0.options.upload_dir);
     ____0.createDir(____0.options.download_dir);
+    ____0.addfeatures(____0.dir + "/json/features.json")
 
     ____0.log('');
     ____0.log('************************************');
