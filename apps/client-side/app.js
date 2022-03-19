@@ -213,8 +213,6 @@ module.exports = function (site) {
         if (obj.vat_total) {
             value.push(site.getTLV('5', obj.vat_total));
         }
-        console.log(obj);
-        console.log(value);
         value = Buffer.concat([...value]).toString('base64');
         res.json({
             done: true,
