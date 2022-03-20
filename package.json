@@ -1,6 +1,6 @@
 {
   "name": "isite",
-  "version": "2022.03.07",
+  "version": "2022.03.08",
   "description": "Create Enterprise Multi-Language Web Site [Fast and Easy] ",
   "main": "index.js",
   "repository": {
@@ -43,6 +43,7 @@
     "mongodb": "^4.2.2",
     "mv": "^2.1.1",
     "node-fetch": "^2.6.1",
+    "utf8": "^3.0.0",
     "ws": "^8.2.3",
     "xlsx": "^0.17.4"
   }
