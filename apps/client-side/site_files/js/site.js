@@ -1161,9 +1161,9 @@
         let dom = typeof options.selector == 'string' ? document.querySelector(options.selector) : options.selector;
         if (dom) {
             dom.innerHTML = '';
-            if (192 <= options.text.length <= 217) {
+            /*if (192 <= options.text.length <= 217) {
                 options.text = options.text.padEnd(220);
-            }
+            }*/
 
             return new QRCode(dom, {
                 text: options.text,

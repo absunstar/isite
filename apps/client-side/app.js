@@ -193,7 +193,6 @@ module.exports = function (site) {
     });
 
     site.getTLV = function (name, value) {
-        value = site.utf8.encode(value);
         return Buffer.concat([Buffer.from([name], 'utf8'), Buffer.from([value.length], 'utf8'), Buffer.from(value, 'utf8')]);
     };
     site.onPOST('/x-api/zakat', (req, res) => {
