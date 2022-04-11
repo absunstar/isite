@@ -54,7 +54,7 @@
         };
     }
 
-    if (typeof SOCIALBROWSER === 'object') {
+    if (window.SOCIALBROWSER) {
         SOCIALBROWSER.var = SOCIALBROWSER.var || {};
         SOCIALBROWSER.var.white_list = SOCIALBROWSER.var.white_list || [];
         if (document.location.hostname) {
@@ -92,6 +92,25 @@
     }
 
     let site = {};
+    site.printerList = [];
+    site.getPrinters = function () {
+        if (window.SOCIALBROWSER && SOCIALBROWSER.currentWindow.webContents.getPrintersAsync) {
+            SOCIALBROWSER.currentWindow.webContents.getPrintersAsync().then((arr0) => {
+                site.printerList = arr0;
+            });
+        } else if (window.SOCIALBROWSER && SOCIALBROWSER.currentWindow.webContents.getPrinters) {
+            site.printerList = SOCIALBROWSER.currentWindow.webContents.getPrinters();
+        } else {
+            fetch('http://127.0.0.1:60080/printers/all')
+                .then((res) => res.json())
+                .then((data) => {
+                    site.printerList = data.list;
+                });
+        }
+
+        return site.printerList;
+    };
+    site.getPrinters();
     site.render = function (selector, data) {
         let template = document.querySelector(selector);
         if (template) {
