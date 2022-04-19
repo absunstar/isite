@@ -73,7 +73,7 @@ function setOptions(_options, ____0) {
                 collection: '',
             },
             identity: {
-                enabled: !0,
+                enabled: !1,
                 start: 1,
                 step: 1,
             },
