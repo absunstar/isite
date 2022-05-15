@@ -456,11 +456,11 @@
       n = _num.join('.');
     }
     if (!float) {
+      return n;
+    } else {
       if (n.endsWith('.')) {
         n = n + '00';
       }
-      return n;
-    } else {
       return site.to_float(n);
     }
   };
