@@ -455,10 +455,11 @@
       }
       n = _num.join('.');
     }
-    if (n && !float) {
-      if (n.endsWith('.')) {
+    if (!float) {
+      if (n && n.endsWith('.')) {
         n = n + '00';
       }
+      return n;
     } else {
       return site.to_float(n);
     }
