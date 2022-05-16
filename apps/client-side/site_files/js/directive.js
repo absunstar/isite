@@ -19,7 +19,10 @@ app.filter('xmoney', function () {
 });
 app.filter('xmoney2', function () {
   return function (value) {
-    return value.toFixed(2);
+    if (value) {
+      return value.toFixed(2);
+    }
+    return value;
   };
 });
 app.service('isite', [
