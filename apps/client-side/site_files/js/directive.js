@@ -20,7 +20,12 @@ app.filter('xmoney', function () {
 app.filter('xmoney2', function () {
   return function (value) {
     if (value) {
-      return value.toFixed(2);
+      let arr = value.toString().split('.');
+      if (arr[1] && arr[1].length === 3 && parseInt(arr[1][2]) === 5) {
+        arr[1] = arr[1][0] + arr[1][1] + 9;
+        value = arr.join('.');
+      }
+      return parseFloat( value).toFixed(2);
     }
     return value;
   };
