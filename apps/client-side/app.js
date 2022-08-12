@@ -155,6 +155,8 @@ module.exports = function (site) {
       __dirname + '/site_files/css/layout.css',
       __dirname + '/site_files/css/modal.css',
       __dirname + '/site_files/css/color.css',
+      __dirname + '/site_files/css/images.css',
+      __dirname + '/site_files/css/dropdown.css',
       __dirname + '/site_files/css/fonts.css',
       __dirname + '/site_files/css/font-droid.css',
       __dirname + '/site_files/css/effect.css',

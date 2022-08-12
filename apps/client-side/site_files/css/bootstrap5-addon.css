@@ -31,7 +31,9 @@ i-radio {
 i-button {
   display: contents;
 }
-
+.dropdown-content {
+  top: 55px;
+}
 .v-tabs .nav-link {
   color: #aaa;
   background: #fff;

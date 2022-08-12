@@ -1,12 +1,12 @@
 <div class="dropdown i-list" >
     <div class="control">
         <label> {{label}} </label>
-        <input ng-focus="focus()" class="full-width text dropdown-text {{css}}" ng-disabled="disabled" v="{{v}}" readonly ng-model="ngModel.$display" />
+        <input ng-focus="focus()" class="full-width text dropdown-text form-control {{css}}" ng-disabled="disabled" v="{{v}}" readonly ng-model="ngModel.$display" />
     </div>
 
     <div class="dropdown-content">
         <div class="row padding" ng-show="showSearch">
-            <input class="full-width search" ng-model="ngSearch" />
+            <input class="full-width search form-control" ng-model="ngSearch" />
             <br />
         </div>
 

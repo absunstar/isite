@@ -10,10 +10,6 @@
 }
 
 
-
-
-
-
 i-image img{
     width : 200px;
     height: 200px;
@@ -38,8 +34,8 @@ i-image.logo img{
 }
 
 i-image.photo img{
-    width : 200px;
-    height: 200px;
+    width : 128px;
+    height: 128px;
 }
 
 i-image.hover img:hover{
