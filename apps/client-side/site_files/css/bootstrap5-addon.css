@@ -1,0 +1,68 @@
+/* Small devices (landscape phones, 576px and up) */
+@media (min-width: 576px) {
+}
+
+/* Medium devices (tablets, 768px and up) */
+@media (min-width: 768px) {
+}
+
+/* Large devices (desktops, 992px and up) */
+@media (min-width: 992px) {
+}
+
+/* X-Large devices (large desktops, 1200px and up) */
+@media (min-width: 1200px) {
+}
+
+/* XX-Large devices (larger desktops, 1400px and up) */
+@media (min-width: 1400px) {
+}
+
+.ar .form-check .form-check-input {
+  float: right;
+  margin-right: -1.5em;
+}
+i-checkbox,
+i-radio {
+  align-self: center;
+  margin-left: 1.5em;
+  margin-right: 1.5em;
+}
+i-button {
+  display: contents;
+}
+
+.v-tabs .nav-link {
+  color: #aaa;
+  background: #fff;
+  position: relative;
+  cursor: pointer;
+}
+
+.v-tabs .nav-link.active {
+  color: #45b649;
+  background: #fff;
+}
+
+@media (min-width: 992px) {
+  .v-tabs .nav-link::before {
+    content: '';
+    display: block;
+    border-top: 8px solid transparent;
+    border-left: 10px solid #fff;
+    border-bottom: 8px solid transparent;
+    position: absolute;
+    top: 50%;
+    right: -10px;
+    transform: translateY(-50%);
+    opacity: 0;
+  }
+  .ar .v-tabs .nav-link::before {
+    border-right: 10px solid #fff;
+    left: -10px;
+  }
+}
+
+.v-tabs .nav-link.active::before {
+  opacity: 1;
+}

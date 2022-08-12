@@ -1,5 +1,5 @@
 @font-face {
-    font-family: 'Droid';
+    font-family: 'Arabic';
     font-style: normal;
     font-weight: normal;
     src: url(/x-fonts/DroidKufi-Regular.eot);
@@ -9,7 +9,7 @@
   }
   
   @font-face {
-    font-family: 'Droid';
+    font-family: 'Arabic';
     font-style: normal;
     font-weight: bold;
     src: url(/x-fonts/DroidKufi-Bold.eot);

@@ -1,12 +1,12 @@
 @font-face {
-    font-family: 'Cairo';
+    font-family: 'Arabic';
     font-style: normal;
     font-weight: normal;
     src: url(/x-fonts/Cairo-Regular.ttf);
     font-display: swap;
 }
 @font-face {
-    font-family: 'Cairo';
+    font-family: 'Arabic';
     font-style: normal;
     font-weight: bold;
     src: url(/x-fonts/Cairo-Bold.ttf);

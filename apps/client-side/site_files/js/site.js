@@ -110,7 +110,7 @@
 
     return site.printerList;
   };
-  site.getPrinters();
+  
   site.render = function (selector, data) {
     let template = document.querySelector(selector);
     if (template) {
@@ -609,45 +609,43 @@
     return '';
   };
 
-  site.vControles = [];
   site.validated = function (s) {
     const res = {
       ok: !0,
       messages: [],
     };
-    site.vControles.forEach((n) => {
-      n.el.style.border = n.border;
-    });
-    site.vControles = [];
+
     s = s || 'body';
     const arr = document.querySelectorAll(s + ' [v]');
     arr.forEach((el) => {
-      const border = el.style.border;
+      el.classList.remove('is-invalid');
+      el.classList.remove('is-valid');
       const v = el.getAttribute('v');
       const vList = v.split(' ');
       vList.forEach((vl) => {
         vl = vl.toLowerCase().trim();
         if (vl === 'r') {
           if ((el.nodeName === 'INPUT' || el.nodeName === 'SELECT') && (!el.value || el.value.like('*undefined*'))) {
-            site.vControles.push({
-              el: el,
-              border: border,
-            });
-            el.style.border = '2px solid #ff1100';
+            el.classList.add('is-invalid');
+            if ((f = el.parentNode.querySelector('.invalid-feedback'))) {
+              if (site.session && site.session.lang == 'en') {
+                f.innerHTML = 'Data Is Required';
+              } else if (site.session && site.session.lang == 'ar') {
+                f.innerHTML = 'هذا البيان مطلوب';
+              }
+            }
             res.ok = !1;
             res.messages.push({
               en: 'Data Is Required',
               ar: 'هذا البيان مطلوب',
             });
+          }else{
+            el.classList.add('is-valid');
           }
         } else if (vl.like('ml*')) {
           const length = parseInt(vl.replace('ml', ''));
           if ((el.nodeName === 'INPUT' || el.nodeName === 'TEXTAREA') && (!el.value || el.value.length > length)) {
-            site.vControles.push({
-              el: el,
-              border: border,
-            });
-            el.style.border = '2px solid #ff1100';
+            el.classList.add('is-invalid');
             res.ok = !1;
             res.messages.push({
               en: 'Letter Count Must be <= ' + length,
@@ -657,11 +655,7 @@
         } else if (vl.like('ll*')) {
           const length = parseInt(vl.replace('ll', ''));
           if ((el.nodeName === 'INPUT' || el.nodeName === 'TEXTAREA') && (!el.value || el.value.length < length)) {
-            site.vControles.push({
-              el: el,
-              border: border,
-            });
-            el.style.border = '2px solid #ff1100';
+            el.classList.add('is-invalid');
             res.ok = !1;
             res.messages.push({
               en: 'Letter Count Must be >= ' + length,
@@ -671,11 +665,7 @@
         } else if (vl.like('l*')) {
           const length = parseInt(vl.replace('l', ''));
           if ((el.nodeName === 'INPUT' || el.nodeName === 'TEXTAREA') && (!el.value || el.value.length !== length)) {
-            site.vControles.push({
-              el: el,
-              border: border,
-            });
-            el.style.border = '2px solid #ff1100';
+            el.classList.add('is-invalid');
             res.ok = !1;
             res.messages.push({
               en: 'Letter Count Must be = ' + length,
