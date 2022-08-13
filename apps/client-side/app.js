@@ -173,22 +173,26 @@ module.exports = function (site) {
 
   site.createDir(site.dir + '/../../uploads');
 
-  site.post({ name: '/api/upload/image/:category', public: true }, (req, res) => {
-    site.createDir(site.options.upload_dir + '/' + req.params.category, () => {
-      site.createDir(site.options.upload_dir + '/' + req.params.category + '/images', () => {
+  site.post({ name: '/x-api/upload/image', public: true }, (req, res) => {
+    site.createDir(site.options.upload_dir + '/' + req.headers['folder'], () => {
+      site.createDir(site.options.upload_dir + '/' + req.headers['folder'] + '/images', () => {
         let response = {
+          image: {},
           done: !0,
         };
         let file = req.files.fileToUpload;
         if (file) {
-          let newName = 'image_' + new Date().getTime().toString().replace('.', '_') + '.png';
-          let newpath = site.options.upload_dir + '/' + req.params.category + '/images/' + newName;
+          let newName = 'image_' + (new Date().getTime().toString() + Math.random()).replaceAll('.', '_') + site.path.extname(file.originalFilename);
+          let newpath = site.path.resolve(site.options.upload_dir + '/' + req.headers['folder'] + '/images/' + newName);
           site.mv(file.filepath, newpath, function (err) {
             if (err) {
               response.error = err;
               response.done = !1;
+            } else {
+              response.image.path = newpath;
+              response.image.url = '/x-api/image/' + req.headers['folder'] + '/' + newName;
+              response.image.size = file.size;
             }
-            response.image_url = '/api/image/' + req.params.category + '/' + newName;
             res.json(response);
           });
         } else {
@@ -200,15 +204,16 @@ module.exports = function (site) {
     });
   });
 
-  site.get({ name: '/api/image/:category/:name', public: true }, (req, res) => {
+  site.get({ name: '/x-api/image/:category/:name', public: true }, (req, res) => {
     res.set('Cache-Control', 'public, max-age=2592000');
     res.download(site.options.upload_dir + '/' + req.params.category + '/images/' + req.params.name);
   });
 
-  site.post({ name: '/api/upload/file/:category', public: true }, (req, res) => {
-    site.createDir(site.options.upload_dir + '/' + req.params.category, () => {
-      site.createDir(site.options.upload_dir + '/' + req.params.category + '/files', () => {
+  site.post({ name: '/x-api/upload/file', public: true }, (req, res) => {
+    site.createDir(site.options.upload_dir + '/' + req.headers['folder'], () => {
+      site.createDir(site.options.upload_dir + '/' + req.headers['folder'] + '/files', () => {
         let response = {
+          file: {},
           done: !0,
         };
         let file = req.files.fileToUpload;
@@ -218,17 +223,15 @@ module.exports = function (site) {
           res.json(response);
           return;
         }
-        let newName = 'file_' + new Date().getTime() + '.' + site.path.extname(file.name);
-        let newpath = site.options.upload_dir + '/' + req.params.category + '/files/' + newName;
+        let newName = 'file_' + (new Date().getTime().toString() + Math.random()).replaceAll('.', '_') + site.path.extname(file.originalFilename);
+        let newpath = site.path.resolve(site.options.upload_dir + '/' + req.headers['folder'] + '/files/' + newName);
         site.mv(file.filepath, newpath, function (err) {
           if (err) {
             response.error = err;
             response.done = !1;
           }
-          response.file = {};
-          response.file.url = '/api/file/' + req.params.category + '/' + newName;
-          response.file.name = file.originalFilename;
-          response.file.mimetype = file.mimetype;
+          response.file.path = newpath;
+          response.file.url = '/x-api/file/' + req.headers['folder'] + '/' + newName;
           response.file.size = file.size;
           res.json(response);
         });
@@ -236,7 +239,7 @@ module.exports = function (site) {
     });
   });
 
-  site.get({ name: '/api/file/:category/:name', public: true }, (req, res) => {
+  site.get({ name: '/x-api/file/:category/:name', public: true }, (req, res) => {
     res.download(site.options.upload_dir + '/' + req.params.category + '/files/' + req.params.name);
   });
 

@@ -71,10 +71,11 @@ app.service('isite', [
       var fd = new FormData();
       fd.append('fileToUpload', files[0]);
       $http
-        .post('/api/upload/image/' + options.category, fd, {
+        .post('/x-api/upload/image' , fd, {
           withCredentials: !0,
           headers: {
             'Content-Type': undefined,
+            folder: options.folder,
           },
           uploadEventHandlers: {
             progress: function (e) {
@@ -86,7 +87,7 @@ app.service('isite', [
         .then(
           function (res) {
             if (res.data && res.data.done) {
-              callback(null, res.data.image_url);
+              callback(null, res.data.image);
             }
           },
           function (error) {
@@ -98,7 +99,7 @@ app.service('isite', [
     this.uploadFile = function (files, options, callback) {
       options = Object.assign(
         {
-          category: 'default',
+          folder: 'default',
         },
         options
       );
@@ -107,10 +108,11 @@ app.service('isite', [
       var fd = new FormData();
       fd.append('fileToUpload', files[0]);
       $http
-        .post('/api/upload/file/' + options.category, fd, {
+        .post('/x-api/upload/file', fd, {
           withCredentials: !0,
           headers: {
             'Content-Type': undefined,
+            folder: options.folder,
           },
           uploadEventHandlers: {
             progress: function (e) {
@@ -122,10 +124,7 @@ app.service('isite', [
         .then(
           function (res) {
             if (res.data && res.data.done && res.data.file) {
-              callback(null, {
-                name: res.data.file.name,
-                url: res.data.file.url,
-              });
+              callback(null, res.data.file);
             }
           },
           function (error) {

@@ -15,6 +15,7 @@ app.directive('iControl', function () {
     },
     link: function ($scope, element, attrs, ctrl) {
       attrs.type = attrs.type || 'text';
+      $scope.id2 = $scope.id2 || 'input_' + Math.random().toString().replace('0.', '');
 
       if (typeof attrs.disabled !== 'undefined') {
         attrs.disabled = 'disabled';
@@ -30,8 +31,8 @@ app.directive('iControl', function () {
     },
     template: `
         <div class="mb-3 {{class2}}">
-        <label for="id2" class="form-label">{{label}}</label>
-        <input id="id2" ng-disabled="disabled" autofocus v="{{v}}"  type="{{type}}" ng-model="ngModel" ng-change="ngChange()" ngKeydown="ngKeydown()" class="form-control"  placeholder="{{placeholder}}" aria-label="{{label}}"  />
+        <label for="{{id2}}" class="form-label">{{label}}</label>
+        <input id="{{id2}}" ng-disabled="disabled" autofocus v="{{v}}"  type="{{type}}" ng-model="ngModel" ng-change="ngChange()" ngKeydown="ngKeydown()" class="form-control"  placeholder="{{placeholder}}" aria-label="{{label}}"  />
         <div class="invalid-feedback">
         
         </div>   
@@ -40,7 +41,43 @@ app.directive('iControl', function () {
   };
 });
 
-app.directive('iCheckbox', function () {
+app.directive('iTextarea', function () {
+  return {
+    restrict: 'E',
+    require: 'ngModel',
+    scope: {
+      v: '@',
+      label: '@',
+      id2: '@',
+      disabled: '@',
+      rows: '@',
+      ngModel: '=',
+      ngChange: '&',
+    },
+    link: function ($scope, element, attrs, ctrl) {
+      if (typeof attrs.disabled !== 'undefined') {
+        attrs.disabled = 'disabled';
+      } else {
+        attrs.disabled = '';
+      }
+      $scope.rows = $scope.rows || 4;
+      $scope.id2 = $scope.id2 || 'input_' + Math.random().toString().replace('0.', '');
+      $(element)
+        .find('textarea')
+        .focus(() => {
+          $('.popup').hide();
+        });
+    },
+    template: `
+        <div class="mb-3">
+          <label for="{{id2}}" class="form-label">{{label}}</label>
+          <textarea ng-disabled="disabled" class="form-control" id="{{id2}}" ng-model="ngModel" ng-change="ngChange()" v="{{v}}" rows="{{rows}}"></textarea>
+        </div>
+        `,
+  };
+});
+
+app.directive('iCheckbox', function ($timeout) {
   return {
     restrict: 'E',
     require: 'ngModel',
@@ -57,10 +94,17 @@ app.directive('iCheckbox', function () {
         $scope.disabled = '';
       }
       $scope.id2 = $scope.id2 || 'input_' + Math.random().toString().replace('0.', '');
+      $scope.changed = function () {
+        $timeout(() => {
+          if ($scope.ngChange) {
+            $scope.ngChange();
+          }
+        }, 100);
+      };
     },
     template: `
         <div class="form-check">
-          <input ng-change="ngChange()" ng-disabled="disabled" class="form-check-input" type="checkbox" ng-model="ngModel" id="{{id2}}">
+          <input ng-change="changed()" ng-disabled="disabled" class="form-check-input" type="checkbox" ng-model="ngModel" id="{{id2}}">
           <label class="form-check-label" for="{{id2}}">
             {{label}}
           </label>
@@ -108,34 +152,40 @@ app.directive('iButton', function () {
     scope: {
       label: '@',
       type: '@',
-      busy: '@',
+      loading: '@',
       click: '&',
       fa: '@',
     },
     link: function ($scope, element, attrs, ctrl) {
-      attrs.type = attrs.type || '';
-      if (attrs.type.like('*exit*') || attrs.type.like('*close*')) {
-        attrs.fa = 'times';
-      } else if (attrs.type.like('*view*') || attrs.type.like('*details*')) {
-        attrs.fa = 'file';
-      } else if (attrs.type.like('*add*') || attrs.type.like('*new*')) {
-        attrs.fa = 'plus-circle';
-      } else if (attrs.type.like('*update*') || attrs.type.like('*edit*')) {
-        attrs.fa = 'edit';
-      } else if (attrs.type.like('*save*')) {
-        attrs.fa = 'save';
-      } else if (attrs.type.like('*delete*') || attrs.type.like('*remove*')) {
-        attrs.fa = 'trash';
-      } else if (attrs.type.like('*print*')) {
-        attrs.fa = 'print';
-      } else if (attrs.type.like('*search*')) {
-        attrs.fa = 'search';
-      } else if (attrs.type.like('*export*') || attrs.type.like('*excel*')) {
-        attrs.fa = 'table';
+      $scope.type = $scope.type || '';
+      if ($scope.type.like('*exit*') || $scope.type.like('*close*')) {
+        $scope.fa = 'times';
+      } else if ($scope.type.like('*view*') || $scope.type.like('*details*')) {
+        $scope.fa = 'file';
+      } else if ($scope.type.like('*add*') || $scope.type.like('*new*')) {
+        $scope.fa = 'plus-circle';
+      } else if ($scope.type.like('*update*') || $scope.type.like('*edit*')) {
+        $scope.fa = 'edit';
+      } else if ($scope.type.like('*save*')) {
+        $scope.fa = 'save';
+      } else if ($scope.type.like('*delete*') || $scope.type.like('*remove*')) {
+        $scope.fa = 'trash';
+      } else if ($scope.type.like('*print*')) {
+        $scope.fa = 'print';
+      } else if ($scope.type.like('*search*')) {
+        $scope.fa = 'search';
+      } else if ($scope.type.like('*export*') || $scope.type.like('*excel*')) {
+        $scope.fa = 'table';
       } else {
         $scope.class = 'btn-primary';
       }
-
+      $scope.$watch('loading', (loading) => {
+        if (loading === 'true' ) {
+          $scope.busy = true
+        } else {
+          $scope.busy = false
+        }
+      });
     },
     template: `
         <button class="btn {{class}}" type="button" ng-click="click()" ng-disabled="busy">
@@ -291,6 +341,108 @@ app.directive('iList', [
         };
       },
       template: `/*##client-side/sub/i-list2.content.html*/`,
+    };
+  },
+]);
+app.directive('iChecklist', [
+  '$interval',
+  '$timeout',
+  function ($interval, $timeout) {
+    return {
+      restrict: 'E',
+      required: 'ngModel',
+      scope: {
+        label: '@',
+        primary: '@',
+        display: '@',
+        class2: '@',
+        ngModel: '=',
+        items: '=',
+        like: '&',
+        ngChange: '&',
+      },
+      link: function ($scope, element, attrs, ctrl) {
+        $scope.primary = $scope.primary || 'id';
+        $scope.display = $scope.display || 'name';
+        $scope.class2 = $scope.class2 || 'col3';
+        $scope.selectedItems = [];
+
+        $scope.$watch('ngModel', (ngModel) => {
+          $scope.reload();
+        });
+
+        $scope.reload = function () {
+          $scope.selectedItems = [];
+
+          if ($scope.ngModel) {
+            $scope.ngModel.forEach((mitem) => {
+              $scope.selectedItems.push(mitem);
+            });
+
+            if ($scope.items) {
+              $scope.items.forEach((mitem) => {
+                let exist = !1;
+                $scope.selectedItems.forEach((sitem) => {
+                  if (mitem[$scope.primary] === sitem[$scope.primary]) {
+                    exist = !0;
+                  }
+                });
+                if (exist) {
+                  mitem.$selected = !0;
+                } else {
+                  mitem.$selected = !1;
+                }
+              });
+            }
+          }
+          if (!$scope.ngModel) {
+            $scope.selectedItems = [];
+            if ($scope.items) {
+              $scope.items.forEach((mitem) => {
+                mitem.$selected = !1;
+              });
+            }
+          }
+        };
+
+        $scope.change = function (item) {
+          if (item.$selected) {
+            let exsits = !1;
+            $scope.selectedItems.forEach((sitem) => {
+              if (sitem[$scope.primary] === item[$scope.primary]) {
+                exsits = !0;
+              }
+            });
+            if (!exsits) {
+              let nitem = { ...item };
+              delete nitem.$selected;
+              delete nitem.$$hashKey;
+              $scope.selectedItems.push(nitem);
+            }
+          } else {
+            $scope.selectedItems.forEach((sitem, index) => {
+              if (sitem[$scope.primary] === item[$scope.primary]) {
+                $scope.selectedItems.splice(index, 1);
+              }
+            });
+          }
+
+          $scope.ngModel = $scope.selectedItems;
+          $timeout(() => {
+            if ($scope.ngChange) {
+              $scope.ngChange();
+            }
+          }, 100);
+        };
+      },
+      template: `
+       <div class="check-list">
+            <label class="title margin"> {{label}} </label>
+            <div class="row">
+              <i-checkbox class="{{class2}}" label="{{item[display]}}" ng-repeat="item in items" ng-model="item.$selected" ng-change="change(item);"></i-checkbox>
+            </div>
+        </div>
+        `,
     };
   },
 ]);
@@ -938,136 +1090,6 @@ app.directive('iFulldate', [
   },
 ]);
 
-app.directive('iTextarea', function () {
-  return {
-    restrict: 'E',
-    require: 'ngModel',
-    scope: {
-      v: '@',
-      label: '@',
-      disabled: '@',
-      rows: '@',
-      ngModel: '=',
-      ngChange: '&',
-    },
-    link: function (scope, element, attrs, ctrl) {
-      if (typeof attrs.disabled !== 'undefined') {
-        attrs.disabled = 'disabled';
-      } else {
-        attrs.disabled = '';
-      }
-      scope.rows = scope.rows || 4;
-
-      $(element)
-        .find('textarea')
-        .focus(() => {
-          $('.popup').hide();
-        });
-    },
-    template: `
-        <div class="control">
-            <label> {{label}} </label>
-            <textarea ng-disabled="disabled" rows="{{rows}}" v="{{v}}" ng-model="ngModel" ng-change="ngChange()"></textarea>
-        </div>
-        `,
-  };
-});
-
-
-
-app.directive('iChecklist', [
-  '$interval',
-  function ($interval) {
-    return {
-      restrict: 'E',
-      required: 'ngModel',
-      scope: {
-        label: '@',
-        primary: '@',
-        display: '@',
-        ngModel: '=',
-        items: '=',
-        like: '&',
-      },
-      link: function ($scope, element, attrs, ctrl) {
-        attrs.primary = attrs.primary || 'id';
-
-        $scope.selectedItems = [];
-
-        $scope.$watch('ngModel', (ngModel) => {
-          $scope.reload();
-        });
-
-        $scope.reload = function () {
-          $scope.selectedItems = [];
-
-          if ($scope.ngModel) {
-            $scope.ngModel.forEach((mitem) => {
-              $scope.selectedItems.push(mitem);
-            });
-
-            if ($scope.items) {
-              $scope.items.forEach((mitem) => {
-                let exist = !1;
-                $scope.selectedItems.forEach((sitem) => {
-                  if (mitem[$scope.primary] === sitem[$scope.primary]) {
-                    exist = !0;
-                  }
-                });
-                if (exist) {
-                  mitem.$selected = !0;
-                } else {
-                  mitem.$selected = !1;
-                }
-              });
-            }
-          }
-          if (!$scope.ngModel) {
-            $scope.selectedItems = [];
-            if ($scope.items) {
-              $scope.items.forEach((mitem) => {
-                mitem.$selected = !1;
-              });
-            }
-          }
-        };
-
-        $scope.change = function (item) {
-          item.$selected = !item.$selected;
-
-          if (item.$selected) {
-            let exsits = !1;
-            $scope.selectedItems.forEach((sitem) => {
-              if (sitem[$scope.primary] === item[$scope.primary]) {
-                exsits = !0;
-              }
-            });
-            if (!exsits) {
-              $scope.selectedItems.push(item);
-            }
-          } else {
-            $scope.selectedItems.forEach((sitem, index) => {
-              if (sitem[$scope.primary] === item[$scope.primary]) {
-                $scope.selectedItems.splice(index, 1);
-              }
-            });
-          }
-
-          $scope.ngModel = $scope.selectedItems;
-        };
-      },
-      template: `
-       <div class="row padding check-list">
-            <label class="title"> {{label}} </label>
-                <div ng-repeat="item in items" ng-click="change(item);ngChange($event , item);" class="selector" ng-class="{'selected' : item.$selected , 'un-selected' : !item.$selected  }" >
-                    <i ng-show="!item.$selected" class="fa fa-square"></i>  <i ng-show="item.$selected" class="fa fa-check"></i> {{item[display]}}
-                </div>
-        </div>
-        `,
-    };
-  },
-]);
-
 app.directive('iChecklist2', [
   '$interval',
   function ($interval) {
@@ -1216,41 +1238,62 @@ app.directive('iFile', [
       required: 'ngModel',
       scope: {
         label: '@',
-        type: '@',
+        folder: '@',
         ngModel: '=',
         ngClick: '&',
         onSelected: '&',
       },
-      link: function (scope, element, attrs, ctrl) {
-        scope.type = scope.type || 'bg-green';
-
+      link: function ($scope, element, attrs, ctrl) {
+        $scope.label = $scope.label || 'Select File to Upload';
         let input = $(element).find('input')[0];
-        let a = $(element).find('a')[0];
-
+        let button = $(element).find('button')[0];
+        if (attrs.view === '') {
+          $scope.viewOnly = !0;
+        }
+        let progress = $(element).find('.progress')[0];
+        $(progress).hide();
+        $scope.folder = $scope.folder || 'default';
+        $scope.id = Math.random().toString().replace('.', '_');
         if (attrs.view !== '') {
-          a.addEventListener('click', function () {
+          button.addEventListener('click', function () {
             input.click();
           });
         }
 
         input.addEventListener('change', function () {
-          scope.ngModel = this.files[0].path;
-          scope.onSelected(this.files[0].path);
-          scope.$applyAsync();
+          isite.uploadFile(
+            this.files,
+            {
+              folder: $scope.folder,
+            },
+            (err, file, e) => {
+              if (e) {
+                $(progress).show();
+                $scope.value = (e.loaded / e.total) * 100;
+                $scope.max = e.total;
+                if ($scope.value === 100) {
+                  $(progress).hide();
+                }
+              }
+
+              if (file) {
+                $scope.ngModel = file;
+                console.log(file);
+              }
+            }
+          );
+          $scope.ngModel = this.files[0].path;
+          $scope.onSelected(this.files[0].path);
+          $scope.$applyAsync();
         });
 
-        scope.$watch('ngModel', (ngModel) => {
+        $scope.$watch('ngModel', (ngModel) => {
           if (ngModel) {
             a.setAttribute('url', ngModel);
           }
         });
       },
-      template: `
-        <form class="form text-center pointer">
-            <input  class="hidden" type="file" name="file" />
-            <a class="btn {{type}}" ngClick="ngClick()" url="{{ngModel}}"> {{label}} </a>
-        </form>
-        `,
+      template: `/*##client-side/sub/i-file.content.html*/`,
     };
   },
 ]);
@@ -1263,16 +1306,16 @@ app.directive('iImage', [
       restrict: 'E',
       required: 'ngModel',
       scope: {
-        category: '@',
+        folder: '@',
         ngModel: '=',
         ngClick: '&',
       },
-      link: function (scope, element, attrs, ctrl) {
-        scope.category = scope.category || 'default';
+      link: function ($scope, element, attrs, ctrl) {
+        $scope.folder = $scope.folder || 'default';
 
         let input = $(element).find('input')[0];
         let img = $(element).find('img')[0];
-        let progress = $(element).find('progress')[0];
+        let progress = $(element).find('.progress')[0];
         $(progress).hide();
 
         if (attrs.view !== '') {
@@ -1285,34 +1328,39 @@ app.directive('iImage', [
           isite.uploadImage(
             this.files,
             {
-              category: scope.category,
+              folder: $scope.folder,
             },
-            (err, image_url, e) => {
+            (err, image, e) => {
               if (e) {
                 $(progress).show();
-                progress.value = e.loaded;
-                progress.max = e.total;
+                $scope.value = (e.loaded / e.total) * 100;
+                $scope.max = e.total;
+                if ($scope.value === 100) {
+                  $(progress).hide();
+                }
               }
 
-              if (image_url) {
-                scope.ngModel = image_url;
+              if (image) {
+                $scope.ngModel = image;
               }
             }
           );
         });
 
-        scope.$watch('ngModel', (ngModel) => {
+        $scope.$watch('ngModel', (ngModel) => {
           if (ngModel) {
-            img.setAttribute('src', ngModel);
+            img.setAttribute('src', ngModel.url);
           }
         });
       },
       template: `
-        <form class="form text-center pointer">
-            <input  class="hidden" type="file" name="file" />
-            <img class="bg-white"  ng-src="{{ngModel}}" ngClick="ngClick()" onerror="this.src='/images/no.jpg'" />
-            <progress class="row"></progress>
-        </form>
+        <div class=" text-center pointer">
+            <input  class="hidden" type="file" name="fileToUpload" accept="image/*"/>
+            <img class="rounded"  ng-src="{{ngModel.url}}" ngClick="ngClick()" onerror="this.src='/images/no.jpg'" />
+            <div class="progress row">
+               <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow="{{value}}" aria-valuemin="0" aria-valuemax="100" style="width: {{value}}%"></div>
+            </div>
+        </div>
         `,
     };
   },

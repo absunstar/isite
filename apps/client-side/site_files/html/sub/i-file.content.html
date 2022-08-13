@@ -1,0 +1,19 @@
+<div class="row">
+  <label class="col"> {{label}} </label>
+  <button ng-hide="ngModel" class="btn btn-primary col">
+    <i class="fas fa-upload"></i>
+  </button>
+  <div class="row">
+    <input class="hidden" type="file" name="fileToUpload" />
+    <div class="progress row">
+      <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow="{{value}}" aria-valuemin="0" aria-valuemax="100" style="width: {{value}}%"></div>
+    </div>
+  </div>
+
+  <div class="view" ng-show="ngModel">
+    <a class="link" href="{{ngModel.url}}"> {{ngModel.name}} </a> <span class="blue"> [ size {{ngModel.size / 1000}} kb ] </span>
+    <button class="btn btn-danger" ng-click="ngModel = null">
+      <i class="fas fa-times"></i>
+    </button>
+  </div>
+</div>

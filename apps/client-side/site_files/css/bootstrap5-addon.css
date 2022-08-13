@@ -22,6 +22,12 @@
   float: right;
   margin-right: -1.5em;
 }
+label {
+  float: left;
+}
+.ar label {
+  float: right;
+}
 i-checkbox,
 i-radio {
   align-self: center;
@@ -30,6 +36,19 @@ i-radio {
 }
 i-button {
   display: contents;
+}
+i-file {
+  padding: 10px !important;
+  border: 1px dashed var(--theme-color);
+  margin: 10px;
+  height: fit-content;
+}
+i-file button {
+  max-width: 100px;
+}
+i-file .view button {
+  width: 40px;
+  height: 40px;
 }
 .dropdown-content {
   top: 55px;
