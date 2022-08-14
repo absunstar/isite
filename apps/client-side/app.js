@@ -16,6 +16,12 @@ module.exports = function (site) {
   });
 
   site.get({
+    name: '/x-images',
+    path: __dirname + '/site_files/images',
+    public: true,
+  });
+
+  site.get({
     name: '/x-js',
     path: __dirname + '/site_files/js',
     public: true,
@@ -160,6 +166,7 @@ module.exports = function (site) {
       __dirname + '/site_files/css/fonts.css',
       __dirname + '/site_files/css/font-droid.css',
       __dirname + '/site_files/css/effect.css',
+      __dirname + '/site_files/css/scrollbar.css',
       __dirname + '/site_files/css/table.css',
       __dirname + '/site_files/css/tabs.css',
       __dirname + '/site_files/css/help.css',

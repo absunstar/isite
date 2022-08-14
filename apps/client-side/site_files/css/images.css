@@ -12,16 +12,19 @@
 i-image {
   width: auto !important;
   height: auto !important;
+  margin: 5px;
 }
 i-image img {
-  width: 150px;
-  height: 150px;
+  width: 128px;
+  height: 128px;
   transition: all 0.5s ease;
   -moz-transition: all 0.5s ease;
   -webkit-transition: all 0.5s ease;
   -ms-transition: all 0.5s ease;
-  background-image: url('/images/no.jpg');
+  background-image: url('/x-images/no.jpg');
   background-size: contain;
+  background-repeat: no-repeat;
+  border: 1px dashed var(--theme-color);
 }
 
 i-image.full img {
@@ -35,10 +38,13 @@ i-image.logo img {
   width: 48px;
   height: 48px;
 }
-
+i-image.logo64 img {
+  width: 64px;
+  height: 64px;
+}
 i-image.photo img {
-  width: 128px;
-  height: 128px;
+  width: 256px;
+  height: 256px;
 }
 
 i-image.hover img:hover {

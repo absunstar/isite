@@ -1,0 +1,19 @@
+<div class="row i-date2">
+  <div class="control">
+    <label> {{label}} </label>
+    <div class="row dashed">
+      <div class="col1 padding" ng-click="setDay()">
+        <i class="fa fa-calendar-day"></i>
+      </div>
+      <div class="col4 padding">
+        <i-list items="days" ng-model="model.selectedDay" ng-change="updateDate()"></i-list>
+      </div>
+      <div class="col4 padding">
+        <i-list items="monthes" ng-model="model.selectedMonth" ng-change="updateDate()"></i-list>
+      </div>
+      <div class="col4 padding">
+        <i-list items="years" ng-search="searchYear" ng-model="model.selectedYear" ng-change="updateDate()"></i-list>
+      </div>
+    </div>
+  </div>
+</div>

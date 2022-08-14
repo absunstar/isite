@@ -28,14 +28,37 @@ label {
 .ar label {
   float: right;
 }
+fieldset {
+  padding: var(--fieldset-padding);
+  margin: var(--fieldset-margin);
+  background: var(--fieldset-background);
+  border: var(--fieldset-border);
+}
+
+fieldset legend {
+  color: var(--legend-color);
+  font-size: var(--legend-font-size);
+  text-shadow: var(--legend-text-shadow);
+  font-weight: var(--legend-font-weight);
+  background: var(--fieldset-background);
+  border: var(--legend-border);
+}
+i-textarea {
+  margin: 10px;
+}
 i-checkbox,
 i-radio {
   align-self: center;
   margin-left: 1.5em;
   margin-right: 1.5em;
+  white-space: nowrap;
 }
+
 i-button {
   display: contents;
+}
+i-button button {
+  margin: 5px;
 }
 i-file {
   padding: 10px !important;
@@ -50,8 +73,24 @@ i-file .view button {
   width: 40px;
   height: 40px;
 }
+i-date .fa {
+  font-size: 24px;
+  vertical-align: middle;
+  margin-top: 5px;
+}
+.modal-content {
+  width: 75%;
+}
+.modal-body {
+  padding: 10px;
+  display: block;
+}
+.modal-footer {
+  display: block;
+  width: 100%;
+}
 .dropdown-content {
-  top: 55px;
+  top: 35px;
 }
 .v-tabs .nav-link {
   color: #aaa;

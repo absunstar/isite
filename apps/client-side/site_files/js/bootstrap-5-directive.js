@@ -158,32 +158,41 @@ app.directive('iButton', function () {
     },
     link: function ($scope, element, attrs, ctrl) {
       $scope.type = $scope.type || '';
-      if ($scope.type.like('*exit*') || $scope.type.like('*close*')) {
-        $scope.fa = 'times';
-      } else if ($scope.type.like('*view*') || $scope.type.like('*details*')) {
-        $scope.fa = 'file';
-      } else if ($scope.type.like('*add*') || $scope.type.like('*new*')) {
-        $scope.fa = 'plus-circle';
+      $scope.class = $scope.class = 'btn-dark';
+      $scope.fa = $scope.fa || $scope.label ? '' : 'fas fa-play';
+
+      if ($scope.type.like('*add*') || $scope.type.like('*new*')) {
+        $scope.fa = 'fas fa-plus';
+        $scope.class = 'btn-primary';
       } else if ($scope.type.like('*update*') || $scope.type.like('*edit*')) {
-        $scope.fa = 'edit';
+        $scope.fa = 'fas fa-edit';
+        $scope.class = 'btn-warning';
       } else if ($scope.type.like('*save*')) {
-        $scope.fa = 'save';
+        $scope.fa = 'fas fa-save';
+        $scope.class = 'btn-success';
+      } else if ($scope.type.like('*view*') || $scope.type.like('*details*')) {
+        $scope.fa = 'fas fa-eye';
+        $scope.class = 'btn-info';
       } else if ($scope.type.like('*delete*') || $scope.type.like('*remove*')) {
-        $scope.fa = 'trash';
+        $scope.fa = 'fas fa-trash';
+        $scope.class = 'btn-danger';
+      } else if ($scope.type.like('*exit*') || $scope.type.like('*close*')) {
+        $scope.fa = 'fas fa-times-circle';
+        $scope.class = 'btn-danger';
       } else if ($scope.type.like('*print*')) {
-        $scope.fa = 'print';
+        $scope.fa = 'fas fa-print';
+        $scope.class = 'btn-secondary';
       } else if ($scope.type.like('*search*')) {
         $scope.fa = 'search';
       } else if ($scope.type.like('*export*') || $scope.type.like('*excel*')) {
-        $scope.fa = 'table';
-      } else {
-        $scope.class = 'btn-primary';
+        $scope.fa = 'fas fa-file-export';
+        $scope.class = 'btn-secondary';
       }
       $scope.$watch('loading', (loading) => {
-        if (loading === 'true' ) {
-          $scope.busy = true
+        if (loading === 'true') {
+          $scope.busy = true;
         } else {
-          $scope.busy = false
+          $scope.busy = false;
         }
       });
     },
@@ -191,6 +200,7 @@ app.directive('iButton', function () {
         <button class="btn {{class}}" type="button" ng-click="click()" ng-disabled="busy">
           <span ng-show="busy" class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
           {{label}}
+          <i class="{{fa}}"></i>
         </button>
         `,
   };
@@ -220,9 +230,10 @@ app.directive('iList', [
         items: '=',
       },
       link: function ($scope, element, attrs, ctrl) {
-        $scope.display = attrs.display = attrs.display || 'name';
-        $scope.primary = attrs.primary = attrs.primary || 'id';
-        attrs.space = attrs.space || ' ';
+        $scope.primary = $scope.primary || 'id';
+        $scope.display = $scope.display || 'name';
+        $scope.display2 = $scope.display2 || '';
+        $scope.space = $scope.space || ' - ';
         attrs.ngValue = attrs.ngValue || '';
 
         $scope.searchElement = $(element).find('.dropdown .search');
@@ -306,7 +317,11 @@ app.directive('iList', [
 
           if (items) {
             items.forEach((item) => {
-              item.$display = $scope.getValue(item) + attrs.space + $scope.getValue2(item);
+              if ($scope.display2) {
+                item.$display = $scope.getValue(item) + $scope.space + $scope.getValue2(item);
+              } else {
+                item.$display = $scope.getValue(item);
+              }
             });
           }
 
@@ -314,7 +329,12 @@ app.directive('iList', [
             items.forEach((item) => {
               if (isite.getValue(item, $scope.primary) == isite.getValue($scope.ngModel, $scope.primary)) {
                 $scope.ngModel = item;
-                item.$display = $scope.getValue(item) + attrs.space + $scope.getValue2(item);
+                if ($scope.display2) {
+                  item.$display = $scope.getValue(item) + $scope.space + $scope.getValue2(item);
+                } else {
+                  item.$display = $scope.getValue(item);
+                }
+
                 input.val(item.$display);
               }
             });
@@ -327,16 +347,26 @@ app.directive('iList', [
           $scope.ngModel = ngModel;
 
           if (ngModel) {
-            input.val(' ' + $scope.getNgModelValue(ngModel) + attrs.space + $scope.getNgModelValue2(ngModel));
+            if ($scope.display2) {
+              input.val(' ' + $scope.getNgModelValue(ngModel) + $scope.space + $scope.getNgModelValue2(ngModel));
+            } else {
+              input.val(' ' + $scope.getNgModelValue(ngModel));
+            }
           }
         });
 
         $scope.updateModel = function (item) {
           $scope.ngModel = $scope.getNgValue(item, $scope.ngValue);
-          input.val($scope.getNgModelValue($scope.ngModel) + attrs.space + $scope.getNgModelValue2($scope.ngModel));
+          if ($scope.display2) {
+            input.val($scope.getNgModelValue($scope.ngModel) + $scope.space + $scope.getNgModelValue2($scope.ngModel));
+          } else {
+            input.val($scope.getNgModelValue($scope.ngModel));
+          }
           $timeout(() => {
-            $scope.ngChange();
-          });
+            if ($scope.ngChange) {
+              $scope.ngChange();
+            }
+          }, 100);
           $scope.hide();
         };
       },
@@ -364,7 +394,7 @@ app.directive('iChecklist', [
       link: function ($scope, element, attrs, ctrl) {
         $scope.primary = $scope.primary || 'id';
         $scope.display = $scope.display || 'name';
-        $scope.class2 = $scope.class2 || 'col3';
+        $scope.class2 = $scope.class2 || 'col';
         $scope.selectedItems = [];
 
         $scope.$watch('ngModel', (ngModel) => {
@@ -446,132 +476,86 @@ app.directive('iChecklist', [
     };
   },
 ]);
+
 app.directive('iDate', function () {
   return {
-    link: function (scope, element, attrs) {
-      if (typeof attrs.disabled !== 'undefined') {
-        attrs.disabled = 'disabled';
-      } else {
-        attrs.disabled = '';
-      }
-
-      $(element)
-        .find('select')
-        .focus(() => {
-          $('.popup').hide();
-        });
-
-      scope.days1 = [];
-      for (let i = 1; i < 32; i++) {
-        scope.days1.push(i);
-      }
-      scope.years1 = [];
-      for (let i = 1900; i < 2100; i++) {
-        scope.years1.push(i);
-      }
-      scope.monthes1 = ['يناير', 'فبراير', 'مارس', 'ابريل', 'مايو', 'يونيو', 'يوليو', 'اغسطس', 'سبتمبر', 'اكتوبر', 'نوفمبر', 'ديسمبر'];
-    },
     restrict: 'E',
-    require: 'ngModel',
+    required: 'ngModel',
     scope: {
-      v: '@',
       label: '@',
-      disabled: '@',
+      year: '@',
       ngModel: '=',
+      ngChange: '&',
     },
-    template: `
-      <div class="row i-date">
-  
-        <div class=" control">
-          <label> {{label}} </label>
-          <div class="row">
-            <div class="col3 day"> 
-              <select ng-disabled="disabled" v="{{v}}" ng-model="ngModel.day" class="appearance-none no-border-left no-border-radius" >
-              <option ng-repeat="d1 in days1" ng-value="d1"> {{d1}} </option>
-              </select>
-            </div>
-            <div class="col5 month"> 
-              <select ng-disabled="disabled" v="{{v}}" ng-model="ngModel.month" class="appearance-none no-border-left no-border-right no-border-radius" >
-              <option ng-repeat="m1 in monthes1" ng-value="$index"> {{m1}} </option>
-              </select>
-            </div>
-            <div class="col4 year"> 
-              <select ng-disabled="disabled" v="{{v}}" ng-model="ngModel.year" class="appearance-none no-border-right no-border-radius" >
-              <option ng-repeat="y1 in years1" ng-value="y1"> {{y1}} </option>
-              </select>
-            </div>
-          </div>
-        </div>
-    
-  
-      </div>
-      `,
-  };
-});
-
-app.directive('iDate2', function () {
-  return {
     link: function ($scope, element, attrs) {
       if (typeof attrs.disabled !== 'undefined') {
         attrs.disabled = 'disabled';
       } else {
         attrs.disabled = '';
       }
+      $scope.year = $scope.year ? parseInt($scope.year) : 1960;
 
-      $scope.y_search = attrs.year || '202';
-      $scope.m_search = attrs.month || '';
-      $scope.d_search = attrs.day || '';
+      $scope.model = {};
 
-      $scope.days1 = [];
+      $scope.days = [];
       for (let i = 1; i < 32; i++) {
-        $scope.days1.push({
+        $scope.days.push({
           id: i,
           name: i,
         });
       }
-      $scope.years1 = [];
-      for (let i = 1900; i < 2100; i++) {
-        $scope.years1.push({
+      $scope.years = [];
+      for (let i = $scope.year; i < 2100; i++) {
+        $scope.years.push({
           id: i,
           name: i,
         });
       }
-
-      $scope.monthes1 = [
-        { id: 0, name: 'يناير / Jan' },
-        { id: 1, name: 'فبراير / Feb' },
-        { id: 2, name: 'مارس / Mar' },
-        { id: 3, name: 'ابريل / Aper' },
-        { id: 4, name: 'مايو / May' },
-        { id: 5, name: 'يونيو / June' },
-        { id: 6, name: 'يوليو / Jule' },
-        { id: 7, name: 'اغسطس / Aug' },
-        { id: 8, name: 'سبتمبر / Sep' },
-        { id: 9, name: 'اكتوبر / Oct' },
-        { id: 10, name: 'نوفمبر / Nov' },
-        { id: 11, name: 'ديسمبر / Des' },
-      ];
-
-      $scope.model = null;
+      $scope.lang = site.session ? site.session.lang : 'en';
+      if ($scope.lang === 'ar') {
+        $scope.monthes = [
+          { id: 0, name: 'يناير' },
+          { id: 1, name: 'فبراير' },
+          { id: 2, name: 'مارس' },
+          { id: 3, name: 'ابريل' },
+          { id: 4, name: 'مايو' },
+          { id: 5, name: 'يونيو' },
+          { id: 6, name: 'يوليو' },
+          { id: 7, name: 'اغسطس' },
+          { id: 8, name: 'سبتمبر' },
+          { id: 9, name: 'اكتوبر' },
+          { id: 10, name: 'نوفمبر' },
+          { id: 11, name: 'ديسمبر' },
+        ];
+      } else {
+        $scope.monthes = [
+          { id: 0, name: 'Jan' },
+          { id: 1, name: 'Feb' },
+          { id: 2, name: 'Mar' },
+          { id: 3, name: 'Aper' },
+          { id: 4, name: 'May' },
+          { id: 5, name: 'June' },
+          { id: 6, name: 'Jule' },
+          { id: 7, name: 'Aug' },
+          { id: 8, name: 'Sep' },
+          { id: 9, name: 'Oct' },
+          { id: 10, name: 'Nov' },
+          { id: 11, name: 'Des' },
+        ];
+      }
 
       $scope.$watch('ngModel', function (ngModel) {
         if (ngModel) {
           ngModel = new Date(ngModel);
           $scope.model = $scope.model || {};
-          $scope.model.day = ngModel.getDate();
-          $scope.model.day_name = $scope.model.day;
-          $scope.model.month = ngModel.getMonth();
-          $scope.model.month_name = $scope.monthes1.find((m) => m.id == $scope.model.month).name;
-          $scope.model.year = ngModel.getFullYear();
-          $scope.model.year_name = $scope.model.year;
+          $scope.model.selectedDay = $scope.days.find((d) => d.id == ngModel.getDate());
+          $scope.model.selectedMonth = $scope.monthes.find((m) => m.id == ngModel.getMonth());
+          $scope.model.selectedYear = $scope.years.find((y) => y.id == ngModel.getFullYear());
         } else {
           $scope.model = $scope.model || {};
-          $scope.model.day = 0;
-          $scope.model.day_name = '';
-          $scope.model.month = -1;
-          $scope.model.month_name = '';
-          $scope.model.year = 0;
-          $scope.model.year_name = '';
+          $scope.model.selectedDay = null;
+          $scope.model.selectedMonth = null;
+          $scope.model.selectedYear = null;
         }
       });
 
@@ -579,21 +563,11 @@ app.directive('iDate2', function () {
         $scope.ngModel = new Date();
       };
       $scope.updateDate = function (date) {
-        if (date.year) {
-          $scope.model.year = date.year.id;
-          $scope.model.year_name = date.year.name;
-        } else if (date.month) {
-          $scope.model.month = date.month.id;
-          $scope.model.month_name = date.month.name;
-        } else if (date.day) {
-          $scope.model.day = date.day.id;
-          $scope.model.day_name = date.day.name;
-        }
-
-        if ($scope.model && $scope.model.year && $scope.model.day && $scope.model.month > -1) {
-          $scope.ngModel = new Date($scope.model.year, $scope.model.month, $scope.model.day, 0, 0, 0);
-        } else {
-          delete $scope.ngModel;
+        if ($scope.model.selectedDay && $scope.model.selectedMonth && $scope.model.selectedYear) {
+          $scope.ngModel = new Date($scope.model.selectedYear.id, $scope.model.selectedMonth.id, $scope.model.selectedDay.id, 0, 0, 0);
+          if ($scope.ngChange) {
+            $scope.ngChange();
+          }
         }
       };
     },
@@ -605,7 +579,7 @@ app.directive('iDate2', function () {
       label: '@',
       ngModel: '=',
     },
-    template: `/*##client-side/sub/i-date2.content.html*/`,
+    template: `/*##client-side/directive/i-date.html*/`,
   };
 });
 

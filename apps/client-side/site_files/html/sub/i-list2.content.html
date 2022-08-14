@@ -1,22 +1,20 @@
-<div class="dropdown i-list" >
-    <div class="control">
-        <label> {{label}} </label>
-        <input ng-focus="focus()" class="full-width text dropdown-text form-control {{css}}" ng-disabled="disabled" v="{{v}}" readonly ng-model="ngModel.$display" />
+<div class="dropdown i-list">
+  <div class="control">
+    <label> {{label}} </label>
+    <input ng-focus="focus()" class="full-width text dropdown-text form-control {{css}}" ng-disabled="disabled" v="{{v}}" readonly ng-model="ngModel.$display" />
+  </div>
+
+  <div class="dropdown-content">
+    <div class="padding" ng-show="showSearch">
+      <input class="full-width search form-control" ng-model="ngSearch" />
     </div>
 
-    <div class="dropdown-content">
-        <div class="row padding" ng-show="showSearch">
-            <input class="full-width search form-control" ng-model="ngSearch" />
-            <br />
-        </div>
-
-        <div class="row padding dropdown-item center" ng-repeat="item in items | filter:{ $display : ngSearch}" ng-click="updateModel(item)">
-            <p>{{getValue(item)}}</p>
-            <small> {{getValue2(item)}} </small>
-        </div>
-
-        <div class="row center padding pointer">
-            <a class="btn red" ng-click="updateModel({})"> <i class="fa fa-trash"></i> Clear </a>
-        </div>
+    <div class="dropdown-item row" ng-repeat="item in items | filter:{ $display : ngSearch}" ng-click="updateModel(item)">
+      <p>{{getValue(item)}} <small ng-show="display2"> {{getValue2(item)}} </small></p>
     </div>
+
+    <div class="row center padding pointer">
+      <a class="btn red" ng-click="updateModel({})"> <i class="fa fa-trash"></i> Clear </a>
+    </div>
+  </div>
 </div>
