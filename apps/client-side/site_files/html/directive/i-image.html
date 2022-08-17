@@ -1,0 +1,7 @@
+<div class="text-center pointer">
+  <input class="hidden" type="file" name="fileToUpload" accept="{{accept}}" />
+  <img class="rounded" ng-src="{{ngModel.url}}" ngClick="ngClick()" onerror="this.src='/images/no.jpg'" />
+  <div class="progress row">
+    <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow="{{value}}" aria-valuemin="0" aria-valuemax="100" style="width: {{value}}%"></div>
+  </div>
+</div>

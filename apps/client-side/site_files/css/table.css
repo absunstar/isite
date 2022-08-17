@@ -36,10 +36,10 @@
 }
 
 .table th {
-  background-color: var(--navbar-background-color);
-  color: var(--table-th-color);
+  background-color: var(--navbar-background-color) !important;
+  color: var(--table-th-color) !important;
   border: var(--table-border);
-  padding: 5px;
+  padding: 5px !important;
   text-align: center;
   font-weight: bold;
   white-space: nowrap;

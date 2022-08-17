@@ -21,9 +21,6 @@ i-image img {
   -moz-transition: all 0.5s ease;
   -webkit-transition: all 0.5s ease;
   -ms-transition: all 0.5s ease;
-  background-image: url('/x-images/no.jpg');
-  background-size: contain;
-  background-repeat: no-repeat;
   border: 1px dashed var(--theme-color);
 }
 

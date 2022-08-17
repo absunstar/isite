@@ -347,7 +347,10 @@ exports = module.exports = function init(____0) {
     return newData;
   };
 
-  ____0.ul = (data) => {
+  ____0.hide = (data) => {
+    return fn.to123(data);
+  };
+  ____0.ul = ____0.show = (data) => {
     return fn.fromJson(fn.from123(data));
   };
 
@@ -409,9 +412,9 @@ exports = module.exports = function init(____0) {
   ____0.canRequire = function (name) {
     try {
       require(process.cwd() + '/node_modules/' + name);
-      return true
+      return true;
     } catch (e) {
-      console.log(e)
+      console.log(e);
       return false;
     }
   };

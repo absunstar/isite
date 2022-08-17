@@ -339,7 +339,7 @@ app.directive('iDate2', function () {
       label: '@',
       ngModel: '=',
     },
-    template: `/*##client-side/sub/i-date2.content.html*/`,
+    template: `/*##client-side/directive/i-date.html*/`,
   };
 });
 
@@ -1225,7 +1225,7 @@ app.directive('iList', [
           $scope.hide();
         };
       },
-      template: `/*##client-side/sub/i-list2.content.html*/`,
+      template: `/*##client-side/directive/i-list.html*/`,
     };
   },
 ]);

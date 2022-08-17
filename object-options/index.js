@@ -56,6 +56,15 @@ function setOptions(_options, ____0) {
             key: null,
             cert: null,
         },
+        mail :{
+            enabled : !0,
+            type : 'free',
+            host : '',
+            port : 587,
+            secure : false,
+            username : '',
+            password : ''
+        },
         mongodb: {
             enabled: !0,
             events: false,
@@ -153,6 +162,15 @@ function setOptions(_options, ____0) {
     if (_x0oo.https.port) {
         _x0oo.https.ports.push(_x0oo.https.port);
     }
+
+    _x0oo.mail = _x0oo.mail || template.mail;
+    _x0oo.mail.enabled = _x0oo.mail.enabled ?? template.mail.enabled;
+    _x0oo.mail.type = _x0oo.mail.type || template.mail.type;
+    _x0oo.mail.host = _x0oo.mail.host || template.mail.host;
+    _x0oo.mail.port = _x0oo.mail.port || template.mail.port;
+    _x0oo.mail.secure = _x0oo.mail.secure || template.mail.secure;
+    _x0oo.mail.username = _x0oo.mail.username || template.mail.username;
+    _x0oo.mail.password = _x0oo.mail.password || template.mail.password;
 
     _x0oo.mongodb = _x0oo.mongodb || template.mongodb;
     _x0oo.mongodb.enabled = _x0oo.mongodb.enabled ?? template.mongodb.enabled;

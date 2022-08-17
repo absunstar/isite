@@ -110,7 +110,7 @@
 
     return site.printerList;
   };
-  
+
   site.render = function (selector, data) {
     let template = document.querySelector(selector);
     if (template) {
@@ -543,6 +543,13 @@
     return newData;
   };
 
+  site.hide = function (obj) {
+    return site.to123(obj);
+  };
+  site.show = function (obj) {
+    return JSON.parse(site.from123(obj));
+  };
+
   site.typeOf = site.typeof = function type(elem) {
     return Object.prototype.toString.call(elem).slice(8, -1);
   };
@@ -609,6 +616,15 @@
     return '';
   };
 
+  site.resetValidated = function (s) {
+    s = s || 'body';
+    const arr = document.querySelectorAll(s + ' [v]');
+    arr.forEach((el) => {
+      el.classList.remove('is-invalid');
+      el.classList.remove('is-valid');
+    });
+  };
+
   site.validated = function (s) {
     const res = {
       ok: !0,
@@ -639,7 +655,7 @@
               en: 'Data Is Required',
               ar: 'هذا البيان مطلوب',
             });
-          }else{
+          } else {
             el.classList.add('is-valid');
           }
         } else if (vl.like('ml*')) {
