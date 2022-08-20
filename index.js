@@ -218,10 +218,6 @@ module.exports = function init(options) {
 
   ____0.reset = function () {};
 
-  ____0.test = function () {
-    ____0.log(' Isite Test OK !! ');
-  };
-
   ____0.on('[any][saving data]', function () {
     ____0.log('Saving Data :: ' + ____0.options.savingTime + ' Minute ');
   });

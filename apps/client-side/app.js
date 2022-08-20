@@ -196,6 +196,7 @@ module.exports = function (site) {
               response.error = err;
               response.done = !1;
             } else {
+              response.image.name = file.originalFilename;
               response.image.path = newpath;
               response.image.url = '/x-api/image/' + req.headers['folder'] + '/' + newName;
               response.image.size = file.size;
@@ -237,6 +238,7 @@ module.exports = function (site) {
             response.error = err;
             response.done = !1;
           }
+          response.file.name = file.originalFilename;
           response.file.path = newpath;
           response.file.url = '/x-api/file/' + req.headers['folder'] + '/' + newName;
           response.file.size = file.size;

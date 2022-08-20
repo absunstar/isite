@@ -188,6 +188,9 @@ app.directive('iButton', function () {
         $scope.fa = 'fas fa-file-export';
         $scope.class = 'btn-secondary';
       }
+      if ($scope.type.like('*default*')) {
+        $scope.class = '';
+      }
       $scope.$watch('loading', (loading) => {
         if (loading === 'true') {
           $scope.busy = true;
@@ -400,7 +403,9 @@ app.directive('iChecklist', [
         $scope.$watch('ngModel', (ngModel) => {
           $scope.reload();
         });
-
+        $scope.$watch('items', (ngModel) => {
+          $scope.reload();
+        });
         $scope.reload = function () {
           $scope.selectedItems = [];
 
@@ -725,12 +730,14 @@ app.directive('iRadiolist', [
 app.directive('iFile', [
   '$interval',
   'isite',
-  function ($interval, isite) {
+  '$timeout',
+  function ($interval, isite, $timeout) {
     return {
       restrict: 'E',
       required: 'ngModel',
       scope: {
         label: '@',
+        view: '@',
         accept: '@',
         folder: '@',
         ngModel: '=',
@@ -742,16 +749,17 @@ app.directive('iFile', [
         $scope.label = $scope.label || 'Select File to Upload';
         $scope.folder = $scope.folder || 'default';
         $scope.accept = $scope.accept ? $scope.accept : '';
+        $scope.viewOnly = $scope.view === undefined ? false : true;
+
         let input = $(element).find('input')[0];
         let button = $(element).find('button')[0];
-        if (attrs.view === '') {
-          $scope.viewOnly = !0;
-        }
+
         let progress = $(element).find('.progress')[0];
         $(progress).hide();
 
         $scope.id = Math.random().toString().replace('.', '_');
-        if (attrs.view !== '') {
+
+        if (!$scope.viewOnly) {
           button.addEventListener('click', function () {
             input.click();
           });
@@ -775,9 +783,7 @@ app.directive('iFile', [
 
               if (file) {
                 $scope.ngModel = file;
-                if ($scope.ngChange) {
-                  $scope.ngChange();
-                }
+                $scope.changed();
               }
             }
           );
@@ -788,9 +794,17 @@ app.directive('iFile', [
 
         $scope.$watch('ngModel', (ngModel) => {
           if (ngModel) {
-            a.setAttribute('url', ngModel);
+            button.setAttribute('url', ngModel);
           }
         });
+
+        $scope.changed = function () {
+          $timeout(() => {
+            if ($scope.ngChange) {
+              $scope.ngChange();
+            }
+          }, 200);
+        };
       },
       template: `/*##client-side/directive/i-file.html*/`,
     };
@@ -800,12 +814,14 @@ app.directive('iFile', [
 app.directive('iImage', [
   '$interval',
   'isite',
-  function ($interval, isite) {
+  '$timeout',
+  function ($interval, isite, $timeout) {
     return {
       restrict: 'E',
       required: 'ngModel',
       scope: {
         folder: '@',
+        view: '@',
         accept: '@',
         ngModel: '=',
         ngClick: '&',
@@ -814,12 +830,14 @@ app.directive('iImage', [
       link: function ($scope, element, attrs, ctrl) {
         $scope.folder = $scope.folder || 'default';
         $scope.accept = $scope.accept ? $scope.accept : 'image/*';
+        $scope.viewOnly = $scope.view === undefined ? false : true;
+
         let input = $(element).find('input')[0];
         let img = $(element).find('img')[0];
         let progress = $(element).find('.progress')[0];
         $(progress).hide();
 
-        if (attrs.view !== '') {
+        if (!$scope.viewOnly) {
           img.addEventListener('click', function () {
             input.click();
           });
@@ -844,7 +862,9 @@ app.directive('iImage', [
               if (image) {
                 $scope.ngModel = image;
                 if ($scope.ngChange) {
-                  $scope.ngChange();
+                  $timeout(() => {
+                    $scope.ngChange();
+                  }, 200);
                 }
               }
             }

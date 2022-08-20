@@ -2,10 +2,10 @@
   <div class="control">
     <label> {{label}} </label>
     <div class="row dashed">
-      <div class="col1 padding" ng-click="setDay()">
+      <div class="col2 padding pointer" title="current Date" ng-click="setDay()">
         <i class="fa fa-calendar-day"></i>
       </div>
-      <div class="col4 padding">
+      <div class="col3 padding">
         <i-list items="days" ng-model="model.selectedDay" ng-change="updateDate()"></i-list>
       </div>
       <div class="col4 padding">

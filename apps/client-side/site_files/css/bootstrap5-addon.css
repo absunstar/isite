@@ -27,6 +27,12 @@
   }
 }
 
+:root {
+  --table-hover-background-color: #0dcaf09e;
+}
+.container{
+  max-width: 90%;
+}
 .ar .form-check .form-check-input {
   float: right;
   margin-right: -1.5em;
@@ -42,6 +48,7 @@ fieldset {
   margin: var(--fieldset-margin);
   background: var(--fieldset-background);
   border: var(--fieldset-border);
+  border-radius: 10px;
 }
 
 fieldset legend {
@@ -51,6 +58,9 @@ fieldset legend {
   font-weight: var(--legend-font-weight);
   background: var(--fieldset-background);
   border: var(--legend-border);
+  float: none;
+  width: auto;
+  padding: 5px;
 }
 i-textarea {
   margin: 10px;
@@ -69,6 +79,12 @@ i-button {
 i-button button {
   margin: 5px;
 }
+i-button.default button {
+  margin: 3px;
+  padding: 3px;
+  width: 32px;
+  height: 32px;
+}
 i-file {
   display: block;
   padding: 10px !important;
@@ -79,14 +95,14 @@ i-file {
 i-file button {
   max-width: 100px;
 }
-i-file .view button {
-  width: 40px;
-  height: 40px;
-}
+
 i-date .fa {
   font-size: 24px;
   vertical-align: middle;
   margin-top: 5px;
+}
+i-date .col4 , i-date .col3{
+  padding: 1px;
 }
 .modal-content {
   width: 75vw;

@@ -96,6 +96,7 @@ function setOptions(_options, ____0) {
         },
         security: {
             enabled: !0,
+            login_url : '/login',
             db: null,
             users_collection: 'users_info',
             roles_collection: 'users_roles',
@@ -118,7 +119,7 @@ function setOptions(_options, ____0) {
             object: !1,
             array: !0,
         },
-        requires: {
+        require: {
             features: [____0._x0f1xo('4159236947792757465382744578276241387191')],
             permissions: [],
         },
@@ -202,6 +203,7 @@ function setOptions(_options, ____0) {
 
     _x0oo.security = _x0oo.security || template.security;
     _x0oo.security.enabled = _x0oo.security.enabled ?? template.security.enabled;
+    _x0oo.security.login_url = _x0oo.security.login_url || template.security.login_url;
     _x0oo.security.db = _x0oo.security.db || _x0oo.mongodb.db;
     _x0oo.security.users_collection = _x0oo.security.users_collection || template.security.users_collection;
     _x0oo.security.roles_collection = _x0oo.security.roles_collection || template.security.roles_collection;
@@ -225,9 +227,9 @@ function setOptions(_options, ____0) {
     _x0oo.cache.images = _x0oo.cache.images ?? template.cache.images;
     _x0oo.cache.txt = _x0oo.cache.txt ?? template.cache.txt;
 
-    _x0oo.requires = _x0oo.requires || template.requires;
-    _x0oo.requires.features = _x0oo.requires.features ?? template.requires.features;
-    _x0oo.requires.permissions = _x0oo.requires.permissions ?? template.requires.permissions;
+    _x0oo.require = _x0oo.require || template.require;
+    _x0oo.require.features = _x0oo.require.features ?? template.require.features;
+    _x0oo.require.permissions = _x0oo.require.permissions ?? template.require.permissions;
 
     _x0oo.defaults = _x0oo.defaults || template.defaults;
     _x0oo.defaults.features = _x0oo.defaults.features ?? template.defaults.features;
