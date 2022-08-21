@@ -641,7 +641,7 @@
       vList.forEach((vl) => {
         vl = vl.toLowerCase().trim();
         if (vl === 'r') {
-          if ((el.nodeName === 'INPUT' || el.nodeName === 'SELECT') && (!el.value || el.value.like('*undefined*'))) {
+          if ((el.nodeName === 'INPUT' || el.nodeName === 'SELECT' || el.nodeName === 'TEXTAREA') && (!el.value || el.value.like('*undefined*'))) {
             el.classList.add('is-invalid');
             if ((f = el.parentNode.querySelector('.invalid-feedback'))) {
               if (site.session && site.session.lang == 'en') {

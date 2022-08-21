@@ -6,13 +6,13 @@
         <i class="fa fa-calendar-day"></i>
       </div>
       <div class="col3 padding">
-        <i-list items="days" ng-model="model.selectedDay" ng-change="updateDate()"></i-list>
+        <i-list v="{{v}}" items="days" ng-model="model.selectedDay" ng-change="updateDate()"></i-list>
       </div>
       <div class="col4 padding">
-        <i-list items="monthes" ng-model="model.selectedMonth" ng-change="updateDate()"></i-list>
+        <i-list v="{{v}}" items="monthes" ng-model="model.selectedMonth" ng-change="updateDate()"></i-list>
       </div>
       <div class="col4 padding">
-        <i-list items="years" ng-search="searchYear" ng-model="model.selectedYear" ng-change="updateDate()"></i-list>
+        <i-list v="{{v}}" items="years" ng-search="searchYear" ng-model="model.selectedYear" ng-change="updateDate()"></i-list>
       </div>
     </div>
   </div>

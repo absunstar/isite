@@ -131,7 +131,7 @@ app.directive('iRadio', function () {
         attrs.disabled = '';
       }
 
-      $scope.group = $scope.group || attrs.group || attrs.ngModel.replaceAll('.', '_');
+      $scope.group = $scope.group || attrs.ngModel.replaceAll('.', '_');
       $scope.id2 = $scope.id2 || 'input_' + Math.random().toString().replace('0.', '');
     },
     template: `
@@ -488,6 +488,7 @@ app.directive('iDate', function () {
     required: 'ngModel',
     scope: {
       label: '@',
+      V: '@',
       year: '@',
       ngModel: '=',
       ngChange: '&',
@@ -746,7 +747,7 @@ app.directive('iFile', [
         ngChange: '&',
       },
       link: function ($scope, element, attrs, ctrl) {
-        $scope.label = $scope.label || 'Select File to Upload';
+        $scope.label = $scope.label || '';
         $scope.folder = $scope.folder || 'default';
         $scope.accept = $scope.accept ? $scope.accept : '';
         $scope.viewOnly = $scope.view === undefined ? false : true;
