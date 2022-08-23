@@ -110,99 +110,99 @@ h5 {
 }
 
 .col1 {
-  width: calc(1 / 13 * 100%);
+  width: calc(1 / 13 * 100%) !important;
 }
 
 .col2 {
-  width: calc(2 / 13 * 100%);
+  width: calc(2 / 13 * 100%) !important;
 }
 
 .col3 {
-  width: calc(3 / 13 * 100%);
+  width: calc(3 / 13 * 100%) !important;
 }
 
 .col4 {
-  width: calc(4 / 13 * 100%);
+  width: calc(4 / 13 * 100%) !important;
 }
 
 .col5 {
-  width: calc(5 / 13 * 100%);
+  width: calc(5 / 13 * 100%) !important;
 }
 
 .col6 {
-  width: calc(6 / 13 * 100%);
+  width: calc(6 / 13 * 100%) !important;
 }
 
 .col7 {
-  width: calc(7 / 13 * 100%);
+  width: calc(7 / 13 * 100%) !important;
 }
 
 .col8 {
-  width: calc(8 / 13 * 100%);
+  width: calc(8 / 13 * 100%) !important;
 }
 
 .col9 {
-  width: calc(9 / 13 * 100%);
+  width: calc(9 / 13 * 100%) !important;
 }
 
 .col10 {
-  width: calc(10 / 13 * 100%);
+  width: calc(10 / 13 * 100%) !important;
 }
 
 .col11 {
-  width: calc(11 / 13 * 100%);
+  width: calc(11 / 13 * 100%) !important;
 }
 
 .col12 {
-  width: calc(12 / 13 * 100%);
+  width: calc(12 / 13 * 100%) !important;
 }
 
 .col-1 {
-  width: calc(0.9 / 13 * 100%);
+  width: calc(0.9 / 13 * 100%) !important;
 }
 
 .col-2 {
-  width: calc(1.9 / 13 * 100%);
+  width: calc(1.9 / 13 * 100%) !important;
 }
 
 .col-3 {
-  width: calc(2.9 / 13 * 100%);
+  width: calc(2.9 / 13 * 100%) !important;
 }
 
 .col-4 {
-  width: calc(3.9 / 13 * 100%);
+  width: calc(3.9 / 13 * 100%) !important;
 }
 
 .col-5 {
-  width: calc(4.9 / 13 * 100%);
+  width: calc(4.9 / 13 * 100%) !important;
 }
 
 .col-6 {
-  width: calc(5.9 / 13 * 100%);
+  width: calc(5.9 / 13 * 100%) !important;
 }
 
 .col-7 {
-  width: calc(6.9 / 13 * 100%);
+  width: calc(6.9 / 13 * 100%) !important;
 }
 
 .col-8 {
-  width: calc(7.9 / 13 * 100%);
+  width: calc(7.9 / 13 * 100%) !important;
 }
 
 .col-9 {
-  width: calc(8.9 / 13 * 100%);
+  width: calc(8.9 / 13 * 100%) !important;
 }
 
 .col-10 {
-  width: calc(9.9 / 13 * 100%);
+  width: calc(9.9 / 13 * 100%) !important;
 }
 
 .col-11 {
-  width: calc(10.9 / 13 * 100%);
+  width: calc(10.9 / 13 * 100%) !important;
 }
 
 .col-12 {
-  width: calc(11.9 / 13 * 100%);
+  width: calc(11.9 / 13 * 100%) !important;
 }
 
 /* Small devices (landscape phones, 576px and down) */
