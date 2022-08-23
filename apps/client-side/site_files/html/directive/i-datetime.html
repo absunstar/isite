@@ -2,7 +2,8 @@
   <label> {{label}} </label>
   <div class="row" ng-hide="editOnly">
     <p ng-click="editOnly = true" class="blue border padding pointer">
-      <span>{{model.selectedDay.name || '__'}} </span> / <span>{{model.selectedMonth.name || '______'}}</span> / <span>{{model.selectedYear.name || '____'}}</span> 
+      <span>{{model.selectedDay.name || '__'}} </span> / <span>{{model.selectedMonth.name || '______'}}</span> / <span>{{model.selectedYear.name || '____'}}</span> <span class="bold green">{{model.selectedHour.name || '--'}} </span> :
+      <span class="bold green">{{model.selectedMinute.name || '--'}}</span>
     </p>
   </div>
   <div class="row dashed" ng-show="editOnly">
@@ -16,7 +17,13 @@
       <i-list label="Year" v="{{v}}" items="years" ng-search="searchYear" ng-model="model.selectedYear"></i-list>
     </div>
 
-    <div class="col-3">
+    <div class="col-2">
+      <i-list label="Hour" v="{{v}}" items="hours" ng-model="model.selectedHour"></i-list>
+    </div>
+    <div class="col-2">
+      <i-list label="Minute" v="{{v}}" items="minutes" ng-model="model.selectedMinute"></i-list>
+    </div>
+    <div class="row">
       <br />
       <i-button type="save default" ng-click="updateDate()"></i-button>
     </div>

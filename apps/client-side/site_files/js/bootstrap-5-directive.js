@@ -29,15 +29,7 @@ app.directive('iControl', function () {
           $('.i-list .dropdown-content').css('display', 'none');
         });
     },
-    template: `
-        <div class="mb-3 {{class2}}">
-        <label for="{{id2}}" class="form-label">{{label}}</label>
-        <input id="{{id2}}" ng-disabled="disabled" autofocus v="{{v}}"  type="{{type}}" ng-model="ngModel" ng-change="ngChange()" ngKeydown="ngKeydown()" class="form-control"  placeholder="{{placeholder}}" aria-label="{{label}}"  />
-        <div class="invalid-feedback">
-        
-        </div>   
-        </div>
-        `,
+    template: `/*##client-side/directive/i-control.html*/`,
   };
 });
 
@@ -68,12 +60,7 @@ app.directive('iTextarea', function () {
           $('.popup').hide();
         });
     },
-    template: `
-        <div class="mb-3">
-          <label for="{{id2}}" class="form-label">{{label}}</label>
-          <textarea ng-disabled="disabled" class="form-control" id="{{id2}}" ng-model="ngModel" ng-change="ngChange()" v="{{v}}" rows="{{rows}}"></textarea>
-        </div>
-        `,
+    template: `/*##client-side/directive/i-textarea.html*/`,
   };
 });
 
@@ -102,14 +89,7 @@ app.directive('iCheckbox', function ($timeout) {
         }, 100);
       };
     },
-    template: `
-        <div class="form-check">
-          <input ng-change="changed()" ng-disabled="disabled" class="form-check-input" type="checkbox" ng-model="ngModel" id="{{id2}}">
-          <label class="form-check-label" for="{{id2}}">
-            {{label}}
-          </label>
-        </div>
-        `,
+    template: `/*##client-side/directive/i-checkbox.html*/`,
   };
 });
 
@@ -134,15 +114,7 @@ app.directive('iRadio', function () {
       $scope.group = $scope.group || attrs.ngModel.replaceAll('.', '_');
       $scope.id2 = $scope.id2 || 'input_' + Math.random().toString().replace('0.', '');
     },
-    template: `
-            <div class="form-check">
-              <input class="form-check-input" type="radio" ng-change="ngChange()" ng-disabled="disabled" ng-model="ngModel" id="{{id2}}" name="{{group}}" >
-              <label class="form-check-label" for="exampleRadios1">
-                {{label}}
-              </label>
-            </div>
-
-        `,
+    template: `/*##client-side/directive/i-radio.html*/`,
   };
 });
 
@@ -182,11 +154,12 @@ app.directive('iButton', function () {
       } else if ($scope.type.like('*print*')) {
         $scope.fa = 'fas fa-print';
         $scope.class = 'btn-secondary';
-      } else if ($scope.type.like('*search*')) {
-        $scope.fa = 'search';
       } else if ($scope.type.like('*export*') || $scope.type.like('*excel*')) {
         $scope.fa = 'fas fa-file-export';
         $scope.class = 'btn-secondary';
+      } else if ($scope.type.like('*search*') || $scope.type.like('*find*')) {
+        $scope.fa = 'fas fa-search';
+        $scope.class = 'btn-light';
       }
       if ($scope.type.like('*default*')) {
         $scope.class = '';
@@ -199,13 +172,7 @@ app.directive('iButton', function () {
         }
       });
     },
-    template: `
-        <button class="btn {{class}}" type="button" ng-click="click()" ng-disabled="busy">
-          <span ng-show="busy" class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
-          {{label}}
-          <i class="{{fa}}"></i>
-        </button>
-        `,
+    template: `/*##client-side/directive/i-button.html*/`,
   };
 });
 app.directive('iList', [
@@ -470,14 +437,7 @@ app.directive('iChecklist', [
           }, 100);
         };
       },
-      template: `
-       <div class="check-list">
-            <label class="title margin"> {{label}} </label>
-            <div class="row">
-              <i-checkbox class="{{class2}}" label="{{item[display]}}" ng-repeat="item in items" ng-model="item.$selected" ng-change="change(item);"></i-checkbox>
-            </div>
-        </div>
-        `,
+      template: `/*##client-side/directive/i-checklist.html*/`,
     };
   },
 ]);
@@ -571,6 +531,7 @@ app.directive('iDate', function () {
       $scope.updateDate = function (date) {
         if ($scope.model.selectedDay && $scope.model.selectedMonth && $scope.model.selectedYear) {
           $scope.ngModel = new Date($scope.model.selectedYear.id, $scope.model.selectedMonth.id, $scope.model.selectedDay.id, 0, 0, 0);
+          $scope.editOnly = false;
           if ($scope.ngChange) {
             $scope.ngChange();
           }
@@ -589,144 +550,134 @@ app.directive('iDate', function () {
   };
 });
 
-app.directive('iChecklist2', [
-  '$interval',
-  function ($interval) {
-    return {
-      restrict: 'E',
-      required: 'ngModel',
-      scope: {
-        label: '@',
-        primary: '@',
-        display: '@',
-        ngModel: '=',
-        items: '=',
-        like: '&',
-      },
-      link: function ($scope, element, attrs, ctrl) {
-        attrs.primary = attrs.primary || 'id';
+app.directive('iDatetime', function () {
+  return {
+    restrict: 'E',
+    required: 'ngModel',
+    scope: {
+      label: '@',
+      V: '@',
+      ngYear: '@',
+      ngModel: '=',
+      ngChange: '&',
+    },
+    link: function ($scope, element, attrs) {
+      if (typeof attrs.disabled !== 'undefined') {
+        attrs.disabled = 'disabled';
+      } else {
+        attrs.disabled = '';
+      }
+      $scope.year = $scope.ngYear ? parseInt($scope.ngYear) : 1960;
 
-        $scope.selectedItems = [];
+      $scope.model = {};
 
-        $scope.$watch('ngModel', (ngModel) => {
-          $scope.reload();
+      $scope.hours = [];
+      for (let i = 0; i < 24; i++) {
+        $scope.hours.push({
+          id: i,
+          name: i < 10 ? '0' + i : i,
         });
+      }
+      $scope.minutes = [];
+      for (let i = 0; i < 60; i++) {
+        $scope.minutes.push({
+          id: i,
+          name: i < 10 ? '0' + i : i,
+        });
+      }
 
-        $scope.reload = function () {
-          $scope.selectedItems = [];
+      $scope.days = [];
+      for (let i = 1; i < 32; i++) {
+        $scope.days.push({
+          id: i,
+          name: i,
+        });
+      }
 
-          if ($scope.ngModel) {
-            $scope.ngModel.forEach((mitem) => {
-              $scope.selectedItems.push(mitem);
-            });
+      $scope.years = [];
+      for (let i = $scope.year; i < 2100; i++) {
+        $scope.years.push({
+          id: i,
+          name: i,
+        });
+      }
+      $scope.lang = site.session ? site.session.lang : 'en';
+      if ($scope.lang === 'ar') {
+        $scope.monthes = [
+          { id: 0, name: 'يناير' },
+          { id: 1, name: 'فبراير' },
+          { id: 2, name: 'مارس' },
+          { id: 3, name: 'ابريل' },
+          { id: 4, name: 'مايو' },
+          { id: 5, name: 'يونيو' },
+          { id: 6, name: 'يوليو' },
+          { id: 7, name: 'اغسطس' },
+          { id: 8, name: 'سبتمبر' },
+          { id: 9, name: 'اكتوبر' },
+          { id: 10, name: 'نوفمبر' },
+          { id: 11, name: 'ديسمبر' },
+        ];
+      } else {
+        $scope.monthes = [
+          { id: 0, name: 'Jan' },
+          { id: 1, name: 'Feb' },
+          { id: 2, name: 'Mar' },
+          { id: 3, name: 'Aper' },
+          { id: 4, name: 'May' },
+          { id: 5, name: 'June' },
+          { id: 6, name: 'Jule' },
+          { id: 7, name: 'Aug' },
+          { id: 8, name: 'Sep' },
+          { id: 9, name: 'Oct' },
+          { id: 10, name: 'Nov' },
+          { id: 11, name: 'Des' },
+        ];
+      }
 
-            if ($scope.items) {
-              $scope.items.forEach((mitem) => {
-                let exist = !1;
-                $scope.selectedItems.forEach((sitem) => {
-                  if (mitem[$scope.primary] === sitem[$scope.primary]) {
-                    exist = !0;
-                  }
-                });
-                if (exist) {
-                  mitem.$selected = !0;
-                } else {
-                  mitem.$selected = !1;
-                }
-              });
-            }
+      $scope.$watch('ngModel', function (ngModel) {
+        if (ngModel) {
+          ngModel = new Date(ngModel);
+          $scope.model = $scope.model || {};
+          $scope.model.selectedDay = $scope.days.find((d) => d.id == ngModel.getDate());
+          $scope.model.selectedMonth = $scope.monthes.find((m) => m.id == ngModel.getMonth());
+          $scope.model.selectedYear = $scope.years.find((y) => y.id == ngModel.getFullYear());
+          $scope.model.selectedHour = $scope.hours.find((y) => y.id == ngModel.getHours());
+          $scope.model.selectedMinute = $scope.minutes.find((y) => y.id == ngModel.getMinutes());
+        } else {
+          $scope.model = $scope.model || {};
+          $scope.model.selectedDay = null;
+          $scope.model.selectedMonth = null;
+          $scope.model.selectedYear = null;
+          $scope.model.selectedHour = null;
+          $scope.model.selectedMinute = null;
+        }
+      });
+
+      $scope.setDay = function () {
+        $scope.ngModel = new Date();
+      };
+
+      $scope.updateDate = function (date) {
+        if ($scope.model.selectedDay && $scope.model.selectedMonth && $scope.model.selectedYear && $scope.model.selectedHour && $scope.model.selectedMinute) {
+          $scope.ngModel = new Date($scope.model.selectedYear.id, $scope.model.selectedMonth.id, $scope.model.selectedDay.id, $scope.model.selectedHour.id, $scope.model.selectedMinute.id, 0);
+          $scope.editOnly = false;
+          if ($scope.ngChange) {
+            $scope.ngChange();
           }
-          if (!$scope.ngModel) {
-            $scope.selectedItems = [];
-            if ($scope.items) {
-              $scope.items.forEach((mitem) => {
-                mitem.$selected = !1;
-              });
-            }
-          }
-        };
-
-        $scope.change = function (item) {
-          if (item.$selected) {
-            let exsits = !1;
-            $scope.selectedItems.forEach((sitem) => {
-              if (sitem[$scope.primary] === item[$scope.primary]) {
-                exsits = !0;
-              }
-            });
-            if (!exsits) {
-              $scope.selectedItems.push(item);
-            }
-          } else {
-            $scope.selectedItems.forEach((sitem, index) => {
-              if (sitem[$scope.primary] === item[$scope.primary]) {
-                $scope.selectedItems.splice(index, 1);
-              }
-            });
-          }
-
-          $scope.ngModel = $scope.selectedItems;
-        };
-      },
-      template: `
-       <div class="row padding check-list">
-            <label class="title"> {{label}} </label>
-            <div class="control" ng-repeat="item in items">
-                <label class="checkbox" >
-                    <span > {{item[display]}} </span>
-                    <input type="checkbox" ng-model="item.$selected" ng-change="change(item)" >
-                    <span class="checkmark"></span>
-                </label>
-            </div>
-        </div>
-        `,
-    };
-  },
-]);
-
-app.directive('iRadiolist', [
-  '$interval',
-  function ($interval) {
-    return {
-      restrict: 'E',
-      required: 'ngModel',
-      scope: {
-        label: '@',
-        display: '@',
-        ngModel: '=',
-        items: '=',
-      },
-      link: function (scope, element, attrs) {
-        scope.model = scope.ngModel;
-
-        scope.code = 'radio_' + Math.random();
-
-        scope.change = function (item) {
-          scope.ngModel = item;
-        };
-
-        scope.isChecked = function (item) {
-          if (item && scope.ngModel && scope.ngModel.id === item.id) {
-            return !0;
-          }
-          return !1;
-        };
-      },
-      template: `
-       <div class="row padding radio-list">
-            <label class="title"> {{label}} </label>
-            <div class="control" ng-repeat="item in items">
-                <label class="radio" >
-                    <span > {{item[display]}} </span>
-                    <input name="{{code}}" type="radio" ng-model="model"  ng-checked="isChecked(item)" ng-click="change(item)" ng-change="change(item)" >
-                    <span class="checkmark"></span>
-                </label>
-            </div>
-        </div>
-        `,
-    };
-  },
-]);
+        }
+      };
+    },
+    restrict: 'E',
+    require: 'ngModel',
+    scope: {
+      v: '@',
+      disabled: '@',
+      label: '@',
+      ngModel: '=',
+    },
+    template: `/*##client-side/directive/i-datetime.html*/`,
+  };
+});
 
 app.directive('iFile', [
   '$interval',
@@ -996,23 +947,7 @@ app.directive('iTreeview', [
           }
         });
       },
-      template: `
-        <div class="treeview">
-        <ul >
-            <li ng-dblclick="$event.preventDefault();$event.stopPropagation();source.$actions = !0" ng-mouseleave="source.$actions = !1">
-           
-            <i ng-hide="openTree" class="fa fa-folder"></i>  <i ng-show="openTree" class="fa fa-folder"></i> 
-           
-
-            <span ng-click="openTree = !openTree" class="title"> {{label}} <small class="display"> [ {{ngModel.v_display}} ] </small>  </span>
-                <div class="actions" ng-show="source.$actions === !0">
-                    <i-button type="add default" ng-click="ngClick($event , ngModel);ngNode($event , ngModel)"></i-button>
-                </div>
-                <i-treenode display="{{display}}" ng-click="ngClick($event)" ng-add="ngAdd()" ng-edit="ngEdit()" ng-delete="ngDelete()" ng-show="openTree" ng-model="ngModel" nodes="v_nodes" ></i-treenode>
-            </li>
-        </ul>
-        </div>
-        `,
+      template: `/*##client-side/directive/i-treeview.html*/`,
     };
   },
 ]);
@@ -1117,30 +1052,7 @@ app.directive('iTreenode', [
           node.$selected = !0;
         };
       },
-      template: `
-        <div class="treenode"> 
-        <ul >
-            <li  ng-repeat="node in nodes" >
-            <div class="row" ng-dblclick="$event.preventDefault();$event.stopPropagation();node.$actions = !0;source.$actions = !1" ng-mouseleave="node.$actions = !1">
-            <span ng-show="node.nodes.length > 0" ng-click="node.$expand = !node.$expand;">
-                    <i ng-hide="node.$expand" class="fa fa-caret-left"></i>  <i ng-show="node.$expand" class="fa fa-caret-down"></i> 
-            </span>
-            <span ng-hide="node.nodes.length > 0" >
-                    <i class="fa fa-file"></i>
-            </span>
-
-                <span class="text" ng-class="{'selected' : node.$selected == !0}" ng-click="ngClick($event , node);node.$expand = !node.$expand;selected(node);updateModal(node)"   > {{node[display]}} </span>
-                <div class="actions" ng-show="node.$actions === !0">
-                    <i-button type="add default" ng-click="ngAdd(node)"></i-button>
-                    <i-button type="edit default" ng-click="ngEdit(node)"></i-button>
-                    <i-button type="delete default" ng-click="ngDelete(node)"></i-button>
-                </div>
-            </div>   
-                <i-treenode display="{{display}}" ng-click="ngClick($event)" ng-add="ngAdd()" ng-edit="ngEdit()" ng-delete="ngDelete()" ng-show="node.$expand" ng-model="ngModel" nodes="node.nodes" nodes="node.nodes"></i-treenode>
-            </li>
-        </ul>
-        </div>
-        `,
+      template: `/*##client-side/directive/i-treenode.html*/`,
     };
   },
 ]);

@@ -1,6 +1,89 @@
 @media all {
+  .flex,
+  .display-flex {
+    display: flex !important;
+  }
+  .inline-flex,
+  .display-inline-flex {
+    display: inline-flex !important;
+  }
+
+  .flexbox,
+  .display-flexbox {
+    display: flexbox !important;
+  }
+  .flexbox,
+  .display-flexbox {
+    display: inline-flexbox !important;
+  }
+  .block,
+  .display-block {
+    display: block !important;
+  }
+
+  .none,
+  .display-none {
+    display: none !important;
+  }
+
+  .inline,
+  .display-inline {
+    display: inline !important;
+  }
+  .inline-block,
+  .display-inline-block {
+    display: inline-block !important;
+  }
+
+  .inline-grid,
+  .display-inline-grid {
+    display: inline-grid !important;
+  }
+
+  .fixed,
+  .position-fixed {
+    position: fixed !important;
+  }
+  .relative,
+  .position-relative {
+    position: relative !important;
+  }
+  .static,
+  .position-static {
+    position: static !important;
+  }
+  .sticky,
+  .position-sticky {
+    position: sticky !important;
+  }
+
+  .left,
+  .float-left {
+    float: left !important;
+  }
+
+  .right,
+  .float-right {
+    float: right !important;
+  }
+  .float-none {
+    float: none !important;
+  }
+
+  .text-center {
+    text-align: center !important;
+  }
+
+  .text-left {
+    text-align: left !important;
+  }
+
+  .text-right {
+    text-align: right !important;
+  }
+
   .pointer {
-    cursor: pointer;
+    cursor: pointer !important;
   }
 
   .bold {
@@ -22,31 +105,8 @@
     text-align: center !important;
   }
 
-  .float-none {
-    float: none !important;
-  }
   .center i.center {
     vertical-align: text-bottom;
-  }
-
-  .left {
-    float: left !important;
-  }
-
-  .right {
-    float: right !important;
-  }
-
-  .text-center {
-    text-align: center !important;
-  }
-
-  .text-left {
-    text-align: left !important;
-  }
-
-  .text-right {
-    text-align: right !important;
   }
 
   .border {
@@ -55,85 +115,6 @@
 
   .dashed {
     border: 2px dashed var(--theme-color) !important;
-  }
-
-  .margin {
-    margin: 3px !important;
-  }
-
-  .padding {
-    padding: 3px !important;
-  }
-
-  .text-shadow {
-    text-shadow: 1px 1px 1px #000 !important;
-  }
-
-  .box-shadow {
-    box-shadow: 1px 1px 8px 2px #000 !important;
-  }
-
-  .block {
-    display: block;
-  }
-
-  .none {
-    display: none;
-  }
-
-  .inline {
-    display: inline-block;
-  }
-
-  .inline-grid {
-    display: inline-grid;
-  }
-
-  .small {
-    font-size: small;
-  }
-
-  .smaller {
-    font-size: smaller;
-  }
-
-  .x-small {
-    font-size: x-small;
-  }
-
-  .xx-small {
-    font-size: xx-small;
-  }
-
-  .medium {
-    font-size: medium;
-  }
-
-  .large {
-    font-size: large;
-  }
-
-  .larger {
-    font-size: larger;
-  }
-
-  .v {
-    font-size: x-large;
-  }
-
-  .error {
-    text-align: center;
-    color: red;
-  }
-
-  .xx-large {
-    font-size: xx-large;
-  }
-
-  .appearance-none {
-    -moz-appearance: none;
-    -webkit-appearance: none;
-    appearance: none;
   }
 
   .no-border {
@@ -151,13 +132,85 @@
   .no-border-top {
     border-top: none !important;
   }
-
   .no-border-bottom {
     border-bottom: none !important;
   }
 
   .no-border-radius {
     border-radius: 0px !important;
+  }
+
+  .border-radius {
+    border-radius: 5px !important;
+  }
+  .margin {
+    margin: 5px !important;
+  }
+
+  .padding {
+    padding: 5px !important;
+  }
+
+  .text-shadow {
+    text-shadow: 1px 1px 1px #000 !important;
+  }
+
+  .box-shadow {
+    box-shadow: 1px 1px 8px 2px #000 !important;
+  }
+
+  .font-small {
+    font-size: small !important;
+  }
+
+  .font-smaller {
+    font-size: smaller !important;
+  }
+
+  .font-x-small {
+    font-size: x-small !important;
+  }
+
+  .font-xx-small {
+    font-size: xx-small !important;
+  }
+
+  .font-medium {
+    font-size: medium !important;
+  }
+
+  .font-large {
+    font-size: large !important;
+  }
+
+  .font-larger {
+    font-size: larger !important;
+  }
+
+  .font-x-large {
+    font-size: x-large !important;
+  }
+  .font-xx-large {
+    font-size: xx-large !important;
+  }
+
+  .rtl {
+    direction: rtl;
+  }
+
+  .ltr {
+    direction: ltr;
+  }
+
+  .error {
+    text-align: center;
+    color: red;
+  }
+
+  .appearance-none {
+    -moz-appearance: none;
+    -webkit-appearance: none;
+    appearance: none;
   }
 
   .paper {

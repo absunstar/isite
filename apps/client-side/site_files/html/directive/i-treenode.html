@@ -1,0 +1,20 @@
+<div class="treenode">
+  <ul>
+    <li ng-repeat="node in nodes">
+      <div class="row" ng-dblclick="$event.preventDefault();$event.stopPropagation();node.$actions = !0;source.$actions = !1" ng-mouseleave="node.$actions = !1">
+        <span ng-show="node.nodes.length > 0" ng-click="node.$expand = !node.$expand;"> <i ng-hide="node.$expand" class="fa fa-caret-left"></i> <i ng-show="node.$expand" class="fa fa-caret-down"></i> </span>
+        <span ng-hide="node.nodes.length > 0">
+          <i class="fa fa-file"></i>
+        </span>
+
+        <span class="text" ng-class="{'selected' : node.$selected == !0}" ng-click="ngClick($event , node);node.$expand = !node.$expand;selected(node);updateModal(node)"> {{node[display]}} </span>
+        <div class="actions" ng-show="node.$actions === !0">
+          <i-button type="add default" ng-click="ngAdd(node)"></i-button>
+          <i-button type="edit default" ng-click="ngEdit(node)"></i-button>
+          <i-button type="delete default" ng-click="ngDelete(node)"></i-button>
+        </div>
+      </div>
+      <i-treenode display="{{display}}" ng-click="ngClick($event)" ng-add="ngAdd()" ng-edit="ngEdit()" ng-delete="ngDelete()" ng-show="node.$expand" ng-model="ngModel" nodes="node.nodes" nodes="node.nodes"></i-treenode>
+    </li>
+  </ul>
+</div>

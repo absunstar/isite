@@ -30,6 +30,9 @@
 :root {
   --table-hover-background-color: #0dcaf09e;
 }
+body{
+  margin-bottom: 100px;
+}
 .container{
   max-width: 90%;
 }
