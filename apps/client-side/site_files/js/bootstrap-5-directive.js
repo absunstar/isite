@@ -101,6 +101,7 @@ app.directive('iRadio', function () {
       label: '@',
       group: '@',
       id2: '@',
+      ngValue: '@',
       ngModel: '=',
       ngChange: '&',
     },

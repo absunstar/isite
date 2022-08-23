@@ -5,18 +5,18 @@
       <span>{{model.selectedDay.name || '__'}} </span> / <span>{{model.selectedMonth.name || '______'}}</span> / <span>{{model.selectedYear.name || '____'}}</span> 
     </p>
   </div>
-  <div class="row dashed" ng-show="editOnly">
-    <div class="col-2">
+  <div class="row dashed padding margin" ng-show="editOnly">
+    <div class="col2">
       <i-list label="Day" v="{{v}}" items="days" ng-model="model.selectedDay"></i-list>
     </div>
-    <div class="col-3">
+    <div class="col3">
       <i-list label="Month" v="{{v}}" items="monthes" ng-model="model.selectedMonth"></i-list>
     </div>
-    <div class="col-3">
+    <div class="col3">
       <i-list label="Year" v="{{v}}" items="years" ng-search="searchYear" ng-model="model.selectedYear"></i-list>
     </div>
 
-    <div class="col-3">
+    <div class="col3">
       <br />
       <i-button type="save default" ng-click="updateDate()"></i-button>
     </div>
