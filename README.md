@@ -88,8 +88,8 @@ site = isite({
     apps: !0,
     apps_dir: process.cwd() + '/apps',
     name: 'Your Site',
-    dynamic: false, // (auto set )dynamic db & prot based on folder name [ smart-pos-3000 ]
-    savingTime: 60,
+    dynamic: false, // (auto set )dynamic db & prot based on folder name [ smart-Your Site-3000 ]
+    savingTime: 60 // 60 minutes then save sessions and site data,
     log: !0,
     lang: 'ar',
     theme: 'default',
@@ -99,8 +99,8 @@ site = isite({
         enabled: false,
         port: null,
         ports: [],
-        key: null,
-        cert: null,
+        key: null  // path or will use default,
+        cert: null // path or will use default,
     },
     mongodb: {
         enabled: !0,
@@ -124,7 +124,7 @@ site = isite({
     session: {
         timeout: 60 * 24 * 30,
         enabled: !0,
-        storage: 'mongodb',
+        storage: 'file' || 'mongodb',
         db: null,
         collection: 'users_sessions',
     },
@@ -1043,8 +1043,8 @@ $scope.uploadFile = function (files) {
 site.onPOST('uploadFile', (req, res) => {
     var response = { done: !0 };
     var file = req.files.fileToUpload;
-    var newpath = site.dir + '/../../uploads/' + file.name;
-    site.mv(file.path, newpath, function (err) {
+    var newpath = site.dir + '/../../uploads/' + file.originalFilename;
+    site.mv(file.filepath, newpath, function (err) {
         if (err) {
             response.error = err;
             response.done = false;

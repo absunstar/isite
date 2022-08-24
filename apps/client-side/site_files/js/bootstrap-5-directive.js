@@ -834,6 +834,58 @@ app.directive('iImage', [
     };
   },
 ]);
+app.directive('iUpload', [
+  '$interval',
+  'isite',
+  function ($interval, isite) {
+    return {
+      restrict: 'E',
+      scope: {
+        label: '@',
+        api: '@',
+        type: '@',
+        view: '@',
+        ngClick: '&',
+        onUploaded: '&',
+      },
+      link: function ($scope, element, attrs, ctrl) {
+        let input = $(element).find('input')[0];
+        let a = $(element).find('button')[0];
+        let progress = $(element).find('progress')[0];
+        $(progress).hide();
+
+        if (attrs.view !== '') {
+          a.addEventListener('click', function () {
+            input.click();
+          });
+        }
+
+        input.addEventListener('change', function () {
+          if ($scope.api) {
+            isite.upload(
+              this.files,
+              {
+                api: $scope.api,
+              },
+              (err, file, e) => {
+                if (e) {
+                  $(progress).show();
+                  progress.value = e.loaded;
+                  progress.max = e.total;
+                }
+
+                if (file) {
+                  $scope.onUploaded(file);
+                }
+              }
+            );
+          }
+        });
+      },
+      template: `/*##client-side/directive/i-upload.html*/`,
+    };
+  },
+]);
 
 app.directive('iTreeview', [
   '$interval',
