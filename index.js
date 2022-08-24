@@ -13,6 +13,7 @@ module.exports = function init(options) {
   ____0.path = require('path');
   ____0.zlib = require('zlib');
   ____0.xlsx = ____0.XLSX = require('xlsx');
+  ____0.pdf = ____0.PDF = require('pdf-lib');
   ____0.querystring = require('querystring');
   ____0.formidable = require('formidable');
   ____0.mv = require('mv');
