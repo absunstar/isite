@@ -202,6 +202,12 @@
     direction: ltr;
   }
 
+  .height-auto{
+    height: auto !important;
+  };
+  .width-auto{
+    height: auto !important;
+  };
   .error {
     text-align: center;
     color: red;
