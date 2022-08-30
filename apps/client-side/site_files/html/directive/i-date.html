@@ -6,17 +6,17 @@
     </p>
   </div>
   <div class="row dashed padding margin" ng-show="editOnly">
-    <div class="col2">
+    <div class="col3">
       <i-list label="Day" v="{{v}}" items="days" ng-model="model.selectedDay"></i-list>
     </div>
-    <div class="col3">
+    <div class="col4">
       <i-list label="Month" v="{{v}}" items="monthes" ng-model="model.selectedMonth"></i-list>
     </div>
-    <div class="col3">
+    <div class="col4">
       <i-list label="Year" v="{{v}}" items="years" ng-search="searchYear" ng-model="model.selectedYear"></i-list>
     </div>
 
-    <div class="col3">
+    <div class="col2">
       <br />
       <i-button type="save default" ng-click="updateDate()"></i-button>
     </div>
