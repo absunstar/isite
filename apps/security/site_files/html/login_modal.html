@@ -1,32 +1,24 @@
-<div data-ng-controller="login" id="loginModal" class="modal small fade" tabindex="-1" role="dialog" fixed>
-    <div class="modal-content">
-        <div class="modal-header">
-            <span class="close">&times;</span>
-            <h2 class="text-center"><i class="fa fa-sign-in"></i> ##word.security_login##</h2>
-        </div>
-
-        <div class="modal-body">
-            <h1 ng-show="busy" class="center"><i class="fa fa-spinner fa-pulse fa-3x fa-fw"></i></h1>
-
-            <form ng-hide="busy">
-                <div class="control">
-                    <label>##word.security_user_email##</label>
-                    <input id="userEmail" ng-model="userEmail" type="text" ng-keydown="tryLogin($event)" />
-                </div>
-                <div class="control">
-                    <label>##word.security_user_password##</label>
-                    <input id="userPassword" ng-model="userPassword" type="password" ng-keydown="tryLogin($event)" />
-                </div>
-            </form>
-
-            <p class="yellow">{{error}}</p>
-        </div>
-        <div class="modal-footer center">
-            <a ng-hide="busy" id="loginBtn" ng-click="login()" class="btn bg-green white"> <i class="fa fa-sign-in" aria-hidden="true"></i> ##word.security_login## </a>
-            <a class="btn bg-blue white" onclick="site.hideModal('#loginModal')"> <i class="fa fa-times" aria-hidden="true"></i> ##word.close## </a>
-        </div>
+<div data-ng-controller="login" id="loginModal" class="modal small" fixed>
+  <div class="modal-content">
+    <div class="modal-header">
+      <span class="close">&times;</span>
+      <h2 class="text-center"><i class="fas fa-sign-in-alt"></i> ##word.security_login##</h2>
     </div>
-    <!-- /.modal-content -->
+
+    <div class="modal-body">
+      <h1 ng-show="busy" class="center"><i class="fas fa-spinner fa-pulse fa-3x fa-fw"></i></h1>
+
+      <form ng-hide="busy">
+        <i-control label="##word.security_user_email##" ng-model="userEmail" ng-keydown="tryLogin($event)"></i-control>
+        <i-control type="password" label="##word.security_user_password##" ng-model="userPassword" ng-keydown="tryLogin($event)"></i-control>
+      </form>
+
+      <p class="yellow">{{error}}</p>
+    </div>
+    <div class="modal-footer center">
+      <i-button ng-hide="busy" fa="fa fa-sign-in" ng-click="login()" label="##word.security_login##"></i-button>
+      <i-button ng-hide="busy" type="close" onclick="site.hideModal('#loginModal')" label="##word.close##"></i-button>
+    </div>
+  </div>
 </div>
-<!-- /.modal -->
 <script x-import="security/login.js"></script>

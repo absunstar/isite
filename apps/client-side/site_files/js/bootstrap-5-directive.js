@@ -161,6 +161,12 @@ app.directive('iButton', function () {
       } else if ($scope.type.like('*search*') || $scope.type.like('*find*')) {
         $scope.fa = 'fas fa-search';
         $scope.class = 'btn-light';
+      } else if ($scope.type.like('*login*') || $scope.type.like('*signin*')) {
+        $scope.fa = 'fas fa-sign-in-alt';
+        $scope.class = 'btn-light';
+      } else if ($scope.type.like('*logout*') || $scope.type.like('*signout*')) {
+        $scope.fa = 'fas fa-sign-out-alt';
+        $scope.class = 'btn-light';
       }
       if ($scope.type.like('*default*')) {
         $scope.class = '';

@@ -20,6 +20,7 @@
     margin: auto;
     padding: 0;
     width: 90%;
+    height: auto !important;
     box-shadow: 0 4px 8px 0 var(--modal-box-shadow-color), 0 6px 20px 0 var(--modal-box-shadow-color);
     -webkit-animation-name: var(--modal-animation-name);
     -webkit-animation-duration: var(--modal-animation-duration);
@@ -43,7 +44,6 @@
     padding: 2px 16px;
     color: var(--modal-color);
     overflow: overlay;
-    max-height: 85vh;
 }
 
 .modal-footer {
