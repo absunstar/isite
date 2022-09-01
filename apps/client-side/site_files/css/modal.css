@@ -6,9 +6,9 @@
     padding-bottom: 20px;
     left: 0;
     top: 0;
-    width: 100%;
-    height: 100%;
-    background-color: var(--modal-background);
+    width: 100% !important;
+    height: 100% !important;
+    background-color: var(--modal-background) !important;
     overflow: auto;
 }
 
@@ -41,9 +41,8 @@
 
 .modal-body {
     display: contents;
-    padding: 2px 16px;
     color: var(--modal-color);
-    overflow: overlay;
+    overflow: visible;
 }
 
 .modal-footer {

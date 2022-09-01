@@ -115,14 +115,18 @@ i-date p,
 i-datetime p {
   margin-top: 10px !important;
 }
+i-datetime.is-invalid .row {
+  border: 1px solid #dc3545 !important;
+  border-radius: 10px !important;
+}
 .modal-content {
   width: 75vw;
   height: 100vh;
 }
 .modal-body {
-  padding: 10px;
+  padding: 1rem;
   display: block;
-  overflow: auto;
+  overflow: visible !important;
 }
 .modal-footer {
   display: block;

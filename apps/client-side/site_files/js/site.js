@@ -655,6 +655,13 @@
               en: 'Data Is Required',
               ar: 'هذا البيان مطلوب',
             });
+          } if (el.nodeName === 'I-DATETIME' && !el.getAttribute('value')){
+            el.classList.add('is-invalid');
+            res.ok = !1;
+            res.messages.push({
+              en: 'Data Is Required',
+              ar: 'هذا البيان مطلوب',
+            });
           } else {
             el.classList.add('is-valid');
           }

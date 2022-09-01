@@ -1,5 +1,5 @@
 ::-webkit-scrollbar {
-  width: 5px;
+  width: 10px;
 }
 
 ::-webkit-scrollbar-track {
@@ -9,8 +9,4 @@
 ::-webkit-scrollbar-thumb {
   background-color: var(--scrollbar-background-color);
   outline: 1px solid var(--scrollbar-color);
-}
-
-html::-webkit-scrollbar {
-  width: 10px;
 }

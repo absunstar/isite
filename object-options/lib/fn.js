@@ -348,6 +348,9 @@ exports = module.exports = function init(____0) {
   };
 
   ____0.hide = (data) => {
+    if (data === undefined) {
+      return '';
+    }
     return fn.to123(data);
   };
   ____0.ul = ____0.show = (data) => {
