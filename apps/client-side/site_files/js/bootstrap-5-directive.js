@@ -650,6 +650,7 @@ app.directive('iDatetime', function () {
           $scope.model.selectedYear = $scope.years.find((y) => y.id == ngModel.getFullYear());
           $scope.model.selectedHour = $scope.hours.find((y) => y.id == ngModel.getHours());
           $scope.model.selectedMinute = $scope.minutes.find((y) => y.id == ngModel.getMinutes());
+          element.setAttribute('value', ngModel.getTime());
         } else {
           $scope.model = $scope.model || {};
           $scope.model.selectedDay = null;
@@ -657,6 +658,7 @@ app.directive('iDatetime', function () {
           $scope.model.selectedYear = null;
           $scope.model.selectedHour = null;
           $scope.model.selectedMinute = null;
+          element.setAttribute('value', '');
         }
       });
 
@@ -668,6 +670,7 @@ app.directive('iDatetime', function () {
         if ($scope.model.selectedDay && $scope.model.selectedMonth && $scope.model.selectedYear && $scope.model.selectedHour && $scope.model.selectedMinute) {
           $scope.ngModel = new Date($scope.model.selectedYear.id, $scope.model.selectedMonth.id, $scope.model.selectedDay.id, $scope.model.selectedHour.id, $scope.model.selectedMinute.id, 0);
           $scope.editOnly = false;
+          element.setAttribute('value', ngModel.getTime());
           if ($scope.ngChange) {
             $scope.ngChange();
           }
