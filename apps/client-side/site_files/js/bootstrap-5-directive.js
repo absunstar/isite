@@ -670,7 +670,7 @@ app.directive('iDatetime', function () {
         if ($scope.model.selectedDay && $scope.model.selectedMonth && $scope.model.selectedYear && $scope.model.selectedHour && $scope.model.selectedMinute) {
           $scope.ngModel = new Date($scope.model.selectedYear.id, $scope.model.selectedMonth.id, $scope.model.selectedDay.id, $scope.model.selectedHour.id, $scope.model.selectedMinute.id, 0);
           $scope.editOnly = false;
-          $(element).attr('value', ngModel.getTime());
+          $(element).attr('value', $scope.ngModel.getTime());
           if ($scope.ngChange) {
             $scope.ngChange();
           }
