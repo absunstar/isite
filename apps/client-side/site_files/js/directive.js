@@ -160,7 +160,7 @@ app.directive('iDate2', function () {
       label: '@',
       ngModel: '=',
     },
-    template: `/*##client-side/directive/i-date.html*/`,
+    template: `/*##client-side/directive-core/i-date.html*/`,
   };
 });
 
@@ -1046,7 +1046,7 @@ app.directive('iList', [
           $scope.hide();
         };
       },
-      template: `/*##client-side/directive/i-list.html*/`,
+      template: `/*##client-side/directive-core/i-list.html*/`,
     };
   },
 ]);
