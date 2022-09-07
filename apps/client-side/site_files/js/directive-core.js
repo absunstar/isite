@@ -165,7 +165,7 @@ app.service('isite', [
         .then(
           function (res) {
             if (res.data && res.data.done && res.data.file) {
-              callback(null, data);
+              callback(null, res.data);
             }
           },
           function (error) {
