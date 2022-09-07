@@ -150,6 +150,8 @@ exports = module.exports = function init(____0) {
       path.endsWith('.jpeg') ||
       path.endsWith('.ico') ||
       path.endsWith('.bmp') ||
+      path.endsWith('.xls') ||
+      path.endsWith('.xlsx') ||
       path.endsWith('.eot')
     ) {
       return 'binary';

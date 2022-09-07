@@ -71,7 +71,7 @@ app.service('isite', [
       var fd = new FormData();
       fd.append('fileToUpload', files[0]);
       $http
-        .post('/x-api/upload/image' , fd, {
+        .post('/x-api/upload/image', fd, {
           withCredentials: !0,
           headers: {
             'Content-Type': undefined,
@@ -165,10 +165,7 @@ app.service('isite', [
         .then(
           function (res) {
             if (res.data && res.data.done && res.data.file) {
-              callback(null, {
-                name: res.data.file.name,
-                url: res.data.file.url,
-              });
+              callback(null, data);
             }
           },
           function (error) {

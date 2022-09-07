@@ -876,15 +876,15 @@ app.directive('iUpload', [
               {
                 api: $scope.api,
               },
-              (err, file, e) => {
+              (err, data, e) => {
                 if (e) {
                   $(progress).show();
                   progress.value = e.loaded;
                   progress.max = e.total;
                 }
 
-                if (file) {
-                  $scope.onUploaded(file);
+                if (data) {
+                  $scope.onUploaded(data);
                 }
               }
             );
