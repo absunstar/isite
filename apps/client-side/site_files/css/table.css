@@ -1,5 +1,4 @@
 .table {
-  display: block !important;
   overflow-x: auto !important;
   border-collapse: collapse;
   width: 100%;
@@ -80,4 +79,12 @@
 .table.border-none th,
 .table.border-none td {
   border: none !important;
+}
+
+@media screen and (max-width: 768px
+
+/*mobile*/) {
+  .table {
+    display: block !important;
+  }
 }
