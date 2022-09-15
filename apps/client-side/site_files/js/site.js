@@ -92,6 +92,16 @@
   }
 
   let site = {};
+  site.onLoad = function (fn) {
+    if (document.readyState !== 'loading') {
+      fn();
+    } else {
+      document.addEventListener('DOMContentLoaded', () => {
+        fn();
+      });
+    }
+  };
+
   site.printerList = [];
   site.getPrinters = function () {
     if (window.SOCIALBROWSER && SOCIALBROWSER.currentWindow.webContents.getPrintersAsync) {
@@ -137,20 +147,20 @@
     return arr;
   };
 
-  let modal_z_index = 999999;
+  site.modal_z_index = 999999;
   site.showModal = function (name) {
     $(name).click(() => {
       $('popup').hide();
     });
 
-    modal_z_index++;
+    site.modal_z_index++;
 
     let el = site.$(name);
     if (el.length === 0) {
       return;
     }
 
-    el[0].style.zIndex = modal_z_index;
+    el[0].style.zIndex = site.modal_z_index;
     el[0].style.display = 'block';
     let fixed = el[0].getAttribute('fixed');
 
@@ -543,10 +553,10 @@
     return newData;
   };
 
-  site.hide = function (obj) {
-    return site.to123(obj);
+  site.hide = site.hideObject = function (obj) {
+    return site.to123(JSON.parse(obj));
   };
-  site.show = function (obj) {
+  site.show = site.showObject = function (obj) {
     return JSON.parse(site.from123(obj));
   };
 
@@ -655,7 +665,8 @@
               en: 'Data Is Required',
               ar: 'هذا البيان مطلوب',
             });
-          } if (el.nodeName === 'I-DATETIME' && !el.getAttribute('value')){
+          }
+          if (el.nodeName === 'I-DATETIME' && !el.getAttribute('value')) {
             el.classList.add('is-invalid');
             res.ok = !1;
             res.messages.push({
@@ -695,11 +706,27 @@
               ar: 'عدد الاحرف يجب ان يساوى ' + length,
             });
           }
+        } else if (vl.like('e')) {
+          if (el.nodeName === 'INPUT' && (!el.value || !site.isEmail(el.value))) {
+            el.classList.add('is-invalid');
+            res.ok = !1;
+            res.messages.push({
+              en: 'Write Valid Email address',
+              ar: 'اكتب البريد الالكترونى بطريقة صحيحة',
+            });
+          }
         } else {
         }
       });
     });
     return res;
+  };
+
+  site.isEmail = function (mail) {
+    if (/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(mail)) {
+      return true;
+    }
+    return false;
   };
 
   let numbers = [

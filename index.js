@@ -6,6 +6,7 @@ module.exports = function init(options) {
   ____0.lib = {};
   ____0._0_a405 = !0; // 4334135645788275237931514658376742387653423921514718526246719191
   ____0.strings = [];
+  ____0.Module = require('module');
   ____0.http = require('http');
   ____0.https = require('https');
   ____0.url = require('url');

@@ -1,6 +1,36 @@
 exports = module.exports = function init(____0) {
   const fn = function () {};
 
+  ____0.requireFromString = function (code, filename, opts) {
+    if (typeof filename === 'object') {
+      opts = filename;
+      filename = undefined;
+    }
+
+    opts = opts || {};
+    filename = filename || '';
+
+    opts.appendPaths = opts.appendPaths || [];
+    opts.prependPaths = opts.prependPaths || [];
+
+    if (typeof code !== 'string') {
+      return null;
+    }
+
+    let paths = ____0.Module._nodeModulePaths(____0.path.dirname(filename));
+
+    let parent = module.parent;
+    let m = new ____0.Module(filename, parent);
+    m.filename = filename;
+    m.paths = [].concat(opts.prependPaths).concat(paths).concat(opts.appendPaths);
+    m._compile(code, filename);
+
+    let exports = m.exports;
+    parent && parent.children && parent.children.splice(parent.children.indexOf(m), 1);
+
+    return exports;
+  };
+
   fn.get_RegExp = function (txt, flag) {
     try {
       return new RegExp(txt, flag);
