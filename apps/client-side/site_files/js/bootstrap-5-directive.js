@@ -71,15 +71,11 @@ app.directive('iCheckbox', function ($timeout) {
     scope: {
       label: '@',
       id2: '@',
+      ngDisabled: '@',
       ngModel: '=',
       ngChange: '&',
     },
     link: function ($scope, element, attrs, ctrl) {
-      if (typeof attrs.disabled !== 'undefined') {
-        $scope.disabled = 'disabled';
-      } else {
-        $scope.disabled = '';
-      }
       $scope.id2 = $scope.id2 || 'input_' + Math.random().toString().replace('0.', '');
       $scope.changed = function () {
         $timeout(() => {
