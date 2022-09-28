@@ -151,8 +151,10 @@ exports = module.exports = function init(____0) {
       return 'image/jpg';
     } else if (path.endsWith('.jpeg')) {
       return 'image/jpeg';
-    } else if (path.endsWith('.gif')) {
-      return 'image/gif';
+    } else if (path.endsWith('.jpeg')) {
+      return 'image/jpeg';
+    }  else if (path.endsWith('.webp')) {
+      return 'image/webp';
     } else if (path.endsWith('.ico')) {
       return 'image/ico';
     } else if (path.endsWith('.json')) {
@@ -180,6 +182,7 @@ exports = module.exports = function init(____0) {
       path.endsWith('.jpeg') ||
       path.endsWith('.ico') ||
       path.endsWith('.bmp') ||
+      path.endsWith('.webp') ||
       path.endsWith('.xls') ||
       path.endsWith('.xlsx') ||
       path.endsWith('.eot')

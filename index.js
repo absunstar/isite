@@ -25,6 +25,7 @@ module.exports = function init(options) {
   ____0.nodemailer = require('nodemailer');
   ____0.child_process = require('child_process');
   ____0.cwd = process.cwd();
+  ____0.setting = {};
 
   ____0.https.globalAgent.options = {
     key: ____0.fs.readFileSync(__dirname + '/ssl/key.pem'),
@@ -164,13 +165,7 @@ module.exports = function init(options) {
   ____0.all = ____0.onALL = ____0.routing.onALL;
   ____0.run = ____0.start = ____0.listen = ____0.routing.start;
 
-  ____0.setting = require('./lib/setting.js')(____0);
-  ____0.setting.set({
-    name: 'loaded',
-    value: !0,
-  });
 
-  ____0.setting.addList(____0.dir + '/json/setting.json');
 
   require('./lib/vars.js')(____0);
 
@@ -250,10 +245,6 @@ module.exports = function init(options) {
     ____0.log('===  Importing App : ' + app_path);
     if (____0.isFileExistsSync(app_path + '/site_files/json/words.json')) {
       ____0.words.addApp(app_path);
-    }
-
-    if (____0.isFileExistsSync(app_path + '/site_files/json/setting.json')) {
-      ____0.setting.addList(app_path + '/site_files/json/setting.json');
     }
 
     if (____0.isFileExistsSync(app_path + '/site_files/json/vars.json')) {
