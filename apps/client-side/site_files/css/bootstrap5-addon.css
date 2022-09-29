@@ -136,8 +136,8 @@ i-datetime.is-invalid .row {
   top: 35px;
 }
 .v-tabs .nav-link {
-  color: #aaa;
-  background: #fff;
+  color: #aaa !important;
+  background: #fff !important;
   position: relative;
   cursor: pointer;
   font-weight: bold;
