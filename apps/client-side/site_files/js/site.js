@@ -715,6 +715,15 @@
               ar: 'اكتب البريد الالكترونى بطريقة صحيحة',
             });
           }
+        } else if (vl.like('web') || vl.like('url')) {
+          if (el.nodeName === 'INPUT' && (!el.value || !site.isURL(el.value))) {
+            el.classList.add('is-invalid');
+            res.ok = !1;
+            res.messages.push({
+              en: 'Write Valid Web address',
+              ar: 'اكتب رابط الموقع بطريقة صحيحة',
+            });
+          }
         } else {
         }
       });
@@ -728,7 +737,10 @@
     }
     return false;
   };
-
+  site.isURL = function (str) {
+    var pattern = new RegExp('^(https?:\\/\\/)?' + '((([a-z\\d]([a-z\\d-]*[a-z\\d])*)\\.)+[a-z]{2,}|' + '((\\d{1,3}\\.){3}\\d{1,3}))' + '(\\:\\d+)?(\\/[-a-z\\d%_.~+]*)*' + '(\\?[;&a-z\\d%_.~+=-]*)?' + '(\\#[-a-z\\d_]*)?$', 'i');
+    return !!pattern.test(encodeURI(str));
+  };
   let numbers = [
     {
       n: 1,
