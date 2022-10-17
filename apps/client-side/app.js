@@ -193,7 +193,7 @@ module.exports = function (site) {
         if (file) {
           let p = new Date().getTime().toString() + Math.random().toString();
           console.log(p);
-          let newName = 'image_' + p.replaceAll('.', '_') + site.path.extname(file.originalFilename);
+          let newName = 'image_' + p.toString().replaceAll('.', '_') + site.path.extname(file.originalFilename);
           let newpath = site.path.resolve(site.options.upload_dir + '/' + req.headers['folder'] + '/images/' + newName);
           site.mv(file.filepath, newpath, function (err) {
             if (err) {
