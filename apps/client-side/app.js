@@ -182,7 +182,6 @@ module.exports = function (site) {
     ],
   });
 
-
   site.post({ name: '/x-api/upload/image', public: true }, (req, res) => {
     site.createDir(site.options.upload_dir + '/' + req.headers['folder'], () => {
       site.createDir(site.options.upload_dir + '/' + req.headers['folder'] + '/images', () => {
@@ -192,7 +191,9 @@ module.exports = function (site) {
         };
         let file = req.files.fileToUpload;
         if (file) {
-          let newName = 'image_' + (new Date().getTime().toString() + Math.random().toString()).replaceAll('.', '_') + site.path.extname(file.originalFilename);
+          let p = new Date().getTime().toString() + Math.random().toString();
+          console.log(p);
+          let newName = 'image_' + p.replaceAll('.', '_') + site.path.extname(file.originalFilename);
           let newpath = site.path.resolve(site.options.upload_dir + '/' + req.headers['folder'] + '/images/' + newName);
           site.mv(file.filepath, newpath, function (err) {
             if (err) {

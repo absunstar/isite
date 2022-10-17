@@ -27,10 +27,6 @@ module.exports = function init(options) {
   ____0.cwd = process.cwd();
   ____0.setting = {};
 
-  ____0.https.globalAgent.options = {
-    key: ____0.fs.readFileSync(__dirname + '/ssl/key.pem'),
-    cert: ____0.fs.readFileSync(__dirname + '/ssl/cert.pem'),
-  };
 
   ____0.require = function (file_path) {
     return require(file_path)(____0);
@@ -164,8 +160,6 @@ module.exports = function init(options) {
 
   ____0.all = ____0.onALL = ____0.routing.onALL;
   ____0.run = ____0.start = ____0.listen = ____0.routing.start;
-
-
 
   require('./lib/vars.js')(____0);
 
