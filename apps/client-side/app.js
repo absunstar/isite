@@ -191,9 +191,7 @@ module.exports = function (site) {
         };
         let file = req.files.fileToUpload;
         if (file) {
-          let p = new Date().getTime().toString() + Math.random().toString();
-          console.log(p);
-          let newName = 'image_' + p.toString().replaceAll('.', '_') + site.path.extname(file.originalFilename);
+          let newName = 'image_' + new Date().getTime().toString() + Math.random().toString() + site.path.extname(file.originalFilename);
           let newpath = site.path.resolve(site.options.upload_dir + '/' + req.headers['folder'] + '/images/' + newName);
           site.mv(file.filepath, newpath, function (err) {
             if (err) {
@@ -235,7 +233,7 @@ module.exports = function (site) {
           res.json(response);
           return;
         }
-        let newName = 'file_' + (new Date().getTime().toString() + Math.random().toString()).replaceAll('.', '_') + site.path.extname(file.originalFilename);
+        let newName = 'file_' + (new Date().getTime().toString() + Math.random().toString()) + site.path.extname(file.originalFilename);
         let newpath = site.path.resolve(site.options.upload_dir + '/' + req.headers['folder'] + '/files/' + newName);
         site.mv(file.filepath, newpath, function (err) {
           if (err) {
