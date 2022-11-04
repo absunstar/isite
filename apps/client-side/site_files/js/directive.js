@@ -1553,7 +1553,7 @@ app.directive('iFiles', [
                          <h2> 
                             <a class="btn default bg-blue" href="{{f.url}}"> <i class="fa fa-2x fa-download white"></i> </a>
                             <a ng-if="viewOnly !== !0" class="btn default bg-red" ng-click="deleteFile(f)"> <i class="fa fa-trash white"></i> </a>
-                            <span>  {{f.name}} </span>
+                            <span>  {{f}} </span>
                          </h2>  
                     </div>
                 </div>
