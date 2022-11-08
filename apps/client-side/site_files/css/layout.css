@@ -94,7 +94,7 @@ h5 {
   padding: 0;
   margin: 0;
   float: var(--float);
-  display: inline;
+  display: inline-block !important;
 }
 .col-1,
 .col-2,
@@ -112,7 +112,7 @@ h5 {
   padding: 0;
   margin: 0;
   float: var(--float);
-  display: inline;
+  display: inline-block !important;
 }
 
 .col1 {
