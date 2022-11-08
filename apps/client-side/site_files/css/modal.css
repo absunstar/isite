@@ -6,8 +6,9 @@
     padding-bottom: 20px;
     left: 0;
     top: 0;
-    width: 100% !important;
-    height: 100% !important;
+    right: 0;
+    width: 100vw !important;
+    height: 100vh !important;
     background-color: var(--modal-background) !important;
     overflow: auto;
 }
@@ -19,7 +20,7 @@
     background-color: var(--modal-content-background);
     margin: auto;
     padding: 0;
-    width: 90%;
+    width: 90vw;
     height: auto !important;
     box-shadow: 0 4px 8px 0 var(--modal-box-shadow-color), 0 6px 20px 0 var(--modal-box-shadow-color);
     -webkit-animation-name: var(--modal-animation-name);
@@ -241,3 +242,12 @@
         opacity: 1;
     }
 }
+
+/* Mobile */
+@media screen and (max-width: 480px) {
+    .modal.small .modal-content,
+    .modal-content.small {
+        width: 90vw;
+    }
+  
+  }
