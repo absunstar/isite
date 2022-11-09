@@ -7,8 +7,8 @@
     left: 0;
     top: 0;
     right: 0;
-    width: 100vw !important;
-    height: 100vh !important;
+    width: 100% !important;
+    height: 100% !important;
     background-color: var(--modal-background) !important;
     overflow: auto;
 }
