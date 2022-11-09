@@ -9,6 +9,7 @@
     right: 0;
     width: 100% !important;
     height: 100% !important;
+    max-width: 100% !important;
     background-color: var(--modal-background) !important;
     overflow: auto;
 }
