@@ -70,6 +70,12 @@
     float: none !important;
   }
 
+  .is-invalid{
+    border: 1px solid red !important;
+  }
+  .is-valid{
+    border: 1px solid green !important;
+  }
   .text-center {
     text-align: center !important;
   }
