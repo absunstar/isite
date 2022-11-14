@@ -574,7 +574,7 @@
       tablinks[i].className = tablinks[i].className.replace(' active', '');
     }
     document.querySelectorAll(tabContentSelector + '.tab-content').forEach((el) => {
-      el.style.display = 'inline-block';
+      el.style.display = 'block';
     });
 
     if (e) {
