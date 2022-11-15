@@ -102,15 +102,12 @@
     }
   };
 
-  
+  site.zoomNumber = parseInt(localStorage.getItem('zoomNumber') || 100);
   site.zoom = function (op) {
-    site.zoomNumber = parseInt(localStorage.getItem('zoomNumber') || 100);
     if (op == '+') {
       site.zoomNumber += 25;
     } else if (op == '-') {
       site.zoomNumber -= 25;
-    } else {
-      site.zoomNumber = 100;
     }
     localStorage.setItem('zoomNumber', site.zoomNumber.toString());
     document.body.style.zoom = site.zoomNumber + '%';
