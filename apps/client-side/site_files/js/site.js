@@ -108,11 +108,16 @@
       site.zoomNumber += 25;
     } else if (op == '-') {
       site.zoomNumber -= 25;
+    } else if (op == '0') {
+    } else {
+      site.zoomNumber = 100;
     }
     localStorage.setItem('zoomNumber', site.zoomNumber.toString());
     document.body.style.zoom = site.zoomNumber + '%';
   };
-  site.onLoad(site.zoom);
+  site.onLoad(() => {
+    site.zoom('0');
+  });
 
   site.printerList = [];
   site.getPrinters = function () {
