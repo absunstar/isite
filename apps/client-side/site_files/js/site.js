@@ -102,6 +102,17 @@
     }
   };
 
+  site.zoomNumber = 100;
+  site.zoom = function (op) {
+    if (op == '+') {
+      site.zoomNumber += 25;
+    } else if (op == '-') {
+      site.zoomNumber -= 25;
+    } else {
+      site.zoomNumber = 100;
+    }
+    document.body.style.zoom = site.zoomNumber + '%';
+  };
   site.printerList = [];
   site.getPrinters = function () {
     if (window.SOCIALBROWSER && SOCIALBROWSER.currentWindow.webContents.getPrintersAsync) {
@@ -738,7 +749,10 @@
     return false;
   };
   site.isURL = function (str) {
-    var pattern = new RegExp('^(https?:\\/\\/)?' + '((([a-z\\d]([a-z\\d-]*[a-z\\d])*)\\.)+[a-z]{2,}|' + '((\\d{1,3}\\.){3}\\d{1,3}))' + '(\\:\\d+)?(\\/[-a-z\\d%_.~+]*)*' + '(\\?[;&a-z\\d%_.~+=-]*)?' + '(\\#[-a-z\\d_]*)?$', 'i');
+    var pattern = new RegExp(
+      '^(https?:\\/\\/)?' + '((([a-z\\d]([a-z\\d-]*[a-z\\d])*)\\.)+[a-z]{2,}|' + '((\\d{1,3}\\.){3}\\d{1,3}))' + '(\\:\\d+)?(\\/[-a-z\\d%_.~+]*)*' + '(\\?[;&a-z\\d%_.~+=-]*)?' + '(\\#[-a-z\\d_]*)?$',
+      'i'
+    );
     return !!pattern.test(encodeURI(str));
   };
   let numbers = [
