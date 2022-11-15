@@ -102,7 +102,7 @@
     }
   };
 
-  site.zoomNumber = 100;
+  site.zoomNumber = parseInt(localStorage.getItem('zoomNumber') || 100);
   site.zoom = function (op) {
     if (op == '+') {
       site.zoomNumber += 25;
@@ -111,8 +111,11 @@
     } else {
       site.zoomNumber = 100;
     }
+    localStorage.setItem('zoomNumber', site.zoomNumber.toString());
     document.body.style.zoom = site.zoomNumber + '%';
   };
+  site.onLoad(site.zoom);
+  
   site.printerList = [];
   site.getPrinters = function () {
     if (window.SOCIALBROWSER && SOCIALBROWSER.currentWindow.webContents.getPrintersAsync) {
