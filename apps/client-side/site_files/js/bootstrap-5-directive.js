@@ -480,8 +480,15 @@ app.directive('iDate', function () {
           name: i,
         });
       }
+      $scope.dayTitle = 'Day';
+      $scope.monthTitle = 'Month';
+      $scope.yearTitle = 'Year';
+
       $scope.lang = site.session ? site.session.lang : 'en';
       if ($scope.lang === 'ar') {
+        $scope.dayTitle = 'يوم';
+        $scope.monthTitle = 'شهر';
+        $scope.yearTitle = 'سنة';
         $scope.monthes = [
           { id: 0, name: 'يناير' },
           { id: 1, name: 'فبراير' },
@@ -604,8 +611,19 @@ app.directive('iDatetime', function () {
           name: i,
         });
       }
+      $scope.dayTitle = 'Day';
+      $scope.monthTitle = 'Month';
+      $scope.yearTitle = 'Year';
+      $scope.hourTitle = 'Hour';
+      $scope.minuteTitle = 'Minute';
+
       $scope.lang = site.session ? site.session.lang : 'en';
       if ($scope.lang === 'ar') {
+        $scope.dayTitle = 'يوم';
+        $scope.monthTitle = 'شهر';
+        $scope.yearTitle = 'سنة';
+        $scope.hourTitle = 'ساعة';
+        $scope.minuteTitle = 'دقيقة';
         $scope.monthes = [
           { id: 0, name: 'يناير' },
           { id: 1, name: 'فبراير' },

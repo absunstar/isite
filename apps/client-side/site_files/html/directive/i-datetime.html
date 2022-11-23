@@ -8,20 +8,20 @@
   </div>
   <div class="row dashed padding margin" ng-show="editOnly">
     <div class="col2">
-      <i-list label="Day"  items="days" ng-model="model.selectedDay"></i-list>
+      <i-list label="{{dayTitle}}"  items="days" ng-model="model.selectedDay"></i-list>
     </div>
     <div class="col3">
-      <i-list label="Month"  items="monthes" ng-model="model.selectedMonth"></i-list>
+      <i-list label="{{monthTitle}}"  items="monthes" ng-model="model.selectedMonth"></i-list>
     </div>
     <div class="col3">
-      <i-list label="Year"  items="years" ng-search="searchYear" ng-model="model.selectedYear"></i-list>
+      <i-list label="{{yearTitle}}"  items="years" ng-search="searchYear" ng-model="model.selectedYear"></i-list>
     </div>
 
     <div class="col2">
-      <i-list label="Hour"  items="hours" ng-model="model.selectedHour"></i-list>
+      <i-list label="{{hourTitle}}"  items="hours" ng-model="model.selectedHour"></i-list>
     </div>
     <div class="col2">
-      <i-list label="Minute"  items="minutes" ng-model="model.selectedMinute"></i-list>
+      <i-list label="{{minuteTitle}}"  items="minutes" ng-model="model.selectedMinute"></i-list>
     </div>
     <div class="row">
       <br />
