@@ -86,7 +86,10 @@
     transform: rotate(45deg);
 }
 
-
+i-checkbox {
+    padding-left: 20px;
+    padding-right: 20px;
+}
 i-checkbox .selector {
     user-select: none;
     -webkit-user-select: none;
