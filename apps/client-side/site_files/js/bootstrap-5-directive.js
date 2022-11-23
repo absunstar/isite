@@ -508,15 +508,15 @@ app.directive('iDate', function () {
           { id: 0, name: 'Jan' },
           { id: 1, name: 'Feb' },
           { id: 2, name: 'Mar' },
-          { id: 3, name: 'Aper' },
+          { id: 3, name: 'Apr' },
           { id: 4, name: 'May' },
-          { id: 5, name: 'June' },
-          { id: 6, name: 'Jule' },
+          { id: 5, name: 'Jun' },
+          { id: 6, name: 'Jul' },
           { id: 7, name: 'Aug' },
           { id: 8, name: 'Sep' },
           { id: 9, name: 'Oct' },
           { id: 10, name: 'Nov' },
-          { id: 11, name: 'Des' },
+          { id: 11, name: 'Dec' },
         ];
       }
 
@@ -643,15 +643,15 @@ app.directive('iDatetime', function () {
           { id: 0, name: 'Jan' },
           { id: 1, name: 'Feb' },
           { id: 2, name: 'Mar' },
-          { id: 3, name: 'Aper' },
+          { id: 3, name: 'Apr' },
           { id: 4, name: 'May' },
-          { id: 5, name: 'June' },
-          { id: 6, name: 'Jule' },
+          { id: 5, name: 'Jun' },
+          { id: 6, name: 'Jul' },
           { id: 7, name: 'Aug' },
           { id: 8, name: 'Sep' },
           { id: 9, name: 'Oct' },
           { id: 10, name: 'Nov' },
-          { id: 11, name: 'Des' },
+          { id: 11, name: 'Dec' },
         ];
       }
 
