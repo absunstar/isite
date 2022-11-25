@@ -75,6 +75,11 @@ legend::after {
 i-textarea {
   margin: 0px;
 }
+
+i-checkbox {
+  padding-left: 20px !important;
+  padding-right: 20px !important;
+}
 i-checkbox,
 i-radio {
   align-self: center;
