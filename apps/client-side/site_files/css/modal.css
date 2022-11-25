@@ -248,7 +248,8 @@
 @media screen and (max-width: 480px) {
     .modal.small .modal-content,
     .modal-content.small {
-        width: 90vw;
+        width: 95vw;
+        margin: 2vw !important;
     }
   
   }
