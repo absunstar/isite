@@ -179,6 +179,7 @@ module.exports = function (site) {
       __dirname + '/site_files/css/theme_paper.css',
       __dirname + '/site_files/css/bootstrap5.css',
       __dirname + '/site_files/css/bootstrap5-addon.css',
+      __dirname + '/site_files/css/font-awesome.css',
     ],
   });
 

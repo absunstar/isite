@@ -367,7 +367,7 @@ app.directive('iChecklist', [
       link: function ($scope, element, attrs, ctrl) {
         $scope.primary = $scope.primary || 'id';
         $scope.display = $scope.display || 'name';
-        $scope.class2 = $scope.class2 || 'col';
+        $scope.class2 = $scope.class2 || 'col3';
         $scope.selectedItems = [];
 
         $scope.$watch('ngModel', (ngModel) => {
