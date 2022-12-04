@@ -132,6 +132,9 @@
         .then((res) => res.json())
         .then((data) => {
           site.printerList = data.list;
+        })
+        .catch((err) => {
+          site.printerList = [];
         });
     }
 
