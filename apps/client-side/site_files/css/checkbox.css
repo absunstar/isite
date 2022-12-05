@@ -1,121 +1,125 @@
 .check-list label.checkbox {
-    text-align: var(--text-align);
+  text-align: var(--text-align);
 }
 
 .check-list .control {
-    padding: 0px;
+  padding: 0px;
 }
 
 .check-list .title {
-    font-size: 16px;
+  font-size: 16px;
 }
 
 .checkbox {
-    margin: 5px;
-    margin-right: 10px;
-    display: inline-block;
-    position: relative;
-    padding-right: 35px;
-    padding-left: 0px;
-    margin-bottom: 12px;
-    cursor: pointer;
-    direction: ltr;
-    -webkit-user-select: none;
-    -moz-user-select: none;
-    -ms-user-select: none;
-    user-select: none;
+  margin: 5px;
+  margin-right: 10px;
+  display: inline-block;
+  position: relative;
+  padding-right: 35px;
+  padding-left: 0px;
+  margin-bottom: 12px;
+  cursor: pointer;
+  direction: ltr;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
 }
 
 .en .checkbox {
-    direction: rtl;
-    padding-left: 35px;
-    padding-right: 0px;
+  direction: rtl;
+  padding-left: 35px;
+  padding-right: 0px;
 }
 
 .checkbox span.title {
-    vertical-align: sub;
+  vertical-align: sub;
 }
 
 .checkbox input {
-    position: absolute;
-    opacity: 0;
-    cursor: pointer;
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
 }
 
 .checkbox .checkmark {
-    position: absolute;
-    top: 3px;
-    margin-left: 5px;
-    margin-right: 5px;
-    height: 20px;
-    width: 20px;
-    border: 2px solid var(--modal-header-background-color);
-    transition: color .1s ease;
+  position: absolute;
+  top: 3px;
+  margin-left: 5px;
+  margin-right: 5px;
+  height: 20px;
+  width: 20px;
+  border: 2px solid var(--modal-header-background-color);
+  transition: color 0.1s ease;
 }
 
-.checkbox .checkbox:hover input~.checkmark {
-    border: 10px dashed var(--modal-header-background-color);
+.checkbox .checkbox:hover input ~ .checkmark {
+  border: 10px dashed var(--modal-header-background-color);
 }
 
-.checkbox input:checked~.checkmark {
-    background-color: var(--modal-header-background-color);
-    border: none;
-    border-radius: 5px;
-
-}
-
-.checkbox .checkmark:after {
-    content: "";
-    position: absolute;
-    display: none;
-}
-
-.checkbox input:checked~.checkmark:after {
-    display: block;
+.checkbox input:checked ~ .checkmark {
+  background-color: var(--modal-header-background-color);
+  border: none;
+  border-radius: 5px;
 }
 
 .checkbox .checkmark:after {
-    left: 7px;
-    top: 2px;
-    width: 5px;
-    height: 10px;
-    border: solid white;
-    border-width: 0 2px 2px 0;
-    -webkit-transform: rotate(45deg);
-    -ms-transform: rotate(45deg);
-    transform: rotate(45deg);
+  content: '';
+  position: absolute;
+  display: none;
 }
 
+.checkbox input:checked ~ .checkmark:after {
+  display: block;
+}
+
+.checkbox .checkmark:after {
+  left: 7px;
+  top: 2px;
+  width: 5px;
+  height: 10px;
+  border: solid white;
+  border-width: 0 2px 2px 0;
+  -webkit-transform: rotate(45deg);
+  -ms-transform: rotate(45deg);
+  transform: rotate(45deg);
+}
+
+i-checkbox {
+  display: inline-block;
+}
+i-checkbox label {
+  cursor: pointer;
+}
 i-checkbox .selector {
-    user-select: none;
-    -webkit-user-select: none;
-    -moz-user-select: none;
-    cursor: pointer;
-    display: inline-block;
-    padding: 5px 9px;
-    margin: 5px;
-    min-width: 25px;
-    min-height: 25px;
-    border-radius: 0px;
-    border: none;
-    color: #fff;
-    background: red;
+  user-select: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  cursor: pointer;
+  display: inline-block;
+  padding: 5px 9px;
+  margin: 5px;
+  min-width: 25px;
+  min-height: 25px;
+  border-radius: 0px;
+  border: none;
+  color: #fff;
+  background: red;
 }
 
-i-checkbox .selector.selected .fa{
-    color: #ffffff;
+i-checkbox .selector.selected .fa {
+  color: #ffffff;
 }
-i-checkbox .selector.un-selected .fa{
-    color: #fff;
+i-checkbox .selector.un-selected .fa {
+  color: #fff;
 }
-
 
 i-checkbox .selector.selected {
-    background: #ffffff;
-    color: #ffffff;
-    background: #118011;
+  background: #ffffff;
+  color: #ffffff;
+  background: #118011;
 }
 i-checkbox .selector.un-selected {
-    background: #aaa;
-    color: #fff;
+  background: #aaa;
+  color: #fff;
 }

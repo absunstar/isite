@@ -143,7 +143,9 @@
   --main-menu-h2-color: #ffffff;
   --main-menu-p-color: #ffffff;
 
-  --scrollbar-background-color: #272727;
+  --scrollbar-width : 10px;
   --scrollbar-color: #ffeb3b;
-  --scrollbar-box-shadow-color: #4caf50;
+  --scrollbar-outline:1px solid var(--scrollbar-color);
+  --scrollbar-background-color: #272727;
+  --scrollbar-box-shadow: inset 0 0 6px #4caf50;
 }

@@ -121,6 +121,7 @@ app.directive('iButton', function () {
     scope: {
       label: '@',
       type: '@',
+      class2: '@',
       loading: '@',
       click: '&',
       fa: '@',
@@ -166,6 +167,9 @@ app.directive('iButton', function () {
       }
       if ($scope.type.like('*default*')) {
         $scope.class = '';
+      }
+      if ($scope.class2) {
+        $scope.class = $scope.class2;
       }
       $scope.$watch('loading', (loading) => {
         if (loading === 'true') {

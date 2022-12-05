@@ -1,10 +1,10 @@
 <div class="treenode">
   <ul>
     <li ng-repeat="node in nodes">
-      <div class="row" ng-dblclick="$event.preventDefault();$event.stopPropagation();node.$actions = !0;source.$actions = !1" ng-mouseleave="node.$actions = !1">
+      <div class="row" ng-dblclick="$event.preventDefault();$event.stopPropagation();node.$actions = !0;source.$actions = !1" >
         <span ng-show="node.nodes.length > 0" ng-click="node.$expand = !node.$expand;"> <i ng-hide="node.$expand" class="fa fa-caret-left"></i> <i ng-show="node.$expand" class="fa fa-caret-down"></i> </span>
-        <span ng-hide="node.nodes.length > 0">
-          <i class="fa fa-file"></i>
+        <span ng-show="node.nodes.length == 0">
+          <i class="fas fa-file"></i>
         </span>
 
         <span class="text" ng-class="{'selected' : node.$selected == !0}" ng-click="ngClick($event , node);node.$expand = !node.$expand;selected(node);updateModal(node)"> {{node[display]}} </span>
