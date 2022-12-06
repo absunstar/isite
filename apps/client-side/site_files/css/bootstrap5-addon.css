@@ -34,7 +34,7 @@ body {
   margin-bottom: 100px;
 }
 .container {
-  max-width: 90%;
+  max-width: 100%;
 }
 .ar .form-check .form-check-input {
   float: right;
