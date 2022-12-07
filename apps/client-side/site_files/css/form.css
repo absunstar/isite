@@ -136,8 +136,8 @@ textarea:focus {
 }
 
 fieldset {
-    padding: var(--fieldset-padding);
-    margin: var(--fieldset-margin);
+    padding: var(--fieldset-padding) ;
+    margin: var(--fieldset-margin) ;
     background: var(--fieldset-background);
     border: var(--fieldset-border);
 }

@@ -1,199 +1,199 @@
 .modal {
-    display: none;
-    position: fixed;
-    z-index: 999999;
-    padding-top: 20px;
-    padding-bottom: 20px;
-    left: 0;
-    top: 0;
-    right: 0;
-    width: 100% !important;
-    height: 100% !important;
-    max-width: 100% !important;
-    background-color: var(--modal-background) !important;
-    overflow: auto;
+  display: none;
+  position: fixed;
+  z-index: 999999;
+  padding-top: 20px;
+  padding-bottom: 20px;
+  left: 0;
+  top: 0;
+  right: 0;
+  width: 100% !important;
+  height: 100% !important;
+  max-width: 100% !important;
+  background-color: var(--modal-background) !important;
+  overflow: auto;
 }
 
 .modal-content {
-    border: var(---modal-content-border);
-    position: relative;
-    color: var(--modal-color);
-    background-color: var(--modal-content-background);
-    margin: auto;
-    padding: 0;
-    width: 90vw;
-    height: auto !important;
-    box-shadow: 0 4px 8px 0 var(--modal-box-shadow-color), 0 6px 20px 0 var(--modal-box-shadow-color);
-    -webkit-animation-name: var(--modal-animation-name);
-    -webkit-animation-duration: var(--modal-animation-duration);
-    animation-name: var(--modal-animation-name);
-    animation-duration: var(--modal-animation-duration);
+  border: var(---modal-content-border);
+  position: relative;
+  color: var(--modal-color);
+  background-color: var(--modal-content-background);
+  margin: auto;
+  padding: 0;
+  width: 90vw;
+  height: auto !important;
+  box-shadow: 0 4px 8px 0 var(--modal-box-shadow-color), 0 6px 20px 0 var(--modal-box-shadow-color);
+  -webkit-animation-name: var(--modal-animation-name);
+  -webkit-animation-duration: var(--modal-animation-duration);
+  animation-name: var(--modal-animation-name);
+  animation-duration: var(--modal-animation-duration);
 }
 
 .modal.small .modal-content,
 .modal-content.small {
-    width: 50%;
+  width: 50%;
 }
 
 .modal-header {
-    padding: 8px 16px;
-    background-color: var(--modal-header-background-color);
-    color: var(--modal-header-color);
+  padding: 8px 16px;
+  background-color: var(--modal-header-background-color);
+  color: var(--modal-header-color);
 }
 
 .modal-body {
-    display: contents;
-    color: var(--modal-color);
-    overflow: visible;
+  display: contents;
+  color: var(--modal-color);
+  overflow: visible;
 }
 
 .modal-footer {
-    padding: 2px 16px;
-    color: var(--modal-footer-color);
+  padding: 2px 16px;
+  color: var(--modal-footer-color);
 }
 
 @-webkit-keyframes animatetop {
-    from {
-        top: -300px;
-        opacity: 0;
-    }
-    to {
-        top: 0;
-        opacity: 1;
-    }
+  from {
+    top: -300px;
+    opacity: 0;
+  }
+  to {
+    top: 0;
+    opacity: 1;
+  }
 }
 
 @keyframes animatetop {
-    from {
-        top: -300px;
-        opacity: 0;
-    }
-    to {
-        top: 0;
-        opacity: 1;
-    }
+  from {
+    top: -300px;
+    opacity: 0;
+  }
+  to {
+    top: 0;
+    opacity: 1;
+  }
 }
 
 @-webkit-keyframes animatebottom {
-    from {
-        top: 1000px;
-        opacity: 0;
-    }
-    to {
-        top: 0;
-        opacity: 1;
-    }
+  from {
+    top: 1000px;
+    opacity: 0;
+  }
+  to {
+    top: 0;
+    opacity: 1;
+  }
 }
 
 @keyframes animatebottom {
-    from {
-        top: 1000px;
-        opacity: 0;
-    }
-    to {
-        top: 0;
-        opacity: 1;
-    }
+  from {
+    top: 1000px;
+    opacity: 0;
+  }
+  to {
+    top: 0;
+    opacity: 1;
+  }
 }
 
 @-webkit-keyframes animateleft {
-    from {
-        left: -300px;
-        opacity: 0;
-    }
-    to {
-        left: 0;
-        opacity: 1;
-    }
+  from {
+    left: -300px;
+    opacity: 0;
+  }
+  to {
+    left: 0;
+    opacity: 1;
+  }
 }
 
 @keyframes animateleft {
-    from {
-        left: -300px;
-        opacity: 0;
-    }
-    to {
-        left: 0;
-        opacity: 1;
-    }
+  from {
+    left: -300px;
+    opacity: 0;
+  }
+  to {
+    left: 0;
+    opacity: 1;
+  }
 }
 
 @-webkit-keyframes animateopacity {
-    from {
-        opacity: 0;
-    }
-    to {
-        opacity: 1;
-    }
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
 }
 
 @keyframes animateopacity {
-    from {
-        opacity: 0;
-    }
-    to {
-        opacity: 1;
-    }
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
 }
 
 .modal-header .close {
-    color: var(--modal-color);
-    float: right;
-    font-size: 26px;
-    margin-top: -10px;
-    font-weight: bold;
+  color: var(--modal-color);
+  float: right;
+  font-size: 26px;
+  margin-top: -10px;
+  font-weight: bold;
 }
 
 .modal-header .close:hover,
 .modal-header .close:focus {
-    color: rgb(221, 17, 17);
-    text-decoration: none;
-    cursor: pointer;
+  color: rgb(221, 17, 17);
+  text-decoration: none;
+  cursor: pointer;
 }
 .modal-header h2 {
-    font-size: 16px;
-    text-align: center;
-    padding: 0px;
-    margin: 0px;
-    color: #ffffff;
-    font-weight: bold;
+  font-size: 16px;
+  text-align: center;
+  padding: 0px;
+  margin: 0 auto;
+  color: #ffffff;
+  font-weight: bold;
 }
 
 .popup {
-    overflow: auto;
-    display: block;
-    padding: 5px;
-    box-shadow: 1px 1px 10px 1px #000;
-    z-index: 4000;
-    max-height: 250px;
-    position: fixed;
-    background: var(--modal-content-background);
-    min-width: 250px;
-    -webkit-animation-name: animatepopup;
-    -webkit-animation-duration: 0.5s;
-    animation-name: animatepopup;
-    animation-duration: 0.5s;
+  overflow: auto;
+  display: block;
+  padding: 5px;
+  box-shadow: 1px 1px 10px 1px #000;
+  z-index: 4000;
+  max-height: 250px;
+  position: fixed;
+  background: var(--modal-content-background);
+  min-width: 250px;
+  -webkit-animation-name: animatepopup;
+  -webkit-animation-duration: 0.5s;
+  animation-name: animatepopup;
+  animation-duration: 0.5s;
 }
 
 .popup item {
-    display: block;
-    padding: 5px;
-    color: var(--input-color);
-    font-weight: bold;
-    cursor: pointer;
+  display: block;
+  padding: 5px;
+  color: var(--input-color);
+  font-weight: bold;
+  cursor: pointer;
 }
 
 .popup item:hover {
-    background: var(--theme-color);
-    color: #ffffff;
+  background: var(--theme-color);
+  color: #ffffff;
 }
 
 .popup .search-box {
-    background-color: var(--modal-header-background-color);
-    border: var(--border);
-    overflow: hidden;
-    position: relative;
-    width: 100%;
+  background-color: var(--modal-header-background-color);
+  border: var(--border);
+  overflow: hidden;
+  position: relative;
+  width: 100%;
 }
 .popup .search-box .icon-close {
   height: 100%;
@@ -202,7 +202,7 @@
   background: red;
 }
 
-.popup .search-box .icon-close i{
+.popup .search-box .icon-close i {
   height: 100%;
   position: absolute;
   left: 35%;
@@ -216,7 +216,7 @@
   position: absolute;
   background: red;
 }
-.popup .search-box .icon-search i{
+.popup .search-box .icon-search i {
   height: 100%;
   position: absolute;
   left: 35%;
@@ -225,31 +225,29 @@
   background: green;
 }
 
-
 @-webkit-keyframes animatepopup {
-    from {
-        opacity: 0;
-    }
-    to {
-        opacity: 1;
-    }
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
 }
 
 @keyframes animatepopup {
-    from {
-        opacity: 0;
-    }
-    to {
-        opacity: 1;
-    }
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
 }
 
 /* Mobile */
 @media screen and (max-width: 480px) {
-    .modal.small .modal-content,
-    .modal-content.small {
-        width: 95vw;
-        margin: 2vw !important;
-    }
-  
+  .modal.small .modal-content,
+  .modal-content.small {
+    width: 95vw;
+    margin: 2vw !important;
   }
+}

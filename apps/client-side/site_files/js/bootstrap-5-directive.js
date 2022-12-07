@@ -52,7 +52,7 @@ app.directive('iTextarea', function () {
       } else {
         attrs.disabled = '';
       }
-      $scope.rows = $scope.rows || 4;
+      $scope.rows = $scope.rows || 10;
       $scope.id2 = $scope.id2 || 'input_' + Math.random().toString().replace('0.', '');
       $(element)
         .find('textarea')

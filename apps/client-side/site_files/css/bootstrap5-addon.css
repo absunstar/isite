@@ -52,6 +52,7 @@ fieldset {
   background: var(--fieldset-background);
   border: var(--fieldset-border);
   border-radius: 10px;
+  max-width: 98% !important;
 }
 
 fieldset legend {
@@ -129,6 +130,10 @@ i-datetime.is-invalid .row {
 }
 .modal-content {
   width: 75vw;
+  height: 100vh;
+}
+.full .modal-content {
+  width: 95vw;
   height: 100vh;
 }
 .modal-body {
