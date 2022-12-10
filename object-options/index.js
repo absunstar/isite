@@ -25,10 +25,11 @@ function setOptions(_options, ____0) {
     port: port,
     cwd: ____0.cwd,
     dir: ____0.cwd + '/site_files',
-    upload_dir: ____0.cwd + '/../uploads',
-    download_dir: ____0.cwd + '/../downloads',
     apps: !0,
     apps_dir: ____0.cwd + '/apps',
+    upload_dir: ____0.cwd + '/../uploads',
+    download_dir: ____0.cwd + '/../downloads',
+    backup_dir: ____0.cwd + '/../backup',
     name: name,
     hostname: 'localhost',
     key: null,
@@ -143,6 +144,7 @@ function setOptions(_options, ____0) {
   _x0oo.dir = _x0oo.dir || template.dir;
   _x0oo.upload_dir = _x0oo.upload_dir || template.upload_dir;
   _x0oo.download_dir = _x0oo.download_dir || template.download_dir;
+  _x0oo.backup_dir = _x0oo.backup_dir || template.backup_dir;
 
   _x0oo.savingTime = _x0oo.savingTime ?? template.savingTime;
   _x0oo.hostname = _x0oo.hostname || template.hostname;

@@ -85,6 +85,7 @@ site = isite({
     dir: process.cwd() + '/site_files',
     upload_dir: process.cwd() + '/../uploads',
     download_dir: process.cwd() + '/../downloads',
+    backup_dir: process.cwd() + '/../backup',
     apps: !0,
     apps_dir: process.cwd() + '/apps',
     name: 'Your Site',
@@ -819,6 +820,24 @@ $employees.deleteDuplicate({'profile.name' : 1 } , (err , result)=>{
 
  }
 
+ // backup database
+ site.backupDB() // backup current database to current backup folder
+ site.backupDB({db:'' , path : ''})
+
+ // restore database
+ site.restoreDB() // restore current database from current backup folder
+ site.restoreDB({db:'' , path : ''})
+
+// API to download backup db
+site.onGET('db', (req, res) => {
+  site.backupDB(null, (err, options) => {
+    if (!err) {
+      res.download(options.path);
+    } else {
+      res.json(err);
+    }
+  });
+});
 
 //==================================================================
 // Global Database Events
