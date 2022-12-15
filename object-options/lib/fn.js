@@ -137,6 +137,7 @@ exports = module.exports = function init(____0) {
 
   fn.getContentType = function (path) {
     if (typeof path === undefined) return null;
+    return ____0.mimeTypes[____0.path.extname(path)] || 'application/' + ____0.path.extname(path);
     if (path.endsWith('.exe')) {
       return 'application/octet-stream';
     } else if (path.endsWith('.txt')) {
@@ -153,7 +154,7 @@ exports = module.exports = function init(____0) {
       return 'image/jpeg';
     } else if (path.endsWith('.jpeg')) {
       return 'image/jpeg';
-    }  else if (path.endsWith('.webp')) {
+    } else if (path.endsWith('.webp')) {
       return 'image/webp';
     } else if (path.endsWith('.ico')) {
       return 'image/ico';

@@ -102,6 +102,7 @@ module.exports = function init(options) {
       console.warn(`warning : ${warning.name} \n ${warning.message}  \n ${warning.stack}`);
     });
   }
+  ____0.fsm = require('./lib/data.js')(____0);
   ____0.fsm = require('./lib/fsm.js')(____0);
 
   ____0.fileList = ____0.fsm.list;
