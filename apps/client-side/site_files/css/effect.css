@@ -70,10 +70,10 @@
     float: none !important;
   }
 
-  .is-invalid{
+  .is-invalid {
     border: 1px solid red !important;
   }
-  .is-valid{
+  .is-valid {
     border: 1px solid green !important;
   }
   .text-center {
@@ -99,11 +99,15 @@
   .italic {
     font-style: italic;
   }
-.center{
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
+  .flex-center {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .center {
+    margin: 0 auto;
+    text-align: center;
+  }
   .center,
   .center p,
   .center span,
@@ -211,12 +215,12 @@
     direction: ltr;
   }
 
-  .height-auto{
+  .height-auto {
     height: auto !important;
-  };
-  .width-auto{
+  }
+  .width-auto {
     height: auto !important;
-  };
+  }
   .error {
     text-align: center;
     color: red;
