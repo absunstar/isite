@@ -99,7 +99,11 @@
   .italic {
     font-style: italic;
   }
-
+.center{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
   .center,
   .center p,
   .center span,
@@ -107,7 +111,6 @@
   .center b,
   .center i,
   .center img {
-    margin: 0 auto !important;
     text-align: center !important;
   }
 
