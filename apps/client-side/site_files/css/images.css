@@ -10,15 +10,15 @@
 }
 
 i-image {
-  display: inline-block;
-  width: auto !important;
-  height: auto !important;
+  display: block;
+  width: 90% !important;
+  height: 90% !important;
   border: var(--i-image-border);
 }
 i-image img {
   width: 256px;
   height: 256px;
-  object-fit: cover;
+  object-fit: fill;
   background-image: url('/images/no.png');
   background-size: contain;
   background-position: center;
