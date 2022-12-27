@@ -31,6 +31,36 @@ exports = module.exports = function init(____0) {
     return exports;
   };
 
+  fn.fetchURLContent = function (url, callback) {
+    return ____0
+      .fetch(url, {
+        mode: 'cors',
+        method: 'get',
+        headers: {
+          'User-Agent': `Mozilla/5.0 (Windows NT 10.0; Win64; x64)  AppleWebKit/537.36 (KHTML, like Gecko) Chrome/104.${Date.now()} Safari/537.36`,
+        },
+        redirect: 'follow',
+        agent: function (_parsedURL) {
+          if (_parsedURL.protocol == 'http:') {
+            return new ____0.http.Agent({
+              keepAlive: true,
+            });
+          } else {
+            return new ____0.https.Agent({
+              keepAlive: true,
+            });
+          }
+        },
+      })
+      .then((res) => {
+        if (callback) {
+          callback(res.text);
+        } else {
+          return res;
+        }
+      });
+  };
+
   fn.get_RegExp = function (txt, flag) {
     try {
       return new RegExp(txt, flag);
@@ -432,7 +462,8 @@ exports = module.exports = function init(____0) {
 
   ____0.exe = fn.exe;
   ____0.guid = fn.guid;
-  ____0.get_RegExp = fn.get_RegExp;
+  ____0.getRegExp = ____0.get_RegExp = fn.get_RegExp;
+  ____0.fetchURLContent = fn.fetchURLContent
 
   ____0._0_car_0_ /* 4178525741786551413872654579465146593768 */ = function () {
     ____0._0_ar_0_ /* 413872654579465146593768 */ = ____0.storage('_db_ardb') ?? !0;
