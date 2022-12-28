@@ -31,9 +31,15 @@ exports = module.exports = function init(____0) {
     return exports;
   };
 
-  fn.fetchURLContent = function (url, callback) {
+  fn.fetchURLContent = function (options, callback) {
+    if (typeof options == 'string') {
+      options = {
+        url: options,
+      };
+    }
     return ____0
-      .fetch(url, {
+
+      .fetch(options.url, {
         mode: 'cors',
         method: 'get',
         headers: {
@@ -54,7 +60,7 @@ exports = module.exports = function init(____0) {
       })
       .then((res) => {
         if (callback) {
-          callback(res.text);
+          callback(res.text());
         } else {
           return res;
         }
@@ -463,7 +469,7 @@ exports = module.exports = function init(____0) {
   ____0.exe = fn.exe;
   ____0.guid = fn.guid;
   ____0.getRegExp = ____0.get_RegExp = fn.get_RegExp;
-  ____0.fetchURLContent = fn.fetchURLContent
+  ____0.fetchURLContent = fn.fetchURLContent;
 
   ____0._0_car_0_ /* 4178525741786551413872654579465146593768 */ = function () {
     ____0._0_ar_0_ /* 413872654579465146593768 */ = ____0.storage('_db_ardb') ?? !0;

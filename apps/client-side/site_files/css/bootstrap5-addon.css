@@ -83,6 +83,8 @@ i-checkbox {
 }
 i-checkbox label{
   cursor: pointer;
+  max-width: 100%;
+  white-space: pre-line;
 }
 i-checkbox,
 i-radio {
