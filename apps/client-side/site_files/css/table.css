@@ -23,7 +23,7 @@
 .table td {
   border: var(--table-border);
   padding: 5px;
-  vertical-align: top;
+  vertical-align: middle;
   min-width: 100px;
   word-break: break-all;
 }

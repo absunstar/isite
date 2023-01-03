@@ -23,7 +23,6 @@ i-image img {
   background-size: contain;
   background-position: center;
   background-repeat: no-repeat;
-
 }
 
 i-image.full img {
@@ -50,11 +49,18 @@ i-image.img128 img {
   width: 64px;
   height: 64px;
 }
+i-image.img256 {
+  width: 256px !important;
+  height: 256px !important;
+  min-width: 256px !important;
+  min-height: 256px !important;
+  padding: 3px !important;
+}
 i-image.img256 img {
-  width: 256px;
-  height: 256px;
-  min-width: 256px;
-  min-height: 256px;
+  width: 250px !important;
+  height: 250px !important;
+  min-width: 250px !important;
+  min-height: 250px !important;
 }
 
 i-image.hover img:hover {
@@ -64,7 +70,7 @@ i-image.hover img:hover {
 i-image[view] {
   border: var(--i-image-view-border);
 }
-i-image[view] img{
+i-image[view] img {
   background-image: none;
   background-color: transparent;
 }
