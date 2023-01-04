@@ -894,9 +894,9 @@ app.directive('iButton', function () {
       }
     },
     template: `
-        <a class="btn {{type}}">
+        <button class="btn {{type}}">
         {{label}}
-        <i ng-show="fa" class="fa fa-{{fa}}" aria-hidden="true"></i> </a>
+        <i ng-show="fa" class="fa fa-{{fa}}" aria-hidden="true"></i> </button>
         `,
   };
 });
