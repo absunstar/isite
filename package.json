@@ -37,7 +37,7 @@
   "license": "UNLICENSED",
   "dependencies": {
     "archiver": "^5.0.2",
-    "cheerio": "^1.0.0-rc.10",
+    "cheerio": "^1.0.0-rc.12",
     "formidable": "^2.0.1",
     "md5": "^2.3.0",
     "mongodb": "^4.2.2",

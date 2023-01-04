@@ -19,7 +19,6 @@ i-image img {
   width: 256px;
   height: 256px;
   object-fit: fill;
-  background-image: url('/images/no.png');
   background-size: contain;
   background-position: center;
   background-repeat: no-repeat;
@@ -28,7 +27,6 @@ i-image img {
 i-image.full img {
   width: 100% !important;
   height: auto !important;
-
   padding: 5px;
 }
 
