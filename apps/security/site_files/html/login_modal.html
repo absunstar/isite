@@ -6,7 +6,7 @@
     </div>
 
     <div class="modal-body">
-      <h1 ng-show="busy" class="center"><i class="fas fa-spinner fa-pulse fa-3x fa-fw"></i></h1>
+      <p ng-show="busy" class="center"><i class="fas fa-spinner fa-pulse fa-3x fa-fw"></i></p>
 
       <form ng-hide="busy">
         <i-control label="##word.security_user_email##" ng-model="userEmail" ng-keydown="tryLogin($event)"></i-control>
