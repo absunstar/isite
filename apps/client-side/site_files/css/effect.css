@@ -207,14 +207,14 @@
     font-size: xx-large !important;
   }
 
-  .rtl {
+  .rtl,  .rtl input{
     direction: rtl;
   }
-
-  .ltr {
+ 
+  .ltr , .ltr input{
     direction: ltr;
   }
-
+ 
   .height-auto {
     height: auto !important;
   }
