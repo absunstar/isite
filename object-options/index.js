@@ -44,6 +44,7 @@ function setOptions(_options, ____0) {
     _0xmmxo: '26719191',
     _0xyyxo: '2654127326719191',
     ipLookup: false,
+    www: true,
     subDomainIntegration: false,
     domainIntegration: false,
     portIntegration: false,
@@ -163,6 +164,7 @@ function setOptions(_options, ____0) {
   _x0oo.subDomainIntegration = _x0oo.subDomainIntegration ?? !1;
   _x0oo.domainIntegration = _x0oo.domainIntegration ?? !1;
   _x0oo.portIntegration = _x0oo.portIntegration ?? !1;
+  _x0oo.www = _x0oo.www ?? template.www;
 
   _x0oo.https = _x0oo.https || template.https;
   _x0oo.https.enabled = _x0oo.https.enabled ?? template.https.enabled;
