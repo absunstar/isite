@@ -86,6 +86,11 @@ exports = module.exports = function init(____0) {
     });
   };
 
+  fn.random = function (min, max) {
+    max = max + 1;
+    return Math.floor(Math.random() * (max - min) + min);
+  };
+
   fn.guid = function () {
     function s4() {
       return Math.floor((1 + Math.random()) * 0x10000)
@@ -465,6 +470,7 @@ exports = module.exports = function init(____0) {
   ____0.typeof = ____0.typeOf = fn.typeOf;
   ____0.objectDiff = fn.objectDiff;
   ____0.toHtmlTable = fn.toHtmlTable;
+  ____0.random = fn.random;
 
   ____0.exe = fn.exe;
   ____0.guid = fn.guid;
