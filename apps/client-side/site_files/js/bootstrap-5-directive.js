@@ -985,7 +985,7 @@ app.directive('iTreeview', [
           $scope.v_nodes = [];
           if (nodes) {
             nodes.forEach((node) => {
-              node.$parent_id = node.parent_id || 0;
+              node.$parent_id = node.parent_id || node.parentId || 0;
               node.v_display = node.v_display || '';
               node.v_display += node[attrs.display];
               if (node.$parent_id == 0) {
@@ -1005,7 +1005,7 @@ app.directive('iTreeview', [
               v_node.nodes = v_node.nodes || [];
 
               nodes.forEach((node) => {
-                node.$parent_id = node.parent_id || 0;
+                node.$parent_id = node.parent_id || node.parentId ||0;
                 if (node.$parent_id == v_node.id) {
                   node.v_display = node.v_display || '';
                   node.v_display += node[attrs.display];
