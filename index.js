@@ -26,6 +26,14 @@ module.exports = function init(options) {
   ____0.child_process = require('child_process');
   ____0.cwd = process.cwd();
   ____0.setting = {};
+  ____0.apps = [];
+  ____0.appList = [];
+  ____0.addApp = function (app) {
+    ____0.appList.push(app);
+  };
+  ____0.getApp = function (name) {
+    return ____0.appList.find((a) => a.name === name);
+  };
 
   ____0.require = function (file_path) {
     return require(file_path)(____0);
@@ -221,7 +229,6 @@ module.exports = function init(options) {
   ____0.dashboard = require(__dirname + '/lib/dashboard.js');
   ____0.dashboard(____0);
 
-  ____0.apps = [];
   ____0.importApps = function (app_dir) {
     if (____0.isFileExistsSync(app_dir) && ____0.fs.lstatSync(app_dir).isDirectory()) {
       ____0.fs.readdir(app_dir, (err, files) => {
@@ -239,7 +246,7 @@ module.exports = function init(options) {
   ____0.importApp = function (app_path, name2) {
     ____0.log('===  Importing App : ' + app_path);
     if (____0.isFileExistsSync(app_path + '/site_files/json/words.json')) {
-      ____0.words.addApp(app_path);
+      ____0.words.addPath(app_path);
     }
 
     if (____0.isFileExistsSync(app_path + '/site_files/json/vars.json')) {
