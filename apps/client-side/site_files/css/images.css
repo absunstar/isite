@@ -16,8 +16,8 @@ i-image {
   border: var(--i-image-border);
 }
 i-image img {
-  width: 256px;
-  height: 256px;
+  width: 100%;
+  min-height: 32px;
   object-fit: fill;
   background-size: contain;
   background-position: center;
