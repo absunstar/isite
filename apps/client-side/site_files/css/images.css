@@ -4,8 +4,8 @@
   border-radius: 10px;
 }
 .logo {
-  width: 48px;
-  height: 48px;
+  width: 48px !important;
+  height: 48px !important;
   border-radius: 5px;
 }
 
