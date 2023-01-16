@@ -585,14 +585,15 @@
   };
 
   site.showTabContent = function (e, tabContentSelector) {
-    let tabcontents = document.querySelectorAll('.tab-content');
-    for (i = 0; i < tabcontents.length; i++) {
-      tabcontents[i].style.display = 'none';
-    }
-    let tablinks = document.querySelectorAll('.tab-link');
-    for (i = 0; i < tablinks.length; i++) {
-      tablinks[i].className = tablinks[i].className.replace(' active', '');
-    }
+    let parent = document.querySelector(tabContentSelector).parentNode;
+
+    parent.querySelectorAll('.tab-content').forEach((tabContent) => {
+      tabContentstyle.display = 'none';
+    });
+    parent.querySelectorAll('.tab-link').forEach((tabLink) => {
+      tabLink.className = tabLink.className.replace(' active', '');
+    });
+
     document.querySelectorAll(tabContentSelector + '.tab-content').forEach((el) => {
       el.style.display = 'block';
     });
