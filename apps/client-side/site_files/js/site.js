@@ -585,7 +585,7 @@
   };
 
   site.showTabContent = function (e, tabContentSelector) {
-    let parent = document.querySelector(tabContentSelector).parentNode;
+    let parent = document.querySelector(tabContentSelector).parentNode.parentNode;
 
     parent.querySelectorAll('.tab-content').forEach((tabContent) => {
       tabContent.style.display = 'none';
