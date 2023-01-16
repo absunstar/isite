@@ -588,7 +588,7 @@
     let parent = document.querySelector(tabContentSelector).parentNode;
 
     parent.querySelectorAll('.tab-content').forEach((tabContent) => {
-      tabContentstyle.display = 'none';
+      tabContent.style.display = 'none';
     });
     parent.querySelectorAll('.tab-link').forEach((tabLink) => {
       tabLink.className = tabLink.className.replace(' active', '');
