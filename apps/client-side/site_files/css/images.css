@@ -30,23 +30,62 @@ i-image.full img {
   padding: 5px;
 }
 
-i-image.img32 img {
-  width: 32px;
-  height: 32px;
+i-image.img32 {
+  width: 32px !important;
+  height: 32px !important;
+  min-width: 32px !important;
+  min-height: 32px !important;
+  padding: 1px !important;
 }
-i-image.logo img,
+i-image.img32 img {
+  width: 30px !important;
+  height: 30px !important;
+  min-width: 30px !important;
+  min-height: 30px !important;
+}
+
+i-image.img48 {
+  width: 48px !important;
+  height: 48px !important;
+  min-width: 48px !important;
+  min-height: 48px !important;
+  padding: 2px !important;
+}
 i-image.img48 img {
-  width: 48px;
-  height: 48px;
+  width: 44px !important;
+  height: 44px !important;
+  min-width: 44px !important;
+  min-height: 44px !important;
+}
+
+i-image.img64 {
+  width: 64px !important;
+  height: 64px !important;
+  min-width: 64px !important;
+  min-height: 64px !important;
+  padding: 2px !important;
 }
 i-image.img64 img {
-  width: 64px;
-  height: 64px;
+  width: 60px !important;
+  height: 60px !important;
+  min-width: 60px !important;
+  min-height: 60px !important;
+}
+
+i-image.img128 {
+  width: 128px !important;
+  height: 128px !important;
+  min-width: 128px !important;
+  min-height: 128px !important;
+  padding: 3px !important;
 }
 i-image.img128 img {
-  width: 64px;
-  height: 64px;
+  width: 122px !important;
+  height: 122px !important;
+  min-width: 122px !important;
+  min-height: 122px !important;
 }
+
 i-image.img256 {
   width: 256px !important;
   height: 256px !important;
