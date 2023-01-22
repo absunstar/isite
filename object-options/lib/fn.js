@@ -177,8 +177,12 @@ exports = module.exports = function init(____0) {
   };
 
   fn.getContentType = function (path) {
-    if (typeof path === undefined) return null;
-    return ____0.mimeTypes[____0.path.extname(path)] || 'application/' + ____0.path.extname(path);
+    if (typeof path === undefined) {
+      return null;
+    }
+    let ext = ____0.path.extname(path).replace('.', '');
+    return ____0.mimeTypes[ext] || 'application/' + ext;
+
     if (path.endsWith('.exe')) {
       return 'application/octet-stream';
     } else if (path.endsWith('.txt')) {
