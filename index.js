@@ -3,6 +3,8 @@ module.exports = function init(options) {
 
   ____0.package = require(__dirname + '/package.json');
 
+  ____0.localDir = __dirname;
+  ____0.cwd = process.cwd();
   ____0.lib = {};
   ____0._0_a405 = !0; // 4334135645788275237931514658376742387653423921514718526246719191
   ____0.strings = [];
@@ -25,7 +27,7 @@ module.exports = function init(options) {
   ____0.md5 = ____0.hash = ____0.x0md50x = require('md5');
   ____0.nodemailer = require('nodemailer');
   ____0.child_process = require('child_process');
-  ____0.cwd = process.cwd();
+
   ____0.setting = {};
   ____0.apps = [];
   ____0.appList = [];
