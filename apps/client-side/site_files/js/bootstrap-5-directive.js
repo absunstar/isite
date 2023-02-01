@@ -229,9 +229,11 @@ app.directive('iList', [
           $scope.fa_add = 'fa-plus';
         }
 
-        if (typeof attrs.ngSearch == 'undefined') {
-          $scope.showSearch = !1;
-        } else {
+     
+        if ($scope.ngSearch) {
+          $scope.showSearch = !0;
+        }
+        if ($scope.ngGet) {
           $scope.showSearch = !0;
         }
 
@@ -336,7 +338,7 @@ app.directive('iList', [
         $scope.searchChanged = function () {
           $timeout(() => {
             if ($scope.ngGet) {
-              $scope.ngGet();
+              $scope.ngGet({ $search: $scope.$search });
             } else if ($scope.ngSearch) {
               $scope.ngSearch = $scope.$search;
             }
