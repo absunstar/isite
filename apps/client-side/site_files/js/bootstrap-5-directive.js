@@ -338,9 +338,9 @@ app.directive('iList', [
         $scope.searchChanged = function () {
           $timeout(() => {
             if ($scope.ngGet) {
-              $scope.ngGet({ $search: $scope.$search });
+              $scope.ngGet({ $search: $scope.searchElement.val() });
             } else if ($scope.ngSearch) {
-              $scope.ngSearch = $scope.$search;
+              $scope.ngSearch = $scope.searchElement.val();
             }
           }, 100);
         };
