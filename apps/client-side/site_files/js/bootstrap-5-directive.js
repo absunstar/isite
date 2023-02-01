@@ -203,6 +203,7 @@ app.directive('iList', [
         ngModel: '=',
         ngSearch: '=',
         ngChange: '&',
+        ngGet : '&',
         ngAdd: '&',
         items: '=',
       },
