@@ -203,7 +203,7 @@ app.directive('iList', [
         ngModel: '=',
         ngSearch: '=',
         ngChange: '&',
-        ngGet : '&',
+        ngGet: '&',
         ngAdd: '&',
         items: '=',
       },
@@ -332,6 +332,16 @@ app.directive('iList', [
             }
           }
         });
+
+        $scope.searchChanged = function () {
+          $timeout(() => {
+            if ($scope.ngGet) {
+              $scope.ngGet();
+            } else if ($scope.ngSearch) {
+              $scope.ngSearch = $scope.$search;
+            }
+          }, 100);
+        };
 
         $scope.updateModel = function (item) {
           $scope.ngModel = $scope.getNgValue(item, $scope.ngValue);
@@ -1006,7 +1016,7 @@ app.directive('iTreeview', [
               v_node.nodes = v_node.nodes || [];
 
               nodes.forEach((node) => {
-                node.$parent_id = node.parent_id || node.parentId ||0;
+                node.$parent_id = node.parent_id || node.parentId || 0;
                 if (node.$parent_id == v_node.id) {
                   node.v_display = node.v_display || '';
                   node.v_display += node[attrs.display];

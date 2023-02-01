@@ -6,7 +6,7 @@
 
   <div class="dropdown-content">
     <div class="padding" ng-show="showSearch">
-      <input class="full-width search form-control" ng-change="ngGet()" ng-model="ngSearch" />
+      <input class="full-width search form-control" ng-change="searchChanged()" ng-model="$search" />
     </div>
 
     <div class="dropdown-item row" ng-repeat="item in items | filter:{ $display : ngSearch}" ng-click="updateModel(item)">
