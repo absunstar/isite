@@ -237,7 +237,7 @@ app.directive('iList', [
           $scope.showSearch = !0;
         }
 
-        let input = $(element).find('input');
+        let input = $(element).find('input.dropdown-text');
         $(element).hover(
           () => {
             $scope.popupElement.css('display', 'block');
@@ -335,15 +335,16 @@ app.directive('iList', [
           }
         });
 
-        $scope.searchChanged = function () {
-          $timeout(() => {
+        $scope.searchElement.on('input' , ()=>{
+              $timeout(() => {
             if ($scope.ngGet) {
               $scope.ngGet({ $search: $scope.searchElement.val() });
             } else if ($scope.ngSearch) {
               $scope.ngSearch = $scope.searchElement.val();
             }
           }, 100);
-        };
+        })
+
 
         $scope.updateModel = function (item) {
           $scope.ngModel = $scope.getNgValue(item, $scope.ngValue);
