@@ -140,7 +140,16 @@ app.directive('iButton', function () {
       } else if ($scope.type.like('*save*')) {
         $scope.fa = 'fas fa-save';
         $scope.class = 'btn-success';
-      } else if ($scope.type.like('*view*') || $scope.type.like('*details*')) {
+      } else if ($scope.type.like('*list*')) {
+        $scope.fa = 'fas fa-list';
+        $scope.class = 'btn-info';
+      } else if ($scope.type.like('unapprove')) {
+        $scope.fa = 'fas fa-eject';
+        $scope.class = 'btn-danger';
+      }  else if ($scope.type.like('approve')) {
+        $scope.fa = 'fas fa-check-double';
+        $scope.class = 'btn-primary';
+      }else if ($scope.type.like('*view*') || $scope.type.like('*details*')) {
         $scope.fa = 'fas fa-eye';
         $scope.class = 'btn-info';
       } else if ($scope.type.like('*delete*') || $scope.type.like('*remove*')) {

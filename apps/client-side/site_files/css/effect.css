@@ -207,14 +207,16 @@
     font-size: xx-large !important;
   }
 
-  .rtl,  .rtl input{
+  .rtl,
+  .rtl input {
     direction: rtl;
   }
- 
-  .ltr , .ltr input{
+
+  .ltr,
+  .ltr input {
     direction: ltr;
   }
- 
+
   .height-auto {
     height: auto !important;
   }
@@ -247,6 +249,14 @@
 
   .multi-lines {
     white-space: pre-wrap;
+  }
+
+  .currency {
+    font-size: smaller;
+    font-weight: bold;
+    color: black;
+    text-shadow: 0 0 white;
+    text-transform: uppercase;
   }
 
   .ww {
