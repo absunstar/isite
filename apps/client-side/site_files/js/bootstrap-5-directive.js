@@ -349,7 +349,7 @@ app.directive('iList', [
             if ($scope.ngGet) {
               $scope.ngGet({ $search: $scope.searchElement.val() });
             } else if ($scope.ngSearch) {
-              $scope.ngSearch = $scope.searchElement.val();
+              $scope.$filter = $scope.searchElement.val();
             }
           }, 100);
         })

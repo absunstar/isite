@@ -9,7 +9,7 @@
       <input class="full-width search form-control"  />
     </div>
 
-    <div class="dropdown-item row" ng-repeat="item in items | filter:{ $display : ngSearch}" ng-click="updateModel(item)">
+    <div class="dropdown-item row" ng-repeat="item in items | filter:{ $display : $filter}" ng-click="updateModel(item)">
       <p>{{getValue(item)}} <small ng-show="display2"> {{getValue2(item)}} </small></p>
     </div>
 

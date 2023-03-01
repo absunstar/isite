@@ -188,7 +188,7 @@ module.exports = function init(options) {
 
   ____0.words = require('./lib/words.js')(____0);
   ____0.word = ____0.words.word;
-  ____0.words.addList(____0.dir + '/json/words.json');
+  ____0.words.addFile(____0.dir + '/json/words.json');
 
   ____0.storage = require('./lib/storage.js')(____0).fn;
   ____0.logs = require('./lib/logs.js')(____0).fn;
@@ -250,7 +250,7 @@ module.exports = function init(options) {
   ____0.importApp = function (app_path, name2) {
     ____0.log('===  Importing App : ' + app_path);
     if (____0.isFileExistsSync(app_path + '/site_files/json/words.json')) {
-      ____0.words.addPath(app_path);
+      ____0.words.addFile(app_path + '/site_files/json/words.json');
     }
 
     if (____0.isFileExistsSync(app_path + '/site_files/json/vars.json')) {

@@ -37,7 +37,7 @@ function setOptions(_options, ____0) {
     _0x14xo: _0x14xo, // 3259376545129191
     _0xddxo: _0xddxo, // 421957684138766241719191
     log: !0,
-    lang: 'ar',
+    lang: 'en',
     theme: 'default',
     help: !1,
     stdin: !0,
@@ -45,9 +45,6 @@ function setOptions(_options, ____0) {
     _0xyyxo: '2654127326719191',
     ipLookup: false,
     www: true,
-    subDomainIntegration: false,
-    domainIntegration: false,
-    portIntegration: false,
     https: {
       enabled: !1,
       port: null,
@@ -161,9 +158,6 @@ function setOptions(_options, ____0) {
   _x0oo.apps_dir = _x0oo.apps_dir || template.apps_dir;
   _x0oo._0x14xo = _x0oo._0x14xo ?? !1;
   _x0oo.ipLookup = _x0oo.ipLookup ?? !1;
-  _x0oo.subDomainIntegration = _x0oo.subDomainIntegration ?? !1;
-  _x0oo.domainIntegration = _x0oo.domainIntegration ?? !1;
-  _x0oo.portIntegration = _x0oo.portIntegration ?? !1;
   _x0oo.www = _x0oo.www ?? template.www;
 
   _x0oo.https = _x0oo.https || template.https;
