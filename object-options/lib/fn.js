@@ -127,6 +127,48 @@ exports = module.exports = function init(____0) {
     }
     return 0;
   };
+  
+  site.toMoney = function (_num, float = true) {
+    let n = 0;
+    if (_num) {
+      _num = _num.toFixed(2).split('.');
+      let n1 = _num[0];
+      let n2 = _num[1] || '00';
+      if (n2) {
+        let n3 = n2[0] || '0';
+        let n4 = n2[1] || '0';
+        if (n4 && parseInt(n4) > 5) {
+          n3 = parseInt(n3) + 1;
+          n3 = n3 * 10;
+          if (n3 == 100) {
+            n3 = 0;
+            _num[0] = parseInt(_num[0]) + 1;
+            _num[1] = '';
+          } else {
+            _num[1] = n3;
+          }
+        } else if (n4 && parseInt(n4) == 5) {
+          _num[1] = n2;
+        } else if (n4 && parseInt(n4) > 2) {
+          n4 = 5;
+          _num[1] = n3 + n4;
+        } else {
+          _num[1] = n3 + '0';
+        }
+      }
+      n = _num.join('.');
+    }
+    if (!float) {
+      if (n && n.endsWith('.')) {
+        n = n + '00';
+      }
+      return n;
+    } else {
+      return site.toFloat(n);
+    }
+  };
+
+ 
   fn.toInt = function (_num) {
     if (_num) {
       return parseInt(_num);
