@@ -127,8 +127,8 @@ exports = module.exports = function init(____0) {
     }
     return 0;
   };
-  
-  site.toMoney = function (_num, float = true) {
+
+  fn.toMoney = function (_num, float = true) {
     let n = 0;
     if (_num) {
       _num = _num.toFixed(2).split('.');
@@ -168,7 +168,6 @@ exports = module.exports = function init(____0) {
     }
   };
 
- 
   fn.toInt = function (_num) {
     if (_num) {
       return parseInt(_num);
@@ -511,6 +510,7 @@ exports = module.exports = function init(____0) {
   ____0.fromBase64 = fn.fromBase64;
   ____0.to123 = fn.to123;
   ____0.toBase64 = fn.toBase64;
+  ____0.toMoney = fn.toMoney;
   ____0.getContentType = fn.getContentType;
   ____0.getFileEncode = fn.getFileEncode;
   ____0.typeof = ____0.typeOf = fn.typeOf;
