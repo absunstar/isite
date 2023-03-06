@@ -164,7 +164,7 @@ exports = module.exports = function init(____0) {
       }
       return n;
     } else {
-      return site.toFloat(n);
+      return fn.toFloat(n);
     }
   };
 
