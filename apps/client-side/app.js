@@ -165,6 +165,36 @@ module.exports = function (site) {
     ],
   });
 
+  site.get({
+    name: ['/x-css/sa.css'],
+    parser: 'css2',
+    public: true,
+    compress: !0,
+    path: [
+      __dirname + '/site_files/css/normalize.css',
+      __dirname + '/site_files/css/theme.css',
+      __dirname + '/site_files/css/layout.css',
+      __dirname + '/site_files/css/modal.css',
+      __dirname + '/site_files/css/color.css',
+      __dirname + '/site_files/css/images.css',
+      __dirname + '/site_files/css/dropdown.css',
+      __dirname + '/site_files/css/fonts.css',
+      __dirname + '/site_files/css/effect.css',
+      __dirname + '/site_files/css/scrollbar.css',
+      __dirname + '/site_files/css/table.css',
+      __dirname + '/site_files/css/treeview.css',
+      __dirname + '/site_files/css/tabs.css',
+      __dirname + '/site_files/css/help.css',
+      __dirname + '/site_files/css/print.css',
+      __dirname + '/site_files/css/tableExport.css',
+      __dirname + '/site_files/css/theme_paper.css',
+      __dirname + '/site_files/css/bootstrap5.css',
+      __dirname + '/site_files/css/bootstrap5-addon.css',
+      __dirname + '/site_files/css/font-awesome.css',
+      __dirname + '/site_files/css/font-saudi.css',
+    ],
+  });
+
   site.post({ name: '/x-api/upload/image', public: true }, (req, res) => {
     site.createDir(site.options.upload_dir + '/' + req.headers['folder'], () => {
       site.createDir(site.options.upload_dir + '/' + req.headers['folder'] + '/images', () => {

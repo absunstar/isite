@@ -1,14 +1,18 @@
-@font-face {
-    font-family: 'Arabic';
-    font-style: normal;
-    font-weight: normal;
-    src: url(/x-fonts/Cairo-Regular.ttf);
-    font-display: swap;
+:root {
+  --font-family: Arabic, English, sans-serif, Tahoma, serif;
+  --bs-body-font-family: Arabic, English, sans-serif, Tahoma, serif;
 }
 @font-face {
-    font-family: 'Arabic';
-    font-style: normal;
-    font-weight: bold;
-    src: url(/x-fonts/Cairo-Bold.ttf);
-    font-display: swap;
+  font-family: 'Arabic';
+  font-style: normal;
+  font-weight: normal;
+  src: url(/x-fonts/Cairo-Regular.ttf);
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Arabic';
+  font-style: normal;
+  font-weight: bold;
+  src: url(/x-fonts/Cairo-Bold.ttf);
+  font-display: swap;
 }
