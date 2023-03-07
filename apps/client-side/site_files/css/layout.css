@@ -53,7 +53,8 @@ h3 {
   visibility: collapse;
 }
 
-.hidden {
+.hidden,
+.hidden:is([class^='col']) {
   display: none !important;
 }
 
