@@ -250,4 +250,8 @@
     width: 95vw;
     margin: 2vw !important;
   }
+  .modal-content{
+    width: 96vw;
+    margin: 1vw !important;
+  }
 }
