@@ -54,9 +54,11 @@
     margin: 10px;
     padding: 3px;
     cursor: pointer;
-    border-right: 1px dashed var(--treeview-border-color);
+    border-right: 1px solid var(--treeview-border-color);
 }
-
+.ar .treenode li {
+    border-left: 1px solid var(--treeview-border-color);
+}
 
 .treenode li span {
     font-size: 14px;
