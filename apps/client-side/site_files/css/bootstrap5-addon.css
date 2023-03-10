@@ -116,7 +116,9 @@ i-file {
 i-file button {
   max-width: 100px;
 }
-
+i-upload{
+  display: inline-block;
+}
 i-date .fa {
   font-size: 24px;
   vertical-align: middle;
