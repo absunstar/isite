@@ -63,6 +63,81 @@ app.directive('iTextarea', function () {
     template: `/*##client-side/directive/i-textarea.html*/`,
   };
 });
+app.directive('iContent', function ($timeout, $interval) {
+  return {
+    restrict: 'E',
+    scope: {
+      v: '@',
+      label: '@',
+      id2: '@',
+      disabled: '@',
+      rows: '@',
+      ngModel: '=',
+      ngChange: '&',
+    },
+    link: function ($scope, element, attrs, ctrl) {
+      if (typeof attrs.disabled !== 'undefined') {
+        attrs.disabled = 'disabled';
+      } else {
+        attrs.disabled = '';
+      }
+      $scope.rows = $scope.rows || 10;
+      $scope.id2 = $scope.id2 || 'textarea_' + Math.random().toString().replace('0.', '');
+      $(element)
+        .find('textarea')
+        .focus(() => {
+          $('.popup').hide();
+        });
+      $timeout(() => {
+        window['content_' + attrs.id] = WebShareEditor.create($scope.id2, {
+          toolbarItem: [
+            ['undo', 'redo'],
+            ['font', 'fontSize', 'formatBlock'],
+            ['bold', 'underline', 'italic', 'strike', 'subscript', 'superscript'],
+            ['removeFormat'],
+            ['fontColor', 'hiliteColor'],
+            ['outdent', 'indent'],
+            ['align', 'horizontalRule', 'list', 'table'],
+            ['link', 'image', 'video'],
+            /* ['fullScreen', 'showBlocks', 'codeView'],
+             ['preview', 'print'],
+             ['save', 'template'], */
+          ],
+          width: '100%',
+          minHeight: '300px',
+        });
+        if ($scope.ngModel) {
+          window['content_' + attrs.id].setContents($scope.ngModel);
+        }
+        $interval(() => {
+          $scope.ngModel2 = window['content_' + attrs.id].getContents();
+          if ($scope.ngModel !== $scope.ngModel2) {
+            $scope.ngModel = $scope.ngModel2;
+            $scope.changed();
+          }
+        }, 1000);
+      }, 500);
+
+      $scope.changed = function () {
+        $timeout(() => {
+          if ($scope.ngChange) {
+            $scope.ngChange();
+          }
+        }, 100);
+      };
+
+      $scope.$watch('ngModel', (ngModel) => {
+        if (ngModel && window['content_' + attrs.id]) {
+          if ($scope.ngModel !== $scope.ngModel2) {
+            $scope.ngModel = $scope.ngModel2;
+            window['content_' + attrs.id].setContents($scope.ngModel);
+          }
+        }
+      });
+    },
+    template: `/*##client-side/directive/i-content.html*/`,
+  };
+});
 
 app.directive('iCheckbox', function ($timeout) {
   return {
@@ -146,10 +221,10 @@ app.directive('iButton', function () {
       } else if ($scope.type.like('unapprove')) {
         $scope.fa = 'fas fa-eject';
         $scope.class = 'btn-danger';
-      }  else if ($scope.type.like('approve')) {
+      } else if ($scope.type.like('approve')) {
         $scope.fa = 'fas fa-check-double';
         $scope.class = 'btn-primary';
-      }else if ($scope.type.like('*view*') || $scope.type.like('*details*')) {
+      } else if ($scope.type.like('*view*') || $scope.type.like('*details*')) {
         $scope.fa = 'fas fa-eye';
         $scope.class = 'btn-info';
       } else if ($scope.type.like('*delete*') || $scope.type.like('*remove*')) {
@@ -238,7 +313,6 @@ app.directive('iList', [
           $scope.fa_add = 'fa-plus';
         }
 
-     
         if ($scope.ngSearch) {
           $scope.showSearch = !0;
         }
@@ -344,16 +418,15 @@ app.directive('iList', [
           }
         });
 
-        $scope.searchElement.on('input' , ()=>{
-              $timeout(() => {
+        $scope.searchElement.on('input', () => {
+          $timeout(() => {
             if ($scope.ngGet) {
               $scope.ngGet({ $search: $scope.searchElement.val() });
             } else if ($scope.ngSearch) {
               $scope.$filter = $scope.searchElement.val();
             }
           }, 100);
-        })
-
+        });
 
         $scope.updateModel = function (item) {
           $scope.ngModel = $scope.getNgValue(item, $scope.ngValue);

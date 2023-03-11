@@ -69,8 +69,11 @@ module.exports = function (site) {
       __dirname + '/site_files/js/last.js',
       __dirname + '/site_files/js/bootstrap5.js',
       __dirname + '/site_files/js/bootstrap-5-addon.js',
+      __dirname + '/site_files/js/WebShareEditor.js',
     ],
   });
+
+  
   site.get({
     name: '/x-css',
     path: __dirname + '/site_files/css',
@@ -134,7 +137,7 @@ module.exports = function (site) {
       __dirname + '/site_files/css/font-awesome.css',
     ],
   });
-
+  
   site.get({
     name: ['/x-css/bootstrap-5-support.css', '/x-css/bootstrap-support.css'],
     parser: 'css2',
@@ -162,9 +165,10 @@ module.exports = function (site) {
       __dirname + '/site_files/css/bootstrap5.css',
       __dirname + '/site_files/css/bootstrap5-addon.css',
       __dirname + '/site_files/css/font-awesome.css',
+      __dirname + '/site_files/css/WebShareEditor.css',
     ],
   });
-
+  
   site.get({
     name: ['/x-css/sa.css'],
     parser: 'css2',
@@ -192,6 +196,7 @@ module.exports = function (site) {
       __dirname + '/site_files/css/bootstrap5-addon.css',
       __dirname + '/site_files/css/font-awesome.css',
       __dirname + '/site_files/css/font-saudi.css',
+      __dirname + '/site_files/css/WebShareEditor.css',
     ],
   });
 
