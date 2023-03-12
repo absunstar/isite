@@ -99,9 +99,9 @@ app.directive('iContent', function ($timeout, $interval) {
             ['outdent', 'indent'],
             ['align', 'horizontalRule', 'list', 'table'],
             ['link', 'image', 'video'],
+            ['preview', 'print'],
             /* ['fullScreen', 'showBlocks', 'codeView'],
-             ['preview', 'print'],
-             ['save', 'template'], */
+            ['save', 'template'],*/
           ],
           width: '100%',
           minHeight: '300px',
@@ -420,9 +420,9 @@ app.directive('iList', [
 
         $scope.searchElement.on('input', () => {
           $timeout(() => {
-            if ($scope.ngGet) {
+            if (attrs.ngGet) {
               $scope.ngGet({ $search: $scope.searchElement.val() });
-            } else if ($scope.ngSearch) {
+            } else if (attrs.ngSearch) {
               $scope.$filter = $scope.searchElement.val();
             }
           }, 100);

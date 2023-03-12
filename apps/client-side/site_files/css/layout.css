@@ -68,15 +68,15 @@ h3 {
 
 .container {
   display: block !important;
-  width: 100% !important;
+  width: 98% !important;
   margin: 0 auto !important;
-  padding: 10px !important;
+  padding: 1% !important;
 }
 
 .row,
 .row10 {
   display: inline-block;
-  width: 100% !important;
+  width: 96% !important;
   padding: 0px !important;
   margin: 0px !important;
 }
