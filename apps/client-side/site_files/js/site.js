@@ -1247,7 +1247,7 @@
       console.error('qrcode need {selector , text}');
       return;
     }
-    return JsBarcode(options.selector, options.selector, options.options);
+    return JsBarcode(options.selector, options.text, options.options);
   };
   site.qrcode = function (options) {
     if (!options || !options.selector || !options.text) {
@@ -1272,5 +1272,13 @@
       });
     }
   };
+
+  site.export = function (table, type = 'xlsx') {
+    var data = typeof table === 'string' ? document.querySelector(table) : table;
+    var excelFile = XLSX.utils.table_to_book(data, { sheet: 'sheet1' });
+    XLSX.write(excelFile, { bookType: type, bookSST: true, type: 'base64' });
+    XLSX.writeFile(excelFile, (data.id || data.tagName) + '.' + type);
+  };
+
   window.site = site;
 })(window, document, 'undefined', jQuery);

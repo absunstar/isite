@@ -73,6 +73,31 @@ module.exports = function (site) {
     ],
   });
 
+  site.get({
+    name: ['/x-js/sa.js'],
+    public: true,
+    parser: 'js',
+    path: [
+      __dirname + '/site_files/js/first.js',
+      __dirname + '/site_files/js/jquery.js',
+      __dirname + '/site_files/js/mustache.js',
+      __dirname + '/site_files/js/base64.js',
+      __dirname + '/site_files/js/site.js',
+      __dirname + '/site_files/js/dom-to-image.js',
+      __dirname + '/site_files/js/barcode.js',
+      __dirname + '/site_files/js/qrcode.js',
+      __dirname + '/site_files/js/angular.min.js',
+      __dirname + '/site_files/js/app.js',
+      __dirname + '/site_files/js/directive-core.js',
+      __dirname + '/site_files/js/bootstrap-5-directive.js',
+      __dirname + '/site_files/js/last.js',
+      __dirname + '/site_files/js/bootstrap5.js',
+      __dirname + '/site_files/js/bootstrap-5-addon.js',
+      __dirname + '/site_files/js/WebShareEditor.js',
+      __dirname + '/site_files/js/xlsx.js',
+    ],
+  });
+
   
   site.get({
     name: '/x-css',

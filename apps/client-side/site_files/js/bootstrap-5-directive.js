@@ -248,6 +248,12 @@ app.directive('iButton', function () {
       } else if ($scope.type.like('*logout*') || $scope.type.like('*signout*')) {
         $scope.fa = 'fas fa-sign-out-alt';
         $scope.class = 'btn-light';
+      } else if ($scope.type.like('*push*')) {
+        $scope.fa = 'fas fa-long-arrow-alt-down';
+        $scope.class = 'btn-primary';
+      } else if ($scope.type.like('*cancel*')) {
+        $scope.fa = 'fas fa-minus-circle';
+        $scope.class = 'btn-danger';
       }
       if ($scope.type.like('*default*')) {
         $scope.class = '';
@@ -323,7 +329,9 @@ app.directive('iList', [
         let input = $(element).find('input.dropdown-text');
         $(element).hover(
           () => {
-            $scope.popupElement.css('display', 'block');
+            if (attrs.disabled !== 'disabled') {
+              $scope.popupElement.css('display', 'block');
+            }
           },
           () => {
             $scope.popupElement.css('display', 'none');
