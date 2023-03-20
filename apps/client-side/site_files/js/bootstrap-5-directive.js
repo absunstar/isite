@@ -296,6 +296,7 @@ app.directive('iList', [
         ngGet: '&',
         ngAdd: '&',
         items: '=',
+        activeValue: '=',
       },
       link: function ($scope, element, attrs, ctrl) {
         $scope.primary = $scope.primary || 'id';
@@ -410,6 +411,10 @@ app.directive('iList', [
               }
             });
           }
+
+        
+            console.log('activeValue : ', $scope.activeValue);
+          
         });
 
         $scope.$watch('ngModel', (ngModel) => {
@@ -591,6 +596,7 @@ app.directive('iDate', function () {
       $scope.dayTitle = 'Day';
       $scope.monthTitle = 'Month';
       $scope.yearTitle = 'Year';
+     
 
       $scope.lang = site.session ? site.session.lang : 'en';
       if ($scope.lang === 'ar') {
@@ -635,11 +641,13 @@ app.directive('iDate', function () {
           $scope.model.selectedDay = $scope.days.find((d) => d.id == ngModel.getDate());
           $scope.model.selectedMonth = $scope.monthes.find((m) => m.id == ngModel.getMonth());
           $scope.model.selectedYear = $scope.years.find((y) => y.id == ngModel.getFullYear());
+          $scope.model.$selectedYear = 2023;
         } else {
           $scope.model = $scope.model || {};
           $scope.model.selectedDay = null;
           $scope.model.selectedMonth = null;
           $scope.model.selectedYear = null;
+          $scope.model.activeYear = 2023;
         }
       });
 

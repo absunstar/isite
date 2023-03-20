@@ -21,6 +21,12 @@
     border: 1px solid var(--theme-color);
 }
 
+.dropdown .dropdown-search{
+    padding: 5%;
+    position: sticky;
+    top: 0;
+    background: #ffffff;
+}
 /* Links inside the dropdown */
 .dropdown-content p {
     color: black;

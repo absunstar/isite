@@ -80,10 +80,10 @@ i-image.img128 {
   padding: 3px !important;
 }
 i-image.img128 img {
-  width: 122px !important;
-  height: 122px !important;
-  min-width: 122px !important;
-  min-height: 122px !important;
+  width: 120px !important;
+  height: 120px !important;
+  min-width: 120px !important;
+  min-height: 120px !important;
 }
 
 i-image.img256 {
@@ -94,10 +94,10 @@ i-image.img256 {
   padding: 3px !important;
 }
 i-image.img256 img {
-  width: 250px !important;
-  height: 250px !important;
-  min-width: 250px !important;
-  min-height: 250px !important;
+  width: 245px !important;
+  height: 245px !important;
+  min-width: 245px !important;
+  min-height: 245px !important;
 }
 
 i-image.hover img:hover {

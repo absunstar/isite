@@ -81,7 +81,7 @@ i-checkbox {
   padding-left: 20px !important;
   padding-right: 20px !important;
 }
-i-checkbox label{
+i-checkbox label {
   cursor: pointer;
   max-width: 100%;
   white-space: pre-line;
@@ -99,6 +99,7 @@ i-button {
 }
 i-button button {
   margin: 5px;
+  padding: 7px 9px;
 }
 i-button.default button {
   margin: 3px;
@@ -110,13 +111,14 @@ i-file {
   display: block;
   padding: 10px !important;
   border: 1px dashed var(--theme-color);
-  margin: 10px;
+  margin: 1% !important;
   height: fit-content;
+  width: 98% !important;
 }
 i-file button {
   max-width: 100px;
 }
-i-upload{
+i-upload {
   display: inline-block;
 }
 i-date .fa {
