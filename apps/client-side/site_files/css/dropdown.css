@@ -3,7 +3,6 @@
     position: relative;
     display: inline-block;
     width: 100%;
-    z-index: 99999;
 }
 
 /* Dropdown Content (Hidden by Default) */
