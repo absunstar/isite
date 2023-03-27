@@ -412,9 +412,7 @@ app.directive('iList', [
             });
           }
 
-        
-            console.log('activeValue : ', $scope.activeValue);
-          
+                
         });
 
         $scope.$watch('ngModel', (ngModel) => {
