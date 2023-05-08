@@ -106,7 +106,7 @@ app.directive('iContent', function ($timeout, $interval) {
           width: '100%',
           minHeight: '300px',
         });
-        if ($scope.ngModel) {
+        if ($scope.ngModel && window['content_' + attrs.id]) {
           window['content_' + attrs.id].setContents($scope.ngModel);
         }
         $interval(() => {
@@ -411,8 +411,6 @@ app.directive('iList', [
               }
             });
           }
-
-                
         });
 
         $scope.$watch('ngModel', (ngModel) => {
@@ -594,7 +592,6 @@ app.directive('iDate', function () {
       $scope.dayTitle = 'Day';
       $scope.monthTitle = 'Month';
       $scope.yearTitle = 'Year';
-     
 
       $scope.lang = site.session ? site.session.lang : 'en';
       if ($scope.lang === 'ar') {
@@ -654,7 +651,8 @@ app.directive('iDate', function () {
       };
       $scope.updateDate = function (date) {
         if ($scope.model.selectedDay && $scope.model.selectedMonth && $scope.model.selectedYear) {
-          $scope.ngModel = new Date($scope.model.selectedYear.id, $scope.model.selectedMonth.id, $scope.model.selectedDay.id, 0, 0, 0);
+          let now = new Date();
+          $scope.ngModel = new Date($scope.model.selectedYear.id, $scope.model.selectedMonth.id, $scope.model.selectedDay.id, now.getHours(), now.getMinutes(), now.getSeconds());
           $scope.editOnly = false;
           if ($scope.ngChange) {
             $scope.ngChange();
