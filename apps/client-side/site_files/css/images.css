@@ -3,10 +3,14 @@
   height: 300px;
   border-radius: 10px;
 }
-.logo {
+i-image.logo {
   width: 48px !important;
   height: 48px !important;
   border-radius: 5px;
+}
+ img.logo , .logo img {
+  width: 44px !important;
+  height: 44px !important;
 }
 
 i-image {
