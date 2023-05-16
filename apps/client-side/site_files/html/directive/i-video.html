@@ -1,8 +1,15 @@
 <div class="text-center pointer">
   <input class="hidden" type="file" name="fileToUpload" accept="{{accept}}" />
-  <video controls>Your browser does not support the video element.</video>
-  <i-button type="default" fa="fas fa-upload"></i-button>
-  <div class="progress row">
-    <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow="{{value}}" aria-valuemin="0" aria-valuemax="100"></div>
+  <div class="center">
+    <div class="row">
+      <video controls>Your browser does not support the video element.</video>
+    </div>
+    <i-button type="upload" ng-click="upload()"></i-button>
+    <i-button type="delete" ng-click="delete()"></i-button>
+  </div>
+  <div class="row padding">
+    <div class="progress row">
+      <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow="{{value}}" aria-valuemin="0" aria-valuemax="100"></div>
+    </div>
   </div>
 </div>

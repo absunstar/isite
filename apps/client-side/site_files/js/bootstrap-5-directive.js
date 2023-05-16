@@ -88,7 +88,13 @@ app.directive('iContent', function ($timeout, $interval) {
         .focus(() => {
           $('.popup').hide();
         });
-      $timeout(() => {
+      $scope.handelContentElement = function () {
+        if (!document.querySelector('#' + $scope.id2)) {
+          $timeout(() => {
+            $scope.handelContentElement();
+          }, 1000);
+          return false;
+        }
         window['content_' + attrs.id] = WebShareEditor.create($scope.id2, {
           toolbarItem: [
             ['undo', 'redo'],
@@ -110,13 +116,17 @@ app.directive('iContent', function ($timeout, $interval) {
           window['content_' + attrs.id].setContents($scope.ngModel);
         }
         $interval(() => {
-          $scope.ngModel2 = window['content_' + attrs.id].getContents();
-          if ($scope.ngModel !== $scope.ngModel2) {
-            $scope.ngModel = $scope.ngModel2;
-            $scope.changed();
+          if (window['content_' + attrs.id]) {
+            $scope.ngModel2 = window['content_' + attrs.id].getContents();
+            if ($scope.ngModel !== $scope.ngModel2) {
+              $scope.ngModel = $scope.ngModel2;
+              $scope.changed();
+            }
           }
         }, 1000);
-      }, 500);
+      };
+
+      $scope.handelContentElement();
 
       $scope.changed = function () {
         $timeout(() => {
@@ -128,7 +138,7 @@ app.directive('iContent', function ($timeout, $interval) {
 
       $scope.$watch('ngModel', (ngModel) => {
         if (ngModel && window['content_' + attrs.id]) {
-          if ($scope.ngModel !== $scope.ngModel2) {
+          if ($scope.ngModel2 && $scope.ngModel !== $scope.ngModel2) {
             $scope.ngModel = $scope.ngModel2;
             window['content_' + attrs.id].setContents($scope.ngModel);
           }
@@ -251,13 +261,13 @@ app.directive('iButton', function () {
       } else if ($scope.type.like('*push*')) {
         $scope.fa = 'fas fa-folder-plus';
         $scope.class = 'btn-primary';
-      }else if ($scope.type.like('*cancel*')) {
+      } else if ($scope.type.like('*cancel*')) {
         $scope.fa = 'fas fa-minus-circle';
         $scope.class = 'btn-danger';
       } else if ($scope.type.like('*upload*')) {
         $scope.fa = 'fas fa-upload';
         $scope.class = 'btn-primary';
-      }  else if ($scope.type.like('*up*')) {
+      } else if ($scope.type.like('*up*')) {
         $scope.fa = 'fas fa-long-arrow-alt-up';
         $scope.class = 'btn-light';
       } else if ($scope.type.like('*down*')) {
@@ -1003,16 +1013,18 @@ app.directive('iAudio', [
 
         let input = $(element).find('input')[0];
         let audio = $(element).find('audio')[0];
-        let audioSource = $(element).find('audio source')[0];
-        let btn = $(element).find('button')[0];
         let progress = $(element).find('.progress')[0];
         $(progress).hide();
 
-        if (!$scope.viewOnly) {
-          btn.addEventListener('click', function () {
+        $scope.upload = function () {
+          if (!$scope.viewOnly) {
             input.click();
-          });
-        }
+          }
+        };
+        $scope.delete = function () {
+          $scope.ngModel = null;
+          audio.setAttribute('src', null);
+        };
 
         input.addEventListener('change', function () {
           isite.uploadAudio(
@@ -1045,8 +1057,8 @@ app.directive('iAudio', [
 
         $scope.$watch('ngModel', (ngModel) => {
           if (ngModel) {
-            audioSource.setAttribute('src', ngModel.url);
-            audioSource.setAttribute('type', 'audio/mpeg');
+            audio.setAttribute('src', ngModel.url);
+            audio.setAttribute('type', 'audio/mpeg');
           }
         });
       },
@@ -1078,15 +1090,19 @@ app.directive('iVideo', [
 
         let input = $(element).find('input')[0];
         let video = $(element).find('video')[0];
-        let btn = $(element).find('button')[0];
         let progress = $(element).find('.progress')[0];
         $(progress).hide();
 
-        if (!$scope.viewOnly) {
-          btn.addEventListener('click', function () {
+        $scope.upload = function () {
+          if (!$scope.viewOnly) {
             input.click();
-          });
-        }
+          }
+        };
+        $scope.delete = function () {
+          console.log('delete ...');
+          $scope.ngModel = null;
+          video.setAttribute('src', null);
+        };
 
         input.addEventListener('change', function () {
           isite.uploadVideo(
@@ -1119,18 +1135,21 @@ app.directive('iVideo', [
 
         $scope.capture = function () {
           let canvas = document.createElement('canvas');
-          canvas.width = $(video).width;
-          canvas.height = $(video).height;
+          canvas.width = video.videoWidth / 4;
+          canvas.height = video.videoHeight / 4;
           canvas.getContext('2d').drawImage(video, 0, 0, canvas.width, canvas.height);
           $scope.ngModel.imageURL = canvas.toDataURL('image/jpeg');
-          console.log(video);
-          console.log(canvas);
-          console.log($scope.ngModel.imageURL);
         };
 
-        video.onloadstart = function () {
-          $scope.capture();
-        };
+        video.addEventListener(
+          'canplay',
+          function (e) {
+            $timeout(() => {
+              $scope.capture();
+            }, 2000);
+          },
+          false
+        );
 
         $scope.$watch('ngModel', (ngModel) => {
           if (ngModel) {
