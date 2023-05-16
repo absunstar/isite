@@ -8,7 +8,8 @@ i-image.logo {
   height: 48px !important;
   border-radius: 5px;
 }
- img.logo , .logo img {
+img.logo,
+.logo img {
   width: 44px !important;
   height: 44px !important;
 }
@@ -26,6 +27,10 @@ i-image img {
   background-size: contain;
   background-position: center;
   background-repeat: no-repeat;
+}
+
+i-image i-button {
+  display: none;
 }
 
 i-image.full img {
@@ -98,12 +103,14 @@ i-image.img256 {
   padding: 3px !important;
 }
 i-image.img256 img {
-  width: 245px !important;
-  height: 245px !important;
-  min-width: 245px !important;
-  min-height: 245px !important;
+  width: 215px !important;
+  height: 215px !important;
+  min-width: 215px !important;
+  min-height: 215px !important;
 }
-
+i-image.img256 i-button {
+  display: inline-block;
+}
 i-image.hover img:hover {
   transform: scale(1.1);
 }

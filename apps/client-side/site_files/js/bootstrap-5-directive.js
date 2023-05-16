@@ -944,10 +944,14 @@ app.directive('iImage', [
         let progress = $(element).find('.progress')[0];
         $(progress).hide();
 
-        if (!$scope.viewOnly) {
-          img.addEventListener('click', function () {
+        $scope.upload = function () {
+          if (!$scope.viewOnly) {
             input.click();
-          });
+          }
+        };
+        $scope.delete = function(){
+          img.src = null;
+          $scope.ngModel = null;
         }
 
         input.addEventListener('change', function () {

@@ -62,9 +62,12 @@ fieldset legend {
   font-weight: var(--legend-font-weight);
   background: var(--fieldset-background);
   border: var(--legend-border);
-  float: none;
+  float: left;
   width: auto;
   padding: 5px;
+}
+.ar fieldset legend{
+  float: right;
 }
 legend::after {
   content: ' : ';
