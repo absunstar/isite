@@ -193,3 +193,20 @@ i-datetime.is-invalid .row {
 .v-tabs .nav-link.active::before {
   opacity: 1;
 }
+
+i-audio {
+  background: #fff;
+  border: 1px solid #ddd;
+  display: block;
+  padding: 5px;
+}
+i-audio audio {
+  vertical-align: bottom;
+}
+i-audio .btn {
+  vertical-align: top;
+}
+
+i-video video {
+  max-height: 50vh;
+}

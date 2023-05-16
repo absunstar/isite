@@ -249,11 +249,20 @@ app.directive('iButton', function () {
         $scope.fa = 'fas fa-sign-out-alt';
         $scope.class = 'btn-light';
       } else if ($scope.type.like('*push*')) {
-        $scope.fa = 'fas fa-long-arrow-alt-down';
+        $scope.fa = 'fas fa-folder-plus';
         $scope.class = 'btn-primary';
-      } else if ($scope.type.like('*cancel*')) {
+      }else if ($scope.type.like('*cancel*')) {
         $scope.fa = 'fas fa-minus-circle';
         $scope.class = 'btn-danger';
+      } else if ($scope.type.like('*upload*')) {
+        $scope.fa = 'fas fa-upload';
+        $scope.class = 'btn-primary';
+      }  else if ($scope.type.like('*up*')) {
+        $scope.fa = 'fas fa-long-arrow-alt-up';
+        $scope.class = 'btn-light';
+      } else if ($scope.type.like('*down*')) {
+        $scope.fa = 'fas fa-long-arrow-alt-down';
+        $scope.class = 'btn-light';
       }
       if ($scope.type.like('*default*')) {
         $scope.class = '';
@@ -942,6 +951,7 @@ app.directive('iImage', [
                 $(progress).show();
                 $scope.value = (e.loaded / e.total) * 100;
                 $scope.max = e.total;
+                $(progress).css('width', $scope.value);
                 if ($scope.value === 100) {
                   $(progress).hide();
                 }
@@ -969,6 +979,172 @@ app.directive('iImage', [
     };
   },
 ]);
+
+app.directive('iAudio', [
+  '$interval',
+  'isite',
+  '$timeout',
+  function ($interval, isite, $timeout) {
+    return {
+      restrict: 'E',
+      required: 'ngModel',
+      scope: {
+        folder: '@',
+        view: '@',
+        accept: '@',
+        ngModel: '=',
+        ngClick: '&',
+        ngChange: '&',
+      },
+      link: function ($scope, element, attrs, ctrl) {
+        $scope.folder = $scope.folder || 'default';
+        $scope.accept = $scope.accept ? $scope.accept : '.mp3';
+        $scope.viewOnly = $scope.view === undefined ? false : true;
+
+        let input = $(element).find('input')[0];
+        let audio = $(element).find('audio')[0];
+        let audioSource = $(element).find('audio source')[0];
+        let btn = $(element).find('button')[0];
+        let progress = $(element).find('.progress')[0];
+        $(progress).hide();
+
+        if (!$scope.viewOnly) {
+          btn.addEventListener('click', function () {
+            input.click();
+          });
+        }
+
+        input.addEventListener('change', function () {
+          isite.uploadAudio(
+            this.files,
+            {
+              folder: $scope.folder,
+            },
+            (err, audio, e) => {
+              if (e) {
+                $(progress).show();
+                $scope.value = (e.loaded / e.total) * 100;
+                $scope.max = e.total;
+                $(progress).css('width', $scope.value);
+                if ($scope.value === 100) {
+                  $(progress).hide();
+                }
+              }
+
+              if (audio) {
+                $scope.ngModel = audio;
+                if ($scope.ngChange) {
+                  $timeout(() => {
+                    $scope.ngChange();
+                  }, 200);
+                }
+              }
+            }
+          );
+        });
+
+        $scope.$watch('ngModel', (ngModel) => {
+          if (ngModel) {
+            audioSource.setAttribute('src', ngModel.url);
+            audioSource.setAttribute('type', 'audio/mpeg');
+          }
+        });
+      },
+      template: `/*##client-side/directive/i-audio.html*/`,
+    };
+  },
+]);
+
+app.directive('iVideo', [
+  '$interval',
+  'isite',
+  '$timeout',
+  function ($interval, isite, $timeout) {
+    return {
+      restrict: 'E',
+      required: 'ngModel',
+      scope: {
+        folder: '@',
+        view: '@',
+        accept: '@',
+        ngModel: '=',
+        ngClick: '&',
+        ngChange: '&',
+      },
+      link: function ($scope, element, attrs, ctrl) {
+        $scope.folder = $scope.folder || 'default';
+        $scope.accept = $scope.accept ? $scope.accept : '.mp4';
+        $scope.viewOnly = $scope.view === undefined ? false : true;
+
+        let input = $(element).find('input')[0];
+        let video = $(element).find('video')[0];
+        let btn = $(element).find('button')[0];
+        let progress = $(element).find('.progress')[0];
+        $(progress).hide();
+
+        if (!$scope.viewOnly) {
+          btn.addEventListener('click', function () {
+            input.click();
+          });
+        }
+
+        input.addEventListener('change', function () {
+          isite.uploadVideo(
+            this.files,
+            {
+              folder: $scope.folder,
+            },
+            (err, video, e) => {
+              if (e) {
+                $(progress).show();
+                $scope.value = (e.loaded / e.total) * 100;
+                $scope.max = e.total;
+                $(progress).css('width', $scope.value);
+                if ($scope.value === 100) {
+                  $(progress).hide();
+                }
+              }
+
+              if (video) {
+                $scope.ngModel = video;
+                if ($scope.ngChange) {
+                  $timeout(() => {
+                    $scope.ngChange();
+                  }, 200);
+                }
+              }
+            }
+          );
+        });
+
+        $scope.capture = function () {
+          let canvas = document.createElement('canvas');
+          canvas.width = $(video).width;
+          canvas.height = $(video).height;
+          canvas.getContext('2d').drawImage(video, 0, 0, canvas.width, canvas.height);
+          $scope.ngModel.imageURL = canvas.toDataURL('image/jpeg');
+          console.log(video);
+          console.log(canvas);
+          console.log($scope.ngModel.imageURL);
+        };
+
+        video.onloadstart = function () {
+          $scope.capture();
+        };
+
+        $scope.$watch('ngModel', (ngModel) => {
+          if (ngModel) {
+            video.setAttribute('src', ngModel.url);
+            video.setAttribute('type', 'video/mp4');
+            video.load();
+          }
+        });
+      },
+      template: `/*##client-side/directive/i-video.html*/`,
+    };
+  },
+]);
+
 app.directive('iUpload', [
   '$interval',
   'isite',

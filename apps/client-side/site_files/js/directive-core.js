@@ -96,6 +96,80 @@ app.service('isite', [
         );
     };
 
+    this.uploadAudio = function (files, options, callback) {
+      options = Object.assign(
+        {
+          category: 'default',
+        },
+        options
+      );
+      callback = callback || function () {};
+
+      var fd = new FormData();
+      fd.append('fileToUpload', files[0]);
+      $http
+        .post('/x-api/upload/audio', fd, {
+          withCredentials: !0,
+          headers: {
+            'Content-Type': undefined,
+            folder: options.folder,
+          },
+          uploadEventHandlers: {
+            progress: function (e) {
+              callback(null, null, e);
+            },
+          },
+          transformRequest: angular.identity,
+        })
+        .then(
+          function (res) {
+            if (res.data && res.data.done) {
+              callback(null, res.data.audio);
+            }
+          },
+          function (error) {
+            callback(error, null, null);
+          }
+        );
+    };
+
+    this.uploadVideo = function (files, options, callback) {
+      options = Object.assign(
+        {
+          category: 'default',
+        },
+        options
+      );
+      callback = callback || function () {};
+
+      var fd = new FormData();
+      fd.append('fileToUpload', files[0]);
+      $http
+        .post('/x-api/upload/video', fd, {
+          withCredentials: !0,
+          headers: {
+            'Content-Type': undefined,
+            folder: options.folder,
+          },
+          uploadEventHandlers: {
+            progress: function (e) {
+              callback(null, null, e);
+            },
+          },
+          transformRequest: angular.identity,
+        })
+        .then(
+          function (res) {
+            if (res.data && res.data.done) {
+              callback(null, res.data.video);
+            }
+          },
+          function (error) {
+            callback(error, null, null);
+          }
+        );
+    };
+
     this.uploadFile = function (files, options, callback) {
       options = Object.assign(
         {

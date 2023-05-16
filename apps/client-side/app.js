@@ -262,6 +262,82 @@ module.exports = function (site) {
     res.download(site.options.upload_dir + '/' + req.params.category + '/images/' + req.params.name);
   });
 
+  site.post({ name: '/x-api/upload/audio', public: true }, (req, res) => {
+    site.createDir(site.options.upload_dir + '/' + req.headers['folder'], () => {
+      site.createDir(site.options.upload_dir + '/' + req.headers['folder'] + '/audios', () => {
+        let response = {
+          audio: {},
+          done: !0,
+        };
+        let file = req.files.fileToUpload;
+        if (file) {
+          let newName = 'audio_' + new Date().getTime().toString() + Math.random().toString() + site.path.extname(file.originalFilename);
+          let newpath = site.path.resolve(site.options.upload_dir + '/' + req.headers['folder'] + '/audios/' + newName);
+          site.mv(file.filepath, newpath, function (err) {
+            if (err) {
+              response.error = err;
+              response.done = !1;
+            } else {
+              response.audio.name = file.originalFilename;
+              response.audio.path = newpath;
+              response.audio.url = '/x-api/audio/' + req.headers['folder'] + '/' + newName;
+              response.audio.size = file.size;
+            }
+            res.json(response);
+          });
+        } else {
+          response.error = 'no file';
+          response.done = !1;
+          res.json(response);
+        }
+      });
+    });
+  });
+
+  site.get({ name: '/x-api/audio/:category/:name', public: true }, (req, res) => {
+    res.set('Cache-Control', 'public, max-age=2592000');
+    res.download(site.options.upload_dir + '/' + req.params.category + '/audios/' + req.params.name);
+  });
+
+
+  site.post({ name: '/x-api/upload/video', public: true }, (req, res) => {
+    site.createDir(site.options.upload_dir + '/' + req.headers['folder'], () => {
+      site.createDir(site.options.upload_dir + '/' + req.headers['folder'] + '/videos', () => {
+        let response = {
+          video: {},
+          done: !0,
+        };
+        let file = req.files.fileToUpload;
+        if (file) {
+          let newName = 'video_' + new Date().getTime().toString() + Math.random().toString() + site.path.extname(file.originalFilename);
+          let newpath = site.path.resolve(site.options.upload_dir + '/' + req.headers['folder'] + '/videos/' + newName);
+          site.mv(file.filepath, newpath, function (err) {
+            if (err) {
+              response.error = err;
+              response.done = !1;
+            } else {
+              response.video.name = file.originalFilename;
+              response.video.path = newpath;
+              response.video.url = '/x-api/video/' + req.headers['folder'] + '/' + newName;
+              response.video.size = file.size;
+            }
+            res.json(response);
+          });
+        } else {
+          response.error = 'no file';
+          response.done = !1;
+          res.json(response);
+        }
+      });
+    });
+  });
+
+  site.get({ name: '/x-api/video/:category/:name', public: true }, (req, res) => {
+    res.set('Cache-Control', 'public, max-age=2592000');
+    res.download(site.options.upload_dir + '/' + req.params.category + '/videos/' + req.params.name);
+  });
+
+
   site.post({ name: '/x-api/upload/file', public: true }, (req, res) => {
     site.createDir(site.options.upload_dir + '/' + req.headers['folder'], () => {
       site.createDir(site.options.upload_dir + '/' + req.headers['folder'] + '/files', () => {
