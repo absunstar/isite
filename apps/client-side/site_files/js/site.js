@@ -596,7 +596,7 @@
             tabContent.style.display = 'none';
           });
           tabs.querySelectorAll('.tab-link').forEach((tabLink) => {
-            if (tabLink.getAttribute('onclick').contains("'#" + tabContentSelector + "'")) {
+            if (tabLink.getAttribute('onclick').contains(tabContentSelector + "'")) {
               tabLink.classList.add('active');
             } else {
               tabLink.classList.remove('active');
