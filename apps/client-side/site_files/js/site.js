@@ -597,9 +597,9 @@
           });
           tabs.querySelectorAll('.tab-link').forEach((tabLink) => {
             if (tabLink.getAttribute('onclick').contains(tabContentSelector)) {
-              tabLink.className += ' active';
+              tabLink.classList.add('active');
             } else {
-              tabLink.className = tabLink.className.replace(' active', '');
+              tabLink.classList.remove('active');
             }
           });
 
