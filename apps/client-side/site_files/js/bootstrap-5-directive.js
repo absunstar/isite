@@ -16,7 +16,11 @@ app.directive('iControl', function () {
     link: function ($scope, element, attrs, ctrl) {
       attrs.type = attrs.type || 'text';
       $scope.id2 = $scope.id2 || 'input_' + Math.random().toString().replace('0.', '');
-
+      $scope.v = $scope.v || '';
+      $scope.requird = '';
+      if($scope.v.like('*r*')){
+        $scope.requird = '*';
+      }
       if (typeof attrs.disabled !== 'undefined') {
         attrs.disabled = 'disabled';
       } else {
@@ -323,7 +327,10 @@ app.directive('iList', [
         $scope.display2 = $scope.display2 || '';
         $scope.space = $scope.space || ' - ';
         attrs.ngValue = attrs.ngValue || '';
-
+        $scope.requird = '';
+        if($scope.v.like('*r*')){
+          $scope.requird = '*';
+        }
         $scope.searchElement = $(element).find('.dropdown .search');
         $scope.popupElement = $(element).find('.dropdown .dropdown-content');
 
@@ -949,10 +956,10 @@ app.directive('iImage', [
             input.click();
           }
         };
-        $scope.delete = function(){
+        $scope.delete = function () {
           img.src = null;
           $scope.ngModel = null;
-        }
+        };
 
         input.addEventListener('change', function () {
           isite.uploadImage(
