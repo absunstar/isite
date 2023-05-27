@@ -263,7 +263,7 @@ app.directive('iButton', function () {
         $scope.fa = 'fas fa-sign-out-alt';
         $scope.class = 'btn-light';
       } else if ($scope.type.like('*push*')) {
-        $scope.fa = 'fas fa-folder-plus';
+        $scope.fa = 'fas fa-plus-circle';
         $scope.class = 'btn-primary';
       } else if ($scope.type.like('*cancel*')) {
         $scope.fa = 'fas fa-minus-circle';
