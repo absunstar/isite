@@ -1,4 +1,9 @@
 @media all {
+  .loaded,
+  .hide {
+    visibility: collapse;
+  }
+
   .flex,
   .display-flex {
     display: flex !important;

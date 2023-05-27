@@ -49,18 +49,14 @@ h2 {
 h3 {
   font-size: clamp(14px, 1vw, 2vw);
 }
-.loaded {
-  visibility: collapse;
-}
+
 
 .hidden,
 .hidden:is([class^='col']) {
   display: none !important;
 }
 
-.hide {
-  visibility: collapse;
-}
+
 
 .mobile {
   display: none !important;
