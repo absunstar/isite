@@ -1214,9 +1214,11 @@ app.directive('iUpload', [
                   $(progress).show();
                   progress.value = e.loaded;
                   progress.max = e.total;
-                  if (e.loaded === e.total) {
-                    $scope.onUploaded();
+                  console.log(e.loaded);
+                  console.log(e.total);
+                  if (e.loaded == e.total) {
                     console.log('loaded');
+                    $scope.onUploaded();
                   }
                 }
               }
