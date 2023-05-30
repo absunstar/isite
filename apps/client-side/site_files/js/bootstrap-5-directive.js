@@ -1214,10 +1214,10 @@ app.directive('iUpload', [
                   $(progress).show();
                   progress.value = e.loaded;
                   progress.max = e.total;
-                }
-
-                if (data) {
-                  $scope.onUploaded(data);
+                  if (e.loaded === e.total) {
+                    $scope.onUploaded();
+                    console.log('loaded');
+                  }
                 }
               }
             );
