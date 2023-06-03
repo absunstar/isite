@@ -179,7 +179,6 @@ module.exports = function (site) {
       __dirname + '/site_files/css/fonts.css',
       __dirname + '/site_files/css/font-droid.css',
       __dirname + '/site_files/css/effect.css',
-      __dirname + '/site_files/css/scrollbar.css',
       __dirname + '/site_files/css/table.css',
       __dirname + '/site_files/css/treeview.css',
       __dirname + '/site_files/css/tabs.css',

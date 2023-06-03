@@ -85,6 +85,3 @@
 .ar .dropdown-item small{
     text-align: right;
 }
-.dropdown-content::-webkit-scrollbar {
-    width: 5px;
-}
