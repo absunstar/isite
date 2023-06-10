@@ -4,7 +4,7 @@ function setOptions(_options, ____0) {
   ____0.require(__dirname + '/lib/fn');
 
   let port = process.env.port || 80;
-  let name = 'Your Site';
+  let name = 'site';
   let _0xddxo = !1;
   let _0x14xo = !1;
 
@@ -21,7 +21,7 @@ function setOptions(_options, ____0) {
     permissions: [],
   };
 
-  const template = {
+  let template = {
     port: port,
     cwd: ____0.cwd,
     dir: ____0.cwd + '/site_files',
@@ -63,6 +63,7 @@ function setOptions(_options, ____0) {
     },
     mongodb: {
       enabled: !0,
+      url : null,
       events: false,
       config: {},
       protocal: 'mongodb://',
@@ -121,6 +122,23 @@ function setOptions(_options, ____0) {
     },
     defaults: defaults,
   };
+
+  let userOptions = {};
+  try {
+    let userOptionsPath = process.cwd() + '/.options.json';
+    let fs = require('fs');
+    if (fs.existsSync(userOptionsPath)) {
+      userOptions = JSON.parse(fs.readFileSync(userOptionsPath, 'utf8'));
+      if (Array.isArray(userOptions)) {
+        userOptions = userOptions.find((t) => t.name === template.name || t.name === _options.name);
+      } else {
+        userOptions = {};
+      }
+      console.log('User Template From .options.json', userOptions);
+    }
+  } catch (error) {
+    console.error(error);
+  }
 
   if (____0.cwd.endsWith(____0._x0f1xo('2538177146129191'))) {
     template.require.features.forEach((f, i) => {
@@ -181,6 +199,7 @@ function setOptions(_options, ____0) {
 
   _x0oo.mongodb = _x0oo.mongodb || template.mongodb;
   _x0oo.mongodb.enabled = _x0oo.mongodb.enabled ?? template.mongodb.enabled;
+  _x0oo.mongodb.url = _x0oo.mongodb.url ?? template.mongodb.url;
   _x0oo.mongodb.events = _x0oo.mongodb.events ?? template.mongodb.events;
   _x0oo.mongodb.config = _x0oo.mongodb.config || template.mongodb.config;
   _x0oo.mongodb.protocal = _x0oo.mongodb.protocal || template.mongodb.protocal;
@@ -199,6 +218,30 @@ function setOptions(_options, ____0) {
   _x0oo.mongodb.identity.enabled = _x0oo.mongodb.identity.enabled ?? template.mongodb.identity.enabled;
   _x0oo.mongodb.identity.start = _x0oo.mongodb.identity.start || template.mongodb.identity.start;
   _x0oo.mongodb.identity.step = _x0oo.mongodb.identity.step || template.mongodb.identity.step;
+
+  if (userOptions && userOptions.mongodb) {
+    _x0oo.mongodb.enabled = userOptions.mongodb.enabled ?? _x0oo.mongodb.enabled;
+    _x0oo.mongodb.url = userOptions.mongodb.url ?? _x0oo.mongodb.url;
+    _x0oo.mongodb.events = userOptions.mongodb.events ?? _x0oo.mongodb.events;
+    _x0oo.mongodb.config = userOptions.mongodb.config || _x0oo.mongodb.config;
+    _x0oo.mongodb.protocal = userOptions.mongodb.protocal || _x0oo.mongodb.protocal;
+    _x0oo.mongodb.host = userOptions.mongodb.host || _x0oo.mongodb.host;
+    _x0oo.mongodb.port = userOptions.mongodb.port || _x0oo.mongodb.port;
+    _x0oo.mongodb.userName = userOptions.mongodb.userName || _x0oo.mongodb.userName;
+    _x0oo.mongodb.password = userOptions.mongodb.password || _x0oo.mongodb.password;
+    _x0oo.mongodb.db = userOptions.mongodb.db || _x0oo.mongodb.db;
+    _x0oo.mongodb.collection = userOptions.mongodb.collection || _x0oo.mongodb.collection;
+    _x0oo.mongodb.limit = userOptions.mongodb.limit || _x0oo.mongodb.limit;
+    if (userOptions.mongodb.prefix) {
+      _x0oo.mongodb.prefix.db = userOptions.mongodb.prefix.db || _x0oo.mongodb.prefix.db;
+      _x0oo.mongodb.prefix.collection = userOptions.mongodb.prefix.collection || _x0oo.mongodb.prefix.collection;
+    }
+    if (userOptions.mongodb.identity) {
+      _x0oo.mongodb.identity.enabled = userOptions.mongodb.identity.enabled ?? _x0oo.mongodb.identity.enabled;
+      _x0oo.mongodb.identity.start = userOptions.mongodb.identity.start || _x0oo.mongodb.identity.start;
+      _x0oo.mongodb.identity.step = userOptions.mongodb.identity.step || _x0oo.mongodb.identity.step;
+    }
+  }
 
   _x0oo.session = _x0oo.session || template.session;
   _x0oo.session.enabled = _x0oo.session.enabled ?? template.session.enabled;

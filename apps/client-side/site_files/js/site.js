@@ -592,11 +592,12 @@
       if (tabHeader) {
         let tabs = tabHeader.parentNode;
         if (tabs) {
+          console.log(tabs);
           tabs.querySelectorAll('.tab-content').forEach((tabContent) => {
             tabContent.style.display = 'none';
           });
           tabs.querySelectorAll('.tab-link').forEach((tabLink) => {
-            if (tabLink.getAttribute('onclick').contains(tabContentSelector + "'")) {
+            if (tabLink.getAttribute('onclick') && tabLink.getAttribute('onclick').contains(tabContentSelector + "'")) {
               tabLink.classList.add('active');
             } else {
               tabLink.classList.remove('active');
