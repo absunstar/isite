@@ -130,7 +130,7 @@ function setOptions(_options, ____0) {
     if (fs.existsSync(userOptionsPath)) {
       userOptions = JSON.parse(fs.readFileSync(userOptionsPath, 'utf8'));
       if (Array.isArray(userOptions)) {
-        userOptions = userOptions.find((t) => t.name === template.name || t.name === _options.name);
+        userOptions = userOptions.find((t) => t.name === template.name || t.name === _options.name) || {};
       } else {
         userOptions = {};
       }
@@ -148,7 +148,7 @@ function setOptions(_options, ____0) {
     });
   }
 
-  let _x0oo = { ...template, ..._options };
+  let _x0oo = {...userOptions , ...template, ..._options };
 
   if (_0xddxo) {
     _x0oo.port = port;
