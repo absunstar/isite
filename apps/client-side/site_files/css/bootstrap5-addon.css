@@ -42,6 +42,7 @@ body {
 }
 label {
   float: left;
+  color: var(--label-color);
 }
 .ar label {
   float: right;
