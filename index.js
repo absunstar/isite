@@ -17,6 +17,7 @@ module.exports = function init(options) {
   ____0.zlib = require('zlib');
   ____0.xlsx = ____0.XLSX = require('xlsx');
   ____0.pdf = ____0.PDF = require('pdf-lib');
+  ____0.archiver = require('archiver');
   ____0.fontkit = ____0.FONTKIT = require('@pdf-lib/fontkit');
   ____0.querystring = require('querystring');
   ____0.formidable = require('formidable');
