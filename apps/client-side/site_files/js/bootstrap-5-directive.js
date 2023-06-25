@@ -586,45 +586,34 @@ app.directive('iDate', function () {
     restrict: 'E',
     required: 'ngModel',
     scope: {
+      v: '@',
+      id2: '@',
       label: '@',
-      V: '@',
-      year: '@',
+      type: '@',
+      class2: '@',
+      disabled: '@',
       ngModel: '=',
       ngChange: '&',
+      ngKeydown: '&',
     },
     link: function ($scope, element, attrs) {
+      $scope.id2 = $scope.id2 || 'input_' + Math.random().toString().replace('0.', '');
+      $scope.v = $scope.v || '';
+      $scope.requird = '';
+      if ($scope.v.like('*r*')) {
+        $scope.requird = '*';
+      }
       if (typeof attrs.disabled !== 'undefined') {
         attrs.disabled = 'disabled';
       } else {
         attrs.disabled = '';
       }
-      $scope.year = $scope.year ? parseInt($scope.year) : 1960;
+      $scope.class2 = $scope.class2 || '';
 
       $scope.model = {};
 
-      $scope.days = [];
-      for (let i = 1; i < 32; i++) {
-        $scope.days.push({
-          id: i,
-          name: i,
-        });
-      }
-      $scope.years = [];
-      for (let i = $scope.year; i < 2100; i++) {
-        $scope.years.push({
-          id: i,
-          name: i,
-        });
-      }
-      $scope.dayTitle = 'Day';
-      $scope.monthTitle = 'Month';
-      $scope.yearTitle = 'Year';
-
       $scope.lang = site.session ? site.session.lang : 'en';
       if ($scope.lang === 'ar') {
-        $scope.dayTitle = 'يوم';
-        $scope.monthTitle = 'شهر';
-        $scope.yearTitle = 'سنة';
         $scope.monthes = [
           { id: 0, name: 'يناير' },
           { id: 1, name: 'فبراير' },
@@ -641,18 +630,18 @@ app.directive('iDate', function () {
         ];
       } else {
         $scope.monthes = [
-          { id: 0, name: 'Jan' },
-          { id: 1, name: 'Feb' },
-          { id: 2, name: 'Mar' },
-          { id: 3, name: 'Apr' },
+          { id: 0, name: 'January' },
+          { id: 1, name: 'February' },
+          { id: 2, name: 'March' },
+          { id: 3, name: 'April' },
           { id: 4, name: 'May' },
-          { id: 5, name: 'Jun' },
-          { id: 6, name: 'Jul' },
-          { id: 7, name: 'Aug' },
-          { id: 8, name: 'Sep' },
-          { id: 9, name: 'Oct' },
-          { id: 10, name: 'Nov' },
-          { id: 11, name: 'Dec' },
+          { id: 5, name: 'June' },
+          { id: 6, name: 'July' },
+          { id: 7, name: 'August' },
+          { id: 8, name: 'September' },
+          { id: 9, name: 'October' },
+          { id: 10, name: 'November' },
+          { id: 11, name: 'December' },
         ];
       }
 
@@ -660,16 +649,14 @@ app.directive('iDate', function () {
         if (ngModel) {
           ngModel = new Date(ngModel);
           $scope.model = $scope.model || {};
-          $scope.model.selectedDay = $scope.days.find((d) => d.id == ngModel.getDate());
+          $scope.model.selectedDay = site.addZero(ngModel.getDate(), 2);
           $scope.model.selectedMonth = $scope.monthes.find((m) => m.id == ngModel.getMonth());
-          $scope.model.selectedYear = $scope.years.find((y) => y.id == ngModel.getFullYear());
-          $scope.model.$selectedYear = 2023;
+          $scope.model.selectedYear = ngModel.getFullYear();
         } else {
           $scope.model = $scope.model || {};
           $scope.model.selectedDay = null;
           $scope.model.selectedMonth = null;
           $scope.model.selectedYear = null;
-          $scope.model.activeYear = 2023;
         }
       });
 
@@ -677,9 +664,7 @@ app.directive('iDate', function () {
         $scope.ngModel = new Date();
       };
       $scope.updateDate = function (date) {
-        if ($scope.model.selectedDay && $scope.model.selectedMonth && $scope.model.selectedYear) {
-          let now = new Date();
-          $scope.ngModel = new Date($scope.model.selectedYear.id, $scope.model.selectedMonth.id, $scope.model.selectedDay.id, now.getHours(), now.getMinutes(), now.getSeconds());
+        if ($scope.ngModel) {
           $scope.editOnly = false;
           if ($scope.ngChange) {
             $scope.ngChange();
@@ -704,65 +689,34 @@ app.directive('iDatetime', function () {
     restrict: 'E',
     required: 'ngModel',
     scope: {
+      v: '@',
+      id2: '@',
       label: '@',
-      V: '@',
-      ngYear: '@',
+      type: '@',
+      class2: '@',
+      disabled: '@',
       ngModel: '=',
       ngChange: '&',
+      ngKeydown: '&',
     },
     link: function ($scope, element, attrs) {
+      $scope.id2 = $scope.id2 || 'input_' + Math.random().toString().replace('0.', '');
+      $scope.v = $scope.v || '';
+      $scope.requird = '';
+      if ($scope.v.like('*r*')) {
+        $scope.requird = '*';
+      }
       if (typeof attrs.disabled !== 'undefined') {
         attrs.disabled = 'disabled';
       } else {
         attrs.disabled = '';
       }
-      $scope.year = $scope.ngYear ? parseInt($scope.ngYear) : 1960;
+      $scope.class2 = $scope.class2 || '';
 
       $scope.model = {};
 
-      $scope.hours = [];
-      for (let i = 0; i < 24; i++) {
-        $scope.hours.push({
-          id: i,
-          name: i < 10 ? '0' + i : i,
-        });
-      }
-      $scope.minutes = [];
-      for (let i = 0; i < 60; i++) {
-        $scope.minutes.push({
-          id: i,
-          name: i < 10 ? '0' + i : i,
-        });
-      }
-
-      $scope.days = [];
-      for (let i = 1; i < 32; i++) {
-        $scope.days.push({
-          id: i,
-          name: i,
-        });
-      }
-
-      $scope.years = [];
-      for (let i = $scope.year; i < 2100; i++) {
-        $scope.years.push({
-          id: i,
-          name: i,
-        });
-      }
-      $scope.dayTitle = 'Day';
-      $scope.monthTitle = 'Month';
-      $scope.yearTitle = 'Year';
-      $scope.hourTitle = 'Hour';
-      $scope.minuteTitle = 'Minute';
-
       $scope.lang = site.session ? site.session.lang : 'en';
       if ($scope.lang === 'ar') {
-        $scope.dayTitle = 'يوم';
-        $scope.monthTitle = 'شهر';
-        $scope.yearTitle = 'سنة';
-        $scope.hourTitle = 'ساعة';
-        $scope.minuteTitle = 'دقيقة';
         $scope.monthes = [
           { id: 0, name: 'يناير' },
           { id: 1, name: 'فبراير' },
@@ -779,18 +733,18 @@ app.directive('iDatetime', function () {
         ];
       } else {
         $scope.monthes = [
-          { id: 0, name: 'Jan' },
-          { id: 1, name: 'Feb' },
-          { id: 2, name: 'Mar' },
-          { id: 3, name: 'Apr' },
+          { id: 0, name: 'January' },
+          { id: 1, name: 'February' },
+          { id: 2, name: 'March' },
+          { id: 3, name: 'April' },
           { id: 4, name: 'May' },
-          { id: 5, name: 'Jun' },
-          { id: 6, name: 'Jul' },
-          { id: 7, name: 'Aug' },
-          { id: 8, name: 'Sep' },
-          { id: 9, name: 'Oct' },
-          { id: 10, name: 'Nov' },
-          { id: 11, name: 'Dec' },
+          { id: 5, name: 'June' },
+          { id: 6, name: 'July' },
+          { id: 7, name: 'August' },
+          { id: 8, name: 'September' },
+          { id: 9, name: 'October' },
+          { id: 10, name: 'November' },
+          { id: 11, name: 'December' },
         ];
       }
 
@@ -798,12 +752,14 @@ app.directive('iDatetime', function () {
         if (ngModel) {
           ngModel = new Date(ngModel);
           $scope.model = $scope.model || {};
-          $scope.model.selectedDay = $scope.days.find((d) => d.id == ngModel.getDate());
+          $scope.model.selectedDay = site.addZero(ngModel.getDate(), 2);
           $scope.model.selectedMonth = $scope.monthes.find((m) => m.id == ngModel.getMonth());
-          $scope.model.selectedYear = $scope.years.find((y) => y.id == ngModel.getFullYear());
-          $scope.model.selectedHour = $scope.hours.find((y) => y.id == ngModel.getHours());
-          $scope.model.selectedMinute = $scope.minutes.find((y) => y.id == ngModel.getMinutes());
-          $(element).attr('value', ngModel.getTime());
+          $scope.model.selectedYear = ngModel.getFullYear();
+          $scope.model.selectedHour = site.addZero(ngModel.getHours(), 2);
+          $scope.model.selectedMinute = site.addZero(ngModel.getMinutes(), 2);
+
+          $scope.ngModel1 = new Date(ngModel);
+          $scope.ngModel2 = new Date(0, 0, 0, ngModel.getHours(), ngModel.getMinutes());
         } else {
           $scope.model = $scope.model || {};
           $scope.model.selectedDay = null;
@@ -811,7 +767,6 @@ app.directive('iDatetime', function () {
           $scope.model.selectedYear = null;
           $scope.model.selectedHour = null;
           $scope.model.selectedMinute = null;
-          $(element).attr('value', '');
         }
       });
 
@@ -820,8 +775,10 @@ app.directive('iDatetime', function () {
       };
 
       $scope.updateDate = function (date) {
-        if ($scope.model.selectedDay && $scope.model.selectedMonth && $scope.model.selectedYear && $scope.model.selectedHour && $scope.model.selectedMinute) {
-          $scope.ngModel = new Date($scope.model.selectedYear.id, $scope.model.selectedMonth.id, $scope.model.selectedDay.id, $scope.model.selectedHour.id, $scope.model.selectedMinute.id, 0);
+        let time = $('#time_' + $scope.id2).val();
+
+        if ($scope.ngModel1 && time) {
+          $scope.ngModel = new Date($scope.ngModel1.getFullYear(), $scope.ngModel1.getMonth(), $scope.ngModel1.getDate(), time.split(':')[0], time.split(':')[1], 0);
           $scope.editOnly = false;
           $(element).attr('value', $scope.ngModel.getTime());
           if ($scope.ngChange) {

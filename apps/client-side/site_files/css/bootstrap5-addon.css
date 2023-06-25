@@ -67,7 +67,7 @@ fieldset legend {
   width: auto;
   padding: 5px;
 }
-.ar fieldset legend{
+.ar fieldset legend {
   float: right;
 }
 legend::after {
@@ -125,15 +125,30 @@ i-file button {
 i-upload {
   display: inline-block;
 }
-i-date .fa {
+i-date .left-10,
+i-datetime .left-10 {
+  margin-left: 10px;
+}
+i-date .fas,
+i-datetime .fas {
   font-size: 24px;
   vertical-align: middle;
   margin-top: 5px;
+  cursor: pointer;
+}
+i-date .fas:hover,
+i-datetime .fas:hover {
+  font-size: 26px;
 }
 i-date p,
 i-datetime p {
-  margin-top: 10px !important;
+  margin: 0 !important;
 }
+i-date input,
+i-datetime input {
+  margin: 0 !important;
+}
+i-date.is-invalid .row,
 i-datetime.is-invalid .row {
   border: 1px solid #dc3545 !important;
   border-radius: 10px !important;

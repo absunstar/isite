@@ -1,0 +1,24 @@
+<div class="mb-3">
+  <label> {{label}} </label>
+  <div class="row" ng-hide="editOnly">
+    <p ng-click="editOnly = true" class="blue border padding pointer">
+      <span>{{model.selectedDay.name || '__'}} </span> / <span>{{model.selectedMonth.name || '______'}}</span> / <span>{{model.selectedYear.name || '____'}}</span> 
+    </p>
+  </div>
+  <div class="row dashed padding margin" ng-show="editOnly">
+    <div class="col3">
+      <i-list label="{{dayTitle}}" v="{{v}}" items="days" ng-search="$selectedDay" ng-model="model.selectedDay"></i-list>
+    </div>
+    <div class="col4">
+      <i-list label="{{monthTitle}}" v="{{v}}" items="monthes" ng-search="$selectedMonth" ng-model="model.selectedMonth"></i-list>
+    </div>
+    <div class="col3">
+      <i-list label="{{yearTitle}}" v="{{v}}" items="years" ng-search="$selectedYear" ng-model="model.selectedYear" active-value="model.activeYear"></i-list>
+    </div>
+
+    <div class="col2">
+      <br />
+      <i-button type="save default" ng-click="updateDate()"></i-button>
+    </div>
+  </div>
+</div>

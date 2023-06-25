@@ -1,24 +1,29 @@
 <div class="mb-3">
-  <label> {{label}} </label>
+  <label for="{{id2}}" class="form-label"> <span class="red bold"> {{requird}} </span> {{label}}</label>
   <div class="row" ng-hide="editOnly">
-    <p ng-click="editOnly = true" class="blue border padding pointer">
-      <span>{{model.selectedDay.name || '__'}} </span> / <span>{{model.selectedMonth.name || '______'}}</span> / <span>{{model.selectedYear.name || '____'}}</span> 
+    <p ng-click="editOnly = true" class="blue bold border padding pointer">
+      <span class="bold">{{model.selectedDay || '__'}} </span> <span class="orange"> / </span> <span class="bold">{{model.selectedMonth.name || '______'}}</span> <span class="orange"> / </span> <span class="bold">{{model.selectedYear || '____'}}</span>
     </p>
   </div>
-  <div class="row dashed padding margin" ng-show="editOnly">
-    <div class="col3">
-      <i-list label="{{dayTitle}}" v="{{v}}" items="days" ng-search="$selectedDay" ng-model="model.selectedDay"></i-list>
+  <div class="row" ng-show="editOnly">
+    <div class="col10">
+      <input
+        id="{{id2}}"
+        ng-disabled="disabled"
+        autofocus
+        v="{{v}}"
+        type="date"
+        ng-model="ngModel"
+        ng-change="ngChange()"
+        ngKeydown="ngKeydown()"
+        class="form-control"
+        placeholder="{{placeholder}}"
+        aria-label="{{label}}"
+      />
     </div>
-    <div class="col4">
-      <i-list label="{{monthTitle}}" v="{{v}}" items="monthes" ng-search="$selectedMonth" ng-model="model.selectedMonth"></i-list>
-    </div>
-    <div class="col3">
-      <i-list label="{{yearTitle}}" v="{{v}}" items="years" ng-search="$selectedYear" ng-model="model.selectedYear" active-value="model.activeYear"></i-list>
-    </div>
-
     <div class="col2">
-      <br />
-      <i-button type="save default" ng-click="updateDate()"></i-button>
+      <i class="fas fa-save" ng-click="updateDate()"></i>
     </div>
+    <div class="invalid-feedback"></div>
   </div>
 </div>
