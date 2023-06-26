@@ -652,11 +652,14 @@ app.directive('iDate', function () {
           $scope.model.selectedDay = site.addZero(ngModel.getDate(), 2);
           $scope.model.selectedMonth = $scope.monthes.find((m) => m.id == ngModel.getMonth());
           $scope.model.selectedYear = ngModel.getFullYear();
+          $(element).attr('value', ngModel.getTime());
+          $scope.ngModel1 = new Date(ngModel);
         } else {
           $scope.model = $scope.model || {};
           $scope.model.selectedDay = null;
           $scope.model.selectedMonth = null;
           $scope.model.selectedYear = null;
+          $(element).attr('value', '');
         }
       });
 
@@ -664,7 +667,8 @@ app.directive('iDate', function () {
         $scope.ngModel = new Date();
       };
       $scope.updateDate = function (date) {
-        if ($scope.ngModel) {
+        if ($scope.ngModel1) {
+          $scope.ngModel = $scope.ngModel1;
           $scope.editOnly = false;
           if ($scope.ngChange) {
             $scope.ngChange();
@@ -760,6 +764,7 @@ app.directive('iDatetime', function () {
 
           $scope.ngModel1 = new Date(ngModel);
           $scope.ngModel2 = new Date(0, 0, 0, ngModel.getHours(), ngModel.getMinutes());
+          $(element).attr('value', ngModel.getTime());
         } else {
           $scope.model = $scope.model || {};
           $scope.model.selectedDay = null;
@@ -767,6 +772,7 @@ app.directive('iDatetime', function () {
           $scope.model.selectedYear = null;
           $scope.model.selectedHour = null;
           $scope.model.selectedMinute = null;
+          $(element).attr('value', '');
         }
       });
 

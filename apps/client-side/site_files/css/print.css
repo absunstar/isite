@@ -54,6 +54,7 @@ body.a4 {
 body.print-mode {
   padding: 0px !important;
   margin: 2mm !important;
+  display: contents;
 }
 body.print-mode .hide {
   visibility: visible;

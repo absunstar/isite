@@ -702,7 +702,14 @@
               en: 'Data Is Required',
               ar: 'هذا البيان مطلوب',
             });
-          } else if (el.nodeName === 'INPUT' || el.nodeName === 'SELECT' || el.nodeName === 'TEXTAREA' || el.nodeName === 'I-DATETIME') {
+          } else if (el.nodeName === 'I-DATE' && !el.getAttribute('value')) {
+            el.classList.add('is-invalid');
+            res.ok = !1;
+            res.messages.push({
+              en: 'Data Is Required',
+              ar: 'هذا البيان مطلوب',
+            });
+          } else if (el.nodeName === 'INPUT' || el.nodeName === 'SELECT' || el.nodeName === 'TEXTAREA' || el.nodeName === 'I-DATETIME'|| el.nodeName === 'I-DATE') {
             el.classList.add('is-valid');
           }
         } else if (vl.like('ml*')) {

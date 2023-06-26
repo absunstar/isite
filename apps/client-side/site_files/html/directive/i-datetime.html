@@ -8,10 +8,10 @@
   </div>
   <div class="row" ng-show="editOnly">
     <div class="col6">
-      <input id="date_{{id2}}" ng-disabled="disabled" autofocus v="{{v}}" type="date" ng-model="ngModel1" class="form-control" aria-label="{{label}}" />
+      <input id="date_{{id2}}" ng-disabled="disabled" autofocus type="date" ng-model="ngModel1" class="form-control" aria-label="{{label}}" />
     </div>
     <div class="col4">
-      <input id="time_{{id2}}" ng-disabled="disabled" autofocus v="{{v}}" min="00:00" max="23:59" type="time" ng-model="ngModel2" class="form-control" aria-label="{{label}}" />
+      <input id="time_{{id2}}" ng-disabled="disabled" autofocus min="00:00" max="23:59" type="time" ng-model="ngModel2" class="form-control" aria-label="{{label}}" />
     </div>
     <div class="col2">
       <i class="fas fa-save" ng-click="updateDate()"></i>

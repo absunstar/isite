@@ -148,11 +148,7 @@ i-date input,
 i-datetime input {
   margin: 0 !important;
 }
-i-date.is-invalid .row,
-i-datetime.is-invalid .row {
-  border: 1px solid #dc3545 !important;
-  border-radius: 10px !important;
-}
+
 .modal-content {
   width: 75vw;
   height: 100vh;
