@@ -1,7 +1,7 @@
 module.exports = function (site) {
 
     site.get({
-        name: '/js/charts.js',
+        name: '/x-js/charts.js',
         path: [
             __dirname + '/site_files/js/chart-core.js',
             __dirname + '/site_files/js/charts.js',
