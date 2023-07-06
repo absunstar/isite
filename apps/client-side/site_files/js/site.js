@@ -577,6 +577,9 @@
     return site.to123(JSON.parse(obj));
   };
   site.show = site.showObject = function (obj) {
+    if (!obj) {
+      return {};
+    }
     return JSON.parse(site.from123(obj));
   };
 
@@ -709,7 +712,7 @@
               en: 'Data Is Required',
               ar: 'هذا البيان مطلوب',
             });
-          } else if (el.nodeName === 'INPUT' || el.nodeName === 'SELECT' || el.nodeName === 'TEXTAREA' || el.nodeName === 'I-DATETIME'|| el.nodeName === 'I-DATE') {
+          } else if (el.nodeName === 'INPUT' || el.nodeName === 'SELECT' || el.nodeName === 'TEXTAREA' || el.nodeName === 'I-DATETIME' || el.nodeName === 'I-DATE') {
             el.classList.add('is-valid');
           }
         } else if (vl.like('ml*')) {

@@ -210,6 +210,7 @@ module.exports = function init(options) {
   require('./lib/browser.js')(____0);
   require('./lib/helper.js')(____0);
   require('./lib/pdf.js')(____0);
+  require('./lib/app.js')(____0);
 
   //Master Pages
   ____0.masterPages = [];

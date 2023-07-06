@@ -1,83 +1,84 @@
 .treeview {
-    color: var(--treeview-color);
-    background: var(--treeview-background-color);
-    user-select: none;
-    -webkit-user-select: none;
-    -moz-user-select: none;
-    -ms-user-select: none;
+  color: var(--treeview-color);
+  background: var(--treeview-background-color);
+  user-select: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
 }
-.treeview .main-node{
-    display: block;
+.treeview .main-node {
+  display: block;
 }
-.treeview .main-node > i{
-    display: inline-block;
+.treeview .main-node > i {
+  display: inline-block;
 }
-.treeview .main-node > h2{
-    display: inline-block;
+.treeview .main-node > h2 {
+  display: inline-block;
 }
-.treeview .main-node > i-button{
-    display: inline-block;
+.treeview .main-node > i-button {
+  display: inline-block;
 }
 
-.treeview i-treenode ul{
-    transition: all linear .3s;
-    -webkit-transition:all linear .3s;
+.treeview i-treenode ul {
+  transition: all linear 0.3s;
+  -webkit-transition: all linear 0.3s;
 }
 
 .treeview i-treenode.ng-hide ul {
-    opacity:0;
+  opacity: 0;
 }
 
 .treeview .actions {
-    display: inline-block;
-    width: auto;
+  display: inline-block;
+  width: auto;
 }
 
 .treeview ul {
-    list-style: none;
-    margin-top: 10px;
+  list-style: none;
+  margin-top: 10px;
 }
 
 .treeview .title {
-    cursor: pointer;
-    padding-bottom: 10px;
-    font-size: 16px;
-    font-weight: bold;
+  cursor: pointer;
+  padding-bottom: 10px;
+  font-size: 16px;
+  font-weight: bold;
 }
 
 .treeview .display {
-    color: var(--treeview-display-color);
+  color: var(--treeview-display-color);
 }
 
 .treenode li {
-    display: block;
-    margin: 10px;
-    padding: 3px;
-    cursor: pointer;
-    border-left: 1px solid var(--treeview-border-color);
+  display: block;
+  margin: 10px;
+  padding: 3px;
+  cursor: pointer;
 }
 .ar .treenode li {
-    border-right: 1px solid var(--treeview-border-color);
+  border-right: 1px solid var(--treeview-border-color);
 }
-
+.en .treenode li {
+  border-left: 1px solid var(--treeview-border-color);
+}
 .treenode li span {
-    font-size: 14px;
-    font-weight: bold;
-    cursor: pointer;
-    padding: 10px 10px;
-    border-radius: 5px;
-    transition: all ease-out .2s;
-    -webkit-transition: all ease-out .2s;
-    display: inline-block;
-    width: auto;
+  font-size: 14px;
+  font-weight: bold;
+  cursor: pointer;
+  padding: 10px 10px;
+  border-radius: 5px;
+  transition: all ease-out 0.2s;
+  -webkit-transition: all ease-out 0.2s;
+  display: inline-block;
+  width: auto;
 }
 
 .treenode li span.text:hover {
-    background: var(--treeview-background-color2);
-    color: var(--treeview-color2);
+  background: var(--treeview-background-color2);
+  color: var(--treeview-color2);
 }
 
 .treenode li .selected {
-    background: var(--treeview-background-color2);
-    color: var(--treeview-color2);
+  background: var(--treeview-background-color2);
+  color: var(--treeview-color2);
 }
