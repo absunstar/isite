@@ -98,7 +98,6 @@ module.exports = function (site) {
     ],
   });
 
-  
   site.get({
     name: '/x-css',
     path: __dirname + '/site_files/css',
@@ -162,7 +161,7 @@ module.exports = function (site) {
       __dirname + '/site_files/css/font-awesome.css',
     ],
   });
-  
+
   site.get({
     name: ['/x-css/bootstrap-5-support.css', '/x-css/bootstrap-support.css'],
     parser: 'css2',
@@ -192,7 +191,7 @@ module.exports = function (site) {
       __dirname + '/site_files/css/WebShareEditor.css',
     ],
   });
-  
+
   site.get({
     name: ['/x-css/sa.css'],
     parser: 'css2',
@@ -225,27 +224,39 @@ module.exports = function (site) {
   });
 
   site.post({ name: '/x-api/upload/image', public: true }, (req, res) => {
-    site.createDir(site.options.upload_dir + '/' + req.headers['folder'], () => {
-      site.createDir(site.options.upload_dir + '/' + req.headers['folder'] + '/images', () => {
+    let folder = req.headers['folder'] || new Date().getFullYear() + '_' + new Date().getMonth() + '_' + new Date().getDate();
+
+    site.createDir(site.options.upload_dir + '/' + folder, () => {
+      site.createDir(site.options.upload_dir + '/' + folder + '/images', () => {
         let response = {
           image: {},
           done: !0,
         };
         let file = req.files.fileToUpload;
         if (file) {
-          let newName = 'image_' + new Date().getTime().toString() + Math.random().toString() + site.path.extname(file.originalFilename);
-          let newpath = site.path.resolve(site.options.upload_dir + '/' + req.headers['folder'] + '/images/' + newName);
+          let name1 = 'image_' + new Date().getTime().toString() + Math.random().toString().replace('.', '_');
+          let newName = name1 + site.path.extname(file.originalFilename);
+          let newName2 = name1 + '.webp';
+          let newpath = site.path.resolve(site.options.upload_dir + '/' + folder + '/images/' + newName);
+          let newpath2 = site.path.resolve(site.options.upload_dir + '/' + folder + '/images/' + newName2);
           site.mv(file.filepath, newpath, function (err) {
             if (err) {
               response.error = err;
               response.done = !1;
+              res.json(response);
             } else {
               response.image.name = file.originalFilename;
               response.image.path = newpath;
-              response.image.url = '/x-api/image/' + req.headers['folder'] + '/' + newName;
+              response.image.url = '/x-api/image/' + folder + '/' + newName;
               response.image.size = file.size;
+              site.webp.cwebp(newpath, newpath2, '-q 80').then((output) => {
+                console.log(output);
+                response.image.path = newpath2;
+                response.image.url = '/x-api/image/' + folder + '/' + newName2;
+                res.json(response);
+                site.fs.unlink(newpath, () => {});
+              });
             }
-            res.json(response);
           });
         } else {
           response.error = 'no file';
@@ -298,7 +309,6 @@ module.exports = function (site) {
     res.download(site.options.upload_dir + '/' + req.params.category + '/audios/' + req.params.name);
   });
 
-
   site.post({ name: '/x-api/upload/video', public: true }, (req, res) => {
     site.createDir(site.options.upload_dir + '/' + req.headers['folder'], () => {
       site.createDir(site.options.upload_dir + '/' + req.headers['folder'] + '/videos', () => {
@@ -335,7 +345,6 @@ module.exports = function (site) {
     res.set('Cache-Control', 'public, max-age=2592000');
     res.download(site.options.upload_dir + '/' + req.params.category + '/videos/' + req.params.name);
   });
-
 
   site.post({ name: '/x-api/upload/file', public: true }, (req, res) => {
     site.createDir(site.options.upload_dir + '/' + req.headers['folder'], () => {

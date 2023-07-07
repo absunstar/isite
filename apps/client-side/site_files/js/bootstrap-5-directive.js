@@ -906,7 +906,6 @@ app.directive('iImage', [
         ngChange: '&',
       },
       link: function ($scope, element, attrs, ctrl) {
-        $scope.folder = $scope.folder || 'default';
         $scope.accept = $scope.accept ? $scope.accept : 'image/*';
         $scope.viewOnly = $scope.view === undefined ? false : true;
 

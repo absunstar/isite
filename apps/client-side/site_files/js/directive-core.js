@@ -60,12 +60,6 @@ app.service('isite', [
     };
 
     this.uploadImage = function (files, options, callback) {
-      options = Object.assign(
-        {
-          category: 'default',
-        },
-        options
-      );
       callback = callback || function () {};
 
       var fd = new FormData();
@@ -75,7 +69,7 @@ app.service('isite', [
           withCredentials: !0,
           headers: {
             'Content-Type': undefined,
-            folder: options.folder,
+            ...options
           },
           uploadEventHandlers: {
             progress: function (e) {

@@ -223,36 +223,6 @@ exports = module.exports = function init(____0) {
     }
     let ext = ____0.path.extname(path).replace('.', '');
     return ____0.mimeTypes[ext] || 'application/' + ext;
-
-    if (path.endsWith('.exe')) {
-      return 'application/octet-stream';
-    } else if (path.endsWith('.txt')) {
-      return 'text/plain';
-    } else if (path.endsWith('.html')) {
-      return 'text/html';
-    } else if (path.endsWith('.pdf')) {
-      return 'application/pdf';
-    } else if (path.endsWith('.png')) {
-      return 'image/png';
-    } else if (path.endsWith('.jpg')) {
-      return 'image/jpg';
-    } else if (path.endsWith('.jpeg')) {
-      return 'image/jpeg';
-    } else if (path.endsWith('.jpeg')) {
-      return 'image/jpeg';
-    } else if (path.endsWith('.webp')) {
-      return 'image/webp';
-    } else if (path.endsWith('.ico')) {
-      return 'image/ico';
-    } else if (path.endsWith('.json')) {
-      return 'application/json';
-    } else if (path.endsWith('.apk')) {
-      return 'application/vnd.android.package-archive';
-    } else if (path.endsWith('.jar')) {
-      return 'application/java-archive';
-    } else {
-      return 'application/' + ____0.path.extname(path);
-    }
   };
 
   fn.getFileEncode = function (path) {
