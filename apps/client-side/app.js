@@ -268,7 +268,7 @@ module.exports = function (site) {
   });
 
   site.get({ name: '/x-api/image/:category/:name', public: true }, (req, res) => {
-    res.set('Cache-Control', 'public, max-age=' + 60 * ____0.options.cache.images);
+    res.set('Cache-Control', 'public, max-age=' + 60 * site.options.cache.images);
     res.download(site.options.upload_dir + '/' + req.params.category + '/images/' + req.params.name);
   });
 
@@ -305,7 +305,7 @@ module.exports = function (site) {
   });
 
   site.get({ name: '/x-api/audio/:category/:name', public: true }, (req, res) => {
-    res.set('Cache-Control', 'public, max-age=' + 60 * ____0.options.cache.images);
+    res.set('Cache-Control', 'public, max-age=' + 60 * site.options.cache.images);
     res.download(site.options.upload_dir + '/' + req.params.category + '/audios/' + req.params.name);
   });
 
@@ -342,7 +342,7 @@ module.exports = function (site) {
   });
 
   site.get({ name: '/x-api/video/:category/:name', public: true }, (req, res) => {
-    res.set('Cache-Control', 'public, max-age='+ 60 * ____0.options.cache.images);
+    res.set('Cache-Control', 'public, max-age='+ 60 * site.options.cache.images);
     res.download(site.options.upload_dir + '/' + req.params.category + '/videos/' + req.params.name);
   });
 
