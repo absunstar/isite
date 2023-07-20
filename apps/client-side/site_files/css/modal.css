@@ -19,8 +19,8 @@
   position: relative;
   color: var(--modal-color);
   background-color: var(--modal-content-background);
-  margin: auto;
-  padding: 0;
+  margin: auto !important;
+  padding: 0 !important;
   width: 90vw;
   height: auto !important;
   box-shadow: 0 4px 8px 0 var(--modal-box-shadow-color), 0 6px 20px 0 var(--modal-box-shadow-color);

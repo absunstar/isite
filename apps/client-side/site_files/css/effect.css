@@ -110,8 +110,8 @@
     justify-content: center;
   }
   .center {
-    margin: 0 auto;
-    text-align: center;
+    margin: 0 auto !important;
+    text-align: center !important;
   }
   .center,
   .center p,

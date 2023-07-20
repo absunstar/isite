@@ -46,6 +46,7 @@ module.exports = function (site) {
       __dirname + '/site_files/js/directive-core.js',
       __dirname + '/site_files/js/directive.js',
       __dirname + '/site_files/js/last.js',
+      __dirname + '/site_files/js/xlsx.js',
     ],
   });
 
@@ -70,6 +71,8 @@ module.exports = function (site) {
       __dirname + '/site_files/js/bootstrap5.js',
       __dirname + '/site_files/js/bootstrap-5-addon.js',
       __dirname + '/site_files/js/WebShareEditor.js',
+      __dirname + '/site_files/js/xlsx.js',
+
     ],
   });
 
@@ -249,13 +252,17 @@ module.exports = function (site) {
               response.image.path = newpath;
               response.image.url = '/x-api/image/' + folder + '/' + newName;
               response.image.size = file.size;
-              site.webp.cwebp(newpath, newpath2, '-q 80').then((output) => {
-                console.log(output);
-                response.image.path = newpath2;
-                response.image.url = '/x-api/image/' + folder + '/' + newName2;
+              if (!response.image.name.like('*.webp')) {
+                site.webp.cwebp(newpath, newpath2, '-q 80').then((output) => {
+                  console.log(output);
+                  response.image.path = newpath2;
+                  response.image.url = '/x-api/image/' + folder + '/' + newName2;
+                  res.json(response);
+                  site.fs.unlink(newpath, () => {});
+                });
+              } else {
                 res.json(response);
-                site.fs.unlink(newpath, () => {});
-              });
+              }
             }
           });
         } else {
@@ -342,7 +349,7 @@ module.exports = function (site) {
   });
 
   site.get({ name: '/x-api/video/:category/:name', public: true }, (req, res) => {
-    res.set('Cache-Control', 'public, max-age='+ 60 * site.options.cache.images);
+    res.set('Cache-Control', 'public, max-age=' + 60 * site.options.cache.images);
     res.download(site.options.upload_dir + '/' + req.params.category + '/videos/' + req.params.name);
   });
 

@@ -102,8 +102,8 @@ i-button {
   display: contents;
 }
 i-button button {
-  margin: 5px;
-  padding: 7px 9px;
+  margin: 5px !important;
+  padding: 7px 9px !important;
 }
 i-button.default button {
   margin: 3px;
