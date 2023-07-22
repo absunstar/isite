@@ -4,6 +4,9 @@ app.config(function ($sceDelegateProvider) {
 });
 
 app.connectScope = function (_scope, callback) {
+  if (!_scope) {
+    _scope = {};
+  }
   if (!_scope.name) {
     if ((elem = document.querySelector('[ng-controller]'))) {
       _scope.name = elem.getAttribute('ng-controller');
@@ -148,6 +151,8 @@ app.connectScope = function (_scope, callback) {
         };
       });
     }
-    callback($scope, $http, $timeout, $interval);
+    if (callback) {
+      callback($scope, $http, $timeout, $interval);
+    }
   });
 };
