@@ -64,7 +64,7 @@ h3 {
 
 .container {
   display: block !important;
-  width: 98% !important;
+  width: 100% !important;
   margin: 0 auto !important;
   padding: 1% !important;
 }
@@ -228,7 +228,7 @@ h3 {
   }
   .row,
   .row10 {
-    width: 96% !important;
+    width: 100% !important;
   }
   .col1,
   .col2,
@@ -256,7 +256,7 @@ h3 {
 @media (max-width: 575px) {
   .row,
   .row10 {
-    width: 96% !important;
+    width: 100% !important;
   }
   .col1,
   .col2,
@@ -280,7 +280,7 @@ h3 {
 @media (max-width: 768px) {
   .row,
   .row10 {
-    width: 96% !important;
+    width: 100% !important;
   }
   .col1,
   .col2,
