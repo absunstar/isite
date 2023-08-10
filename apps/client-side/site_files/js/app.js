@@ -3,7 +3,7 @@ app.config(function ($sceDelegateProvider) {
   $sceDelegateProvider.resourceUrlWhitelist(['self', 'https://www.youtube.com/**']);
 });
 
-app.connectScope = function (_scope, callback) {
+site.connectScope = app.connectScope = function (_scope, callback) {
   if (!_scope) {
     _scope = {};
   }
@@ -30,18 +30,18 @@ app.connectScope = function (_scope, callback) {
   app.controller(_scope.name, function ($scope, $http, $timeout, $interval) {
     $scope.onError = function () {};
     if (Array.isArray(_scope.apps)) {
-      _scope.apps.forEach((_app) => {
+      _scope.apps.forEach((_app, index) => {
         $scope[_app.as + 'DefaultItem'] = {};
         $scope[_app.as + 'Item'] = {};
         $scope[_app.as + 'List'] = [];
 
-        $scope[_app.as + 'Display'] = $scope.display = function () {
+        $scope[_app.as + 'Display'] = function () {
           $scope.error = '';
           $scope[_app.as + 'Item'] = { ...$scope[_app.as + 'DefaultItem'] };
           site.showModal(_app.modal);
         };
 
-        $scope[_app.as + 'Add'] = $scope.add = function () {
+        $scope[_app.as + 'Add'] = function () {
           $scope.error = '';
           const v = site.validated(_app.modal);
           if (!v.ok) {
@@ -68,7 +68,7 @@ app.connectScope = function (_scope, callback) {
             }
           );
         };
-        $scope[_app.as + 'Update'] = $scope.update = function (selectedItem) {
+        $scope[_app.as + 'Update'] = function (selectedItem) {
           $scope.error = '';
           const v = site.validated(_app.modal);
           if (!v.ok) {
@@ -98,7 +98,7 @@ app.connectScope = function (_scope, callback) {
             }
           );
         };
-        $scope[_app.as + 'Delete'] = $scope.delete = function (selectedItem) {
+        $scope[_app.as + 'Delete'] = function (selectedItem) {
           $scope.error = '';
           const v = site.validated(_app.modal);
           if (!v.ok) {
@@ -127,7 +127,7 @@ app.connectScope = function (_scope, callback) {
             }
           );
         };
-        $scope[_app.as + 'LoadAll'] = $scope.loadAll = function () {
+        $scope[_app.as + 'LoadAll'] = function () {
           $scope.busy = true;
           $http({
             method: 'POST',
@@ -149,6 +149,14 @@ app.connectScope = function (_scope, callback) {
             }
           );
         };
+
+        if (index === 0) {
+          $scope.display = $scope[_app.as + 'Display'];
+          $scope.add = $scope[_app.as + 'Add'];
+          $scope.update = $scope[_app.as + 'Update'];
+          $scope.delete = $scope[_app.as + 'Delete'];
+          $scope.loadAll = $scope[_app.as + 'LoadAll'];
+        }
       });
     }
     if (callback) {

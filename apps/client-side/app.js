@@ -72,7 +72,6 @@ module.exports = function (site) {
       __dirname + '/site_files/js/bootstrap-5-addon.js',
       __dirname + '/site_files/js/WebShareEditor.js',
       __dirname + '/site_files/js/xlsx.js',
-
     ],
   });
 
@@ -100,6 +99,15 @@ module.exports = function (site) {
       __dirname + '/site_files/js/xlsx.js',
     ],
   });
+
+  site.get(
+    {
+      name: '/x-words',
+    },
+    (req, res) => {
+      res.render('client-side/words.html', {}, { parser: 'html css js', public: true });
+    }
+  );
 
   site.get({
     name: '/x-css',
@@ -391,6 +399,7 @@ module.exports = function (site) {
   site.getTLV = function (name, value) {
     return Buffer.concat([Buffer.from([name], 'utf8'), Buffer.from([value.length], 'utf8'), Buffer.from(value, 'utf8')]);
   };
+
   site.onPOST('/x-api/zakat', (req, res) => {
     let obj = req.data || {};
     let value = [];

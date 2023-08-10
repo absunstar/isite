@@ -31,6 +31,7 @@ module.exports = function init(options) {
   ____0.webp = require('webp-converter');
 
   ____0.setting = {};
+  ____0.collectionList = [];
   ____0.apps = [];
   ____0.appList = [];
   ____0.addApp = function (app) {
@@ -177,6 +178,8 @@ module.exports = function init(options) {
   require('./lib/vars.js')(____0);
 
   //DataBase Management Oprations
+ 
+
   if (____0.options.mongodb.enabled) {
     ____0.mongodb = require('./lib/mongodb.js')(____0);
     ____0.connectCollection = function (option, db) {
