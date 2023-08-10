@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="myApp">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="/x-css/bootstrap-5-support.css" />
+  </head>
+  <body ng-controller="mainController" class="container loaded">
+    <h1 class="center">##word.counts## : {{words.length}}</h1>
+    <div class="row padding margin border">
+      <div class="col9">
+        <i-control ng-model="nameSearch" label="Search Words"></i-control>
+      </div>
+      <div class="col3">
+        <i-button type="save" ng-click="saveWords()" label="Save All Words"></i-button>
+      </div>
+    </div>
+
+    <table class="table">
+      <tr>
+        <th>ID</th>
+        <th>Name</th>
+        <th>En</th>
+        <th>Ar</th>
+      </tr>
+      <tr ng-repeat="word in words | filter:nameSearch">
+        <td>{{$index+1}}</td>
+        <td>{{word.name}}</td>
+        <td>
+          <i-control ng-model="word.en"></i-control>
+        </td>
+        <td><i-control ng-model="word.ar"></i-control></td>
+      </tr>
+    </table>
+
+    <script src="/x-js/bootstrap-5-support.js"></script>
+    <script>
+      site.connectScope({}, ($scope, $http) => {
+        $scope.name = 'Amr Barakat';
+        $scope.loadWords = function () {
+          $http({
+            method: 'get',
+            url: '/x-api/words',
+          }).then(function (response) {
+            if (response.data.done) {
+              $scope.words = response.data.words;
+            }
+          });
+        };
+        $scope.saveWords = function () {
+          $http({
+            method: 'POST',
+            url: '/x-api/words/save',
+            data: $scope.words,
+          }).then(function (response) {
+            if (response.data.done) {
+              console.log(response.data);
+            }
+          });
+        };
+        $scope.loadWords();
+      });
+    </script>
+  </body>
+</html>

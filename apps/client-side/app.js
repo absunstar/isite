@@ -108,6 +108,14 @@ module.exports = function (site) {
       res.render('client-side/words.html', {}, { parser: 'html css js', public: true });
     }
   );
+  site.get(
+    {
+      name: '/x-words-old',
+    },
+    (req, res) => {
+      res.render('client-side/words-old.html', {}, { parser: 'html css js', public: true });
+    }
+  );
 
   site.get({
     name: '/x-css',
