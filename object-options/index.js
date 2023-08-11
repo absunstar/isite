@@ -134,7 +134,6 @@ function setOptions(_options, ____0) {
       } else {
         userOptions = {};
       }
-      console.log('User Template From .options.json', userOptions);
     }
   } catch (error) {
     console.error(error);
