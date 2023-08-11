@@ -3,6 +3,10 @@ app.config(function ($sceDelegateProvider) {
   $sceDelegateProvider.resourceUrlWhitelist(['self', 'https://www.youtube.com/**']);
 });
 
+app.config(function ($sceProvider) {
+  $sceProvider.enabled(false);
+});
+
 site.connectScope = app.connectScope = function (_scope, callback) {
   if (!_scope) {
     _scope = {};
