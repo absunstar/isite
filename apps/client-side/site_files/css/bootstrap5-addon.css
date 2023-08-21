@@ -160,7 +160,8 @@ i-datetime input {
 .modal-body {
   padding: 1rem;
   display: block;
-  overflow: visible !important;
+  overflow: hidden;
+  overflow-y: scroll;
 }
 .modal-footer {
   display: block;
