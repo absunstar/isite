@@ -151,11 +151,13 @@ i-datetime input {
 
 .modal-content {
   width: 75vw;
-  height: 100vh;
+  height: auto;
+  max-height: 100vh;
 }
 .full .modal-content {
   width: 95vw;
-  height: 100vh;
+  height: auto;
+  max-height: 100vh;
 }
 .modal-body {
   padding: 1rem;
