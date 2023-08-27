@@ -465,12 +465,18 @@ app.directive('iList', [
         });
 
         $scope.updateModel = function (item) {
-          $scope.ngModel = $scope.getNgValue(item, $scope.ngValue);
-          if ($scope.display2) {
-            input.val($scope.getNgModelValue($scope.ngModel) + $scope.space + $scope.getNgModelValue2($scope.ngModel));
+          if (item) {
+            $scope.ngModel = $scope.getNgValue(item, $scope.ngValue);
+            if ($scope.display2) {
+              input.val($scope.getNgModelValue($scope.ngModel) + $scope.space + $scope.getNgModelValue2($scope.ngModel));
+            } else {
+              input.val($scope.getNgModelValue($scope.ngModel));
+            }
           } else {
-            input.val($scope.getNgModelValue($scope.ngModel));
+            $scope.ngModel = null;
+            input.val('');
           }
+
           $timeout(() => {
             if ($scope.ngChange) {
               $scope.ngChange();
