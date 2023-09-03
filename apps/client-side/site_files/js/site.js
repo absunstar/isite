@@ -363,7 +363,7 @@
     op.mode = 'cors';
     op.url = site.handle_url(op.url);
 
-    if (false && window.SOCIALBROWSER && window.SOCIALBROWSER.fetchJson) {
+    if (window.SOCIALBROWSER && window.SOCIALBROWSER.fetchJson) {
       SOCIALBROWSER.fetchJson(op, (data) => {
         callback(data);
       });
