@@ -154,6 +154,9 @@ i-datetime input {
   height: auto;
   max-height: 100vh;
 }
+.modal-content:has(i-list) {
+  min-height: 75vh;
+}
 .full .modal-content {
   width: 95vw;
   height: auto;
