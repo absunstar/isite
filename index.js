@@ -11,6 +11,7 @@ module.exports = function init(options) {
   ____0.Module = require('module');
   ____0.http = require('http');
   ____0.https = require('https');
+  ____0.net = require('net');
   ____0.url = require('url');
   ____0.fs = require('fs');
   ____0.path = require('path');
