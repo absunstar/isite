@@ -1296,5 +1296,62 @@
     XLSX.writeFile(excelFile, (data.id || data.tagName) + '.' + type);
   };
 
+  site.isSPA = false;
+  site.routeContainer = '[router]';
+  site.routeList = [];
+  site.getRoute = (name) => {
+    return site.routeList.find((r) => r.name == name) || { name: name, url: name };
+  };
+  site.route = (event) => {
+    event.preventDefault();
+    site.setRoute(site.getRoute(event.target.href));
+  };
+  site.setRoute = function (route) {
+    if (typeof route === 'string') {
+      route = site.getRoute(route);
+    }
+    window.history.pushState({}, '', route.name);
+  };
+  site.getRouteContent = async (route) => {
+    if (typeof route === 'string') {
+      route = site.getRoute(route);
+    }
+    return await fetch(route.url).then((data) => data.text());
+  };
+  site.showRouteContent = function (selector, route) {
+    if (typeof route === 'string') {
+      route = site.getRoute(route);
+    }
+
+    site.setRoute(route.name);
+    site.getRouteContent(route.url).then((html) => {
+      document.querySelector(selector).innerHTML = html;
+    });
+  };
+
+  document.addEventListener('click', (e) => {
+    if (!site.isSPA) {
+      return;
+    }
+    if (e.target.hasAttribute('route')) {
+      e.preventDefault();
+      let route = e.target.getAttribute('route') || e.target.getAttribute('href');
+      site.showRouteContent(site.routeContainer, route);
+    }
+  });
+  window.addEventListener('hashchange', (e) => {
+    if (!site.isSPA) {
+      return;
+    }
+    let route = window.location.hash.replace('#', '');
+    if (!route) {
+      route = '/';
+    }
+    site.showRouteContent(site.routeContainer, route);
+  });
+
+  if (document.querySelector('html').hasAttribute('spa')) {
+    site.isSPA = true;
+  }
   window.site = site;
 })(window, document, 'undefined', jQuery);

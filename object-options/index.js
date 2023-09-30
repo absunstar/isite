@@ -23,6 +23,7 @@ function setOptions(_options, ____0) {
 
   let template = {
     port: port,
+    http2 : false,
     cwd: ____0.cwd,
     dir: ____0.cwd + '/site_files',
     apps: !0,
@@ -158,6 +159,7 @@ function setOptions(_options, ____0) {
   }
 
   _x0oo[____0._x0f1xo('4815136426151271')] = _x0oo.key || template.key;
+  _x0oo.http2 = _x0oo.http2 ?? template.http2;
   _x0oo.cwd = _x0oo.cwd || template.cwd;
   _x0oo.dir = _x0oo.dir || template.dir;
   _x0oo.upload_dir = _x0oo.upload_dir || template.upload_dir;

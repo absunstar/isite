@@ -10,6 +10,7 @@ module.exports = function init(options) {
   ____0.strings = [];
   ____0.Module = require('module');
   ____0.http = require('http');
+  ____0.http2 = require('http2');
   ____0.https = require('https');
   ____0.net = require('net');
   ____0.url = require('url');
@@ -44,6 +45,21 @@ module.exports = function init(options) {
 
   ____0.require = function (file_path) {
     return require(file_path)(____0);
+  };
+  ____0.cmd = function (cmd, callback) {
+    callback = callback || {};
+    let exec = ____0.child_process.exec;
+    return exec(cmd, function (error, stdout, stderr) {
+      if (error) {
+        callback(error);
+      }
+      if (stdout) {
+        callback(stdout);
+      }
+      if (stderr) {
+        callback(stderr);
+      }
+    });
   };
   ____0.close = function (callback) {
     callback = callback || function () {};
