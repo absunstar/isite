@@ -592,7 +592,6 @@
       if (tabHeader) {
         let tabs = tabHeader.parentNode;
         if (tabs) {
-          console.log(tabs);
           tabs.querySelectorAll('.tab-content').forEach((tabContent) => {
             tabContent.style.display = 'none';
           });
