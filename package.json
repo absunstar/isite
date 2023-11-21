@@ -1,6 +1,6 @@
 {
   "name": "isite",
-  "version": "2023.10.01",
+  "version": "2023.11.20",
   "description": "Create Secure Multi-Language Web Site [Fast and Easy] ",
   "main": "index.js",
   "repository": {
@@ -43,7 +43,7 @@
     "md5": "^2.3.0",
     "mongodb": "^4.2.2",
     "mv": "^2.1.1",
-    "node-fetch": "^2.6.1",
+    "node-fetch": "^3.3.2",
     "nodemailer": "^6.7.8",
     "pdf-lib": "^1.17.1",
     "utf8": "^3.0.0",

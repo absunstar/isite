@@ -45,18 +45,21 @@ site.connectScope = app.connectScope = function (_scope, callback) {
           site.showModal(_app.modal);
         };
 
-        $scope[_app.as + 'Add'] = function () {
+        $scope[_app.as + 'Add'] = function (selectedItem) {
           $scope.error = '';
-          const v = site.validated(_app.modal);
-          if (!v.ok) {
-            $scope.error = v.messages[0].ar;
-            return;
+          if (!selectedItem) {
+            const v = site.validated(_app.modal);
+            if (!v.ok) {
+              $scope.error = v.messages[0].ar;
+              return;
+            }
           }
+          selectedItem = selectedItem || $scope[_app.as + 'Item'];
           $scope.busy = true;
           $http({
             method: 'POST',
             url: `/api/${_app.name}/add`,
-            data: $scope[_app.as + 'Item'],
+            data: selectedItem,
           }).then(
             function (response) {
               $scope.busy = false;

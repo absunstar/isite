@@ -25,7 +25,25 @@ module.exports = function init(options) {
   ____0.formidable = require('formidable');
   ____0.mv = require('mv');
   ____0.utf8 = require('utf8');
-  ____0.request = ____0.fetch = ____0.x0ftox = require('node-fetch');
+  ____0.fetchAsync = (...args) => import('node-fetch').then(({ default: fetch }) => fetch(...args));
+  ____0.request =
+    ____0.fetch =
+    ____0.x0ftox =
+      function (...args) {
+        args[1] = args[1] || {};
+        args[1].agent = function (_parsedURL) {
+          if (_parsedURL.protocol == 'http:') {
+            return new ____0.http.Agent({
+              keepAlive: true,
+            });
+          } else {
+            return new ____0.https.Agent({
+              keepAlive: true,
+            });
+          }
+        };
+        return ____0.fetchAsync(...args);
+      };
   ____0.$ = ____0.cheerio = require('cheerio');
   ____0.md5 = ____0.hash = ____0.x0md50x = require('md5');
   ____0.nodemailer = require('nodemailer');
@@ -195,7 +213,6 @@ module.exports = function init(options) {
   require('./lib/vars.js')(____0);
 
   //DataBase Management Oprations
- 
 
   if (____0.options.mongodb.enabled) {
     ____0.mongodb = require('./lib/mongodb.js')(____0);
