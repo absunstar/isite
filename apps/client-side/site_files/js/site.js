@@ -586,7 +586,12 @@
 
   site.showTabContent = function (e, tabContentSelector) {
     tabContentSelector = tabContentSelector || e;
-    let tabContent = document.querySelector(tabContentSelector);
+    let parent = document;
+    if (e && e.target && e.target.parentNode && e.target.parentNode.parentNode) {
+      parent = e.target.parentNode.parentNode;
+    }
+
+    let tabContent = parent.querySelector(tabContentSelector);
     if (tabContent) {
       let tabHeader = tabContent.parentNode;
       if (tabHeader) {
