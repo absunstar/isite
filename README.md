@@ -1257,7 +1257,7 @@ site.onGET('/', (req, res) => {
     res.set('Content-Type', 'text/plain'); // add response header
     res.remove('Content-Type'); // remove response header
     res.delete('Content-Type'); // remove response header
-    res.redirect('/URL'); // Any URL
+    res.redirect('/URL' , 302); // Any URL
     res.send('HTML CONTENT'); // Any HTML Content or object
     res.send(obj); // Any HTML Content or object
     res.htmlContent('HTML CONTENT'); // Any HTML Content
