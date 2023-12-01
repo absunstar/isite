@@ -590,7 +590,7 @@
     if (e && e.target && e.target.parentNode && e.target.parentNode.parentNode) {
       parent = e.target.parentNode.parentNode;
     }
-    if (parent && parent.getElementsByClassName.contains('tabs-header')) {
+    if (parent && parent.className.contains('tabs-header')) {
       parent = parent.parentNode;
     }
     let tabContent = parent.querySelector(tabContentSelector);
