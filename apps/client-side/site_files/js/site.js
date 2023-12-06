@@ -54,43 +54,6 @@
     };
   }
 
-  if (window.SOCIALBROWSER) {
-    SOCIALBROWSER.var = SOCIALBROWSER.var || {};
-    SOCIALBROWSER.var.white_list = SOCIALBROWSER.var.white_list || [];
-    if (document.location.hostname) {
-      let h = `*${document.location.hostname}*`;
-      let h_exists = !1;
-      SOCIALBROWSER.var.white_list.forEach((w) => {
-        if (w.url == h) {
-          h_exists = !0;
-        }
-      });
-      if (!h_exists) {
-        SOCIALBROWSER.var.white_list.push({
-          url: h,
-        });
-        SOCIALBROWSER.call('set_var', {
-          name: 'white_list',
-          data: SOCIALBROWSER.var.white_list,
-        });
-      }
-    }
-
-    SOCIALBROWSER.var.blocking = SOCIALBROWSER.var.blocking || {};
-    SOCIALBROWSER.var.blocking.block_ads = !1;
-    SOCIALBROWSER.var.blocking.block_empty_iframe = !1;
-    SOCIALBROWSER.var.blocking.remove_external_iframe = !1;
-    SOCIALBROWSER.var.blocking.skip_video_ads = !1;
-    SOCIALBROWSER.var.blocking.popup = SOCIALBROWSER.var.blocking.popup || {};
-    SOCIALBROWSER.var.blocking.popup.allow_external = !0;
-    SOCIALBROWSER.var.blocking.popup.allow_internal = !0;
-
-    SOCIALBROWSER.var.blocking.javascript = SOCIALBROWSER.var.blocking.javascript || {};
-    SOCIALBROWSER.var.blocking.javascript.block_window_open = !1;
-    SOCIALBROWSER.var.blocking.javascript.block_eval = !1;
-    SOCIALBROWSER.var.blocking.javascript.block_console_output = !1;
-  }
-
   let site = {};
   site.onLoad = function (fn) {
     if (document.readyState !== 'loading') {
