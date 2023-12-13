@@ -227,23 +227,7 @@ exports = module.exports = function init(____0) {
 
   fn.getFileEncode = function (path) {
     path = path || '';
-    if (
-      path.endsWith('.woff2') ||
-      path.endsWith('.woff') ||
-      path.endsWith('.ttf') ||
-      path.endsWith('.svg') ||
-      path.endsWith('.otf') ||
-      path.endsWith('.png') ||
-      path.endsWith('.gif') ||
-      path.endsWith('.jpg') ||
-      path.endsWith('.jpeg') ||
-      path.endsWith('.ico') ||
-      path.endsWith('.bmp') ||
-      path.endsWith('.webp') ||
-      path.endsWith('.xls') ||
-      path.endsWith('.xlsx') ||
-      path.endsWith('.eot')
-    ) {
+    if (path.contains('.woff|.ttf|.svg|.otf|.png|.gif|.jpg|.ico|.bmp|.webp|.xls|.eot')) {
       return 'binary';
     }
     return 'utf8';
