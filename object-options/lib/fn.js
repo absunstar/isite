@@ -230,7 +230,7 @@ exports = module.exports = function init(____0) {
     if (path.contains('.woff|.ttf|.svg|.otf|.png|.gif|.jpg|.ico|.bmp|.webp|.xls|.eot')) {
       return 'binary';
     }
-    return 'utf8';
+    return 'UTF8';
   };
 
   fn.toHtmlTable = function (obj) {

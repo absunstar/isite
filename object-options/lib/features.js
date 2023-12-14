@@ -44,9 +44,9 @@ module.exports = function init(____0) {
   }
 
   ____0.addfeatures = function(path){
-    ____0.readFile(path, (err, data) => {
+    ____0.readFile(path, (err, file) => {
       if (!err) {
-        let features = JSON.parse(data)
+        let features = JSON.parse(file.content)
         for (let i = 0; i < features.length; i++) {
           ____0.features.push(features[i])
         }

@@ -170,6 +170,8 @@ module.exports = function init(options) {
   ____0.isFileExistsSync = ____0.fsm.isFileExistsSync;
 
   ____0.readFile = ____0.fsm.readFile;
+  ____0.readFileRaw = ____0.fsm.readFileRaw;
+  ____0.readFileStream = ____0.fsm.readFileStream;
   ____0.readFiles = ____0.fsm.readFiles;
   ____0.readFileSync = ____0.fsm.readFileSync;
 
@@ -263,7 +265,7 @@ module.exports = function init(options) {
   ____0.reset = function () {};
 
   ____0.on('[any][saving data]', function () {
-    ____0.log('Saving Data :: ' + ____0.options.savingTime + ' Minute ');
+    ____0.log( ____0.options.name  + ' :: Saving Data :: ' + ____0.options.savingTime + ' Minute ');
   });
 
   setInterval(function () {
