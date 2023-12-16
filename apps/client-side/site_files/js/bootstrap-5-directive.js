@@ -215,7 +215,7 @@ app.directive('iButton', [
         type: '@',
         class2: '@',
         loading: '@',
-        ngClick: '&',
+        click: '&',
         fa: '@',
       },
       link: function ($scope, element, attrs, ctrl) {
@@ -255,10 +255,10 @@ app.directive('iButton', [
           $scope.class = 'btn-secondary';
         } else if ($scope.type.like('*export*|*excel*')) {
           $scope.fa = 'fas fa-file-export';
-          $scope.class = 'btn-secondary';
+          $scope.class = 'btn-light';
         } else if ($scope.type.like('*import*')) {
           $scope.fa = 'fas fa-file-upload';
-          $scope.class = 'btn-secondary';
+          $scope.class = 'btn-light';
         } else if ($scope.type.like('*search*|*find*')) {
           $scope.fa = 'fas fa-search';
           $scope.class = 'btn-light';
@@ -276,7 +276,7 @@ app.directive('iButton', [
           $scope.class = 'btn-danger';
         } else if ($scope.type.like('*upload*')) {
           $scope.fa = 'fas fa-upload';
-          $scope.class = 'btn-primary';
+          $scope.class = 'btn-light';
         } else if ($scope.type.like('*up*')) {
           $scope.fa = 'fas fa-long-arrow-alt-up';
           $scope.class = 'btn-light';
@@ -302,11 +302,8 @@ app.directive('iButton', [
         if ($scope.class2) {
           $scope.class = $scope.class2;
         }
-        $scope.click = function () {
+        $scope.onclick = function () {
           $scope.clickBusy = true;
-          if ($scope.ngClick) {
-            $scope.ngClick();
-          }
           $timeout(() => {
             $scope.clickBusy = false;
           }, 250);
