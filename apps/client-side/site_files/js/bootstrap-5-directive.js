@@ -220,10 +220,10 @@ app.directive('iButton', function () {
       $scope.class = $scope.class = 'btn-dark';
       $scope.fa = $scope.fa || $scope.label ? '' : 'fas fa-play';
 
-      if ($scope.type.like('*add*') || $scope.type.like('*new*')) {
+      if ($scope.type.like('*add*|*new*')) {
         $scope.fa = 'fas fa-plus';
         $scope.class = 'btn-primary';
-      } else if ($scope.type.like('*update*') || $scope.type.like('*edit*')) {
+      } else if ($scope.type.like('*update*|*edit*')) {
         $scope.fa = 'fas fa-edit';
         $scope.class = 'btn-warning';
       } else if ($scope.type.like('*save*')) {
@@ -238,28 +238,28 @@ app.directive('iButton', function () {
       } else if ($scope.type.like('approve')) {
         $scope.fa = 'fas fa-check-double';
         $scope.class = 'btn-primary';
-      } else if ($scope.type.like('*view*') || $scope.type.like('*details*')) {
+      } else if ($scope.type.like('*view*|*details*|*show*')) {
         $scope.fa = 'fas fa-eye';
         $scope.class = 'btn-info';
-      } else if ($scope.type.like('*delete*') || $scope.type.like('*remove*')) {
+      } else if ($scope.type.like('*delete*|*remove*|*clear*')) {
         $scope.fa = 'fas fa-trash';
         $scope.class = 'btn-danger';
-      } else if ($scope.type.like('*exit*') || $scope.type.like('*close*')) {
+      } else if ($scope.type.like('*exit*|*close*')) {
         $scope.fa = 'fas fa-times-circle';
         $scope.class = 'btn-danger';
       } else if ($scope.type.like('*print*')) {
         $scope.fa = 'fas fa-print';
         $scope.class = 'btn-secondary';
-      } else if ($scope.type.like('*export*') || $scope.type.like('*excel*')) {
+      } else if ($scope.type.like('*export*|*excel*') ) {
         $scope.fa = 'fas fa-file-export';
         $scope.class = 'btn-secondary';
-      } else if ($scope.type.like('*search*') || $scope.type.like('*find*')) {
+      } else if ($scope.type.like('*search*|*find*')) {
         $scope.fa = 'fas fa-search';
         $scope.class = 'btn-light';
-      } else if ($scope.type.like('*login*') || $scope.type.like('*signin*')) {
+      } else if ($scope.type.like('*login*|*signin*')) {
         $scope.fa = 'fas fa-sign-in-alt';
         $scope.class = 'btn-light';
-      } else if ($scope.type.like('*logout*') || $scope.type.like('*signout*')) {
+      } else if ($scope.type.like('*logout*|*signout*')) {
         $scope.fa = 'fas fa-sign-out-alt';
         $scope.class = 'btn-light';
       } else if ($scope.type.like('*push*')) {
@@ -276,6 +276,15 @@ app.directive('iButton', function () {
         $scope.class = 'btn-light';
       } else if ($scope.type.like('*down*')) {
         $scope.fa = 'fas fa-long-arrow-alt-down';
+        $scope.class = 'btn-light';
+      } else if ($scope.type.like('*reset*')) {
+        $scope.fa = 'fas fa-sync-alt';
+        $scope.class = 'btn-light';
+      }else if ($scope.type.like('*stop*')) {
+        $scope.fa = 'fas fa-stop';
+        $scope.class = 'btn-light';
+      }else if ($scope.type.like('*copy*')) {
+        $scope.fa = 'fas fa-copy';
         $scope.class = 'btn-light';
       }
       if ($scope.type.like('*default*')) {
