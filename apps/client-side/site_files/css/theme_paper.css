@@ -129,7 +129,7 @@
     --btn-sgin-color: #000000;
     --btn-sgin-background-color: #ffffff;
 
-    --i-image-border: 2px dashed var(--theme-color);
+    --i-image-border: 3px dashed var(--theme-color);
     --i-image-view-border: 2px solid var(--theme-color);
 
     --fieldset-border: 1px solid var(--theme-color);

@@ -204,106 +204,125 @@ app.directive('iRadio', function () {
   };
 });
 
-app.directive('iButton', function () {
-  return {
-    restrict: 'E',
-    scope: {
-      label: '@',
-      type: '@',
-      class2: '@',
-      loading: '@',
-      click: '&',
-      fa: '@',
-    },
-    link: function ($scope, element, attrs, ctrl) {
-      $scope.type = $scope.type || '';
-      $scope.class = $scope.class = 'btn-dark';
-      $scope.fa = $scope.fa || $scope.label ? '' : 'fas fa-play';
+app.directive('iButton', [
+  '$interval',
+  '$timeout',
+  function ($interval, $timeout) {
+    return {
+      restrict: 'E',
+      scope: {
+        label: '@',
+        type: '@',
+        class2: '@',
+        loading: '@',
+        ngClick: '&',
+        fa: '@',
+      },
+      link: function ($scope, element, attrs, ctrl) {
+        $scope.type = $scope.type || '';
+        $scope.class = $scope.class = 'btn-light';
+        $scope.fa = $scope.fa || $scope.label ? '' : 'fas fa-mouse-pointer';
 
-      if ($scope.type.like('*add*|*new*')) {
-        $scope.fa = 'fas fa-plus';
-        $scope.class = 'btn-primary';
-      } else if ($scope.type.like('*update*|*edit*')) {
-        $scope.fa = 'fas fa-edit';
-        $scope.class = 'btn-warning';
-      } else if ($scope.type.like('*save*')) {
-        $scope.fa = 'fas fa-save';
-        $scope.class = 'btn-success';
-      } else if ($scope.type.like('*list*')) {
-        $scope.fa = 'fas fa-list';
-        $scope.class = 'btn-info';
-      } else if ($scope.type.like('unapprove')) {
-        $scope.fa = 'fas fa-eject';
-        $scope.class = 'btn-danger';
-      } else if ($scope.type.like('approve')) {
-        $scope.fa = 'fas fa-check-double';
-        $scope.class = 'btn-primary';
-      } else if ($scope.type.like('*view*|*details*|*show*')) {
-        $scope.fa = 'fas fa-eye';
-        $scope.class = 'btn-info';
-      } else if ($scope.type.like('*delete*|*remove*|*clear*')) {
-        $scope.fa = 'fas fa-trash';
-        $scope.class = 'btn-danger';
-      } else if ($scope.type.like('*exit*|*close*')) {
-        $scope.fa = 'fas fa-times-circle';
-        $scope.class = 'btn-danger';
-      } else if ($scope.type.like('*print*')) {
-        $scope.fa = 'fas fa-print';
-        $scope.class = 'btn-secondary';
-      } else if ($scope.type.like('*export*|*excel*') ) {
-        $scope.fa = 'fas fa-file-export';
-        $scope.class = 'btn-secondary';
-      } else if ($scope.type.like('*search*|*find*')) {
-        $scope.fa = 'fas fa-search';
-        $scope.class = 'btn-light';
-      } else if ($scope.type.like('*login*|*signin*')) {
-        $scope.fa = 'fas fa-sign-in-alt';
-        $scope.class = 'btn-light';
-      } else if ($scope.type.like('*logout*|*signout*')) {
-        $scope.fa = 'fas fa-sign-out-alt';
-        $scope.class = 'btn-light';
-      } else if ($scope.type.like('*push*')) {
-        $scope.fa = 'fas fa-plus-circle';
-        $scope.class = 'btn-primary';
-      } else if ($scope.type.like('*cancel*')) {
-        $scope.fa = 'fas fa-minus-circle';
-        $scope.class = 'btn-danger';
-      } else if ($scope.type.like('*upload*')) {
-        $scope.fa = 'fas fa-upload';
-        $scope.class = 'btn-primary';
-      } else if ($scope.type.like('*up*')) {
-        $scope.fa = 'fas fa-long-arrow-alt-up';
-        $scope.class = 'btn-light';
-      } else if ($scope.type.like('*down*')) {
-        $scope.fa = 'fas fa-long-arrow-alt-down';
-        $scope.class = 'btn-light';
-      } else if ($scope.type.like('*reset*')) {
-        $scope.fa = 'fas fa-sync-alt';
-        $scope.class = 'btn-light';
-      }else if ($scope.type.like('*stop*')) {
-        $scope.fa = 'fas fa-stop';
-        $scope.class = 'btn-light';
-      }else if ($scope.type.like('*copy*')) {
-        $scope.fa = 'fas fa-copy';
-        $scope.class = 'btn-light';
-      }
-      if ($scope.type.like('*default*')) {
-        $scope.class = '';
-      }
-      if ($scope.class2) {
-        $scope.class = $scope.class2;
-      }
-      $scope.$watch('loading', (loading) => {
-        if (loading === 'true') {
-          $scope.busy = true;
-        } else {
-          $scope.busy = false;
+        if ($scope.type.like('*add*|*new*')) {
+          $scope.fa = 'fas fa-plus';
+          $scope.class = 'btn-primary';
+        } else if ($scope.type.like('*update*|*edit*')) {
+          $scope.fa = 'fas fa-edit';
+          $scope.class = 'btn-warning';
+        } else if ($scope.type.like('*save*')) {
+          $scope.fa = 'fas fa-save';
+          $scope.class = 'btn-success';
+        } else if ($scope.type.like('*list*')) {
+          $scope.fa = 'fas fa-list';
+          $scope.class = 'btn-info';
+        } else if ($scope.type.like('unapprove')) {
+          $scope.fa = 'fas fa-eject';
+          $scope.class = 'btn-danger';
+        } else if ($scope.type.like('approve')) {
+          $scope.fa = 'fas fa-check-double';
+          $scope.class = 'btn-primary';
+        } else if ($scope.type.like('*view*|*details*|*show*')) {
+          $scope.fa = 'fas fa-eye';
+          $scope.class = 'btn-info';
+        } else if ($scope.type.like('*delete*|*remove*|*clear*')) {
+          $scope.fa = 'fas fa-trash';
+          $scope.class = 'btn-danger';
+        } else if ($scope.type.like('*exit*|*close*')) {
+          $scope.fa = 'fas fa-times-circle';
+          $scope.class = 'btn-danger';
+        } else if ($scope.type.like('*print*')) {
+          $scope.fa = 'fas fa-print';
+          $scope.class = 'btn-secondary';
+        } else if ($scope.type.like('*export*|*excel*')) {
+          $scope.fa = 'fas fa-file-export';
+          $scope.class = 'btn-secondary';
+        } else if ($scope.type.like('*import*')) {
+          $scope.fa = 'fas fa-file-upload';
+          $scope.class = 'btn-secondary';
+        } else if ($scope.type.like('*search*|*find*')) {
+          $scope.fa = 'fas fa-search';
+          $scope.class = 'btn-light';
+        } else if ($scope.type.like('*login*|*signin*')) {
+          $scope.fa = 'fas fa-sign-in-alt';
+          $scope.class = 'btn-light';
+        } else if ($scope.type.like('*logout*|*signout*')) {
+          $scope.fa = 'fas fa-sign-out-alt';
+          $scope.class = 'btn-light';
+        } else if ($scope.type.like('*push*')) {
+          $scope.fa = 'fas fa-plus-circle';
+          $scope.class = 'btn-primary';
+        } else if ($scope.type.like('*cancel*')) {
+          $scope.fa = 'fas fa-minus-circle';
+          $scope.class = 'btn-danger';
+        } else if ($scope.type.like('*upload*')) {
+          $scope.fa = 'fas fa-upload';
+          $scope.class = 'btn-primary';
+        } else if ($scope.type.like('*up*')) {
+          $scope.fa = 'fas fa-long-arrow-alt-up';
+          $scope.class = 'btn-light';
+        } else if ($scope.type.like('*down*')) {
+          $scope.fa = 'fas fa-long-arrow-alt-down';
+          $scope.class = 'btn-light';
+        } else if ($scope.type.like('*reset*')) {
+          $scope.fa = 'fas fa-sync-alt';
+          $scope.class = 'btn-light';
+        } else if ($scope.type.like('*stop*')) {
+          $scope.fa = 'fas fa-stop';
+          $scope.class = 'btn-light';
+        } else if ($scope.type.like('*play*')) {
+          $scope.fa = 'far fa-play-circle';
+          $scope.class = 'btn-light';
+        } else if ($scope.type.like('*copy*')) {
+          $scope.fa = 'fas fa-copy';
+          $scope.class = 'btn-light';
         }
-      });
-    },
-    template: `/*##client-side/directive/i-button.html*/`,
-  };
-});
+        if ($scope.type.like('*default*')) {
+          $scope.class = '';
+        }
+        if ($scope.class2) {
+          $scope.class = $scope.class2;
+        }
+        $scope.click = function () {
+          $scope.clickBusy = true;
+          if ($scope.ngClick) {
+            $scope.ngClick();
+          }
+          $timeout(() => {
+            $scope.clickBusy = false;
+          }, 250);
+        };
+        $scope.$watch('loading', (loading) => {
+          if (loading === 'true') {
+            $scope.busy = true;
+          } else {
+            $scope.busy = false;
+          }
+        });
+      },
+      template: `/*##client-side/directive/i-button.html*/`,
+    };
+  },
+]);
 app.directive('iList', [
   '$interval',
   '$timeout',
@@ -596,7 +615,7 @@ app.directive('iChecklist', [
   },
 ]);
 
-app.directive('iDate', function () {
+app.directive('iDate', function ($timeout) {
   return {
     restrict: 'E',
     required: 'ngModel',
@@ -685,6 +704,7 @@ app.directive('iDate', function () {
         if ($scope.ngModel1) {
           $scope.ngModel = $scope.ngModel1;
           $scope.editOnly = false;
+
           if ($scope.ngChange) {
             $scope.ngChange();
           }
@@ -845,9 +865,10 @@ app.directive('iFile', [
         $scope.viewOnly = $scope.view === undefined ? false : true;
 
         let input = $(element).find('input')[0];
-        let button = $(element).find('button')[0];
+        let button = $(element).find('i-button')[0];
 
         let progress = $(element).find('.progress')[0];
+        let progressBar = $(element).find('.progress-bar')[0];
         $(progress).hide();
 
         $scope.id = Math.random().toString().replace('.', '_');
@@ -868,6 +889,7 @@ app.directive('iFile', [
               if (e) {
                 $(progress).show();
                 $scope.value = (e.loaded / e.total) * 100;
+                progressBar.style.width = $scope.value + '%';
                 $scope.max = e.total;
                 if ($scope.value === 100) {
                   $(progress).hide();
@@ -1088,7 +1110,6 @@ app.directive('iVideo', [
           }
         };
         $scope.delete = function () {
-          console.log('delete ...');
           $scope.ngModel = null;
           video.setAttribute('src', null);
         };
@@ -1193,7 +1214,6 @@ app.directive('iUpload', [
                   progress.max = e.total;
                 } else if (data) {
                   if ($scope.onUploaded) {
-                    console.log(err, data, e);
                     $scope.onUploaded({ $data: data });
                   }
                 }

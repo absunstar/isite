@@ -2,7 +2,8 @@
   <label for="{{id2}}" class="form-label"> <span class="red bold"> {{requird}} </span> {{label}}</label>
   <div class="row" ng-hide="editOnly">
     <p ng-click="editOnly = true" class="blue bold border padding pointer">
-      <span class="bold">{{model.selectedDay || '__'}} </span> <span class="orange"> / </span> <span class="bold">{{model.selectedMonth.name || '______'}}</span> <span class="orange"> / </span> <span class="bold">{{model.selectedYear || '____'}}</span>
+      <span class="bold">{{model.selectedDay || '__'}} </span> <span class="orange"> / </span> <span class="bold">{{model.selectedMonth.name || '______'}}</span> <span class="orange"> / </span>
+      <span class="bold">{{model.selectedYear || '____'}}</span>
     </p>
   </div>
   <div class="row" ng-show="editOnly">
@@ -21,7 +22,7 @@
       />
     </div>
     <div class="col2">
-      <i class="fas fa-save" ng-click="updateDate()"></i>
+      <i-button type="save" ng-click="updateDate()"></i-button>
     </div>
     <div class="invalid-feedback"></div>
   </div>

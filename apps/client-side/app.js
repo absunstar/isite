@@ -243,7 +243,7 @@ module.exports = function (site) {
   });
 
   site.post({ name: '/x-api/upload/image', public: true }, (req, res) => {
-    let folder = req.headers['folder'] || new Date().getFullYear() + '_' + new Date().getMonth() + '_' + new Date().getDate();
+    let folder = req.headers['folder'] || new Date().getFullYear() + '_' + (new Date().getMonth() + 1) + '_' + new Date().getDate();
 
     site.createDir(site.options.upload_dir + '/' + folder, () => {
       site.createDir(site.options.upload_dir + '/' + folder + '/images', () => {
@@ -268,13 +268,12 @@ module.exports = function (site) {
               response.image.path = newpath;
               response.image.url = '/x-api/image/' + folder + '/' + newName;
               response.image.size = file.size;
-              if (!response.image.name.like('*.webp')) {
+              if (!response.image.name.like('*.webp|*.gif')) {
                 site.webp.cwebp(newpath, newpath2, '-q 80').then((output) => {
-                  console.log(output);
                   response.image.path = newpath2;
                   response.image.url = '/x-api/image/' + folder + '/' + newName2;
                   res.json(response);
-                  site.fs.unlink(newpath, () => {});
+                  site.deleteFileSync(newpath, () => {});
                 });
               } else {
                 res.json(response);

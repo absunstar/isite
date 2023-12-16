@@ -1,12 +1,11 @@
 <div class="row">
   <label class="col"> {{label}} </label>
-  <button ng-hide="ngModel || viewOnly" class="btn btn-primary col">
-    <i class="fas fa-upload"></i>
-  </button>
+  <i-button type="upload" ng-hide="ngModel || viewOnly" class="col"></i-button>
+
   <div class="row">
     <input class="hidden" type="file" name="fileToUpload" accept="{{accept}}" />
     <div class="progress row">
-      <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow="{{value}}" aria-valuemin="0" aria-valuemax="100" style="width: {{value}}%"></div>
+      <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow="{{value}}" aria-valuemin="0" aria-valuemax="100"></div>
     </div>
   </div>
 

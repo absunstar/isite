@@ -114,12 +114,15 @@ i-button.default button {
 i-file {
   display: block;
   padding: 10px !important;
-  border: 1px dashed var(--theme-color);
+  border: 3px dashed var(--theme-color);
   margin: 1% !important;
   height: fit-content;
   width: 98% !important;
 }
-i-file button {
+i-file label {
+  margin-top: 10px !important;
+}
+i-file i-button {
   max-width: 100px;
 }
 i-upload {
@@ -131,17 +134,15 @@ i-datetime .left-10 {
 }
 i-date .fas,
 i-datetime .fas {
-  font-size: 24px;
-  vertical-align: middle;
-  margin-top: 5px;
-  cursor: pointer;
-}
-i-date .fas:hover,
-i-datetime .fas:hover {
-  font-size: 26px;
+  color: green;
 }
 i-date p,
 i-datetime p {
+  margin: 0 !important;
+}
+i-date button,
+i-datetime button {
+  background: transparent !important;
   margin: 0 !important;
 }
 i-date input,

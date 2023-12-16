@@ -12,6 +12,7 @@ i-image {
   border: var(--i-image-border);
   margin: 5px;
   border-radius: 5px;
+  padding: 5px;
 }
 i-image div{
   width: 100%;

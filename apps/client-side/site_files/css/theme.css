@@ -98,7 +98,7 @@
   --btn-box-shadow-color: #272727;
   --btn-border-radius: 5px;
 
-  --i-image-border: 2px dashed var(--modal-header-background-color);
+  --i-image-border: 3px dashed var(--modal-header-background-color);
   --i-image-view-border: 2px solid var(--modal-header-background-color);
 
   --fieldset-border: 2px solid #283e4a;
