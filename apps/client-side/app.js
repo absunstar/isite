@@ -129,17 +129,12 @@ module.exports = function (site) {
   });
 
   site.get({
-    name: '/x-fonts',
+    name: ['/x-fonts', '/x-css/x-fonts'],
     path: __dirname + '/site_files/fonts',
     public: true,
   });
   site.get({
-    name: '/x-css/x-fonts',
-    path: __dirname + '/site_files/fonts',
-    public: true,
-  });
-  site.get({
-    name: '/webfonts',
+    name: ['/webfonts', '/x-css/webfonts'],
     path: __dirname + '/site_files/webfonts',
     public: true,
   });
