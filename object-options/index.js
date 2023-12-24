@@ -40,6 +40,7 @@ function setOptions(_options, ____0) {
     log: !0,
     lang: 'en',
     theme: 'default',
+    public : false,
     help: !1,
     stdin: !0,
     _0xmmxo: '26319191',
