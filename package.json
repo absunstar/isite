@@ -1,7 +1,7 @@
 {
   "name": "isite",
-  "version": "2023.12.19",
-  "description": "Create Secure Multi-Language Web Site [Fast and Easy] ",
+  "version": "2023.12.20",
+  "description": "Create High Level Multi-Language Web Site [Fast and Easy] ",
   "main": "index.js",
   "repository": {
     "type": "git",
