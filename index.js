@@ -265,7 +265,7 @@ module.exports = function init(options) {
   ____0.reset = function () {};
 
   ____0.on('[any][saving data]', function () {
-    ____0.log( ____0.options.name  + ' :: Saving Data :: ' + ____0.options.savingTime + ' Minute ');
+    ____0.log(____0.options.name + ' :: Saving Data :: ' + ____0.options.savingTime + ' Minute ');
   });
 
   setInterval(function () {
