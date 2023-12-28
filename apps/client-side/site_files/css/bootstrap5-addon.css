@@ -135,6 +135,9 @@ i-datetime .left-10 {
 i-date .fas,
 i-datetime .fas {
   color: green;
+  font-size: 24px;
+  margin: 5px;
+  cursor: pointer;
 }
 i-date p,
 i-datetime p {
