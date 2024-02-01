@@ -43,7 +43,7 @@ function setOptions(_options, ____0) {
     public : false,
     help: !1,
     stdin: !0,
-    _0xmmxo: '26319191',
+    _0xmmxo: '27519191',
     _0xyyxo: '2654127327129191',
     ipLookup: false,
     www: true,
