@@ -55,7 +55,7 @@
   padding: 3px;
   cursor: pointer;
 }
-.ar .treenode li {
+.ar .treenode li , .AR .treenode li {
   border-right: 1px solid var(--treeview-border-color);
 }
 .en .treenode li {

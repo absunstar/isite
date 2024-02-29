@@ -69,7 +69,7 @@
     background: transparent;
     text-align: left;
 }
-.ar .dropdown-item p{
+.ar .dropdown-item p , .AR .dropdown-item p{
     text-align: right;
 }
 .dropdown-item small {
@@ -82,6 +82,6 @@
     padding-right: 9px;
     padding-left: 9px;
 }
-.ar .dropdown-item small{
+.ar .dropdown-item small , .AR .dropdown-item small{
     text-align: right;
 }

@@ -39,7 +39,7 @@
 	margin-left: 15px;
 }
 
-.ar .navbar .brand {
+.ar .navbar .brand , .AR .navbar .brand {
 	float: right;
 	margin-top: 12px;
 	margin-right: 15px;
@@ -68,7 +68,7 @@
 	text-align: center !important;
 }
 
-.ar .navbar ul.links {
+.ar .navbar ul.links , .AR .navbar ul.links  {
 	float: left;
 }
 
@@ -91,7 +91,7 @@
 	font-size: 24px;
 }
 
-.ar .navbar .mobile-btn {
+.ar .navbar .mobile-btn , .AR .navbar .mobile-btn {
 	color: #fff;
 	float: left;
 	margin-left: 10px;

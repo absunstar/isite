@@ -36,7 +36,7 @@ body {
 .container {
   max-width: 100%;
 }
-.ar .form-check .form-check-input {
+.ar .form-check .form-check-input , .AR .form-check .form-check-input {
   float: right;
   margin-right: -1.5em;
 }
@@ -44,7 +44,7 @@ label {
   float: left;
   color: var(--label-color);
 }
-.ar label {
+.ar label , .AR label {
   float: right;
 }
 fieldset {
@@ -67,7 +67,7 @@ fieldset legend {
   width: auto;
   padding: 5px;
 }
-.ar fieldset legend {
+.ar fieldset legend , .AR fieldset legend{
   float: right;
 }
 legend::after {
@@ -209,7 +209,7 @@ i-datetime input {
     transform: translateY(-50%);
     opacity: 0;
   }
-  .ar .v-tabs .nav-link::before {
+  .ar .v-tabs .nav-link::before , .AR .v-tabs .nav-link::before {
     border-right: 10px solid #fff;
     left: -10px;
   }
