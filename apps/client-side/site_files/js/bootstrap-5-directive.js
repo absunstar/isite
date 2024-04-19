@@ -122,7 +122,7 @@ app.directive('iContent', function ($timeout, $interval) {
         }
 
         $interval(() => {
-          if (window['content_' + $scope.id2]) {
+          if (!$scope.stopGet && window['content_' + $scope.id2]) {
             $scope.ngModel2 = window['content_' + $scope.id2].getContents();
             if ($scope.ngModel !== $scope.ngModel2) {
               $scope.ngModel = $scope.ngModel2;
@@ -143,12 +143,14 @@ app.directive('iContent', function ($timeout, $interval) {
       };
 
       $scope.$watch('ngModel', (ngModel) => {
+        $scope.stopGet = true;
         if (ngModel && window['content_' + $scope.id2]) {
           if ($scope.ngModel2 && $scope.ngModel !== $scope.ngModel2) {
             $scope.ngModel = $scope.ngModel2;
             window['content_' + $scope.id2].setContents($scope.ngModel);
           }
         }
+        $scope.stopGet = false;
       });
     },
     template: `/*##client-side/directive/i-content.html*/`,
