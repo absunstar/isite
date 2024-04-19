@@ -145,15 +145,17 @@ app.directive('iContent', function ($timeout, $interval) {
 
       $scope.$watch('ngModel', (ngModel) => {
         $scope.stopReading = true;
-        if (ngModel && window['content_' + $scope.id2]) {
-          if ($scope.ngModel2 && $scope.ngModel !== $scope.ngModel2) {
-            $scope.ngModel = $scope.ngModel2;
-            window['content_' + $scope.id2].setContents($scope.ngModel);
-          }
-        }
         $timeout(() => {
-          $scope.stopReading = false;
-        }, 500);
+          if (ngModel && window['content_' + $scope.id2]) {
+            if ($scope.ngModel2 && $scope.ngModel !== $scope.ngModel2) {
+              $scope.ngModel = $scope.ngModel2;
+              window['content_' + $scope.id2].setContents($scope.ngModel);
+            }
+          }
+          $timeout(() => {
+            $scope.stopReading = false;
+          }, 1000);
+        }, 1000);
       });
     },
     template: `/*##client-side/directive/i-content.html*/`,
