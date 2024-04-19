@@ -87,6 +87,7 @@ app.directive('iContent', function ($timeout, $interval) {
       }
       $scope.rows = $scope.rows || 10;
       $scope.id2 = $scope.id2 || 'textarea_' + Math.random().toString().replace('0.', '');
+      $(element).find('textarea').id = $scope.id2;
       $(element)
         .find('textarea')
         .focus(() => {
@@ -119,6 +120,7 @@ app.directive('iContent', function ($timeout, $interval) {
         if ($scope.ngModel && window['content_' + $scope.id2]) {
           window['content_' + $scope.id2].setContents($scope.ngModel);
         }
+
         $interval(() => {
           if (window['content_' + $scope.id2]) {
             $scope.ngModel2 = window['content_' + $scope.id2].getContents();
