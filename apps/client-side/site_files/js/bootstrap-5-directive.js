@@ -85,6 +85,7 @@ app.directive('iContent', function ($timeout, $interval) {
       } else {
         attrs.disabled = '';
       }
+      $scope.stopReading = false;
       $scope.rows = $scope.rows || 10;
       $scope.id2 = $scope.id2 || 'textarea_' + Math.random().toString().replace('0.', '');
       $(element).find('textarea').id = $scope.id2;
@@ -122,7 +123,7 @@ app.directive('iContent', function ($timeout, $interval) {
         }
 
         $interval(() => {
-          if (!$scope.stopGet && window['content_' + $scope.id2]) {
+          if (!$scope.stopReading && window['content_' + $scope.id2]) {
             $scope.ngModel2 = window['content_' + $scope.id2].getContents();
             if ($scope.ngModel !== $scope.ngModel2) {
               $scope.ngModel = $scope.ngModel2;
@@ -143,14 +144,16 @@ app.directive('iContent', function ($timeout, $interval) {
       };
 
       $scope.$watch('ngModel', (ngModel) => {
-        $scope.stopGet = true;
+        $scope.stopReading = true;
         if (ngModel && window['content_' + $scope.id2]) {
           if ($scope.ngModel2 && $scope.ngModel !== $scope.ngModel2) {
             $scope.ngModel = $scope.ngModel2;
             window['content_' + $scope.id2].setContents($scope.ngModel);
           }
         }
-        $scope.stopGet = false;
+        $timeout(() => {
+          $scope.stopReading = false;
+        }, 500);
       });
     },
     template: `/*##client-side/directive/i-content.html*/`,
