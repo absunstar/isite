@@ -99,7 +99,7 @@ app.directive('iContent', function ($timeout, $interval) {
           }, 1000);
           return false;
         }
-        window['content_' + attrs.id] = WebShareEditor.create($scope.id2, {
+        window['content_' + $scope.id2] = WebShareEditor.create($scope.id2, {
           toolbarItem: [
             ['undo', 'redo'],
             ['font', 'fontSize', 'formatBlock'],
@@ -116,12 +116,12 @@ app.directive('iContent', function ($timeout, $interval) {
           width: '100%',
           minHeight: '300px',
         });
-        if ($scope.ngModel && window['content_' + attrs.id]) {
-          window['content_' + attrs.id].setContents($scope.ngModel);
+        if ($scope.ngModel && window['content_' + $scope.id2]) {
+          window['content_' + $scope.id2].setContents($scope.ngModel);
         }
         $interval(() => {
-          if (window['content_' + attrs.id]) {
-            $scope.ngModel2 = window['content_' + attrs.id].getContents();
+          if (window['content_' + $scope.id2]) {
+            $scope.ngModel2 = window['content_' + $scope.id2].getContents();
             if ($scope.ngModel !== $scope.ngModel2) {
               $scope.ngModel = $scope.ngModel2;
               $scope.changed();
@@ -141,10 +141,10 @@ app.directive('iContent', function ($timeout, $interval) {
       };
 
       $scope.$watch('ngModel', (ngModel) => {
-        if (ngModel && window['content_' + attrs.id]) {
+        if (ngModel && window['content_' + $scope.id2]) {
           if ($scope.ngModel2 && $scope.ngModel !== $scope.ngModel2) {
             $scope.ngModel = $scope.ngModel2;
-            window['content_' + attrs.id].setContents($scope.ngModel);
+            window['content_' + $scope.id2].setContents($scope.ngModel);
           }
         }
       });
