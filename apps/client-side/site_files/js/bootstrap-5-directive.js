@@ -121,9 +121,12 @@ app.directive('iContent', function ($timeout, $interval) {
         if ($scope.ngModel && window['content_' + $scope.id2]) {
           window['content_' + $scope.id2].setContents($scope.ngModel);
         }
+        $scope.readingNow();
+      };
 
-        $interval(() => {
-          if (!$scope.stopReading && window['content_' + $scope.id2]) {
+      $scope.readingNow = function () {
+        $scope.intravalReading = $interval(() => {
+          if (window['content_' + $scope.id2]) {
             $scope.ngModel2 = window['content_' + $scope.id2].getContents();
             if ($scope.ngModel !== $scope.ngModel2) {
               $scope.ngModel = $scope.ngModel2;
@@ -132,7 +135,6 @@ app.directive('iContent', function ($timeout, $interval) {
           }
         }, 1000);
       };
-
       $scope.handelContentElement();
 
       $scope.changed = function () {
@@ -144,18 +146,15 @@ app.directive('iContent', function ($timeout, $interval) {
       };
 
       $scope.$watch('ngModel', (ngModel) => {
-        $scope.stopReading = true;
-        $timeout(() => {
-          if (ngModel && window['content_' + $scope.id2]) {
-            if ($scope.ngModel2 && $scope.ngModel !== $scope.ngModel2) {
-              $scope.ngModel = $scope.ngModel2;
-              window['content_' + $scope.id2].setContents($scope.ngModel);
-            }
+        clearInterval($scope.intravalReading);
+
+        if (ngModel && window['content_' + $scope.id2]) {
+          if ($scope.ngModel2 && $scope.ngModel !== $scope.ngModel2) {
+            $scope.ngModel = $scope.ngModel2;
+            window['content_' + $scope.id2].setContents($scope.ngModel);
           }
-          $timeout(() => {
-            $scope.stopReading = false;
-          }, 1000);
-        }, 1000);
+        }
+        $scope.readingNow();
       });
     },
     template: `/*##client-side/directive/i-content.html*/`,
