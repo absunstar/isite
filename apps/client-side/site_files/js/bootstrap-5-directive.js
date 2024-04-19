@@ -150,7 +150,7 @@ app.directive('iContent', function ($timeout, $interval) {
 
         if (ngModel && window['content_' + $scope.id2]) {
           if ($scope.ngModel2 && $scope.ngModel !== $scope.ngModel2) {
-            $scope.ngModel = $scope.ngModel2;
+            $scope.ngModel = ngModel;
             window['content_' + $scope.id2].setContents($scope.ngModel);
           }
         }
