@@ -1,5 +1,5 @@
 <div class="mb-3 {{class2}}">
   <label for="{{id2}}" class="form-label"> <span class="red bold"> {{requird}} </span> {{label}}</label>
-  <input id="{{id2}}" ng-disabled="disabled" autofocus v="{{v}}" type="{{type}}" ng-model="ngModel" ng-change="ngChange()" ngKeydown="ngKeydown()" class="form-control" placeholder="{{placeholder}}" aria-label="{{label}}" />
+  <input id="{{id2}}" ng-disabled="disabled" autofocus v="{{v}}" min="00:00" max="23:59" type="{{type}}" ng-model="ngModel" ng-change="ngChange()" ngKeydown="ngKeydown()" class="form-control" placeholder="{{placeholder}}" aria-label="{{label}}" />
   <div class="invalid-feedback"></div>
 </div>
