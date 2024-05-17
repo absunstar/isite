@@ -534,7 +534,7 @@
   };
 
   site.hide = site.hideObject = function (obj) {
-    return site.to123(JSON.parse(obj));
+    return site.to123(JSON.stringify(obj));
   };
   site.show = site.showObject = function (obj) {
     if (!obj) {
