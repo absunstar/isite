@@ -80,7 +80,7 @@ app.service('isite', [
         })
         .then(
           function (res) {
-            if (res.data && res.data.done) {
+            if (res.data && res.data.image) {
               callback(null, res.data.image);
             }
           },
@@ -117,7 +117,7 @@ app.service('isite', [
         })
         .then(
           function (res) {
-            if (res.data && res.data.done) {
+            if (res.data && res.data.audio) {
               callback(null, res.data.audio);
             }
           },
@@ -154,7 +154,7 @@ app.service('isite', [
         })
         .then(
           function (res) {
-            if (res.data && res.data.done) {
+            if (res.data && res.data.video) {
               callback(null, res.data.video);
             }
           },
@@ -191,7 +191,7 @@ app.service('isite', [
         })
         .then(
           function (res) {
-            if (res.data && res.data.done && res.data.file) {
+            if (res.data && res.data.file) {
               callback(null, res.data.file);
             }
           },
@@ -232,7 +232,7 @@ app.service('isite', [
         })
         .then(
           function (res) {
-            if (res.data && res.data.done && res.data.file) {
+            if (res.data) {
               callback(null, res.data);
             }
           },
