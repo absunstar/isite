@@ -1,8 +1,8 @@
 <div data-ng-controller="login" id="loginModal" class="modal small" fixed>
   <div class="modal-content">
     <div class="modal-header">
+      <p class="bold font-22 text-center"><i class="fas fa-sign-in-alt"></i> ##word.security_login##</p>
       <span class="close">&times;</span>
-      <p class="text-center"><i class="fas fa-sign-in-alt"></i> ##word.security_login##</p>
     </div>
 
     <div class="modal-body">
@@ -13,10 +13,10 @@
         <i-control type="password" label="##word.security_user_password##" ng-model="userPassword" ng-keydown="tryLogin($event)"></i-control>
       </form>
 
-      <p class="yellow">{{error}}</p>
+      <p class="red">{{error}}</p>
     </div>
     <div class="modal-footer center">
-      <i-button ng-hide="busy" fa="fa fa-sign-in" ng-click="login()" label="##word.security_login##"></i-button>
+      <i-button ng-hide="busy" type="signin" ng-click="login()" label="##word.security_login##"></i-button>
       <i-button ng-hide="busy" type="close" onclick="site.hideModal('#loginModal')" label="##word.close##"></i-button>
     </div>
   </div>
