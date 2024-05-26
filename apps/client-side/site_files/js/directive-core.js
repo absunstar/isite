@@ -4,10 +4,33 @@ window.$ = window.jQuery;
 app.filter('xdate', function () {
   return function (item) {
     if (item) {
-      if (item.day2) {
-        return `${item.day} - ${item.month + 1} - ${item.year} -- ${item.day2} - ${item.month2 + 1} - ${item.year2}`;
+      if (typeof item == 'string') {
+        let d = new Date(item);
+        return `${d.getDate()} - ${d.getMonth() + 1} - ${d.getFullYear()}`;
       } else {
-        return `${item.day} - ${item.month + 1} - ${item.year}`;
+        if (item.getDate) {
+          return `${item.getDate()} - ${item.getMonth() + 1} - ${item.getFullYear()}`;
+        } else if (item.day2) {
+          return `${item.day} - ${item.month + 1} - ${item.year} -- ${item.day2} - ${item.month2 + 1} - ${item.year2}`;
+        } else if (item.day) {
+          return `${item.day} - ${item.month + 1} - ${item.year}`;
+        } else {
+          return '';
+        }
+      }
+    }
+  };
+});
+app.filter('xdatetime', function () {
+  return function (item) {
+    if (item) {
+      if (typeof item == 'string') {
+        let d = new Date(item);
+        return `${d.getDate()} - ${d.getMonth() + 1} - ${d.getFullYear()} ( ${d.getHours()}:${d.getMinutes()}:${d.getSeconds()} )`;
+      } else {
+        if (item.getDate) {
+          return `${item.getDate()} - ${item.getMonth() + 1} - ${item.getFullYear()} ( ${item.getHours()}:${item.getMinutes()}:${item.getSeconds()} )`;
+        }
       }
     }
   };
@@ -69,7 +92,7 @@ app.service('isite', [
           withCredentials: !0,
           headers: {
             'Content-Type': undefined,
-            ...options
+            ...options,
           },
           uploadEventHandlers: {
             progress: function (e) {
