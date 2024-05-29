@@ -79,20 +79,36 @@ module.exports = function init(options) {
       }
     });
   };
-  ____0.close = function (callback) {
-    callback = callback || function () {};
+  ____0.closing = false;
+  ____0.close = function (wait = 30) {
+    if (____0.closing) {
+      return false;
+    }
+    ____0.closing = true;
+    console.log('Try Closing Site : ' + ____0.options.name);
 
     let count = 0;
-    ____0.servers.forEach((s) => {
+    ____0.servers.forEach((s, i) => {
+      console.log('Closing Server Number : ' + (i + 1));
       s.close(() => {
         count++;
         if (count == ____0.servers.length) {
-          ____0.call('please close mongodb', null, () => {
+          console.log('Closing All Database ...');
+          ____0.call('[close-database]', null, () => {
+            console.log('Closing Process');
             process.exit(0);
           });
         }
       });
     });
+
+    setTimeout(() => {
+      console.log('Closing All Database ...');
+      ____0.call('[close-database]', null, () => {
+        console.log('Closing Process');
+        process.exit(0);
+      });
+    }, 1000 * wait);
   };
 
   require('./object-options')(options, ____0);
@@ -135,11 +151,11 @@ module.exports = function init(options) {
 
     /* when ctrl + c */
     process.on('SIGINT', (code) => {
-      ____0.close();
+      ____0.close(1);
     });
 
     process.on('SIGTERM', (code) => {
-      ____0.close();
+      ____0.close(1);
     });
 
     process.on('unhandledRejection', (reason, p) => {

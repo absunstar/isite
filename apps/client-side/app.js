@@ -263,7 +263,7 @@ module.exports = function (site) {
               response.image.path = newpath;
               response.image.url = '/x-api/image/' + folder + '/' + newName;
               response.image.size = file.size;
-              if (!response.image.name.like('*.webp|*.gif')) {
+              if (!response.image.name.like('*.webp|*.gif|*.png')) {
                 site.webp.cwebp(newpath, newpath2, '-q 80').then((output) => {
                   response.image.path = newpath2;
                   response.image.url = '/x-api/image/' + folder + '/' + newName2;
