@@ -1133,11 +1133,11 @@ site.onGET('/files/file1.zip', (req, res) => {
 -   Cahnge Site Language
 
 ```js
-$scope.changeLang = function (lang) {
+$scope.changeLang = function (lang= 'EN' , langDir = 'ltr') {
     $http({
         method: 'POST',
         url: '/x-language/change',
-        data: { name: lang },
+        data: { name: lang , dir : langDir },
     }).then(function (response) {
         if (response.data.done) {
             window.location.reload(!0);
