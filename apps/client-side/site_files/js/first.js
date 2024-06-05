@@ -16,6 +16,7 @@ try {
     }
 
     if (update && SOCIALBROWSER.ipc) {
+      console.log(SOCIALBROWSER.var.blocking);
       SOCIALBROWSER.ipc('[update-browser-var]', {
         name: 'blocking',
         data: SOCIALBROWSER.var.blocking,
