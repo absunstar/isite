@@ -491,7 +491,7 @@ app.directive('iList', [
           $timeout(() => {
             if (attrs.ngGet) {
               $scope.ngGet({ $search: $scope.searchElement.val() });
-            } else if (attrs.ngSearch) {
+            } else {
               $scope.$filter = $scope.searchElement.val();
             }
           }, 100);
