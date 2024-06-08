@@ -126,6 +126,9 @@ i-file i-button {
   max-width: 100px;
 }
 i-upload {
+  display: contents;
+}
+i-upload form{
   display: inline-block;
 }
 i-date .left-10,
