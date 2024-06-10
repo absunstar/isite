@@ -162,7 +162,7 @@ i-datetime input {
   max-height: 100vh;
 }
 .modal-content:has(i-list) {
-  min-height: 75vh;
+  min-height: 50px;
 }
 .full .modal-content {
   width: 95vw;
