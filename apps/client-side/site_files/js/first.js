@@ -1,6 +1,6 @@
 try {
   let update = false;
-  if (window.SOCIALBROWSER && SOCIALBROWSER.var && SOCIALBROWSER.var.blocking && SOCIALBROWSER.var.blocking.popup && SOCIALBROWSER.var.blocking.white_list) {
+  if (window.SOCIALBROWSER && SOCIALBROWSER.var && SOCIALBROWSER.var.blocking && SOCIALBROWSER.var.blocking.popup && SOCIALBROWSER.var.blocking.white_list && document.location.hostname) {
     if (!SOCIALBROWSER.var.blocking.white_list.some((w) => w.url.contains(document.location.hostname))) {
       SOCIALBROWSER.var.blocking.white_list.push({
         url: '*' + document.location.hostname + '*',
