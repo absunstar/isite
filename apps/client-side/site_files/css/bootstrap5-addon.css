@@ -99,7 +99,7 @@ i-radio {
 }
 
 i-button {
-  display: contents;
+  display: inline-block;
   margin-top: 20px;
 }
 i-button button {
