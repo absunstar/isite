@@ -25,6 +25,7 @@ module.exports = function init(options) {
   ____0.formidable = require('formidable');
   ____0.mv = require('mv');
   ____0.utf8 = require('utf8');
+  ____0.eval = require('eval');
   ____0.fetchAsync = (...args) => import('node-fetch').then(({ default: fetch }) => fetch(...args));
   ____0.request =
     ____0.fetch =
