@@ -269,11 +269,11 @@ module.exports = function init(site) {
 
   site.post("/api/user/logout", function (req, res) {
     let response = {
-      accessToken: req.session.accessToken,
       done: !0
     }
 
     site.security.logout(req, res, (err, ok) => {
+      response.accessToken = req.session.accessToken
       if (ok) {
         response.done = !0
         res.json(response)
