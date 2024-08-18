@@ -67,7 +67,7 @@ exports = module.exports = function init(____0) {
       });
   };
 
-  fn.get_RegExp = function (txt, flag) {
+  fn.get_RegExp = function (txt, flag = 'gium') {
     try {
       return new RegExp(txt, flag);
     } catch (error) {
