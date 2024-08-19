@@ -268,7 +268,7 @@ module.exports = function init(options) {
   require('./lib/helper.js')(____0);
   require('./lib/pdf.js')(____0);
   require('./lib/app.js')(____0);
-
+  require('./lib/eval.js')(____0);
   //Master Pages
   ____0.masterPages = [];
   ____0.addMasterPage = function (page) {
