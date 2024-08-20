@@ -71,7 +71,7 @@ function setOptions(_options, ____0) {
       protocal: 'mongodb://',
       host: '127.0.0.1',
       port: '27017',
-      userName: null,
+      username: null,
       password: null,
       db: 'db_' + name,
       collection: 'default_collection',
@@ -207,7 +207,7 @@ function setOptions(_options, ____0) {
   _x0oo.mongodb.protocal = _x0oo.mongodb.protocal || template.mongodb.protocal;
   _x0oo.mongodb.host = _x0oo.mongodb.host || template.mongodb.host;
   _x0oo.mongodb.port = _x0oo.mongodb.port || template.mongodb.port;
-  _x0oo.mongodb.userName = _x0oo.mongodb.userName || template.mongodb.userName;
+  _x0oo.mongodb.username = _x0oo.mongodb.username || template.mongodb.username;
   _x0oo.mongodb.password = _x0oo.mongodb.password || template.mongodb.password;
   _x0oo.mongodb.db = _0xddxo ? 'smart_db_' + name : _x0oo.mongodb.db || template.mongodb.db;
   _x0oo.mongodb.collection = _x0oo.mongodb.collection || template.mongodb.collection;
@@ -229,7 +229,7 @@ function setOptions(_options, ____0) {
     _x0oo.mongodb.protocal = userOptions.mongodb.protocal || _x0oo.mongodb.protocal;
     _x0oo.mongodb.host = userOptions.mongodb.host || _x0oo.mongodb.host;
     _x0oo.mongodb.port = userOptions.mongodb.port || _x0oo.mongodb.port;
-    _x0oo.mongodb.userName = userOptions.mongodb.userName || _x0oo.mongodb.userName;
+    _x0oo.mongodb.username = userOptions.mongodb.username || _x0oo.mongodb.username;
     _x0oo.mongodb.password = userOptions.mongodb.password || _x0oo.mongodb.password;
     _x0oo.mongodb.db = userOptions.mongodb.db || _x0oo.mongodb.db;
     _x0oo.mongodb.collection = userOptions.mongodb.collection || _x0oo.mongodb.collection;
