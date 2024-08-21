@@ -27,7 +27,6 @@ app.directive('iControl', function () {
         attrs.disabled = '';
       }
       $scope.class2 = $scope.class2 || '';
-     
     },
     template: `/*##client-side/directive/i-control.html*/`,
   };
@@ -446,7 +445,12 @@ app.directive('iList', [
           if (items) {
             items.forEach((item) => {
               if ($scope.display2) {
-                item.$display = $scope.getValue(item) + $scope.space + $scope.getValue2(item);
+                let val = $scope.getValue(item);
+                if (val) {
+                  val = val + $scope.space;
+                }
+                val = val + $scope.getValue2(item);
+                item.$display = val;
               } else {
                 item.$display = $scope.getValue(item);
               }
@@ -458,7 +462,12 @@ app.directive('iList', [
               if (isite.getValue(item, $scope.primary) == isite.getValue($scope.ngModel, $scope.primary)) {
                 $scope.ngModel = item;
                 if ($scope.display2) {
-                  item.$display = $scope.getValue(item) + $scope.space + $scope.getValue2(item);
+                  let val = $scope.getValue(item);
+                  if (val) {
+                    val = val + $scope.space;
+                  }
+                  val = val + $scope.getValue2(item);
+                  item.$display = val;
                 } else {
                   item.$display = $scope.getValue(item);
                 }
@@ -476,9 +485,14 @@ app.directive('iList', [
 
           if (ngModel) {
             if ($scope.display2) {
-              input.val(' ' + $scope.getNgModelValue(ngModel) + $scope.space + $scope.getNgModelValue2(ngModel));
+              let val = $scope.getNgModelValue(ngModel);
+              if (val) {
+                val = val + $scope.space;
+              }
+              val = val + $scope.getNgModelValue2(ngModel);
+              input.val(val);
             } else {
-              input.val(' ' + $scope.getNgModelValue(ngModel));
+              input.val($scope.getNgModelValue(ngModel));
             }
           }
         });
@@ -497,7 +511,12 @@ app.directive('iList', [
           if (item) {
             $scope.ngModel = $scope.getNgValue(item, $scope.ngValue);
             if ($scope.display2) {
-              input.val($scope.getNgModelValue($scope.ngModel) + $scope.space + $scope.getNgModelValue2($scope.ngModel));
+              let val = $scope.getNgModelValue(ngModel);
+              if (val) {
+                val = val + $scope.space;
+              }
+              val = val + $scope.getNgModelValue2(ngModel);
+              input.val(val);
             } else {
               input.val($scope.getNgModelValue($scope.ngModel));
             }

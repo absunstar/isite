@@ -36,15 +36,22 @@ body {
 .container {
   max-width: 100%;
 }
-.ar .form-check .form-check-input , .AR .form-check .form-check-input {
+.ar .form-check .form-check-input,
+.AR .form-check .form-check-input {
   float: right;
   margin-right: -1.5em;
+}
+.form-label {
+  margin-bottom: 0.5rem;
+  margin-left: 5px;
+  border-bottom: 1px solid #0000000a;
 }
 label {
   float: left;
   color: var(--label-color);
 }
-.ar label , .AR label {
+.ar label,
+.AR label {
   float: right;
 }
 fieldset {
@@ -67,7 +74,8 @@ fieldset legend {
   width: auto;
   padding: 5px;
 }
-.ar fieldset legend , .AR fieldset legend{
+.ar fieldset legend,
+.AR fieldset legend {
   float: right;
 }
 legend::after {
@@ -130,7 +138,7 @@ i-file i-button {
 i-upload {
   display: contents;
 }
-i-upload form{
+i-upload form {
   display: inline-block;
 }
 i-date .left-10,
@@ -196,7 +204,7 @@ i-datetime input {
   scroll-behavior: auto;
   overflow: auto;
   border: 3px solid #ddd;
-  transition: all .2s ease;
+  transition: all 0.2s ease;
 }
 .v-tabs .nav-link {
   color: #aaa !important;
@@ -228,7 +236,8 @@ i-datetime input {
     transform: translateY(-50%);
     opacity: 0;
   }
-  .ar .v-tabs .nav-link::before , .AR .v-tabs .nav-link::before {
+  .ar .v-tabs .nav-link::before,
+  .AR .v-tabs .nav-link::before {
     border-right: 10px solid #fff;
     left: -10px;
   }
