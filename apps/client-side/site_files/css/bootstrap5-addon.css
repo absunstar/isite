@@ -105,6 +105,7 @@ i-button button {
   margin: 5px !important;
   margin-top: 30px !important;
   padding: 7px 9px !important;
+  max-height: 40px;
 }
 i-button.default button {
   margin: 3px;
@@ -181,7 +182,21 @@ i-datetime input {
   width: 100%;
 }
 .dropdown-content {
-  top: 35px;
+  display: none;
+  position: absolute;
+  top: 30px !important;
+  background-color: #ffffff;
+  width: 100%;
+  box-shadow: 0px 20px 16px 16px rgba(0, 0, 0, 0.2);
+  z-index: 999;
+  max-height: 75vh;
+  min-height: 20%;
+  padding: 0px;
+  margin: 0;
+  scroll-behavior: auto;
+  overflow: auto;
+  border: 3px solid #ddd;
+  transition: all .2s ease;
 }
 .v-tabs .nav-link {
   color: #aaa !important;

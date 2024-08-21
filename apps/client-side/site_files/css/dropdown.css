@@ -25,7 +25,7 @@
     padding: 5%;
     position: sticky;
     top: 0;
-    background: #ffffff;
+    background: #eee;
 }
 /* Links inside the dropdown */
 .dropdown-content p {
@@ -39,7 +39,7 @@
 /* Change color of dropdown links on hover */
 .dropdown-content .dropdown-item:hover {
     background-color: var(--theme-color);
-    color: #fff;
+    color: var(--color);
 }
 .dropdown-content .dropdown-item:hover p,
 .dropdown-content .dropdown-item:hover small {
@@ -54,33 +54,32 @@
     display: block;
 }
 
-.dropdown-item {
-    display: inline-block;
+i-list .dropdown-item {
+    display: inline-block !important;
     cursor: pointer;
     background: var(--dropdown-background);
-    padding: 0px;
-    margin: 0px;
+    padding: 0px !important;
+    margin: 0px !important;
     transition: all .1s ease;
+    border-bottom: 1px solid #ddd !important;
 }
 .dropdown-item p {
-    color: #055160;
-    font-size: 14px;
+    color: var(--color);
+    font-size: 16px;
     font-weight: bold;
     background: transparent;
-    text-align: left;
+    text-align: center;
 }
 .ar .dropdown-item p , .AR .dropdown-item p{
     text-align: right;
 }
 .dropdown-item small {
-    color: antiquewhite;
-    font-size: 9px;
-    text-align: left;
-    padding: 3px;
-    background: #198754;
+    color: #272727;
+    font-size: 12px;
+    text-align: center;
+    background: #ddd;
     font-weight: bold;
-    padding-right: 9px;
-    padding-left: 9px;
+    padding: 5px;
 }
 .ar .dropdown-item small , .AR .dropdown-item small{
     text-align: right;
