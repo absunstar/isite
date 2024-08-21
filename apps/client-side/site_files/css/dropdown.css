@@ -22,11 +22,19 @@
 }
 
 .dropdown .dropdown-search{
-    padding: 5%;
+    padding: 5px;
     position: sticky;
     top: 0;
     background: #eee;
 }
+.dropdown .dropdown-search i-control{
+    display: inline-block;
+    width: 85%;
+}
+.dropdown .dropdown-search i-button button{
+    margin-top: 0px !important;
+}
+
 /* Links inside the dropdown */
 .dropdown-content p {
     color: black;
@@ -70,10 +78,10 @@ i-list .dropdown-item {
     text-align: right;
 }
 .dropdown-item small {
-    color: #272727;
+    color: #ffffff;
     font-size: 12px;
     text-align: center;
-    background: #ddd;
+    background: #747474;
     font-weight: bold;
     padding: 5px;
 }
