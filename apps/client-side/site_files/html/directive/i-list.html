@@ -6,15 +6,13 @@
 
   <div class="dropdown-content">
     <div class="dropdown-search" ng-show="showSearch">
+      <i-control class="search"></i-control>
       <input class="full-width search form-control" />
+      <i-button type="reset" ng-click="updateModel(null)"></i-button>
     </div>
 
     <div class="dropdown-item row" ng-repeat="item in items | filter:$filter" ng-click="updateModel(item)">
       <p>{{getValue(item)}} <small ng-show="display2"> {{getValue2(item)}} </small></p>
-    </div>
-
-    <div class="row center padding pointer">
-      <i-button class="block center" type="clear" ng-click="updateModel(null)" label="Clear"></i-button>
     </div>
   </div>
 </div>

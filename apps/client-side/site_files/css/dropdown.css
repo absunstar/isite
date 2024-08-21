@@ -38,13 +38,9 @@
 
 /* Change color of dropdown links on hover */
 .dropdown-content .dropdown-item:hover {
-    background-color: var(--theme-color);
-    color: var(--color);
+    background-color: #bbbbbb;
 }
-.dropdown-content .dropdown-item:hover p,
-.dropdown-content .dropdown-item:hover small {
-    color: #fff;
-}
+
 /* Show the dropdown menu on hover */
 .dropdown:hover .dropdown-content {
     display: block;
