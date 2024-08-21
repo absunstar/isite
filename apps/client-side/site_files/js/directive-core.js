@@ -66,20 +66,20 @@ app.service('isite', [
       }
 
       let arr = property.split('.');
+      let value = null;
 
-      if (arr.length === 1) {
-        return obj[arr[0]];
+      if (arr.length > 0) {
+        value = obj[arr[0]];
       }
 
-      if (arr.length === 2) {
-        return obj[arr[0]][arr[1]];
+      if (arr.length > 1 && value) {
+        value = value[arr[1]];
+      }
+      if (arr.length > 2 && value) {
+        value = value[arr[2]];
       }
 
-      if (arr.length === 3) {
-        return obj[arr[0]][arr[1]][arr[2]];
-      }
-
-      return null;
+      return value;
     };
 
     this.uploadImage = function (files, options, callback) {
