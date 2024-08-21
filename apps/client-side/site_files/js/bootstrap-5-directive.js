@@ -361,7 +361,7 @@ app.directive('iList', [
         if ($scope.v.like('*r*')) {
           $scope.requird = '*';
         }
-        $scope.searchElement = $(element).find('.dropdown .search');
+        $scope.searchElement = $(element).find('.dropdown .search input');
         $scope.popupElement = $(element).find('.dropdown .dropdown-content');
 
         if (typeof attrs.disabled !== 'undefined') {
