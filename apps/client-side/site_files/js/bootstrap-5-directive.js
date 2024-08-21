@@ -27,11 +27,7 @@ app.directive('iControl', function () {
         attrs.disabled = '';
       }
       $scope.class2 = $scope.class2 || '';
-      $(element)
-        .find('input')
-        .focus(() => {
-          $('.i-list .dropdown-content').css('display', 'none');
-        });
+     
     },
     template: `/*##client-side/directive/i-control.html*/`,
   };
