@@ -48,7 +48,7 @@ module.exports = function init(options) {
   ____0.$ = ____0.cheerio = require('cheerio');
   ____0.md5 = ____0.hash = ____0.x0md50x = require('md5');
   ____0.nodemailer = require('nodemailer');
-  ____0.child_process = require('child_process');
+  ____0.child_process = require('node:child_process');
   ____0.webp = require('webp-converter');
 
   ____0.setting = {};
@@ -111,7 +111,7 @@ module.exports = function init(options) {
       });
     }, 1000 * wait);
   };
-
+  ____0.options = {};
   require('./object-options')(options, ____0);
 
   ____0.console = console;
@@ -269,6 +269,9 @@ module.exports = function init(options) {
   require('./lib/pdf.js')(____0);
   require('./lib/app.js')(____0);
   require('./lib/eval.js')(____0);
+  require('./lib/proxy.js')(____0);
+
+
   //Master Pages
   ____0.masterPages = [];
   ____0.addMasterPage = function (page) {

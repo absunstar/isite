@@ -23,7 +23,7 @@ function setOptions(_options, ____0) {
 
   let template = {
     port: port,
-    http2 : false,
+    http2: false,
     cwd: ____0.cwd,
     dir: ____0.cwd + '/site_files',
     apps: !0,
@@ -40,7 +40,7 @@ function setOptions(_options, ____0) {
     log: !0,
     lang: 'en',
     theme: 'default',
-    public : false,
+    public: false,
     help: !1,
     stdin: !0,
     _0xmmxo: '26319191',
@@ -49,7 +49,7 @@ function setOptions(_options, ____0) {
     www: true,
     https: {
       enabled: !1,
-      port: null,
+      port: 443,
       ports: [],
       key: null,
       cert: null,
@@ -65,7 +65,7 @@ function setOptions(_options, ____0) {
     },
     mongodb: {
       enabled: !0,
-      url : null,
+      url: null,
       events: false,
       config: {},
       protocal: 'mongodb://',
@@ -123,6 +123,12 @@ function setOptions(_options, ____0) {
       permissions: [],
     },
     defaults: defaults,
+    proxy: {
+      enabled: !1,
+      port: 55555,
+      public: true,
+      privateList: [],
+    },
   };
 
   let userOptions = {};
@@ -149,7 +155,7 @@ function setOptions(_options, ____0) {
     });
   }
 
-  let _x0oo = {...userOptions , ...template, ..._options };
+  let _x0oo = { ...userOptions, ...template, ..._options };
 
   if (_0xddxo) {
     _x0oo.port = port;
