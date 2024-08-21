@@ -511,11 +511,11 @@ app.directive('iList', [
           if (item) {
             $scope.ngModel = $scope.getNgValue(item, $scope.ngValue);
             if ($scope.display2) {
-              let val = $scope.getNgModelValue(ngModel);
+              let val = $scope.getNgModelValue($scope.ngModel);
               if (val) {
                 val = val + $scope.space;
               }
-              val = val + $scope.getNgModelValue2(ngModel);
+              val = val + $scope.getNgModelValue2($scope.ngModel);
               input.val(val);
             } else {
               input.val($scope.getNgModelValue($scope.ngModel));
