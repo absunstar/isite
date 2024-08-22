@@ -49,14 +49,11 @@
   background-color: #bbbbbb;
 }
 
-/* Show the dropdown menu on hover 
-.dropdown:hover .dropdown-content {
+/* Show the dropdown menu on hover */
+.dropdown.dropdown-text:hover .dropdown-content {
   display: block;
 }
-*/
-.dropdown-text:hover > .dropdown-content {
-  display: block;
-}
+
 
 i-list .dropdown-item {
   display: inline-block !important;
