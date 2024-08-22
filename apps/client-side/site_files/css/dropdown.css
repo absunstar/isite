@@ -77,7 +77,7 @@ i-list .dropdown-item {
 .ar .dropdown-item p , .AR .dropdown-item p{
     text-align: right;
 }
-.dropdown-item small {
+.dropdown-item .small {
     color: #ffffff;
     font-size: 12px;
     text-align: center;
@@ -85,6 +85,6 @@ i-list .dropdown-item {
     font-weight: bold;
     padding: 5px;
 }
-.ar .dropdown-item small , .AR .dropdown-item small{
+.ar .dropdown-item .small , .AR .dropdown-item small{
     text-align: right;
 }
