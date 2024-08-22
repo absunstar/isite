@@ -49,11 +49,11 @@
   background-color: #bbbbbb;
 }
 
-/* Show the dropdown menu on hover */
+/* Show the dropdown menu on hover 
 .dropdown:hover .dropdown-content {
   display: block;
 }
-
+*/
 .dropdown-text:hover > .dropdown-content {
   display: block;
 }
