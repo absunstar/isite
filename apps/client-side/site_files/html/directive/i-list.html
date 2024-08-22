@@ -11,7 +11,8 @@
     </div>
 
     <div class="dropdown-item row" ng-repeat="item in items | filter:$filter" ng-click="updateModel(item)">
-      <p>{{getValue(item)}} <small ng-show="display2"> {{getValue2(item)}} </small></p>
+      <p>{{getValue(item)}}</p>
+      <small ng-show="display2"> {{getValue2(item)}} </small>
     </div>
   </div>
 </div>
