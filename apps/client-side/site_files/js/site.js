@@ -1117,7 +1117,7 @@
           url: options,
         };
       }
-      var ws = new WebSocket(options.url);
+      let ws = new WebSocket(options.url);
       let server = {
         ws: ws,
         options: options,
@@ -1178,7 +1178,7 @@
           server.onMessage(JSON.parse(msg.data));
         }
       };
-
+      site.server = server;
       callback(server);
     } else {
       console.error('WebSocket Not Supported');
