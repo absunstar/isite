@@ -81,7 +81,7 @@ module.exports = function init(options) {
     });
   };
   ____0.closing = false;
-  ____0.close = function (wait = 30) {
+  ____0.close = function (wait = 0) {
     if (____0.closing) {
       return false;
     }
@@ -155,9 +155,7 @@ module.exports = function init(options) {
       ____0.close(1);
     });
 
-    process.on('SIGTERM', (code) => {
-      ____0.close(1);
-    });
+  
 
     process.on('unhandledRejection', (reason, p) => {
       console.error('Unhandled Rejection at :: ', p, 'reason :: ', reason);
