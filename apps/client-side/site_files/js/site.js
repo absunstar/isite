@@ -1196,7 +1196,7 @@
         }
       };
       site.server = server;
-      callback(server);
+      callback(site.server);
       return site.server;
     } else {
       console.error('WebSocket Not Supported');
