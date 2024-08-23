@@ -1145,7 +1145,7 @@
         onData: () => {
           console.log('server.onData Not Implement ... ');
         },
-        send: function (msg) {
+        sendMessage: function (msg) {
           if (this.closed) {
             return false;
           }
@@ -1158,6 +1158,7 @@
           this.ws.send(JSON.stringify(msg));
         },
       };
+      server.send = server.sendMessage;
       ws.onerror = function (error) {
         server.onError(error);
       };
@@ -1171,15 +1172,31 @@
         server.onOpen();
       };
 
-      ws.onmessage = function (msg) {
-        if (msg instanceof Blob) {
-          server.onData(msg);
+      ws.onmessage = function (message) {
+        if (message instanceof Blob) {
+          server.onData(message);
         } else {
-          server.onMessage(JSON.parse(msg.data));
+          message = JSON.parse(message.data);
+          if (message.type) {
+            if (message.type === 'ready') {
+              server.uuid = message.uuid;
+              server.ip = message.ip;
+              if (!site.server.id) {
+                server.id = message.id;
+              } else {
+                server.sendMessage({
+                  type: 'attach',
+                  id: site.server.id,
+                });
+              }
+            }
+          }
+          server.onMessage(message);
         }
       };
       site.server = server;
       callback(server);
+      return site.server;
     } else {
       console.error('WebSocket Not Supported');
     }
