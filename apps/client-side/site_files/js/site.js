@@ -1181,13 +1181,14 @@
             if (message.type === 'ready') {
               server.uuid = message.uuid;
               server.ip = message.ip;
-              if (!site.server.id) {
-                server.id = message.id;
-              } else {
+              if (site.server && site.server.id) {
+                server.id = site.server.id;
                 server.sendMessage({
                   type: 'attach',
                   id: site.server.id,
                 });
+              } else {
+                server.id = message.id;
               }
             }
           }
