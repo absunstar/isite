@@ -383,19 +383,8 @@ app.directive('iList', [
         }
 
         let input = $(element).find('input.dropdown-text');
-        $(element).hover(
-          () => {
-            if (attrs.disabled !== 'disabled') {
-              $scope.popupElement.css('display', 'block');
-            }
-          },
-          () => {
-            $scope.popupElement.css('display', 'none');
-          }
-        );
+
         $scope.focus = function () {
-          $('.i-list .dropdown-content').css('display', 'none');
-          $scope.popupElement.css('display', 'block');
           $scope.searchElement.focus();
         };
         $scope.hide = function () {

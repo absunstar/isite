@@ -668,12 +668,6 @@ app.directive('iControl', function () {
         attrs.disabled = '';
       }
 
-      $(element)
-        .find('input')
-        .focus(() => {
-          $('.i-list .dropdown-content').css('display', 'none');
-        });
-
       scope.$watch(attrs.ngModel, function (v) {});
     },
     template: `
@@ -953,17 +947,8 @@ app.directive('iList', [
         }
 
         let input = $(element).find('input');
-        /*$(element).hover(
-          () => {
-            $scope.popupElement.css('display', 'block');
-          },
-          () => {
-            $scope.popupElement.css('display', 'none');
-          }
-        );*/
+
         $scope.focus = function () {
-          $('.i-list .dropdown-content').css('display', 'none');
-          $scope.popupElement.css('display', 'block');
           $scope.searchElement.focus();
         };
         $scope.hide = function () {
