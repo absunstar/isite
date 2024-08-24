@@ -34,7 +34,10 @@
 .dropdown .dropdown-search i-button button {
   margin-top: 10px !important;
 }
-
+.dropdown .dropdown-search .btns {
+  width: 50px !important;
+  display: contents !important;
+}
 /* Links inside the dropdown */
 .dropdown-content p {
   color: black;
