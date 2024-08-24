@@ -951,9 +951,7 @@ app.directive('iList', [
         $scope.focus = function () {
           $scope.searchElement.focus();
         };
-        $scope.hide = function () {
-          $scope.popupElement.css('display', 'none');
-        };
+       
 
         $scope.getValue = function (item) {
           let v = isite.getValue(item, $scope.display);
