@@ -54,9 +54,6 @@
 .dropdown-content:hover {
   display: block;
 } */
-body:hover .dropdown-content {
-  display: none;
-}
 
 i-list .dropdown-item {
   display: inline-block !important;

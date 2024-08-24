@@ -366,6 +366,12 @@ app.directive('iList', [
         $(input).click(() => {
           $scope.popupElement.css('display', 'block');
         });
+        $scope.hide = function () {
+          $scope.popupElement.css('display', 'none');
+        };
+        $(document).click(() => {
+          $scope.hide();
+        });
 
         if (typeof attrs.disabled !== 'undefined') {
           attrs.disabled = 'disabled';
