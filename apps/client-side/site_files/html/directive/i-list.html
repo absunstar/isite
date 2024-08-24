@@ -1,7 +1,7 @@
 <div class="dropdown i-list">
   <div class="mb-3 {{class2}}">
     <label class="form-label"> <span class="red bold"> {{requird}} </span> {{label}} </label>
-    <input  class="full-width text dropdown-text form-control {{css}}" ng-disabled="disabled" v="{{v}}" readonly ng-model="ngModel.$display" />
+    <input class="full-width text dropdown-text form-control {{css}}" v="{{v}}" readonly ng-model="ngModel.$display" />
   </div>
 
   <div class="dropdown-content">
@@ -12,7 +12,7 @@
 
     <div class="dropdown-item row" ng-repeat="item in items | filter:$filter" ng-click="updateModel(item)">
       <p>{{getValue(item)}}</p>
-      <p class="small" ng-show="display2"> {{getValue2(item)}} </p>
+      <p class="small" ng-show="display2">{{getValue2(item)}}</p>
     </div>
   </div>
 </div>
