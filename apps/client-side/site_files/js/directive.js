@@ -1028,7 +1028,6 @@ app.directive('iList', [
           $timeout(() => {
             $scope.ngChange();
           });
-          $scope.hide();
         };
       },
       template: `/*##client-side/directive-core/i-list.html*/`,

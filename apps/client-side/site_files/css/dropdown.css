@@ -50,10 +50,9 @@
 }
 
 /* Show the dropdown menu on hover */
-.dropdown:hover .dropdown-content {
+.dropdown[disabled='']:hover .dropdown-content {
   display: block;
 }
-
 
 i-list .dropdown-item {
   display: inline-block !important;
