@@ -50,7 +50,8 @@
 }
 
 /* Show the dropdown menu on hover */
-.dropdown:not([disabled]):hover .dropdown-content {
+.dropdown:not([disabled]):hover .dropdown-content,
+.dropdown-content:hover {
   display: block;
 }
 
