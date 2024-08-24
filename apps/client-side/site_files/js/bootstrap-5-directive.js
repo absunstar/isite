@@ -363,7 +363,8 @@ app.directive('iList', [
         $scope.searchElement = $(element).find('.dropdown .search input');
         $scope.popupElement = $(element).find('.dropdown .dropdown-content');
         let input = $(element).find('input.dropdown-text');
-        $(input).click(() => {
+        $(input).click((ev) => {
+          ev.stopPropagation();
           $scope.popupElement.css('display', 'block');
         });
         $scope.hide = function () {
