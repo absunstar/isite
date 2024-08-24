@@ -49,10 +49,13 @@
   background-color: #bbbbbb;
 }
 
-/* Show the dropdown menu on hover */
+/* Show the dropdown menu on hover
 .dropdown:not([disabled]):hover .dropdown-content,
 .dropdown-content:hover {
   display: block;
+} */
+body:hover .dropdown-content {
+  display: none;
 }
 
 i-list .dropdown-item {

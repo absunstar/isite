@@ -362,6 +362,10 @@ app.directive('iList', [
         }
         $scope.searchElement = $(element).find('.dropdown .search input');
         $scope.popupElement = $(element).find('.dropdown .dropdown-content');
+        let input = $(element).find('input.dropdown-text');
+        $(input).click(() => {
+          $scope.popupElement.css('display', 'block');
+        });
 
         if (typeof attrs.disabled !== 'undefined') {
           attrs.disabled = 'disabled';
@@ -382,12 +386,9 @@ app.directive('iList', [
           $scope.showSearch = !0;
         }
 
-        let input = $(element).find('input.dropdown-text');
-
         $scope.focus = function () {
           $scope.searchElement.focus();
         };
-        
 
         $scope.getValue = function (item) {
           let v = isite.getValue(item, $scope.display);
