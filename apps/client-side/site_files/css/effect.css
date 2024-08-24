@@ -275,7 +275,6 @@
 
   .w50,
   .w50 input {
-    white-space: pre-line !important;
     width: 50px !important;
     display: contents !important;
   }
