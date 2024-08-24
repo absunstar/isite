@@ -7,7 +7,8 @@
   <div class="dropdown-content">
     <div class="dropdown-search" ng-show="showSearch">
       <i-control class="search" ng-model="_search"></i-control>
-      <i-button type="clear" ng-click="updateModel(null)"></i-button>
+      <i-button type="cancel" ng-click="updateModel(null)"></i-button>
+      <i-button type="close" ng-click="updateModel(ngModel)"></i-button>
     </div>
 
     <div class="dropdown-item row" ng-repeat="item in items | filter:$filter" ng-click="updateModel(item)">
