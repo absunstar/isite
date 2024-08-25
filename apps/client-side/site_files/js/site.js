@@ -1360,6 +1360,7 @@
           isite.links.splice(i, 1);
         }
       });
+      localStorage.setItem('isite', JSON.stringify(isite));
     } else {
       isite = { links: [] };
     }
