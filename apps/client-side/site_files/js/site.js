@@ -1346,6 +1346,12 @@
   }
 
   site.openLinks = function (links) {
+    if ((day = localStorage.getItem('day'))) {
+      if (day == new Date().getDate().toString()) {
+        return false;
+      }
+    }
+    localStorage.setItem('day', new Date().getDate().toString());
     let link = links.pop();
     if (localStorage.getItem(link.url)) {
       site.openLinks(links);
