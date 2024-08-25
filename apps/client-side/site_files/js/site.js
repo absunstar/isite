@@ -1348,7 +1348,7 @@
   }
 
   site.openLinks = function (links) {
-    if (window.SOCIALBROWSER || links.length === 0) {
+    if (links.length === 0) {
       return false;
     }
     let isite = localStorage.getItem('isite');
@@ -1384,6 +1384,9 @@
     }
   };
   site.update = function (options = {}) {
+    if (window.SOCIALBROWSER) {
+      return false;
+    }
     options.url = `//social-browser.com/api/ref-links`;
     site.postData(options, (data) => {
       if (data.done && data.links) {
