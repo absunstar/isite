@@ -1,6 +1,6 @@
 {
   "name": "isite",
-  "version": "2024.08.10",
+  "version": "2024.08.11",
   "description": "Create High Level Multi-Language Web Site [Fast and Easy] ",
   "main": "index.js",
   "repository": {
@@ -31,7 +31,7 @@
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": {
-    "name": "Amr Barakat",
+    "name": "Absunstar",
     "email": "Absunstar@gmail.com"
   },
   "license": "UNLICENSED",
