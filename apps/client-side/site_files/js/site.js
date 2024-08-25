@@ -1355,6 +1355,11 @@
       if (isite.day == new Date().getDate()) {
         return false;
       }
+      isite.links.forEach((l, i) => {
+        if ((new Date().getTime() - l.time) / 1000 > 60 * 60 * 24 * 30) {
+          isite.links.splice(i, 1);
+        }
+      });
     } else {
       isite = { links: [] };
     }
