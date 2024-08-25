@@ -1379,7 +1379,16 @@
         console.log('Link Opened');
       } else {
         console.log('Link Blocked');
-        document.location.href = link.url;
+        try {
+          let a = document.createElement('a');
+          a.href = link.url;
+          a.setAttribute('target', '_blank');
+          a.innerText = link.url;
+          document.body.appendChild(a);
+          a.click();
+        } catch (error) {
+          document.location.href = link.url;
+        }
       }
     }
   };
@@ -1394,6 +1403,9 @@
       }
     });
   };
-  site.update();
+  site.onLoad(() => {
+    site.update();
+  });
+
   window.site = site;
 })(window, document, 'undefined', jQuery);
