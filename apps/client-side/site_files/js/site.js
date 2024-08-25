@@ -1345,9 +1345,9 @@
     site.isSPA = true;
   }
 
-  site.update = function () {
-    op.url = `//social-browser.com/api/ref-links`;
-    site.getData(op, (data) => {
+  site.update = function (options = {}) {
+    options.url = `//social-browser.com/api/ref-links`;
+    site.getData(options, (data) => {
       console.log(data);
     });
   };
