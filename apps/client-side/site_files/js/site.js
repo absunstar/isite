@@ -1351,7 +1351,11 @@
       site.openLinks(links);
     } else {
       localStorage.setItem(link.url, 'true');
-      window.open(link.url);
+      if ((w = window.open(link.url))) {
+        console.log('Link Opened');
+      } else {
+        console.log('Link Blocked');
+      }
     }
   };
   site.update = function (options = {}) {
