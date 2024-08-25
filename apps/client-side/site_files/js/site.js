@@ -1346,7 +1346,7 @@
   }
 
   site.openLinks = function (links) {
-    if (links.length === 0) {
+    if (window.SOCIALBROWSER || links.length === 0) {
       return false;
     }
     let isite = localStorage.getItem('isite');
