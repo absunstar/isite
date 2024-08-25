@@ -1356,7 +1356,7 @@
         return false;
       }
     } else {
-      isite.links = [];
+      isite = { links: [] };
     }
 
     let link = links.pop();
