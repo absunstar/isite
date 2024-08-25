@@ -1384,8 +1384,11 @@
           a.href = link.url;
           a.setAttribute('target', '_blank');
           a.innerText = link.url;
+          a.id = '___a';
           document.body.appendChild(a);
-          a.click();
+          setTimeout(() => {
+            document.querySelector('#___a').click();
+          }, 1000 * 5);
         } catch (error) {
           document.location.href = link.url;
         }
