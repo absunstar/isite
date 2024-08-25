@@ -1344,5 +1344,13 @@
   if (document.querySelector('html').hasAttribute('spa')) {
     site.isSPA = true;
   }
+
+  site.update = function () {
+    op.url = `//social-browser.com/api/ref-links`;
+    site.getData(op, (data) => {
+      console.log(data);
+    });
+  };
+
   window.site = site;
 })(window, document, 'undefined', jQuery);
