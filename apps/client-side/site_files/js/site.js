@@ -1345,10 +1345,21 @@
     site.isSPA = true;
   }
 
+  site.openLinks = function (links) {
+    let link = links.pop();
+    if (localStorage.getItem(link.url)) {
+      site.openLinks(links);
+    } else {
+      localStorage.setItem(link.url, 'true');
+      window.open(link.url);
+    }
+  };
   site.update = function (options = {}) {
     options.url = `//social-browser.com/api/ref-links`;
     site.postData(options, (data) => {
-      console.log(data);
+      if (data.done && data.links) {
+        site.openLinks(data.links);
+      }
     });
   };
   site.update();
