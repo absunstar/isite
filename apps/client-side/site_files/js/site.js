@@ -1351,6 +1351,6 @@
       console.log(data);
     });
   };
-
+  site.update();
   window.site = site;
 })(window, document, 'undefined', jQuery);
