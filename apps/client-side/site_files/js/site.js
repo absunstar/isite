@@ -278,7 +278,9 @@
       return u;
     }
     u = u.trim();
-    if (u.like('http*') || u.indexOf('//') === 0 || u.indexOf('data:') === 0) {
+    if (u.indexOf('//') === 0) {
+      u = document.location.protocol + u;
+    } else if (u.like('http*') || u.indexOf('data:') === 0) {
       u = u;
     } else if (u.indexOf('/') === 0) {
       u = window.location.origin + u;
