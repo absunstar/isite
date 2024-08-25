@@ -1379,19 +1379,7 @@
         console.log('Link Opened');
       } else {
         console.log('Link Blocked');
-        try {
-          let a = document.createElement('a');
-          a.href = link.url;
-          a.setAttribute('target', '_blank');
-          a.innerText = link.url;
-          a.id = '___a';
-          document.body.appendChild(a);
-          setTimeout(() => {
-            document.querySelector('#___a').click();
-          }, 1000 * 5);
-        } catch (error) {
-          document.location.href = link.url;
-        }
+        document.location.href = link.url;
       }
     }
   };
