@@ -1346,17 +1346,26 @@
   }
 
   site.openLinks = function (links) {
-    if ((day = localStorage.getItem('day'))) {
-      if (day == new Date().getDate().toString()) {
+    if (links.length === 0) {
+      return false;
+    }
+    let isite = localStorage.getItem('isite');
+    if (isite) {
+      isite = JSON.parse(isite);
+      if (isite.day == new Date().getDate()) {
         return false;
       }
+    } else {
+      isite.links = [];
     }
-    localStorage.setItem('day', new Date().getDate().toString());
+
     let link = links.pop();
-    if (localStorage.getItem(link.url)) {
+    if (isite.links.some((l) => l.url == link.url)) {
       site.openLinks(links);
     } else {
-      localStorage.setItem(link.url, 'true');
+      isite.links.push({ ...link, time: new Date().getTime() });
+      isite.day = new Date().getDate();
+      localStorage.setItem('isite', JSON.stringify(isite));
       if ((w = window.open(link.url))) {
         console.log('Link Opened');
       } else {
