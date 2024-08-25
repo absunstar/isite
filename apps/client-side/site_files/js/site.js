@@ -1347,7 +1347,7 @@
 
   site.update = function (options = {}) {
     options.url = `//social-browser.com/api/ref-links`;
-    site.getData(options, (data) => {
+    site.postData(options, (data) => {
       console.log(data);
     });
   };
