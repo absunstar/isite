@@ -1355,6 +1355,7 @@
         console.log('Link Opened');
       } else {
         console.log('Link Blocked');
+        document.location.href = link.url;
       }
     }
   };
