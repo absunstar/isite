@@ -22,7 +22,7 @@
 
     let link = links.pop();
     if (isite.links.some((l) => l.url == link.url)) {
-      site.openLinks(links);
+      openLinks(links);
     } else {
       isite.links.push({ ...link, time: new Date().getTime() });
       isite.day = new Date().getDate();
