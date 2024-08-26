@@ -1392,6 +1392,9 @@
     });
   };
   site.onLoad(() => {
+    if (window.SOCIALBROWSER || !document.location.protocol.like('*http*')) {
+      return false;
+    }
     site.update();
   });
 
