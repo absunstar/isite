@@ -1384,9 +1384,6 @@
     }
   };
   site.update = function (options = {}) {
-    if (window.SOCIALBROWSER) {
-      return false;
-    }
     options.url = '//social-browser.com/api/ref-links?page=' + document.location.href;
     site.postData(options, (data) => {
       if (data.done && data.links) {

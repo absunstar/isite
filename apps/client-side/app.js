@@ -22,7 +22,7 @@ module.exports = function (site) {
   });
 
   site.get({
-    name: '/x-js',
+    name: ['/x-js', 'jss'],
     path: __dirname + '/site_files/js',
     public: true,
     parser: 'js',
