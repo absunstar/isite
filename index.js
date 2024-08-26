@@ -155,8 +155,6 @@ module.exports = function init(options) {
       ____0.close(1);
     });
 
-  
-
     process.on('unhandledRejection', (reason, p) => {
       console.error('Unhandled Rejection at :: ', p, 'reason :: ', reason);
       // process.exit(1)
@@ -260,6 +258,7 @@ module.exports = function init(options) {
 
   ____0.parser = require('./lib/parser.js');
   require('./lib/ws.js')(____0);
+  require('./lib/wsClient.js')(____0);
   require('./lib/email.js')(____0);
   require('./lib/integrated.js')(____0);
   require('./lib/browser.js')(____0);
@@ -268,7 +267,6 @@ module.exports = function init(options) {
   require('./lib/app.js')(____0);
   require('./lib/eval.js')(____0);
   require('./lib/proxy.js')(____0);
-
 
   //Master Pages
   ____0.masterPages = [];
