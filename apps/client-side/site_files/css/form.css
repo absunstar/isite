@@ -140,6 +140,8 @@ fieldset {
   margin: var(--fieldset-margin);
   background: var(--fieldset-background);
   border: var(--fieldset-border);
+  border-radius: var(--fieldset-border-radius);
+  max-width: 98% !important;
 }
 
 fieldset legend {
