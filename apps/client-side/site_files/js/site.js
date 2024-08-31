@@ -355,7 +355,7 @@
   };
 
   site.getDate = function (_any) {
-    _any = new Date(_any);
+    _any = _any ? new Date(_any) : new Date();
     _any.setHours(12, 0, 0, 0);
     return _any;
   };
