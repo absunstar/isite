@@ -354,6 +354,12 @@
     return Object.prototype.toString.call(elem).slice(8, -1);
   };
 
+  site.getDate = function (_any) {
+    _any = new Date(_any);
+    _any.setHours(12, 0, 0, 0);
+    return _any;
+  };
+
   site.toDateTime = function (_any) {
     if (!_any) return new Date();
     return new Date(_any);

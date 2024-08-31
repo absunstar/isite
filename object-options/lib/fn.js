@@ -180,6 +180,13 @@ exports = module.exports = function init(____0) {
     }
     return 0;
   };
+
+  fn.getDate = function (_any) {
+    _any = new Date(_any);
+    _any.setHours(12, 0, 0, 0);
+    return _any;
+  };
+
   fn.toDateTime = function (_any) {
     return new Date(_any);
   };
@@ -439,6 +446,7 @@ exports = module.exports = function init(____0) {
   ____0.toInt = ____0.to_int = fn.toInt;
   ____0.toFloat = ____0.to_float = fn.toFloat;
 
+  ____0.getDate = fn.getDate;
   ____0.toDateTime = fn.toDateTime;
   ____0.toDateOnly = ____0.toDate = fn.toDateOnly;
 
