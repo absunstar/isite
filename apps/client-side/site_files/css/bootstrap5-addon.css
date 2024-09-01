@@ -41,6 +41,9 @@ body {
   float: right;
   margin-right: -1.5em;
 }
+a {
+  word-wrap: break-word;
+}
 .form-label {
   margin-bottom: 0.5rem;
   margin-left: 5px;

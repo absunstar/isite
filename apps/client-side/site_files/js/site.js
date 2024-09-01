@@ -66,7 +66,7 @@
   };
 
   site.isMobile = function () {
-    return navigator.userAgentData.mobile;
+    return navigator.userAgentData.mobile || 'ontouchstart' in window || navigator.maxTouchPoints > 0;
   };
 
   site.zoomNumber = parseInt(localStorage.getItem('zoomNumber') || 100);
