@@ -65,6 +65,10 @@
     }
   };
 
+  site.isMobile = function () {
+    return navigator.userAgentData.mobile;
+  };
+
   site.zoomNumber = parseInt(localStorage.getItem('zoomNumber') || 100);
   site.zoom = function (op) {
     if (op == '+') {
