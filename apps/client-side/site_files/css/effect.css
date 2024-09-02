@@ -379,7 +379,7 @@
   border: 0;
   width: 100% !important;
   height: 100% !important;
-  object-fit: fill;
+  object-fit: contain;
   z-index: 99999999;
   background: #000;
   padding: 0;
