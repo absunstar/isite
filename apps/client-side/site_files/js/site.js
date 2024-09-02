@@ -69,7 +69,19 @@
     return navigator.userAgentData.mobile || 'ontouchstart' in window || navigator.maxTouchPoints > 0;
   };
 
+  site.touchtime = 0;
   site.zoomElement = function (element) {
+    if (site.touchtime == 0) {
+      site.touchtime = new Date().getTime();
+      return false;
+    } else {
+      if (new Date().getTime() - site.touchtime < 800) {
+        site.touchtime = 0;
+      } else {
+        site.touchtime = new Date().getTime();
+        return false;
+      }
+    }
     element = typeof element == 'string' ? document.querySelector(element) : element;
     if (element.classList.contains('zoom')) {
       element.classList.remove('zoom');

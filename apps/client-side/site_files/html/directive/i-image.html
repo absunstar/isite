@@ -1,7 +1,7 @@
 <div class="text-center pointer" ng-click="upload()">
   <input class="hidden" type="file" name="fileToUpload" accept="{{accept}}" />
   <div class="center">
-    <img ontouchstart="site.zoomElement(this)" ondblclick="site.zoomElement(this)" ng-src="{{ngModel.url}}" ngClick="ngClick()" onerror="this.src='/images/no.jpg'" />
+    <img onclick="site.zoomElement(this)" ng-src="{{ngModel.url}}" ngClick="ngClick()" onerror="this.src='/images/no.jpg'" />
     <i-button type="upload" ng-click="upload()"></i-button>
     <i-button type="delete" ng-click="delete()"></i-button>
   </div>
