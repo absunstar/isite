@@ -69,6 +69,15 @@
     return navigator.userAgentData.mobile || 'ontouchstart' in window || navigator.maxTouchPoints > 0;
   };
 
+  site.zoomElement = function (element) {
+    element = typeof element == 'string' ? document.querySelector(element) : element;
+    if (element.classList.contains('zoom')) {
+      element.classList.remove('zoom');
+    } else {
+      element.classList.add('zoom');
+    }
+  };
+
   site.zoomNumber = parseInt(localStorage.getItem('zoomNumber') || 100);
   site.zoom = function (op) {
     if (op == '+') {
