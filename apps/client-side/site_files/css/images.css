@@ -52,12 +52,6 @@ i-image.img32 {
   min-height: 32px !important;
   padding: 1px !important;
 }
-i-image.img32 img {
-  width: 30px;
-  height: 30px;
-  min-width: 30px;
-  min-height: 30px;
-}
 
 i-image.img48 {
   width: 48px !important;
@@ -65,12 +59,6 @@ i-image.img48 {
   min-width: 48px !important;
   min-height: 48px !important;
   padding: 2px !important;
-}
-i-image.img48 img {
-  width: 44px;
-  height: 44px;
-  min-width: 44px;
-  min-height: 44px;
 }
 
 i-image.img64 {
@@ -80,12 +68,6 @@ i-image.img64 {
   min-height: 64px !important;
   padding: 2px !important;
 }
-i-image.img64 img {
-  width: 60px;
-  height: 60px;
-  min-width: 60px;
-  min-height: 60px;
-}
 
 i-image.img128 {
   width: 128px !important;
@@ -94,12 +76,6 @@ i-image.img128 {
   min-height: 128px !important;
   padding: 3px !important;
 }
-i-image.img128 img {
-  width: 120px;
-  height: 120px;
-  min-width: 120px;
-  min-height: 120px;
-}
 
 i-image.img256 {
   width: 256px !important;
@@ -107,12 +83,6 @@ i-image.img256 {
   min-width: 256px !important;
   min-height: 256px !important;
   padding: 3px !important;
-}
-i-image.img256 img {
-  width: 200px;
-  height: 200px;
-  min-width: 200px;
-  min-height: 200px;
 }
 
 i-image.hover img:hover {

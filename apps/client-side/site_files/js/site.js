@@ -75,7 +75,7 @@
       site.touchtime = new Date().getTime();
       return false;
     } else {
-      if (new Date().getTime() - site.touchtime < 800) {
+      if (new Date().getTime() - site.touchtime < 250) {
         site.touchtime = 0;
       } else {
         site.touchtime = new Date().getTime();
