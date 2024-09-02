@@ -95,7 +95,3 @@ i-image[view] {
 i-image[view] i-button {
   display: none;
 }
-i-image[view] img {
-  background-image: none;
-  background-color: transparent;
-}
