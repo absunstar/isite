@@ -959,7 +959,7 @@ site.on('mongodb after delete many' , (result)=>{
           site.mongodb.deleteOne({
             dbName: 'company',
             collectionName: 'employess',
-            where:{_id: new site.mongodb.ObjectID('df54fdt8h3n48ykd136vg')}
+            where:{_id: new site.mongodb.ObjectId('df54fdt8h3n48ykd136vg')}
         }, function (err, result) {
             if (err) {
                 site.log(err.message)
