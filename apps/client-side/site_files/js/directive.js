@@ -947,11 +947,23 @@ app.directive('iList', [
         }
 
         let input = $(element).find('input');
-
+        $(element).hover(
+          () => {
+            $scope.popupElement.css('display', 'block');
+          },
+          () => {
+            $scope.popupElement.css('display', 'none');
+          }
+        );
         $scope.focus = function () {
+          $('.i-list .dropdown-content').css('display', 'none');
+          $scope.popupElement.css('display', 'block');
           $scope.searchElement.focus();
         };
        
+        $scope.hide = function () {
+          $scope.popupElement.css('display', 'none');
+        };
 
         $scope.getValue = function (item) {
           let v = isite.getValue(item, $scope.display);
@@ -1026,6 +1038,7 @@ app.directive('iList', [
           $timeout(() => {
             $scope.ngChange();
           });
+          $scope.hide();
         };
       },
       template: `/*##client-side/directive-core/i-list.html*/`,
