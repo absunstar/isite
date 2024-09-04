@@ -181,9 +181,13 @@ fieldset legend {
   font-size: 16px;
   color: #000;
 }
-.i-date2 .fa {
-  font-size: 18px;
+.i-date2 label {
+  display: none;
+}
+.i-date2 .fa-calendar-day {
+  font-size: 35px;
   cursor: pointer;
+  color: var(--theme-color);
 }
 i-file {
   display: block;

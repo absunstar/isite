@@ -73,10 +73,6 @@ app.directive('iDate2', function () {
         attrs.disabled = '';
       }
 
-      $scope.y_search = attrs.year || '202';
-      $scope.m_search = attrs.month || '';
-      $scope.d_search = attrs.day || '';
-
       $scope.days1 = [];
       for (let i = 1; i < 32; i++) {
         $scope.days1.push({
@@ -84,6 +80,7 @@ app.directive('iDate2', function () {
           name: i,
         });
       }
+
       $scope.years1 = [];
       for (let i = 1900; i < 2100; i++) {
         $scope.years1.push({
@@ -113,42 +110,24 @@ app.directive('iDate2', function () {
         if (ngModel) {
           ngModel = new Date(ngModel);
           $scope.model = $scope.model || {};
-          $scope.model.day = ngModel.getDate();
-          $scope.model.day_name = $scope.model.day;
-          $scope.model.month = ngModel.getMonth();
-          $scope.model.month_name = $scope.monthes1.find((m) => m.id == $scope.model.month).name;
-          $scope.model.year = ngModel.getFullYear();
-          $scope.model.year_name = $scope.model.year;
+          $scope.model.day = $scope.days1.find((d) => d.id == ngModel.getDate());
+          $scope.model.month = $scope.monthes1.find((m) => m.id == ngModel.getMonth());
+          $scope.model.year = $scope.years1.find((y) => y.id == ngModel.getFullYear());
         } else {
           $scope.model = $scope.model || {};
-          $scope.model.day = 0;
-          $scope.model.day_name = '';
-          $scope.model.month = -1;
-          $scope.model.month_name = '';
-          $scope.model.year = 0;
-          $scope.model.year_name = '';
+          $scope.model.day = null;
+          $scope.model.month = null;
+          $scope.model.year = null;
         }
       });
 
       $scope.setDay = function () {
         $scope.ngModel = new Date();
       };
-      $scope.updateDate = function (date) {
-        if (date.year) {
-          $scope.model.year = date.year.id;
-          $scope.model.year_name = date.year.name;
-        } else if (date.month) {
-          $scope.model.month = date.month.id;
-          $scope.model.month_name = date.month.name;
-        } else if (date.day) {
-          $scope.model.day = date.day.id;
-          $scope.model.day_name = date.day.name;
-        }
 
+      $scope.updateDate = function () {
         if ($scope.model && $scope.model.year && $scope.model.day && $scope.model.month > -1) {
-          $scope.ngModel = new Date($scope.model.year, $scope.model.month, $scope.model.day, 0, 0, 0);
-        } else {
-          delete $scope.ngModel;
+          $scope.ngModel = new Date($scope.model.year, $scope.model.month, $scope.model.day, 12, 0, 0);
         }
       };
     },
@@ -960,7 +939,7 @@ app.directive('iList', [
           $scope.popupElement.css('display', 'block');
           $scope.searchElement.focus();
         };
-       
+
         $scope.hide = function () {
           $scope.popupElement.css('display', 'none');
         };
@@ -1037,7 +1016,7 @@ app.directive('iList', [
           input.val($scope.getNgModelValue($scope.ngModel) + attrs.space + $scope.getNgModelValue2($scope.ngModel));
           $timeout(() => {
             $scope.ngChange();
-          });
+          }, 200);
           $scope.hide();
         };
       },
