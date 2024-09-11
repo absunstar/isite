@@ -48,7 +48,8 @@
 }
 
 /* Change color of dropdown links on hover */
-.dropdown-content .dropdown-item:hover {
+.dropdown-content .dropdown-item:hover,
+.dropdown-content .dropdown-item:hover p {
   background-color: #7c7c7c;
   --color: #ffffff;
 }
@@ -75,7 +76,8 @@ i-list .dropdown-item {
   text-align: center;
   padding: 0;
 }
-.ar .dropdown-item p,.rtl .dropdown-item p,
+.ar .dropdown-item p,
+.rtl .dropdown-item p,
 .AR .dropdown-item p {
   text-align: right;
 }
