@@ -185,27 +185,6 @@
         site.hideModal(name);
       });
     });
-
-    site.$(name + ' .modal-header').forEach((he) => {
-      he.addEventListener('click', function (event) {
-        event = event || window.event;
-        event.stopPropagation();
-      });
-    });
-
-    site.$(name + ' .modal-body').forEach((bo) => {
-      bo.addEventListener('click', function (event) {
-        event = event || window.event;
-        event.stopPropagation();
-      });
-    });
-
-    site.$(name + ' .modal-footer').forEach((fo) => {
-      fo.addEventListener('click', function (event) {
-        event = event || window.event;
-        event.stopPropagation();
-      });
-    });
   };
 
   site.hideModal = function (name) {
