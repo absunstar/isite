@@ -25,7 +25,7 @@
   padding: 5px;
   position: sticky;
   top: 0;
-  background: #eee;
+  background: var(--theme-color);
 }
 .dropdown .dropdown-search i-control2 {
   display: inline-block;
@@ -49,7 +49,8 @@
 
 /* Change color of dropdown links on hover */
 .dropdown-content .dropdown-item:hover {
-  background-color: #bbbbbb;
+  background-color: #7c7c7c;
+  --color: #ffffff;
 }
 
 /* Show the dropdown menu on hover
@@ -70,12 +71,11 @@ i-list .dropdown-item {
 .dropdown-item p {
   color: var(--color);
   font-size: 16px;
-  font-weight: bold;
   background: transparent;
   text-align: center;
   padding: 0;
 }
-.ar .dropdown-item p,
+.ar .dropdown-item p,.rtl .dropdown-item p,
 .AR .dropdown-item p {
   text-align: right;
 }

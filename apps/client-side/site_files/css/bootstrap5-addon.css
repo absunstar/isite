@@ -209,7 +209,7 @@ i-datetime input {
   margin: 0;
   scroll-behavior: auto;
   overflow: auto;
-  border: 4px solid #bbb;
+  border: 1px solid var(--theme-color);
   border-radius: 10px;
 }
 .v-tabs .nav-link {
