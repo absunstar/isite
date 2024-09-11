@@ -199,7 +199,7 @@ i-datetime input {
 .dropdown-content {
   display: none;
   position: absolute;
-  top: 70px !important;
+  top: 75px !important;
   background-color: #ffffff;
   width: 100%;
   z-index: 999;
