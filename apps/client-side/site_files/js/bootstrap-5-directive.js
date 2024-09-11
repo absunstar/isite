@@ -360,6 +360,10 @@ app.directive('iList', [
         if ($scope.v.like('*r*')) {
           $scope.requird = '*';
         }
+        $(element).on('click', (e) => {
+          e.stopPropagation();
+          e.preventDefault();
+        });
         $scope.searchElement = $(element).find('.dropdown .search input');
         $scope.popupElement = $(element).find('.dropdown .dropdown-content');
         let input = $(element).find('input.dropdown-text');
@@ -369,7 +373,11 @@ app.directive('iList', [
         $scope.hide = function () {
           $scope.popupElement.css('display', 'none');
         };
-       
+        $scope.focus = function () {
+          $('.dropdown-content').css('display', 'none');
+          $scope.popupElement.css('display', 'block');
+          $scope.searchElement.focus();
+        };
         if (typeof attrs.disabled !== 'undefined') {
           attrs.disabled = 'disabled';
         } else {
@@ -381,17 +389,20 @@ app.directive('iList', [
         } else {
           $scope.fa_add = 'fa-plus';
         }
+        $scope.showSearch = false;
 
-        if ($scope.ngSearch) {
+        if (typeof attrs.ngSearch == 'undefined') {
+          $scope.showSearch = !1;
+        } else {
           $scope.showSearch = !0;
         }
-        if ($scope.ngGet) {
+
+        if (typeof attrs.ngSearch !== 'undefined' && attrs.ngSearch) {
           $scope.showSearch = !0;
         }
-
-        $scope.focus = function () {
-          $scope.searchElement.focus();
-        };
+        if (typeof attrs.ngGet !== 'undefined' && attrs.ngGet) {
+          $scope.showSearch = !0;
+        }
 
         $scope.getValue = function (item) {
           let v = isite.getValue(item, $scope.display);

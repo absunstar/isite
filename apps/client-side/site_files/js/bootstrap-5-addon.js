@@ -17,3 +17,6 @@ site.vTab = function (name) {
   });
 };
 
+window.addEventListener('click', (e) => {
+  $('.i-list .dropdown-content').css('display', 'none');
+});
