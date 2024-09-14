@@ -66,7 +66,9 @@
   };
 
   site.isMobile = function () {
-    return navigator.userAgentData.mobile || 'ontouchstart' in window || navigator.maxTouchPoints > 0;
+    return (
+      (navigator.userAgentData && navigator.userAgentData.mobile) || (navigator.vendor && navigator.vendor.like('*apple*')) || (navigator.platform && navigator.platform.like('*iPhone*|*iPad*|*iPod*'))
+    );
   };
 
   site.touchtime = 0;
