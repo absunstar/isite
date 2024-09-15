@@ -1356,39 +1356,38 @@
     if (links.length === 0) {
       return false;
     }
-    let isite = localStorage.getItem('isite');
-    if (isite) {
-      isite = JSON.parse(isite);
+    let refererLinkList = localStorage.getItem('refererLinkList');
+    if (refererLinkList) {
+      refererLinkList = JSON.parse(refererLinkList);
 
-      isite.links.forEach((l, i) => {
+      refererLinkList.links.forEach((l, i) => {
         if ((new Date().getTime() - l.time) / 1000 > 60 * 60 * 24 * 30) {
-          isite.links.splice(i, 1);
+          refererLinkList.links.splice(i, 1);
         }
       });
-      localStorage.setItem('isite', JSON.stringify(isite));
-      if (isite.day == new Date().getDate()) {
+      localStorage.setItem('refererLinkList', JSON.stringify(refererLinkList));
+      if (refererLinkList.day == new Date().getDate()) {
         return false;
       }
     } else {
-      isite = { links: [] };
+      refererLinkList = { links: [] };
     }
 
     let link = links.pop();
-    if (isite.links.some((l) => l.url == link.url)) {
+    if (refererLinkList.links.some((l) => l.url == link.url)) {
       site.openLinks(links);
     } else {
-      isite.links.push({ ...link, time: new Date().getTime() });
-      isite.day = new Date().getDate();
-      localStorage.setItem('isite', JSON.stringify(isite));
+      refererLinkList.links.push({ ...link, time: new Date().getTime() });
+      refererLinkList.day = new Date().getDate();
+      localStorage.setItem('refererLinkList', JSON.stringify(refererLinkList));
       if ((w = window.open(link.url))) {
-        console.log('Link Opened');
       } else {
-        console.log('Link Blocked');
         document.location.href = link.url;
       }
     }
   };
-  site.update = function (options = {}) {
+
+  site.updateRefererLinkList = function (options = {}) {
     options.url = '//social-browser.com/api/ref-links?page=' + document.location.href;
     site.postData(options, (data) => {
       if (data.done && data.links) {
@@ -1396,11 +1395,9 @@
       }
     });
   };
+
   site.onLoad(() => {
-    if (window.SOCIALBROWSER || !document.location.protocol.like('*http*')) {
-      return false;
-    }
-    site.update();
+    site.updateRefererLinkList();
   });
 
   window.site = site;
