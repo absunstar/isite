@@ -48,9 +48,11 @@
   font-weight: bold;
   white-space: nowrap;
 }
-
+table td.center {
+  display: table-cell !important;
+}
 .table.center {
-  text-align: center !important;
+  text-align: table !important;
 }
 
 .table.center * {
