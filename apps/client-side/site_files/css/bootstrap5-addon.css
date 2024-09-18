@@ -123,6 +123,9 @@ i-button button {
   padding: 7px 9px !important;
   max-height: 40px;
 }
+table i-button button {
+  margin-top: 0px !important;
+}
 i-button.default button {
   margin: 3px;
   padding: 3px;
