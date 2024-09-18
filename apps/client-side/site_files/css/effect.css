@@ -126,7 +126,9 @@
       text-align: center !important;
     }
   }
-
+  td .center {
+    border: none !important;
+  }
   .center i.center {
     vertical-align: text-bottom;
   }
