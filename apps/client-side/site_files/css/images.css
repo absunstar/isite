@@ -41,7 +41,7 @@ i-image i-button {
 
 i-image.full img {
   width: 100% !important;
-  height: auto !important;
+  height: 100% !important;
   padding: 5px;
 }
 
