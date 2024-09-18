@@ -111,22 +111,20 @@
   }
   .center {
     margin: 0 auto;
-    text-align: center;
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
     align-items: center;
     flex-direction: column;
     align-content: center;
-  }
-  .center,
-  .center p,
-  .center span,
-  .center label,
-  .center b,
-  .center i,
-  .center img {
-    text-align: center !important;
+    p,
+    b,
+    i,
+    img,
+    span,
+    label {
+      text-align: center !important;
+    }
   }
 
   .center i.center {
