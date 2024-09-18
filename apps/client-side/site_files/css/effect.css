@@ -127,7 +127,7 @@
     }
   }
   table td.center {
-    border: none !important;
+    display: block !important;
   }
   .center i.center {
     vertical-align: text-bottom;
