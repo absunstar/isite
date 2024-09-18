@@ -128,7 +128,7 @@
     }
   }
   table td.center {
-    display: block !important;
+    display: table-cell !important;
   }
   .center i.center {
     vertical-align: text-bottom;
