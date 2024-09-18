@@ -103,9 +103,9 @@ h3 {
   display: flex;
   justify-content: center;
   align-items: center;
-  flex-wrap: nowrap;
-  align-content: center;
   flex-direction: column;
+  align-content: center;
+  flex-wrap: wrap;
 }
 .col-1,
 .col-2,
