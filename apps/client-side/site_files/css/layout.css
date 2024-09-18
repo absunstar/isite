@@ -101,11 +101,11 @@ h3 {
   margin: 0;
   float: var(--float);
   display: flex;
-  justify-content: center;
-  align-items: center;
+  justify-content: flex-start;
+  align-items: stretch;
   flex-direction: column;
-  align-content: center;
-  flex-wrap: wrap;
+  align-content: stretch;
+  flex-wrap: nowrap;
 }
 .col-1,
 .col-2,
