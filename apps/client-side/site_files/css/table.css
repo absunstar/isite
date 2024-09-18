@@ -52,7 +52,7 @@ table td.center {
   display: table-cell !important;
 }
 .table.center {
-  text-align: table !important;
+  display: table !important;
 }
 
 .table.center * {
