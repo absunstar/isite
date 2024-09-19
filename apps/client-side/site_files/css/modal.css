@@ -161,6 +161,7 @@
 .modal-header p {
   width: 100%;
   text-align: center;
+  display: block;
 }
 .popup {
   overflow: auto;
