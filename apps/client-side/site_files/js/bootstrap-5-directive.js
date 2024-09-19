@@ -202,6 +202,13 @@ app.directive('iRadio', function () {
 
       $scope.group = $scope.group || attrs.ngModel.replaceAll('.', '_');
       $scope.id2 = $scope.id2 || 'input_' + Math.random().toString().replace('0.', '');
+      $scope.changed = function () {
+        $timeout(() => {
+          if ($scope.ngChange) {
+            $scope.ngChange();
+          }
+        }, 100);
+      };
     },
     template: `/*##client-side/directive/i-radio.html*/`,
   };
