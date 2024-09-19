@@ -181,7 +181,7 @@ app.directive('iCheckbox', function ($timeout) {
   };
 });
 
-app.directive('iRadio', function () {
+app.directive('iRadio', function ($timeout) {
   return {
     restrict: 'E',
     require: 'ngModel',
