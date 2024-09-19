@@ -197,8 +197,13 @@ i-datetime input {
   overflow-y: auto;
 }
 .modal-footer {
-  display: block;
+  display: flex;
   width: 100%;
+  flex-wrap: nowrap;
+  align-content: center;
+  justify-content: center;
+  align-items: center;
+  flex-direction: row;
 }
 .dropdown-content {
   display: none;
