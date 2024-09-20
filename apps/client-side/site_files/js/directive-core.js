@@ -84,9 +84,12 @@ app.service('isite', [
 
     this.uploadImage = function (files, options, callback) {
       callback = callback || function () {};
-
-      var fd = new FormData();
-      fd.append('fileToUpload', files[0]);
+      const file = files[0];
+      if (!file.type.like('*jpg*|*png*|*jpeg*|*ico*|*webp*|*gif*')) {
+        return alert('Error Selected Image ');
+      }
+      let fd = new FormData();
+      fd.append('fileToUpload', file);
       $http
         .post('/x-api/upload/image', fd, {
           withCredentials: !0,

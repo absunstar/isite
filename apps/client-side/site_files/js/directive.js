@@ -1359,7 +1359,7 @@ app.directive('iImage', [
       },
       template: `
         <form class="form text-center pointer">
-            <input  class="hidden" type="file" name="file" />
+            <input  class="hidden" type="file" name="file" accept="image/*" />
             <img class="bg-white"  ng-src="{{ngModel}}" ngClick="ngClick()" onerror="this.src='/images/no.jpg'" />
             <progress class="row"></progress>
         </form>
