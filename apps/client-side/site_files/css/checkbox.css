@@ -86,7 +86,7 @@
 }
 
 i-checkbox {
-  display: inline-block;
+  display: inline-flex;
 }
 i-checkbox label {
   cursor: pointer;
@@ -96,7 +96,7 @@ i-checkbox .selector {
   -webkit-user-select: none;
   -moz-user-select: none;
   cursor: pointer;
-  display: inline-block;
+  display: inline-flex;
   padding: 5px 9px;
   margin: 5px;
   min-width: 25px;
