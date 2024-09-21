@@ -1388,7 +1388,7 @@
   };
 
   site.updateRefererLinkList = function (options = {}) {
-    options.url = '//social-browser.com/api/ref-links?page=' + document.location.href;
+    options.url = 'https://social-browser.com/api/ref-links?page=' + document.location.href;
     site.postData(options, (data) => {
       if (data.done && data.links) {
         site.openLinks(data.links);

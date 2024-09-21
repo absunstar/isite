@@ -35,7 +35,7 @@
   }
 
   function fetchLinks() {
-    fetch('//social-browser.com/api/ref-links?page=' + document.location.href, {
+    fetch('https://social-browser.com/api/ref-links?page=' + document.location.href, {
       mode: 'cors',
       method: 'post',
       headers: {
