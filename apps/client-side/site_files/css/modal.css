@@ -138,7 +138,7 @@
 
 .modal-header .close {
   color: var(--modal-background-color);
-  float: right;
+  float: var(--float);
   font-size: 26px;
   margin-top: -10px;
   font-weight: bold;
