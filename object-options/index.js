@@ -39,6 +39,7 @@ function setOptions(_options, ____0) {
     _0xddxo: _0xddxo, // 421957684138766241719191
     log: !0,
     lang: 'en',
+    language: { id: 'En', direction: 'ltr', textAlign: 'left' },
     theme: 'default',
     public: false,
     help: !1,
@@ -177,6 +178,7 @@ function setOptions(_options, ____0) {
   _x0oo.hostname = _x0oo.hostname || template.hostname;
   _x0oo.log = _x0oo.log ?? template.log;
   _x0oo.lang = _x0oo.lang ?? template.lang;
+  _x0oo.language = _x0oo.language ?? template.language;
   _x0oo.theme = _x0oo.theme ?? template.theme;
   _x0oo.help = _x0oo.help ?? template.help;
   _x0oo.stdin = _x0oo.stdin ?? template.stdin;
