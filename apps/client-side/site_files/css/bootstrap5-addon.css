@@ -101,6 +101,7 @@ i-checkbox label {
 }
 i-checkbox,
 i-radio {
+  display: inline-flex;
   align-self: center;
   margin-left: 1.5em;
   margin-right: 1.5em;
