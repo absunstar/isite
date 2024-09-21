@@ -251,11 +251,11 @@
 @media screen and (max-width: 480px) {
   .modal.small .modal-content,
   .modal-content.small {
-    width: 95vw;
-    margin: 2vw !important;
+    width: 96%;
+    margin: 2% !important;
   }
   .modal-content {
-    width: 96vw;
-    margin: 1vw !important;
+    width: 96%;
+    margin: 2% !important;
   }
 }
