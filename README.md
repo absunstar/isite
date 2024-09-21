@@ -91,7 +91,8 @@ site = isite({
     dynamic: false, // (auto set )dynamic db & prot based on folder name [ smart-Your Site-3000 ]
     savingTime: 60 // 60 minutes then save sessions and site data,
     log: !0,
-    lang: 'ar',
+    lang: 'en',
+    language : {id : 'en' , dir : 'ltr' , text : 'left' },
     theme: 'default',
     help: !0,
     stdin: !0,
@@ -1130,11 +1131,11 @@ site.onGET('/files/file1.zip', (req, res) => {
 - Cahnge Site Language
 
 ```js
-$scope.changeLang = function (lang = 'EN', langDir = 'ltr') {
+$scope.changeLang = function (lang = 'EN', dir = 'ltr' , text = 'left') {
   $http({
     method: 'POST',
     url: '/x-language/change',
-    data: { name: lang, dir: langDir },
+    data: { id: lang, dir: dir , text : text },
   }).then(function (response) {
     if (response.data.done) {
       window.location.reload(!0);
