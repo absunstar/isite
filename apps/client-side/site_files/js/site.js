@@ -660,9 +660,9 @@
           if ((el.nodeName === 'INPUT' || el.nodeName === 'SELECT' || el.nodeName === 'TEXTAREA') && (!el.value || el.value.like('*undefined*'))) {
             el.classList.add('is-invalid');
             if ((f = el.parentNode.querySelector('.invalid-feedback'))) {
-              if (site.session && site.session.lang == 'en') {
+              if (site.session && site.session.language.id.like('*en*')) {
                 f.innerHTML = 'Data Is Required';
-              } else if (site.session && site.session.lang == 'ar') {
+              } else if (site.session && site.session.language.id.like('*ar*')) {
                 f.innerHTML = 'هذا البيان مطلوب';
               }
             }

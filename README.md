@@ -631,7 +631,7 @@ site.var('siteBrand', 'XSite');
 ```html
 <title>##var.siteName##</title>
 <h2>##var.siteBrand##</h2>
-<h2>Lang : ##session.lang## , Theme : ##session.theme##</h2>
+<h2>Lang : ##session.language.id## , Theme : ##session.theme##</h2>
 <h2>query name : ##query.name## , query age : ##query.age##</h2>
 <h2>data name : ##data.name## , data age : ##data.age##</h2>
 <h2>param category : ##params.category## , param post : ##params.post##</h2>
