@@ -191,7 +191,8 @@ exports = module.exports = function init(____0) {
   };
 
   fn.toDateTime = function (_any) {
-    return new Date(_any);
+    let d = new Date(_any);
+    return new Date(Date.UTC(d.getFullYear(), d.getMonth(), d.getDate(), d.getHours(), d.getMinutes(), d.getSeconds()));
   };
 
   fn.toDateX = function (_any) {
