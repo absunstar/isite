@@ -208,7 +208,7 @@ exports = module.exports = function init(____0) {
 
   fn.toDateOnly = function (_any) {
     let d = fn.toDateTime(_any);
-    return new Date(d.getFullYear(), d.getMonth(), d.getDate());
+    return new Date(d.getFullYear(), d.getMonth(), d.getDate(), 12, 0, 0);
   };
 
   fn.toDateT = function (_any) {
