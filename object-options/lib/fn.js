@@ -182,9 +182,12 @@ exports = module.exports = function init(____0) {
   };
 
   fn.getDate = function (_any) {
-    _any = _any ? new Date(_any) : new Date();
-    _any.setHours(12, 0, 0, 0);
-    return _any;
+    let d = _any ? new Date(_any) : new Date();
+    return new Date(Date.UTC(d.getFullYear(), d.getMonth(), d.getDate(), 12, 0, 0));
+  };
+  fn.toDateOnly = function (_any) {
+    let d = fn.toDateTime(_any);
+    return new Date(Date.UTC(d.getFullYear(), d.getMonth(), d.getDate(), 12, 0, 0));
   };
 
   fn.toDateTime = function (_any) {
@@ -204,11 +207,6 @@ exports = module.exports = function init(____0) {
   fn.toDateXF = function (_any) {
     let d = fn.toDateTime(_any);
     return d.getFullYear() + '-' + (d.getMonth() + 1) + '-' + d.getDate() + ' ' + d.getHours() + ':' + d.getMinutes() + ':' + d.getSeconds();
-  };
-
-  fn.toDateOnly = function (_any) {
-    let d = fn.toDateTime(_any);
-    return new Date(d.getFullYear(), d.getMonth(), d.getDate(), 12, 0, 0);
   };
 
   fn.toDateT = function (_any) {

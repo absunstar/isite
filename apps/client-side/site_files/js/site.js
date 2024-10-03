@@ -354,9 +354,8 @@
   };
 
   site.getDate = function (_any) {
-    _any = _any ? new Date(_any) : new Date();
-    _any.setHours(12, 0, 0, 0);
-    return _any;
+    let d = _any ? new Date(_any) : new Date();
+    return new Date(Date.UTC(d.getFullYear(), d.getMonth(), d.getDate(), 12, 0, 0));
   };
 
   site.toDateTime = function (_any) {
