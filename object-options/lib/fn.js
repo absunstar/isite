@@ -190,7 +190,7 @@ exports = module.exports = function init(____0) {
     return new Date(Date.UTC(d.getFullYear(), d.getMonth(), d.getDate(), 12, 0, 0));
   };
 
-  fn.toDateTime = function (_any) {
+  fn.getDateTime = fn.toDateTime = function (_any) {
     let d = new Date(_any);
     return new Date(Date.UTC(d.getFullYear(), d.getMonth(), d.getDate(), d.getHours(), d.getMinutes(), d.getSeconds()));
   };
@@ -446,7 +446,7 @@ exports = module.exports = function init(____0) {
   ____0.toFloat = ____0.to_float = fn.toFloat;
 
   ____0.getDate = fn.getDate;
-  ____0.toDateTime = fn.toDateTime;
+  ____0.toDateTime = ____0.getDateTime = fn.toDateTime;
   ____0.toDateOnly = ____0.toDate = fn.toDateOnly;
 
   ____0.toDateX = fn.toDateX;

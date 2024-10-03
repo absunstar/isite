@@ -357,7 +357,10 @@
     let d = _any ? new Date(_any) : new Date();
     return new Date(Date.UTC(d.getFullYear(), d.getMonth(), d.getDate(), 12, 0, 0));
   };
-
+  site.getDateTime = function (_any) {
+    let d = _any ? new Date(_any) : new Date();
+    return new Date(Date.UTC(d.getFullYear(), d.getMonth(), d.getDate(), d.getHours(), d.getMinutes(), d.getSeconds()));
+  };
   site.toDateTime = function (_any) {
     if (!_any) return new Date();
     return new Date(_any);
