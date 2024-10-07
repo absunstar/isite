@@ -77,7 +77,8 @@ i-list .dropdown-item {
   font-size: 16px;
   background: transparent;
   text-align: center;
-  padding: 0;
+  padding: 2px;
+  margin: 0;
 }
 .ar .dropdown-item p,
 .rtl .dropdown-item p,
