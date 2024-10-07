@@ -52,8 +52,9 @@
 
 /* Change color of dropdown links on hover */
 .dropdown-content .dropdown-item:hover {
-  background-color: #7c7c7c;
+  background-color: #4CAF50;
   --color: #ffffff;
+  padding-right: 20px !important;
 }
 
 /* Show the dropdown menu on hover

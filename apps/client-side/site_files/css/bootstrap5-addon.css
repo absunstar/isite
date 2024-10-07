@@ -207,7 +207,7 @@ i-datetime input {
   width: 100%;
   z-index: 999;
   max-height: 75vh;
-  padding: 0px;
+  padding: 5px;
   margin: 0;
   scroll-behavior: smooth;
   overflow: auto;
