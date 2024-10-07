@@ -67,7 +67,7 @@ i-list .dropdown-item {
   display: inline-block !important;
   cursor: pointer;
   background: var(--dropdown-background);
-  padding: 0px !important;
+  padding: 2px !important;
   margin: 0px !important;
   transition: all 0.1s ease;
   border-bottom: 1px solid #ddd !important;
