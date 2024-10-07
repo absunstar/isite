@@ -67,7 +67,10 @@
 
   site.isMobile = function () {
     return (
-      (navigator.userAgentData && navigator.userAgentData.mobile) || (navigator.vendor && navigator.vendor.like('*apple*')) || (navigator.platform && navigator.platform.like('*iPhone*|*iPad*|*iPod*'))
+      (navigator.userAgentData && navigator.userAgentData.mobile) ||
+      (navigator.vendor && navigator.vendor.like('*apple*')) ||
+      (navigator.platform && navigator.platform.like('*iPhone*|*iPad*|*iPod*')) ||
+      navigator.maxTouchPoints > 0
     );
   };
 
