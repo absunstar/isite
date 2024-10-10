@@ -644,6 +644,61 @@ app.directive('iChecklist', [
   },
 ]);
 
+app.directive('iTime', [
+  '$interval',
+  '$timeout',
+  function ($interval, $timeout) {
+    return {
+      restrict: 'E',
+      required: 'ngModel',
+      scope: {
+        label: '@',
+        primary: '@',
+        display: '@',
+        class2: '@',
+        ngModel: '=',
+        items: '=',
+        like: '&',
+        ngChange: '&',
+      },
+      link: function ($scope, element, attrs, ctrl) {
+        $scope.hourList = [];
+        $scope.minuteList = [];
+
+        for (let index = 0; index < 24; index++) {
+          $scope.hourList.push({ id: index, name: site.addZero(index, 2).toString() });
+        }
+        $scope.hour = $scope.hourList[0];
+        for (let index = 0; index < 60; index++) {
+          $scope.minuteList.push({ id: index, name: site.addZero(index, 2).toString() });
+        }
+        $scope.minute = $scope.minuteList[0];
+
+        $scope.$watch('ngModel', (ngModel) => {
+          console.log(ngModel);
+          if (ngModel && typeof ngModel.h !== 'undefined') {
+            $scope.hour = $scope.hourList.find((h) => h.id == ngModel.h) || $scope.hourList[0];
+          }
+          if (ngModel && typeof ngModel.m !== 'undefined') {
+            $scope.minute = $scope.minuteList.find((m) => m.id == ngModel.m) || $scope.minuteList[0];
+          }
+        });
+
+        $scope.change = function () {
+          $scope.ngModel = { h: $scope.hour.id || 0, m: $scope.minute.id || 0 };
+          console.log($scope.ngModel);
+          $timeout(() => {
+            if ($scope.ngChange) {
+              $scope.ngChange();
+            }
+          }, 100);
+        };
+      },
+      template: `/*##client-side/directive/i-time.html*/`,
+    };
+  },
+]);
+
 app.directive('iDate', function ($timeout) {
   return {
     restrict: 'E',

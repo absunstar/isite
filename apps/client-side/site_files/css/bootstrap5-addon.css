@@ -278,3 +278,24 @@ i-audio .btn {
 i-video video {
   max-height: 50vh;
 }
+i-time .time {
+  display: flex;
+  flex-wrap: nowrap;
+  align-content: space-between;
+  justify-content: space-evenly;
+  align-items: baseline;
+  flex-direction: row;
+  --scrollbar-width: 3px;
+  .dropdown-content {
+    top: 40px !important;
+  }
+  input {
+    font-weight: bold;
+  }
+}
+i-time .sep span {
+  font-size: xx-large;
+  line-height: 0;
+  margin-left: 5px;
+  margin-right: 5px;
+}

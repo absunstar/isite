@@ -1,0 +1,16 @@
+<div class="mb-3 center {{class2}}">
+  <label class="form-label"> <span class="red bold"> {{requird}} </span> {{label}} </label>
+  <div class="row">
+    <div class="time">
+      <div class="hour">
+        <i-list items="hourList" ng-model="hour" ng-change="change()"></i-list>
+      </div>
+      <div class="sep text-center">
+        <span class="bold"> : </span>
+      </div>
+      <div class="minute">
+        <i-list items="minuteList" ng-model="minute" ng-change="change()"></i-list>
+      </div>
+    </div>
+  </div>
+</div>
