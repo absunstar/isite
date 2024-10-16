@@ -29,15 +29,18 @@
         <td>{{word.name}}</td>
         <td>
           <i-control ng-model="word.En"></i-control>
+          <i-control ng-model="word.EN"></i-control>
         </td>
-        <td><i-control ng-model="word.Ar"></i-control></td>
+        <td>
+          <i-control ng-model="word.Ar"></i-control>
+          <i-control ng-model="word.AR"></i-control>
+        </td>
       </tr>
     </table>
 
     <script src="/x-js/bootstrap-5-support.js"></script>
     <script>
       site.connectScope({}, ($scope, $http) => {
-        $scope.name = 'Amr Barakat';
         $scope.loadWords = function () {
           $http({
             method: 'get',
