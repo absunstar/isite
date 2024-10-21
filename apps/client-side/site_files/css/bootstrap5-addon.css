@@ -144,7 +144,7 @@ i-upload {
   display: contents;
 }
 i-upload form {
-  display: inline-block;
+  display: contents;
 }
 i-date .left-10,
 i-datetime .left-10 {
