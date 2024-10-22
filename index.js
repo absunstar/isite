@@ -50,7 +50,7 @@ module.exports = function init(options) {
   ____0.nodemailer = require('nodemailer');
   ____0.child_process = require('node:child_process');
   ____0.webp = require('webp-converter');
-
+  ____0.telegramBotApi = require('node-telegram-bot-api')
   ____0.setting = {};
   ____0.collectionList = [];
   ____0.apps = [];
