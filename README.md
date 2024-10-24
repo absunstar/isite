@@ -1131,11 +1131,11 @@ site.onGET('/files/file1.zip', (req, res) => {
 - Cahnge Site Language
 
 ```js
-$scope.changeLang = function (lang = 'EN', dir = 'ltr' , text = 'left') {
+$scope.changeLang = function (lang = 'EN', dir = 'ltr', text = 'left') {
   $http({
     method: 'POST',
     url: '/x-language/change',
-    data: { id: lang, dir: dir , text : text },
+    data: { id: lang, dir: dir, text: text },
   }).then(function (response) {
     if (response.data.done) {
       window.location.reload(!0);
@@ -1377,9 +1377,7 @@ site.quee('sync event name 2', { name: 'x2' });
 
 # Contact Me
 
-- Patreon : https://www.patreon.com/next_corporation
+- Binance ID: 836059928 (for Money support)
 - Email : Absunstar@gmail.com
-- Linkedin : https://www.linkedin.com/in/absunstar
 - Github : https://github.com/absunstar
-- Paypal : https://paypal.me/absunstar
 - What's up: +966568118373
