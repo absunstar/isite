@@ -1,5 +1,10 @@
 module.exports = function init(options) {
   const ____0 = function () {};
+  ____0.args = {};
+  process.argv.forEach((arg) => {
+    arg = arg.split('=');
+    ____0.args[arg[0].replace('--', '')] = arg[1] || true;
+  });
 
   ____0.package = require(__dirname + '/package.json');
 
@@ -50,7 +55,7 @@ module.exports = function init(options) {
   ____0.nodemailer = require('nodemailer');
   ____0.child_process = require('node:child_process');
   ____0.webp = require('webp-converter');
-  ____0.telegramBotApi = require('node-telegram-bot-api')
+  ____0.telegramBotApi = require('node-telegram-bot-api');
   ____0.setting = {};
   ____0.collectionList = [];
   ____0.apps = [];

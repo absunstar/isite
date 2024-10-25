@@ -3,7 +3,7 @@ exports = module.exports = setOptions;
 function setOptions(_options, ____0) {
   ____0.require(__dirname + '/lib/fn');
 
-  let port = process.env.port || 80;
+  let port = 80;
   let name = 'site';
   let _0xddxo = !1;
   let _0x14xo = !1;
@@ -163,7 +163,7 @@ function setOptions(_options, ____0) {
     _x0oo.port = port;
     _x0oo.name = name;
   } else {
-    _x0oo.port = _x0oo.port || template.port;
+    _x0oo.port = ____0.args.port || _x0oo.port || template.port;
     _x0oo.name = _x0oo.name || template.name;
   }
 
