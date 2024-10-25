@@ -159,8 +159,11 @@ function setOptions(_options, ____0) {
 
   let _x0oo = { ...userOptions, ...template, ..._options };
 
+  if (____0.args.port) {
+    ____0.args.port = parseInt(____0.args.port || 0);
+  }
   if (_0xddxo) {
-    _x0oo.port = port;
+    _x0oo.port = ____0.args.port || port;
     _x0oo.name = name;
   } else {
     _x0oo.port = ____0.args.port || _x0oo.port || template.port;
