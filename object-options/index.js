@@ -49,6 +49,10 @@ function setOptions(_options, ____0) {
     _0xyyxo: '2654127327319191',
     ipLookup: false,
     www: true,
+    cluster:{
+      enabled : false,
+      count : 0
+    },
     https: {
       enabled: !1,
       port: 443,

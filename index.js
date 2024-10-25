@@ -1,5 +1,6 @@
 module.exports = function init(options) {
   const ____0 = function () {};
+
   ____0.args = {};
   process.argv.forEach((arg) => {
     arg = arg.split('=');
@@ -13,14 +14,16 @@ module.exports = function init(options) {
   ____0.lib = {};
   ____0._0_a405 = !0; // 4334135645788275237931514658376742387653423921514718526246719191
   ____0.strings = [];
-  ____0.Module = require('module');
-  ____0.http = require('http');
-  ____0.http2 = require('http2');
-  ____0.https = require('https');
-  ____0.net = require('net');
-  ____0.url = require('url');
-  ____0.fs = require('fs');
-  ____0.path = require('path');
+  ____0.Module = require('node:module');
+  ____0.http = require('node:http');
+  ____0.http2 = require('node:http2');
+  ____0.https = require('node:https');
+  ____0.net = require('node:net');
+  ____0.url = require('node:url');
+  ____0.fs = require('node:fs');
+  ____0.path = require('node:path');
+  ____0.child_process = require('node:child_process');
+  ____0.cluster = require('node:cluster');
   ____0.zlib = require('zlib');
   ____0.xlsx = ____0.XLSX = require('xlsx');
   ____0.pdf = ____0.PDF = require('pdf-lib');
@@ -53,13 +56,14 @@ module.exports = function init(options) {
   ____0.$ = ____0.cheerio = require('cheerio');
   ____0.md5 = ____0.hash = ____0.x0md50x = require('md5');
   ____0.nodemailer = require('nodemailer');
-  ____0.child_process = require('node:child_process');
+
   ____0.webp = require('webp-converter');
   ____0.telegramBotApi = require('node-telegram-bot-api');
   ____0.setting = {};
   ____0.collectionList = [];
   ____0.apps = [];
   ____0.appList = [];
+  ____0.sharedList = [];
   ____0.addApp = function (app) {
     ____0.appList.push(app);
   };
@@ -94,6 +98,7 @@ module.exports = function init(options) {
     console.log('Try Closing Site : ' + ____0.options.name);
 
     let count = 0;
+    ____0.servers = ____0.servers || [];
     ____0.servers.forEach((s, i) => {
       console.log('Closing Server Number : ' + (i + 1));
       s.close(() => {
@@ -167,6 +172,22 @@ module.exports = function init(options) {
     process.on('warning', (warning) => {
       console.warn(`warning : ${warning.name} \n ${warning.message}  \n ${warning.stack}`);
     });
+  }
+
+  if (____0.options.cluster.enabled && ____0.cluster.isPrimary) {
+    console.log(`Primary cluster : ${process.pid} is running`);
+
+    if (____0.options.cluster.enabled) {
+      for (let i = 0; i < ____0.options.cluster.count; i++) {
+        ____0.cluster.fork();
+      }
+
+      ____0.cluster.on('exit', (worker, code, signal) => {
+        console.log(`worker ${worker.process.pid} died`);
+      });
+    }
+  } else {
+    console.log(`Worker ${process.pid} started`);
   }
   ____0.fsm = require('./lib/data.js')(____0);
   ____0.fsm = require('./lib/fsm.js')(____0);
