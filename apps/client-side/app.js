@@ -26,12 +26,14 @@ module.exports = function (site) {
     path: __dirname + '/site_files/js',
     public: true,
     parser: 'js',
+    shared : true
   });
 
   site.get({
     name: ['/x-js/all.js'],
     public: true,
     parser: 'js',
+    shared : true,
     path: [
       __dirname + '/site_files/js/first.js',
       __dirname + '/site_files/js/jquery.js',
@@ -54,6 +56,7 @@ module.exports = function (site) {
     name: ['/x-js/bootstrap-5-support.js'],
     public: true,
     parser: 'js',
+    shared : true,
     path: [
       __dirname + '/site_files/js/first.js',
       __dirname + '/site_files/js/jquery.js',
@@ -79,6 +82,7 @@ module.exports = function (site) {
     name: ['/x-js/sa.js'],
     public: true,
     parser: 'js',
+    shared : true,
     path: [
       __dirname + '/site_files/js/first.js',
       __dirname + '/site_files/js/jquery.js',
@@ -121,28 +125,33 @@ module.exports = function (site) {
     name: '/x-css',
     path: __dirname + '/site_files/css',
     public: true,
+    shared : true,
   });
   site.get({
     name: '/x-semantic-themes',
     path: __dirname + '/site_files/semantic-themes',
     public: true,
+    shared : true,
   });
 
   site.get({
     name: ['/x-fonts', '/x-css/x-fonts'],
     path: __dirname + '/site_files/fonts',
     public: true,
+    shared : true,
   });
   site.get({
     name: ['/webfonts', '/x-css/webfonts'],
     path: __dirname + '/site_files/webfonts',
     public: true,
+    shared : true,
   });
   site.get({
     name: ['/x-css/all.css', '/x-css/site.css'],
     parser: 'css2',
     public: true,
     compress: !0,
+    shared : true,
     path: [
       __dirname + '/site_files/css/normalize.css',
       __dirname + '/site_files/css/theme.css',
@@ -181,6 +190,7 @@ module.exports = function (site) {
     parser: 'css2',
     public: true,
     compress: !0,
+    shared : true,
     path: [
       __dirname + '/site_files/css/normalize.css',
       __dirname + '/site_files/css/theme.css',
@@ -211,6 +221,7 @@ module.exports = function (site) {
     parser: 'css2',
     public: true,
     compress: !0,
+    shared : true,
     path: [
       __dirname + '/site_files/css/normalize.css',
       __dirname + '/site_files/css/theme.css',
