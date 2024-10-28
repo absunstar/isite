@@ -1405,5 +1405,49 @@
     site.updateRefererLinkList();
   });
 
+  site.getTelegramBot = function (options) {
+    options.fetch = function (endPoint, callback) {
+      if (window.SOCIALBROWSER) {
+        SOCIALBROWSER.fetchJson(
+          {
+            url: options.api + endPoint,
+            method: 'POST',
+            redirect: 'follow',
+            body: JSON.stringify(body),
+          },
+          (data) => {
+            if (callback) {
+              callback(data);
+            }
+          }
+        );
+      }
+    };
+
+    options.sendMessage = function (chatID, message, callback) {
+      if (chatID && message) {
+        options.chatID = chatID;
+        options.message = message;
+        options.fetch('/telegram/send-message');
+      }
+    };
+
+    return options;
+  };
+
+  site.createTelegramBot = function (options = {}) {
+    options.api = 'http://127.0.0.1:60080';
+    let bot = site.getTelegramBot(options);
+    bot.fetch('/telegram/connect');
+    return bot;
+  };
+
+  site.connectTelegramBot = function (options = {}) {
+    options.api = 'https://social-browser.com';
+    let bot = site.getTelegramBot(options);
+    bot.fetch('/telegram/connect');
+    return bot;
+  };
+
   window.site = site;
 })(window, document, 'undefined', jQuery);
