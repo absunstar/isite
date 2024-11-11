@@ -36,6 +36,9 @@ body {
 .container {
   max-width: 100%;
 }
+.form-check .form-check-input {
+  min-width: 1em;
+}
 .ar .form-check .form-check-input,
 .AR .form-check .form-check-input {
   margin-right: -1.5em;
