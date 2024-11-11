@@ -1190,7 +1190,11 @@
         } else {
           message = JSON.parse(message.data);
           if (message.type) {
-            if (message.type === 'ready') {
+            if (message.type === 'ping') {
+              server.sendMessage({
+                type: 'pong',
+              });
+            } else if (message.type === 'ready') {
               server.uuid = message.uuid;
               server.ip = message.ip;
               server.id = message.id;
