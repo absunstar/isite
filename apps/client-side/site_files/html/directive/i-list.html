@@ -12,7 +12,7 @@
       </div>
     </div>
 
-    <div class="dropdown-item row" ng-repeat="item in items | filter:$filter" ng-click="updateModel(item)">
+    <div ng-class="{'selected':item.$selected}" class="dropdown-item row" ng-repeat="item in items | filter:$filter" ng-click="updateModel(item)">
       <p>{{getValue(item)}}</p>
       <p class="small" ng-show="display2">{{getValue2(item)}}</p>
     </div>

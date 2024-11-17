@@ -453,6 +453,7 @@ app.directive('iList', [
 
           if (items) {
             items.forEach((item) => {
+              item.$selected = false;
               if ($scope.display2) {
                 let val = $scope.getValue(item);
                 if (val) {
@@ -469,6 +470,7 @@ app.directive('iList', [
           if (items && $scope.ngModel) {
             items.forEach((item) => {
               if (isite.getValue(item, $scope.primary) == isite.getValue($scope.ngModel, $scope.primary)) {
+                item.$selected = true;
                 $scope.ngModel = item;
                 if ($scope.display2) {
                   let val = $scope.getValue(item);
@@ -482,6 +484,8 @@ app.directive('iList', [
                 }
 
                 input.val(item.$display);
+              } else {
+                item.$selected = false;
               }
             });
           }
@@ -518,6 +522,10 @@ app.directive('iList', [
 
         $scope.updateModel = function (item) {
           if (item) {
+            $scope.items.forEach((_item) => {
+              _item.$selected = false;
+            });
+            item.$selected = true;
             $scope.ngModel = $scope.getNgValue(item, $scope.ngValue);
             if ($scope.display2) {
               let val = $scope.getNgModelValue($scope.ngModel);

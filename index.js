@@ -114,11 +114,8 @@ module.exports = function init(options) {
     });
 
     setTimeout(() => {
-      console.log('Closing All Database ...');
-      ____0.call('[close-database]', null, () => {
-        console.log('Closing Process');
-        process.exit(0);
-      });
+      console.log('Closing Process');
+      process.exit(0);
     }, 1000 * wait);
   };
   ____0.options = {};

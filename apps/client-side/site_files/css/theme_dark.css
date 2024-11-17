@@ -104,7 +104,7 @@
 
     --fieldset-border: 1px solid #151515;
     --fieldset-background: none;
-    --fieldset-margin : 10px;
+    --fieldset-margin : 1% !important;
     --fieldset-padding : 5px;
     --legend-color: #fff;
     --legend-text-shadow: none;

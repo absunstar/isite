@@ -1,289 +1,295 @@
 module.exports = function init(site) {
-
   site.post('/api/security/permissions', (req, res) => {
-
     let response = {
-      done: !1
-    }
+      done: !1,
+    };
 
     if (!req.session.user) {
-      response.error = 'You Are Not Login'
-      res.json(response)
-      return
+      response.error = 'You Are Not Login';
+      res.json(response);
+      return;
     }
 
     response.done = !0;
-    response.permissions = site.security.permissions
-    res.json(response)
-  })
+    response.permissions = site.security.permissions;
+    res.json(response);
+  });
 
   site.post('/api/security/roles', (req, res) => {
-
     let response = {
-      done: !1
-    }
+      done: !1,
+    };
 
     if (!req.session.user) {
-      response.error = 'You Are Not Login'
-      res.json(response)
-      return
+      response.error = 'You Are Not Login';
+      res.json(response);
+      return;
     }
 
     response.done = !0;
-    response.roles = site.security.roles
-    res.json(response)
-  })
+    response.roles = site.security.roles;
+    res.json(response);
+  });
 
   site.get({
-    name: ["security" , "security/users"],
-    path: __dirname + "/site_files/html/index.html",
-    parser: "html css js",
-    compress: !1
-  })
+    name: ['security', 'security/users'],
+    path: __dirname + '/site_files/html/index.html',
+    parser: 'html css js',
+    compress: !1,
+  });
 
   site.get({
     name: '/images',
-    path: __dirname + '/site_files/images'
-  })
-
+    path: __dirname + '/site_files/images',
+  });
 
   site.post('/api/users/all', (req, res) => {
-
     let response = {
-      done: !1
-    }
+      done: !1,
+    };
 
     if (!req.session.user) {
-      response.error = 'You Are Not Login'
-      res.json(response)
-      return
+      response.error = 'You Are Not Login';
+      res.json(response);
+      return;
     }
 
-    site.security.getUsers({
-      limit: 1000
-    }, (err, docs, count) => {
-      if (!err) {
-        response.done = !0
-        for (let i = 0; i < docs.length; i++) {
-          let u = docs[i]
-          u.profile = u.profile || {}
-          u.profile.image_url = u.profile.image_url || '/images/user.png'
+    site.security.getUsers(
+      {
+        limit: 1000,
+      },
+      (err, docs, count) => {
+        if (!err) {
+          response.done = !0;
+          for (let i = 0; i < docs.length; i++) {
+            let u = docs[i];
+            u.profile = u.profile || {};
+            u.profile.image_url = u.profile.image_url || '/images/user.png';
+          }
+          response.users = docs;
+          response.count = count;
         }
-        response.users = docs
-        response.count = count
+        res.json(response);
       }
-      res.json(response)
-    })
-  })
+    );
+  });
 
-  site.post("/api/user/add", (req, res) => {
-
+  site.post('/api/user/add', (req, res) => {
     let response = {
-      done: !1
-    }
+      done: !1,
+    };
 
     if (!req.session.user) {
-      response.error = 'You Are Not Login'
-      res.json(response)
-      return
+      response.error = 'You Are Not Login';
+      res.json(response);
+      return;
     }
 
-    let user = req.body
-    user.$req = req
-    user.$res = res
+    let user = req.body;
+    user.$req = req;
+    user.$res = res;
     site.security.addUser(user, (err, _id) => {
       if (!err) {
-        response.done = !0
+        response.done = !0;
       } else {
-        response.error = err.message
+        response.error = err.message;
       }
-      res.json(response)
-    })
-  })
+      res.json(response);
+    });
+  });
 
-  site.post("/api/user/update", (req, res) => {
+  site.post('/api/user/update', (req, res) => {
     let response = {
-      done: !1
-    }
+      done: !1,
+    };
 
     if (!req.session.user) {
-      response.error = 'You Are Not Login'
-      res.json(response)
-      return
+      response.error = 'You Are Not Login';
+      res.json(response);
+      return;
     }
 
-    let user = req.body
-    user.$req = req
-    user.$res = res
-    delete user.$$hashKey
+    let user = req.body;
+    user.$req = req;
+    user.$res = res;
+    delete user.$$hashKey;
 
-    site.security.updateUser(user, err => {
+    site.security.updateUser(user, (err) => {
       if (!err) {
-        response.done = !0
+        response.done = !0;
       } else {
-        response.error = err.message
+        response.error = err.message;
       }
-      res.json(response)
-    })
+      res.json(response);
+    });
+  });
 
-  })
-
-  site.post("/api/user/delete", (req, res) => {
+  site.post('/api/user/delete', (req, res) => {
     let response = {
-      done: !1
-    }
+      done: !1,
+    };
 
     if (!req.session.user) {
-      response.error = 'You Are Not Login'
-      res.json(response)
-      return
+      response.error = 'You Are Not Login';
+      res.json(response);
+      return;
     }
 
-    let id = req.body.id
+    let id = req.body.id;
     if (id) {
-      site.security.deleteUser({
-        id: id,
-        $req: req,
-        $res: res
-      }, (err, result) => {
-        if (!err) {
-          response.done = !0
-        }else{
-          response.error = err.message
+      site.security.deleteUser(
+        {
+          id: id,
+          $req: req,
+          $res: res,
+        },
+        (err, result) => {
+          if (!err) {
+            response.done = !0;
+          } else {
+            response.error = err.message;
+          }
+          res.json(response);
         }
-        res.json(response)
-      })
+      );
     } else {
-      response.error = 'No ID Requested'
-      res.json(response)
+      response.error = 'No ID Requested';
+      res.json(response);
     }
-  })
+  });
 
-  site.post("/api/user/view", (req, res) => {
-
+  site.post('/api/user/view', (req, res) => {
     let response = {
-      done: !1
-    }
+      done: !1,
+    };
 
     if (!req.session.user) {
-      response.error = 'You Are Not Login'
-      res.json(response)
-      return
+      response.error = 'You Are Not Login';
+      res.json(response);
+      return;
     }
 
-    site.security.getUser({
-      id: req.body.id
-    }, (err, doc) => {
-      if (!err) {
-        response.done = !0
-        response.doc =doc
-      } else {
-        response.error = err.message
+    site.security.getUser(
+      {
+        id: req.body.id,
+      },
+      (err, doc) => {
+        if (!err) {
+          response.done = !0;
+          response.doc = doc;
+        } else {
+          response.error = err.message;
+        }
+        res.json(response);
       }
-      res.json(response)
-    })
-  })
+    );
+  });
 
-
-  site.post("/api/user/register", (req, res) => {
-    let response = {}
+  site.post('/api/user/register', (req, res) => {
+    let response = {};
 
     if (req.body.$encript) {
-      if (req.body.$encript === "64") {
-        req.body.email = site.fromBase64(req.body.email)
-        req.body.password = site.fromBase64(req.body.password)
-      } else if (req.body.$encript === "123") {
-        req.body.email = site.from123(req.body.email)
-        req.body.password = site.from123(req.body.password)
+      if (req.body.$encript === '64') {
+        req.body.email = site.fromBase64(req.body.email);
+        req.body.password = site.fromBase64(req.body.password);
+      } else if (req.body.$encript === '123') {
+        req.body.email = site.from123(req.body.email);
+        req.body.password = site.from123(req.body.password);
       }
     }
 
-    site.security.register({
+    site.security.register(
+      {
         email: req.body.email,
         password: req.body.password,
         ip: req.ip,
-        permissions: ["user"],
+        permissions: ['user'],
         profile: {
           files: [],
-          name: req.body.email
+          name: req.body.email,
         },
         $req: req,
-        $res: res
+        $res: res,
       },
       function (err, doc) {
         if (!err) {
-          response.user = doc
-          response.done = !0
+          response.user = doc;
+          response.done = !0;
         } else {
-          response.error = err.message
+          response.error = err.message;
         }
-        res.json(response)
+        res.json(response);
       }
-    )
-  })
+    );
+  });
 
-
-  site.post("/api/user/login", function (req, res) {
+  site.post('/api/user/login', function (req, res) {
     let response = {
-      accessToken: req.session.accessToken
-    }
+      accessToken: req.session.accessToken,
+    };
 
     if (req.body.$encript) {
-      if (req.body.$encript === "64") {
-        req.body.email = site.fromBase64(req.body.email)
-        req.body.password = site.fromBase64(req.body.password)
-      } else if (req.body.$encript === "123") {
-        req.body.email = site.from123(req.body.email)
-        req.body.password = site.from123(req.body.password)
+      if (req.body.$encript === '64') {
+        req.body.email = site.fromBase64(req.body.email);
+        req.body.mobile = site.fromBase64(req.body.mobile);
+        req.body.username = site.fromBase64(req.body.username);
+        req.body.password = site.fromBase64(req.body.password);
+        req.body.key = site.fromBase64(req.body.key);
+      } else if (req.body.$encript === '123') {
+        req.body.email = site.from123(req.body.email);
+        req.body.mobile = site.from123(req.body.mobile);
+        req.body.username = site.from123(req.body.username);
+        req.body.password = site.from123(req.body.password);
+        req.body.key = site.from123(req.body.key);
       }
     }
 
     if (site.security.isUserLogin(req, res)) {
-      response.error = "Login Error , You Are Loged "
-      response.done = !0
-      res.json(response)
-      return
+      response.error = 'Login Error , You Are Loged ';
+      response.done = !0;
+      res.json(response);
+      return;
     }
 
-    site.security.login({
+    site.security.login(
+      {
         email: req.body.email,
+        username: req.body.username,
+        mobile: req.body.mobile,
         password: req.body.password,
+        key: req.body.key,
         $req: req,
-        $res: res
+        $res: res,
       },
       function (err, user) {
         if (!err) {
+          response.user = user;
 
-          response.user = user
-
-          response.done = !0
-
+          response.done = !0;
         } else {
-          response.error = err.message
+          response.error = err.message;
         }
 
-        res.json(response)
+        res.json(response);
       }
-    )
-  })
+    );
+  });
 
-  site.post("/api/user/logout", function (req, res) {
+  site.post('/api/user/logout', function (req, res) {
     let response = {
-      done: !0
-    }
+      done: !0,
+    };
 
     site.security.logout(req, res, (err, ok) => {
-      response.accessToken = req.session.accessToken
+      response.accessToken = req.session.accessToken;
       if (ok) {
-        response.done = !0
-        res.json(response)
+        response.done = !0;
+        res.json(response);
       } else {
-        response.error = "You Are Not Loged"
-        response.done = !0
-        res.json(response)
+        response.error = 'You Are Not Loged';
+        response.done = !0;
+        res.json(response);
       }
-    })
-  })
-
-
-}
+    });
+  });
+};

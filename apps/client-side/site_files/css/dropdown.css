@@ -51,7 +51,7 @@
 }
 
 /* Change color of dropdown links on hover */
-.dropdown-content .dropdown-item:hover {
+.dropdown-content .dropdown-item:hover , .dropdown-content .dropdown-item.selected {
   background-color: #4CAF50;
   --color: #ffffff;
   padding-right: 20px !important;
