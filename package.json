@@ -1,6 +1,6 @@
 {
   "name": "isite",
-  "version": "2024.09.01",
+  "version": "2024.09.02",
   "description": "Create High Level Multi-Language Web Site [Fast and Easy] ",
   "main": "index.js",
   "repository": {
@@ -42,7 +42,7 @@
     "eval": "^0.1.8",
     "formidable": "^2.0.1",
     "md5": "^2.3.0",
-    "mongodb": "^6.8.0",
+    "mongodb": "^6.10.0",
     "mv": "^2.1.1",
     "node-fetch": "^3.3.2",
     "node-telegram-bot-api": "^0.66.0",
