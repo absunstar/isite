@@ -180,11 +180,13 @@ module.exports = function init(options) {
       }
 
       ____0.cluster.on('exit', (worker, code, signal) => {
-        console.log(`worker ${worker.process.pid} died`);
+        console.log(`worker cluster : ${worker.process.pid} died`);
       });
     }
-  } else {
-    console.log(`Worker ${process.pid} started`);
+  } else if (____0.options.cluster.enabled && !____0.cluster.isPrimary)  {
+    console.log(`Worker cluster : ${process.pid} started`);
+  } else  {
+    console.log(`Process : ${process.pid} started`);
   }
   ____0.fsm = require('./lib/data.js')(____0);
   ____0.fsm = require('./lib/fsm.js')(____0);
