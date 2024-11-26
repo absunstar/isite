@@ -60,7 +60,11 @@ module.exports = function init(options) {
   ____0.webp = require('webp-converter');
   ____0.telegramBotApi = require('node-telegram-bot-api');
   ____0.setting = {};
+
+  ____0.databaseList = [];
+  ____0.databaseCollectionList = [];
   ____0.collectionList = [];
+
   ____0.apps = [];
   ____0.appList = [];
   ____0.sharedList = [];
