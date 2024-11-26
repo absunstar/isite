@@ -366,7 +366,7 @@ exports = module.exports = function init(____0) {
     if (obj === undefined || obj === null) {
       return '';
     }
-    return JSON.stringify(obj);
+    return JSON.stringify(____0.removeRefObject(obj));
   };
 
   fn._0xpttxo = function () {
@@ -429,14 +429,35 @@ exports = module.exports = function init(____0) {
     return newData;
   };
 
-  ____0.hide = ____0.hideObject =(data) => {
+  ____0.hide = ____0.hideObject = (data) => {
     if (data === undefined) {
       return '';
     }
     return fn.to123(data);
   };
-  ____0.ul = ____0.show = ____0.showObject =(data) => {
-    return fn.fromJson(fn.from123(data));
+  ____0.ul =
+    ____0.show =
+    ____0.showObject =
+      (data) => {
+        return fn.fromJson(fn.from123(data));
+      };
+
+  ____0.removeRefObject = function (obj) {
+    const seen = new Set();
+    const recurse = (obj) => {
+      seen.add(obj, true);
+      for (let [k, v] of Object.entries(obj)) {
+        if (v && typeof v == 'object') {
+          if (seen.has(v)) {
+            delete obj[k];
+          } else {
+            recurse(v);
+          }
+        }
+      }
+      return obj;
+    };
+    return recurse(obj);
   };
 
   ____0.fn = fn;
