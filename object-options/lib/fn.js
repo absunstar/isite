@@ -447,11 +447,13 @@ exports = module.exports = function init(____0) {
     const recurse = (obj) => {
       seen.add(obj, true);
       for (let [k, v] of Object.entries(obj)) {
-        if (v && typeof v == 'object') {
-          if (seen.has(v)) {
-            delete obj[k];
-          } else {
-            recurse(v);
+        if (k !== '_id') {
+          if (v && typeof v == 'object') {
+            if (seen.has(v)) {
+              delete obj[k];
+            } else {
+              recurse(v);
+            }
           }
         }
       }
