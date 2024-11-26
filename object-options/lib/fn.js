@@ -429,13 +429,13 @@ exports = module.exports = function init(____0) {
     return newData;
   };
 
-  ____0.hide = (data) => {
+  ____0.hide = ____0.hideObject =(data) => {
     if (data === undefined) {
       return '';
     }
     return fn.to123(data);
   };
-  ____0.ul = ____0.show = (data) => {
+  ____0.ul = ____0.show = ____0.showObject =(data) => {
     return fn.fromJson(fn.from123(data));
   };
 
