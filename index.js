@@ -187,9 +187,9 @@ module.exports = function init(options) {
         console.log(`worker cluster : ${worker.process.pid} died`);
       });
     }
-  } else if (____0.options.cluster.enabled && !____0.cluster.isPrimary)  {
+  } else if (____0.options.cluster.enabled && !____0.cluster.isPrimary) {
     console.log(`Worker cluster : ${process.pid} started`);
-  } else  {
+  } else {
     console.log(`Process : ${process.pid} started`);
   }
   ____0.fsm = require('./lib/data.js')(____0);
@@ -406,6 +406,12 @@ module.exports = function init(options) {
     // 4578815141785252455847572118176545188679211923764553137442393151413872654579465146593768
     ____0[____0.from123('397413494139217339741349')] = _;
   });
+
+  setInterval(() => {
+    ____0.collectionList.forEach((collection) => {
+      collection.checkTaskList();
+    });
+  }, 10);
 
   return ____0;
 };
