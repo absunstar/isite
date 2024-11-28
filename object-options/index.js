@@ -94,6 +94,7 @@ function setOptions(_options, ____0) {
     },
     session: {
       timeout: 60 * 24 * 30,
+      memoryTimeout : 60,
       enabled: !0,
       storage: 'mongodb',
       db: null,
@@ -265,6 +266,7 @@ function setOptions(_options, ____0) {
   _x0oo.session = _x0oo.session || template.session;
   _x0oo.session.enabled = _x0oo.session.enabled ?? template.session.enabled;
   _x0oo.session.timeout = _x0oo.session.timeout ?? template.session.timeout;
+  _x0oo.session.memoryTimeout = _x0oo.session.memoryTimeout ?? template.session.memoryTimeout;
   _x0oo.session.storage = _x0oo.session.storage || template.session.storage;
   _x0oo.session.db = _x0oo.session.db || _x0oo.mongodb.db;
   _x0oo.session.collection = _x0oo.session.collection || template.session.collection;
