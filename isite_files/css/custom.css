@@ -6,6 +6,8 @@ body{
 }
 
 p {
+    word-break: break-word;
+    word-wrap: break-word;
     padding: 7px;
     padding-left: 20px;
     font-size: 16px;
