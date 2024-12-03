@@ -14,7 +14,7 @@ app.controller('navbar', ($scope, $http) => {
   $scope.changeLang = function (language) {
     if (typeof language == 'string') {
       language = { id: language, dir: 'rtl', text: 'right' };
-      if (language.id.like('*en*')) {
+      if (!language.id.like('*ar*')) {
         language.dir = 'ltr';
         language.text = 'left';
       }
