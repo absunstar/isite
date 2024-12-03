@@ -39,7 +39,7 @@ function setOptions(_options, ____0) {
     _0x14xo: _0x14xo, // 3259376545129191
     _0xddxo: _0xddxo, // 421957684138766241719191
     log: !0,
-    lang: 'en',
+    lang: 'En',
     language: { id: 'En', dir: 'ltr', text: 'left' },
     theme: 'default',
     public: false,

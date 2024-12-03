@@ -1,8 +1,8 @@
 [
-    {"name" : "developer" , "en" : "Developer" , "ar" : " ديفولوبر" },
-    {"name" : "admin" , "en" : "Admin" , "ar" : " ادمن" },
-    {"name" : "owner" , "en" : "Owner" , "ar" : " صاحب البرنامج" },
-    {"name" : "security" , "en" : "Users Management" , "ar" : "ادارة المستخدمين" },
-    {"name" : "print" , "en" : "Print" , "ar" : "طباعة" },
-    {"name" : "menus" , "en" : "Menus View" , "ar" : "ظهور القوائم العامة" }
+    {"name" : "developer" , "En" : "Developer" , "Ar" : " ديفولوبر" },
+    {"name" : "admin" , "En" : "Admin" , "Ar" : " ادمن" },
+    {"name" : "owner" , "En" : "Owner" , "Ar" : " صاحب البرنامج" },
+    {"name" : "security" , "En" : "Users Management" , "Ar" : "ادارة المستخدمين" },
+    {"name" : "print" , "En" : "Print" , "Ar" : "طباعة" },
+    {"name" : "menus" , "En" : "Menus View" , "Ar" : "ظهور القوائم العامة" }
 ]

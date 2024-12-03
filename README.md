@@ -637,8 +637,8 @@ site.var('siteBrand', 'XSite');
 <h2>data name : ##data.name## , data age : ##data.age##</h2>
 <h2>param category : ##params.category## , param post : ##params.post##</h2>
 
-<div x-lang="ar">Show if Site Language is Arabic</div>
-<div x-lang="en">Show if Site Language is English</div>
+<div x-lang="Ar">Show if Site Language is Arabic</div>
+<div x-lang="En">Show if Site Language is English</div>
 // auto detect user session language
 
 <div x-permission="admin">Only Admi Users Can Show This Content</div>
@@ -1104,9 +1104,9 @@ site.onGET('/files/file1.zip', (req, res) => {
 
 ```json
 [
-  { "name": "user_name", "en": "User Name", "ar": "أسم المستخدم" },
-  { "name": "user_email", "en": "Email", "ar": "البريد الالكترونى" },
-  { "name": "user_password", "en": "Password", "ar": "كلمة المرور" }
+  { "name": "user_name", "En": "User Name", "Ar": "أسم المستخدم" },
+  { "name": "user_email", "En": "Email", "Ar": "البريد الالكترونى" },
+  { "name": "user_password", "En": "Password", "Ar": "كلمة المرور" }
 ]
 ```
 
@@ -1151,8 +1151,8 @@ $scope.changeLang = function (lang = 'EN', dir = 'ltr', text = 'left') {
 - Show Content Depended on Language
 
 ```html
-<div x-lang="ar">This Content Will Display When Site Language is Arabic</div>
-<div x-lang="en">This Content Will Display When Site Language is English</div>
+<div x-lang="Ar">This Content Will Display When Site Language is Arabic</div>
+<div x-lang="En">This Content Will Display When Site Language is English</div>
 ```
 
 ## Client libraries

@@ -92,7 +92,7 @@ require('isite-client')(site)
 
 ```html
 <!DOCTYPE html>
-<html lang="en" ng-app="myApp">
+<html lang="En" ng-app="myApp">
 
 <head>
     <meta charset="UTF-8">
@@ -100,7 +100,7 @@ require('isite-client')(site)
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
     <link rel="stylesheet" href="/x-css/site.css">
-    <style x-lang="ar">
+    <style x-lang="Ar">
     :root {
         --direction: rtl;
         --text-align: right;
