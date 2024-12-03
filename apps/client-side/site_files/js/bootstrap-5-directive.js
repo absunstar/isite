@@ -113,7 +113,7 @@ app.directive('iContent', function ($timeout, $interval) {
           width: '100%',
           minHeight: '300px',
         });
-        if ($scope.ngModel && window['content_' + $scope.id2]) {
+        if (window['content_' + $scope.id2]) {
           window['content_' + $scope.id2].setContents($scope.ngModel);
         }
         $scope.readingNow();
@@ -143,7 +143,7 @@ app.directive('iContent', function ($timeout, $interval) {
       $scope.$watch('ngModel', (ngModel) => {
         clearInterval($scope.intravalReading);
 
-        if (ngModel && window['content_' + $scope.id2]) {
+        if (window['content_' + $scope.id2]) {
           if ($scope.ngModel2 && $scope.ngModel !== $scope.ngModel2) {
             $scope.ngModel = ngModel;
             window['content_' + $scope.id2].setContents($scope.ngModel);
