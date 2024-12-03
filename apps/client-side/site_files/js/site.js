@@ -1405,10 +1405,6 @@
     });
   };
 
-  site.onLoad(() => {
-    site.updateRefererLinkList();
-  });
-
   site.getTelegramBot = function (options) {
     options.fetch = function (endPoint, callback) {
       if (window.SOCIALBROWSER) {
