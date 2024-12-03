@@ -114,7 +114,7 @@ app.directive('iContent', function ($timeout, $interval) {
           minHeight: '300px',
         });
         if (window['content_' + $scope.id2]) {
-          window['content_' + $scope.id2].setContents($scope.ngModel);
+          window['content_' + $scope.id2].setContents($scope.ngModel || '');
         }
         $scope.readingNow();
       };
@@ -146,7 +146,7 @@ app.directive('iContent', function ($timeout, $interval) {
         if (window['content_' + $scope.id2]) {
           if ($scope.ngModel2 && $scope.ngModel !== $scope.ngModel2) {
             $scope.ngModel = ngModel;
-            window['content_' + $scope.id2].setContents($scope.ngModel);
+            window['content_' + $scope.id2].setContents($scope.ngModel || '');
           }
         }
         $scope.readingNow();
