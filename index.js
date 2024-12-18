@@ -1,4 +1,5 @@
 module.exports = function init(options) {
+  console.log('isite init ...');
   const ____0 = function () {};
 
   ____0.args = {};
