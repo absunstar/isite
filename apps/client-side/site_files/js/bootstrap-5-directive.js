@@ -738,8 +738,8 @@ app.directive('iDate', function ($timeout) {
 
       $scope.model = {};
 
-      $scope.lang = site.session ? site.session.language.id : 'en';
-      if ($scope.lang === 'ar') {
+      $scope.lang = site.session ? site.session.language.id : 'En';
+      if ($scope.lang.contains('ar')) {
         $scope.monthes = [
           { id: 0, name: 'يناير' },
           { id: 1, name: 'فبراير' },
@@ -846,8 +846,8 @@ app.directive('iDatetime', function () {
 
       $scope.model = {};
 
-      $scope.lang = site.session ? site.session.language.id : 'en';
-      if ($scope.lang === 'ar') {
+      $scope.lang = site.session ? site.session.language.id : 'En';
+      if ($scope.lang.contains('ar')) {
         $scope.monthes = [
           { id: 0, name: 'يناير' },
           { id: 1, name: 'فبراير' },
