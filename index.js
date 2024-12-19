@@ -176,23 +176,26 @@ module.exports = function init(options) {
     });
   }
 
-  if (____0.options.cluster.enabled && ____0.cluster.isPrimary) {
-    console.log(`Primary cluster : ${process.pid} is running`);
+  // if (____0.options.cluster.enabled && ____0.cluster.isPrimary) {
+  //   console.log(`Primary cluster : ${process.pid} is running`);
 
-    if (____0.options.cluster.enabled) {
-      for (let i = 0; i < ____0.options.cluster.count; i++) {
-        ____0.cluster.fork();
-      }
+  //   if (____0.options.cluster.enabled) {
+  //     for (let i = 0; i < ____0.options.cluster.count; i++) {
+  //       ____0.cluster.fork();
+  //     }
 
-      ____0.cluster.on('exit', (worker, code, signal) => {
-        console.log(`worker cluster : ${worker.process.pid} died`);
-      });
-    }
-  } else if (____0.options.cluster.enabled && !____0.cluster.isPrimary) {
-    console.log(`Worker cluster : ${process.pid} started`);
-  } else {
-    console.log(`Process : ${process.pid} started`);
-  }
+  //     ____0.cluster.on('exit', (worker, code, signal) => {
+  //       console.log(`worker cluster : ${worker.process.pid} died`);
+  //     });
+  //   }
+  // } else if (____0.options.cluster.enabled && !____0.cluster.isPrimary) {
+  //   console.log(`Worker cluster : ${process.pid} started`);
+  // } else {
+  //   console.log(`Process : ${process.pid} started`);
+  // }
+
+  console.log(`Process ID : ${process.pid} `);
+
   ____0.fsm = require('./lib/data.js')(____0);
   ____0.fsm = require('./lib/fsm.js')(____0);
 
