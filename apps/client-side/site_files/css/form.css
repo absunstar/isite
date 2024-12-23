@@ -146,12 +146,16 @@ fieldset {
 }
 
 fieldset legend {
+  display: contents;
   color: var(--legend-color);
   font-size: var(--legend-font-size);
   text-shadow: var(--legend-text-shadow);
   font-weight: var(--legend-font-weight);
   background: var(--fieldset-background);
   border: var(--legend-border);
+  float: var(--float);
+  width: auto;
+  padding: 5px;
 }
 
 .files {
