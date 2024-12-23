@@ -78,7 +78,7 @@ h3 {
   flex-direction: row;
   flex-wrap: wrap;
   align-content: flex-start;
-  align-items: center;
+  align-items: flex-start;
   justify-content: space-between;
 }
 
