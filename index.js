@@ -24,7 +24,6 @@ module.exports = function init(options) {
   ____0.fs = require('node:fs');
   ____0.path = require('node:path');
   ____0.child_process = require('node:child_process');
-  ____0.cluster = require('node:cluster');
   ____0.zlib = require('zlib');
   ____0.xlsx = ____0.XLSX = require('xlsx');
   ____0.pdf = ____0.PDF = require('pdf-lib');
