@@ -1,6 +1,6 @@
 {
   "name": "isite",
-  "version": "2025.01.02",
+  "version": "2025.01.03",
   "description": "Create High Level Multi-Language Web Site [Fast and Easy] ",
   "main": "index.js",
   "repository": {
@@ -41,6 +41,7 @@
     "cheerio": "^1.0.0-rc.12",
     "eval": "^0.1.8",
     "formidable": "^2.0.1",
+    "https-proxy-agent": "^7.0.6",
     "md5": "^2.3.0",
     "mongodb": "^6.10.0",
     "mv": "^2.1.1",
@@ -48,6 +49,7 @@
     "node-telegram-bot-api": "^0.66.0",
     "nodemailer": "^6.9.14",
     "pdf-lib": "^1.17.1",
+    "telegram": "^2.26.22",
     "utf8": "^3.0.0",
     "webp-converter": "^2.3.3",
     "ws": "^8.18.0",

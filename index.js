@@ -24,6 +24,7 @@ module.exports = function init(options) {
   ____0.fs = require('node:fs');
   ____0.path = require('node:path');
   ____0.child_process = require('node:child_process');
+  ____0.readline = require('node:readline');
   ____0.zlib = require('zlib');
   ____0.xlsx = ____0.XLSX = require('xlsx');
   ____0.pdf = ____0.PDF = require('pdf-lib');
@@ -34,23 +35,28 @@ module.exports = function init(options) {
   ____0.mv = require('mv');
   ____0.utf8 = require('utf8');
   ____0.eval = require('eval');
+  ____0.proxyAgent = require('https-proxy-agent');
   ____0.fetchAsync = (...args) => import('node-fetch').then(({ default: fetch }) => fetch(...args));
   ____0.request =
     ____0.fetch =
     ____0.x0ftox =
       function (...args) {
         args[1] = args[1] || {};
-        args[1].agent = function (_parsedURL) {
-          if (_parsedURL.protocol == 'http:') {
-            return new ____0.http.Agent({
-              keepAlive: true,
-            });
-          } else {
-            return new ____0.https.Agent({
-              keepAlive: true,
-            });
-          }
-        };
+        args[1].agent =
+          args[1].agent ||
+          function (_parsedURL) {
+            if (args[1].proxyURL) {
+              return new ____0.proxyAgent(proxyURL);
+            } else if (_parsedURL.protocol == 'http:') {
+              return new ____0.http.Agent({
+                keepAlive: true,
+              });
+            } else {
+              return new ____0.https.Agent({
+                keepAlive: true,
+              });
+            }
+          };
         return ____0.fetchAsync(...args);
       };
   ____0.$ = ____0.cheerio = require('cheerio');
@@ -59,6 +65,7 @@ module.exports = function init(options) {
 
   ____0.webp = require('webp-converter');
   ____0.telegramBotApi = require('node-telegram-bot-api');
+  ____0.telegram = require('telegram');
   ____0.setting = {};
 
   ____0.databaseList = [];
