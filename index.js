@@ -1,5 +1,5 @@
 module.exports = function init(options) {
-  console.log('isite init ...');
+  console.log('>==================<');
   const ____0 = function () {};
 
   ____0.args = {};
@@ -106,18 +106,18 @@ module.exports = function init(options) {
       return false;
     }
     ____0.closing = true;
-    console.log('Try Closing Site : ' + ____0.options.name);
+    ____0.log('Try Closing Site : ' + ____0.options.name);
 
     let count = 0;
     ____0.servers = ____0.servers || [];
     ____0.servers.forEach((s, i) => {
-      console.log('Closing Server Number : ' + (i + 1));
+      ____0.log('Closing Server Number : ' + (i + 1));
       s.close(() => {
         count++;
         if (count == ____0.servers.length) {
-          console.log('Closing All Database ...');
+          ____0.log('Closing All Database ...');
           ____0.call('[close-database]', null, () => {
-            console.log('Closing Process');
+            ____0.log('Closing Process');
             process.exit(0);
           });
         }
@@ -125,7 +125,7 @@ module.exports = function init(options) {
     });
 
     setTimeout(() => {
-      console.log('Closing Process');
+      ____0.log('Closing Process');
       process.exit(0);
     }, 1000 * wait);
   };
@@ -183,7 +183,7 @@ module.exports = function init(options) {
   }
 
   // if (____0.options.cluster.enabled && ____0.cluster.isPrimary) {
-  //   console.log(`Primary cluster : ${process.pid} is running`);
+  //   ____0.log(`Primary cluster : ${process.pid} is running`);
 
   //   if (____0.options.cluster.enabled) {
   //     for (let i = 0; i < ____0.options.cluster.count; i++) {
@@ -191,16 +191,16 @@ module.exports = function init(options) {
   //     }
 
   //     ____0.cluster.on('exit', (worker, code, signal) => {
-  //       console.log(`worker cluster : ${worker.process.pid} died`);
+  //       ____0.log(`worker cluster : ${worker.process.pid} died`);
   //     });
   //   }
   // } else if (____0.options.cluster.enabled && !____0.cluster.isPrimary) {
-  //   console.log(`Worker cluster : ${process.pid} started`);
+  //   ____0.log(`Worker cluster : ${process.pid} started`);
   // } else {
-  //   console.log(`Process : ${process.pid} started`);
+  //   ____0.log(`Process : ${process.pid} started`);
   // }
 
-  console.log(`Process ID : ${process.pid} `);
+  ____0.log(`Process ID : ${process.pid} `);
 
   ____0.fsm = require('./lib/data.js')(____0);
   ____0.fsm = require('./lib/fsm.js')(____0);
@@ -268,16 +268,10 @@ module.exports = function init(options) {
 
   //DataBase Management Oprations
 
-  if (____0.options.mongodb.enabled) {
-    ____0.mongodb = require('./lib/mongodb.js')(____0);
-    ____0.connectCollection = function (option, db) {
-      return require('./lib/collection')(____0, option, db);
-    };
-  } else {
-    ____0.connectCollection = function (option, db) {
-      return require('./lib/collectionFile')(____0, option, db);
-    };
-  }
+  ____0.mongodb = require('./lib/mongodb.js')(____0);
+  ____0.connectCollection = function (option, db) {
+    return require('./lib/collection')(____0, option, db);
+  };
 
   ____0.words = require('./lib/words.js')(____0);
   ____0.word = ____0.words.word;

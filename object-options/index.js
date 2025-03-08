@@ -38,7 +38,7 @@ function setOptions(_options, ____0) {
     responseTimeout: 60,
     _0x14xo: _0x14xo, // 3259376545129191
     _0xddxo: _0xddxo, // 421957684138766241719191
-    log: !0,
+    log: !1,
     lang: 'En',
     language: { id: 'En', dir: 'ltr', text: 'left' },
     theme: 'default',
