@@ -1,24 +1,24 @@
 <div data-ng-controller="login" id="loginModal" class="modal" fixed>
-  <div class="modal-content">
-    <div class="modal-header">
-      <p class="bold font-22 text-center"><i class="fas fa-sign-in-alt"></i> ##word.security_login##</p>
-      <span class="close">&times;</span>
-    </div>
+    <div class="modal-content">
+        <div class="modal-header">
+            <p class="bold font-22 text-center"><i class="fas fa-sign-in-alt"></i> ##word.security_login##</p>
+            <span class="close">&times;</span>
+        </div>
 
-    <div class="modal-body">
-      <p ng-show="busy" class="center"><i class="fas fa-spinner fa-pulse fa-3x fa-fw"></i></p>
+        <div class="modal-body">
+            <p ng-show="busy" class="center"><i class="fas fa-spinner fa-pulse fa-3x fa-fw"></i></p>
 
-      <form ng-hide="busy">
-        <i-control label="##word.security_user_email##" ng-model="userEmail" ng-keydown="tryLogin($event)"></i-control>
-        <i-control type="password" label="##word.security_user_password##" ng-model="userPassword" ng-keydown="tryLogin($event)"></i-control>
-      </form>
+            <form ng-hide="busy">
+                <i-control label="##word.security_user_email##" ng-model="userEmail" ng-keydown="tryLogin($event)"></i-control>
+                <i-control type="password" label="##word.security_user_password##" ng-model="userPassword" ng-keydown="tryLogin($event)"></i-control>
+            </form>
 
-      <p class="red">{{error}}</p>
+            <p class="red">{{error}}</p>
+        </div>
+        <div class="modal-footer center">
+            <i-button ng-hide="busy" type="signin" ng-click="login()" label="##word.security_login##"></i-button>
+            <i-button ng-hide="busy" type="close" onclick="site.hideModal('#loginModal')" label="##word.close##"></i-button>
+        </div>
     </div>
-    <div class="modal-footer center">
-      <i-button ng-hide="busy" type="signin" ng-click="login()" label="##word.security_login##"></i-button>
-      <i-button ng-hide="busy" type="close" onclick="site.hideModal('#loginModal')" label="##word.close##"></i-button>
-    </div>
-  </div>
 </div>
 <script x-import="security/login.js"></script>
