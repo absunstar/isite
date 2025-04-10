@@ -407,7 +407,9 @@ module.exports = function init(options) {
 
     setInterval(() => {
         ____0.collectionList.forEach((collection) => {
-            collection.checkTaskList();
+            if (!collection.taskBusy && collection.taskList.length > 0) {
+                collection.checkTaskList();
+            }
         });
     }, 10);
 

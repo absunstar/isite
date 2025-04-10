@@ -67,6 +67,7 @@ fieldset {
   border: var(--fieldset-border);
   border-radius: var(--fieldset-border-radius);
   max-width: 98% !important;
+  margin-bottom: 10px !important;
 }
 
 fieldset legend {
@@ -175,7 +176,7 @@ i-datetime input {
 }
 
 .modal-content {
-  width: 75vw;
+  width: 75%;
   height: auto;
   max-height: 100vh;
 }
@@ -183,7 +184,7 @@ i-datetime input {
   min-height: 50px;
 }
 .full .modal-content {
-  width: 95vw;
+  width: 96%;
   height: auto;
   max-height: 100vh;
 }

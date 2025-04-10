@@ -1,29 +1,83 @@
-<!DOCTYPE html>
 <html lang="En">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Require Permissions</title>
-    <link rel="stylesheet" href="/x-css/bootstrap-5-support.css" />
-    <style>
-      .btn {
-        font-size: xx-large;
-      }
-      li {
-        font-size: x-large;
-      }
-    </style>
-  </head>
-  <body class="container">
-    <br /><br />
-    <h1 class="center bold red">Require Permissions</h1>
-    <div class="row padding margin">
-      <h2 class="center blue" x-list1="permissions">##item1.*##</h2>
-    </div>
-
-    <br /><br />
-    <div x-feature="!browser.social">
-      <h1 class="center"><a class="btn btn-primary" href="https://social-browser.com" target="_blank"> Open Social Browser Site </a></h1>
-    </div>
-  </body>
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Require Permissions</title>
+        <link rel="stylesheet" href="/x-css/bootstrap-5-support.css" />
+        <link rel="shortcut icon" type="image/x-icon" href="/x-dashboard-images/browser.png" />
+        <link rel="icon" type="image/x-icon" href="/x-dashboard-images/browser.png" />
+        <link itemprop="image" rel="image_src" href="/x-dashboard-images/browser.png" />
+        <link rel="apple-touch-icon" href="/x-dashboard-images/browser.png" />
+        <style>
+            body {
+                font-family: Arial, sans-serif;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+                height: 100vh;
+                margin: 0;
+                background-color: #f4f4f8;
+            }
+            .container {
+                background: white;
+                padding: 2rem !important;
+                border-radius: 1rem;
+                box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+                text-align: center;
+                max-width: fit-content;
+            }
+            h1 {
+                margin-bottom: 1rem;
+            }
+            p {
+                margin-bottom: 2rem;
+                color: #555;
+            }
+            .download-button {
+                background-color: #4caf50;
+                color: white;
+                padding: 1rem 2rem;
+                text-decoration: none;
+                border-radius: 0.5rem;
+                font-size: 1rem;
+                transition: background-color 0.3s;
+            }
+            .download-button:hover {
+                background-color: #45a049;
+            }
+            hr {
+                width: 90%;
+                margin-top: 50px;
+            }
+            .feature {
+                padding: 20px;
+                margin: 0 auto;
+                width: 50%;
+            }
+            li {
+                width: fit-content;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="container" x-feature="!browser.social">
+            <h1>Download Social Browser</h1>
+            <p>Get the latest version of our application and start exploring All features free !</p>
+            <a href="https://social-browser.com" class="download-button">Download Social Browser</a>
+            <hr />
+            <ul>
+                <li>Support Multi User</li>
+                <li>Support Multi Proxy</li>
+                <li>Support Multi Browser Changer</li>
+                <li>Protected Browser FingerPrint</li>
+                <li>Watching Streaming Sites without Ads</li>
+                <li>Support Safty Mode For Children</li>
+                <li>Create & Custom Virual PC For Evert User</li>
+            </ul>
+        </div>
+        <div class="row padding margin">
+            <h2 class="feature" x-list1="permissions">Required Feature : ##item1.*##</h2>
+        </div>
+    </body>
 </html>
