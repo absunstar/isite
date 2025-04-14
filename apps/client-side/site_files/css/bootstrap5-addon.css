@@ -46,7 +46,7 @@ body {
     flex-wrap: nowrap;
     align-content: center;
     justify-content: flex-start;
-    align-items: flex-start;
+    align-items: flex-end;
     gap: 5px;
     label {
         cursor: pointer;
@@ -57,6 +57,7 @@ body {
 }
 .form-check .form-check-input {
     min-width: 1em;
+    margin: 5px;
 }
 .ar .form-check .form-check-input,
 .AR .form-check .form-check-input {
