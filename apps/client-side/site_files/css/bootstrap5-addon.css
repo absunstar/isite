@@ -132,7 +132,10 @@ i-radio {
     margin-right: 1.5em;
     white-space: nowrap;
 }
-
+i-checklist i-checkbox {
+  display: flex !important;
+  flex-direction: row;
+}
 i-button {
     display: contents;
 }
