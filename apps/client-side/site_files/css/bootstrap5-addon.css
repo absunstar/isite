@@ -134,7 +134,7 @@ i-radio {
 }
 i-checklist i-checkbox {
   display: flex !important;
-  flex-direction: row;
+  flex-direction: row !important;
 }
 i-button {
     display: contents;
