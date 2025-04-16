@@ -320,14 +320,10 @@ module.exports = function init(options) {
 
     ____0.importApps = function (app_dir) {
         if (____0.isFileExistsSync(app_dir) && ____0.fs.lstatSync(app_dir).isDirectory()) {
-            ____0.fs.readdir(app_dir, (err, files) => {
-                if (!err && files && files.length > 0) {
-                    ____0.log('=== Auto Importing Apps : ' + app_dir);
-                    files.forEach((file) => {
-                        if (____0.fs.lstatSync(app_dir + '/' + file).isDirectory()) {
-                            ____0.importApp(app_dir + '/' + file);
-                        }
-                    });
+            ____0.log('=== Auto Importing Apps : ' + app_dir);
+            ____0.fs.readdirSync(app_dir).forEach((file) => {
+                if (____0.fs.lstatSync(app_dir + '/' + file).isDirectory()) {
+                    ____0.importApp(app_dir + '/' + file);
                 }
             });
         }
@@ -376,14 +372,10 @@ module.exports = function init(options) {
 
     if (____0.options.apps === !0) {
         if (____0.isFileExistsSync(____0.options.apps_dir) && ____0.fs.lstatSync(____0.options.apps_dir).isDirectory()) {
-            ____0.fs.readdir(____0.options.apps_dir, (err, files) => {
-                if (!err && files && files.length > 0) {
-                    ____0.log('=== Auto Loading Default Apps ===');
-                    files.forEach((file) => {
-                        if (____0.fs.lstatSync(____0.options.apps_dir + '/' + file).isDirectory()) {
-                            ____0.loadApp(file);
-                        }
-                    });
+            ____0.log('=== Auto Loading Default Apps ===');
+            ____0.fs.readdirSync(____0.options.apps_dir).forEach((file) => {
+                if (____0.fs.lstatSync(____0.options.apps_dir + '/' + file).isDirectory()) {
+                    ____0.importApp(____0.options.apps_dir + '/' + file);
                 }
             });
         }
