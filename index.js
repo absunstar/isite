@@ -329,7 +329,7 @@ module.exports = function init(options) {
         }
     };
     ____0.importApp = function (app_path, name2) {
-        ____0.log('===  Importing App : ' + app_path);
+        ____0.log('\n===  Importing App : ' + app_path);
         if (____0.isFileExistsSync(app_path + '/site_files/json/words.json')) {
             ____0.words.addFile(app_path + '/site_files/json/words.json');
         }
@@ -372,10 +372,10 @@ module.exports = function init(options) {
 
     if (____0.options.apps === !0) {
         if (____0.isFileExistsSync(____0.options.apps_dir) && ____0.fs.lstatSync(____0.options.apps_dir).isDirectory()) {
-            ____0.log('=== Auto Loading Default Apps ===');
+            ____0.log('\n=== Auto Loading Default Apps ===');
             ____0.fs.readdirSync(____0.options.apps_dir).forEach((file) => {
                 if (____0.fs.lstatSync(____0.options.apps_dir + '/' + file).isDirectory()) {
-                    ____0.importApp(____0.options.apps_dir + '/' + file);
+                    ____0.loadApp(file);
                 }
             });
         }
