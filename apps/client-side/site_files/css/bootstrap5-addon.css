@@ -74,8 +74,8 @@ a {
 }
 input,
 select,
-textarea , input.form-control {
-    width: inherit;
+textarea,
+input.form-control {
     text-align: var(--text-align);
     font-family: var(--font-family);
     height: var(--input-height);
@@ -86,17 +86,6 @@ textarea , input.form-control {
     font-weight: var(--input-font-wight);
     color: var(--input-color);
     background-color: var(--input-background-color);
-    background-image: none;
-    -webkit-transition: border-color ease-in-out 0.15s, -webkit-box-shadow ease-in-out 0.15s;
-    -o-transition: border-color ease-in-out 0.15s, box-shadow ease-in-out 0.15s;
-    transition: border-color ease-in-out 0.15s, box-shadow ease-in-out 0.15s;
-    border-radius: var(--input-border-radius);
-    border-width: var(--input-border-width);
-    border-color: var(--input-border-color);
-    border-style: solid;
-    outline: none;
-    scrollbar-arrow-color: var(--input-color);
-    -ms-scrollbar-arrow-color: var(--input-color);
 }
 label {
     float: var(--float);
