@@ -74,7 +74,7 @@ a {
 }
 input,
 select,
-textarea , .form-control {
+textarea , input.form-control {
     width: inherit;
     text-align: var(--text-align);
     font-family: var(--font-family);
