@@ -87,6 +87,14 @@ input.form-control {
     color: var(--input-color);
     background-color: var(--input-background-color);
 }
+input:focus,
+select:focus,
+textarea:focus,
+input.form-control {
+    color: var(--input-color);
+    border-width: var(--input-focus-border-width);
+    border-color: var(--input-focus-border-color);
+}
 label {
     float: var(--float);
     color: var(--label-color);
