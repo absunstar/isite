@@ -91,7 +91,7 @@ input:focus,
 select:focus,
 textarea:focus,
 input.form-control {
-    color: var(--input-color);
+    color: var(--input-color) !important;
     border-width: var(--input-focus-border-width);
     border-color: var(--input-focus-border-color);
 }
