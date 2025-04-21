@@ -79,7 +79,7 @@ input.form-control {
     text-align: var(--text-align);
     font-family: var(--font-family);
     height: var(--input-height);
-    min-height: var(--input-height);
+   
     line-height: var(--line-height);
     padding: var(--input-padding);
     font-size: var(--input-font-size);
