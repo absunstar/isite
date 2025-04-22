@@ -79,7 +79,6 @@ input.form-control {
     text-align: var(--text-align);
     font-family: var(--font-family);
     height: var(--input-height);
-   
     line-height: var(--line-height);
     padding: var(--input-padding);
     font-size: var(--input-font-size);
@@ -91,8 +90,7 @@ input:focus,
 select:focus,
 textarea:focus,
 input.form-control {
-    color: var(--input-color) !important;
-   
+    color: var(--input-color);
 }
 label {
     float: var(--float);
