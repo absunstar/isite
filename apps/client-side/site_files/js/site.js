@@ -111,12 +111,12 @@
 
   site.printerList = [];
   site.getPrinters = function () {
-    if (window.SOCIALBROWSER && SOCIALBROWSER.currentWindow.webContents.getPrintersAsync) {
-      SOCIALBROWSER.currentWindow.webContents.getPrintersAsync().then((arr0) => {
+    if (window.SOCIALBROWSER && SOCIALBROWSER.webContents.getPrintersAsync) {
+      SOCIALBROWSER.webContents.getPrintersAsync().then((arr0) => {
         site.printerList = arr0;
       });
-    } else if (window.SOCIALBROWSER && SOCIALBROWSER.currentWindow.webContents.getPrinters) {
-      site.printerList = SOCIALBROWSER.currentWindow.webContents.getPrinters();
+    } else if (window.SOCIALBROWSER && SOCIALBROWSER.webContents.getPrinters) {
+      site.printerList = SOCIALBROWSER.webContents.getPrinters();
     } else {
       fetch('http://127.0.0.1:60080/printers/all')
         .then((res) => res.json())
