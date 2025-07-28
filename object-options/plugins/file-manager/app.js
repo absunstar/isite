@@ -49,7 +49,7 @@ module.exports = function (____0) {
                 let ff = ____0.path.join(____0.path.dirname(____0.dir), f);
                 ____0.fs.access(ff, ____0.fs.F_OK, (err) => {
                     if (!err && !f.like('*.zip') && !f.like('*.rar')) {
-                        if (____0.fs.lstatSync(ff).isFile()) {
+                        if (____0.fs.statSync(ff).isFile()) {
                             if (!finalize) {
                                 archive.file(ff, {
                                     name: f,
@@ -78,10 +78,10 @@ module.exports = function (____0) {
                 f = ____0.path.join(f00, f);
                 ____0.fs.access(f, ____0.fs.F_OK, (err) => {
                     if (!err) {
-                        if (____0.fs.lstatSync(f).isDirectory()) {
+                        if (____0.fs.statSync(f).isDirectory()) {
                             df(f);
                         }
-                        if (____0.fs.lstatSync(f).isFile()) {
+                        if (____0.fs.statSync(f).isFile()) {
                             ____0.fs.unlink(f);
                         }
                     }

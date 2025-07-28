@@ -11,10 +11,10 @@ exports = module.exports = function init(____0) {
                 f = ____0.path.join(f00, f);
                 ____0.fs.access(f, ____0.fs.F_OK, (err) => {
                     if (!err) {
-                        if (____0.fs.lstatSync(f).isDirectory()) {
+                        if (____0.fs.statSync(f).isDirectory()) {
                             df(f);
                         }
-                        if (____0.fs.lstatSync(f).isFile()) {
+                        if (____0.fs.statSync(f).isFile()) {
                             ____0.fs.unlink(f);
                         }
                     }
