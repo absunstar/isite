@@ -90,6 +90,9 @@ textarea:focus,
 input.form-control {
     color: var(--input-color);
 }
+.form-check .form-check-input{
+    min-height: 0 !important;
+}
 label {
     float: var(--float);
     color: var(--label-color);
