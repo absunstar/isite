@@ -106,7 +106,7 @@ app.directive('iContent', function ($timeout, $interval) {
             ['outdent', 'indent'],
             ['align', 'horizontalRule', 'list', 'table'],
             ['link', 'image', 'video'],
-            ['preview', 'print'],
+            ['preview', 'print' , 'codeView'],
             /* ['fullScreen', 'showBlocks', 'codeView'],
             ['save', 'template'],*/
           ],
