@@ -221,12 +221,12 @@
 
   .rtl,
   .rtl input {
-    direction: rtl;
+    direction: rtl !important;
   }
 
   .ltr,
   .ltr input {
-    direction: ltr;
+    direction: ltr !important;
   }
 
   .height-auto {
