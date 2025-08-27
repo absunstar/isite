@@ -93,7 +93,7 @@ function setOptions(_options, ____0) {
       },
     },
     session: {
-      cookieDomain : '',
+      cookieDomain : false,
       timeout: 60 * 24 * 30,
       memoryTimeout : 60,
       enabled: !0,
@@ -271,7 +271,7 @@ function setOptions(_options, ____0) {
   _x0oo.session.storage = _x0oo.session.storage || template.session.storage;
   _x0oo.session.db = _x0oo.session.db || _x0oo.mongodb.db;
   _x0oo.session.collection = _x0oo.session.collection || template.session.collection;
-  _x0oo.session.cookieDomain = _x0oo.session.cookieDomain || template.session.cookieDomain;
+  _x0oo.session.cookieDomain = _x0oo.session.cookieDomain ?? template.session.cookieDomain;
 
   _x0oo.security = _x0oo.security || template.security;
   _x0oo.security.enabled = _x0oo.security.enabled ?? template.security.enabled;
