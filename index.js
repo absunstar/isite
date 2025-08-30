@@ -44,6 +44,9 @@ module.exports = function init(options) {
                 args[1] = args[1] || {};
                 if (args[1].body && typeof args[1].body == 'object') {
                     args[1].body = JSON.stringify(args[1].body);
+                } else if (args[1].data && typeof args[1].data == 'object') {
+                    args[1].body = JSON.stringify(args[1].data);
+                    delete args[1].data;
                 }
                 args[1].agent =
                     args[1].agent ||
