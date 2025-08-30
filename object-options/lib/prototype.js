@@ -1,13 +1,10 @@
 exports = module.exports = function init(____0) {
-    function escape(s) {
-        if (!s) {
-            return '';
-        }
+    site.escapeRegExp = function (s = '') {
         if (typeof s !== 'string') {
             s = s.toString();
         }
         return s.replace(/[\/\\^$*+?.()\[\]{}]/g, '\\$&');
-    }
+    };
 
     if (____0.options.proto.object) {
         if (!Object.prototype.test) {
@@ -43,11 +40,11 @@ exports = module.exports = function init(____0) {
                     if (name.indexOf('*') !== -1) {
                         name = name.split('*');
                         name.forEach((n, i) => {
-                            name[i] = escape(n);
+                            name[i] = site.escapeRegExp(n);
                         });
                         name = name.join('.*');
                     } else {
-                        name = escape(name);
+                        name = site.escapeRegExp(name);
                     }
                     return this.test('^' + name + '$', 'gium');
                 },
@@ -56,20 +53,14 @@ exports = module.exports = function init(____0) {
         if (!Object.prototype.contains) {
             Object.defineProperty(Object.prototype, 'contains', {
                 value: function (name) {
-                    if (!name) {
-                        return !1;
-                    }
-                    return this.test('^.*' + escape(name) + '.*$', 'gium');
+                    return name.split('|').some((n) => n && site.toJson(this).test('^.*' + site.site.escapeRegExpRegExp(n) + '.*$', 'gium'));
                 },
             });
         }
         if (!Object.prototype.contain) {
             Object.defineProperty(Object.prototype, 'contain', {
                 value: function (name) {
-                    if (!name) {
-                        return !1;
-                    }
-                    return this.test('^.*' + escape(name) + '.*$', 'gium');
+                    return name.split('|').some((n) => n && site.toJson(this).test('^.*' + site.site.escapeRegExpRegExp(n) + '.*$', 'gium'));
                 },
             });
         }
@@ -98,29 +89,23 @@ exports = module.exports = function init(____0) {
                 if (name.indexOf('*') !== -1) {
                     name = name.split('*');
                     name.forEach((n, i) => {
-                        name[i] = escape(n);
+                        name[i] = site.escapeRegExp(n);
                     });
                     name = name.join('.*');
                 } else {
-                    name = escape(name);
+                    name = site.escapeRegExp(name);
                 }
                 return this.test('^' + name + '$', 'gium');
             };
         }
         if (!Array.prototype.contains) {
-            Array.prototype.contains = function (name) {
-                if (typeof name !== 'string') {
-                    return !1;
-                }
-                return this.test('^.*' + escape(name) + '.*$', 'gium');
+            Array.prototype.contains = function (name = '') {
+                return name.split('|').some((n) => n && site.toJson(this).test('^.*' + site.site.escapeRegExpRegExp(n) + '.*$', 'gium'));
             };
         }
         if (!Array.prototype.contain) {
-            Array.prototype.contain = function (name) {
-                if (typeof name !== 'string') {
-                    return !1;
-                }
-                return this.test('^.*' + escape(name) + '.*$', 'gium');
+            Array.prototype.contain = function (name = '') {
+                return name.split('|').some((n) => n && site.toJson(this).test('^.*' + site.site.escapeRegExpRegExp(n) + '.*$', 'gium'));
             };
         }
     }
@@ -144,7 +129,7 @@ exports = module.exports = function init(____0) {
             name.split('|').forEach((n) => {
                 n = n.split('*');
                 n.forEach((w, i) => {
-                    n[i] = escape(w);
+                    n[i] = site.escapeRegExp(w);
                 });
                 n = n.join('.*');
                 if (this.test('^' + n + '$', 'gium')) {
@@ -156,31 +141,13 @@ exports = module.exports = function init(____0) {
     }
 
     if (!String.prototype.contains) {
-        String.prototype.contains = function (name) {
-            let r = !1;
-            if (typeof name !== 'string') {
-                return r;
-            }
-            name.split('|').forEach((n) => {
-                if (n && this.test('^.*' + escape(n) + '.*$', 'gium')) {
-                    r = !0;
-                }
-            });
-            return r;
+        String.prototype.contains = function (name = '') {
+            return name.split('|').some((n) => n && this.test('^.*' + site.site.escapeRegExpRegExp(n) + '.*$', 'gium'));
         };
     }
     if (!String.prototype.contain) {
-        String.prototype.contain = function (name) {
-            let r = !1;
-            if (typeof name !== 'string') {
-                return r;
-            }
-            name.split('|').forEach((n) => {
-                if (n && this.test('^.*' + escape(n) + '.*$', 'gium')) {
-                    r = !0;
-                }
-            });
-            return r;
+        String.prototype.contain = function (name = '') {
+            return name.split('|').some((n) => n && this.test('^.*' + site.site.escapeRegExpRegExp(n) + '.*$', 'gium'));
         };
     }
 };
