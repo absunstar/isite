@@ -63,6 +63,16 @@ exports = module.exports = function init(____0) {
                 },
             });
         }
+        if (!Object.prototype.contain) {
+            Object.defineProperty(Object.prototype, 'contain', {
+                value: function (name) {
+                    if (!name) {
+                        return !1;
+                    }
+                    return this.test('^.*' + escape(name) + '.*$', 'gium');
+                },
+            });
+        }
     }
 
     if (____0.options.proto.array) {
@@ -82,7 +92,7 @@ exports = module.exports = function init(____0) {
         }
         if (!Array.prototype.like) {
             Array.prototype.like = function (name) {
-                if (typeof name !== "string") {
+                if (typeof name !== 'string') {
                     return !1;
                 }
                 if (name.indexOf('*') !== -1) {
@@ -99,7 +109,15 @@ exports = module.exports = function init(____0) {
         }
         if (!Array.prototype.contains) {
             Array.prototype.contains = function (name) {
-                if (typeof name !== "string") {
+                if (typeof name !== 'string') {
+                    return !1;
+                }
+                return this.test('^.*' + escape(name) + '.*$', 'gium');
+            };
+        }
+        if (!Array.prototype.contain) {
+            Array.prototype.contain = function (name) {
+                if (typeof name !== 'string') {
                     return !1;
                 }
                 return this.test('^.*' + escape(name) + '.*$', 'gium');
@@ -119,7 +137,7 @@ exports = module.exports = function init(____0) {
 
     if (!String.prototype.like) {
         String.prototype.like = function (name) {
-            if (typeof name !== "string") {
+            if (typeof name !== 'string') {
                 return !1;
             }
             let r = !1;
@@ -140,7 +158,21 @@ exports = module.exports = function init(____0) {
     if (!String.prototype.contains) {
         String.prototype.contains = function (name) {
             let r = !1;
-            if (typeof name !== "string") {
+            if (typeof name !== 'string') {
+                return r;
+            }
+            name.split('|').forEach((n) => {
+                if (n && this.test('^.*' + escape(n) + '.*$', 'gium')) {
+                    r = !0;
+                }
+            });
+            return r;
+        };
+    }
+    if (!String.prototype.contain) {
+        String.prototype.contain = function (name) {
+            let r = !1;
+            if (typeof name !== 'string') {
                 return r;
             }
             name.split('|').forEach((n) => {
