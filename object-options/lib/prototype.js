@@ -1,5 +1,5 @@
 exports = module.exports = function init(____0) {
-    site.escapeRegExp = function (s = '') {
+    ____0.escapeRegExp = function (s = '') {
         if (typeof s !== 'string') {
             s = s.toString();
         }
@@ -40,11 +40,11 @@ exports = module.exports = function init(____0) {
                     if (name.indexOf('*') !== -1) {
                         name = name.split('*');
                         name.forEach((n, i) => {
-                            name[i] = site.escapeRegExp(n);
+                            name[i] = ____0.escapeRegExp(n);
                         });
                         name = name.join('.*');
                     } else {
-                        name = site.escapeRegExp(name);
+                        name = ____0.escapeRegExp(name);
                     }
                     return this.test('^' + name + '$', 'gium');
                 },
@@ -53,14 +53,14 @@ exports = module.exports = function init(____0) {
         if (!Object.prototype.contains) {
             Object.defineProperty(Object.prototype, 'contains', {
                 value: function (name) {
-                    return name.split('|').some((n) => n && site.toJson(this).test('^.*' + site.site.escapeRegExpRegExp(n) + '.*$', 'gium'));
+                    return name.split('|').some((n) => n && ____0.toJson(this).test('^.*' + ____0.escapeRegExpRegExp(n) + '.*$', 'gium'));
                 },
             });
         }
         if (!Object.prototype.contain) {
             Object.defineProperty(Object.prototype, 'contain', {
                 value: function (name) {
-                    return name.split('|').some((n) => n && site.toJson(this).test('^.*' + site.site.escapeRegExpRegExp(n) + '.*$', 'gium'));
+                    return name.split('|').some((n) => n && ____0.toJson(this).test('^.*' + ____0.escapeRegExpRegExp(n) + '.*$', 'gium'));
                 },
             });
         }
@@ -89,23 +89,23 @@ exports = module.exports = function init(____0) {
                 if (name.indexOf('*') !== -1) {
                     name = name.split('*');
                     name.forEach((n, i) => {
-                        name[i] = site.escapeRegExp(n);
+                        name[i] = ____0.escapeRegExp(n);
                     });
                     name = name.join('.*');
                 } else {
-                    name = site.escapeRegExp(name);
+                    name = ____0.escapeRegExp(name);
                 }
                 return this.test('^' + name + '$', 'gium');
             };
         }
         if (!Array.prototype.contains) {
             Array.prototype.contains = function (name = '') {
-                return name.split('|').some((n) => n && site.toJson(this).test('^.*' + site.site.escapeRegExpRegExp(n) + '.*$', 'gium'));
+                return name.split('|').some((n) => n && ____0.toJson(this).test('^.*' + ____0.escapeRegExpRegExp(n) + '.*$', 'gium'));
             };
         }
         if (!Array.prototype.contain) {
             Array.prototype.contain = function (name = '') {
-                return name.split('|').some((n) => n && site.toJson(this).test('^.*' + site.site.escapeRegExpRegExp(n) + '.*$', 'gium'));
+                return name.split('|').some((n) => n && ____0.toJson(this).test('^.*' + ____0.escapeRegExpRegExp(n) + '.*$', 'gium'));
             };
         }
     }
@@ -129,7 +129,7 @@ exports = module.exports = function init(____0) {
             name.split('|').forEach((n) => {
                 n = n.split('*');
                 n.forEach((w, i) => {
-                    n[i] = site.escapeRegExp(w);
+                    n[i] = ____0.escapeRegExp(w);
                 });
                 n = n.join('.*');
                 if (this.test('^' + n + '$', 'gium')) {
@@ -142,12 +142,12 @@ exports = module.exports = function init(____0) {
 
     if (!String.prototype.contains) {
         String.prototype.contains = function (name = '') {
-            return name.split('|').some((n) => n && this.test('^.*' + site.site.escapeRegExpRegExp(n) + '.*$', 'gium'));
+            return name.split('|').some((n) => n && this.test('^.*' + ____0.escapeRegExpRegExp(n) + '.*$', 'gium'));
         };
     }
     if (!String.prototype.contain) {
         String.prototype.contain = function (name = '') {
-            return name.split('|').some((n) => n && this.test('^.*' + site.site.escapeRegExpRegExp(n) + '.*$', 'gium'));
+            return name.split('|').some((n) => n && this.test('^.*' + ____0.escapeRegExpRegExp(n) + '.*$', 'gium'));
         };
     }
 };
