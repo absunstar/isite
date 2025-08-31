@@ -387,6 +387,7 @@ module.exports = function init(options) {
     ____0.createDir(____0.options.upload_dir);
     ____0.createDir(____0.options.download_dir);
     ____0.createDir(____0.options.backup_dir);
+    
     ____0.addfeatures(____0.dir + '/json/features.json');
 
     ____0.log('');
