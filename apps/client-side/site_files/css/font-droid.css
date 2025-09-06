@@ -1,6 +1,6 @@
 :root {
-  --font-family: Arabic, English, sans-serif, Tahoma, serif;
-  --bs-body-font-family: Arabic, English, sans-serif, Tahoma, serif;
+  --font-family: 'Arabic', 'English', sans-serif, Tahoma, serif;
+  --bs-body-font-family: 'Arabic', 'English', sans-serif, Tahoma, serif;
 }
 @font-face {
   font-family: 'Arabic';

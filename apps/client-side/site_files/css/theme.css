@@ -1,7 +1,7 @@
 :root {
   --theme-color: #283e4a;
   --theme-color2: #2f8033;
-  --font-family: Arabic, sans-serif, Tahoma, serif;
+  --font-family: 'Arabic', sans-serif, Tahoma, serif;
   --font-weight: normal;
   --font-size: 14px;
   --line-height: 1.4;
