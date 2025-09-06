@@ -221,12 +221,12 @@
 
   .rtl,
   .rtl * {
-    direction: rtl !important;
+    direction: rtl;
   }
 
   .ltr,
   .ltr * {
-    direction: ltr !important;
+    direction: ltr;
   }
 
   .height-auto {
