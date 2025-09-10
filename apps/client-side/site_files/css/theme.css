@@ -103,7 +103,7 @@
 
   --fieldset-border: 2px solid #283e4a;
   --fieldset-background: none;
-  --fieldset-margin : 1% !important;
+  --fieldset-margin : 1%;
   --fieldset-padding: 5px;
   --legend-color: #fff;
   --legend-text-shadow: none;

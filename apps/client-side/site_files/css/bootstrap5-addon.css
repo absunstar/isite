@@ -102,8 +102,8 @@ label {
 }
 
 fieldset {
-    padding: var(--fieldset-padding);
-    margin: var(--fieldset-margin);
+    padding: var(--fieldset-padding) !important;
+    margin: var(--fieldset-margin) !important;
     background: var(--fieldset-background);
     border: var(--fieldset-border);
     border-radius: var(--fieldset-border-radius);

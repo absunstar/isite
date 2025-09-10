@@ -136,7 +136,7 @@
   --fieldset-border: none;
   --fieldset-border-radius : 10px;
   --fieldset-background: #e9ecef;
-  --fieldset-margin : 1% !important;
+  --fieldset-margin : 1%;
   --fieldset-padding: 5px;
   --legend-color: #5a5a5a;
   --legend-text-shadow: none;
