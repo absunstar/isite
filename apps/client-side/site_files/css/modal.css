@@ -152,7 +152,7 @@
 }
 .modal-header h2 {
   font-size: 16px;
-  text-align: center;
+  text-align: center !important;
   padding: 0px;
   margin: 0 auto;
   color: #ffffff;
@@ -160,7 +160,7 @@
 }
 .modal-header p {
   width: 100%;
-  text-align: center;
+  text-align: center !important;
   display: block;
 }
 .popup {

@@ -1,92 +1,96 @@
 :root {
-  --font-family: 'Arabic', 'English', sans-serif, Tahoma, serif;
-  --bs-body-font-family: 'Arabic', 'English', sans-serif, Tahoma, serif;
+    --font-family: 'Arabic', 'English', sans-serif, Tahoma, serif;
+    --bs-body-font-family: 'Arabic', 'English', sans-serif, Tahoma, serif;
 }
 @font-face {
-  font-family: 'Arabic';
-  src: url(/x-fonts/DINNextLTW23-Light.eot);
-  src: url(/x-fonts/DINNextLTW23-Light.eot?#iefix) format('embedded-opentype'), url(/x-fonts/DINNextLTW23-Light.woff2) format('woff2'), url(/x-fonts/DINNextLTW23-Light.woff) format('woff'),
-    url(/x-fonts/DINNextLTW23-Light.ttf) format('truetype');
-  font-weight: 300;
-  font-display: swap;
-}
-
-@font-face {
-  font-family: 'Arabic';
-  src: url(/x-fonts/DINNextLTW23-Medium.eot);
-  src: url(/x-fonts/DINNextLTW23-Medium.eot?#iefix) format('embedded-opentype'), url(/x-fonts/DINNextLTW23-Medium.woff2) format('woff2'), url(/x-fonts/DINNextLTW23-Medium.woff) format('woff'),
-    url(/x-fonts/DINNextLTW23-Medium.ttf) format('truetype');
-  font-weight: 500;
-  font-display: swap;
+    font-family: 'Arabic';
+    src: url(/x-fonts/DINNextLTW23-Light.eot);
+    src: url(/x-fonts/DINNextLTW23-Light.eot?#iefix) format('embedded-opentype'), url(/x-fonts/DINNextLTW23-Light.woff2) format('woff2'), url(/x-fonts/DINNextLTW23-Light.woff) format('woff'),
+        url(/x-fonts/DINNextLTW23-Light.ttf) format('truetype');
+    font-weight: 300;
+    font-display: swap;
 }
 
 @font-face {
-  font-family: 'Arabic';
-  src: url(/x-fonts/DINNextLTW05-Bold.eot);
-  src: url(/x-fonts/DINNextLTW05-Bold.eot?#iefix) format('embedded-opentype'), url(/x-fonts/DINNextLTW05-Bold.woff2) format('woff2'), url(/x-fonts/DINNextLTW05-Bold.woff) format('woff'),
-    url(/x-fonts/DINNextLTW05-Bold.ttf) format('truetype');
-  font-weight: 600;
-  font-display: swap;
-}
-
-
-
-@font-face {
-  font-family: 'Arabic';
-  src: url(/x-fonts/DINNextLTW05-UltraLight.eot);
-  src: url(/x-fonts/DINNextLTW05-UltraLight.eot?#iefix) format('embedded-opentype'), url(/x-fonts/DINNextLTW05-UltraLight.woff2) format('woff2'),
-    url(/x-fonts/DINNextLTW05-UltraLight.woff) format('woff'), url(/x-fonts/DINNextLTW05-UltraLight.ttf) format('truetype');
-  font-weight: 200;
-  font-display: swap;
+    font-family: 'Arabic';
+    src: url(/x-fonts/DINNextLTW23-Medium.eot);
+    src: url(/x-fonts/DINNextLTW23-Medium.eot?#iefix) format('embedded-opentype'), url(/x-fonts/DINNextLTW23-Medium.woff2) format('woff2'), url(/x-fonts/DINNextLTW23-Medium.woff) format('woff'),
+        url(/x-fonts/DINNextLTW23-Medium.ttf) format('truetype');
+    font-weight: 500;
+    font-display: swap;
 }
 
 @font-face {
-  font-family: 'Arabic';
-  src: url(/x-fonts/DINNextLTW05-Regular.eot);
-  src: url(/x-fonts/DINNextLTW05-Regular.eot?#iefix) format('embedded-opentype'), url(/x-fonts/DINNextLTW05-Regular.woff2) format('woff2'), url(/x-fonts/DINNextLTW05-Regular.woff) format('woff'),
-    url(/x-fonts/DINNextLTW05-Regular.ttf) format('truetype');
-  font-weight: 400;
-  font-display: swap;
+    font-family: 'Arabic';
+    src: url(/x-fonts/DINNextLTW05-Bold.eot);
+    src: url(/x-fonts/DINNextLTW05-Bold.eot?#iefix) format('embedded-opentype'), url(/x-fonts/DINNextLTW05-Bold.woff2) format('woff2'), url(/x-fonts/DINNextLTW05-Bold.woff) format('woff'),
+        url(/x-fonts/DINNextLTW05-Bold.ttf) format('truetype');
+    font-weight: 600;
+    font-display: swap;
 }
 
 @font-face {
-  font-family: 'English';
-  font-style: normal;
-  font-weight: 400;
-  src: url(/x-fonts/HelveticaNeueLTStd55Roman_22526.woff) format('woff');
+    font-family: 'Arabic';
+    src: url(/x-fonts/DINNextLTW05-UltraLight.eot);
+    src: url(/x-fonts/DINNextLTW05-UltraLight.eot?#iefix) format('embedded-opentype'), url(/x-fonts/DINNextLTW05-UltraLight.woff2) format('woff2'),
+        url(/x-fonts/DINNextLTW05-UltraLight.woff) format('woff'), url(/x-fonts/DINNextLTW05-UltraLight.ttf) format('truetype');
+    font-weight: 200;
+    font-display: swap;
 }
 
 @font-face {
-  font-family: 'English';
-  font-style: normal;
-  font-weight: 200;
-  src: url(/x-fonts/HelveticaNeueLTStd45Light_22520.woff) format('woff');
+    font-family: 'Arabic';
+    src: url(/x-fonts/DINNextLTW05-Regular.eot);
+    src: url(/x-fonts/DINNextLTW05-Regular.eot?#iefix) format('embedded-opentype'), url(/x-fonts/DINNextLTW05-Regular.woff2) format('woff2'), url(/x-fonts/DINNextLTW05-Regular.woff) format('woff'),
+        url(/x-fonts/DINNextLTW05-Regular.ttf) format('truetype');
+    font-weight: 400;
+    font-display: swap;
 }
 
 @font-face {
-  font-family: 'English';
-  font-style: normal;
-  font-weight: 300;
-  src: url(/x-fonts/HelveticaNeueLTStdMd1.woff) format('woff');
+    font-family: 'English';
+    font-style: normal;
+    font-weight: 400;
+    src: url(/x-fonts/HelveticaNeueLTStd55Roman_22526.woff) format('woff');
+    font-display: swap;
 }
 
 @font-face {
-  font-family: 'English';
-  font-style: normal;
-  font-weight: 500;
-  src: url(/x-fonts/HelveticaNeueLTStd75Bold_22539.woff) format('woff');
+    font-family: 'English';
+    font-style: normal;
+    font-weight: 200;
+    src: url(/x-fonts/HelveticaNeueLTStd45Light_22520.woff) format('woff');
+    font-display: swap;
 }
 
 @font-face {
-  font-family: 'English';
-  font-style: normal;
-  font-weight: 600;
-  src: url(/x-fonts/HelveticaNeueLTStd85Heavy_22545.woff) format('woff');
+    font-family: 'English';
+    font-style: normal;
+    font-weight: 300;
+    src: url(/x-fonts/HelveticaNeueLTStdMd1.woff) format('woff');
+    font-display: swap;
 }
 
 @font-face {
-  font-family: 'English';
-  font-style: normal;
-  font-weight: 800;
-  src: url(/x-fonts/HelveticaNeueLTStd95Black_22551.woff) format('woff');
+    font-family: 'English';
+    font-style: normal;
+    font-weight: 500;
+    src: url(/x-fonts/HelveticaNeueLTStd75Bold_22539.woff) format('woff');
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'English';
+    font-style: normal;
+    font-weight: 600;
+    src: url(/x-fonts/HelveticaNeueLTStd85Heavy_22545.woff) format('woff');
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'English';
+    font-style: normal;
+    font-weight: 800;
+    src: url(/x-fonts/HelveticaNeueLTStd95Black_22551.woff) format('woff');
+    font-display: swap;
 }
