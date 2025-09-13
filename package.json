@@ -38,7 +38,7 @@
   "dependencies": {
     "@pdf-lib/fontkit": "^1.1.1",
     "archiver": "^5.0.2",
-    "cheerio": "^1.0.0-rc.12",
+    "cheerio": "^1.1.2",
     "eval": "^0.1.8",
     "formidable": "^2.0.1",
     "https-proxy-agent": "^7.0.6",
