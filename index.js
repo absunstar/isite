@@ -70,8 +70,7 @@ module.exports = function init(options) {
     ____0.nodemailer = require('nodemailer');
 
     ____0.webp = require('webp-converter');
-    ____0.telegramBotApi = require('node-telegram-bot-api');
-    ____0.telegram = require('telegram');
+  
     ____0.setting = {};
 
     ____0.databaseList = [];
