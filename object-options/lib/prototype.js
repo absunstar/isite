@@ -34,7 +34,7 @@ exports = module.exports = function init(____0) {
         if (!Object.prototype.like) {
             Object.defineProperty(Object.prototype, 'like', {
                 value: function (name) {
-                    if (!name) {
+                    if (typeof name !== 'string') {
                         return !1;
                     }
                     if (name.indexOf('*') !== -1) {
@@ -53,6 +53,9 @@ exports = module.exports = function init(____0) {
         if (!Object.prototype.contains) {
             Object.defineProperty(Object.prototype, 'contains', {
                 value: function (name) {
+                    if (typeof name !== 'string') {
+                        return !1;
+                    }
                     return name.split('|').some((n) => n && ____0.toJson(this).test('^.*' + ____0.escapeRegExp(n) + '.*$', 'gium'));
                 },
             });
@@ -60,6 +63,9 @@ exports = module.exports = function init(____0) {
         if (!Object.prototype.contain) {
             Object.defineProperty(Object.prototype, 'contain', {
                 value: function (name) {
+                    if (typeof name !== 'string') {
+                        return !1;
+                    }
                     return name.split('|').some((n) => n && ____0.toJson(this).test('^.*' + ____0.escapeRegExp(n) + '.*$', 'gium'));
                 },
             });
@@ -100,11 +106,17 @@ exports = module.exports = function init(____0) {
         }
         if (!Array.prototype.contains) {
             Array.prototype.contains = function (name = '') {
+                if (typeof name !== 'string') {
+                    return !1;
+                }
                 return name.split('|').some((n) => n && ____0.toJson(this).test('^.*' + ____0.escapeRegExp(n) + '.*$', 'gium'));
             };
         }
         if (!Array.prototype.contain) {
             Array.prototype.contain = function (name = '') {
+                if (typeof name !== 'string') {
+                    return !1;
+                }
                 return name.split('|').some((n) => n && ____0.toJson(this).test('^.*' + ____0.escapeRegExp(n) + '.*$', 'gium'));
             };
         }
@@ -142,11 +154,17 @@ exports = module.exports = function init(____0) {
 
     if (!String.prototype.contains) {
         String.prototype.contains = function (name = '') {
+            if (typeof name !== 'string') {
+                return !1;
+            }
             return name.split('|').some((n) => n && this.test('^.*' + ____0.escapeRegExp(n) + '.*$', 'gium'));
         };
     }
     if (!String.prototype.contain) {
         String.prototype.contain = function (name = '') {
+            if (typeof name !== 'string') {
+                return !1;
+            }
             return name.split('|').some((n) => n && this.test('^.*' + ____0.escapeRegExp(n) + '.*$', 'gium'));
         };
     }
