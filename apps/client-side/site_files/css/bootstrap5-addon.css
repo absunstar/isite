@@ -83,6 +83,7 @@ input.form-control {
     font-weight: var(--input-font-wight);
     color: var(--input-color);
     background-color: var(--input-background-color);
+        white-space: nowrap;
 }
 input:focus,
 select:focus,
