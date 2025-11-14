@@ -231,7 +231,7 @@ app.directive('iButton', [
             },
             link: function ($scope, element, attrs, ctrl) {
                 $scope.type = $scope.type || '';
-                $scope.class = $scope.class = 'btn-light';
+                $scope.class = 'btn-light';
                 $scope.fa = $scope.fa || $scope.label ? '' : 'fas fa-mouse-pointer';
 
                 if ($scope.type.like('*add*|*new*')) {
@@ -310,9 +310,7 @@ app.directive('iButton', [
                 if ($scope.type.like('*default*')) {
                     $scope.class = '';
                 }
-                if ($scope.class2) {
-                    $scope.class = $scope.class2;
-                }
+                
                 $scope.onclick = function () {
                     $scope.clickBusy = true;
                     $timeout(() => {
