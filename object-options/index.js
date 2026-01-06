@@ -93,6 +93,7 @@ function setOptions(_options, ____0) {
       },
     },
     session: {
+      save: true,
       cookieDomain : false,
       timeout: 60 * 24 * 30,
       memoryTimeout : 60,
@@ -265,6 +266,7 @@ function setOptions(_options, ____0) {
   }
 
   _x0oo.session = _x0oo.session || template.session;
+  _x0oo.session.save = _x0oo.session.save ?? template.session.save;
   _x0oo.session.enabled = _x0oo.session.enabled ?? template.session.enabled;
   _x0oo.session.timeout = _x0oo.session.timeout ?? template.session.timeout;
   _x0oo.session.memoryTimeout = _x0oo.session.memoryTimeout ?? template.session.memoryTimeout;
