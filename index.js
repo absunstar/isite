@@ -1,5 +1,5 @@
 module.exports = function init(options) {
-    console.log('>==================<');
+    console.log('>======== Nodejs Loading ==========<');
     const ____0 = function () {};
 
     ____0.args = {};

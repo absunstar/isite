@@ -488,8 +488,8 @@ exports = module.exports = function init(____0) {
     return new ____0._0xddxo().getDate();
   };
 
-  ____0.fromJson = fn.fromJson;
-  ____0.toJson = fn.toJson;
+  ____0.fromJson = ____0.fromJSON = fn.fromJson;
+  ____0.toJson = ____0.toJSON = fn.toJson;
   ____0.from123 = ____0._x0f1xo = ____0.f1 = fn.from123;
   ____0.fromBase64 = fn.fromBase64;
   ____0.to123 = fn.to123;
