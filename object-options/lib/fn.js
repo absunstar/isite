@@ -342,10 +342,10 @@ exports = module.exports = function init(____0) {
     return obj3;
   };
 
-  fn.fromJson = (data) => {
+  fn.fromJson = (data , Default = {}) => {
     try {
       if (!data) {
-        return {};
+        return Default;
       }
 
       if (data && typeof data === 'string' && data != '') {
@@ -356,10 +356,10 @@ exports = module.exports = function init(____0) {
         return data;
       }
     } catch (e) {
-      return {};
+      return Default;
     }
 
-    return {};
+    return Default;
   };
 
   fn.toJson = (obj) => {
