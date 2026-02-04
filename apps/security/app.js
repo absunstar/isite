@@ -273,6 +273,7 @@ module.exports = function init(site) {
         res.json(response);
       }
     );
+    
   });
 
   site.post('/api/user/logout', function (req, res) {

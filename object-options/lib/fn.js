@@ -1,6 +1,28 @@
 exports = module.exports = function init(____0) {
   const fn = function () {};
 
+  ____0.newURL = function (url, base) {
+    try {
+      return new URL(url, base);
+    } catch (e) {
+      return {
+        href: url,
+        origin: '',
+        protocol: '',
+        username: '',
+        password: '',
+        host: '',
+        hostname: '',
+        port: '',
+        pathname: url,
+        search: '',
+        searchParams: '',
+        hash: '',
+        query : {}
+      };
+    }
+  }
+
   ____0.requireFromString = function (code, filename, opts) {
     if (typeof filename === 'object') {
       opts = filename;
