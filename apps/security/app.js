@@ -32,7 +32,7 @@ module.exports = function init(site) {
   });
 
   site.get({
-    name: ['security', 'security/users'],
+    name: ['security/users'],
     path: __dirname + '/site_files/html/index.html',
     parser: 'html css js',
     compress: !1,
