@@ -26,7 +26,6 @@ module.exports = function init(options) {
     ____0.child_process = require('node:child_process');
     ____0.readline = require('node:readline');
     ____0.zlib = require('zlib');
-    ____0.xlsx = ____0.XLSX = require('xlsx');
     ____0.pdf = ____0.PDF = require('pdf-lib');
     ____0.archiver = require('archiver');
     ____0.fontkit = ____0.FONTKIT = require('@pdf-lib/fontkit');

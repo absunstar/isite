@@ -1,6 +1,6 @@
 {
   "name": "isite",
-  "version": "2026.04.02",
+  "version": "2026.04.03",
   "description": "Create High Level Multi-Language Web Site [Fast and Easy] ",
   "main": "index.js",
   "repository": {
@@ -52,8 +52,7 @@
     "telegram": "^2.26.22",
     "utf8": "^3.0.0",
     "webp-converter": "^2.3.3",
-    "ws": "^8.18.0",
-    "xlsx": "^0.17.5"
+    "ws": "^8.18.0"
   },
   "optionalDependencies": {
     "bufferutil": "^4.0.8"
