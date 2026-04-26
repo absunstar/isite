@@ -162,10 +162,14 @@ i-button {
     display: contents;
 }
 i-button button {
+    padding: 5px !important;
     margin: 5px !important;
     margin-top: 30px !important;
-    padding: 7px 9px !important;
     max-height: 40px;
+}
+i-button .label:not(:empty) {
+   padding-right: 5px;
+   
 }
 table i-button button {
     margin-top: 0px !important;
