@@ -1,0 +1,538 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>isite Documentation</title>
+    <meta
+      name="description"
+      content="Documentation for the isite Node.js web framework, including setup, routing, sessions, MongoDB, WebSocket, and helper APIs."
+    />
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <aside class="sidebar">
+      <a class="brand" href="#overview" aria-label="isite documentation home">
+        <span class="brand-mark">i</span>
+        <span>
+          <strong>isite</strong>
+          <small>Documentation</small>
+        </span>
+      </a>
+
+      <label class="search">
+        <span>Search docs</span>
+        <input id="searchInput" type="search" placeholder="routes, mongodb, session..." autocomplete="off" />
+      </label>
+
+      <nav class="nav" aria-label="Documentation sections">
+        <a href="#overview">Overview</a>
+        <a href="#installation">Installation</a>
+        <a href="#configuration">Configuration</a>
+        <a href="#folder-structure">Folder Structure</a>
+        <a href="#routing">Routing</a>
+        <a href="#request-response">Request and Response</a>
+        <a href="#files">Files</a>
+        <a href="#websocket">WebSocket</a>
+        <a href="#sessions">Cookies and Sessions</a>
+        <a href="#apps">Custom Apps</a>
+        <a href="#master-pages">Master Pages</a>
+        <a href="#server-tags">Server Tags</a>
+        <a href="#mongodb">MongoDB</a>
+        <a href="#upload-download">Upload and Download</a>
+        <a href="#languages">Multi Language</a>
+        <a href="#client-libraries">Client Libraries</a>
+        <a href="#helpers">Helpers</a>
+        <a href="#events">Events</a>
+        <a href="#api">API Reference</a>
+      </nav>
+    </aside>
+
+    <main>
+      <section class="hero doc-section" id="overview" data-tags="overview features framework nodejs social browser">
+        <div class="hero-content">
+          <p class="eyebrow">Node.js web framework</p>
+          <h1>isite documentation</h1>
+          <p>
+            isite helps you build secure, multi-language Node.js websites with automatic routes, file
+            management, sessions, permissions, MongoDB helpers, WebSocket handling, and custom apps.
+          </p>
+          <div class="hero-actions">
+            <a class="button primary" href="#installation">Get started</a>
+            <a class="button" href="#api">View API</a>
+          </div>
+        </div>
+        <div class="hero-panel" aria-label="isite quick facts">
+          <span>Package</span>
+          <strong>isite</strong>
+          <span>Current repo version</span>
+          <strong>2026.04.05</strong>
+          <span>Main entry</span>
+          <strong>index.js</strong>
+        </div>
+      </section>
+
+      <section class="doc-section" data-tags="features automatic routing websocket mongodb security uploads downloads">
+        <h2>What is included</h2>
+        <div class="feature-grid">
+          <article>
+            <h3>Automatic routing</h3>
+            <p>Map URLs to files, callbacks, folders, merged assets, dynamic paths, or wildcard routes.</p>
+          </article>
+          <article>
+            <h3>Server-side site files</h3>
+            <p>Read HTML, CSS, JS, JSON, XML, images, fonts, downloads, and merged files with cache support.</p>
+          </article>
+          <article>
+            <h3>Sessions and security</h3>
+            <p>Built-in cookies, session storage, users, roles, permissions, and feature-based HTML display.</p>
+          </article>
+          <article>
+            <h3>MongoDB helpers</h3>
+            <p>Connect collections and use high-level insert, find, update, delete, import, export, and backup APIs.</p>
+          </article>
+          <article>
+            <h3>Custom apps</h3>
+            <p>Load reusable modules from local paths, the global apps folder, or isite's built-in apps.</p>
+          </article>
+          <article>
+            <h3>WebSocket support</h3>
+            <p>Create WebSocket routes on the server and connect from the client with the bundled helper.</p>
+          </article>
+        </div>
+      </section>
+
+      <section class="doc-section" id="installation" data-tags="install npm start template startup">
+        <h2>Installation</h2>
+        <p>Install the package from npm, then create a server using the exported factory function.</p>
+        <pre><code>npm install isite</code></pre>
+        <h3>Minimal server</h3>
+        <pre><code>var isite = require('isite');
+var site = isite({ port: 8080 });
+
+site.loadLocalApp('client-side');
+site.loadLocalApp('security');
+
+site.run();</code></pre>
+        <h3>Startup template</h3>
+        <pre><code>git clone https://github.com/absunstar/isite-template
+cd isite-template
+npm i
+npm start</code></pre>
+      </section>
+
+      <section class="doc-section" id="configuration" data-tags="configuration options port cwd app dir mongodb session security cache https">
+        <h2>Configuration</h2>
+        <p>
+          Pass an options object to <code>isite()</code>. The framework also initializes defaults for
+          folders, cache, MongoDB, sessions, security, language, HTTPS, and local apps.
+        </p>
+        <pre><code>var site = require('isite')({
+  port: process.env.port || 80,
+  cwd: process.cwd(),
+  dir: process.cwd() + '/site_files',
+  upload_dir: process.cwd() + '/../uploads',
+  download_dir: process.cwd() + '/../downloads',
+  backup_dir: process.cwd() + '/../backup',
+  apps: true,
+  apps_dir: process.cwd() + '/apps',
+  name: 'Your Site',
+  lang: 'en',
+  theme: 'default',
+  mongodb: {
+    enabled: true,
+    host: 'localhost',
+    port: '27017',
+    db: 'default_db',
+    collection: 'default_collection'
+  },
+  session: {
+    timeout: 60 * 24 * 30,
+    enabled: true,
+    storage: 'file'
+  },
+  security: {
+    enabled: true,
+    users_collection: 'users_info',
+    roles_collection: 'users_roles'
+  }
+});</code></pre>
+      </section>
+
+      <section class="doc-section" id="folder-structure" data-tags="folder structure site_files html css js images fonts json xml apps">
+        <h2>Folder Structure</h2>
+        <p>
+          isite expects a <code>site_files</code> folder for public and parsed assets. Apps live in
+          <code>apps</code>, while uploads, downloads, and backups can be configured.
+        </p>
+        <pre><code>server.js
+package.json
+apps/
+site_files/
+  css/
+  js/
+  html/
+  fonts/
+  images/
+  json/
+  xml/
+uploads/
+downloads/
+backup/</code></pre>
+      </section>
+
+      <section class="doc-section" id="routing" data-tags="routes onget onpost onrequest wildcard dynamic folder merged cache parser compress">
+        <h2>Routing</h2>
+        <p>
+          Routes can return files, folders, merged files, JSON content, or callback output. Route names
+          and request parameters are normalized to lowercase, with raw variants available when needed.
+        </p>
+        <h3>Static file routes</h3>
+        <pre><code>site.onGET({ name: ['/', '/home', '/index'], path: site.dir + '/html/index.html' });
+site.onGET({ name: '/css/bootstrap.css', path: site.dir + '/css/bootstrap.min.css' });
+site.onPOST({ name: '/api', path: site.dir + '/json/employees.json' });</code></pre>
+        <h3>Merge multiple files</h3>
+        <pre><code>site.onGET({
+  name: '/css/style.css',
+  path: [
+    site.dir + '/css/bootstrap.css',
+    site.dir + '/css/custom.css'
+  ]
+});</code></pre>
+        <h3>Callbacks, dynamic params, and wildcard routes</h3>
+        <pre><code>site.onGET('/post/:id/category/:cat_id', function (req, res) {
+  res.end('Post: ' + req.params.id + ', category: ' + req.params.cat_id);
+});
+
+site.onGET('/post/*', function (req, res) {
+  res.end('Any post route');
+});
+
+site.onGET('*', function (req, res) {
+  res.end('Fallback route');
+});</code></pre>
+      </section>
+
+      <section class="doc-section" id="request-response" data-tags="request response query body params render redirect status json feature">
+        <h2>Request and Response</h2>
+        <p>
+          isite decorates request and response objects with helpers for query/body data, params, headers,
+          rendering, JSON responses, redirects, cookies, sessions, and user features.
+        </p>
+        <pre><code>site.onGET('/api', function (req, res) {
+  res.json({
+    queryName: req.query.name,
+    rawName: req.queryRaw.name,
+    ip: req.ip,
+    browserIsChrome: req.hasFeature('browser.chrome')
+  });
+});
+
+site.onPOST('/users', function (req, res) {
+  res.status(201).json({ done: true, user: req.body });
+});
+
+site.onGET('/old-url', function (req, res) {
+  res.redirect('/new-url', 302);
+});</code></pre>
+      </section>
+
+      <section class="doc-section" id="files" data-tags="files readfile html css js json xml write delete mkdir stat cache">
+        <h2>Files</h2>
+        <p>
+          File helpers read from <code>site_files</code> by type, cache content in memory, merge files,
+          check stats, write data, and create or remove directories.
+        </p>
+        <pre><code>site.html('index', function (err, content) {
+  site.log(content);
+});
+
+site.readFiles([
+  site.dir + '/html/head.html',
+  site.dir + '/html/content.html',
+  site.dir + '/html/footer.html'
+], function (err, content) {
+  site.log(content);
+});
+
+site.isFileExists(path, function (yes) {});
+site.fileStat(path, function (err, stats) {});
+site.writeFile(path, data, function (err) {});
+site.removeFile(path, function (err) {});
+site.createDir(path, function (err, path) {});</code></pre>
+      </section>
+
+      <section class="doc-section" id="websocket" data-tags="websocket ws chat client server onws">
+        <h2>WebSocket</h2>
+        <p>Register WebSocket endpoints with <code>site.onWS()</code> and connect from the browser with <code>site.ws()</code>.</p>
+        <pre><code>site.onWS('/chat', function (client) {
+  client.onMessage = function (message) {
+    if (message.type === 'connected') {
+      client.send({ type: 'ready' });
+    }
+  };
+});</code></pre>
+        <pre><code>&lt;script src="/x-js/all.js"&gt;&lt;/script&gt;
+&lt;script&gt;
+site.ws('ws://localhost/chat', function (server) {
+  server.onOpen = function () {
+    server.send({ type: 'accessToken', content: '##session.accessToken##' });
+  };
+  server.onMessage = function (msg) {
+    console.log(msg);
+  };
+});
+&lt;/script&gt;</code></pre>
+      </section>
+
+      <section class="doc-section" id="sessions" data-tags="cookie cookies session sessions access token users">
+        <h2>Cookies and Sessions</h2>
+        <p>
+          Cookies store client-side values per user. Sessions store server-side user data and are
+          automatically associated with an access token.
+        </p>
+        <pre><code>site.onGET('/testSetCookie', function (req, res) {
+  res.cookie('name', req.query.name);
+  res.end('cookie set');
+});
+
+site.onGET('/testGetCookie', function (req, res) {
+  res.end('name from cookie: ' + req.cookie('name'));
+});</code></pre>
+        <pre><code>site.onGET('/testSetSession', function (req, res) {
+  req.session.user_name = req.query.user_name;
+  res.session.ip = req.ip;
+  site.saveSession(res.session);
+  res.end('Session set');
+});</code></pre>
+      </section>
+
+      <section class="doc-section" id="apps" data-tags="apps modules custom loadlocalapp importapp github">
+        <h2>Custom Apps</h2>
+        <p>
+          Apps are modules that receive the <code>site</code> instance. They can register routes, words,
+          variables, permissions, roles, and app-specific logic.
+        </p>
+        <pre><code>// apps/my-app/app.js
+module.exports = function (site) {
+  site.onGET('/my-app', function (req, res) {
+    res.send('My app is loaded');
+  });
+};</code></pre>
+        <pre><code>site.importApp(FOLDER_PATH);
+site.loadApp('my-app');
+site.loadLocalApp('security');</code></pre>
+      </section>
+
+      <section class="doc-section" id="master-pages" data-tags="master page layout header footer parser">
+        <h2>Master Pages</h2>
+        <p>Master pages wrap route content with shared header and footer files.</p>
+        <pre><code>site.addMasterPage({
+  name: 'main',
+  header: site.dir + '/html/header.html',
+  footer: site.dir + '/html/footer.html'
+});
+
+site.onGET({
+  name: '/contact',
+  masterPage: 'main',
+  path: site.dir + '/html/contact.html',
+  parser: 'html'
+});</code></pre>
+      </section>
+
+      <section class="doc-section" id="server-tags" data-tags="server tags x-import x-lang x-permission x-feature variables words parser">
+        <h2>HTML Server Tags and Attributes</h2>
+        <p>
+          Enable <code>parser: 'html'</code> to import site files, inject variables, use words, and show
+          content conditionally by language, permission, login state, browser, operating system, or IP.
+        </p>
+        <pre><code>site.var('siteName', 'First Site With isite');
+site.onGET({ name: '/', path: site.dir + '/html/index.html', parser: 'html' });</code></pre>
+        <pre><code>&lt;style x-import="page.css"&gt;&lt;/style&gt;
+&lt;div x-import="navbar.html"&gt;&lt;/div&gt;
+&lt;title&gt;##var.siteName##&lt;/title&gt;
+&lt;h2&gt;##word.user_name##&lt;/h2&gt;
+
+&lt;div x-lang="Ar"&gt;Arabic content&lt;/div&gt;
+&lt;div x-permission="admin"&gt;Admins only&lt;/div&gt;
+&lt;div x-feature="login"&gt;Logged-in users&lt;/div&gt;
+&lt;div x-feature="browser.chrome"&gt;Chrome users&lt;/div&gt;</code></pre>
+      </section>
+
+      <section class="doc-section" id="mongodb" data-tags="mongodb database collection connectcollection insert find update delete backup restore index duplicate">
+        <h2>MongoDB</h2>
+        <p>
+          Use <code>site.connectCollection()</code> for high-level collection access, or
+          <code>site.mongodb</code> for lower-level database operations.
+        </p>
+        <pre><code>var employees = site.connectCollection('employees', 'company');
+
+employees.insertOne({ name: 'amr', salary: 50000 }, function (err, doc) {});
+
+employees.findMany({
+  where: { name: /a/i },
+  select: { name: 1, salary: 1 },
+  limit: 50,
+  skip: 10,
+  sort: { salary: -1 }
+}, function (err, docs, count) {});
+
+employees.updateOne({
+  where: { id: 5 },
+  set: { salary: 30000 }
+}, function (err, result) {});
+
+employees.deleteOne({ where: { id: 5 } }, function (err, result) {});</code></pre>
+        <pre><code>site.backupDB();
+site.restoreDB();
+employees.createIndex({ name: 1 }, {}, function (err, result) {});
+employees.createUnique({ email: 1 }, function (err, result) {});</code></pre>
+      </section>
+
+      <section class="doc-section" id="upload-download" data-tags="upload download formidable files mv multipart">
+        <h2>Upload and Download</h2>
+        <p>isite parses uploaded files and provides response helpers for forced downloads.</p>
+        <pre><code>&lt;form action="uploadFile" method="post" enctype="multipart/form-data"&gt;
+  &lt;input type="file" name="fileToUpload" /&gt;
+  &lt;input type="submit" /&gt;
+&lt;/form&gt;</code></pre>
+        <pre><code>site.onPOST('uploadFile', function (req, res) {
+  var response = { done: true };
+  var file = req.files.fileToUpload;
+  var newpath = site.options.upload_dir + '/' + file.originalFilename;
+
+  site.mv(file.filepath, newpath, function (err) {
+    if (err) {
+      response.done = false;
+      response.error = err;
+    }
+    res.json(response);
+  });
+});
+
+site.onGET('/files/file1.zip', function (req, res) {
+  res.download(site.options.download_dir + '/file1.zip', 'info.zip');
+});</code></pre>
+      </section>
+
+      <section class="doc-section" id="languages" data-tags="multi language words json x-lang word change language arabic english">
+        <h2>Multi Language</h2>
+        <p>
+          Store translated words in <code>site_files/json/words.json</code>, use <code>##word.name##</code>
+          in HTML, and switch language with <code>/x-language/change</code>.
+        </p>
+        <pre><code>[
+  { "name": "user_name", "En": "User Name", "Ar": "اسم المستخدم" },
+  { "name": "user_email", "En": "Email", "Ar": "البريد الالكترونى" }
+]</code></pre>
+        <pre><code>&lt;label&gt;##word.user_name##&lt;/label&gt;
+&lt;div x-lang="Ar"&gt;Arabic content&lt;/div&gt;
+&lt;div x-lang="En"&gt;English content&lt;/div&gt;</code></pre>
+      </section>
+
+      <section class="doc-section" id="client-libraries" data-tags="client libraries jquery bootstrap angular font awesome x-css x-js charts">
+        <h2>Client Libraries and Charts</h2>
+        <p>
+          The client-side app exposes common browser libraries through fixed routes. The charts app adds
+          local chart creation helpers.
+        </p>
+        <pre><code>site.loadLocalApp('client-side');
+site.loadLocalApp('charts');</code></pre>
+        <pre><code>&lt;link rel="stylesheet" href="/x-css/bootstrap3.css" /&gt;
+&lt;link rel="stylesheet" href="/x-css/font-awesome.css" /&gt;
+&lt;script src="/x-js/jquery.js"&gt;&lt;/script&gt;
+&lt;script src="/x-js/bootstrap3.js"&gt;&lt;/script&gt;
+&lt;script src="/x-js/angular.js"&gt;&lt;/script&gt;</code></pre>
+      </section>
+
+      <section class="doc-section" id="helpers" data-tags="helpers md5 base64 json copy render feature request response">
+        <h2>Helpers</h2>
+        <p>isite includes helpers for rendering, hashing, encoding, JSON conversion, object copying, and feature checks.</p>
+        <pre><code>res.render('index.html', { name: 'amr' }, {
+  compress: true,
+  cache: false,
+  parser: 'html css js'
+});
+
+var copy = site.copy({ name: 'amr' });
+var hash = site.md5('content');
+var base64 = site.toBase64('content');
+var normal = site.fromBase64(base64);
+var jsonString = site.toJson(copy);
+var jsonObj = site.fromJson(jsonString);</code></pre>
+      </section>
+
+      <section class="doc-section" id="events" data-tags="events on call quee queue sync async callback">
+        <h2>Events</h2>
+        <p>Global events let apps and routes communicate across the site lifecycle.</p>
+        <pre><code>site.on('event name', function (obj) {
+  site.log('name: ' + obj.name);
+});
+
+site.call('event name', { name: 'x1' });
+
+site.on('sync event name', function (obj, callback, next) {
+  site.log(obj.name);
+  next();
+});
+
+site.quee('sync event name', { name: 'x2' });</code></pre>
+      </section>
+
+      <section class="doc-section" id="api" data-tags="api reference methods onget onpost files mongodb websocket apps sessions helpers">
+        <h2>API Reference</h2>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>Area</th>
+                <th>Methods and properties</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Server</td>
+                <td><code>site.run</code>, <code>site.start</code>, <code>site.listen</code>, <code>site.close</code></td>
+              </tr>
+              <tr>
+                <td>Routing</td>
+                <td><code>onREQUEST</code>, <code>onGET</code>, <code>onPOST</code>, <code>onPUT</code>, <code>onDELETE</code>, <code>onALL</code>, <code>callRoute</code></td>
+              </tr>
+              <tr>
+                <td>Extra methods</td>
+                <td><code>onPATCH</code>, <code>onOPTIONS</code>, <code>onHEAD</code>, <code>onVIEW</code>, <code>onCOPY</code>, <code>onLINK</code>, <code>onUNLINK</code>, <code>onLOCK</code>, <code>onUNLOCK</code></td>
+              </tr>
+              <tr>
+                <td>Files</td>
+                <td><code>html</code>, <code>css</code>, <code>js</code>, <code>json</code>, <code>xml</code>, <code>readFile</code>, <code>readFiles</code>, <code>writeFile</code>, <code>removeFile</code>, <code>createDir</code></td>
+              </tr>
+              <tr>
+                <td>Apps</td>
+                <td><code>importApp</code>, <code>importApps</code>, <code>loadApp</code>, <code>loadLocalApp</code>, <code>addApp</code>, <code>getApp</code></td>
+              </tr>
+              <tr>
+                <td>Database</td>
+                <td><code>connectCollection</code>, <code>mongodb</code>, <code>backupDB</code>, <code>restoreDB</code></td>
+              </tr>
+              <tr>
+                <td>HTML parser</td>
+                <td><code>var</code>, <code>addVars</code>, <code>word</code>, <code>words.addFile</code>, <code>addMasterPage</code></td>
+              </tr>
+              <tr>
+                <td>Utilities</td>
+                <td><code>copy</code>, <code>md5</code>, <code>toBase64</code>, <code>fromBase64</code>, <code>toJson</code>, <code>fromJson</code>, <code>cmd</code>, <code>fetch</code></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <p class="empty-state" id="emptyState">No sections match your search.</p>
+    </main>
+
+    <button class="top-button" id="topButton" type="button" aria-label="Back to top">↑</button>
+
+    <script src="script.js"></script>
+  </body>
+</html>
