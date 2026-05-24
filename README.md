@@ -1375,6 +1375,11 @@ site.quee('sync event name 2', { name: 'x2' });
 - This Framework Development by One Developer
 - For Producation Contract what's up (+966568118373)
 
+
+# Documention
+
+- Pages : https://absunstar.github.io/isite
+
 # Contact Me
 
 - Binance ID: 836059928 (for Money support)
