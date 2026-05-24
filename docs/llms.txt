@@ -1,0 +1,39 @@
+# isite
+
+isite is a CommonJS Node.js web framework for multi-language websites with automatic routing, server-side site file parsing, sessions, cookies, permissions, MongoDB helpers, uploads/downloads, WebSocket support, custom apps, and utilities.
+
+## Documentation
+
+- Main docs: ./index.html
+- Agent guide: ./agent-guide.md
+- AI context: ./ai-context.md
+- API map: ./api-map.json
+- Examples for AI: ./examples-for-ai.md
+
+## Main source areas
+
+- Core entry: ../index.js
+- Routing: ../lib/routing.js
+- Files: ../lib/fsm.js
+- MongoDB wrapper: ../lib/mongodb.js
+- Collection wrapper: ../lib/collection.js
+- Security: ../lib/security.js
+- Sessions: ../lib/sessions.js
+- WebSocket: ../lib/ws.js and ../lib/wsClient.js
+- Parser: ../lib/parser.js
+- Apps: ../lib/app.js
+- Utilities: ../object-options/lib/fn.js
+- Events: ../object-options/lib/event.js
+
+## Canonical startup
+
+```js
+var isite = require('isite');
+var site = isite({ port: 8080 });
+
+site.loadLocalApp('client-side');
+site.loadLocalApp('security');
+
+site.run();
+```
+
