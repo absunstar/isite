@@ -45,6 +45,7 @@
         <a href="#helpers">Helpers</a>
         <a href="#events">Events</a>
         <a href="#api">API Reference</a>
+        <a href="#function-index">Function Index</a>
       </nav>
     </aside>
 
@@ -525,6 +526,445 @@ site.quee('sync event name', { name: 'x2' });</code></pre>
               </tr>
             </tbody>
           </table>
+        </div>
+      </section>
+
+      <section class="doc-section" id="function-index" data-tags="complete all functions public api methods collection mongodb security websocket helpers response request">
+        <h2>Complete Function Index</h2>
+        <p>
+          This index lists the public and commonly consumed functions found in the isite source. Some
+          aliases call the same implementation, so they are grouped together.
+        </p>
+
+        <div class="function-index">
+          <article>
+            <h3>Site lifecycle and core</h3>
+            <div class="method-list">
+              <code>isite(options)</code>
+              <code>site.run()</code>
+              <code>site.start()</code>
+              <code>site.listen()</code>
+              <code>site.close(wait)</code>
+              <code>site.reset()</code>
+              <code>site.require(filePath)</code>
+              <code>site.cmd(command, callback)</code>
+              <code>site.log(...args)</code>
+              <code>site.canRequire(name)</code>
+              <code>site.newURL(url, base)</code>
+              <code>site.requireFromString(code, filename, opts)</code>
+            </div>
+          </article>
+
+          <article>
+            <h3>Routing</h3>
+            <div class="method-list">
+              <code>site.onREQUEST(method, route, callback)</code>
+              <code>site.onGET(route, callback)</code>
+              <code>site.get(route, callback)</code>
+              <code>site.onPOST(route, callback)</code>
+              <code>site.post(route, callback)</code>
+              <code>site.onPUT(route, callback)</code>
+              <code>site.put(route, callback)</code>
+              <code>site.onDELETE(route, callback)</code>
+              <code>site.delete(route, callback)</code>
+              <code>site.onALL(route, callback)</code>
+              <code>site.all(route, callback)</code>
+              <code>site.onTEST(route, callback)</code>
+              <code>site.test(route, callback)</code>
+              <code>site.onVIEW(route, callback)</code>
+              <code>site.onOPTIONS(route, callback)</code>
+              <code>site.onPATCH(route, callback)</code>
+              <code>site.onCOPY(route, callback)</code>
+              <code>site.onHEAD(route, callback)</code>
+              <code>site.onLINK(route, callback)</code>
+              <code>site.onUNLINK(route, callback)</code>
+              <code>site.onPURGE(route, callback)</code>
+              <code>site.onLOCK(route, callback)</code>
+              <code>site.onUNLOCK(route, callback)</code>
+              <code>site.onPROPFIND(route, callback)</code>
+              <code>site.callRoute(name, req, res)</code>
+              <code>site.off(routeOrPath)</code>
+            </div>
+          </article>
+
+          <article>
+            <h3>Request helpers</h3>
+            <div class="method-list">
+              <code>req.addFeature(name)</code>
+              <code>req.hasFeature(name)</code>
+              <code>req.removeFeature(name)</code>
+              <code>req.getUserFinger()</code>
+              <code>req.word(name)</code>
+              <code>req.cookie(name)</code>
+              <code>req.cookies(name)</code>
+            </div>
+          </article>
+
+          <article>
+            <h3>Response helpers</h3>
+            <div class="method-list">
+              <code>res.set(name, value)</code>
+              <code>res.status(code)</code>
+              <code>res.error(code)</code>
+              <code>res.download(path, name)</code>
+              <code>res.download2(path, name)</code>
+              <code>res.render(file, data, options)</code>
+              <code>res.html(file, data, options)</code>
+              <code>res.txt(name, data)</code>
+              <code>res.css(name, data)</code>
+              <code>res.js(name, data)</code>
+              <code>res.jsonFile(name, data)</code>
+              <code>res.send(content)</code>
+              <code>res.sendHTML(content)</code>
+              <code>res.htmlContent(content)</code>
+              <code>res.textContent(text)</code>
+              <code>res.sendTEXT(text)</code>
+              <code>res.json(object, time)</code>
+              <code>res.redirect(url, code)</code>
+              <code>res.remove(name)</code>
+              <code>res.delete(name)</code>
+              <code>res.cookie(name, value)</code>
+              <code>res.cookies(name, value)</code>
+            </div>
+          </article>
+
+          <article>
+            <h3>File system</h3>
+            <div class="method-list">
+              <code>site.fileStat(path, callback)</code>
+              <code>site.fileStatSync(path)</code>
+              <code>site.css(name, callback)</code>
+              <code>site.xml(name, callback)</code>
+              <code>site.js(name, callback)</code>
+              <code>site.json(name, callback)</code>
+              <code>site.html(name, callback)</code>
+              <code>site.download(name, req, res)</code>
+              <code>site.downloadFile(path, req, res)</code>
+              <code>site.isFileExists(path, callback)</code>
+              <code>site.isFileExistsSync(path)</code>
+              <code>site.readFile(path, callback)</code>
+              <code>site.readFileRaw(path, callback)</code>
+              <code>site.readFileStream(path)</code>
+              <code>site.readFiles(paths, callback)</code>
+              <code>site.readFileSync(path)</code>
+              <code>site.writeFile(path, data, callback)</code>
+              <code>site.writeFileSync(path, data, encode, callback)</code>
+              <code>site.removeFile(path, callback)</code>
+              <code>site.deleteFile(path, callback)</code>
+              <code>site.removeFileSync(path)</code>
+              <code>site.deleteFileSync(path)</code>
+              <code>site.createDir(path, callback)</code>
+              <code>site.mkDir(path, callback)</code>
+              <code>site.createDirSync(path)</code>
+              <code>site.mkdirSync(path)</code>
+            </div>
+          </article>
+
+          <article>
+            <h3>Events and features</h3>
+            <div class="method-list">
+              <code>site.on(name, callback)</code>
+              <code>site.call(name, args, callback)</code>
+              <code>site.quee(name, args, callback)</code>
+              <code>site.quee_check(name, fire)</code>
+              <code>site.addFeature(name, value)</code>
+              <code>site.getFeature(name)</code>
+              <code>site.hasFeature(name)</code>
+              <code>site.feature(name, value)</code>
+              <code>site.addfeatures(path)</code>
+            </div>
+          </article>
+
+          <article>
+            <h3>Variables, words, and master pages</h3>
+            <div class="method-list">
+              <code>site.addVar(name, value)</code>
+              <code>site.getVar(name)</code>
+              <code>site.var(name, value)</code>
+              <code>site.addVars(path)</code>
+              <code>site.word(obj)</code>
+              <code>site.words.word(obj)</code>
+              <code>site.words.get(name)</code>
+              <code>site.words.add(word)</code>
+              <code>site.words.set(word)</code>
+              <code>site.words.addList(list)</code>
+              <code>site.words.addFile(path)</code>
+              <code>site.words.save()</code>
+              <code>site.addMasterPage(page)</code>
+            </div>
+          </article>
+
+          <article>
+            <h3>Apps</h3>
+            <div class="method-list">
+              <code>site.addApp(app)</code>
+              <code>site.getApp(name)</code>
+              <code>site.connectApp(appOptions)</code>
+              <code>site.importApp(appPath, name2)</code>
+              <code>site.importApps(appDir)</code>
+              <code>site.loadApp(name, name2)</code>
+              <code>site.loadLocalApp(name, name2)</code>
+              <code>app.init()</code>
+              <code>app.add(item, callback)</code>
+              <code>app.update(item, callback)</code>
+              <code>app.delete(item, callback)</code>
+              <code>app.view(item, callback)</code>
+              <code>app.all(options, callback)</code>
+              <code>app.handleRequest(req, res, callback)</code>
+              <code>app.api(apiOptions, callback)</code>
+            </div>
+          </article>
+
+          <article>
+            <h3>Collections</h3>
+            <div class="method-list">
+              <code>site.connectCollection(option, db)</code>
+              <code>collection.insertOne(doc, callback)</code>
+              <code>collection.insert(doc, callback)</code>
+              <code>collection.add(doc, callback)</code>
+              <code>collection.addOne(doc, callback)</code>
+              <code>collection.insertMany(docs, callback)</code>
+              <code>collection.addMany(docs, callback)</code>
+              <code>collection.insertAll(docs, callback)</code>
+              <code>collection.addAll(docs, callback)</code>
+              <code>collection.update(options, callback)</code>
+              <code>collection.updateOne(options, callback)</code>
+              <code>collection.edit(options, callback)</code>
+              <code>collection.editOne(options, callback)</code>
+              <code>collection.updateMany(options, callback)</code>
+              <code>collection.editMany(options, callback)</code>
+              <code>collection.updateAll(options, callback)</code>
+              <code>collection.editAll(options, callback)</code>
+              <code>collection.delete(options, callback)</code>
+              <code>collection.deleteOne(options, callback)</code>
+              <code>collection.remove(options, callback)</code>
+              <code>collection.removeOne(options, callback)</code>
+              <code>collection.deleteMany(options, callback)</code>
+              <code>collection.removeMany(options, callback)</code>
+              <code>collection.deleteAll(options, callback)</code>
+              <code>collection.removeAll(options, callback)</code>
+              <code>collection.get(options, callback)</code>
+              <code>collection.getOne(options, callback)</code>
+              <code>collection.find(options, callback)</code>
+              <code>collection.findOne(options, callback)</code>
+              <code>collection.select(options, callback)</code>
+              <code>collection.selectOne(options, callback)</code>
+              <code>collection.getMany(options, callback)</code>
+              <code>collection.getAll(options, callback)</code>
+              <code>collection.findAll(options, callback)</code>
+              <code>collection.findMany(options, callback)</code>
+              <code>collection.selectAll(options, callback)</code>
+              <code>collection.selectMany(options, callback)</code>
+              <code>collection.count(options, callback)</code>
+              <code>collection.getCount(options, callback)</code>
+              <code>collection.ObjectId(id)</code>
+              <code>collection.ObjectID(id)</code>
+              <code>collection.drop(callback)</code>
+              <code>collection.createUnique(obj, callback)</code>
+              <code>collection.createIndex(obj, options, callback)</code>
+              <code>collection.dropIndex(obj, options, callback)</code>
+              <code>collection.dropIndexes(options, callback)</code>
+              <code>collection.aggregate(pipeline, callback)</code>
+              <code>collection.findDuplicate(obj, callback)</code>
+              <code>collection.deleteDuplicate(obj, callback)</code>
+              <code>collection.removeDuplicate(obj, callback)</code>
+              <code>collection.loadAll(options, callback)</code>
+              <code>collection.import(filePath, callback)</code>
+              <code>collection.export(options, filePath, callback)</code>
+            </div>
+          </article>
+
+          <article>
+            <h3>MongoDB low-level</h3>
+            <div class="method-list">
+              <code>site.mongodb.ObjectID(id)</code>
+              <code>site.mongodb.ObjectId(id)</code>
+              <code>site.mongodb.handleDoc(doc, badLetter)</code>
+              <code>site.mongodb.connectDB(name, callback)</code>
+              <code>site.mongodb.connectCollection(options, callback)</code>
+              <code>site.mongodb.createIndex(options, callback)</code>
+              <code>site.mongodb.dropIndex(options, callback)</code>
+              <code>site.mongodb.dropIndexes(options, callback)</code>
+              <code>site.mongodb.aggregate(options, callback)</code>
+              <code>site.mongodb.dropCollection(options, callback)</code>
+              <code>site.mongodb.insertOne(options, callback)</code>
+              <code>site.mongodb.insert(options, callback)</code>
+              <code>site.mongodb.insertMany(options, callback)</code>
+              <code>site.mongodb.findOne(options, callback)</code>
+              <code>site.mongodb.find(options, callback)</code>
+              <code>site.mongodb.findMany(options, callback)</code>
+              <code>site.mongodb.count(options, callback)</code>
+              <code>site.mongodb.distinct(options, callback)</code>
+              <code>site.mongodb.updateOne(options, callback)</code>
+              <code>site.mongodb.update(options, callback)</code>
+              <code>site.mongodb.updateMany(options, callback)</code>
+              <code>site.mongodb.deleteOne(options, callback)</code>
+              <code>site.mongodb.delete(options, callback)</code>
+              <code>site.mongodb.deleteMany(options, callback)</code>
+              <code>site.backupDB(options, callback)</code>
+              <code>site.restoreDB(options, callback)</code>
+            </div>
+          </article>
+
+          <article>
+            <h3>Security</h3>
+            <div class="method-list">
+              <code>site.security.addKey(key)</code>
+              <code>site.security.addPermissions(list, callback)</code>
+              <code>site.security.addRole(role, callback)</code>
+              <code>site.security.updateRole(role, callback)</code>
+              <code>site.security.editeRole(role, callback)</code>
+              <code>site.security.deleteRole(role, callback)</code>
+              <code>site.security.removeRole(role, callback)</code>
+              <code>site.security.addRoles(list, callback)</code>
+              <code>site.security.removeUserFinger(obj)</code>
+              <code>site.security.getUserFinger(obj)</code>
+              <code>site.security.handleUser(user)</code>
+              <code>site.security.loadAllUsers(callback)</code>
+              <code>site.security.loadAllRoles(callback)</code>
+              <code>site.security.getUsers(options, callback)</code>
+              <code>site.security.getUser(user, callback)</code>
+              <code>site.security.isUserExists(user, callback)</code>
+              <code>site.security.login(user, callback)</code>
+              <code>site.security.register(user, callback)</code>
+              <code>site.security.logout(req, res, callback)</code>
+              <code>site.security.addUser(user, callback)</code>
+              <code>site.security.updateUser(user, callback)</code>
+              <code>site.security.deleteUser(user, callback)</code>
+              <code>site.security.isUserLogin(req, res)</code>
+              <code>site.security.isUserHasPermission(req, res, permission)</code>
+              <code>site.security.isUserHasPermissions(req, res, permissions)</code>
+              <code>site.security.isUserHasRole(req, res, role)</code>
+              <code>site.security.isUserHasRoles(req, res, roles)</code>
+              <code>site.security.getUserPermissions(req, res)</code>
+              <code>site.security.getUserRoles(req, res)</code>
+              <code>site.security.addUserPermission(id, permission, callback)</code>
+            </div>
+          </article>
+
+          <article>
+            <h3>Sessions, storage, and logs</h3>
+            <div class="method-list">
+              <code>site.getSession(req, callback)</code>
+              <code>site.sessions.attach(req, callback)</code>
+              <code>site.saveSession(session)</code>
+              <code>site.sessions.save(session)</code>
+              <code>site.storage(key, value)</code>
+              <code>site.logs(key, value)</code>
+            </div>
+          </article>
+
+          <article>
+            <h3>WebSocket</h3>
+            <div class="method-list">
+              <code>site.onWS(options, callback)</code>
+              <code>site.ws.start(options, callback)</code>
+              <code>site.ws.sendToAll(message)</code>
+              <code>site.ws.closeAll()</code>
+              <code>site.ws.onNewSupportedClient(client)</code>
+              <code>site.ws.wsSupport()</code>
+              <code>site.ws.supportHandle(client, message)</code>
+            </div>
+          </article>
+
+          <article>
+            <h3>General utilities</h3>
+            <div class="method-list">
+              <code>site.copy(obj)</code>
+              <code>site.toNumber(value)</code>
+              <code>site.to_number(value)</code>
+              <code>site.toInt(value)</code>
+              <code>site.to_int(value)</code>
+              <code>site.toFloat(value)</code>
+              <code>site.to_float(value)</code>
+              <code>site.toMoney(value, float)</code>
+              <code>site.random(min, max)</code>
+              <code>site.guid()</code>
+              <code>site.getRegExp(text, flag)</code>
+              <code>site.get_RegExp(text, flag)</code>
+              <code>site.fetchURLContent(options, callback)</code>
+              <code>site.fetch(url, options)</code>
+              <code>site.request(url, options)</code>
+              <code>site.AI(text)</code>
+              <code>site.hide(data)</code>
+              <code>site.hideObject(data)</code>
+              <code>site.show(data)</code>
+              <code>site.showObject(data)</code>
+              <code>site.ul(data)</code>
+              <code>site.removeRefObject(obj)</code>
+              <code>site.objectDiff(obj1, obj2)</code>
+              <code>site.toHtmlTable(obj)</code>
+              <code>site.typeof(value)</code>
+              <code>site.typeOf(value)</code>
+              <code>site.escapeRegExp(text)</code>
+            </div>
+          </article>
+
+          <article>
+            <h3>Date, JSON, and encoding</h3>
+            <div class="method-list">
+              <code>site.getDate(value)</code>
+              <code>site.toDate(value)</code>
+              <code>site.toDateOnly(value)</code>
+              <code>site.toDateTime(value)</code>
+              <code>site.getDateTime(value)</code>
+              <code>site.toDateX(value)</code>
+              <code>site.toDateXT(value)</code>
+              <code>site.toDateXF(value)</code>
+              <code>site.toDateT(value)</code>
+              <code>site.toDateF(value)</code>
+              <code>site.yy()</code>
+              <code>site.mm()</code>
+              <code>site.dd()</code>
+              <code>site.fromJson(data, defaultValue)</code>
+              <code>site.fromJSON(data, defaultValue)</code>
+              <code>site.toJson(obj)</code>
+              <code>site.toJSON(obj)</code>
+              <code>site.toBase64(data)</code>
+              <code>site.fromBase64(data)</code>
+              <code>site.to123(data)</code>
+              <code>site.from123(data)</code>
+              <code>site.f1(data)</code>
+              <code>site.getContentType(path)</code>
+              <code>site.getFileEncode(path)</code>
+              <code>site.md5(text)</code>
+              <code>site.hash(text)</code>
+            </div>
+          </article>
+
+          <article>
+            <h3>Email, Telegram, PDF, and proxy</h3>
+            <div class="method-list">
+              <code>site.sendEmail(mail, callback)</code>
+              <code>site.sendMail(mail, callback)</code>
+              <code>site.sendFreeMail(mail, callback)</code>
+              <code>site.sendSmptMail(mail, callback)</code>
+              <code>site.checkMailConfig(mail, callback)</code>
+              <code>site.connectTelegramClient(session, apiId, apiHash, options)</code>
+              <code>site.telegramInit(token, onNewMessage, polling)</code>
+              <code>site.newTelegramBot(data, onNewMessage, polling)</code>
+              <code>site.sendTelegramMessage(token, chatID, message)</code>
+              <code>site.initFontKit(options, callback)</code>
+              <code>site.loadPDF(options, callback)</code>
+              <code>site.httpTrustedOnline()</code>
+              <code>site.startProxy(options)</code>
+              <code>site.closeProxy(options)</code>
+            </div>
+          </article>
+
+          <article>
+            <h3>Prototype helpers</h3>
+            <div class="method-list">
+              <code>String.prototype.test(reg, flag)</code>
+              <code>String.prototype.like(name)</code>
+              <code>String.prototype.contains(name)</code>
+              <code>String.prototype.contain(name)</code>
+              <code>Array.prototype.test(reg, flag)</code>
+              <code>Array.prototype.like(name)</code>
+              <code>Array.prototype.contains(name)</code>
+              <code>Array.prototype.contain(name)</code>
+            </div>
+          </article>
         </div>
       </section>
 

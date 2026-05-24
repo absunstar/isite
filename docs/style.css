@@ -316,6 +316,34 @@ pre code {
   overflow-x: auto;
 }
 
+.function-index {
+  display: grid;
+  gap: 16px;
+}
+
+.function-index article {
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  padding: 18px;
+  background: #fbfcff;
+}
+
+.function-index h3 {
+  margin-top: 0;
+}
+
+.method-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.method-list code {
+  max-width: 100%;
+  white-space: normal;
+  overflow-wrap: anywhere;
+}
+
 table {
   width: 100%;
   min-width: 720px;
