@@ -269,7 +269,7 @@ exports = module.exports = function init(____0) {
 
     fn.getFileEncode = function (path) {
         path = path || '';
-        if (path.contains('.woff|.ttf|.svg|.otf|.png|.gif|.jpg|.ico|.bmp|.webp|.xls|.eot')) {
+        if (path.contains('.woff|.ttf|.svg|.otf|.png|.gif|.jpg|.ico|.bmp|.webp|.xls|.eot|.doc|.pdf|.zip|.rar|.7z|.tar|.gz|.mp3|.mp4|.avi|.mov|.flv|.wmv')) {
             return 'binary';
         }
         return 'UTF8';
