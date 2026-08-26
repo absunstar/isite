@@ -10,7 +10,7 @@ const modules = [
   ['session','session.js'],['parser','parser.js'],['dashboard','dashboard.js']
 ];
 function generate() {
-  const out = ["'use strict';", '// GENERATED startup bundle. Original lib modules remain public and authoritative.'];
+  const out = ['// GENERATED startup bundle. Original lib modules remain public and authoritative.', '// Intentionally no top-level strict mode: legacy modules may rely on sloppy-mode implicit globals.'];
   for (const [key, file] of modules) {
     const source = fs.readFileSync(path.join(root, 'lib', file), 'utf8');
     out.push(`const ${key} = (() => { const module = { exports: {} }; const exports = module.exports;\n${source}\nreturn module.exports; })();`);

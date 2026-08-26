@@ -1,0 +1,11 @@
+'use strict';
+const assert = require('node:assert/strict');
+const fs = require('node:fs');
+const path = require('node:path');
+const bundle = fs.readFileSync(path.join(__dirname,'..','lib','service-startup-bundle.js'),'utf8');
+const routing = fs.readFileSync(path.join(__dirname,'..','lib','routing.js'),'utf8');
+const firstCode = bundle.split(/\r?\n/).map(s=>s.trim()).find(s=>s && !s.startsWith('//')) || '';
+assert.notEqual(firstCode, "'use strict';", 'service bundle must preserve sloppy-mode semantics of legacy modules');
+assert.notEqual(firstCode, '"use strict";', 'service bundle must preserve sloppy-mode semantics of legacy modules');
+assert.match(routing, /\(response\s*=\s*____0\.getShared/, 'legacy routing still contains implicit response assignment covered by sloppy-mode compatibility');
+console.log('PASS service bundle preserves legacy sloppy-mode compatibility');

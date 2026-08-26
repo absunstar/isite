@@ -1,6 +1,6 @@
 {
   "name": "isite",
-  "version": "2026.08.26-v23",
+  "version": "2026.08.26-v24",
   "description": "Create High Level Multi-Language Web Site [Fast and Easy] ",
   "main": "index.js",
   "repository": {
@@ -31,7 +31,7 @@
     "check": "node tests/static-check.js",
     "test": "node tests/run.js",
     "benchmark": "node benchmarks/performance.js",
-    "verify": "npm run check && npm test && npm run core-bundle-test && npm run service-bundle-test && npm run compat:framework && npm run http-compat && npm run http-v17 && npm run startup-test && npm run startup-v22-test && npm run http-test && npm run smoke && npm run benchmark",
+    "verify": "npm run check && npm test && npm run core-bundle-test && npm run service-bundle-test && npm run service-bundle-sloppy-test && npm run compat:framework && npm run http-compat && npm run http-v17 && npm run startup-test && npm run startup-v22-test && npm run http-test && npm run smoke && npm run benchmark",
     "smoke": "node tests/smoke-init.js",
     "http-test": "node tests/http-download.js",
     "smart-code:scan": "node tests/smart-code-harness.js --scan",
@@ -54,7 +54,8 @@
     "core-bundle-test": "node tests/core-bundle-sync.js",
     "startup-v22-test": "node tests/startup-v22.js",
     "build:service-startup-bundle": "node scripts/build-service-startup-bundle.js",
-    "service-bundle-test": "node tests/service-bundle-sync.js"
+    "service-bundle-test": "node tests/service-bundle-sync.js",
+    "service-bundle-sloppy-test": "node tests/service-bundle-sloppy-compat.js"
   },
   "author": {
     "name": "Absunstar",
