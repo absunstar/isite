@@ -1,7 +1,8 @@
 exports = module.exports = setOptions;
 
 function setOptions(_options, ____0) {
-  ____0.require(__dirname + '/lib/fn');
+  const startupOptions = require('./lib/startup-bundle.js');
+  startupOptions.fn(____0);
 
   let port = 80;
   let name = 'site';
@@ -325,13 +326,13 @@ function setOptions(_options, ____0) {
   ____0._0x14xo = _x0oo._0x14xo;
   ____0._0_ar2_0_ = !0;
 
-  ____0.require(__dirname + ____0._x0f1xo('25787262415386744719236245584774'));
-  ____0.require(__dirname + ____0._x0f1xo('25787262415386544578827447129191'));
-  ____0.require(__dirname + ____0._x0f1xo('25787262415386574758376847129191'));
-  ____0.require(__dirname + ____0._x0f1xo('2578726241538671465886754579328246183691'));
-  ____0.require(__dirname + ____0._x0f1xo('25787262415386744138427548319191'));
-  ____0.require(__dirname + ____0._x0f1xo('25787262415386684738765342392374'));
-  ____0.require(__dirname + ____0._x0f1xo('2578726241538658423817754739235746719191'));
+  startupOptions.strings(____0);
+  startupOptions.constMod(____0);
+  startupOptions.event(____0);
+  startupOptions.prototype(____0);
+  startupOptions.safty(____0);
+  startupOptions.numbers(____0);
+  startupOptions.features(____0);
   dir_arr.forEach((f) => {
     ____0.addFeature(f);
   });

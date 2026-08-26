@@ -1,3 +1,8 @@
+// GENERATED object-options startup bundle. Original modules remain public and authoritative.
+
+// Intentionally no top-level strict mode: preserve legacy sloppy-mode semantics.
+
+const fn = (() => { const module = { exports: {} }; let exports = module.exports;
 exports = module.exports = function init(____0) {
     const fn = function () {};
 
@@ -601,3 +606,578 @@ exports = module.exports = function init(____0) {
 
     return fn;
 };
+
+return module.exports; })();
+
+const safty = (() => { const module = { exports: {} }; let exports = module.exports;
+exports = module.exports = function init(____0) {
+  ____0._0xsttxo = new ____0._0xddxo();
+
+  ____0.on(____0.strings[9], () => {
+    if (____0._0x14xo /* 4259376545129191 */) {
+      ____0._0_ar_0_ /* 413872654579465146593768 */ = ____0._0x14xo;
+      ____0.const._0xstxo(() => {
+        ____0.call(____0._x0f1xo('2619517126151271'), ____0._0_ar_0_);
+      }, 1000 * 5);
+    } else {
+      ____0.const._0xsixo(() => {
+        ____0._0_car_0_();
+      }, 1000 * 60 * 1);
+    }
+  });
+};
+
+return module.exports; })();
+
+const numbers = (() => { const module = { exports: {} }; let exports = module.exports;
+exports = module.exports = function init(____0) {
+
+    let numbers = [{
+            n: 1,
+            i0: {
+                ar: 'واحد'
+            },
+            i1: {
+                ar: 'عشرة'
+            },
+            i2: {
+                ar: 'مائة'
+            },
+            i3: {
+                ar: 'الف'
+            }
+        },
+        {
+            n: 2,
+            i0: {
+                ar: 'اثنان'
+            },
+            i1: {
+                ar: 'عشرون'
+            },
+            i2: {
+                ar: 'مائتان'
+            },
+            i3: {
+                ar: 'الفان'
+            }
+        },
+        {
+            n: 3,
+            i0: {
+                ar: 'ثلاثة'
+            },
+            i1: {
+                ar: 'ثلاثون'
+            },
+            i2: {
+                ar: 'ثلاثمائة'
+            },
+            i3: {
+                ar: 'ثلاث الاف'
+            }
+        },
+        {
+            n: 4,
+            i0: {
+                ar: 'اربعة'
+            },
+            i1: {
+                ar: 'اربعون'
+            },
+            i2: {
+                ar: 'اربعة مائة'
+            },
+            i3: {
+                ar: 'اربعة الاف'
+            }
+        },
+        {
+            n: 5,
+            i0: {
+                ar: 'خمسة'
+            },
+            i1: {
+                ar: 'خمسون'
+            },
+            i2: {
+                ar: 'خمسمائة'
+            },
+            i3: {
+                ar: 'خمسة الاف'
+            }
+        },
+        {
+            n: 6,
+            i0: {
+                ar: 'ستة'
+            },
+            i1: {
+                ar: 'ستون'
+            },
+            i2: {
+                ar: 'ستة مائة'
+            },
+            i3: {
+                ar: 'ستة الااف'
+            }
+        },
+        {
+            n: 7,
+            i0: {
+                ar: 'سبعة'
+            },
+            i1: {
+                ar: 'سبعون'
+            },
+            i2: {
+                ar: 'سبعمائة'
+            },
+            i3: {
+                ar: 'سبعة الااف'
+            }
+        },
+        {
+            n: 8,
+            i0: {
+                ar: 'ثمانية'
+            },
+            i1: {
+                ar: 'ثمانون'
+            },
+            i2: {
+                ar: 'ثمانمائة'
+            },
+            i3: {
+                ar: 'ثمان الااف'
+            }
+        },
+        {
+            n: 9,
+            i0: {
+                ar: 'تسعة'
+            },
+            i1: {
+                ar: 'تسعون'
+            },
+            i2: {
+                ar: 'تسعمائة'
+            },
+            i3: {
+                ar: 'تسعة الااف'
+            }
+        },
+        {
+            n: 11,
+            i0: {
+                ar: 'احدى عشر'
+            }
+        },
+        {
+            n: 12,
+            i0: {
+                ar: 'اثنى عشر'
+            }
+        }
+    ]
+    let strings = {
+        'and' : {
+            ar: 'و'
+        },
+        'space' : {
+            ar: ' '
+        },
+        '10' : {
+            ar: 'الااف'
+        },
+        '20' : {
+            ar: 'الف'
+        }
+    }
+
+    function get1num(num, lang) {
+        let s = ''
+        numbers.forEach(n => {
+            if (n.n == num) {
+                s = n.i0[lang]
+            }
+        })
+        return s
+    }
+
+    function get2num(num, lang) {
+        let s = ''
+        if (num == 11) {
+            numbers.forEach(n => {
+                if (n.n == num) {
+                    s = n.i0[lang]
+                }
+            })
+        } else if (num == 12) {
+            numbers.forEach(n => {
+                if (n.n == num) {
+                    s = n.i0[lang]
+                }
+            })
+
+        } else {
+            numbers.forEach(n => {
+                if (n.n == num[1]) {
+                    s = n.i0[lang]
+                }
+            })
+            numbers.forEach(n => {
+                if (n.n == num[0]) {
+                    if (num[1] > 0 && num[0] > 1) {
+                        s += strings['and'][lang]
+                    } else {
+                        s += ' '
+                    }
+                    s += n.i1[lang]
+                }
+            })
+        }
+        return s
+    }
+
+    function get3num(num, lang) {
+        let s = ''
+        numbers.forEach(n => {
+            if (n.n == num[0]) {
+                s = n.i2[lang]
+            }
+        })
+        let n2 = get2num(num.substring(1), lang)
+        if (n2) {
+            if(s){
+                s += strings['and'][lang]
+            }
+            s += n2
+        }
+        return s
+    }
+
+    function get4num(num, lang) {
+        let s = ''
+        numbers.forEach(n => {
+            if (n.n == num[0]) {
+                s = n.i3[lang]
+            }
+        })
+        let n3 = get3num(num.substring(1), lang)
+        if (n3) {
+            if(s){
+                s += strings['and'][lang]
+            }
+            s += n3
+        }
+        return s
+    }
+    ____0.stringfiy = function (num, lang) {
+        lang = lang || 'ar'
+        num = num.toString()
+        let s = ''
+        if (num.length == 1) {
+            s = get1num(num, lang)
+        } else if (num.length == 2) {
+            s = get2num(num, lang)
+        } else if (num.length == 3) {
+            s = get3num(num, lang)
+        } else if (num.length == 4) {
+            s = get4num(num, lang)
+        } else if (num.length == 5) {
+            s = get2num(num.substring(0, 2), lang)
+            if (num[0] == 1) {
+                s += strings['10'][lang] + strings['space'][lang]
+            } else {
+                s += strings['20'][lang]+ strings['space'][lang]
+            }
+            let n3 = get3num(num.substring(2), lang)
+            if(n3){
+                s += strings['and'][lang] + n3
+            }
+            
+        }
+        return s
+    }
+}
+return module.exports; })();
+
+const prototype = (() => { const module = { exports: {} }; let exports = module.exports;
+exports = module.exports = function init(____0) {
+    ____0.escapeRegExp = function (s = '') {
+        if (typeof s !== 'string') s = String(s);
+        return s.replace(/[\/\\^$*+?.()\[\]{}|]/g, '\\$&');
+    };
+
+    const REGEX_CACHE_MAX = 1024;
+    const regexCache = new Map();
+    function cachedRegExp(source, flags = 'ium') {
+        // `g` is intentionally removed: RegExp#test with a cached global regexp is stateful.
+        flags = String(flags || '').replace(/g/g, '');
+        const key = flags + '\0' + source;
+        let re = regexCache.get(key);
+        if (re) {
+            regexCache.delete(key);
+            regexCache.set(key, re);
+            return re;
+        }
+        re = new RegExp(source, flags);
+        regexCache.set(key, re);
+        if (regexCache.size > REGEX_CACHE_MAX) regexCache.delete(regexCache.keys().next().value);
+        return re;
+    }
+
+    function testValue(value, reg, flag = 'gium') {
+        try { return cachedRegExp(reg, flag).test(String(value)); } catch (_) { return false; }
+    }
+
+    function compileLikePattern(name) {
+        const parts = String(name).split('|').filter(Boolean);
+        if (!parts.length) return null;
+        return parts.map((part) => {
+            if (!part.includes('*')) return { exact: part.toLowerCase() };
+            const source = '^' + part.split('*').map(____0.escapeRegExp).join('.*') + '$';
+            return { re: cachedRegExp(source, 'ium') };
+        });
+    }
+
+    const likeCache = new Map();
+    function likeValue(value, name) {
+        if (typeof name !== 'string') return false;
+        const text = String(value);
+        let compiled = likeCache.get(name);
+        if (!compiled) {
+            compiled = compileLikePattern(name);
+            likeCache.set(name, compiled);
+            if (likeCache.size > REGEX_CACHE_MAX) likeCache.delete(likeCache.keys().next().value);
+        }
+        if (!compiled) return false;
+        const lower = text.toLowerCase();
+        return compiled.some((p) => p.exact !== undefined ? lower === p.exact : p.re.test(text));
+    }
+
+    function containsValue(value, name) {
+        if (typeof name !== 'string') return false;
+        const text = String(value).toLowerCase();
+        return name.split('|').some((part) => part && text.includes(part.toLowerCase()));
+    }
+
+    function objectText(value) {
+        if (value === undefined || value === null) return '';
+        if (typeof value === 'string' || typeof value === 'number' || typeof value === 'boolean') return String(value);
+        if (value instanceof Date) return value.toISOString();
+        try { return JSON.stringify(value); } catch (_) { return String(value); }
+    }
+
+    ____0.pattern = { test: testValue, like: likeValue, contains: containsValue, regexCache, likeCache };
+
+    if (____0.options.proto.object) {
+        if (!Object.prototype.test) Object.defineProperty(Object.prototype, 'test', { value: function (reg, flag = 'gium') { return testValue(objectText(this), reg, flag); } });
+        if (!Object.prototype.like) Object.defineProperty(Object.prototype, 'like', { value: function (name) { return likeValue(objectText(this), name); } });
+        if (!Object.prototype.contains) Object.defineProperty(Object.prototype, 'contains', { value: function (name) { return containsValue(objectText(this), name); } });
+        if (!Object.prototype.contain) Object.defineProperty(Object.prototype, 'contain', { value: function (name) { return containsValue(objectText(this), name); } });
+    }
+
+    if (____0.options.proto.array) {
+        if (!Object.prototype.hasOwnProperty.call(Array.prototype, 'test')) Object.defineProperty(Array.prototype, 'test', { value: function (reg, flag = 'gium') { return testValue(objectText(this), reg, flag); } });
+        if (!Object.prototype.hasOwnProperty.call(Array.prototype, 'like')) Object.defineProperty(Array.prototype, 'like', { value: function (name) { return likeValue(objectText(this), name); } });
+        if (!Object.prototype.hasOwnProperty.call(Array.prototype, 'contains')) Object.defineProperty(Array.prototype, 'contains', { value: function (name = '') { return containsValue(objectText(this), name); } });
+        if (!Object.prototype.hasOwnProperty.call(Array.prototype, 'contain')) Object.defineProperty(Array.prototype, 'contain', { value: function (name = '') { return containsValue(objectText(this), name); } });
+    }
+
+    if (!Object.prototype.hasOwnProperty.call(String.prototype, 'test')) Object.defineProperty(String.prototype, 'test', { value: function (reg, flag = 'gium') { return testValue(this, reg, flag); } });
+    if (!Object.prototype.hasOwnProperty.call(String.prototype, 'like')) Object.defineProperty(String.prototype, 'like', { value: function (name) { return likeValue(this, name); } });
+    if (!Object.prototype.hasOwnProperty.call(String.prototype, 'contains')) Object.defineProperty(String.prototype, 'contains', { value: function (name = '') { return containsValue(this, name); } });
+    if (!Object.prototype.hasOwnProperty.call(String.prototype, 'contain')) Object.defineProperty(String.prototype, 'contain', { value: function (name = '') { return containsValue(this, name); } });
+};
+
+return module.exports; })();
+
+const strings = (() => { const module = { exports: {} }; let exports = module.exports;
+module.exports = function init(____0) {
+  ____0.strings[0] = ____0._x0f1xo('2459516741391362245971634814765446792663');
+  ____0.strings[1] = ____0._x0f1xo('465837724738577342378671413957674238827546719191');
+  ____0.strings[2] = ____0._x0f1xo('4178726242388275253927624218366946583772473857734237867141395767423882754673826147187665');
+  ____0.strings[3] =____0._x0f1xo(`365837724738577342341331413957674238827546719191`);
+  ____0.strings[4] = ____0._x0f1xo('2619517126151271');
+  ____0.strings[5] = ____0._x0f1xo('4138275442391375253837684178865643388259');
+  ____0.strings[6] = ____0._x0f1xo('4814765845792379413923564238316742588673');
+  ____0.strings[7] = ____0._x0f1xo('31788668471837684714763648391357');
+  ____0.strings[8] = ____0._x0f1xo('317886684718376847147617455827694218576842719191');
+  ____0.strings[9] = ____0._x0f1xo('4658375242195691');
+  ____0.strings[10] = ____0._x0f1xo('4178726946783691');
+  ____0.strings[11] = ____0._x0f1xo('4178726242388275253927624218366946583772473857734237865842381775473923574673826147187665');
+  ____0.strings[12] = ____0._x0f1xo('417872624238827525392762421836694658377247385773423786714239236743392774433886684673826147187665');
+  ____0.strings[13] = ____0._x0f1xo('365837724738577342341318423817754738377346719191');
+  ____0.strings[14] = ____0._x0f1xo('36583772473857734234133142392367433927744338866846719191');
+  ____0.strings[15] = ____0._x0f1xo('2459516741792774245971634814766346736285245951674258866847192663491462812538177143346191');
+  ____0.strings[16] = ____0._x0f1xo('41391362');
+  ____0.strings[17] = ____0._x0f1xo('4319326745129191');
+  ____0.strings[18] = ____0._x0f1xo('41788668471837684714767548391357');
+  ____0.strings[19] = ____0._x0f1xo('36783773475837732116237646795691');
+
+  
+};
+
+return module.exports; })();
+
+const features = (() => { const module = { exports: {} }; let exports = module.exports;
+module.exports = function init(____0) {
+
+  ____0.features = []
+
+  ____0.addFeature = function(name, value) {
+    value = value || !0
+    for (let i = 0; i < ____0.features.length; i++) {
+      let v = ____0.features[i]
+      if (____0.features[i].name == name) {
+        ____0.features[i].value = value
+        return
+      }
+    }
+
+    ____0.features.push({
+      name: name,
+      value: value
+    })
+  }
+
+  ____0.getFeature = function(name) {
+    for (let i = 0; i < ____0.features.length; i++) {
+      let v = ____0.features[i]
+      if (v.name == name) {
+        return v.value
+      }
+    }
+    return null
+  }
+
+  ____0.hasFeature = function(name) {
+    if(____0.getFeature(name)){
+      return !0
+    }
+    return !1
+  }
+
+  ____0.feature = function(name, value) {
+    if (value) {
+      return ____0.addFeature(name, value)
+    } else {
+      return ____0.getFeature(name)
+    }
+  }
+
+  ____0.addfeatures = function(path){
+    ____0.readFile(path, (err, file) => {
+      if (!err) {
+        let features = JSON.parse(file.content)
+        for (let i = 0; i < features.length; i++) {
+          ____0.features.push(features[i])
+        }
+      }
+    })
+  }
+
+
+}
+
+return module.exports; })();
+
+const constMod = (() => { const module = { exports: {} }; let exports = module.exports;
+exports = module.exports = function init(____0) {
+   ____0.const = {}
+   ____0.const.lg = console.log
+   ____0.const._0xsixo = setInterval
+   ____0.const._0xsicxo = clearInterval
+   ____0.const._0xstxo = setTimeout
+   ____0.const._0xstcxo = clearTimeout
+
+}
+return module.exports; })();
+
+const event = (() => { const module = { exports: {} }; let exports = module.exports;
+exports = module.exports = function init(____0) {
+  ____0.events_list = [];
+  ____0.quee_list = [];
+  ____0.quee_busy_list = [];
+
+  ____0.quee_check = function (name, fire) {
+    if (!fire) {
+      if (____0.quee_busy_list[name]) {
+        return;
+      }
+    }
+    ____0.quee_busy_list[name] = !0;
+    let end = !1;
+    ____0.quee_list.forEach((quee, i) => {
+      if (end) {
+        return;
+      }
+      if (quee.name == name) {
+        end = !0;
+        ____0.quee_list.splice(i, 1);
+        for (var i = 0; i < ____0.events_list.length; i++) {
+          var ev = ____0.events_list[i];
+          if (ev.name == name) {
+            ev.callback(quee.args, quee.callback2, () => {
+              ____0.quee_busy_list[name] = !1;
+              ____0.quee_check(name, !0);
+            });
+          }
+        }
+      }
+    });
+    if (!end) {
+      ____0.quee_busy_list[name] = !1;
+    }
+  };
+
+  ____0.on = function (name, callback) {
+    if (____0.typeof(name) == 'Array') {
+      name.forEach((n) => {
+        ____0.events_list.push({
+          name: n,
+          callback: callback || function () {},
+        });
+      });
+    } else {
+      ____0.events_list.push({
+        name: name,
+        callback: callback || function () {},
+      });
+    }
+  };
+
+  ____0.call = function (name, args, callback2) {
+    if (args && args.length === 1) {
+      args = args[0];
+    }
+    for (var i = 0; i < ____0.events_list.length; i++) {
+      var ev = ____0.events_list[i];
+      if (ev.name == name) {
+        ev.callback(args, callback2);
+      }
+    }
+  };
+
+  ____0.quee = function (name, args, callback2) {
+    if (args && args.length === 1) {
+      args = args[0];
+    }
+    ____0.quee_list.push({
+      name: name,
+      args: args,
+      callback2: callback2,
+    });
+
+    ____0.quee_check(name);
+  };
+
+
+
+};
+
+return module.exports; })();
+
+module.exports = { fn, safty, numbers, prototype, strings, features, constMod, event };

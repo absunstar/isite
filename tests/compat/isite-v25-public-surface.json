@@ -1,0 +1,5971 @@
+{
+  "version": 1,
+  "frameworkVersion": "2026.08.26-v25",
+  "generatedAt": "2026-08-26T09:16:25.427Z",
+  "site": {
+    "entries": {
+      "$": {
+        "type": "getter-error"
+      },
+      "$roles": {
+        "type": "object",
+        "enumerable": true,
+        "writable": true,
+        "configurable": true
+      },
+      "$users": {
+        "type": "object",
+        "enumerable": true,
+        "writable": true,
+        "configurable": true
+      },
+      "AI": {
+        "type": "function",
+        "enumerable": true,
+        "writable": true,
+        "configurable": true,
+        "arity": 1
+      },
+      "AdaptiveCache": {
+        "type": "function",
+        "enumerable": true,
+        "writable": true,
+        "configurable": true,
+        "arity": 0
+      },
+      "AsyncPool": {
+        "type": "function",
+        "enumerable": true,
+        "writable": true,
+        "configurable": true,
+        "arity": 0
+      },
+      "BackpressureQueue": {
+        "type": "function",
+        "enumerable": true,
+        "writable": true,
+        "configurable": true,
+        "arity": 0
+      },
+      "FONTKIT": {
+        "type": "getter-error"
+      },
+      "Module": {
+        "type": "function",
+        "enumerable": true,
+        "writable": true,
+        "configurable": true,
+        "arity": 0
+      },
+      "PDF": {
+        "type": "getter-error"
+      },
+      "TaggedCache": {
+        "type": "function",
+        "enumerable": true,
+        "writable": true,
+        "configurable": true,
+        "arity": 0
+      },
+      "_0_a405": {
+        "type": "boolean",
+        "enumerable": true,
+        "writable": true,
+        "configurable": true
+      },
+      "_0_ar2_0_": {
+        "type": "boolean",
+        "enumerable": true,
+        "writable": true,
+        "configurable": true
+      },
+      "_0_car_0_": {
+        "type": "function",
+        "enumerable": true,
+        "writable": true,
+        "configurable": true,
+        "arity": 0
+      },
+      "_0x14xo": {
+        "type": "boolean",
+        "enumerable": true,
+        "writable": true,
+        "configurable": true
+      },
+      "_0xddxo": {
+        "type": "function",
+        "enumerable": true,
+        "writable": true,
+        "configurable": true,
+        "arity": 7
+      },
+      "_0xsttxo": {
+        "type": "object",
+        "enumerable": true,
+        "writable": true,
+        "configurable": true
+      },
+      "_deleteSharedKey": {
+        "type": "function",
+        "enumerable": true,
+        "writable": true,
+        "configurable": true,
+        "arity": 1
+      },
+      "_sharedSize": {
+        "type": "function",
+        "enumerable": true,
+        "writable": true,
+        "configurable": true,
+        "arity": 1
+      },
+      "_x0f1xo": {
+        "type": "function",
+        "enumerable": true,
+        "writable": true,
+        "configurable": true,
+        "arity": 1
+      },
+      "abort": {
+        "type": "object",
+        "enumerable": true,
+        "writable": true,
+        "configurable": true
+      },
+      "adaptiveCache": {
+        "type": "function",
+        "enumerable": true,
+        "writable": true,
+        "configurable": true,
+        "arity": 1
+      },
+      "adaptiveCaches": {
+        "type": "object",
+        "enumerable": true,
+        "writable": true,
+        "configurable": true
+      },
+      "addApp": {
+        "type": "function",
+        "enumerable": true,
+        "writable": true,
+        "configurable": true,
+        "arity": 1
+      },
+      "addFeature": {
+        "type": "function",
+        "enumerable": true,
+        "writable": true,
+        "configurable": true,
+        "arity": 2
+      },
+      "addMasterPage": {
+        "type": "function",
+        "enumerable": true,
+        "writable": true,
+        "configurable": true,
+        "arity": 1
+      },
+      "addVar": {
+        "type": "function",
+        "enumerable": true,
+        "writable": true,
+        "configurable": true,
+        "arity": 2
+      },
+      "addVars": {
+        "type": "function",
+        "enumerable": true,
+        "writable": true,
+        "configurable": true,
+        "arity": 1
+      },
+      "addfeatures": {
+        "type": "function",
+        "enumerable": true,
+        "writable": true,
+        "configurable": true,
+        "arity": 1
+      },
+      "all": {
+        "type": "function",
+        "enumerable": true,
+        "writable": true,
+        "configurable": true,
+        "arity": 2
+      },
+      "appList": {
+        "type": "array",
+        "enumerable": true,
+        "writable": true,
+        "configurable": true
+      },
+      "apps": {
+        "type": "array",
+        "enumerable": true,
+        "writable": true,
+        "configurable": true
+      },
+      "archiver": {
+        "type": "getter-error"
+      },
+      "args": {
+        "type": "object",
+        "enumerable": true,
+        "writable": true,
+        "configurable": true
+      },
+      "async": {
+        "type": "object",
+        "enumerable": true,
+        "writable": true,
+        "configurable": true
+      },
+      "backpressureQueue": {
+        "type": "function",
+        "enumerable": true,
+        "writable": true,
+        "configurable": true,
+        "arity": 1
+      },
+      "backpressureQueues": {
+        "type": "object",
+        "enumerable": true,
+        "writable": true,
+        "configurable": true
+      },
+      "backupDB": {
+        "type": "function",
+        "enumerable": true,
+        "writable": true,
+        "configurable": true,
+        "arity": 2
+      },
+      "cache": {
+        "type": "object",
+        "enumerable": true,
+        "writable": true,
+        "configurable": true
+      },
+      "cacheGetOrLoad": {
+        "type": "function",
+        "enumerable": true,
+        "writable": true,
+        "configurable": true,
+        "arity": 2
+      },
+      "cacheTuner": {
+        "type": "object",
+        "enumerable": true,
+        "writable": true,
+        "configurable": true
+      },
+      "cacheV3": {
+        "type": "object",
+        "enumerable": true,
+        "writable": true,
+        "configurable": true
+      },
+      "call": {
+        "type": "function",
+        "enumerable": true,
+        "writable": true,
+        "configurable": true,
+        "arity": 3
+      },
+      "callRoute": {
+        "type": "function",
+        "enumerable": true,
+        "writable": true,
+        "configurable": true,
+        "arity": 4
+      },
+      "canRequire": {
+        "type": "function",
+        "enumerable": true,
+        "writable": true,
+        "configurable": true,
+        "arity": 1
+      },
+      "capabilities": {
+        "type": "object",
+        "enumerable": true,
+        "writable": true,
+        "configurable": true
+      },
+      "checkMailConfig": {
+        "type": "function",
+        "enumerable": true,
+        "writable": true,
+        "configurable": true,
+        "arity": 2
+      },
+      "cheerio": {
+        "type": "getter-error"
+      },
+      "child_process": {
+        "type": "object",
+        "enumerable": true,
+        "writable": false,
+        "configurable": true
+      },
+      "circuitBreaker": {
+        "type": "function",
+        "enumerable": true,
+        "writable": true,
+        "configurable": true,
+        "arity": 1
+      },
+      "close": {
+        "type": "function",
+        "enumerable": true,
+        "writable": true,
+        "configurable": true,
+        "arity": 0
+      },
+      "closeGracefully": {
+        "type": "function",
+        "enumerable": true,
+        "writable": true,
+        "configurable": true,
+        "arity": 0
+      },
+      "closeProxy": {
+        "type": "function",
+        "enumerable": true,
+        "writable": true,
+        "configurable": true,
+        "arity": 0
+      },
+      "closing": {
+        "type": "boolean",
+        "enumerable": true,
+        "writable": true,
+        "configurable": true
+      },
+      "cmd": {
+        "type": "function",
+        "enumerable": true,
+        "writable": true,
+        "configurable": true,
+        "arity": 2
+      },
+      "collectionByGuid": {
+        "type": "object",
+        "enumerable": true,
+        "writable": true,
+        "configurable": true
+      },
+      "collectionList": {
+        "type": "array",
+        "enumerable": true,
+        "writable": true,
+        "configurable": true
+      },
+      "compat": {
+        "type": "object",
+        "enumerable": true,
+        "writable": true,
+        "configurable": true
+      },
+      "connectApp": {
+        "type": "function",
+        "enumerable": true,
+        "writable": true,
+        "configurable": true,
+        "arity": 1
+      },
+      "connectCollection": {
+        "type": "function",
+        "enumerable": true,
+        "writable": true,
+        "configurable": true,
+        "arity": 2
+      },
+      "connectTelegramClient": {
+        "type": "function",
+        "enumerable": true,
+        "writable": true,
+        "configurable": true,
+        "arity": 4
+      },
+      "console": {
+        "type": "object",
+        "enumerable": true,
+        "writable": true,
+        "configurable": true
+      },
+      "const": {
+        "type": "object",
+        "enumerable": true,
+        "writable": true,
+        "configurable": true
+      },
+      "context": {
+        "type": "object",
+        "enumerable": true,
+        "writable": true,
+        "configurable": true
+      },
+      "cookie": {
+        "type": "function",
+        "enumerable": true,
+        "writable": true,
+        "configurable": true,
+        "arity": 3
+      },
+      "copy": {
+        "type": "function",
+        "enumerable": true,
+        "writable": true,
+        "configurable": true,
+        "arity": 1
+      },
+      "coreV10": {
+        "type": "object",
+        "enumerable": true,
+        "writable": true,
+        "configurable": true
+      },
+      "coreV11": {
+        "type": "object",
+        "enumerable": true,
+        "writable": true,
+        "configurable": true
+      },
+      "coreV15": {
+        "type": "object",
+        "enumerable": true,
+        "writable": true,
+        "configurable": true
+      },
+      "coreV16": {
+        "type": "object",
+        "enumerable": true,
+        "writable": true,
+        "configurable": true
+      },
+      "coreV17": {
+        "type": "object",
+        "enumerable": true,
+        "writable": true,
+        "configurable": true
+      },
+      "coreV18": {
+        "type": "object",
+        "enumerable": true,
+        "writable": true,
+        "configurable": true
+      },
+      "coreV3": {
+        "type": "object",
+        "enumerable": true,
+        "writable": true,
+        "configurable": true
+      },
+      "coreV4": {
+        "type": "object",
+        "enumerable": true,
+        "writable": true,
+        "configurable": true
+      },
+      "coreV5": {
+        "type": "object",
+        "enumerable": true,
+        "writable": true,
+        "configurable": true
+      },
+      "coreV6": {
+        "type": "object",
+        "enumerable": true,
+        "writable": true,
+        "configurable": true
+      },
+      "coreV7": {
+        "type": "object",
+        "enumerable": true,
+        "writable": true,
+        "configurable": true
+      },
+      "coreV8": {
+        "type": "object",
+        "enumerable": true,
+        "writable": true,
+        "configurable": true
+      },
+      "coreV9": {
+        "type": "object",
+        "enumerable": true,
+        "writable": true,
+        "configurable": true
+      },
+      "createBatcher": {
+        "type": "function",
+        "enumerable": true,
+        "writable": true,
+        "configurable": true,
+        "arity": 1
+      },
+      "createDir": {
+        "type": "function",
+        "enumerable": true,
+        "writable": true,
+        "configurable": true,
+        "arity": 2
+      },
+      "createDirSync": {
+        "type": "function",
+        "enumerable": true,
+        "writable": true,
+        "configurable": true,
+        "arity": 1
+      },
+      "createIdBatcher": {
+        "type": "function",
+        "enumerable": true,
+        "writable": true,
+        "configurable": true,
+        "arity": 1
+      },
+      "css": {
+        "type": "function",
+        "enumerable": true,
+        "writable": true,
+        "configurable": true,
+        "arity": 2
+      },
+      "cwd": {
+        "type": "string",
+        "enumerable": true,
+        "writable": true,
+        "configurable": true
+      },
+      "dashboard": {
+        "type": "function",
+        "enumerable": true,
+        "writable": true,
+        "configurable": true,
+        "arity": 1
+      },
+      "databaseCollectionList": {
+        "type": "array",
+        "enumerable": true,
+        "writable": true,
+        "configurable": true
+      },
+      "databaseList": {
+        "type": "array",
+        "enumerable": true,
+        "writable": true,
+        "configurable": true
+      },
+      "dd": {
+        "type": "function",
+        "enumerable": true,
+        "writable": true,
+        "configurable": true,
+        "arity": 0
+      },
+      "defaultFontOptions": {
+        "type": "object",
+        "enumerable": true,
+        "writable": true,
+        "configurable": true
+      },
+      "delete": {
+        "type": "function",
+        "enumerable": true,
+        "writable": true,
+        "configurable": true,
+        "arity": 2
+      },
+      "deleteFile": {
+        "type": "function",
+        "enumerable": true,
+        "writable": true,
+        "configurable": true,
+        "arity": 2
+      },
+      "deleteFileSync": {
+        "type": "function",
+        "enumerable": true,
+        "writable": true,
+        "configurable": true,
+        "arity": 1
+      },
+      "diagnostics": {
+        "type": "object",
+        "enumerable": true,
+        "writable": true,
+        "configurable": true
+      },
+      "dir": {
+        "type": "string",
+        "enumerable": true,
+        "writable": true,
+        "configurable": true
+      },
+      "download": {
+        "type": "function",
+        "enumerable": true,
+        "writable": true,
+        "configurable": true,
+        "arity": 3
+      },
+      "downloadFile": {
+        "type": "function",
+        "enumerable": true,
+        "writable": true,
+        "configurable": true,
+        "arity": 3
+      },
+      "escapeRegExp": {
+        "type": "function",
+        "enumerable": true,
+        "writable": true,
+        "configurable": true,
+        "arity": 0
+      },
+      "eval": {
+        "type": "getter-error"
+      },
+      "events": {
+        "type": "object",
+        "enumerable": true,
+        "writable": true,
+        "configurable": true
+      },
+      "events_list": {
+        "type": "array",
+        "enumerable": true,
+        "writable": true,
+        "configurable": true
+      },
+      "exe": {
+        "type": "function",
+        "enumerable": true,
+        "writable": true,
+        "configurable": true,
+        "arity": 3
+      },
+      "f1": {
+        "type": "function",
+        "enumerable": true,
+        "writable": true,
+        "configurable": true,
+        "arity": 1
+      },
+      "feature": {
+        "type": "function",
+        "enumerable": true,
+        "writable": true,
+        "configurable": true,
+        "arity": 2
+      },
+      "features": {
+        "type": "array",
+        "enumerable": true,
+        "writable": true,
+        "configurable": true
+      },
+      "featuresV3": {
+        "type": "object",
+        "enumerable": true,
+        "writable": true,
+        "configurable": true
+      },
+      "fetch": {
+        "type": "function",
+        "enumerable": true,
+        "writable": true,
+        "configurable": true,
+        "arity": 0
+      },
+      "fetchAsync": {
+        "type": "function",
+        "enumerable": true,
+        "writable": true,
+        "configurable": true,
+        "arity": 0
+      },
+      "fetchReliable": {
+        "type": "function",
+        "enumerable": true,
+        "writable": true,
+        "configurable": true,
+        "arity": 1
+      },
+      "fetchURLContent": {
+        "type": "function",
+        "enumerable": true,
+        "writable": true,
+        "configurable": true,
+        "arity": 2
+      },
+      "fileList": {
+        "type": "array",
+        "enumerable": true,
+        "writable": true,
+        "configurable": true
+      },
+      "fileStat": {
+        "type": "function",
+        "enumerable": true,
+        "writable": true,
+        "configurable": true,
+        "arity": 2
+      },
+      "fileStatSync": {
+        "type": "function",
+        "enumerable": true,
+        "writable": true,
+        "configurable": true,
+        "arity": 1
+      },
+      "fn": {
+        "type": "function",
+        "enumerable": true,
+        "writable": true,
+        "configurable": true,
+        "arity": 0
+      },
+      "fontByKey": {
+        "type": "object",
+        "enumerable": true,
+        "writable": true,
+        "configurable": true
+      },
+      "fontList": {
+        "type": "array",
+        "enumerable": true,
+        "writable": true,
+        "configurable": true
+      },
+      "fontkit": {
+        "type": "getter-error"
+      },
+      "formidable": {
+        "type": "getter-error"
+      },
+      "from123": {
+        "type": "function",
+        "enumerable": true,
+        "writable": true,
+        "configurable": true,
+        "arity": 1
+      },
+      "fromBase64": {
+        "type": "function",
+        "enumerable": true,
+        "writable": true,
+        "configurable": true,
+        "arity": 1
+      },
+      "fromJSON": {
+        "type": "function",
+        "enumerable": true,
+        "writable": true,
+        "configurable": true,
+        "arity": 1
+      },
+      "fromJson": {
+        "type": "function",
+        "enumerable": true,
+        "writable": true,
+        "configurable": true,
+        "arity": 1
+      },
+      "fs": {
+        "type": "object",
+        "enumerable": true,
+        "writable": true,
+        "configurable": true
+      },
+      "fsm": {
+        "type": "function",
+        "enumerable": true,
+        "writable": true,
+        "configurable": true,
+        "arity": 0
+      },
+      "get": {
+        "type": "function",
+        "enumerable": true,
+        "writable": true,
+        "configurable": true,
+        "arity": 2
+      },
+      "getApp": {
+        "type": "function",
+        "enumerable": true,
+        "writable": true,
+        "configurable": true,
+        "arity": 1
+      },
+      "getContentType": {
+        "type": "function",
+        "enumerable": true,
+        "writable": true,
+        "configurable": true,
+        "arity": 1
+      },
+      "getDate": {
+        "type": "function",
+        "enumerable": true,
+        "writable": true,
+        "configurable": true,
+        "arity": 1
+      },
+      "getDateTime": {
+        "type": "function",
+        "enumerable": true,
+        "writable": true,
+        "configurable": true,
+        "arity": 1
+      },
+      "getFeature": {
+        "type": "function",
+        "enumerable": true,
+        "writable": true,
+        "configurable": true,
+        "arity": 1
+      },
+      "getFileEncode": {
+        "type": "function",
+        "enumerable": true,
+        "writable": true,
+        "configurable": true,
+        "arity": 1
+      },
+      "getRegExp": {
+        "type": "function",
+        "enumerable": true,
+        "writable": true,
+        "configurable": true,
+        "arity": 1
+      },
+      "getSession": {
+        "type": "function",
+        "enumerable": true,
+        "writable": true,
+        "configurable": true,
+        "arity": 2
+      },
+      "getShared": {
+        "type": "function",
+        "enumerable": true,
+        "writable": true,
+        "configurable": true,
+        "arity": 3
+      },
+      "getVar": {
+        "type": "function",
+        "enumerable": true,
+        "writable": true,
+        "configurable": true,
+        "arity": 1
+      },
+      "get_RegExp": {
+        "type": "function",
+        "enumerable": true,
+        "writable": true,
+        "configurable": true,
+        "arity": 1
+      },
+      "guid": {
+        "type": "function",
+        "enumerable": true,
+        "writable": true,
+        "configurable": true,
+        "arity": 0
+      },
+      "handleNotRoute": {
+        "type": "function",
+        "enumerable": true,
+        "writable": true,
+        "configurable": true,
+        "arity": 2
+      },
+      "hasFeature": {
+        "type": "function",
+        "enumerable": true,
+        "writable": true,
+        "configurable": true,
+        "arity": 1
+      },
+      "hash": {
+        "type": "getter-error"
+      },
+      "health": {
+        "type": "function",
+        "enumerable": true,
+        "writable": true,
+        "configurable": true,
+        "arity": 0
+      },
+      "hide": {
+        "type": "function",
+        "enumerable": true,
+        "writable": true,
+        "configurable": true,
+        "arity": 1
+      },
+      "hideObject": {
+        "type": "function",
+        "enumerable": true,
+        "writable": true,
+        "configurable": true,
+        "arity": 1
+      },
+      "hooks": {
+        "type": "object",
+        "enumerable": true,
+        "writable": true,
+        "configurable": true
+      },
+      "html": {
+        "type": "function",
+        "enumerable": true,
+        "writable": true,
+        "configurable": true,
+        "arity": 2
+      },
+      "http": {
+        "type": "object",
+        "enumerable": true,
+        "writable": true,
+        "configurable": true
+      },
+      "http2": {
+        "type": "object",
+        "enumerable": true,
+        "writable": false,
+        "configurable": true
+      },
+      "httpCache": {
+        "type": "object",
+        "enumerable": true,
+        "writable": true,
+        "configurable": true
+      },
+      "httpPlan": {
+        "type": "object",
+        "enumerable": true,
+        "writable": true,
+        "configurable": true
+      },
+      "httpTrustedOnline": {
+        "type": "function",
+        "enumerable": true,
+        "writable": true,
+        "configurable": true,
+        "arity": 0
+      },
+      "https": {
+        "type": "object",
+        "enumerable": true,
+        "writable": false,
+        "configurable": true
+      },
+      "importApp": {
+        "type": "function",
+        "enumerable": true,
+        "writable": true,
+        "configurable": true,
+        "arity": 2
+      },
+      "importApps": {
+        "type": "function",
+        "enumerable": true,
+        "writable": true,
+        "configurable": true,
+        "arity": 1
+      },
+      "inflight": {
+        "type": "object",
+        "enumerable": true,
+        "writable": true,
+        "configurable": true
+      },
+      "initFontKit": {
+        "type": "function",
+        "enumerable": true,
+        "writable": true,
+        "configurable": true,
+        "arity": 2
+      },
+      "isFileExists": {
+        "type": "function",
+        "enumerable": true,
+        "writable": true,
+        "configurable": true,
+        "arity": 2
+      },
+      "isFileExistsSync": {
+        "type": "function",
+        "enumerable": true,
+        "writable": true,
+        "configurable": true,
+        "arity": 1
+      },
+      "js": {
+        "type": "function",
+        "enumerable": true,
+        "writable": true,
+        "configurable": true,
+        "arity": 2
+      },
+      "json": {
+        "type": "function",
+        "enumerable": true,
+        "writable": true,
+        "configurable": true,
+        "arity": 2
+      },
+      "leaks": {
+        "type": "object",
+        "enumerable": true,
+        "writable": true,
+        "configurable": true
+      },
+      "lib": {
+        "type": "object",
+        "enumerable": true,
+        "writable": true,
+        "configurable": true
+      },
+      "listen": {
+        "type": "function",
+        "enumerable": true,
+        "writable": true,
+        "configurable": true,
+        "arity": 2
+      },
+      "loadApp": {
+        "type": "function",
+        "enumerable": true,
+        "writable": true,
+        "configurable": true,
+        "arity": 2
+      },
+      "loadLocalApp": {
+        "type": "function",
+        "enumerable": true,
+        "writable": true,
+        "configurable": true,
+        "arity": 2
+      },
+      "loadPDF": {
+        "type": "function",
+        "enumerable": true,
+        "writable": true,
+        "configurable": true,
+        "arity": 2
+      },
+      "localDir": {
+        "type": "string",
+        "enumerable": true,
+        "writable": true,
+        "configurable": true
+      },
+      "log": {
+        "type": "function",
+        "enumerable": true,
+        "writable": true,
+        "configurable": true,
+        "arity": 0
+      },
+      "logs": {
+        "type": "function",
+        "enumerable": true,
+        "writable": true,
+        "configurable": true,
+        "arity": 2
+      },
+      "masterPages": {
+        "type": "array",
+        "enumerable": true,
+        "writable": true,
+        "configurable": true
+      },
+      "md5": {
+        "type": "getter-error"
+      },
+      "memoizeAsync": {
+        "type": "function",
+        "enumerable": true,
+        "writable": true,
+        "configurable": true,
+        "arity": 1
+      },
+      "memory": {
+        "type": "object",
+        "enumerable": true,
+        "writable": true,
+        "configurable": true
+      },
+      "metrics": {
+        "type": "object",
+        "enumerable": true,
+        "writable": true,
+        "configurable": true
+      },
+      "mimeTypes": {
+        "type": "object",
+        "enumerable": true,
+        "writable": true,
+        "configurable": true
+      },
+      "mkDir": {
+        "type": "function",
+        "enumerable": true,
+        "writable": true,
+        "configurable": true,
+        "arity": 2
+      },
+      "mkdirSync": {
+        "type": "function",
+        "enumerable": true,
+        "writable": true,
+        "configurable": true,
+        "arity": 1
+      },
+      "mm": {
+        "type": "function",
+        "enumerable": true,
+        "writable": true,
+        "configurable": true,
+        "arity": 0
+      },
+      "mongoAdvisor": {
+        "type": "object",
+        "enumerable": true,
+        "writable": true,
+        "configurable": true
+      },
+      "mongoBudget": {
+        "type": "object",
+        "enumerable": true,
+        "writable": true,
+        "configurable": true
+      },
+      "mongoShapes": {
+        "type": "object",
+        "enumerable": true,
+        "writable": true,
+        "configurable": true
+      },
+      "mongoTelemetry": {
+        "type": "object",
+        "enumerable": true,
+        "writable": true,
+        "configurable": true
+      },
+      "mongodb": {
+        "type": "function",
+        "enumerable": true,
+        "writable": true,
+        "configurable": true,
+        "arity": 0
+      },
+      "mv": {
+        "type": "getter-error"
+      },
+      "net": {
+        "type": "object",
+        "enumerable": true,
+        "writable": false,
+        "configurable": true
+      },
+      "newTelegramBot": {
+        "type": "function",
+        "enumerable": true,
+        "writable": true,
+        "configurable": true,
+        "arity": 2
+      },
+      "newURL": {
+        "type": "function",
+        "enumerable": true,
+        "writable": true,
+        "configurable": true,
+        "arity": 1
+      },
+      "nodemailer": {
+        "type": "getter-error"
+      },
+      "objectDiff": {
+        "type": "function",
+        "enumerable": true,
+        "writable": true,
+        "configurable": true,
+        "arity": 2
+      },
+      "off": {
+        "type": "function",
+        "enumerable": true,
+        "writable": true,
+        "configurable": true,
+        "arity": 1
+      },
+      "on": {
+        "type": "function",
+        "enumerable": true,
+        "writable": true,
+        "configurable": true,
+        "arity": 2
+      },
+      "onALL": {
+        "type": "function",
+        "enumerable": true,
+        "writable": true,
+        "configurable": true,
+        "arity": 2
+      },
+      "onCOPY": {
+        "type": "function",
+        "enumerable": true,
+        "writable": true,
+        "configurable": true,
+        "arity": 2
+      },
+      "onDELETE": {
+        "type": "function",
+        "enumerable": true,
+        "writable": true,
+        "configurable": true,
+        "arity": 2
+      },
+      "onGET": {
+        "type": "function",
+        "enumerable": true,
+        "writable": true,
+        "configurable": true,
+        "arity": 2
+      },
+      "onHEAD": {
+        "type": "function",
+        "enumerable": true,
+        "writable": true,
+        "configurable": true,
+        "arity": 2
+      },
+      "onLINK": {
+        "type": "function",
+        "enumerable": true,
+        "writable": true,
+        "configurable": true,
+        "arity": 2
+      },
+      "onLOCK": {
+        "type": "function",
+        "enumerable": true,
+        "writable": true,
+        "configurable": true,
+        "arity": 2
+      },
+      "onOPTIONS": {
+        "type": "function",
+        "enumerable": true,
+        "writable": true,
+        "configurable": true,
+        "arity": 2
+      },
+      "onPATCH": {
+        "type": "function",
+        "enumerable": true,
+        "writable": true,
+        "configurable": true,
+        "arity": 2
+      },
+      "onPOST": {
+        "type": "function",
+        "enumerable": true,
+        "writable": true,
+        "configurable": true,
+        "arity": 2
+      },
+      "onPROPFIND": {
+        "type": "function",
+        "enumerable": true,
+        "writable": true,
+        "configurable": true,
+        "arity": 2
+      },
+      "onPURGE": {
+        "type": "function",
+        "enumerable": true,
+        "writable": true,
+        "configurable": true,
+        "arity": 2
+      },
+      "onPUT": {
+        "type": "function",
+        "enumerable": true,
+        "writable": true,
+        "configurable": true,
+        "arity": 2
+      },
+      "onREQUEST": {
+        "type": "function",
+        "enumerable": true,
+        "writable": true,
+        "configurable": true,
+        "arity": 3
+      },
+      "onTEST": {
+        "type": "function",
+        "enumerable": true,
+        "writable": true,
+        "configurable": true,
+        "arity": 2
+      },
+      "onUNLINK": {
+        "type": "function",
+        "enumerable": true,
+        "writable": true,
+        "configurable": true,
+        "arity": 2
+      },
+      "onUNLOCK": {
+        "type": "function",
+        "enumerable": true,
+        "writable": true,
+        "configurable": true,
+        "arity": 2
+      },
+      "onVIEW": {
+        "type": "function",
+        "enumerable": true,
+        "writable": true,
+        "configurable": true,
+        "arity": 2
+      },
+      "onWS": {
+        "type": "function",
+        "enumerable": true,
+        "writable": true,
+        "configurable": true,
+        "arity": 2
+      },
+      "options": {
+        "type": "object",
+        "enumerable": true,
+        "writable": true,
+        "configurable": true
+      },
+      "package": {
+        "type": "object",
+        "enumerable": true,
+        "writable": true,
+        "configurable": true
+      },
+      "parser": {
+        "type": "function",
+        "enumerable": true,
+        "writable": true,
+        "configurable": true,
+        "arity": 4
+      },
+      "path": {
+        "type": "object",
+        "enumerable": true,
+        "writable": true,
+        "configurable": true
+      },
+      "pattern": {
+        "type": "object",
+        "enumerable": true,
+        "writable": true,
+        "configurable": true
+      },
+      "pdf": {
+        "type": "getter-error"
+      },
+      "pipeline": {
+        "type": "function",
+        "enumerable": true,
+        "writable": true,
+        "configurable": true,
+        "arity": 0
+      },
+      "pool": {
+        "type": "function",
+        "enumerable": true,
+        "writable": true,
+        "configurable": true,
+        "arity": 1
+      },
+      "pools": {
+        "type": "object",
+        "enumerable": true,
+        "writable": true,
+        "configurable": true
+      },
+      "port": {
+        "type": "number",
+        "enumerable": true,
+        "writable": true,
+        "configurable": true
+      },
+      "post": {
+        "type": "function",
+        "enumerable": true,
+        "writable": true,
+        "configurable": true,
+        "arity": 2
+      },
+      "profile": {
+        "type": "function",
+        "enumerable": true,
+        "writable": true,
+        "configurable": true,
+        "arity": 2
+      },
+      "profileReport": {
+        "type": "function",
+        "enumerable": true,
+        "writable": true,
+        "configurable": true,
+        "arity": 0
+      },
+      "proxyAgent": {
+        "type": "getter-error"
+      },
+      "proxyByPort": {
+        "type": "object",
+        "enumerable": true,
+        "writable": true,
+        "configurable": true
+      },
+      "proxyList": {
+        "type": "array",
+        "enumerable": true,
+        "writable": true,
+        "configurable": true
+      },
+      "put": {
+        "type": "function",
+        "enumerable": true,
+        "writable": true,
+        "configurable": true,
+        "arity": 2
+      },
+      "quee": {
+        "type": "function",
+        "enumerable": true,
+        "writable": true,
+        "configurable": true,
+        "arity": 3
+      },
+      "quee_busy_list": {
+        "type": "array",
+        "enumerable": true,
+        "writable": true,
+        "configurable": true
+      },
+      "quee_check": {
+        "type": "function",
+        "enumerable": true,
+        "writable": true,
+        "configurable": true,
+        "arity": 2
+      },
+      "quee_list": {
+        "type": "array",
+        "enumerable": true,
+        "writable": true,
+        "configurable": true
+      },
+      "query": {
+        "type": "object",
+        "enumerable": true,
+        "writable": true,
+        "configurable": true
+      },
+      "queryCache": {
+        "type": "object",
+        "enumerable": true,
+        "writable": true,
+        "configurable": true
+      },
+      "queryPlan": {
+        "type": "object",
+        "enumerable": true,
+        "writable": true,
+        "configurable": true
+      },
+      "querystring": {
+        "type": "object",
+        "enumerable": true,
+        "writable": false,
+        "configurable": true
+      },
+      "random": {
+        "type": "function",
+        "enumerable": true,
+        "writable": true,
+        "configurable": true,
+        "arity": 2
+      },
+      "readFile": {
+        "type": "function",
+        "enumerable": true,
+        "writable": true,
+        "configurable": true,
+        "arity": 2
+      },
+      "readFileRaw": {
+        "type": "function",
+        "enumerable": true,
+        "writable": true,
+        "configurable": true,
+        "arity": 2
+      },
+      "readFileStream": {
+        "type": "function",
+        "enumerable": true,
+        "writable": true,
+        "configurable": true,
+        "arity": 1
+      },
+      "readFileSync": {
+        "type": "function",
+        "enumerable": true,
+        "writable": true,
+        "configurable": true,
+        "arity": 1
+      },
+      "readFiles": {
+        "type": "function",
+        "enumerable": true,
+        "writable": true,
+        "configurable": true,
+        "arity": 2
+      },
+      "readline": {
+        "type": "object",
+        "enumerable": true,
+        "writable": false,
+        "configurable": true
+      },
+      "removeFile": {
+        "type": "function",
+        "enumerable": true,
+        "writable": true,
+        "configurable": true,
+        "arity": 2
+      },
+      "removeFileSync": {
+        "type": "function",
+        "enumerable": true,
+        "writable": true,
+        "configurable": true,
+        "arity": 1
+      },
+      "removeRefObject": {
+        "type": "function",
+        "enumerable": true,
+        "writable": true,
+        "configurable": true,
+        "arity": 1
+      },
+      "request": {
+        "type": "function",
+        "enumerable": true,
+        "writable": true,
+        "configurable": true,
+        "arity": 0
+      },
+      "requestAbort": {
+        "type": "object",
+        "enumerable": true,
+        "writable": true,
+        "configurable": true
+      },
+      "requestTelemetry": {
+        "type": "object",
+        "enumerable": true,
+        "writable": true,
+        "configurable": true
+      },
+      "require": {
+        "type": "function",
+        "enumerable": true,
+        "writable": true,
+        "configurable": true,
+        "arity": 1
+      },
+      "requireFromString": {
+        "type": "function",
+        "enumerable": true,
+        "writable": true,
+        "configurable": true,
+        "arity": 3
+      },
+      "reset": {
+        "type": "function",
+        "enumerable": true,
+        "writable": true,
+        "configurable": true,
+        "arity": 0
+      },
+      "resources": {
+        "type": "object",
+        "enumerable": true,
+        "writable": true,
+        "configurable": true
+      },
+      "responseCache": {
+        "type": "object",
+        "enumerable": true,
+        "writable": true,
+        "configurable": true
+      },
+      "restoreDB": {
+        "type": "function",
+        "enumerable": true,
+        "writable": true,
+        "configurable": true,
+        "arity": 2
+      },
+      "retry": {
+        "type": "function",
+        "enumerable": true,
+        "writable": true,
+        "configurable": true,
+        "arity": 1
+      },
+      "routing": {
+        "type": "function",
+        "enumerable": true,
+        "writable": true,
+        "configurable": true,
+        "arity": 0
+      },
+      "run": {
+        "type": "function",
+        "enumerable": true,
+        "writable": true,
+        "configurable": true,
+        "arity": 2
+      },
+      "saveSession": {
+        "type": "function",
+        "enumerable": true,
+        "writable": true,
+        "configurable": true,
+        "arity": 1
+      },
+      "scheduler": {
+        "type": "object",
+        "enumerable": true,
+        "writable": true,
+        "configurable": true
+      },
+      "security": {
+        "type": "function",
+        "enumerable": true,
+        "writable": true,
+        "configurable": true,
+        "arity": 0
+      },
+      "sendEmail": {
+        "type": "function",
+        "enumerable": true,
+        "writable": true,
+        "configurable": true,
+        "arity": 2
+      },
+      "sendFreeMail": {
+        "type": "function",
+        "enumerable": true,
+        "writable": true,
+        "configurable": true,
+        "arity": 2
+      },
+      "sendMail": {
+        "type": "function",
+        "enumerable": true,
+        "writable": true,
+        "configurable": true,
+        "arity": 2
+      },
+      "sendSmptMail": {
+        "type": "function",
+        "enumerable": true,
+        "writable": true,
+        "configurable": true,
+        "arity": 2
+      },
+      "sendTelegramMessage": {
+        "type": "function",
+        "enumerable": true,
+        "writable": true,
+        "configurable": true,
+        "arity": 3
+      },
+      "server": {
+        "type": "null",
+        "enumerable": true,
+        "writable": true,
+        "configurable": true
+      },
+      "serverCount": {
+        "type": "number",
+        "enumerable": true,
+        "writable": true,
+        "configurable": true
+      },
+      "servers": {
+        "type": "array",
+        "enumerable": true,
+        "writable": true,
+        "configurable": true
+      },
+      "session": {
+        "type": "function",
+        "enumerable": true,
+        "writable": true,
+        "configurable": true,
+        "arity": 4
+      },
+      "sessions": {
+        "type": "function",
+        "enumerable": true,
+        "writable": true,
+        "configurable": true,
+        "arity": 0
+      },
+      "setShared": {
+        "type": "function",
+        "enumerable": true,
+        "writable": true,
+        "configurable": true,
+        "arity": 1
+      },
+      "setting": {
+        "type": "object",
+        "enumerable": true,
+        "writable": true,
+        "configurable": true
+      },
+      "sharedCache": {
+        "type": "object",
+        "enumerable": true,
+        "writable": true,
+        "configurable": true
+      },
+      "sharedCacheBytes": {
+        "type": "number",
+        "enumerable": true,
+        "writable": true,
+        "configurable": true
+      },
+      "sharedCacheMaxBytes": {
+        "type": "number",
+        "enumerable": true,
+        "writable": true,
+        "configurable": true
+      },
+      "sharedCacheMaxEntries": {
+        "type": "number",
+        "enumerable": true,
+        "writable": true,
+        "configurable": true
+      },
+      "sharedCacheTTL": {
+        "type": "number",
+        "enumerable": true,
+        "writable": true,
+        "configurable": true
+      },
+      "sharedKey": {
+        "type": "function",
+        "enumerable": true,
+        "writable": true,
+        "configurable": true,
+        "arity": 3
+      },
+      "sharedList": {
+        "type": "array",
+        "enumerable": true,
+        "writable": true,
+        "configurable": true
+      },
+      "show": {
+        "type": "function",
+        "enumerable": true,
+        "writable": true,
+        "configurable": true,
+        "arity": 1
+      },
+      "showObject": {
+        "type": "function",
+        "enumerable": true,
+        "writable": true,
+        "configurable": true,
+        "arity": 1
+      },
+      "shutdown": {
+        "type": "object",
+        "enumerable": true,
+        "writable": true,
+        "configurable": true
+      },
+      "stableKey": {
+        "type": "function",
+        "enumerable": true,
+        "writable": true,
+        "configurable": true,
+        "arity": 0
+      },
+      "start": {
+        "type": "function",
+        "enumerable": true,
+        "writable": true,
+        "configurable": true,
+        "arity": 2
+      },
+      "startProxy": {
+        "type": "function",
+        "enumerable": true,
+        "writable": true,
+        "configurable": true,
+        "arity": 0
+      },
+      "staticAssets": {
+        "type": "object",
+        "enumerable": true,
+        "writable": true,
+        "configurable": true
+      },
+      "storage": {
+        "type": "function",
+        "enumerable": true,
+        "writable": true,
+        "configurable": true,
+        "arity": 2
+      },
+      "stream": {
+        "type": "object",
+        "enumerable": true,
+        "writable": true,
+        "configurable": true
+      },
+      "stringfiy": {
+        "type": "function",
+        "enumerable": true,
+        "writable": true,
+        "configurable": true,
+        "arity": 2
+      },
+      "strings": {
+        "type": "array",
+        "enumerable": true,
+        "writable": true,
+        "configurable": true
+      },
+      "telegramBotByToken": {
+        "type": "object",
+        "enumerable": true,
+        "writable": true,
+        "configurable": true
+      },
+      "telegramBotList": {
+        "type": "array",
+        "enumerable": true,
+        "writable": true,
+        "configurable": true
+      },
+      "telegramInit": {
+        "type": "function",
+        "enumerable": true,
+        "writable": true,
+        "configurable": true,
+        "arity": 2
+      },
+      "test": {
+        "type": "function",
+        "enumerable": true,
+        "writable": true,
+        "configurable": true,
+        "arity": 2
+      },
+      "to123": {
+        "type": "function",
+        "enumerable": true,
+        "writable": true,
+        "configurable": true,
+        "arity": 1
+      },
+      "toBase64": {
+        "type": "function",
+        "enumerable": true,
+        "writable": true,
+        "configurable": true,
+        "arity": 1
+      },
+      "toDate": {
+        "type": "function",
+        "enumerable": true,
+        "writable": true,
+        "configurable": true,
+        "arity": 1
+      },
+      "toDateF": {
+        "type": "function",
+        "enumerable": true,
+        "writable": true,
+        "configurable": true,
+        "arity": 1
+      },
+      "toDateOnly": {
+        "type": "function",
+        "enumerable": true,
+        "writable": true,
+        "configurable": true,
+        "arity": 1
+      },
+      "toDateT": {
+        "type": "function",
+        "enumerable": true,
+        "writable": true,
+        "configurable": true,
+        "arity": 1
+      },
+      "toDateTime": {
+        "type": "function",
+        "enumerable": true,
+        "writable": true,
+        "configurable": true,
+        "arity": 1
+      },
+      "toDateX": {
+        "type": "function",
+        "enumerable": true,
+        "writable": true,
+        "configurable": true,
+        "arity": 1
+      },
+      "toDateXF": {
+        "type": "function",
+        "enumerable": true,
+        "writable": true,
+        "configurable": true,
+        "arity": 1
+      },
+      "toDateXT": {
+        "type": "function",
+        "enumerable": true,
+        "writable": true,
+        "configurable": true,
+        "arity": 1
+      },
+      "toFloat": {
+        "type": "function",
+        "enumerable": true,
+        "writable": true,
+        "configurable": true,
+        "arity": 1
+      },
+      "toHtmlTable": {
+        "type": "function",
+        "enumerable": true,
+        "writable": true,
+        "configurable": true,
+        "arity": 1
+      },
+      "toInt": {
+        "type": "function",
+        "enumerable": true,
+        "writable": true,
+        "configurable": true,
+        "arity": 1
+      },
+      "toJSON": {
+        "type": "function",
+        "enumerable": true,
+        "writable": true,
+        "configurable": true,
+        "arity": 1
+      },
+      "toJson": {
+        "type": "function",
+        "enumerable": true,
+        "writable": true,
+        "configurable": true,
+        "arity": 1
+      },
+      "toMoney": {
+        "type": "function",
+        "enumerable": true,
+        "writable": true,
+        "configurable": true,
+        "arity": 1
+      },
+      "toNumber": {
+        "type": "function",
+        "enumerable": true,
+        "writable": true,
+        "configurable": true,
+        "arity": 1
+      },
+      "to_float": {
+        "type": "function",
+        "enumerable": true,
+        "writable": true,
+        "configurable": true,
+        "arity": 1
+      },
+      "to_int": {
+        "type": "function",
+        "enumerable": true,
+        "writable": true,
+        "configurable": true,
+        "arity": 1
+      },
+      "to_number": {
+        "type": "function",
+        "enumerable": true,
+        "writable": true,
+        "configurable": true,
+        "arity": 1
+      },
+      "trace": {
+        "type": "object",
+        "enumerable": true,
+        "writable": true,
+        "configurable": true
+      },
+      "typeOf": {
+        "type": "function",
+        "enumerable": true,
+        "writable": true,
+        "configurable": true,
+        "arity": 1
+      },
+      "typeof": {
+        "type": "function",
+        "enumerable": true,
+        "writable": true,
+        "configurable": true,
+        "arity": 1
+      },
+      "ul": {
+        "type": "function",
+        "enumerable": true,
+        "writable": true,
+        "configurable": true,
+        "arity": 1
+      },
+      "url": {
+        "type": "object",
+        "enumerable": true,
+        "writable": true,
+        "configurable": true
+      },
+      "utf8": {
+        "type": "getter-error"
+      },
+      "validate": {
+        "type": "object",
+        "enumerable": true,
+        "writable": true,
+        "configurable": true
+      },
+      "validateRequest": {
+        "type": "function",
+        "enumerable": true,
+        "writable": true,
+        "configurable": true,
+        "arity": 3
+      },
+      "validateRoute": {
+        "type": "function",
+        "enumerable": true,
+        "writable": true,
+        "configurable": true,
+        "arity": 3
+      },
+      "validateServerRequest": {
+        "type": "function",
+        "enumerable": true,
+        "writable": true,
+        "configurable": true,
+        "arity": 3
+      },
+      "validateSession": {
+        "type": "function",
+        "enumerable": true,
+        "writable": true,
+        "configurable": true,
+        "arity": 3
+      },
+      "var": {
+        "type": "function",
+        "enumerable": true,
+        "writable": true,
+        "configurable": true,
+        "arity": 2
+      },
+      "vars": {
+        "type": "array",
+        "enumerable": true,
+        "writable": true,
+        "configurable": true
+      },
+      "webp": {
+        "type": "getter-error"
+      },
+      "withTimeout": {
+        "type": "function",
+        "enumerable": true,
+        "writable": true,
+        "configurable": true,
+        "arity": 2
+      },
+      "word": {
+        "type": "function",
+        "enumerable": true,
+        "writable": true,
+        "configurable": true,
+        "arity": 1
+      },
+      "words": {
+        "type": "function",
+        "enumerable": true,
+        "writable": true,
+        "configurable": true,
+        "arity": 0
+      },
+      "workers": {
+        "type": "object",
+        "enumerable": true,
+        "writable": true,
+        "configurable": true
+      },
+      "writeFile": {
+        "type": "function",
+        "enumerable": true,
+        "writable": true,
+        "configurable": true,
+        "arity": 3
+      },
+      "writeFileSync": {
+        "type": "function",
+        "enumerable": true,
+        "writable": true,
+        "configurable": true,
+        "arity": 4
+      },
+      "ws": {
+        "type": "object",
+        "enumerable": true,
+        "writable": true,
+        "configurable": true
+      },
+      "x0ftox": {
+        "type": "function",
+        "enumerable": true,
+        "writable": true,
+        "configurable": true,
+        "arity": 0
+      },
+      "x0md50x": {
+        "type": "getter-error"
+      },
+      "xml": {
+        "type": "function",
+        "enumerable": true,
+        "writable": true,
+        "configurable": true,
+        "arity": 2
+      },
+      "yy": {
+        "type": "function",
+        "enumerable": true,
+        "writable": true,
+        "configurable": true,
+        "arity": 0
+      },
+      "zlib": {
+        "type": "object",
+        "enumerable": true,
+        "writable": false,
+        "configurable": true
+      }
+    },
+    "aliases": [
+      [
+        "_x0f1xo",
+        "f1",
+        "from123"
+      ],
+      [
+        "all",
+        "onALL"
+      ],
+      [
+        "createDir",
+        "mkDir"
+      ],
+      [
+        "createDirSync",
+        "mkdirSync"
+      ],
+      [
+        "delete",
+        "onDELETE"
+      ],
+      [
+        "deleteFile",
+        "removeFile"
+      ],
+      [
+        "deleteFileSync",
+        "removeFileSync"
+      ],
+      [
+        "fetch",
+        "request",
+        "x0ftox"
+      ],
+      [
+        "fromJSON",
+        "fromJson"
+      ],
+      [
+        "get",
+        "onGET"
+      ],
+      [
+        "getDateTime",
+        "toDateTime"
+      ],
+      [
+        "getRegExp",
+        "get_RegExp"
+      ],
+      [
+        "hide",
+        "hideObject"
+      ],
+      [
+        "listen",
+        "run",
+        "start"
+      ],
+      [
+        "onPOST",
+        "post"
+      ],
+      [
+        "onPUT",
+        "put"
+      ],
+      [
+        "onTEST",
+        "test"
+      ],
+      [
+        "sendEmail",
+        "sendMail"
+      ],
+      [
+        "show",
+        "showObject",
+        "ul"
+      ],
+      [
+        "toDate",
+        "toDateOnly"
+      ],
+      [
+        "toFloat",
+        "to_float"
+      ],
+      [
+        "toInt",
+        "to_int"
+      ],
+      [
+        "toJSON",
+        "toJson"
+      ],
+      [
+        "toNumber",
+        "to_number"
+      ],
+      [
+        "typeOf",
+        "typeof"
+      ]
+    ]
+  },
+  "collection": {
+    "entries": {
+      "ObjectID": {
+        "type": "function",
+        "enumerable": true,
+        "writable": true,
+        "configurable": true,
+        "arity": 1
+      },
+      "ObjectId": {
+        "type": "function",
+        "enumerable": true,
+        "writable": true,
+        "configurable": true,
+        "arity": 1
+      },
+      "_taskScheduled": {
+        "type": "boolean",
+        "enumerable": true,
+        "writable": true,
+        "configurable": true
+      },
+      "add": {
+        "type": "function",
+        "enumerable": true,
+        "writable": true,
+        "configurable": true,
+        "arity": 2
+      },
+      "addAll": {
+        "type": "function",
+        "enumerable": true,
+        "writable": true,
+        "configurable": true,
+        "arity": 2
+      },
+      "addAsync": {
+        "type": "function",
+        "enumerable": true,
+        "writable": true,
+        "configurable": true,
+        "arity": 1
+      },
+      "addMany": {
+        "type": "function",
+        "enumerable": true,
+        "writable": true,
+        "configurable": true,
+        "arity": 2
+      },
+      "addOne": {
+        "type": "function",
+        "enumerable": true,
+        "writable": true,
+        "configurable": true,
+        "arity": 2
+      },
+      "aggregate": {
+        "type": "function",
+        "enumerable": true,
+        "writable": true,
+        "configurable": true,
+        "arity": 2
+      },
+      "batchStats": {
+        "type": "function",
+        "enumerable": true,
+        "writable": true,
+        "configurable": true,
+        "arity": 0
+      },
+      "bulkWriteFast": {
+        "type": "function",
+        "enumerable": true,
+        "writable": true,
+        "configurable": true,
+        "arity": 3
+      },
+      "callback": {
+        "type": "function",
+        "enumerable": true,
+        "writable": true,
+        "configurable": true,
+        "arity": 0
+      },
+      "checkTaskList": {
+        "type": "function",
+        "enumerable": true,
+        "writable": true,
+        "configurable": true,
+        "arity": 0
+      },
+      "collection": {
+        "type": "string",
+        "enumerable": true,
+        "writable": true,
+        "configurable": true
+      },
+      "count": {
+        "type": "function",
+        "enumerable": true,
+        "writable": true,
+        "configurable": true,
+        "arity": 2
+      },
+      "countAsync": {
+        "type": "function",
+        "enumerable": true,
+        "writable": true,
+        "configurable": true,
+        "arity": 1
+      },
+      "countParallel": {
+        "type": "function",
+        "enumerable": true,
+        "writable": true,
+        "configurable": true,
+        "arity": 2
+      },
+      "createIndex": {
+        "type": "function",
+        "enumerable": true,
+        "writable": true,
+        "configurable": true,
+        "arity": 3
+      },
+      "createUnique": {
+        "type": "function",
+        "enumerable": true,
+        "writable": true,
+        "configurable": true,
+        "arity": 2
+      },
+      "db": {
+        "type": "string",
+        "enumerable": true,
+        "writable": true,
+        "configurable": true
+      },
+      "delete": {
+        "type": "function",
+        "enumerable": true,
+        "writable": true,
+        "configurable": true,
+        "arity": 2
+      },
+      "deleteAll": {
+        "type": "function",
+        "enumerable": true,
+        "writable": true,
+        "configurable": true,
+        "arity": 2
+      },
+      "deleteAsync": {
+        "type": "function",
+        "enumerable": true,
+        "writable": true,
+        "configurable": true,
+        "arity": 1
+      },
+      "deleteBusy": {
+        "type": "boolean",
+        "enumerable": true,
+        "writable": true,
+        "configurable": true
+      },
+      "deleteDuplicate": {
+        "type": "function",
+        "enumerable": true,
+        "writable": true,
+        "configurable": true,
+        "arity": 2
+      },
+      "deleteMany": {
+        "type": "function",
+        "enumerable": true,
+        "writable": true,
+        "configurable": true,
+        "arity": 2
+      },
+      "deleteOne": {
+        "type": "function",
+        "enumerable": true,
+        "writable": true,
+        "configurable": true,
+        "arity": 2
+      },
+      "docs": {
+        "type": "array",
+        "enumerable": true,
+        "writable": true,
+        "configurable": true
+      },
+      "drop": {
+        "type": "function",
+        "enumerable": true,
+        "writable": true,
+        "configurable": true,
+        "arity": 1
+      },
+      "dropIndex": {
+        "type": "function",
+        "enumerable": true,
+        "writable": true,
+        "configurable": true,
+        "arity": 3
+      },
+      "dropIndexes": {
+        "type": "function",
+        "enumerable": true,
+        "writable": true,
+        "configurable": true,
+        "arity": 2
+      },
+      "edit": {
+        "type": "function",
+        "enumerable": true,
+        "writable": true,
+        "configurable": true,
+        "arity": 2
+      },
+      "editAll": {
+        "type": "function",
+        "enumerable": true,
+        "writable": true,
+        "configurable": true,
+        "arity": 2
+      },
+      "editMany": {
+        "type": "function",
+        "enumerable": true,
+        "writable": true,
+        "configurable": true,
+        "arity": 2
+      },
+      "editOne": {
+        "type": "function",
+        "enumerable": true,
+        "writable": true,
+        "configurable": true,
+        "arity": 2
+      },
+      "enqueueTask": {
+        "type": "function",
+        "enumerable": true,
+        "writable": true,
+        "configurable": true,
+        "arity": 1
+      },
+      "exists": {
+        "type": "function",
+        "enumerable": true,
+        "writable": true,
+        "configurable": true,
+        "arity": 2
+      },
+      "existsAsync": {
+        "type": "function",
+        "enumerable": true,
+        "writable": true,
+        "configurable": true,
+        "arity": 1
+      },
+      "explainFast": {
+        "type": "function",
+        "enumerable": true,
+        "writable": true,
+        "configurable": true,
+        "arity": 0
+      },
+      "export": {
+        "type": "function",
+        "enumerable": true,
+        "writable": true,
+        "configurable": true,
+        "arity": 3
+      },
+      "find": {
+        "type": "function",
+        "enumerable": true,
+        "writable": true,
+        "configurable": true,
+        "arity": 2
+      },
+      "findAll": {
+        "type": "function",
+        "enumerable": true,
+        "writable": true,
+        "configurable": true,
+        "arity": 2
+      },
+      "findByIdBatched": {
+        "type": "function",
+        "enumerable": true,
+        "writable": true,
+        "configurable": true,
+        "arity": 1
+      },
+      "findByIdsBudgeted": {
+        "type": "function",
+        "enumerable": true,
+        "writable": true,
+        "configurable": true,
+        "arity": 1
+      },
+      "findByIdsFast": {
+        "type": "function",
+        "enumerable": true,
+        "writable": true,
+        "configurable": true,
+        "arity": 3
+      },
+      "findByIdsFastCached": {
+        "type": "function",
+        "enumerable": true,
+        "writable": true,
+        "configurable": true,
+        "arity": 1
+      },
+      "findDuplicate": {
+        "type": "function",
+        "enumerable": true,
+        "writable": true,
+        "configurable": true,
+        "arity": 2
+      },
+      "findIdsBatched": {
+        "type": "function",
+        "enumerable": true,
+        "writable": true,
+        "configurable": true,
+        "arity": 1
+      },
+      "findMany": {
+        "type": "function",
+        "enumerable": true,
+        "writable": true,
+        "configurable": true,
+        "arity": 2
+      },
+      "findManyAsync": {
+        "type": "function",
+        "enumerable": true,
+        "writable": true,
+        "configurable": true,
+        "arity": 1
+      },
+      "findManyBudgeted": {
+        "type": "function",
+        "enumerable": true,
+        "writable": true,
+        "configurable": true,
+        "arity": 0
+      },
+      "findManyCached": {
+        "type": "function",
+        "enumerable": true,
+        "writable": true,
+        "configurable": true,
+        "arity": 1
+      },
+      "findManyConcurrent": {
+        "type": "function",
+        "enumerable": true,
+        "writable": true,
+        "configurable": true,
+        "arity": 2
+      },
+      "findManyConcurrentCached": {
+        "type": "function",
+        "enumerable": true,
+        "writable": true,
+        "configurable": true,
+        "arity": 1
+      },
+      "findManyFast": {
+        "type": "function",
+        "enumerable": true,
+        "writable": true,
+        "configurable": true,
+        "arity": 2
+      },
+      "findManyFastCached": {
+        "type": "function",
+        "enumerable": true,
+        "writable": true,
+        "configurable": true,
+        "arity": 1
+      },
+      "findManyNoCount": {
+        "type": "function",
+        "enumerable": true,
+        "writable": true,
+        "configurable": true,
+        "arity": 2
+      },
+      "findManyNoCountCached": {
+        "type": "function",
+        "enumerable": true,
+        "writable": true,
+        "configurable": true,
+        "arity": 1
+      },
+      "findManyParallel": {
+        "type": "function",
+        "enumerable": true,
+        "writable": true,
+        "configurable": true,
+        "arity": 2
+      },
+      "findOne": {
+        "type": "function",
+        "enumerable": true,
+        "writable": true,
+        "configurable": true,
+        "arity": 2
+      },
+      "findOneAsync": {
+        "type": "function",
+        "enumerable": true,
+        "writable": true,
+        "configurable": true,
+        "arity": 1
+      },
+      "findOneCached": {
+        "type": "function",
+        "enumerable": true,
+        "writable": true,
+        "configurable": true,
+        "arity": 1
+      },
+      "findOneParallel": {
+        "type": "function",
+        "enumerable": true,
+        "writable": true,
+        "configurable": true,
+        "arity": 2
+      },
+      "findPageBudgeted": {
+        "type": "function",
+        "enumerable": true,
+        "writable": true,
+        "configurable": true,
+        "arity": 0
+      },
+      "findPageFast": {
+        "type": "function",
+        "enumerable": true,
+        "writable": true,
+        "configurable": true,
+        "arity": 2
+      },
+      "findPageFastCached": {
+        "type": "function",
+        "enumerable": true,
+        "writable": true,
+        "configurable": true,
+        "arity": 1
+      },
+      "get": {
+        "type": "function",
+        "enumerable": true,
+        "writable": true,
+        "configurable": true,
+        "arity": 2
+      },
+      "getAll": {
+        "type": "function",
+        "enumerable": true,
+        "writable": true,
+        "configurable": true,
+        "arity": 2
+      },
+      "getCount": {
+        "type": "function",
+        "enumerable": true,
+        "writable": true,
+        "configurable": true,
+        "arity": 2
+      },
+      "getMany": {
+        "type": "function",
+        "enumerable": true,
+        "writable": true,
+        "configurable": true,
+        "arity": 2
+      },
+      "getOne": {
+        "type": "function",
+        "enumerable": true,
+        "writable": true,
+        "configurable": true,
+        "arity": 2
+      },
+      "guid": {
+        "type": "string",
+        "enumerable": true,
+        "writable": true,
+        "configurable": true
+      },
+      "identityEnabled": {
+        "type": "boolean",
+        "enumerable": true,
+        "writable": true,
+        "configurable": true
+      },
+      "import": {
+        "type": "function",
+        "enumerable": true,
+        "writable": true,
+        "configurable": true,
+        "arity": 2
+      },
+      "insert": {
+        "type": "function",
+        "enumerable": true,
+        "writable": true,
+        "configurable": true,
+        "arity": 2
+      },
+      "insertAll": {
+        "type": "function",
+        "enumerable": true,
+        "writable": true,
+        "configurable": true,
+        "arity": 2
+      },
+      "insertBusy": {
+        "type": "boolean",
+        "enumerable": true,
+        "writable": true,
+        "configurable": true
+      },
+      "insertMany": {
+        "type": "function",
+        "enumerable": true,
+        "writable": true,
+        "configurable": true,
+        "arity": 2
+      },
+      "insertOne": {
+        "type": "function",
+        "enumerable": true,
+        "writable": true,
+        "configurable": true,
+        "arity": 2
+      },
+      "invalidateQueryCache": {
+        "type": "function",
+        "enumerable": true,
+        "writable": true,
+        "configurable": true,
+        "arity": 0
+      },
+      "loadAll": {
+        "type": "function",
+        "enumerable": true,
+        "writable": true,
+        "configurable": true,
+        "arity": 2
+      },
+      "name": {
+        "type": "string",
+        "enumerable": true,
+        "writable": true,
+        "configurable": true
+      },
+      "options": {
+        "type": "object",
+        "enumerable": true,
+        "writable": true,
+        "configurable": true
+      },
+      "readPool": {
+        "type": "object",
+        "enumerable": true,
+        "writable": true,
+        "configurable": true
+      },
+      "remove": {
+        "type": "function",
+        "enumerable": true,
+        "writable": true,
+        "configurable": true,
+        "arity": 2
+      },
+      "removeAll": {
+        "type": "function",
+        "enumerable": true,
+        "writable": true,
+        "configurable": true,
+        "arity": 2
+      },
+      "removeDuplicate": {
+        "type": "function",
+        "enumerable": true,
+        "writable": true,
+        "configurable": true,
+        "arity": 2
+      },
+      "removeMany": {
+        "type": "function",
+        "enumerable": true,
+        "writable": true,
+        "configurable": true,
+        "arity": 2
+      },
+      "removeOne": {
+        "type": "function",
+        "enumerable": true,
+        "writable": true,
+        "configurable": true,
+        "arity": 2
+      },
+      "scheduleNextTask": {
+        "type": "function",
+        "enumerable": true,
+        "writable": true,
+        "configurable": true,
+        "arity": 0
+      },
+      "select": {
+        "type": "function",
+        "enumerable": true,
+        "writable": true,
+        "configurable": true,
+        "arity": 2
+      },
+      "selectAll": {
+        "type": "function",
+        "enumerable": true,
+        "writable": true,
+        "configurable": true,
+        "arity": 2
+      },
+      "selectMany": {
+        "type": "function",
+        "enumerable": true,
+        "writable": true,
+        "configurable": true,
+        "arity": 2
+      },
+      "selectOne": {
+        "type": "function",
+        "enumerable": true,
+        "writable": true,
+        "configurable": true,
+        "arity": 2
+      },
+      "streamFast": {
+        "type": "function",
+        "enumerable": true,
+        "writable": true,
+        "configurable": true,
+        "arity": 0
+      },
+      "taskBusy": {
+        "type": "boolean",
+        "enumerable": true,
+        "writable": true,
+        "configurable": true
+      },
+      "taskCount": {
+        "type": "number",
+        "enumerable": true,
+        "writable": true,
+        "configurable": true
+      },
+      "taskDone": {
+        "type": "function",
+        "enumerable": true,
+        "writable": true,
+        "configurable": true,
+        "arity": 0
+      },
+      "taskList": {
+        "type": "array",
+        "enumerable": true,
+        "writable": true,
+        "configurable": true
+      },
+      "update": {
+        "type": "function",
+        "enumerable": true,
+        "writable": true,
+        "configurable": true,
+        "arity": 2
+      },
+      "updateAll": {
+        "type": "function",
+        "enumerable": true,
+        "writable": true,
+        "configurable": true,
+        "arity": 2
+      },
+      "updateAsync": {
+        "type": "function",
+        "enumerable": true,
+        "writable": true,
+        "configurable": true,
+        "arity": 1
+      },
+      "updateBusy": {
+        "type": "boolean",
+        "enumerable": true,
+        "writable": true,
+        "configurable": true
+      },
+      "updateMany": {
+        "type": "function",
+        "enumerable": true,
+        "writable": true,
+        "configurable": true,
+        "arity": 2
+      },
+      "updateOne": {
+        "type": "function",
+        "enumerable": true,
+        "writable": true,
+        "configurable": true,
+        "arity": 2
+      }
+    },
+    "aliases": [
+      [
+        "add",
+        "addOne",
+        "insert",
+        "insertOne"
+      ],
+      [
+        "addAll",
+        "addMany",
+        "insertAll",
+        "insertMany"
+      ],
+      [
+        "count",
+        "getCount"
+      ],
+      [
+        "delete",
+        "deleteOne",
+        "remove",
+        "removeOne"
+      ],
+      [
+        "deleteAll",
+        "deleteMany",
+        "removeAll",
+        "removeMany"
+      ],
+      [
+        "deleteDuplicate",
+        "removeDuplicate"
+      ],
+      [
+        "edit",
+        "editOne",
+        "update",
+        "updateOne"
+      ],
+      [
+        "editAll",
+        "editMany",
+        "updateAll",
+        "updateMany"
+      ],
+      [
+        "find",
+        "findOne",
+        "get",
+        "getOne",
+        "select",
+        "selectOne"
+      ],
+      [
+        "findAll",
+        "findMany",
+        "getAll",
+        "getMany",
+        "selectAll",
+        "selectMany"
+      ],
+      [
+        "findManyFast",
+        "findManyNoCount"
+      ],
+      [
+        "findManyFastCached",
+        "findManyNoCountCached"
+      ],
+      [
+        "ObjectID",
+        "ObjectId"
+      ]
+    ]
+  },
+  "namespaces": {
+    "routing": {
+      "entries": {
+        "_compilePattern": {
+          "type": "function",
+          "enumerable": true,
+          "writable": true,
+          "configurable": true,
+          "arity": 1
+        },
+        "_dynamicByMethod": {
+          "type": "object",
+          "enumerable": true,
+          "writable": true,
+          "configurable": true
+        },
+        "_exactByMethod": {
+          "type": "object",
+          "enumerable": true,
+          "writable": true,
+          "configurable": true
+        },
+        "_indexDirty": {
+          "type": "boolean",
+          "enumerable": true,
+          "writable": true,
+          "configurable": true
+        },
+        "add": {
+          "type": "function",
+          "enumerable": true,
+          "writable": true,
+          "configurable": true,
+          "arity": 2
+        },
+        "call": {
+          "type": "function",
+          "enumerable": true,
+          "writable": true,
+          "configurable": true,
+          "arity": 4
+        },
+        "compress": {
+          "type": "function",
+          "enumerable": true,
+          "writable": true,
+          "configurable": true,
+          "arity": 4
+        },
+        "defaultCallback": {
+          "type": "function",
+          "enumerable": true,
+          "writable": true,
+          "configurable": true,
+          "arity": 2
+        },
+        "endResponse": {
+          "type": "function",
+          "enumerable": true,
+          "writable": true,
+          "configurable": true,
+          "arity": 2
+        },
+        "findRoute": {
+          "type": "function",
+          "enumerable": true,
+          "writable": true,
+          "configurable": true,
+          "arity": 2
+        },
+        "handleRoute": {
+          "type": "function",
+          "enumerable": true,
+          "writable": true,
+          "configurable": true,
+          "arity": 3
+        },
+        "handleServer": {
+          "type": "function",
+          "enumerable": true,
+          "writable": true,
+          "configurable": true,
+          "arity": 2
+        },
+        "invalidateIndex": {
+          "type": "function",
+          "enumerable": true,
+          "writable": true,
+          "configurable": true,
+          "arity": 0
+        },
+        "isCompressibleContentType": {
+          "type": "function",
+          "enumerable": true,
+          "writable": true,
+          "configurable": true,
+          "arity": 1
+        },
+        "list": {
+          "type": "array",
+          "enumerable": true,
+          "writable": true,
+          "configurable": true
+        },
+        "off": {
+          "type": "function",
+          "enumerable": true,
+          "writable": true,
+          "configurable": true,
+          "arity": 1
+        },
+        "onALL": {
+          "type": "function",
+          "enumerable": true,
+          "writable": true,
+          "configurable": true,
+          "arity": 2
+        },
+        "onANY": {
+          "type": "function",
+          "enumerable": true,
+          "writable": true,
+          "configurable": true,
+          "arity": 2
+        },
+        "onCOPY": {
+          "type": "function",
+          "enumerable": true,
+          "writable": true,
+          "configurable": true,
+          "arity": 2
+        },
+        "onDELETE": {
+          "type": "function",
+          "enumerable": true,
+          "writable": true,
+          "configurable": true,
+          "arity": 2
+        },
+        "onGET": {
+          "type": "function",
+          "enumerable": true,
+          "writable": true,
+          "configurable": true,
+          "arity": 2
+        },
+        "onHEAD": {
+          "type": "function",
+          "enumerable": true,
+          "writable": true,
+          "configurable": true,
+          "arity": 2
+        },
+        "onLINK": {
+          "type": "function",
+          "enumerable": true,
+          "writable": true,
+          "configurable": true,
+          "arity": 2
+        },
+        "onLOCK": {
+          "type": "function",
+          "enumerable": true,
+          "writable": true,
+          "configurable": true,
+          "arity": 2
+        },
+        "onOPTIONS": {
+          "type": "function",
+          "enumerable": true,
+          "writable": true,
+          "configurable": true,
+          "arity": 2
+        },
+        "onPATCH": {
+          "type": "function",
+          "enumerable": true,
+          "writable": true,
+          "configurable": true,
+          "arity": 2
+        },
+        "onPOST": {
+          "type": "function",
+          "enumerable": true,
+          "writable": true,
+          "configurable": true,
+          "arity": 2
+        },
+        "onPROPFIND": {
+          "type": "function",
+          "enumerable": true,
+          "writable": true,
+          "configurable": true,
+          "arity": 2
+        },
+        "onPURGE": {
+          "type": "function",
+          "enumerable": true,
+          "writable": true,
+          "configurable": true,
+          "arity": 2
+        },
+        "onPUT": {
+          "type": "function",
+          "enumerable": true,
+          "writable": true,
+          "configurable": true,
+          "arity": 2
+        },
+        "onREQUEST": {
+          "type": "function",
+          "enumerable": true,
+          "writable": true,
+          "configurable": true,
+          "arity": 3
+        },
+        "onTEST": {
+          "type": "function",
+          "enumerable": true,
+          "writable": true,
+          "configurable": true,
+          "arity": 2
+        },
+        "onUNLINK": {
+          "type": "function",
+          "enumerable": true,
+          "writable": true,
+          "configurable": true,
+          "arity": 2
+        },
+        "onUNLOCK": {
+          "type": "function",
+          "enumerable": true,
+          "writable": true,
+          "configurable": true,
+          "arity": 2
+        },
+        "onVIEW": {
+          "type": "function",
+          "enumerable": true,
+          "writable": true,
+          "configurable": true,
+          "arity": 2
+        },
+        "rebuildIndex": {
+          "type": "function",
+          "enumerable": true,
+          "writable": true,
+          "configurable": true,
+          "arity": 0
+        },
+        "selectCompression": {
+          "type": "function",
+          "enumerable": true,
+          "writable": true,
+          "configurable": true,
+          "arity": 1
+        },
+        "start": {
+          "type": "function",
+          "enumerable": true,
+          "writable": true,
+          "configurable": true,
+          "arity": 2
+        }
+      },
+      "aliases": [
+        [
+          "onALL",
+          "onANY"
+        ]
+      ]
+    },
+    "fsm": {
+      "entries": {
+        "_cacheFile": {
+          "type": "function",
+          "enumerable": true,
+          "writable": true,
+          "configurable": true,
+          "arity": 1
+        },
+        "_evictPath": {
+          "type": "function",
+          "enumerable": true,
+          "writable": true,
+          "configurable": true,
+          "arity": 1
+        },
+        "_fileSize": {
+          "type": "function",
+          "enumerable": true,
+          "writable": true,
+          "configurable": true,
+          "arity": 1
+        },
+        "_getCached": {
+          "type": "function",
+          "enumerable": true,
+          "writable": true,
+          "configurable": true,
+          "arity": 1
+        },
+        "_touch": {
+          "type": "function",
+          "enumerable": true,
+          "writable": true,
+          "configurable": true,
+          "arity": 1
+        },
+        "cache": {
+          "type": "object",
+          "enumerable": true,
+          "writable": true,
+          "configurable": true
+        },
+        "cacheBytes": {
+          "type": "number",
+          "enumerable": true,
+          "writable": true,
+          "configurable": true
+        },
+        "cacheMaxBytes": {
+          "type": "number",
+          "enumerable": true,
+          "writable": true,
+          "configurable": true
+        },
+        "cacheMaxEntries": {
+          "type": "number",
+          "enumerable": true,
+          "writable": true,
+          "configurable": true
+        },
+        "clearCache": {
+          "type": "function",
+          "enumerable": true,
+          "writable": true,
+          "configurable": true,
+          "arity": 0
+        },
+        "createDir": {
+          "type": "function",
+          "enumerable": true,
+          "writable": true,
+          "configurable": true,
+          "arity": 2
+        },
+        "createDirSync": {
+          "type": "function",
+          "enumerable": true,
+          "writable": true,
+          "configurable": true,
+          "arity": 1
+        },
+        "css": {
+          "type": "function",
+          "enumerable": true,
+          "writable": true,
+          "configurable": true,
+          "arity": 2
+        },
+        "deleteFile": {
+          "type": "function",
+          "enumerable": true,
+          "writable": true,
+          "configurable": true,
+          "arity": 2
+        },
+        "deleteFileSync": {
+          "type": "function",
+          "enumerable": true,
+          "writable": true,
+          "configurable": true,
+          "arity": 1
+        },
+        "dir": {
+          "type": "string",
+          "enumerable": true,
+          "writable": true,
+          "configurable": true
+        },
+        "download": {
+          "type": "function",
+          "enumerable": true,
+          "writable": true,
+          "configurable": true,
+          "arity": 3
+        },
+        "downloadFile": {
+          "type": "function",
+          "enumerable": true,
+          "writable": true,
+          "configurable": true,
+          "arity": 3
+        },
+        "getContent": {
+          "type": "function",
+          "enumerable": true,
+          "writable": true,
+          "configurable": true,
+          "arity": 2
+        },
+        "getFilePath": {
+          "type": "function",
+          "enumerable": true,
+          "writable": true,
+          "configurable": true,
+          "arity": 1
+        },
+        "html": {
+          "type": "function",
+          "enumerable": true,
+          "writable": true,
+          "configurable": true,
+          "arity": 2
+        },
+        "isFileExists": {
+          "type": "function",
+          "enumerable": true,
+          "writable": true,
+          "configurable": true,
+          "arity": 2
+        },
+        "isFileExistsSync": {
+          "type": "function",
+          "enumerable": true,
+          "writable": true,
+          "configurable": true,
+          "arity": 1
+        },
+        "isImage": {
+          "type": "function",
+          "enumerable": true,
+          "writable": true,
+          "configurable": true,
+          "arity": 1
+        },
+        "js": {
+          "type": "function",
+          "enumerable": true,
+          "writable": true,
+          "configurable": true,
+          "arity": 2
+        },
+        "json": {
+          "type": "function",
+          "enumerable": true,
+          "writable": true,
+          "configurable": true,
+          "arity": 2
+        },
+        "list": {
+          "type": "array",
+          "enumerable": true,
+          "writable": true,
+          "configurable": true
+        },
+        "missingPathCache": {
+          "type": "object",
+          "enumerable": true,
+          "writable": true,
+          "configurable": true
+        },
+        "missingPathCacheTTL": {
+          "type": "number",
+          "enumerable": true,
+          "writable": true,
+          "configurable": true
+        },
+        "mkDir": {
+          "type": "function",
+          "enumerable": true,
+          "writable": true,
+          "configurable": true,
+          "arity": 2
+        },
+        "mkdirSync": {
+          "type": "function",
+          "enumerable": true,
+          "writable": true,
+          "configurable": true,
+          "arity": 1
+        },
+        "off": {
+          "type": "function",
+          "enumerable": true,
+          "writable": true,
+          "configurable": true,
+          "arity": 1
+        },
+        "pathCache": {
+          "type": "object",
+          "enumerable": true,
+          "writable": true,
+          "configurable": true
+        },
+        "pathCacheTTL": {
+          "type": "number",
+          "enumerable": true,
+          "writable": true,
+          "configurable": true
+        },
+        "readFile": {
+          "type": "function",
+          "enumerable": true,
+          "writable": true,
+          "configurable": true,
+          "arity": 2
+        },
+        "readFileNow": {
+          "type": "function",
+          "enumerable": true,
+          "writable": true,
+          "configurable": true,
+          "arity": 2
+        },
+        "readFileRaw": {
+          "type": "function",
+          "enumerable": true,
+          "writable": true,
+          "configurable": true,
+          "arity": 2
+        },
+        "readFileStream": {
+          "type": "function",
+          "enumerable": true,
+          "writable": true,
+          "configurable": true,
+          "arity": 1
+        },
+        "readFileSync": {
+          "type": "function",
+          "enumerable": true,
+          "writable": true,
+          "configurable": true,
+          "arity": 1
+        },
+        "readFileSyncRaw": {
+          "type": "function",
+          "enumerable": true,
+          "writable": true,
+          "configurable": true,
+          "arity": 1
+        },
+        "readFiles": {
+          "type": "function",
+          "enumerable": true,
+          "writable": true,
+          "configurable": true,
+          "arity": 2
+        },
+        "removeFile": {
+          "type": "function",
+          "enumerable": true,
+          "writable": true,
+          "configurable": true,
+          "arity": 2
+        },
+        "removeFileSync": {
+          "type": "function",
+          "enumerable": true,
+          "writable": true,
+          "configurable": true,
+          "arity": 1
+        },
+        "stat": {
+          "type": "function",
+          "enumerable": true,
+          "writable": true,
+          "configurable": true,
+          "arity": 2
+        },
+        "statSync": {
+          "type": "function",
+          "enumerable": true,
+          "writable": true,
+          "configurable": true,
+          "arity": 1
+        },
+        "writeFile": {
+          "type": "function",
+          "enumerable": true,
+          "writable": true,
+          "configurable": true,
+          "arity": 3
+        },
+        "writeFileSync": {
+          "type": "function",
+          "enumerable": true,
+          "writable": true,
+          "configurable": true,
+          "arity": 4
+        },
+        "xml": {
+          "type": "function",
+          "enumerable": true,
+          "writable": true,
+          "configurable": true,
+          "arity": 2
+        }
+      },
+      "aliases": [
+        [
+          "createDir",
+          "mkDir"
+        ],
+        [
+          "createDirSync",
+          "mkdirSync"
+        ],
+        [
+          "deleteFile",
+          "removeFile"
+        ],
+        [
+          "deleteFileSync",
+          "removeFileSync"
+        ]
+      ]
+    },
+    "mongodb": {
+      "entries": {
+        "ObjectID": {
+          "type": "function",
+          "enumerable": true,
+          "writable": true,
+          "configurable": true,
+          "arity": 1
+        },
+        "ObjectId": {
+          "type": "getter-error"
+        },
+        "aggregate": {
+          "type": "function",
+          "enumerable": true,
+          "writable": true,
+          "configurable": true,
+          "arity": 2
+        },
+        "bulkWriteFast": {
+          "type": "function",
+          "enumerable": true,
+          "writable": true,
+          "configurable": true,
+          "arity": 2
+        },
+        "callback": {
+          "type": "function",
+          "enumerable": true,
+          "writable": true,
+          "configurable": true,
+          "arity": 0
+        },
+        "closeDbBusy": {
+          "type": "boolean",
+          "enumerable": true,
+          "writable": true,
+          "configurable": true
+        },
+        "collectionIndex": {
+          "type": "object",
+          "enumerable": true,
+          "writable": true,
+          "configurable": true
+        },
+        "collectionInflight": {
+          "type": "object",
+          "enumerable": true,
+          "writable": true,
+          "configurable": true
+        },
+        "collections_indexed": {
+          "type": "array",
+          "enumerable": true,
+          "writable": true,
+          "configurable": true
+        },
+        "connectCollection": {
+          "type": "function",
+          "enumerable": true,
+          "writable": true,
+          "configurable": true,
+          "arity": 2
+        },
+        "connectCollectionBusy": {
+          "type": "boolean",
+          "enumerable": true,
+          "writable": true,
+          "configurable": true
+        },
+        "connectDB": {
+          "type": "function",
+          "enumerable": true,
+          "writable": true,
+          "configurable": true,
+          "arity": 2
+        },
+        "connectDBBusy": {
+          "type": "boolean",
+          "enumerable": true,
+          "writable": true,
+          "configurable": true
+        },
+        "connection": {
+          "type": "string",
+          "enumerable": true,
+          "writable": true,
+          "configurable": true
+        },
+        "count": {
+          "type": "function",
+          "enumerable": true,
+          "writable": true,
+          "configurable": true,
+          "arity": 2
+        },
+        "createIndex": {
+          "type": "function",
+          "enumerable": true,
+          "writable": true,
+          "configurable": true,
+          "arity": 2
+        },
+        "databaseIndex": {
+          "type": "object",
+          "enumerable": true,
+          "writable": true,
+          "configurable": true
+        },
+        "databaseInflight": {
+          "type": "object",
+          "enumerable": true,
+          "writable": true,
+          "configurable": true
+        },
+        "delete": {
+          "type": "function",
+          "enumerable": true,
+          "writable": true,
+          "configurable": true,
+          "arity": 2
+        },
+        "deleteMany": {
+          "type": "function",
+          "enumerable": true,
+          "writable": true,
+          "configurable": true,
+          "arity": 2
+        },
+        "deleteOne": {
+          "type": "function",
+          "enumerable": true,
+          "writable": true,
+          "configurable": true,
+          "arity": 2
+        },
+        "distinct": {
+          "type": "function",
+          "enumerable": true,
+          "writable": true,
+          "configurable": true,
+          "arity": 2
+        },
+        "dropCollection": {
+          "type": "function",
+          "enumerable": true,
+          "writable": true,
+          "configurable": true,
+          "arity": 2
+        },
+        "dropIndex": {
+          "type": "function",
+          "enumerable": true,
+          "writable": true,
+          "configurable": true,
+          "arity": 2
+        },
+        "dropIndexes": {
+          "type": "function",
+          "enumerable": true,
+          "writable": true,
+          "configurable": true,
+          "arity": 2
+        },
+        "explainQuery": {
+          "type": "function",
+          "enumerable": true,
+          "writable": true,
+          "configurable": true,
+          "arity": 2
+        },
+        "find": {
+          "type": "function",
+          "enumerable": true,
+          "writable": true,
+          "configurable": true,
+          "arity": 2
+        },
+        "findByIdsFast": {
+          "type": "function",
+          "enumerable": true,
+          "writable": true,
+          "configurable": true,
+          "arity": 2
+        },
+        "findCursorFast": {
+          "type": "function",
+          "enumerable": true,
+          "writable": true,
+          "configurable": true,
+          "arity": 2
+        },
+        "findMany": {
+          "type": "function",
+          "enumerable": true,
+          "writable": true,
+          "configurable": true,
+          "arity": 2
+        },
+        "findManyConcurrent": {
+          "type": "function",
+          "enumerable": true,
+          "writable": true,
+          "configurable": true,
+          "arity": 2
+        },
+        "findManyFast": {
+          "type": "function",
+          "enumerable": true,
+          "writable": true,
+          "configurable": true,
+          "arity": 2
+        },
+        "findOne": {
+          "type": "function",
+          "enumerable": true,
+          "writable": true,
+          "configurable": true,
+          "arity": 2
+        },
+        "findPageFast": {
+          "type": "function",
+          "enumerable": true,
+          "writable": true,
+          "configurable": true,
+          "arity": 2
+        },
+        "handleDoc": {
+          "type": "function",
+          "enumerable": true,
+          "writable": true,
+          "configurable": true,
+          "arity": 1
+        },
+        "insert": {
+          "type": "function",
+          "enumerable": true,
+          "writable": true,
+          "configurable": true,
+          "arity": 2
+        },
+        "insertMany": {
+          "type": "function",
+          "enumerable": true,
+          "writable": true,
+          "configurable": true,
+          "arity": 2
+        },
+        "insertOne": {
+          "type": "function",
+          "enumerable": true,
+          "writable": true,
+          "configurable": true,
+          "arity": 2
+        },
+        "invalidateQueryCache": {
+          "type": "function",
+          "enumerable": true,
+          "writable": true,
+          "configurable": true,
+          "arity": 1
+        },
+        "invalidateWriteCaches": {
+          "type": "function",
+          "enumerable": true,
+          "writable": true,
+          "configurable": true,
+          "arity": 2
+        },
+        "lib": {
+          "type": "getter-error"
+        },
+        "observeQuery": {
+          "type": "function",
+          "enumerable": true,
+          "writable": true,
+          "configurable": true,
+          "arity": 2
+        },
+        "telemetryEnd": {
+          "type": "function",
+          "enumerable": true,
+          "writable": true,
+          "configurable": true,
+          "arity": 2
+        },
+        "telemetryStart": {
+          "type": "function",
+          "enumerable": true,
+          "writable": true,
+          "configurable": true,
+          "arity": 2
+        },
+        "update": {
+          "type": "function",
+          "enumerable": true,
+          "writable": true,
+          "configurable": true,
+          "arity": 2
+        },
+        "updateMany": {
+          "type": "function",
+          "enumerable": true,
+          "writable": true,
+          "configurable": true,
+          "arity": 2
+        },
+        "updateOne": {
+          "type": "function",
+          "enumerable": true,
+          "writable": true,
+          "configurable": true,
+          "arity": 2
+        }
+      },
+      "aliases": [
+        [
+          "delete",
+          "deleteMany"
+        ],
+        [
+          "find",
+          "findMany"
+        ],
+        [
+          "insert",
+          "insertMany"
+        ],
+        [
+          "update",
+          "updateMany"
+        ]
+      ]
+    },
+    "words": {
+      "entries": {
+        "$collection": {
+          "type": "object",
+          "enumerable": true,
+          "writable": false,
+          "configurable": true
+        },
+        "add": {
+          "type": "function",
+          "enumerable": true,
+          "writable": true,
+          "configurable": true,
+          "arity": 1
+        },
+        "addFile": {
+          "type": "function",
+          "enumerable": true,
+          "writable": true,
+          "configurable": true,
+          "arity": 1
+        },
+        "addList": {
+          "type": "function",
+          "enumerable": true,
+          "writable": true,
+          "configurable": true,
+          "arity": 1
+        },
+        "byName": {
+          "type": "object",
+          "enumerable": true,
+          "writable": true,
+          "configurable": true
+        },
+        "get": {
+          "type": "function",
+          "enumerable": true,
+          "writable": true,
+          "configurable": true,
+          "arity": 1
+        },
+        "list": {
+          "type": "array",
+          "enumerable": true,
+          "writable": true,
+          "configurable": true
+        },
+        "save": {
+          "type": "function",
+          "enumerable": true,
+          "writable": true,
+          "configurable": true,
+          "arity": 0
+        },
+        "set": {
+          "type": "function",
+          "enumerable": true,
+          "writable": true,
+          "configurable": true,
+          "arity": 1
+        },
+        "word": {
+          "type": "function",
+          "enumerable": true,
+          "writable": true,
+          "configurable": true,
+          "arity": 1
+        }
+      },
+      "aliases": []
+    },
+    "security": {
+      "entries": {
+        "$users": {
+          "type": "object",
+          "enumerable": true,
+          "writable": true,
+          "configurable": true
+        },
+        "_fingerDateCache": {
+          "type": "object",
+          "enumerable": true,
+          "writable": true,
+          "configurable": true
+        },
+        "_getFingerDate": {
+          "type": "function",
+          "enumerable": true,
+          "writable": true,
+          "configurable": true,
+          "arity": 0
+        },
+        "addKey": {
+          "type": "function",
+          "enumerable": true,
+          "writable": true,
+          "configurable": true,
+          "arity": 1
+        },
+        "addPermissions": {
+          "type": "function",
+          "enumerable": true,
+          "writable": true,
+          "configurable": true,
+          "arity": 2
+        },
+        "addRole": {
+          "type": "function",
+          "enumerable": true,
+          "writable": true,
+          "configurable": true,
+          "arity": 2
+        },
+        "addRoles": {
+          "type": "function",
+          "enumerable": true,
+          "writable": true,
+          "configurable": true,
+          "arity": 2
+        },
+        "addUser": {
+          "type": "function",
+          "enumerable": true,
+          "writable": true,
+          "configurable": true,
+          "arity": 2
+        },
+        "addUserPermission": {
+          "type": "function",
+          "enumerable": true,
+          "writable": true,
+          "configurable": true,
+          "arity": 3
+        },
+        "busy": {
+          "type": "boolean",
+          "enumerable": true,
+          "writable": true,
+          "configurable": true
+        },
+        "cacheUser": {
+          "type": "function",
+          "enumerable": true,
+          "writable": true,
+          "configurable": true,
+          "arity": 1
+        },
+        "deleteRole": {
+          "type": "function",
+          "enumerable": true,
+          "writable": true,
+          "configurable": true,
+          "arity": 2
+        },
+        "deleteUser": {
+          "type": "function",
+          "enumerable": true,
+          "writable": true,
+          "configurable": true,
+          "arity": 2
+        },
+        "editeRole": {
+          "type": "function",
+          "enumerable": true,
+          "writable": true,
+          "configurable": true,
+          "arity": 2
+        },
+        "findCachedUser": {
+          "type": "function",
+          "enumerable": true,
+          "writable": true,
+          "configurable": true,
+          "arity": 1
+        },
+        "getUser": {
+          "type": "function",
+          "enumerable": true,
+          "writable": true,
+          "configurable": true,
+          "arity": 2
+        },
+        "getUserFinger": {
+          "type": "function",
+          "enumerable": true,
+          "writable": true,
+          "configurable": true,
+          "arity": 1
+        },
+        "getUserPermissions": {
+          "type": "function",
+          "enumerable": true,
+          "writable": true,
+          "configurable": true,
+          "arity": 2
+        },
+        "getUserRoles": {
+          "type": "function",
+          "enumerable": true,
+          "writable": true,
+          "configurable": true,
+          "arity": 2
+        },
+        "getUsers": {
+          "type": "function",
+          "enumerable": true,
+          "writable": true,
+          "configurable": true,
+          "arity": 2
+        },
+        "handleUser": {
+          "type": "function",
+          "enumerable": true,
+          "writable": true,
+          "configurable": true,
+          "arity": 1
+        },
+        "indexUser": {
+          "type": "function",
+          "enumerable": true,
+          "writable": true,
+          "configurable": true,
+          "arity": 1
+        },
+        "isUserExists": {
+          "type": "function",
+          "enumerable": true,
+          "writable": true,
+          "configurable": true,
+          "arity": 2
+        },
+        "isUserHasPermission": {
+          "type": "function",
+          "enumerable": true,
+          "writable": true,
+          "configurable": true,
+          "arity": 3
+        },
+        "isUserHasPermissions": {
+          "type": "function",
+          "enumerable": true,
+          "writable": true,
+          "configurable": true,
+          "arity": 3
+        },
+        "isUserHasRole": {
+          "type": "function",
+          "enumerable": true,
+          "writable": true,
+          "configurable": true,
+          "arity": 3
+        },
+        "isUserHasRoles": {
+          "type": "function",
+          "enumerable": true,
+          "writable": true,
+          "configurable": true,
+          "arity": 3
+        },
+        "isUserLogin": {
+          "type": "function",
+          "enumerable": true,
+          "writable": true,
+          "configurable": true,
+          "arity": 2
+        },
+        "loadAllRoles": {
+          "type": "function",
+          "enumerable": true,
+          "writable": true,
+          "configurable": true,
+          "arity": 1
+        },
+        "loadAllUsers": {
+          "type": "function",
+          "enumerable": true,
+          "writable": true,
+          "configurable": true,
+          "arity": 1
+        },
+        "login": {
+          "type": "function",
+          "enumerable": true,
+          "writable": true,
+          "configurable": true,
+          "arity": 2
+        },
+        "logout": {
+          "type": "function",
+          "enumerable": true,
+          "writable": true,
+          "configurable": true,
+          "arity": 3
+        },
+        "permissionByName": {
+          "type": "object",
+          "enumerable": true,
+          "writable": true,
+          "configurable": true
+        },
+        "permissions": {
+          "type": "array",
+          "enumerable": true,
+          "writable": true,
+          "configurable": true
+        },
+        "rebuildRoleIndexes": {
+          "type": "function",
+          "enumerable": true,
+          "writable": true,
+          "configurable": true,
+          "arity": 0
+        },
+        "rebuildUserIndexes": {
+          "type": "function",
+          "enumerable": true,
+          "writable": true,
+          "configurable": true,
+          "arity": 0
+        },
+        "register": {
+          "type": "function",
+          "enumerable": true,
+          "writable": true,
+          "configurable": true,
+          "arity": 2
+        },
+        "removeRole": {
+          "type": "function",
+          "enumerable": true,
+          "writable": true,
+          "configurable": true,
+          "arity": 2
+        },
+        "removeUserFinger": {
+          "type": "function",
+          "enumerable": true,
+          "writable": true,
+          "configurable": true,
+          "arity": 1
+        },
+        "roleByName": {
+          "type": "object",
+          "enumerable": true,
+          "writable": true,
+          "configurable": true
+        },
+        "roles": {
+          "type": "array",
+          "enumerable": true,
+          "writable": true,
+          "configurable": true
+        },
+        "updateRole": {
+          "type": "function",
+          "enumerable": true,
+          "writable": true,
+          "configurable": true,
+          "arity": 2
+        },
+        "updateUser": {
+          "type": "function",
+          "enumerable": true,
+          "writable": true,
+          "configurable": true,
+          "arity": 2
+        },
+        "userIndexes": {
+          "type": "object",
+          "enumerable": true,
+          "writable": true,
+          "configurable": true
+        },
+        "users": {
+          "type": "array",
+          "enumerable": true,
+          "writable": true,
+          "configurable": true
+        }
+      },
+      "aliases": [
+        [
+          "deleteRole",
+          "removeRole"
+        ],
+        [
+          "editeRole",
+          "updateRole"
+        ]
+      ]
+    },
+    "sessions": {
+      "entries": {
+        "$collection": {
+          "type": "object",
+          "enumerable": true,
+          "writable": false,
+          "configurable": true
+        },
+        "attach": {
+          "type": "function",
+          "enumerable": true,
+          "writable": true,
+          "configurable": true,
+          "arity": 2
+        },
+        "byToken": {
+          "type": "object",
+          "enumerable": true,
+          "writable": true,
+          "configurable": true
+        },
+        "byUserId": {
+          "type": "object",
+          "enumerable": true,
+          "writable": true,
+          "configurable": true
+        },
+        "handleSessions": {
+          "type": "function",
+          "enumerable": true,
+          "writable": true,
+          "configurable": true,
+          "arity": 0
+        },
+        "indexSession": {
+          "type": "function",
+          "enumerable": true,
+          "writable": true,
+          "configurable": true,
+          "arity": 1
+        },
+        "invalidateUser": {
+          "type": "function",
+          "enumerable": true,
+          "writable": true,
+          "configurable": true,
+          "arity": 1
+        },
+        "list": {
+          "type": "array",
+          "enumerable": true,
+          "writable": true,
+          "configurable": true
+        },
+        "loadAll": {
+          "type": "function",
+          "enumerable": true,
+          "writable": true,
+          "configurable": true,
+          "arity": 1
+        },
+        "path": {
+          "type": "string",
+          "enumerable": true,
+          "writable": true,
+          "configurable": true
+        },
+        "push": {
+          "type": "function",
+          "enumerable": true,
+          "writable": true,
+          "configurable": true,
+          "arity": 1
+        },
+        "rebuildIndexes": {
+          "type": "function",
+          "enumerable": true,
+          "writable": true,
+          "configurable": true,
+          "arity": 0
+        },
+        "replaceList": {
+          "type": "function",
+          "enumerable": true,
+          "writable": true,
+          "configurable": true,
+          "arity": 1
+        },
+        "save": {
+          "type": "function",
+          "enumerable": true,
+          "writable": true,
+          "configurable": true,
+          "arity": 1
+        },
+        "saveAll": {
+          "type": "function",
+          "enumerable": true,
+          "writable": true,
+          "configurable": true,
+          "arity": 1
+        }
+      },
+      "aliases": []
+    },
+    "staticAssets": {
+      "entries": {
+        "buildManifest": {
+          "type": "function",
+          "enumerable": true,
+          "writable": true,
+          "configurable": true,
+          "arity": 1
+        },
+        "cacheStats": {
+          "type": "function",
+          "enumerable": true,
+          "writable": true,
+          "configurable": true,
+          "arity": 0
+        },
+        "chooseEncoding": {
+          "type": "function",
+          "enumerable": true,
+          "writable": true,
+          "configurable": true,
+          "arity": 0
+        },
+        "clearManifest": {
+          "type": "function",
+          "enumerable": true,
+          "writable": true,
+          "configurable": true,
+          "arity": 1
+        },
+        "diffManifest": {
+          "type": "function",
+          "enumerable": true,
+          "writable": true,
+          "configurable": true,
+          "arity": 2
+        },
+        "manifest": {
+          "type": "function",
+          "enumerable": true,
+          "writable": true,
+          "configurable": true,
+          "arity": 1
+        },
+        "precompress": {
+          "type": "function",
+          "enumerable": true,
+          "writable": true,
+          "configurable": true,
+          "arity": 1
+        },
+        "precompressMany": {
+          "type": "function",
+          "enumerable": true,
+          "writable": true,
+          "configurable": true,
+          "arity": 1
+        },
+        "prewarmChanged": {
+          "type": "function",
+          "enumerable": true,
+          "writable": true,
+          "configurable": true,
+          "arity": 2
+        },
+        "prewarmManifest": {
+          "type": "function",
+          "enumerable": true,
+          "writable": true,
+          "configurable": true,
+          "arity": 1
+        }
+      },
+      "aliases": []
+    },
+    "responseCache": {
+      "entries": {
+        "apply": {
+          "type": "function",
+          "enumerable": true,
+          "writable": true,
+          "configurable": true,
+          "arity": 2
+        },
+        "bindCollection": {
+          "type": "function",
+          "enumerable": true,
+          "writable": true,
+          "configurable": true,
+          "arity": 2
+        },
+        "cancelWarm": {
+          "type": "function",
+          "enumerable": true,
+          "writable": true,
+          "configurable": true,
+          "arity": 1
+        },
+        "clear": {
+          "type": "function",
+          "enumerable": true,
+          "writable": true,
+          "configurable": true,
+          "arity": 0
+        },
+        "collectionBinding": {
+          "type": "function",
+          "enumerable": true,
+          "writable": true,
+          "configurable": true,
+          "arity": 1
+        },
+        "collectionBindings": {
+          "type": "function",
+          "enumerable": true,
+          "writable": true,
+          "configurable": true,
+          "arity": 0
+        },
+        "delete": {
+          "type": "function",
+          "enumerable": true,
+          "writable": true,
+          "configurable": true,
+          "arity": 1
+        },
+        "get": {
+          "type": "function",
+          "enumerable": true,
+          "writable": true,
+          "configurable": true,
+          "arity": 1
+        },
+        "getOrLoad": {
+          "type": "function",
+          "enumerable": true,
+          "writable": true,
+          "configurable": true,
+          "arity": 2
+        },
+        "has": {
+          "type": "function",
+          "enumerable": true,
+          "writable": true,
+          "configurable": true,
+          "arity": 1
+        },
+        "invalidateCollection": {
+          "type": "function",
+          "enumerable": true,
+          "writable": true,
+          "configurable": true,
+          "arity": 1
+        },
+        "invalidateTag": {
+          "type": "function",
+          "enumerable": true,
+          "writable": true,
+          "configurable": true,
+          "arity": 1
+        },
+        "invalidationStats": {
+          "type": "function",
+          "enumerable": true,
+          "writable": true,
+          "configurable": true,
+          "arity": 0
+        },
+        "key": {
+          "type": "function",
+          "enumerable": true,
+          "writable": true,
+          "configurable": true,
+          "arity": 1
+        },
+        "scheduleWarm": {
+          "type": "function",
+          "enumerable": true,
+          "writable": true,
+          "configurable": true,
+          "arity": 3
+        },
+        "set": {
+          "type": "function",
+          "enumerable": true,
+          "writable": true,
+          "configurable": true,
+          "arity": 2
+        },
+        "stats": {
+          "type": "function",
+          "enumerable": true,
+          "writable": true,
+          "configurable": true,
+          "arity": 0
+        },
+        "unbindCollection": {
+          "type": "function",
+          "enumerable": true,
+          "writable": true,
+          "configurable": true,
+          "arity": 1
+        },
+        "warm": {
+          "type": "function",
+          "enumerable": true,
+          "writable": true,
+          "configurable": true,
+          "arity": 2
+        },
+        "warmMany": {
+          "type": "function",
+          "enumerable": true,
+          "writable": true,
+          "configurable": true,
+          "arity": 1
+        },
+        "warmStats": {
+          "type": "function",
+          "enumerable": true,
+          "writable": true,
+          "configurable": true,
+          "arity": 0
+        }
+      },
+      "aliases": []
+    },
+    "mongoTelemetry": {
+      "entries": {
+        "clear": {
+          "type": "function",
+          "enumerable": true,
+          "writable": true,
+          "configurable": true,
+          "arity": 0
+        },
+        "configure": {
+          "type": "function",
+          "enumerable": true,
+          "writable": true,
+          "configurable": true,
+          "arity": 0
+        },
+        "extractExplain": {
+          "type": "function",
+          "enumerable": true,
+          "writable": true,
+          "configurable": true,
+          "arity": 1
+        },
+        "inefficient": {
+          "type": "function",
+          "enumerable": true,
+          "writable": true,
+          "configurable": true,
+          "arity": 0
+        },
+        "recent": {
+          "type": "function",
+          "enumerable": true,
+          "writable": true,
+          "configurable": true,
+          "arity": 0
+        },
+        "record": {
+          "type": "function",
+          "enumerable": true,
+          "writable": true,
+          "configurable": true,
+          "arity": 0
+        },
+        "recordExplain": {
+          "type": "function",
+          "enumerable": true,
+          "writable": true,
+          "configurable": true,
+          "arity": 3
+        },
+        "report": {
+          "type": "function",
+          "enumerable": true,
+          "writable": true,
+          "configurable": true,
+          "arity": 0
+        },
+        "stats": {
+          "type": "function",
+          "enumerable": true,
+          "writable": true,
+          "configurable": true,
+          "arity": 0
+        }
+      },
+      "aliases": []
+    },
+    "mongoBudget": {
+      "entries": {
+        "clear": {
+          "type": "function",
+          "enumerable": true,
+          "writable": true,
+          "configurable": true,
+          "arity": 0
+        },
+        "delete": {
+          "type": "function",
+          "enumerable": true,
+          "writable": true,
+          "configurable": true,
+          "arity": 1
+        },
+        "get": {
+          "type": "function",
+          "enumerable": true,
+          "writable": true,
+          "configurable": true,
+          "arity": 1
+        },
+        "list": {
+          "type": "function",
+          "enumerable": true,
+          "writable": true,
+          "configurable": true,
+          "arity": 0
+        },
+        "observe": {
+          "type": "function",
+          "enumerable": true,
+          "writable": true,
+          "configurable": true,
+          "arity": 1
+        },
+        "options": {
+          "type": "function",
+          "enumerable": true,
+          "writable": true,
+          "configurable": true,
+          "arity": 2
+        },
+        "set": {
+          "type": "function",
+          "enumerable": true,
+          "writable": true,
+          "configurable": true,
+          "arity": 3
+        },
+        "stats": {
+          "type": "function",
+          "enumerable": true,
+          "writable": true,
+          "configurable": true,
+          "arity": 0
+        }
+      },
+      "aliases": []
+    },
+    "query": {
+      "entries": {
+        "cached": {
+          "type": "function",
+          "enumerable": true,
+          "writable": true,
+          "configurable": true,
+          "arity": 4
+        },
+        "generation": {
+          "type": "function",
+          "enumerable": true,
+          "writable": true,
+          "configurable": true,
+          "arity": 1
+        },
+        "invalidate": {
+          "type": "function",
+          "enumerable": true,
+          "writable": true,
+          "configurable": true,
+          "arity": 1
+        },
+        "invalidateAll": {
+          "type": "function",
+          "enumerable": true,
+          "writable": true,
+          "configurable": true,
+          "arity": 0
+        },
+        "key": {
+          "type": "function",
+          "enumerable": true,
+          "writable": true,
+          "configurable": true,
+          "arity": 3
+        },
+        "stats": {
+          "type": "function",
+          "enumerable": true,
+          "writable": true,
+          "configurable": true,
+          "arity": 0
+        }
+      },
+      "aliases": []
+    },
+    "queryPlan": {
+      "entries": {
+        "clear": {
+          "type": "function",
+          "enumerable": true,
+          "writable": true,
+          "configurable": true,
+          "arity": 0
+        },
+        "compile": {
+          "type": "function",
+          "enumerable": true,
+          "writable": true,
+          "configurable": true,
+          "arity": 2
+        },
+        "instantiate": {
+          "type": "function",
+          "enumerable": true,
+          "writable": true,
+          "configurable": true,
+          "arity": 1
+        },
+        "key": {
+          "type": "function",
+          "enumerable": true,
+          "writable": true,
+          "configurable": true,
+          "arity": 2
+        },
+        "stats": {
+          "type": "function",
+          "enumerable": true,
+          "writable": true,
+          "configurable": true,
+          "arity": 0
+        }
+      },
+      "aliases": []
+    },
+    "compat": {
+      "entries": {
+        "assert": {
+          "type": "function",
+          "enumerable": true,
+          "writable": true,
+          "configurable": true,
+          "arity": 1
+        },
+        "assertFrameworkSurface": {
+          "type": "function",
+          "enumerable": true,
+          "writable": true,
+          "configurable": true,
+          "arity": 1
+        },
+        "assertSurface": {
+          "type": "function",
+          "enumerable": true,
+          "writable": true,
+          "configurable": true,
+          "arity": 2
+        },
+        "captureFrameworkSurface": {
+          "type": "function",
+          "enumerable": true,
+          "writable": true,
+          "configurable": true,
+          "arity": 0
+        },
+        "captureSurface": {
+          "type": "function",
+          "enumerable": true,
+          "writable": true,
+          "configurable": true,
+          "arity": 1
+        },
+        "check": {
+          "type": "function",
+          "enumerable": true,
+          "writable": true,
+          "configurable": true,
+          "arity": 1
+        },
+        "compare": {
+          "type": "function",
+          "enumerable": true,
+          "writable": true,
+          "configurable": true,
+          "arity": 1
+        },
+        "compareFrameworkSurface": {
+          "type": "function",
+          "enumerable": true,
+          "writable": true,
+          "configurable": true,
+          "arity": 1
+        },
+        "compareProjectUsage": {
+          "type": "function",
+          "enumerable": true,
+          "writable": true,
+          "configurable": true,
+          "arity": 2
+        },
+        "compareSurface": {
+          "type": "function",
+          "enumerable": true,
+          "writable": true,
+          "configurable": true,
+          "arity": 2
+        },
+        "contracts": {
+          "type": "function",
+          "enumerable": true,
+          "writable": true,
+          "configurable": true,
+          "arity": 0
+        },
+        "pin": {
+          "type": "function",
+          "enumerable": true,
+          "writable": true,
+          "configurable": true,
+          "arity": 1
+        },
+        "probes": {
+          "type": "object",
+          "enumerable": true,
+          "writable": true,
+          "configurable": true
+        },
+        "scanProject": {
+          "type": "function",
+          "enumerable": true,
+          "writable": true,
+          "configurable": true,
+          "arity": 1
+        },
+        "snapshot": {
+          "type": "function",
+          "enumerable": true,
+          "writable": true,
+          "configurable": true,
+          "arity": 0
+        },
+        "verifyProject": {
+          "type": "function",
+          "enumerable": true,
+          "writable": true,
+          "configurable": true,
+          "arity": 1
+        },
+        "writeFrameworkManifest": {
+          "type": "function",
+          "enumerable": true,
+          "writable": true,
+          "configurable": true,
+          "arity": 1
+        },
+        "writeProjectManifest": {
+          "type": "function",
+          "enumerable": true,
+          "writable": true,
+          "configurable": true,
+          "arity": 2
+        }
+      },
+      "aliases": []
+    },
+    "events": {
+      "entries": {
+        "emit": {
+          "type": "function",
+          "enumerable": true,
+          "writable": true,
+          "configurable": true,
+          "arity": 1
+        },
+        "listenerCount": {
+          "type": "function",
+          "enumerable": true,
+          "writable": true,
+          "configurable": true,
+          "arity": 1
+        },
+        "off": {
+          "type": "function",
+          "enumerable": true,
+          "writable": true,
+          "configurable": true,
+          "arity": 2
+        },
+        "on": {
+          "type": "function",
+          "enumerable": true,
+          "writable": true,
+          "configurable": true,
+          "arity": 2
+        },
+        "once": {
+          "type": "function",
+          "enumerable": true,
+          "writable": true,
+          "configurable": true,
+          "arity": 2
+        },
+        "removeAll": {
+          "type": "function",
+          "enumerable": true,
+          "writable": true,
+          "configurable": true,
+          "arity": 1
+        }
+      },
+      "aliases": []
+    },
+    "hooks": {
+      "entries": {
+        "add": {
+          "type": "function",
+          "enumerable": true,
+          "writable": true,
+          "configurable": true,
+          "arity": 2
+        },
+        "list": {
+          "type": "function",
+          "enumerable": true,
+          "writable": true,
+          "configurable": true,
+          "arity": 1
+        },
+        "remove": {
+          "type": "function",
+          "enumerable": true,
+          "writable": true,
+          "configurable": true,
+          "arity": 2
+        },
+        "run": {
+          "type": "function",
+          "enumerable": true,
+          "writable": true,
+          "configurable": true,
+          "arity": 2
+        }
+      },
+      "aliases": []
+    },
+    "scheduler": {
+      "entries": {
+        "cancel": {
+          "type": "function",
+          "enumerable": true,
+          "writable": true,
+          "configurable": true,
+          "arity": 1
+        },
+        "clear": {
+          "type": "function",
+          "enumerable": true,
+          "writable": true,
+          "configurable": true,
+          "arity": 0
+        },
+        "every": {
+          "type": "function",
+          "enumerable": true,
+          "writable": true,
+          "configurable": true,
+          "arity": 3
+        },
+        "later": {
+          "type": "function",
+          "enumerable": true,
+          "writable": true,
+          "configurable": true,
+          "arity": 3
+        },
+        "list": {
+          "type": "function",
+          "enumerable": true,
+          "writable": true,
+          "configurable": true,
+          "arity": 0
+        }
+      },
+      "aliases": []
+    },
+    "workers": {
+      "entries": {
+        "runFile": {
+          "type": "function",
+          "enumerable": true,
+          "writable": true,
+          "configurable": true,
+          "arity": 2
+        }
+      },
+      "aliases": []
+    },
+    "metrics": {
+      "entries": {
+        "get": {
+          "type": "function",
+          "enumerable": true,
+          "writable": true,
+          "configurable": true,
+          "arity": 1
+        },
+        "inc": {
+          "type": "function",
+          "enumerable": true,
+          "writable": true,
+          "configurable": true,
+          "arity": 1
+        },
+        "reset": {
+          "type": "function",
+          "enumerable": true,
+          "writable": true,
+          "configurable": true,
+          "arity": 0
+        },
+        "set": {
+          "type": "function",
+          "enumerable": true,
+          "writable": true,
+          "configurable": true,
+          "arity": 2
+        },
+        "snapshot": {
+          "type": "function",
+          "enumerable": true,
+          "writable": true,
+          "configurable": true,
+          "arity": 0
+        },
+        "time": {
+          "type": "function",
+          "enumerable": true,
+          "writable": true,
+          "configurable": true,
+          "arity": 2
+        }
+      },
+      "aliases": []
+    },
+    "diagnostics": {
+      "entries": {
+        "cache": {
+          "type": "function",
+          "enumerable": true,
+          "writable": true,
+          "configurable": true,
+          "arity": 0
+        },
+        "close": {
+          "type": "function",
+          "enumerable": true,
+          "writable": true,
+          "configurable": true,
+          "arity": 0
+        },
+        "configure": {
+          "type": "function",
+          "enumerable": true,
+          "writable": true,
+          "configurable": true,
+          "arity": 0
+        },
+        "requestEnd": {
+          "type": "function",
+          "enumerable": true,
+          "writable": true,
+          "configurable": true,
+          "arity": 2
+        },
+        "requestStart": {
+          "type": "function",
+          "enumerable": true,
+          "writable": true,
+          "configurable": true,
+          "arity": 2
+        },
+        "reset": {
+          "type": "function",
+          "enumerable": true,
+          "writable": true,
+          "configurable": true,
+          "arity": 0
+        },
+        "routes": {
+          "type": "function",
+          "enumerable": true,
+          "writable": true,
+          "configurable": true,
+          "arity": 0
+        },
+        "slowRequests": {
+          "type": "function",
+          "enumerable": true,
+          "writable": true,
+          "configurable": true,
+          "arity": 0
+        },
+        "snapshot": {
+          "type": "function",
+          "enumerable": true,
+          "writable": true,
+          "configurable": true,
+          "arity": 0
+        }
+      },
+      "aliases": []
+    },
+    "memory": {
+      "entries": {
+        "check": {
+          "type": "function",
+          "enumerable": true,
+          "writable": true,
+          "configurable": true,
+          "arity": 0
+        },
+        "snapshot": {
+          "type": "function",
+          "enumerable": true,
+          "writable": true,
+          "configurable": true,
+          "arity": 0
+        }
+      },
+      "aliases": []
+    },
+    "resources": {
+      "entries": {
+        "add": {
+          "type": "function",
+          "enumerable": true,
+          "writable": true,
+          "configurable": true,
+          "arity": 1
+        },
+        "close": {
+          "type": "function",
+          "enumerable": true,
+          "writable": true,
+          "configurable": true,
+          "arity": 1
+        },
+        "closeAll": {
+          "type": "function",
+          "enumerable": true,
+          "writable": true,
+          "configurable": true,
+          "arity": 0
+        },
+        "count": {
+          "type": "function",
+          "enumerable": true,
+          "writable": true,
+          "configurable": true,
+          "arity": 0
+        },
+        "delete": {
+          "type": "function",
+          "enumerable": true,
+          "writable": true,
+          "configurable": true,
+          "arity": 1
+        },
+        "get": {
+          "type": "function",
+          "enumerable": true,
+          "writable": true,
+          "configurable": true,
+          "arity": 1
+        },
+        "has": {
+          "type": "function",
+          "enumerable": true,
+          "writable": true,
+          "configurable": true,
+          "arity": 1
+        },
+        "list": {
+          "type": "function",
+          "enumerable": true,
+          "writable": true,
+          "configurable": true,
+          "arity": 0
+        }
+      },
+      "aliases": []
+    },
+    "trace": {
+      "entries": {
+        "child": {
+          "type": "function",
+          "enumerable": true,
+          "writable": true,
+          "configurable": true,
+          "arity": 0
+        },
+        "clear": {
+          "type": "function",
+          "enumerable": true,
+          "writable": true,
+          "configurable": true,
+          "arity": 0
+        },
+        "configure": {
+          "type": "function",
+          "enumerable": true,
+          "writable": true,
+          "configurable": true,
+          "arity": 0
+        },
+        "debug": {
+          "type": "function",
+          "enumerable": true,
+          "writable": true,
+          "configurable": true,
+          "arity": 3
+        },
+        "error": {
+          "type": "function",
+          "enumerable": true,
+          "writable": true,
+          "configurable": true,
+          "arity": 3
+        },
+        "info": {
+          "type": "function",
+          "enumerable": true,
+          "writable": true,
+          "configurable": true,
+          "arity": 3
+        },
+        "log": {
+          "type": "function",
+          "enumerable": true,
+          "writable": true,
+          "configurable": true,
+          "arity": 4
+        },
+        "on": {
+          "type": "function",
+          "enumerable": true,
+          "writable": true,
+          "configurable": true,
+          "arity": 1
+        },
+        "onLevel": {
+          "type": "function",
+          "enumerable": true,
+          "writable": true,
+          "configurable": true,
+          "arity": 2
+        },
+        "recent": {
+          "type": "function",
+          "enumerable": true,
+          "writable": true,
+          "configurable": true,
+          "arity": 0
+        },
+        "stats": {
+          "type": "function",
+          "enumerable": true,
+          "writable": true,
+          "configurable": true,
+          "arity": 0
+        },
+        "warn": {
+          "type": "function",
+          "enumerable": true,
+          "writable": true,
+          "configurable": true,
+          "arity": 3
+        }
+      },
+      "aliases": []
+    },
+    "stream": {
+      "entries": {
+        "jsonArray": {
+          "type": "function",
+          "enumerable": true,
+          "writable": true,
+          "configurable": true,
+          "arity": 2
+        },
+        "jsonLines": {
+          "type": "function",
+          "enumerable": true,
+          "writable": true,
+          "configurable": true,
+          "arity": 2
+        },
+        "ndjson": {
+          "type": "function",
+          "enumerable": true,
+          "writable": true,
+          "configurable": true,
+          "arity": 2
+        }
+      },
+      "aliases": [
+        [
+          "jsonLines",
+          "ndjson"
+        ]
+      ]
+    },
+    "featuresV3": {
+      "entries": {
+        "clear": {
+          "type": "function",
+          "enumerable": true,
+          "writable": true,
+          "configurable": true,
+          "arity": 1
+        },
+        "disable": {
+          "type": "function",
+          "enumerable": true,
+          "writable": true,
+          "configurable": true,
+          "arity": 1
+        },
+        "enable": {
+          "type": "function",
+          "enumerable": true,
+          "writable": true,
+          "configurable": true,
+          "arity": 1
+        },
+        "get": {
+          "type": "function",
+          "enumerable": true,
+          "writable": true,
+          "configurable": true,
+          "arity": 2
+        },
+        "isEnabled": {
+          "type": "function",
+          "enumerable": true,
+          "writable": true,
+          "configurable": true,
+          "arity": 1
+        },
+        "list": {
+          "type": "function",
+          "enumerable": true,
+          "writable": true,
+          "configurable": true,
+          "arity": 0
+        },
+        "set": {
+          "type": "function",
+          "enumerable": true,
+          "writable": true,
+          "configurable": true,
+          "arity": 2
+        }
+      },
+      "aliases": []
+    },
+    "context": {
+      "entries": {
+        "bind": {
+          "type": "function",
+          "enumerable": true,
+          "writable": true,
+          "configurable": true,
+          "arity": 0
+        },
+        "create": {
+          "type": "function",
+          "enumerable": true,
+          "writable": true,
+          "configurable": true,
+          "arity": 0
+        },
+        "get": {
+          "type": "function",
+          "enumerable": true,
+          "writable": true,
+          "configurable": true,
+          "arity": 0
+        },
+        "run": {
+          "type": "function",
+          "enumerable": true,
+          "writable": true,
+          "configurable": true,
+          "arity": 2
+        }
+      },
+      "aliases": []
+    },
+    "abort": {
+      "entries": {
+        "create": {
+          "type": "function",
+          "enumerable": true,
+          "writable": true,
+          "configurable": true,
+          "arity": 0
+        },
+        "link": {
+          "type": "function",
+          "enumerable": true,
+          "writable": true,
+          "configurable": true,
+          "arity": 2
+        },
+        "throwIfAborted": {
+          "type": "function",
+          "enumerable": true,
+          "writable": true,
+          "configurable": true,
+          "arity": 1
+        },
+        "withSignal": {
+          "type": "function",
+          "enumerable": true,
+          "writable": true,
+          "configurable": true,
+          "arity": 2
+        }
+      },
+      "aliases": []
+    },
+    "leaks": {
+      "entries": {
+        "assert": {
+          "type": "function",
+          "enumerable": true,
+          "writable": true,
+          "configurable": true,
+          "arity": 0
+        },
+        "baseline": {
+          "type": "function",
+          "enumerable": true,
+          "writable": true,
+          "configurable": true,
+          "arity": 0
+        },
+        "compare": {
+          "type": "function",
+          "enumerable": true,
+          "writable": true,
+          "configurable": true,
+          "arity": 0
+        },
+        "snapshot": {
+          "type": "function",
+          "enumerable": true,
+          "writable": true,
+          "configurable": true,
+          "arity": 0
+        },
+        "stop": {
+          "type": "function",
+          "enumerable": true,
+          "writable": true,
+          "configurable": true,
+          "arity": 1
+        },
+        "stopAll": {
+          "type": "function",
+          "enumerable": true,
+          "writable": true,
+          "configurable": true,
+          "arity": 0
+        },
+        "watch": {
+          "type": "function",
+          "enumerable": true,
+          "writable": true,
+          "configurable": true,
+          "arity": 0
+        },
+        "watches": {
+          "type": "function",
+          "enumerable": true,
+          "writable": true,
+          "configurable": true,
+          "arity": 0
+        }
+      },
+      "aliases": []
+    },
+    "validate": {
+      "entries": {
+        "all": {
+          "type": "function",
+          "enumerable": true,
+          "writable": true,
+          "configurable": true,
+          "arity": 0
+        },
+        "options": {
+          "type": "function",
+          "enumerable": true,
+          "writable": true,
+          "configurable": true,
+          "arity": 0
+        },
+        "routes": {
+          "type": "function",
+          "enumerable": true,
+          "writable": true,
+          "configurable": true,
+          "arity": 0
+        }
+      },
+      "aliases": []
+    },
+    "async": {
+      "entries": {
+        "eachLimit": {
+          "type": "function",
+          "enumerable": true,
+          "writable": true,
+          "configurable": true,
+          "arity": 3
+        },
+        "eachLimitAbortable": {
+          "type": "function",
+          "enumerable": true,
+          "writable": true,
+          "configurable": true,
+          "arity": 3
+        },
+        "filterLimit": {
+          "type": "function",
+          "enumerable": true,
+          "writable": true,
+          "configurable": true,
+          "arity": 3
+        },
+        "filterLimitAbortable": {
+          "type": "function",
+          "enumerable": true,
+          "writable": true,
+          "configurable": true,
+          "arity": 3
+        },
+        "mapLimit": {
+          "type": "function",
+          "enumerable": true,
+          "writable": true,
+          "configurable": true,
+          "arity": 3
+        },
+        "mapLimitAbortable": {
+          "type": "function",
+          "enumerable": true,
+          "writable": true,
+          "configurable": true,
+          "arity": 3
+        }
+      },
+      "aliases": []
+    },
+    "requestTelemetry": {
+      "entries": {
+        "_active": {
+          "type": "object",
+          "enumerable": true,
+          "writable": true,
+          "configurable": true
+        },
+        "attribution": {
+          "type": "function",
+          "enumerable": true,
+          "writable": true,
+          "configurable": true,
+          "arity": 1
+        },
+        "begin": {
+          "type": "function",
+          "enumerable": true,
+          "writable": true,
+          "configurable": true,
+          "arity": 2
+        },
+        "clear": {
+          "type": "function",
+          "enumerable": true,
+          "writable": true,
+          "configurable": true,
+          "arity": 0
+        },
+        "configure": {
+          "type": "function",
+          "enumerable": true,
+          "writable": true,
+          "configurable": true,
+          "arity": 0
+        },
+        "end": {
+          "type": "function",
+          "enumerable": true,
+          "writable": true,
+          "configurable": true,
+          "arity": 1
+        },
+        "isEnabled": {
+          "type": "function",
+          "enumerable": true,
+          "writable": true,
+          "configurable": true,
+          "arity": 0
+        },
+        "mark": {
+          "type": "function",
+          "enumerable": true,
+          "writable": true,
+          "configurable": true,
+          "arity": 3
+        },
+        "recent": {
+          "type": "function",
+          "enumerable": true,
+          "writable": true,
+          "configurable": true,
+          "arity": 0
+        },
+        "report": {
+          "type": "function",
+          "enumerable": true,
+          "writable": true,
+          "configurable": true,
+          "arity": 0
+        },
+        "resource": {
+          "type": "function",
+          "enumerable": true,
+          "writable": true,
+          "configurable": true,
+          "arity": 0
+        },
+        "slow": {
+          "type": "function",
+          "enumerable": true,
+          "writable": true,
+          "configurable": true,
+          "arity": 0
+        },
+        "stats": {
+          "type": "function",
+          "enumerable": true,
+          "writable": true,
+          "configurable": true,
+          "arity": 0
+        }
+      },
+      "aliases": []
+    },
+    "requestAbort": {
+      "entries": {
+        "attach": {
+          "type": "function",
+          "enumerable": true,
+          "writable": true,
+          "configurable": true,
+          "arity": 2
+        },
+        "get": {
+          "type": "function",
+          "enumerable": true,
+          "writable": true,
+          "configurable": true,
+          "arity": 1
+        },
+        "signal": {
+          "type": "function",
+          "enumerable": true,
+          "writable": true,
+          "configurable": true,
+          "arity": 1
+        }
+      },
+      "aliases": []
+    },
+    "httpPlan": {
+      "entries": {
+        "compile": {
+          "type": "function",
+          "enumerable": true,
+          "writable": true,
+          "configurable": true,
+          "arity": 1
+        },
+        "run": {
+          "type": "function",
+          "enumerable": true,
+          "writable": true,
+          "configurable": true,
+          "arity": 5
+        }
+      },
+      "aliases": []
+    }
+  }
+}

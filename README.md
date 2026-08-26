@@ -4097,3 +4097,11 @@ The v22 framework baseline protects the complete public surface in addition to a
 ### Core v23 startup fast path
 
 Core v23 adds a generated service startup bundle to reduce CommonJS resolution/compile work before `server.start()`. Original `lib/*.js` modules remain available and authoritative. Run `npm run build:service-startup-bundle` after changing one of the bundled sources; `npm run service-bundle-test` verifies synchronization. See `docs/core-v23.md`.
+
+## Core v25 startup optimization
+
+Core v25 adds an internal generated startup bundle for the `object-options` modules and bounded memoization for repeated `from123()` encoded string constants. The original modules and legacy APIs remain available unchanged. Use `npm run build:object-options-bundle` after changing an `object-options/lib/*.js` startup source; `npm run verify` checks bundle synchronization automatically.
+
+## Core v26 startup optimization
+
+Core v26 keeps only Core v3 on the cold-start critical path. The additive Core v4–v18 API surface remains present immediately as enumerable own properties, while its implementation is initialized synchronously on first access and warmed in the background immediately after the server-ready callback. This reduces cold startup without removing or renaming legacy APIs. See `docs/core-v26.md` and run `npm run lazy-core-v26-test` to validate the lazy compatibility surface.

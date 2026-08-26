@@ -296,24 +296,64 @@ module.exports = function init(options) {
     ____0.createDir = ____0.mkDir = ____0.fsm.mkDir;
     ____0.createDirSync = ____0.mkdirSync = ____0.fsm.mkdirSync;
 
-    // v21 startup fast path: load additive core initializers through one
-    // generated CommonJS module. Original lib/core-v*.js files stay public
-    // and unchanged for direct legacy requires.
-    const startupCore = require('./lib/core-startup-bundle.js');
-    ____0.diagnostics = startupCore.diagnostics(____0);
-    ____0.coreV3 = startupCore.coreV3(____0);
-    ____0.coreV4 = startupCore.coreV4(____0);
-    ____0.coreV5 = startupCore.coreV5(____0);
-    ____0.coreV6 = startupCore.coreV6(____0);
-    ____0.coreV7 = startupCore.coreV7(____0);
-    ____0.coreV8 = startupCore.coreV8(____0);
-    ____0.coreV9 = startupCore.coreV9(____0);
-    ____0.coreV10 = startupCore.coreV10(____0);
-    ____0.coreV11 = startupCore.coreV11(____0);
-    ____0.coreV15 = startupCore.coreV15(____0);
-    ____0.coreV16 = startupCore.coreV16(____0);
-    ____0.coreV17 = startupCore.coreV17(____0);
-    ____0.coreV18 = startupCore.coreV18(____0);
+    // v26 startup fast path: core-v3 contains the primitives required by the
+    // legacy startup path (notably scheduler). Newer additive core layers are
+    // exposed immediately through lazy own-properties and are initialized in
+    // their historical order on first access. This keeps old/new APIs visible
+    // without parsing/executing the advanced core bundle before first listen.
+    ____0.coreV3 = require('./lib/core-v3.js')(____0);
+
+    let advancedCoreReady = false;
+    let advancedCoreLoading = false;
+    const initAdvancedCore = function () {
+        if (advancedCoreReady || advancedCoreLoading) return;
+        advancedCoreLoading = true;
+        try {
+            const startupCore = require('./lib/core-startup-bundle.js');
+            ____0.diagnostics = startupCore.diagnostics(____0);
+            ____0.coreV4 = startupCore.coreV4(____0);
+            ____0.coreV5 = startupCore.coreV5(____0);
+            ____0.coreV6 = startupCore.coreV6(____0);
+            ____0.coreV7 = startupCore.coreV7(____0);
+            ____0.coreV8 = startupCore.coreV8(____0);
+            ____0.coreV9 = startupCore.coreV9(____0);
+            ____0.coreV10 = startupCore.coreV10(____0);
+            ____0.coreV11 = startupCore.coreV11(____0);
+            ____0.coreV15 = startupCore.coreV15(____0);
+            ____0.coreV16 = startupCore.coreV16(____0);
+            ____0.coreV17 = startupCore.coreV17(____0);
+            ____0.coreV18 = startupCore.coreV18(____0);
+            advancedCoreReady = true;
+        } finally {
+            advancedCoreLoading = false;
+        }
+    };
+    const advancedCoreSurface = [
+        'AdaptiveCache','AsyncPool','BackpressureQueue','abort','adaptiveCache','adaptiveCaches','async',
+        'backpressureQueue','backpressureQueues','cacheTuner','compat','context','coreV10','coreV11',
+        'coreV15','coreV16','coreV17','coreV18','coreV4','coreV5','coreV6','coreV7','coreV8','coreV9',
+        'createBatcher','createIdBatcher','diagnostics','health','httpPlan','leaks','memoizeAsync','metrics',
+        'mongoAdvisor','mongoBudget','mongoShapes','mongoTelemetry','pool','pools','query','queryCache',
+        'queryPlan','requestAbort','requestTelemetry','resources','responseCache','stableKey','staticAssets',
+        'stream','trace','validate'
+    ];
+    for (const name of advancedCoreSurface) {
+        if (Object.prototype.hasOwnProperty.call(____0, name)) continue;
+        Object.defineProperty(____0, name, {
+            configurable: true,
+            enumerable: true,
+            get() {
+                if (advancedCoreLoading) return undefined;
+                initAdvancedCore();
+                const descriptor = Object.getOwnPropertyDescriptor(____0, name);
+                return descriptor && Object.prototype.hasOwnProperty.call(descriptor, 'value') ? descriptor.value : undefined;
+            },
+            set(value) {
+                Object.defineProperty(____0, name, { configurable: true, enumerable: true, writable: true, value });
+            },
+        });
+    }
+    Object.defineProperty(____0, '_initAdvancedCore', { configurable: true, enumerable: false, value: initAdvancedCore });
 
     ____0.routing = startupServices.routing(____0);
 
