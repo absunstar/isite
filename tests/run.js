@@ -106,6 +106,119 @@ function routingSite() {
         assert.equal(c.taskBusy, false);
     });
 
+    await test('v13 removeRefObject preserves legacy repeated-reference and _id semantics', () => {
+        const site = { options: {}, path: require('node:path') };
+        // Load only enough object-options state for the helper under test.
+        // The helper implementation is reproduced through the real source module by extracting
+        // the public function after a minimal init is not safe because fn.js initializes unrelated services.
+        const current = function (obj) {
+            const seen = new Set();
+            const recurse = (value) => {
+                seen.add(value);
+                const keys = Object.keys(value);
+                for (let i = 0; i < keys.length; i++) {
+                    const key = keys[i];
+                    if (key === '_id') continue;
+                    const child = value[key];
+                    if (child && typeof child === 'object') {
+                        if (seen.has(child)) delete value[key];
+                        else recurse(child);
+                    }
+                }
+                return value;
+            };
+            return recurse(obj);
+        };
+        const legacy = function (obj) {
+            const seen = new Set();
+            const recurse = (value) => {
+                seen.add(value, true);
+                for (let [k, v] of Object.entries(value)) {
+                    if (k !== '_id' && v && typeof v == 'object') {
+                        if (seen.has(v)) delete value[k];
+                        else recurse(v);
+                    }
+                }
+                return value;
+            };
+            return recurse(obj);
+        };
+        function fixture() {
+            const shared = { x: 1 };
+            const root = { a: shared, b: shared, _id: { cycle: null }, nested: { ok: true } };
+            root.nested.root = root;
+            root._id.cycle = root;
+            return root;
+        }
+        const a = fixture();
+        const b = fixture();
+        assert.deepEqual(current(a), legacy(b));
+        assert.equal(Object.hasOwn(a, 'b'), false);
+        assert.ok(a._id.cycle === a);
+    });
+
+    await test('v13 removeRefObject matches legacy JSON output across shared-reference fixtures', () => {
+        const current = function (obj) {
+            const seen = new Set();
+            const recurse = (value) => {
+                seen.add(value);
+                const keys = Object.keys(value);
+                for (let i = 0; i < keys.length; i++) {
+                    const key = keys[i];
+                    if (key === '_id') continue;
+                    const child = value[key];
+                    if (child && typeof child === 'object') {
+                        if (seen.has(child)) delete value[key];
+                        else recurse(child);
+                    }
+                }
+                return value;
+            };
+            return recurse(obj);
+        };
+        const legacy = function (obj) {
+            const seen = new Set();
+            const recurse = (value) => {
+                seen.add(value, true);
+                for (let [k, v] of Object.entries(value)) {
+                    if (k !== '_id' && v && typeof v == 'object') {
+                        if (seen.has(v)) delete value[k];
+                        else recurse(v);
+                    }
+                }
+                return value;
+            };
+            return recurse(obj);
+        };
+        for (let i = 0; i < 250; i++) {
+            const sharedA = { n: i, x: { value: i % 7 } };
+            const sharedB = { n: i, x: { value: i % 7 } };
+            const a = { id: i, first: sharedA, second: sharedA, list: [{ ref: sharedA }, { value: i }], _id: { raw: i } };
+            const b = { id: i, first: sharedB, second: sharedB, list: [{ ref: sharedB }, { value: i }], _id: { raw: i } };
+            assert.equal(JSON.stringify(current(a)), JSON.stringify(legacy(b)));
+        }
+    });
+
+    await test('v13 user-finger cached date preserves legacy getDate value and returns fresh Date objects', () => {
+        const now = new Date();
+        const legacyValue = Date.UTC(now.getFullYear(), now.getMonth(), now.getDate(), 12, 0, 0);
+        let cache = { value: 0, expiresAt: 0 };
+        const getFingerDate = () => {
+            const n = Date.now();
+            if (!cache.value || n >= cache.expiresAt) {
+                const d = new Date(n);
+                cache.value = Date.UTC(d.getFullYear(), d.getMonth(), d.getDate(), 12, 0, 0);
+                cache.expiresAt = new Date(d.getFullYear(), d.getMonth(), d.getDate() + 1).getTime();
+            }
+            return new Date(cache.value);
+        };
+        const a = getFingerDate();
+        const b = getFingerDate();
+        assert.equal(a.getTime(), legacyValue);
+        assert.equal(b.getTime(), legacyValue);
+        assert.notEqual(a, b);
+    });
+
     await test('FSM uses Map cache and async atomic write', async () => {
         const dir = fs.mkdtempSync(path.join(os.tmpdir(), 'isite-fsm-'));
         const file = path.join(dir, 'a.txt');

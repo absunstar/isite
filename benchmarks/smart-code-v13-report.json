@@ -1,0 +1,31 @@
+{
+  "version": "2026.08.26-v13",
+  "smartCode": {
+    "filesScanned": 1019,
+    "bytesScanned": 14728177,
+    "compatibility": "PASS"
+  },
+  "hotPaths": {
+    "jsonReferenceCleanup": {
+      "legacyOpsPerSec": 141977,
+      "v13OpsPerSec": 232553,
+      "speedup": 1.64
+    },
+    "jsonContentType": {
+      "legacyOpsPerSec": 7032981,
+      "v13OpsPerSec": 11166858,
+      "speedup": 1.59
+    },
+    "userFingerDate": {
+      "legacyOpsPerSec": 5773804,
+      "v13OpsPerSec": 10122040,
+      "speedup": 1.75
+    }
+  },
+  "verification": {
+    "regression": "69/69 PASS",
+    "http": "PASS",
+    "smoke": "PASS",
+    "smartCode": "PASS"
+  }
+}

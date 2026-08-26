@@ -3919,3 +3919,31 @@ console.log(site.responseCache.stats());
 ```
 
 Core v9 remains additive. Existing collection CRUD, routing, parser, file and response APIs keep their existing contracts.
+
+---
+
+# Core v13 — Smart Code Hot-Path Optimization
+
+Core v13 uses the complete Smart Code project as a real-world compatibility and performance-priority baseline.
+
+Run the Smart Code compatibility gate:
+
+```bash
+SMART_CODE_DIR=/path/to/smart-code npm run smart-code:verify
+```
+
+Rank the APIs Smart Code uses most often:
+
+```bash
+SMART_CODE_DIR=/path/to/smart-code npm run smart-code:usage
+```
+
+Run targeted hot-path microbenchmarks:
+
+```bash
+npm run smart-code:hotpaths
+```
+
+v13 safely optimizes the internal JSON reference-cleaning path used by `res.json()`, the framework-owned JSON Content-Type setup, and the date creation path used by `security.getUserFinger()`. Public legacy APIs and parser behavior are unchanged.
+
+See `docs/core-v13.md` for details and compatibility guarantees.

@@ -478,23 +478,31 @@ exports = module.exports = function init(____0) {
                 return fn.fromJson(fn.from123(data));
             };
 
+    // v13: allocation-reduced implementation of the legacy reference cleaner.
+    // Semantics are intentionally unchanged: traversal is depth-first in own enumerable
+    // key order, repeated object references are deleted, and `_id` values are not traversed.
     ____0.removeRefObject = function (obj) {
         const seen = new Set();
-        const recurse = (obj) => {
-            seen.add(obj, true);
-            for (let [k, v] of Object.entries(obj)) {
-                if (k !== '_id') {
-                    if (v && typeof v == 'object') {
-                        if (seen.has(v)) {
-                            delete obj[k];
-                        } else {
-                            recurse(v);
-                        }
+
+        const recurse = (value) => {
+            seen.add(value);
+            const keys = Object.keys(value);
+            for (let i = 0; i < keys.length; i++) {
+                const key = keys[i];
+                if (key === '_id') continue;
+
+                const child = value[key];
+                if (child && typeof child === 'object') {
+                    if (seen.has(child)) {
+                        delete value[key];
+                    } else {
+                        recurse(child);
                     }
                 }
             }
-            return obj;
+            return value;
         };
+
         return recurse(obj);
     };
 
