@@ -326,6 +326,34 @@ function routingSite() {
         assert.deepEqual(hidden, ['DATA', 'USER', 'SITE', 'REQ']);
     });
 
+    await test('v22 from123 fast path preserves legacy decoder edge behavior', () => {
+        const full = require('../index.js')({
+            name: 'from123-v22-test', apps: false, stdin: false, log: false, www: false,
+            mongodb: { enabled: false }, security: { enabled: false },
+            session: { enabled: false, save: false, storage: 'file' }, port: 0,
+        });
+        const legacy = (data) => {
+            if (!data) return '';
+            let newData = '';
+            for (let i = 0; i < data.length; i++) {
+                const num = data[i] + data[i + 1];
+                const letters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/=';
+                const numbers = [];
+                for (let n = 11; n < 99; n++) if (n % 10 !== 0 && n % 11 !== 0) numbers.push(n);
+                const index = numbers.indexOf(parseInt(num));
+                newData += letters[index];
+                i++;
+            }
+            return Buffer.from(newData, 'base64').toString();
+        };
+        const samples = [
+            full.to123('hello'), full.to123('مرحبا'), full.to123(''),
+            '1112', '11', '1', 'abc', '11x2', '0011', null, undefined, '', 0,
+        ];
+        for (const sample of samples) assert.equal(full.from123(sample), legacy(sample));
+        full.diagnostics?.close?.();
+    });
+
     await test('Core v3 inflight deduplicates concurrent work', async () => {
         const site = { zlib: require('node:zlib'), http2: require('node:http2'), fetch: globalThis.fetch };
         require('../lib/core-v3.js')(site);
@@ -1384,6 +1412,125 @@ function routingSite() {
         assert.equal(report.ok, true);
         assert.equal(typeof report.delta.heapUsed, 'number');
         assert.deepEqual(site.leaks.watches(), []);
+    });
+
+
+    await test('Core v17 request telemetry attributes resources without changing request results', async () => {
+        const { EventEmitter } = require('node:events');
+        let context = { id: 'ctx-1', requestId: 'req-1' };
+        const site = {
+            context: { get() { return context; } },
+            abort: { throwIfAborted(signal) { if (signal?.aborted) throw signal.reason || new Error('aborted'); }, create() { return new AbortController(); } },
+            health() { return {}; },
+            mongoTelemetry: { record(input) { return { collection: input.collection, operation: input.operation, ms: input.ms || 0 }; } },
+        };
+        require('../lib/core-v17.js')(site);
+        site.requestTelemetry.configure({ enabled: true });
+        const req = new EventEmitter(); req.method = 'GET'; req.url = '/users/12?x=1'; req.headers = { host: 'x' };
+        const res = new EventEmitter(); res.statusCode = 200; res.writableEnded = false;
+        const id = site.requestTelemetry.begin(req, res, { context });
+        site.requestTelemetry.mark(id, 'route');
+        site.mongoTelemetry.record({ collection: 'users', operation: 'findMany', ms: 12 });
+        const row = site.requestTelemetry.end(id, { status: 200 });
+        assert.equal(row.status, 200);
+        assert.equal(row.resources.length, 1);
+        assert.equal(row.resources[0].type, 'mongo');
+        assert.equal(row.resources[0].collection, 'users');
+        assert.equal(site.requestTelemetry.report()[0].route, '/users/:id');
+    });
+
+    await test('Core v17 request AbortSignal aborts only when the connection aborts', () => {
+        const { EventEmitter } = require('node:events');
+        const site = {
+            abort: { create() { const c = new AbortController(); c.cleanup = () => {}; return c; }, throwIfAborted() {} },
+            health() { return {}; },
+        };
+        require('../lib/core-v17.js')(site);
+        const req = new EventEmitter();
+        const res = new EventEmitter(); res.writableEnded = false;
+        const controller = site.requestAbort.attach(req, res);
+        assert.equal(req.signal, controller.signal);
+        assert.equal(controller.signal.aborted, false);
+        req.emit('aborted');
+        assert.equal(controller.signal.aborted, true);
+        assert.equal(controller.signal.reason.code, 'ISITE_HTTP_ABORTED');
+    });
+
+    await test('Core v17 HTTP plans are opt-in, ordered and abort-aware', async () => {
+        const site = {
+            abort: { throwIfAborted(signal) { if (signal?.aborted) throw signal.reason || new Error('aborted'); } },
+            requestAbort: { signal(req) { return req.signal || null; } },
+            health() { return {}; },
+        };
+        require('../lib/core-v17.js')(site);
+        const calls = [];
+        const plan = site.httpPlan.compile([
+            { name: 'one', run(req, res, state) { calls.push('one'); return { value: state.value + 1 }; } },
+            { name: 'two', async run(req, res, state) { calls.push('two'); return { value: state.value * 2 }; } },
+        ]);
+        const out = await plan({}, {}, { value: 2 });
+        assert.deepEqual(calls, ['one', 'two']);
+        assert.equal(out.value, 6);
+        assert.deepEqual(plan.steps, ['one', 'two']);
+    });
+
+
+    await test('Core v18 Mongo shapes fingerprint query structure without retaining values', () => {
+        const site = { health() { return {}; }, stableKey(...parts) { return JSON.stringify(parts); } };
+        require('../lib/core-v18.js')(site);
+        const a = site.mongoShapes.fingerprint('db.users', 'findMany', {
+            where: { email: 'a@example.com', age: { $gt: 20 }, company: { id: 7 } },
+            sort: { createdAt: -1 },
+            limit: 50,
+        });
+        const b = site.mongoShapes.fingerprint('db.users', 'findMany', {
+            where: { email: 'b@example.com', age: { $gt: 70 }, company: { id: 99 } },
+            sort: { createdAt: -1 },
+            limit: 10,
+        });
+        assert.equal(a.key, b.key);
+        assert.deepEqual(a.whereFields, ['age', 'company.id', 'email']);
+        assert.equal(a.key.includes('a@example.com'), false);
+        assert.equal(a.key.includes('99'), false);
+    });
+
+    await test('Core v18 Mongo shapes aggregate execution cost and recommend but never create indexes', () => {
+        const site = { health() { return {}; }, stableKey(...parts) { return JSON.stringify(parts); } };
+        require('../lib/core-v18.js')(site);
+        const shape = site.mongoShapes.begin('db.orders', 'findMany', {
+            where: { company: { id: 1 }, status: 'open' }, sort: { date: -1 }
+        });
+        site.mongoShapes.end(shape, { ms: 180, nReturned: 10, docsExamined: 1000, keysExamined: 1000, stage: 'COLLSCAN' });
+        const row = site.mongoShapes.get(shape.key);
+        assert.equal(row.count, 1);
+        assert.equal(row.completed, 1);
+        assert.equal(row.scanRatio, 100);
+        const suggestions = site.mongoShapes.recommend({ minCount: 1, limit: 5 });
+        assert.equal(suggestions.length, 1);
+        assert.deepEqual(suggestions[0].index, { 'company.id': 1, status: 1, date: -1 });
+        assert.equal(suggestions[0].automatic, false);
+        assert.ok(suggestions[0].reasons.some(x => x.includes('COLLSCAN')));
+    });
+
+    await test('Core v18 explain sampling is explicit and records execution without auto-running explain', async () => {
+        const site = {
+            health() { return {}; },
+            stableKey(...parts) { return JSON.stringify(parts); },
+            mongoTelemetry: { extractExplain() { return { docsExamined: 50, keysExamined: 10, nReturned: 5, stage: 'IXSCAN' }; } },
+        };
+        require('../lib/core-v18.js')(site);
+        let runs = 0;
+        assert.equal(site.mongoShapes.stats().executions, 0);
+        const result = await site.mongoShapes.sampleExplain('db.items', 'findMany', { where: { active: true } }, async () => {
+            runs++;
+            return { queryPlanner: {}, executionStats: {} };
+        });
+        assert.equal(runs, 1);
+        assert.equal(typeof result.shapeKey, 'string');
+        const row = site.mongoShapes.get(result.shapeKey);
+        assert.equal(row.docsExamined, 50);
+        assert.equal(row.keysExamined, 10);
+        assert.equal(row.totalReturned, 5);
     });
 
     console.log(`\n${passed} tests passed`);

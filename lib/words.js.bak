@@ -1,32 +1,23 @@
 module.exports = function init(____0) {
   let app = function () {};
-  let wordsCollection;
-  const getWordsCollection = () => wordsCollection || (wordsCollection = ____0.connectCollection('words'));
-  Object.defineProperty(app, '$collection', { enumerable: true, configurable: true, get: getWordsCollection });
+  app.$collection = ____0.connectCollection('words');
   app.list = [];
   app.byName = new Map();
 
-  // v20: skip a collection wrapper + preload query when MongoDB is disabled.
-  // The public $collection property remains available and initializes lazily.
-  if (____0.options.mongodb && ____0.options.mongodb.enabled) {
-    const preload = setImmediate(() => {
-      getWordsCollection().findAll(
-        { limit: 10000 },
-        (err, docs) => {
-          if (!err && docs) {
-            docs.forEach((doc) => {
-              const previous = app.byName.get(doc.name);
-              if (!previous) app.list.unshift(doc);
-              else { const index = app.list.indexOf(previous); if (index !== -1) app.list[index] = doc; }
-              app.byName.set(doc.name, doc);
-            });
-          }
-        },
-        true
-      );
-    });
-    if (preload && preload.unref) preload.unref();
-  }
+  app.$collection.findAll(
+    { limit: 10000 },
+    (err, docs) => {
+      if (!err && docs) {
+        docs.forEach((doc) => {
+          const previous = app.byName.get(doc.name);
+          if (!previous) app.list.unshift(doc);
+          else { const index = app.list.indexOf(previous); if (index !== -1) app.list[index] = doc; }
+          app.byName.set(doc.name, doc);
+        });
+      }
+    },
+    true
+  );
 
   app.word = function (obj) {
     if (typeof obj === 'string') {

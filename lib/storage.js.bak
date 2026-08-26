@@ -3,33 +3,23 @@ module.exports = function init(____0) {
     storage.list = [];
     storage.byKey = new Map();
     storage.busy = true;
-    // v20 startup fast path: when MongoDB is disabled there is nothing to
-    // preload. Keep the legacy $collectoin property available, but create the
-    // wrapper only on first access instead of paying collection setup during init.
-    let storageCollection;
-    const getStorageCollection = () => storageCollection || (storageCollection = ____0.connectCollection({ collection: 'app_options', identity: { enabled: true } }));
-    Object.defineProperty(storage, '$collectoin', { enumerable: true, configurable: true, get: getStorageCollection });
+    storage.$collectoin = ____0.connectCollection({ collection: 'app_options', identity: { enabled: true } });
 
-    if (____0.options.mongodb && ____0.options.mongodb.enabled) {
-        const preload = setImmediate(() => getStorageCollection().findAll(
-            { where: { app_name: 'storage' }, limit: 10000 },
-            (err, docs) => {
-                if (!err && docs && docs.length > 0) {
-                    docs.forEach((doc) => {
-                        if (!storage.byKey.has(doc.key)) {
-                            storage.list.push(doc);
-                            storage.byKey.set(doc.key, doc);
-                        }
-                    });
-                }
-                storage.busy = false;
-            },
-            true,
-        ));
-        if (preload && preload.unref) preload.unref();
-    } else {
-        storage.busy = false;
-    }
+    storage.$collectoin.findAll(
+        { where: { app_name: 'storage' }, limit: 10000 },
+        (err, docs) => {
+            if (!err && docs && docs.length > 0) {
+                docs.forEach((doc) => {
+                    if (!storage.byKey.has(doc.key)) {
+                        storage.list.push(doc);
+                        storage.byKey.set(doc.key, doc);
+                    }
+                });
+            }
+            storage.busy = false;
+        },
+        true,
+    );
 
     storage.save = function () {
         storage.list.forEach((doc, i) => {

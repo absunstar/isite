@@ -448,11 +448,13 @@ exports = module.exports = function init(____0) {
         return newData;
     };
 
-    fn.from123 = (data) => {
-        if (!data) {
-            return '';
-        }
-
+    // Fast path for the framework's numeric Base64 transport. Public edge
+    // behaviour is preserved by falling back to the legacy algorithm for
+    // malformed/non-digit input.
+    const $base64NumberIndex = new Int16Array(100);
+    $base64NumberIndex.fill(-1);
+    for (let i = 0; i < fn.$base64Numbers.length; i++) $base64NumberIndex[fn.$base64Numbers[i]] = i;
+    const from123Legacy = (data) => {
         let newData = '';
         for (let i = 0; i < data.length; i++) {
             let num = data[i] + data[i + 1];
@@ -460,9 +462,20 @@ exports = module.exports = function init(____0) {
             newData += fn.$base64Letter[index];
             i++;
         }
-        newData = fn.fromBase64(newData);
-
-        return newData;
+        return fn.fromBase64(newData);
+    };
+    fn.from123 = (data) => {
+        if (!data) return '';
+        let newData = '';
+        for (let i = 0; i < data.length; i += 2) {
+            const a = data.charCodeAt(i) - 48;
+            const b = data.charCodeAt(i + 1) - 48;
+            if (a < 0 || a > 9 || b < 0 || b > 9) return from123Legacy(data);
+            const index = $base64NumberIndex[a * 10 + b];
+            if (index < 0) return from123Legacy(data);
+            newData += fn.$base64Letter[index];
+        }
+        return fn.fromBase64(newData);
     };
 
     ____0.hide = ____0.hideObject = (data) => {

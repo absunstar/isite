@@ -1,6 +1,6 @@
 # iSite
 
-**Current version:** `2026.08.26-v11`
+**Current version:** `2026.08.26-v18`
 
 iSite is a Node.js web framework used by Social Browser and other applications. It provides routing, file serving, server-side parsing, sessions, security integration, MongoDB helpers, WebSocket support, caching, diagnostics, reliability primitives, high-throughput database helpers, and backward-compatible legacy APIs.
 
@@ -4024,3 +4024,76 @@ Core v16 adds opt-in infrastructure without changing legacy API behavior:
 - `site.validate.routes/options/all` for report-only route and configuration validation.
 
 No existing route, MongoDB, collection, parser, request, response, file, session, or security method is given new timeout/cancellation behavior automatically. The framework compatibility gate now checks both the historical v14 surface and a new v16 baseline so APIs added in v15/v16 are protected in future releases too.
+
+
+## Core v17 — HTTP Execution & Attribution
+
+Core v17 adds request-bound `AbortSignal` support (`req.signal` / `req.abortSignal`), bounded request telemetry with slow-resource attribution, Mongo-to-request correlation, and opt-in compiled HTTP execution plans via `site.httpPlan`. Legacy routing and request/response APIs are unchanged. See `docs/core-v17.md`.
+
+
+## Core v18 — Mongo Query Shapes & Execution Intelligence
+
+Core v18 correlates Mongo query structure with execution telemetry without changing legacy query behavior. Query fingerprints store field/operator structure and value types, not the actual query values.
+
+```js
+site.mongoShapes.stats();
+site.mongoShapes.report();
+site.mongoShapes.slow();
+site.mongoShapes.recommend();
+```
+
+Index recommendations are advisory only; iSite never creates an index automatically. Explicit explain sampling is available through `site.mongoShapes.sampleExplain(...)`. Legacy `find`, `findMany`, `findOne`, `count`, and `aggregate` signatures and execution semantics remain unchanged.
+
+See `docs/core-v18.md`.
+
+## Core v19 — Startup Fast Path
+
+Core v19 optimizes time-to-listen without changing legacy APIs. HTTP-only startup no longer reads TLS files; readiness uses the native `listen` event instead of 100ms polling; outbound WebSocket support is deferred until after HTTP readiness; and expensive capability/native-module probes are lazy.
+
+Use `npm run benchmark:startup` to measure require/init/start-ready time and `npm run startup-test` to verify startup invariants.
+
+
+
+## Core v20 — Ultra-Fast Init
+
+Core v20 reduces cold initialization work without changing legacy APIs. When MongoDB is disabled, the built-in storage/words/logs services keep their legacy collection properties but initialize those wrappers lazily. Diagnostics-only native modules are also deferred until first use. See `docs/core-v20.md`.
+
+
+## Core v21 — Startup Bundle
+
+Core v21 reduces cold `init()` time by loading the additive core modules through a generated startup bundle while keeping every original `lib/core-v*.js` file available for compatibility. Mongo/security background setup that was already asynchronous is started on the next event-loop turn so `server.start()` reaches the listener sooner. Use `npm run core-bundle-test` to verify that the generated bundle is synchronized with the authoritative source modules. See `docs/core-v21.md`.
+
+---
+
+## Core v22 — Startup Fast Path
+
+Version `2026.08.26-v22` continues the startup-performance work without replacing any legacy API.
+
+### Default startup improvements
+
+- WebSocket ready logging now uses `site.log()` instead of unconditional stdout, so `log: false` avoids startup I/O.
+- `from123()` has a numeric fast path used by iSite's internal encoded constants; malformed or non-numeric input falls back to the exact legacy decoder.
+- The parser hidden-token compatibility regression remains protected.
+
+### Optional repeated-process compile cache
+
+On Node versions that expose `node:module.enableCompileCache()`, repeated process startup can additionally use Node's built-in compile cache:
+
+```bash
+ISITE_COMPILE_CACHE=1 node server.js
+```
+
+This is intentionally **not enabled by default**. Creating a brand-new compile cache can make the first-ever process slightly slower, while subsequent processes can start substantially faster. Older Node versions simply ignore this optional fast path.
+
+### Verification
+
+```bash
+npm run verify
+SMART_CODE_DIR=/path/to/project npm run smart-code:verify
+```
+
+The v22 framework baseline protects the complete public surface in addition to all historical v14/v16/v17/v18/v19/v20/v21 baselines.
+
+### Core v23 startup fast path
+
+Core v23 adds a generated service startup bundle to reduce CommonJS resolution/compile work before `server.start()`. Original `lib/*.js` modules remain available and authoritative. Run `npm run build:service-startup-bundle` after changing one of the bundled sources; `npm run service-bundle-test` verifies synchronization. See `docs/core-v23.md`.

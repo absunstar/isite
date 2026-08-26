@@ -1,5 +1,5 @@
 module.exports = function init(options) {
-    console.log('>======== Nodejs Loading ==========<');
+    // v20: avoid unconditional stdout I/O on every framework init.
     const ____0 = function () {};
 
     ____0.args = {};
@@ -16,23 +16,32 @@ module.exports = function init(options) {
     ____0._0_a405 = !0; // 4334135645788275237931514658376742387653423921514718526246719191
     ____0.strings = [];
     ____0.Module = require('node:module');
+    // v22 optional repeated-start fast path. It stays opt-in because creating
+    // a brand-new compile cache can make the very first process slightly slower.
+    // Set ISITE_COMPILE_CACHE=1 when repeated process startups matter more.
+    if (/^(1|true|yes)$/i.test(String(process.env.ISITE_COMPILE_CACHE || '')) && typeof ____0.Module.enableCompileCache === 'function') {
+        try { ____0.Module.enableCompileCache(); } catch (_) {}
+    }
     ____0.http = require('node:http');
-    ____0.http2 = require('node:http2');
-    ____0.https = require('node:https');
-    ____0.net = require('node:net');
     ____0.url = require('node:url');
     ____0.fs = require('node:fs');
     ____0.path = require('node:path');
-    ____0.child_process = require('node:child_process');
-    ____0.readline = require('node:readline');
-    ____0.zlib = require('node:zlib');
-    ____0.querystring = require('node:querystring');
 
     const lazy = function (names, loader) {
         let loaded;
         const get = function () { return loaded === undefined ? (loaded = loader()) : loaded; };
         for (const name of names) Object.defineProperty(____0, name, { configurable: true, enumerable: true, get });
     };
+    // Startup critical path: built-ins that are not required to open a normal
+    // HTTP listener remain lazy. Accessing the public property still returns
+    // the exact native module, preserving the legacy API surface.
+    lazy(['http2'], () => require('node:http2'));
+    lazy(['https'], () => require('node:https'));
+    lazy(['net'], () => require('node:net'));
+    lazy(['child_process'], () => require('node:child_process'));
+    lazy(['readline'], () => require('node:readline'));
+    lazy(['zlib'], () => require('node:zlib'));
+    lazy(['querystring'], () => require('node:querystring'));
     lazy(['pdf', 'PDF'], () => require('pdf-lib'));
     lazy(['archiver'], () => require('archiver'));
     lazy(['fontkit', 'FONTKIT'], () => require('@pdf-lib/fontkit'));
@@ -249,8 +258,12 @@ module.exports = function init(options) {
 
     ____0.log(`Process ID : ${process.pid} `);
 
-    ____0.fsm = require('./lib/data.js')(____0);
-    ____0.fsm = require('./lib/fsm.js')(____0);
+    // v23 startup fast path: load the stable legacy/service initializers through
+    // one generated CommonJS module. The original lib/*.js files stay public
+    // and authoritative for direct legacy requires.
+    const startupServices = require('./lib/service-startup-bundle.js');
+    ____0.fsm = startupServices.data(____0);
+    ____0.fsm = startupServices.fsm(____0);
 
     ____0.fileList = ____0.fsm.list;
     ____0.fileStatSync = ____0.fsm.statSync;
@@ -283,20 +296,26 @@ module.exports = function init(options) {
     ____0.createDir = ____0.mkDir = ____0.fsm.mkDir;
     ____0.createDirSync = ____0.mkdirSync = ____0.fsm.mkdirSync;
 
-    ____0.diagnostics = require('./lib/performance.js')(____0);
-    ____0.coreV3 = require('./lib/core-v3.js')(____0);
-    ____0.coreV4 = require('./lib/core-v4.js')(____0);
-    ____0.coreV5 = require('./lib/core-v5.js')(____0);
-    ____0.coreV6 = require('./lib/core-v6.js')(____0);
-    ____0.coreV7 = require('./lib/core-v7.js')(____0);
-    ____0.coreV8 = require('./lib/core-v8.js')(____0);
-    ____0.coreV9 = require('./lib/core-v9.js')(____0);
-    ____0.coreV10 = require('./lib/core-v10.js')(____0);
-    ____0.coreV11 = require('./lib/core-v11.js')(____0);
-    ____0.coreV15 = require('./lib/core-v15.js')(____0);
-    ____0.coreV16 = require('./lib/core-v16.js')(____0);
+    // v21 startup fast path: load additive core initializers through one
+    // generated CommonJS module. Original lib/core-v*.js files stay public
+    // and unchanged for direct legacy requires.
+    const startupCore = require('./lib/core-startup-bundle.js');
+    ____0.diagnostics = startupCore.diagnostics(____0);
+    ____0.coreV3 = startupCore.coreV3(____0);
+    ____0.coreV4 = startupCore.coreV4(____0);
+    ____0.coreV5 = startupCore.coreV5(____0);
+    ____0.coreV6 = startupCore.coreV6(____0);
+    ____0.coreV7 = startupCore.coreV7(____0);
+    ____0.coreV8 = startupCore.coreV8(____0);
+    ____0.coreV9 = startupCore.coreV9(____0);
+    ____0.coreV10 = startupCore.coreV10(____0);
+    ____0.coreV11 = startupCore.coreV11(____0);
+    ____0.coreV15 = startupCore.coreV15(____0);
+    ____0.coreV16 = startupCore.coreV16(____0);
+    ____0.coreV17 = startupCore.coreV17(____0);
+    ____0.coreV18 = startupCore.coreV18(____0);
 
-    ____0.routing = require('./lib/routing.js')(____0);
+    ____0.routing = startupServices.routing(____0);
 
     ____0.off = ____0.routing.off;
     ____0.onREQUEST = ____0.routing.onREQUEST;
@@ -324,42 +343,42 @@ module.exports = function init(options) {
     ____0.all = ____0.onALL = ____0.routing.onALL;
     ____0.run = ____0.start = ____0.listen = ____0.routing.start;
 
-    require('./lib/vars.js')(____0);
+    startupServices.vars(____0);
 
     //DataBase Management Oprations
 
-    ____0.mongodb = require('./lib/mongodb.js')(____0);
+    ____0.mongodb = startupServices.mongodb(____0);
     ____0.connectCollection = function (option, db) {
         return require('./lib/collection')(____0, option, db);
     };
 
-    ____0.words = require('./lib/words.js')(____0);
+    ____0.words = startupServices.words(____0);
     ____0.word = ____0.words.word;
     ____0.words.addFile(____0.dir + '/json/words.json');
 
-    ____0.storage = require('./lib/storage.js')(____0).fn;
-    ____0.logs = require('./lib/logs.js')(____0).fn;
+    ____0.storage = startupServices.storage(____0).fn;
+    ____0.logs = startupServices.logs(____0).fn;
 
     if (____0.options.security.enabled) {
         ____0.security = require('./lib/security.js')(____0);
     }
 
-    ____0.cookie = require('./lib/cookie.js');
+    ____0.cookie = startupServices.cookie;
 
-    ____0.sessions = require('./lib/sessions')(____0);
-    ____0.session = require('./lib/session.js');
+    ____0.sessions = startupServices.sessions(____0);
+    ____0.session = startupServices.session;
 
-    ____0.parser = require('./lib/parser.js');
-    require('./lib/ws.js')(____0);
-    require('./lib/wsClient.js')(____0);
-    require('./lib/email.js')(____0);
-    require('./lib/integrated.js')(____0);
-    require('./lib/browser.js')(____0);
-    require('./lib/helper.js')(____0);
-    require('./lib/pdf.js')(____0);
-    require('./lib/app.js')(____0);
-    require('./lib/eval.js')(____0);
-    require('./lib/proxy.js')(____0);
+    ____0.parser = startupServices.parser;
+    startupServices.ws(____0);
+    startupServices.wsClient(____0);
+    startupServices.email(____0);
+    startupServices.integrated(____0);
+    startupServices.browser(____0);
+    startupServices.helper(____0);
+    startupServices.pdf(____0);
+    startupServices.app(____0);
+    startupServices.evalMod(____0);
+    startupServices.proxy(____0);
 
     //Master Pages
     ____0.masterPages = [];
@@ -386,7 +405,7 @@ module.exports = function init(options) {
         if (savingTimer.unref) savingTimer.unref();
     }
 
-    ____0.dashboard = require(__dirname + '/lib/dashboard.js');
+    ____0.dashboard = startupServices.dashboard;
     ____0.dashboard(____0);
 
     ____0.importApps = function (app_dir) {
