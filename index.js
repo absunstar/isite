@@ -8,19 +8,30 @@ module.exports = function init(options) {
         ____0.args[arg[0].replace('--', '')] = arg[1] || true;
     });
 
-    ____0.package = require(__dirname + '/package.json');
+    let packageValue;
+    Object.defineProperty(____0, 'package', { configurable: true, enumerable: true, get() {
+        if (packageValue === undefined) packageValue = require(__dirname + '/package.json');
+        Object.defineProperty(____0, 'package', { configurable: true, enumerable: true, writable: true, value: packageValue });
+        return packageValue;
+    }, set(value) { packageValue = value; Object.defineProperty(____0, 'package', { configurable: true, enumerable: true, writable: true, value }); } });
 
     ____0.localDir = __dirname;
     ____0.cwd = process.cwd();
     ____0.lib = {};
     ____0._0_a405 = !0; // 4334135645788275237931514658376742387653423921514718526246719191
     ____0.strings = [];
-    ____0.Module = require('node:module');
+    let moduleValue;
+    Object.defineProperty(____0, 'Module', { configurable: true, enumerable: true, get() {
+        if (moduleValue === undefined) moduleValue = require('node:module');
+        Object.defineProperty(____0, 'Module', { configurable: true, enumerable: true, writable: true, value: moduleValue });
+        return moduleValue;
+    }, set(value) { moduleValue = value; Object.defineProperty(____0, 'Module', { configurable: true, enumerable: true, writable: true, value }); } });
     // v22 optional repeated-start fast path. It stays opt-in because creating
     // a brand-new compile cache can make the very first process slightly slower.
     // Set ISITE_COMPILE_CACHE=1 when repeated process startups matter more.
-    if (/^(1|true|yes)$/i.test(String(process.env.ISITE_COMPILE_CACHE || '')) && typeof ____0.Module.enableCompileCache === 'function') {
-        try { ____0.Module.enableCompileCache(); } catch (_) {}
+    if (/^(1|true|yes)$/i.test(String(process.env.ISITE_COMPILE_CACHE || ''))) {
+        const Module = ____0.Module;
+        if (typeof Module.enableCompileCache === 'function') { try { Module.enableCompileCache(); } catch (_) {} }
     }
     ____0.http = require('node:http');
     ____0.url = require('node:url');
@@ -261,7 +272,10 @@ module.exports = function init(options) {
     // v23 startup fast path: load the stable legacy/service initializers through
     // one generated CommonJS module. The original lib/*.js files stay public
     // and authoritative for direct legacy requires.
-    const startupServices = require('./lib/service-startup-bundle.js');
+    const noMongoStartup = ____0.options.mongodb && ____0.options.mongodb.enabled === false;
+    const startupServices = noMongoStartup
+        ? require('./lib/service-startup-bundle-nomongo.js')
+        : require('./lib/service-startup-bundle.js');
     ____0.fsm = startupServices.data(____0);
     ____0.fsm = startupServices.fsm(____0);
 
@@ -301,7 +315,40 @@ module.exports = function init(options) {
     // exposed immediately through lazy own-properties and are initialized in
     // their historical order on first access. This keeps old/new APIs visible
     // without parsing/executing the advanced core bundle before first listen.
-    ____0.coreV3 = require('./lib/core-v3.js')(____0);
+    // v27 startup fast path: only the scheduler is required before listen.
+    // The rest of Core v3 remains an immediate public surface but its 27KB
+    // implementation is parsed/executed on first use or during post-listen warm-up.
+    ____0.scheduler = require('./lib/scheduler.js')(____0);
+    let coreV3Ready = false;
+    let coreV3Loading = false;
+    const initCoreV3 = function () {
+        if (coreV3Ready || coreV3Loading) return ____0.coreV3;
+        coreV3Loading = true;
+        try {
+            const value = require('./lib/core-v3.js')(____0);
+            coreV3Ready = true;
+            return value;
+        } finally { coreV3Loading = false; }
+    };
+    const coreV3Surface = [
+        'capabilities','featuresV3','events','hooks','inflight','TaggedCache','cacheV3','cache','cacheGetOrLoad',
+        'withTimeout','retry','circuitBreaker','pipeline','workers','fetchReliable','httpCache','profile','profileReport',
+        'memory','shutdown','closeGracefully','coreV3'
+    ];
+    for (const name of coreV3Surface) {
+        if (Object.prototype.hasOwnProperty.call(____0, name)) continue;
+        Object.defineProperty(____0, name, {
+            configurable: true, enumerable: true,
+            get() {
+                if (coreV3Loading) return undefined;
+                initCoreV3();
+                const d = Object.getOwnPropertyDescriptor(____0, name);
+                return d && Object.prototype.hasOwnProperty.call(d, 'value') ? d.value : undefined;
+            },
+            set(value) { Object.defineProperty(____0, name, { configurable: true, enumerable: true, writable: true, value }); },
+        });
+    }
+    Object.defineProperty(____0, '_initCoreV3', { configurable: true, enumerable: false, value: initCoreV3 });
 
     let advancedCoreReady = false;
     let advancedCoreLoading = false;
@@ -309,6 +356,7 @@ module.exports = function init(options) {
         if (advancedCoreReady || advancedCoreLoading) return;
         advancedCoreLoading = true;
         try {
+            initCoreV3();
             const startupCore = require('./lib/core-startup-bundle.js');
             ____0.diagnostics = startupCore.diagnostics(____0);
             ____0.coreV4 = startupCore.coreV4(____0);
@@ -387,7 +435,20 @@ module.exports = function init(options) {
 
     //DataBase Management Oprations
 
-    ____0.mongodb = startupServices.mongodb(____0);
+    if (noMongoStartup) {
+        let mongoValue;
+        Object.defineProperty(____0, 'mongodb', {
+            configurable: true, enumerable: true,
+            get() {
+                if (mongoValue === undefined) mongoValue = require('./lib/mongodb.js')(____0);
+                Object.defineProperty(____0, 'mongodb', { configurable: true, enumerable: true, writable: true, value: mongoValue });
+                return mongoValue;
+            },
+            set(value) { mongoValue = value; Object.defineProperty(____0, 'mongodb', { configurable: true, enumerable: true, writable: true, value }); },
+        });
+    } else {
+        ____0.mongodb = startupServices.mongodb(____0);
+    }
     ____0.connectCollection = function (option, db) {
         return require('./lib/collection')(____0, option, db);
     };
@@ -519,7 +580,7 @@ module.exports = function init(options) {
 
     ____0.log('');
     ____0.log('************************************');
-    ____0.log(`****** isite version ${____0.package.version} *******`);
+    if (____0.options.log) ____0.log(`****** isite version ${____0.package.version} *******`);
     ____0.log('************************************');
     ____0.log('');
 

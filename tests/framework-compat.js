@@ -26,7 +26,10 @@ const previousV21Baseline = path.join(__dirname, 'compat', 'isite-v21-public-sur
 const previousV22Baseline = path.join(__dirname, 'compat', 'isite-v22-public-surface.json');
 const previousV23Baseline = path.join(__dirname, 'compat', 'isite-v23-public-surface.json');
 const previousV25Baseline = path.join(__dirname, 'compat', 'isite-v25-public-surface.json');
-const latestBaseline = path.join(__dirname, 'compat', 'isite-v26-public-surface.json');
+const previousV26Baseline = path.join(__dirname, 'compat', 'isite-v26-public-surface.json');
+const previousV27Baseline = path.join(__dirname, 'compat', 'isite-v27-public-surface.json');
+const previousV28Baseline = path.join(__dirname, 'compat', 'isite-v28-public-surface.json');
+const latestBaseline = path.join(__dirname, 'compat', 'isite-v29-public-surface.json');
 const historical = site.compat.compareFrameworkSurface(historicalBaseline);
 assert.equal(historical.ok, true, JSON.stringify(historical, null, 2));
 const previous = site.compat.compareFrameworkSurface(previousBaseline);
@@ -47,6 +50,12 @@ const previousV23 = site.compat.compareFrameworkSurface(previousV23Baseline);
 assert.equal(previousV23.ok, true, JSON.stringify(previousV23, null, 2));
 const previousV25 = site.compat.compareFrameworkSurface(previousV25Baseline);
 assert.equal(previousV25.ok, true, JSON.stringify(previousV25, null, 2));
+const previousV26 = site.compat.compareFrameworkSurface(previousV26Baseline);
+assert.equal(previousV26.ok, true, JSON.stringify(previousV26, null, 2));
+const previousV27 = site.compat.compareFrameworkSurface(previousV27Baseline);
+assert.equal(previousV27.ok, true, JSON.stringify(previousV27, null, 2));
+const previousV28 = site.compat.compareFrameworkSurface(previousV28Baseline);
+assert.equal(previousV28.ok, true, JSON.stringify(previousV28, null, 2));
 const baseline = latestBaseline;
 const result = site.compat.compareFrameworkSurface(baseline);
 
@@ -78,6 +87,9 @@ console.log('PASS iSite v22 public API/alias surface preserved');
 console.log('PASS iSite v23 public API/alias surface preserved');
 console.log('PASS iSite v25 public API/alias surface preserved');
 console.log('PASS iSite v26 public API/alias surface preserved');
+console.log('PASS iSite v27 public API/alias surface preserved');
+console.log('PASS iSite v28 public API/alias surface preserved');
+console.log('PASS iSite v29 public API/alias surface preserved');
 
 site.diagnostics?.close?.();
 process.exit(0);

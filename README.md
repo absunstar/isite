@@ -1,6 +1,6 @@
 # iSite
 
-**Current version:** `2026.08.26-v18`
+**Current version:** `2026.08.26-v29`
 
 iSite is a Node.js web framework used by Social Browser and other applications. It provides routing, file serving, server-side parsing, sessions, security integration, MongoDB helpers, WebSocket support, caching, diagnostics, reliability primitives, high-throughput database helpers, and backward-compatible legacy APIs.
 
@@ -4105,3 +4105,22 @@ Core v25 adds an internal generated startup bundle for the `object-options` modu
 ## Core v26 startup optimization
 
 Core v26 keeps only Core v3 on the cold-start critical path. The additive Core v4–v18 API surface remains present immediately as enumerable own properties, while its implementation is initialized synchronously on first access and warmed in the background immediately after the server-ready callback. This reduces cold startup without removing or renaming legacy APIs. See `docs/core-v26.md` and run `npm run lazy-core-v26-test` to validate the lazy compatibility surface.
+
+## Core v27 — faster cold initialization
+
+v27 keeps only the startup-critical scheduler from Core v3 on the pre-listen path. The remaining Core v3 APIs are exposed immediately as lazy own properties and initialize synchronously on first access. The existing post-listen advanced warm-up initializes them after the server is already ready.
+
+On Node v22.16.0 using 81 interleaved cold-process samples, median `init()` moved from about 22.42 ms in v26 to 19.82 ms in v27, while total cold process → ready moved from about 25.85 ms to 23.53 ms. See `docs/core-v27.md` for methodology and compatibility details.
+
+## Core v28 startup champion
+
+Core v28 uses two generated service startup bundles. Mongo-enabled applications keep the full historical startup bundle. Applications that explicitly set `mongodb.enabled: false` use a reduced bundle that excludes the Mongo execution source until `site.mongodb` is first accessed. This preserves the public API while removing unused Mongo parse/init work from no-Mongo applications.
+
+The release policy for startup work is now benchmark-champion based: newer candidates are not promoted automatically; they must beat the currently adopted version without a meaningful regression in important runtime profiles and must pass all compatibility gates.
+
+
+## Core v29 startup champion
+
+Core v29 defers loading `package.json` and `node:module` until their public APIs are first used when they are not required by the startup configuration. `site.package` and `site.Module` remain own enumerable public properties and preserve their legacy values. The optional `ISITE_COMPILE_CACHE=1` path still loads `node:module` immediately, and package-version logging still works when `log:true`.
+
+This release was adopted under the fastest-version policy only after interleaved cold-process benchmarks beat v28 across minimal, MongoDB, and MongoDB+Security profiles while all historical compatibility gates remained green.

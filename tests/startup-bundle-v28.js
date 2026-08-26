@@ -1,0 +1,23 @@
+'use strict';
+const assert = require('node:assert/strict');
+const path = require('node:path');
+const full = require.resolve('../lib/service-startup-bundle.js');
+const noMongo = require.resolve('../lib/service-startup-bundle-nomongo.js');
+const mongo = require.resolve('../lib/mongodb.js');
+function clear() { delete require.cache[full]; delete require.cache[noMongo]; delete require.cache[mongo]; delete require.cache[require.resolve('../index.js')]; }
+clear();
+let init = require('../index.js');
+let site = init({name:'v28-no-mongo',apps:false,stdin:false,help:false,log:false,mongodb:{enabled:false},security:{enabled:false},session:{enabled:false,save:false,storage:'file'},https:{enabled:false},mail:{enabled:false},port:0});
+assert.ok(require.cache[noMongo], 'Mongo-disabled startup must load the no-Mongo bundle');
+assert.equal(require.cache[full], undefined, 'Mongo-disabled startup must not parse the full service bundle');
+assert.equal(require.cache[mongo], undefined, 'Mongo-disabled startup must not load Mongo source before first access');
+assert.equal(typeof site.mongodb.findMany, 'function');
+assert.ok(require.cache[mongo], 'first site.mongodb access must synchronously load the original Mongo module');
+clear();
+init = require('../index.js');
+site = init({name:'v28-with-mongo',apps:false,stdin:false,help:false,log:false,mongodb:{enabled:true,db:'v28'},security:{enabled:false},session:{enabled:false,save:false,storage:'file'},https:{enabled:false},mail:{enabled:false},port:0});
+assert.ok(require.cache[full], 'Mongo-enabled startup must preserve the full legacy service bundle path');
+assert.equal(require.cache[noMongo], undefined, 'Mongo-enabled startup must not use the reduced bundle');
+assert.equal(typeof site.mongodb.findMany, 'function');
+console.log('PASS v28 selects the fastest service bundle without changing Mongo-enabled startup semantics');
+process.exit(0);
