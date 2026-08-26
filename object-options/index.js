@@ -97,10 +97,15 @@ function setOptions(_options, ____0) {
       cookieDomain : false,
       timeout: 60 * 24 * 30,
       memoryTimeout : 60,
+      userCacheTTL: 30 * 1000,
       enabled: !0,
       storage: 'mongodb',
       db: null,
       collection: 'users_sessions',
+    },
+    request: {
+      maxBodyBytes: 10 * 1024 * 1024,
+      maxFileBytes: 50 * 1024 * 1024,
     },
     security: {
       enabled: !0,
@@ -270,10 +275,15 @@ function setOptions(_options, ____0) {
   _x0oo.session.enabled = _x0oo.session.enabled ?? template.session.enabled;
   _x0oo.session.timeout = _x0oo.session.timeout ?? template.session.timeout;
   _x0oo.session.memoryTimeout = _x0oo.session.memoryTimeout ?? template.session.memoryTimeout;
+  _x0oo.session.userCacheTTL = _x0oo.session.userCacheTTL ?? template.session.userCacheTTL;
   _x0oo.session.storage = _x0oo.session.storage || template.session.storage;
   _x0oo.session.db = _x0oo.session.db || _x0oo.mongodb.db;
   _x0oo.session.collection = _x0oo.session.collection || template.session.collection;
   _x0oo.session.cookieDomain = _x0oo.session.cookieDomain ?? template.session.cookieDomain;
+
+  _x0oo.request = _x0oo.request || template.request;
+  _x0oo.request.maxBodyBytes = _x0oo.request.maxBodyBytes ?? template.request.maxBodyBytes;
+  _x0oo.request.maxFileBytes = _x0oo.request.maxFileBytes ?? template.request.maxFileBytes;
 
   _x0oo.security = _x0oo.security || template.security;
   _x0oo.security.enabled = _x0oo.security.enabled ?? template.security.enabled;

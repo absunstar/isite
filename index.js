@@ -25,17 +25,32 @@ module.exports = function init(options) {
     ____0.path = require('node:path');
     ____0.child_process = require('node:child_process');
     ____0.readline = require('node:readline');
-    ____0.zlib = require('zlib');
-    ____0.pdf = ____0.PDF = require('pdf-lib');
-    ____0.archiver = require('archiver');
-    ____0.fontkit = ____0.FONTKIT = require('@pdf-lib/fontkit');
-    ____0.querystring = require('querystring');
-    ____0.formidable = require('formidable');
-    ____0.mv = require('mv');
-    ____0.utf8 = require('utf8');
-    ____0.eval = require('eval');
-    ____0.proxyAgent = require('https-proxy-agent');
-    ____0.fetchAsync = (...args) => import('node-fetch').then(({ default: fetch }) => fetch(...args));
+    ____0.zlib = require('node:zlib');
+    ____0.querystring = require('node:querystring');
+
+    const lazy = function (names, loader) {
+        let loaded;
+        const get = function () { return loaded === undefined ? (loaded = loader()) : loaded; };
+        for (const name of names) Object.defineProperty(____0, name, { configurable: true, enumerable: true, get });
+    };
+    lazy(['pdf', 'PDF'], () => require('pdf-lib'));
+    lazy(['archiver'], () => require('archiver'));
+    lazy(['fontkit', 'FONTKIT'], () => require('@pdf-lib/fontkit'));
+    lazy(['formidable'], () => require('formidable'));
+    lazy(['mv'], () => require('mv'));
+    lazy(['utf8'], () => require('utf8'));
+    lazy(['eval'], () => require('eval'));
+    lazy(['proxyAgent'], () => { const mod = require('https-proxy-agent'); return mod.HttpsProxyAgent || mod; });
+    ____0.fetchAsync = (...args) => {
+        const requestOptions = args[1] || {};
+        // Node 18+ ships an efficient Undici-backed fetch implementation. Use it
+        // for normal requests and keep node-fetch as a lazy compatibility path
+        // for the legacy agent/proxy contract used by existing applications.
+        if (!requestOptions.proxyURL && !requestOptions.agent && typeof globalThis.fetch === 'function') {
+            return globalThis.fetch(...args);
+        }
+        return import('node-fetch').then(({ default: fetch }) => fetch(...args));
+    };
     ____0.request =
         ____0.fetch =
         ____0.x0ftox =
@@ -47,28 +62,17 @@ module.exports = function init(options) {
                     args[1].body = JSON.stringify(args[1].data);
                     delete args[1].data;
                 }
-                args[1].agent =
-                    args[1].agent ||
-                    function (_parsedURL) {
-                        if (args[1].proxyURL) {
-                            return new ____0.proxyAgent(proxyURL);
-                        } else if (_parsedURL.protocol == 'http:') {
-                            return new ____0.http.Agent({
-                                keepAlive: true,
-                            });
-                        } else {
-                            return new ____0.https.Agent({
-                                keepAlive: true,
-                            });
-                        }
+                if (args[1].proxyURL && !args[1].agent) {
+                    args[1].agent = function () {
+                        return new ____0.proxyAgent(args[1].proxyURL);
                     };
+                }
                 return ____0.fetchAsync(...args);
             };
-    ____0.$ = ____0.cheerio = require('cheerio');
-    ____0.md5 = ____0.hash = ____0.x0md50x = require('md5');
-    ____0.nodemailer = require('nodemailer');
-
-    ____0.webp = require('webp-converter');
+    lazy(['$', 'cheerio'], () => require('cheerio'));
+    lazy(['md5', 'hash', 'x0md50x'], () => require('md5'));
+    lazy(['nodemailer'], () => require('nodemailer'));
+    lazy(['webp'], () => require('webp-converter'));
   
     ____0.setting = {};
 
@@ -79,6 +83,53 @@ module.exports = function init(options) {
     ____0.apps = [];
     ____0.appList = [];
     ____0.sharedList = [];
+    ____0.sharedCache = new Map();
+    ____0.sharedCacheMaxEntries = 2000;
+    ____0.sharedCacheMaxBytes = 64 * 1024 * 1024;
+    ____0.sharedCacheTTL = 5 * 60 * 1000;
+    ____0.sharedCacheBytes = 0;
+    ____0.sharedKey = function (host, filePath, url) { return String(host || '') + '\0' + String(filePath || '') + '\0' + String(url || ''); };
+    ____0._sharedSize = function (response) {
+        if (!response || response.content == null) return 0;
+        if (Buffer.isBuffer(response.content)) return response.content.length;
+        if (typeof response.content === 'string') return Buffer.byteLength(response.content);
+        try { return Buffer.byteLength(JSON.stringify(response.content)); } catch (_) { return 0; }
+    };
+    ____0._deleteSharedKey = function (key) {
+        const value = ____0.sharedCache.get(key);
+        if (!value) return;
+        ____0.sharedCache.delete(key);
+        ____0.sharedCacheBytes -= value.$cacheSize || 0;
+        const i = ____0.sharedList.indexOf(value);
+        if (i !== -1) ____0.sharedList.splice(i, 1);
+    };
+    ____0.getShared = function (host, filePath, url) {
+        const key = ____0.sharedKey(host, filePath, url);
+        const value = ____0.sharedCache.get(key);
+        if (!value) return null;
+        if (value.$cacheTime && Date.now() - value.$cacheTime > ____0.sharedCacheTTL) {
+            ____0._deleteSharedKey(key);
+            return null;
+        }
+        ____0.sharedCache.delete(key); ____0.sharedCache.set(key, value);
+        return value;
+    };
+    ____0.setShared = function (response) {
+        const key = ____0.sharedKey(response.host, response.filePath, response.url);
+        const existing = ____0.sharedCache.get(key);
+        if (existing) return existing;
+        response.$cacheTime = Date.now();
+        response.$cacheSize = ____0._sharedSize(response);
+        ____0.sharedCache.set(key, response);
+        ____0.sharedCacheBytes += response.$cacheSize;
+        ____0.sharedList.push(response);
+        while (____0.sharedCache.size > ____0.sharedCacheMaxEntries || ____0.sharedCacheBytes > ____0.sharedCacheMaxBytes) {
+            const first = ____0.sharedCache.keys().next().value;
+            if (first === undefined) break;
+            ____0._deleteSharedKey(first);
+        }
+        return response;
+    };
     ____0.addApp = function (app) {
         ____0.appList.push(app);
     };
@@ -230,6 +281,9 @@ module.exports = function init(options) {
 
     ____0.createDir = ____0.mkDir = ____0.fsm.mkDir;
     ____0.createDirSync = ____0.mkdirSync = ____0.fsm.mkdirSync;
+
+    ____0.diagnostics = require('./lib/performance.js')(____0);
+    ____0.coreV3 = require('./lib/core-v3.js')(____0);
 
     ____0.routing = require('./lib/routing.js')(____0);
 
@@ -399,13 +453,7 @@ module.exports = function init(options) {
         ____0[____0.from123('397413494139217339741349')] = _;
     });
 
-    setInterval(() => {
-        ____0.collectionList.forEach((collection) => {
-            if (!collection.taskBusy && collection.taskList.length > 0) {
-                collection.checkTaskList();
-            }
-        });
-    }, 10);
+    // Collection queues are event-driven; no 10ms polling loop is required.
 
     return ____0;
 };
