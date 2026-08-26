@@ -3973,3 +3973,54 @@ npm run smart-code:hotpaths
 v13 safely optimizes the internal JSON reference-cleaning path used by `res.json()`, the framework-owned JSON Content-Type setup, and the date creation path used by `security.getUserFinger()`. Public legacy APIs and parser behavior are unchanged.
 
 See `docs/core-v13.md` for details and compatibility guarantees.
+
+---
+
+# Core v15 - Universal No-Break Compatibility
+
+iSite Core v15 adds a framework-wide compatibility gate that is independent from any single application.
+
+The v14 public surface is pinned in `tests/compat/isite-v14-public-surface.json`, covering the root `site` object, collection wrapper, public namespaces, HTTP request/response helpers, legacy aliases, and prototype helpers.
+
+```bash
+npm run compat:framework
+npm run http-compat
+npm run verify
+```
+
+For every application that uses iSite, keep a project-specific usage baseline:
+
+```bash
+npm run project:baseline -- /path/to/project /path/to/project-isite-baseline.json
+npm run project:verify -- /path/to/project /path/to/project-isite-baseline.json
+```
+
+New compatibility APIs:
+
+```js
+site.compat.captureSurface(target)
+site.compat.compareSurface(contract, target)
+site.compat.assertSurface(contract, target)
+
+site.compat.captureFrameworkSurface()
+site.compat.compareFrameworkSurface(manifest)
+site.compat.assertFrameworkSurface(manifest)
+site.compat.writeFrameworkManifest(file)
+
+site.compat.probes.add(name, fn)
+site.compat.probes.run({ assert: true })
+```
+
+Core v15 does not automatically freeze objects, change function signatures, or switch legacy execution paths. Compatibility checks are verification tools, so existing applications can continue to extend `site` and collection objects as before.
+
+## Core v16: cancellation, backpressure and stability diagnostics
+
+Core v16 adds opt-in infrastructure without changing legacy API behavior:
+
+- `site.abort.create/link/throwIfAborted/withSignal` for explicit cancellation.
+- `site.async.mapLimitAbortable`, `eachLimitAbortable`, and `filterLimitAbortable`.
+- `site.BackpressureQueue` / `site.backpressureQueue()` for bounded producer queues.
+- `site.leaks.snapshot/baseline/compare/assert/watch` for observational leak diagnostics.
+- `site.validate.routes/options/all` for report-only route and configuration validation.
+
+No existing route, MongoDB, collection, parser, request, response, file, session, or security method is given new timeout/cancellation behavior automatically. The framework compatibility gate now checks both the historical v14 surface and a new v16 baseline so APIs added in v15/v16 are protected in future releases too.

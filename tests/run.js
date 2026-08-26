@@ -1257,6 +1257,135 @@ function routingSite() {
         assert.equal(result.count, 5);
     });
 
+
+    await test('Core v15 surface comparison detects missing/type/alias breaks without rejecting additive APIs', () => {
+        const site = { health() { return {}; }, compat: {} };
+        require('../lib/core-v15.js')(site);
+        const shared = function (a) { return a; };
+        const beforeTarget = { get: shared, onGET: shared, value: 1 };
+        const expected = site.compat.captureSurface(beforeTarget);
+        const additive = { get: shared, onGET: shared, value: 1, newer: true };
+        assert.equal(site.compat.compareSurface(expected, additive).ok, true);
+        const brokenAlias = { get: function (a) { return a; }, onGET: function (a) { return a; }, value: 1 };
+        const aliasResult = site.compat.compareSurface(expected, brokenAlias);
+        assert.equal(aliasResult.ok, false);
+        assert.equal(aliasResult.breaking.brokenAliases.length, 1);
+        const changed = { get: shared, onGET: shared, value: '1' };
+        const changedResult = site.compat.compareSurface(expected, changed);
+        assert.equal(changedResult.ok, false);
+        assert.equal(changedResult.breaking.changedType[0].key, 'value');
+    });
+
+    await test('Core v15 arity changes are warnings by default and strict only when requested', () => {
+        const site = { health() { return {}; }, compat: {} };
+        require('../lib/core-v15.js')(site);
+        const expected = site.compat.captureSurface({ fn: function (a, b) {} });
+        const target = { fn: function (a) {} };
+        const normal = site.compat.compareSurface(expected, target);
+        assert.equal(normal.ok, true);
+        assert.equal(normal.warnings.arityChanged.length, 1);
+        const strict = site.compat.compareSurface(expected, target, { checkArity: true });
+        assert.equal(strict.ok, false);
+    });
+
+    await test('Core v15 semantic compatibility probes are opt-in and report failures safely', async () => {
+        const site = { health() { return {}; }, compat: {} };
+        require('../lib/core-v15.js')(site);
+        site.compat.probes.add('pass', async () => true);
+        site.compat.probes.add('fail', async () => { throw new Error('legacy behavior changed'); });
+        const result = await site.compat.probes.run();
+        assert.equal(result.ok, false);
+        assert.equal(result.total, 2);
+        assert.equal(result.passed, 1);
+        assert.equal(result.failed, 1);
+        assert.deepEqual(new Set(site.compat.probes.list()), new Set(['pass', 'fail']));
+    });
+
+
+    await test('Core v16 abort controller supports parent propagation and timeout without changing legacy APIs', async () => {
+        const site = { async: {}, events: new (require('node:events').EventEmitter)(), health() { return {}; } };
+        require('../lib/core-v16.js')(site);
+        const parent = new AbortController();
+        const child = site.abort.create({ signal: parent.signal });
+        parent.abort('parent-stop');
+        assert.equal(child.signal.aborted, true);
+        child.cleanup();
+
+        const timed = site.abort.create({ timeoutMs: 5 });
+        await new Promise(resolve => setTimeout(resolve, 15));
+        assert.equal(timed.signal.aborted, true);
+        assert.equal(timed.signal.reason.code, 'ISITE_ABORT_TIMEOUT');
+        timed.cleanup();
+    });
+
+    await test('Core v16 abortable mapLimit stops scheduling useful work after abort', async () => {
+        const site = { async: {}, events: new (require('node:events').EventEmitter)(), health() { return {}; } };
+        require('../lib/core-v16.js')(site);
+        const controller = new AbortController();
+        let seen = 0;
+        await assert.rejects(
+            site.async.mapLimitAbortable([1,2,3,4,5], 1, async (value) => {
+                seen++;
+                if (value === 2) controller.abort('done');
+                await new Promise(resolve => setTimeout(resolve, 1));
+                return value;
+            }, { signal: controller.signal }),
+            error => error && error.name === 'AbortError'
+        );
+        assert.equal(seen, 2);
+    });
+
+    await test('Core v16 BackpressureQueue enforces bounded queued work and drains', async () => {
+        const site = { async: {}, events: new (require('node:events').EventEmitter)(), health() { return {}; } };
+        require('../lib/core-v16.js')(site);
+        const queue = new site.BackpressureQueue({ concurrency: 1, maxQueued: 1 });
+        let release;
+        const first = queue.enqueue(() => new Promise(resolve => { release = resolve; }));
+        const second = queue.enqueue(async () => 2);
+        let thirdResolved = false;
+        const third = queue.enqueue(async () => 3).then(v => { thirdResolved = true; return v; });
+        await new Promise(resolve => setTimeout(resolve, 5));
+        assert.equal(queue.stats().queued, 1);
+        assert.equal(thirdResolved, false);
+        release(1);
+        assert.equal(await first, 1);
+        assert.equal(await second, 2);
+        assert.equal(await third, 3);
+        await queue.onIdle();
+        assert.equal(queue.stats().highWaterMark <= 1, true);
+    });
+
+    await test('Core v16 route validation reports duplicate and wildcard overlap without mutating routes', () => {
+        const routes = [
+            { name: '/users/*', method: 'GET', callback() {} },
+            { name: '/users/admin', method: 'GET', callback() {} },
+            { name: '/same', method: 'POST', callback() {} },
+            { name: '/same', method: 'POST', callback() {} },
+        ];
+        const site = {
+            async: {}, events: new (require('node:events').EventEmitter)(), health() { return {}; },
+            routing: { list: routes },
+            escapeRegExp: s => String(s).replace(/[\/\\^$*+?.()\[\]{}|]/g, '\\$&'),
+        };
+        require('../lib/core-v16.js')(site);
+        const before = routes.slice();
+        const report = site.validate.routes();
+        assert.equal(report.ok, false);
+        assert.equal(report.duplicates.length, 1);
+        assert.ok(report.overlaps.some(x => x.names.includes('/users/*') && x.names.includes('/users/admin')));
+        assert.deepEqual(routes, before);
+    });
+
+    await test('Core v16 leak diagnostics are observational and enforce explicit budgets only', () => {
+        const site = { async: {}, events: new (require('node:events').EventEmitter)(), health() { return {}; } };
+        require('../lib/core-v16.js')(site);
+        const baseline = site.leaks.baseline('unit');
+        const report = site.leaks.compare(baseline, { maxHandleGrowth: 1000, maxListenerGrowth: 1000, maxHeapGrowthBytes: Number.MAX_SAFE_INTEGER });
+        assert.equal(report.ok, true);
+        assert.equal(typeof report.delta.heapUsed, 'number');
+        assert.deepEqual(site.leaks.watches(), []);
+    });
+
     console.log(`\n${passed} tests passed`);
     if (process.exitCode) process.exit(process.exitCode);
 })();

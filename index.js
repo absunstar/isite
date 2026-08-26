@@ -293,6 +293,8 @@ module.exports = function init(options) {
     ____0.coreV9 = require('./lib/core-v9.js')(____0);
     ____0.coreV10 = require('./lib/core-v10.js')(____0);
     ____0.coreV11 = require('./lib/core-v11.js')(____0);
+    ____0.coreV15 = require('./lib/core-v15.js')(____0);
+    ____0.coreV16 = require('./lib/core-v16.js')(____0);
 
     ____0.routing = require('./lib/routing.js')(____0);
 
