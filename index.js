@@ -79,6 +79,7 @@ module.exports = function init(options) {
     ____0.databaseList = [];
     ____0.databaseCollectionList = [];
     ____0.collectionList = [];
+    ____0.collectionByGuid = new Map();
 
     ____0.apps = [];
     ____0.appList = [];
@@ -284,6 +285,7 @@ module.exports = function init(options) {
 
     ____0.diagnostics = require('./lib/performance.js')(____0);
     ____0.coreV3 = require('./lib/core-v3.js')(____0);
+    ____0.coreV4 = require('./lib/core-v4.js')(____0);
 
     ____0.routing = require('./lib/routing.js')(____0);
 
@@ -366,9 +368,14 @@ module.exports = function init(options) {
         ____0.log(____0.options.name + ' :: Saving Data :: ' + ____0.options.savingTime + ' Minute ');
     });
 
-    setInterval(function () {
-        ____0.call('[any][saving data]');
-    }, ____0.options.savingTime * 1000 * 60);
+    // v4: use the central scheduler so the framework's periodic save does
+    // not keep short-lived CLI/test processes alive.
+    if (____0.scheduler) {
+        ____0.scheduler.every('isite:saving-data', ____0.options.savingTime * 1000 * 60, () => ____0.call('[any][saving data]'));
+    } else {
+        const savingTimer = setInterval(() => ____0.call('[any][saving data]'), ____0.options.savingTime * 1000 * 60);
+        if (savingTimer.unref) savingTimer.unref();
+    }
 
     ____0.dashboard = require(__dirname + '/lib/dashboard.js');
     ____0.dashboard(____0);

@@ -262,6 +262,107 @@ function routingSite() {
         assert.equal(site.httpCache.range('bytes=100-120', 100).unsatisfiable, true);
     });
 
+
+    await test('Core v4 async pool enforces bounded concurrency', async () => {
+        const site = {};
+        require('../lib/core-v4.js')(site);
+        const pool = site.pool('db', { limit: 2 });
+        let active = 0, maxActive = 0;
+        const jobs = Array.from({ length: 8 }, (_, i) => pool.run(async () => {
+            active++; maxActive = Math.max(maxActive, active);
+            await new Promise(r => setTimeout(r, 2));
+            active--; return i;
+        }));
+        assert.deepEqual(await Promise.all(jobs), [0,1,2,3,4,5,6,7]);
+        assert.equal(maxActive, 2);
+        assert.equal(pool.stats().completed, 8);
+    });
+
+    await test('Core v4 batcher combines same-tick loads and preserves result order', async () => {
+        const site = {};
+        require('../lib/core-v4.js')(site);
+        let batches = 0;
+        const batcher = site.createBatcher(async (keys) => { batches++; return keys.map(k => k * 10); });
+        const result = await Promise.all([batcher.load(1), batcher.load(2), batcher.load(3)]);
+        assert.deepEqual(result, [10, 20, 30]);
+        assert.equal(batches, 1);
+    });
+
+    await test('Core v4 memoizeAsync deduplicates inflight work and caches result', async () => {
+        const site = {};
+        require('../lib/core-v4.js')(site);
+        let runs = 0;
+        const fn = site.memoizeAsync(async (id) => { runs++; await new Promise(r => setTimeout(r, 2)); return { id }; }, { ttl: 1000, key: id => id });
+        const [a, b] = await Promise.all([fn(7), fn(7)]);
+        const c = await fn(7);
+        assert.equal(runs, 1);
+        assert.equal(a.id, 7); assert.equal(b.id, 7); assert.equal(c.id, 7);
+        assert.equal(fn.stats().entries, 1);
+    });
+
+    await test('Core v4 context, metrics and health snapshot are additive', async () => {
+        const site = { databaseList: [], databaseCollectionList: [] };
+        require('../lib/core-v4.js')(site);
+        const ctx = site.context.create({ operation: 'test' });
+        await site.context.run(ctx, async () => {
+            await Promise.resolve();
+            assert.equal(site.context.get().id, ctx.id);
+            assert.equal(site.context.get().operation, 'test');
+        });
+        site.metrics.inc('x'); site.metrics.inc('x', 2); site.metrics.set('g', 4);
+        await site.metrics.time('timer', async () => new Promise(r => setTimeout(r, 1)));
+        const snap = site.metrics.snapshot();
+        assert.equal(snap.counters.x, 3); assert.equal(snap.gauges.g, 4); assert.equal(snap.timers.timer.count, 1);
+        assert.equal(site.health().ok, true);
+    });
+
+    await test('Mongo v4 de-duplicates concurrent database and collection connects', async () => {
+        const Module = require('node:module');
+        const originalLoad = Module._load;
+        let connects = 0;
+        const collections = new Map();
+        class FakeMongoClient {
+            constructor(url, config) { this.url = url; this.config = config; }
+            async connect() { connects++; await new Promise(r => setTimeout(r, 3)); return this; }
+            db(name) { return { name, collection(n) { if (!collections.has(name + ':' + n)) collections.set(name + ':' + n, { name: n }); return collections.get(name + ':' + n); } }; }
+            close() {}
+        }
+        Module._load = function (request, parent, isMain) {
+            if (request === 'mongodb') return { MongoClient: FakeMongoClient, ObjectId: class ObjectId {} };
+            return originalLoad.apply(this, arguments);
+        };
+        try {
+            const site = {
+                options: { mongodb: { enabled: true, url: 'mongodb://fake', db: 'main', collection: 'x', prefix: { db: '', collection: '' }, config: {} } },
+                databaseList: [], databaseCollectionList: [], log() {}, on() {},
+                removeRefObject: x => x, fn: { isDate: () => false }, getDateTime: x => x,
+            };
+            const mongo = require('../lib/mongodb.js')(site);
+            const dbs = await Promise.all(Array.from({ length: 5 }, () => new Promise((resolve, reject) => mongo.connectDB('main', (e, db) => e ? reject(e) : resolve(db)))));
+            assert.equal(connects, 1);
+            assert.equal(new Set(dbs).size, 1);
+            const cols = await Promise.all(Array.from({ length: 5 }, () => new Promise((resolve, reject) => mongo.connectCollection({ dbName: 'main', collectionName: 'users' }, (e, c) => e ? reject(e) : resolve(c)))));
+            assert.equal(new Set(cols).size, 1);
+            assert.equal(mongo.databaseIndex.size, 1);
+            assert.equal(mongo.collectionIndex.size, 1);
+        } finally { Module._load = originalLoad; }
+    });
+
+    await test('WebSocket v4 indexes routes without loading ws dependency', () => {
+        const events = [];
+        const site = {
+            strings: Array(20).fill('ready'), servers: [], guid: () => 'g', md5: x => x, f1: x => String(x),
+            on(name, fn) { events.push([name, fn]); }, call() {}, newURL: u => new URL(u, 'http://localhost'),
+            fromJson: JSON.parse, eval() {},
+        };
+        require('../lib/ws.js')(site);
+        const fn = () => {};
+        site.onWS('/chat', fn);
+        assert.equal(site.ws.getRoute('/chat').callback, fn);
+        assert.equal(site.ws.routeByPath.has('/chat'), true);
+        assert.equal(Object.keys(require.cache).some((p) => /node_modules[\\/]ws[\\/]/.test(p)), false);
+    });
+
     await test('diagnostics exposes event-loop, memory and cache snapshot', () => {
         const site = { fsm: { cache: new Map(), cacheBytes: 0 }, sharedCache: new Map() };
         const d = require('../lib/performance.js')(site);
