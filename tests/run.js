@@ -195,6 +195,24 @@ function routingSite() {
         assert.equal(parser.txt('##var.a##/##user.name##/##params.id##/##query.q##/##data.x##'), 'A/U/42/yes/X');
     });
 
+    await test('parser preserves legacy hidden-token syntax used by showObject/from123', () => {
+        const hidden = [];
+        const site = {
+            var: (k) => ({ secret: 'VAR' })[k],
+            toJson: JSON.stringify,
+            hide: (x) => { hidden.push(x); return 'ENC<' + String(x) + '>'; },
+            setting: {}, word: (x) => x, getContent: () => '', apps: [], secret: 'SITE'
+        };
+        const req = {
+            features: [], paramsRaw: {}, queryRaw: {}, data: { secret: 'DATA' },
+            secret: 'REQ', session: { user: { secret: 'USER' } }
+        };
+        const parser = require('../lib/parser.js')(req, {}, site, { parserDir: process.cwd() });
+        const out = parser.txt('##data.#secret##|##user.#secret##|##site.#secret##|##req.#secret##');
+        assert.equal(out, 'ENC<DATA>|ENC<USER>|ENC<SITE>|ENC<REQ>');
+        assert.deepEqual(hidden, ['DATA', 'USER', 'SITE', 'REQ']);
+    });
+
     await test('Core v3 inflight deduplicates concurrent work', async () => {
         const site = { zlib: require('node:zlib'), http2: require('node:http2'), fetch: globalThis.fetch };
         require('../lib/core-v3.js')(site);
@@ -477,6 +495,99 @@ function routingSite() {
         assert.equal(aggregateCalls, 1); assert.equal(out.count, 11); assert.equal(out.list[0].id, 2);
         assert.equal(pipelineSeen[0].$match.active, true);
         assert.equal(pipelineSeen[1].$facet.data.some(x => x.$limit === 10), true);
+    });
+
+
+    await test('Core v6 query invalidation is generation based and keeps cached API compatible', async () => {
+        const site = {};
+        require('../lib/core-v4.js')(site);
+        require('../lib/core-v5.js')(site);
+        require('../lib/core-v6.js')(site);
+        let runs = 0;
+        const loader = async () => ({ run: ++runs });
+        const first = await site.query.cached('main.users', 'findOne', { where: { id: 1 } }, loader);
+        const second = await site.query.cached('main.users', 'findOne', { where: { id: 1 } }, loader);
+        assert.equal(first.run, 1); assert.equal(second.run, 1);
+        assert.equal(site.query.invalidate('main.users'), 1);
+        const third = await site.query.cached('main.users', 'findOne', { where: { id: 1 } }, loader);
+        assert.equal(third.run, 2);
+        assert.equal(site.query.generation('main.users'), 1);
+        assert.equal(site.query.stats().invalidations, 1);
+    });
+
+    await test('Core v6 compatibility contracts detect missing or changed public APIs', () => {
+        const site = {};
+        require('../lib/core-v4.js')(site);
+        require('../lib/core-v5.js')(site);
+        require('../lib/core-v6.js')(site);
+        const target = { get() {}, post() {}, sessions: [] };
+        const contract = site.compat.snapshot(target);
+        assert.deepEqual(site.compat.compare(contract, target), { ok: true, missing: [], changed: [] });
+        const broken = { get: 1, sessions: [] };
+        const result = site.compat.compare(contract, broken);
+        assert.equal(result.ok, false);
+        assert.deepEqual(result.missing, ['post']);
+        assert.equal(result.changed[0].key, 'get');
+        assert.throws(() => site.compat.assert(contract, broken), e => e.code === 'ISITE_COMPAT_MISMATCH');
+    });
+
+    await test('Core v6 static manifest scans and prewarms eligible assets', async () => {
+        const dir = fs.mkdtempSync(path.join(os.tmpdir(), 'isite-v6-static-'));
+        fs.mkdirSync(path.join(dir, 'sub'));
+        fs.writeFileSync(path.join(dir, 'a.js'), 'var a=1;\n'.repeat(400));
+        fs.writeFileSync(path.join(dir, 'sub', 'b.css'), '.x{display:block}\n'.repeat(400));
+        fs.writeFileSync(path.join(dir, 'ignore.bin'), Buffer.alloc(2048));
+        const site = {};
+        require('../lib/core-v4.js')(site);
+        require('../lib/core-v5.js')(site);
+        require('../lib/core-v6.js')(site);
+        const manifest = await site.staticAssets.buildManifest(dir);
+        assert.equal(manifest.files.length, 2);
+        const warmed = await site.staticAssets.prewarmManifest(manifest, { encoding: 'br', concurrency: 2 });
+        assert.equal(warmed.files, 2); assert.equal(warmed.compressed, 2);
+        assert.ok(warmed.compressedBytes < warmed.originalBytes);
+        assert.equal(site.staticAssets.manifest(dir), manifest);
+        fs.rmSync(dir, { recursive: true, force: true });
+    });
+
+    await test('Mongo v6 findByIdsFast batches ids into one query and bulkWrite invalidates once', async () => {
+        const site = {
+            options: { mongodb: { enabled: true, url: 'mongodb://fake', db: 'main', collection: 'x', limit: 100, prefix: { db: '', collection: '' }, config: {} } },
+            databaseList: [], databaseCollectionList: [], log() {}, on() {},
+            removeRefObject: x => x, fn: { isDate: () => false }, getDateTime: x => x,
+        };
+        let invalidations = 0, findCalls = 0, bulkCalls = 0, whereSeen;
+        site.query = { invalidate(name) { invalidations++; assert.equal(name, 'main.users'); return 1; } };
+        const mongo = require('../lib/mongodb.js')(site);
+        mongo.connectCollection = (obj, cb) => cb(null, {
+            find(where) { findCalls++; whereSeen = where; return { toArray: async () => [{ id: 1 }, { id: 3 }] }; },
+            bulkWrite: async (ops) => { bulkCalls++; return { acknowledged: true, modifiedCount: ops.length }; },
+        });
+        const docs = await new Promise((resolve, reject) => mongo.findByIdsFast({ dbName: 'main', collectionName: 'users', ids: [1, 2, 3] }, (e, v) => e ? reject(e) : resolve(v)));
+        assert.equal(findCalls, 1); assert.deepEqual(whereSeen.id.$in, [1, 2, 3]); assert.equal(docs.length, 2);
+        const result = await new Promise((resolve, reject) => mongo.bulkWriteFast({ dbName: 'main', collectionName: 'users', operations: [{ updateOne: { filter: { id: 1 }, update: { $set: { x: 1 } } } }] }, (e, v) => e ? reject(e) : resolve(v)));
+        assert.equal(bulkCalls, 1); assert.equal(result.modifiedCount, 1); assert.equal(invalidations, 1);
+    });
+
+    await test('Collection v6 helpers are additive and legacy aliases remain intact', async () => {
+        const site = {
+            strings: Array.from({ length: 10 }, (_, i) => 's' + i), on() {}, collectionList: [], collectionByGuid: new Map(), hide: () => 'v6-guid',
+            options: { mongodb: { db: 'd', collection: 'c', identity: { enabled: false }, limit: 100 } },
+            mongodb: {
+                collections_indexed: { c: { nextID: 1 } },
+                findByIdsFast(o, cb) { cb(null, o.ids.map(id => ({ id }))); },
+                bulkWriteFast(o, cb) { cb(null, { modifiedCount: o.operations.length }); },
+                findCursorFast(o, cb) { cb(null, { async *[Symbol.asyncIterator]() { yield { id: 1 }; } }); },
+            },
+            log() {}, toInt: Number,
+        };
+        const c = require('../lib/collection.js')(site, { db: 'd', collection: 'c', identity: { enabled: false } });
+        assert.equal(c.find, c.findOne); assert.equal(c.get, c.findOne); // legacy aliases preserved
+        assert.deepEqual(await c.findByIdsFast([4, 5]), [{ id: 4 }, { id: 5 }]);
+        assert.equal((await c.bulkWriteFast([{ deleteOne: { filter: { id: 4 } } }])).modifiedCount, 1);
+        const cursor = await c.streamFast();
+        const rows = []; for await (const row of cursor) rows.push(row);
+        assert.deepEqual(rows, [{ id: 1 }]);
     });
 
     console.log(`\n${passed} tests passed`);
