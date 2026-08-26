@@ -590,6 +590,81 @@ function routingSite() {
         assert.deepEqual(rows, [{ id: 1 }]);
     });
 
+
+    await test('Core v7 Mongo advisor records query shapes and suggests compound indexes without changing execution', () => {
+        const site = {};
+        require('../lib/core-v4.js')(site);
+        require('../lib/core-v5.js')(site);
+        require('../lib/core-v6.js')(site);
+        require('../lib/core-v7.js')(site);
+        site.mongoAdvisor.record('main.users', 'findMany', { where: { active: true, group: { id: 3 } }, sort: { createdAt: -1 } });
+        site.mongoAdvisor.record('main.users', 'findMany', { where: { active: false, group: { id: 8 } }, sort: { createdAt: -1 } });
+        const report = site.mongoAdvisor.report();
+        assert.equal(report.length, 1); assert.equal(report[0].count, 2);
+        const suggestions = site.mongoAdvisor.suggest({ minCount: 2 });
+        assert.deepEqual(suggestions[0].index, { active: 1, 'group.id': 1, createdAt: -1 });
+        assert.equal(site.health().mongoAdvisor.shapes, 1);
+    });
+
+    await test('Core v7 ID batcher deduplicates ids into one loader batch', async () => {
+        const site = {};
+        require('../lib/core-v4.js')(site);
+        require('../lib/core-v5.js')(site);
+        require('../lib/core-v6.js')(site);
+        require('../lib/core-v7.js')(site);
+        let calls = 0, idsSeen;
+        const batcher = site.createIdBatcher(async ids => {
+            calls++; idsSeen = ids;
+            return ids.map(id => ({ id, name: 'u' + id }));
+        }, { delay: 0, maxBatchSize: 100 });
+        const [a, b, c] = await Promise.all([batcher.load(1), batcher.load(2), batcher.load(1)]);
+        assert.equal(calls, 1); assert.deepEqual(idsSeen, [1, 2]);
+        assert.equal(a.name, 'u1'); assert.equal(b.name, 'u2'); assert.equal(c.name, 'u1');
+        assert.equal(batcher.stats().loaded, 3);
+    });
+
+    await test('Core v7 NDJSON streaming respects backpressure and does not buffer full input', async () => {
+        const { Writable } = require('node:stream');
+        const site = {};
+        require('../lib/core-v4.js')(site);
+        require('../lib/core-v5.js')(site);
+        require('../lib/core-v6.js')(site);
+        require('../lib/core-v7.js')(site);
+        let text = '';
+        const writable = new Writable({ write(chunk, enc, cb) { text += chunk.toString(); cb(); } });
+        const result = await site.stream.ndjson((async function* () { yield { id: 1 }; yield { id: 2 }; })(), writable);
+        assert.equal(result.rows, 2); assert.equal(text, '{"id":1}\n{"id":2}\n'); assert.ok(result.bytes > 0);
+    });
+
+    await test('Core v7 named compatibility contracts keep legacy API shape pinned', () => {
+        const site = {};
+        require('../lib/core-v4.js')(site);
+        require('../lib/core-v5.js')(site);
+        require('../lib/core-v6.js')(site);
+        require('../lib/core-v7.js')(site);
+        const target = { get() {}, post() {}, find() {} };
+        site.compat.pin('legacy', target);
+        assert.equal(site.compat.check('legacy', target).ok, true);
+        target.post = 1;
+        assert.equal(site.compat.check('legacy', target).ok, false);
+        assert.deepEqual(site.compat.contracts(), ['legacy']);
+    });
+
+    await test('Collection v7 batched id reads are additive and preserve legacy aliases', async () => {
+        const site = {
+            strings: Array.from({ length: 10 }, (_, i) => 's' + i), on() {}, collectionList: [], collectionByGuid: new Map(), hide: () => 'v7-guid',
+            options: { mongodb: { db: 'd', collection: 'c', identity: { enabled: false }, limit: 100 } },
+            mongodb: { collections_indexed: { c: { nextID: 1 } }, findByIdsFast(o, cb) { cb(null, o.ids.map(id => ({ id }))); } },
+            log() {}, toInt: Number,
+        };
+        require('../lib/core-v4.js')(site); require('../lib/core-v5.js')(site); require('../lib/core-v6.js')(site); require('../lib/core-v7.js')(site);
+        const c = require('../lib/collection.js')(site, { db: 'd', collection: 'c', identity: { enabled: false } });
+        assert.equal(c.find, c.findOne); assert.equal(c.get, c.findOne);
+        const rows = await Promise.all([c.findByIdBatched(10, { batchDelay: 0 }), c.findByIdBatched(11, { batchDelay: 0 })]);
+        assert.deepEqual(rows, [{ id: 10 }, { id: 11 }]);
+        assert.equal(c.batchStats()[0].batches, 1);
+    });
+
     console.log(`\n${passed} tests passed`);
     if (process.exitCode) process.exit(process.exitCode);
 })();
