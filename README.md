@@ -1,6 +1,11 @@
 # iSite
 
-**Current version:** `2026.08.26-v29`
+**Current version:** `2026.08.26-v30`
+
+## Core v30 — startup-safe lazy collection read pools
+
+Core v30 removes an accidental startup dependency introduced by the additive parallel collection APIs. Creating a legacy collection wrapper no longer materializes the advanced Core v3→v18 stack just to create `collection.readPool`. The `readPool` property remains an own enumerable property and is created synchronously on first access. Legacy `find/get/findMany/add/update/delete` queueing and callback semantics are unchanged.
+
 
 iSite is a Node.js web framework used by Social Browser and other applications. It provides routing, file serving, server-side parsing, sessions, security integration, MongoDB helpers, WebSocket support, caching, diagnostics, reliability primitives, high-throughput database helpers, and backward-compatible legacy APIs.
 
