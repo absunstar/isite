@@ -1193,6 +1193,70 @@ function routingSite() {
         assert.deepEqual(result.missing, [{ category: 'site', name: 'get' }]);
     });
 
+
+    await test('Core v14 additive findMany helpers preserve legacy aliases', async () => {
+        const seen = [];
+        const site = {
+            strings: Array.from({ length: 10 }, (_, i) => 's' + i), on() {}, collectionList: [], collectionByGuid: new Map(), hide: () => 'v14-guid',
+            options: { mongodb: { db: 'd', collection: 'c', identity: { enabled: false }, limit: 100 } },
+            mongodb: {
+                collections_indexed: { c: { nextID: 1 } },
+                findManyFast(o, cb) { seen.push(['fast', o]); cb(null, [{ id: 1 }]); },
+                findManyConcurrent(o, cb) { seen.push(['concurrent', o]); cb(null, [{ id: 1 }], 7); },
+            },
+            log() {}, toInt: Number,
+            pool() { return { run(fn) { return fn(); } }; },
+            query: { cached(name, op, options, loader) { return loader(); } },
+        };
+        const c = require('../lib/collection.js')(site, { db: 'd', collection: 'c', identity: { enabled: false } });
+        assert.equal(c.find, c.findOne);
+        assert.equal(c.get, c.findOne);
+        assert.equal(typeof c.findMany, 'function');
+        assert.equal(c.findManyNoCount, c.findManyFast);
+        assert.equal(c.findManyNoCountCached, c.findManyFastCached);
+        const fast = await c.findManyNoCount({ where: { active: true } });
+        assert.deepEqual(fast, [{ id: 1 }]);
+        const concurrent = await c.findManyConcurrent({ where: { active: true } });
+        assert.deepEqual(concurrent, { list: [{ id: 1 }], count: 7 });
+        assert.equal(seen[0][0], 'fast');
+        assert.equal(seen[1][0], 'concurrent');
+    });
+
+    await test('Core v14 findManyConcurrent keeps callback docs/count signature', async () => {
+        const site = {
+            options: { mongodb: { url: 'mongodb://unused', host: 'localhost', port: 27017, protocal: 'mongodb://', db: 'd', limit: 100 } },
+            log() {}, on() {}, call() {}, databaseList: [],
+            mongoAdvisor: null,
+            mongoTelemetry: null,
+        };
+        const mongo = require('../lib/mongodb.js')(site);
+        let countStarted = false;
+        let findStarted = false;
+        mongo.handleDoc = (v) => v;
+        mongo.connectCollection = (obj, cb) => cb(null, {
+            countDocuments() {
+                countStarted = true;
+                return new Promise((resolve, reject) => {
+                    setTimeout(() => findStarted ? resolve(5) : reject(new Error('find did not start concurrently')), 5);
+                });
+            },
+            find() {
+                findStarted = true;
+                return { toArray: () => Promise.resolve([{ id: 1 }]) };
+            },
+        });
+        const result = await new Promise((resolve, reject) => {
+            mongo.findManyConcurrent({ dbName: 'd', collectionName: 'c', where: {}, limit: 10 }, (err, docs, count) => {
+                if (err) return reject(err);
+                resolve({ docs, count });
+            });
+        });
+        assert.equal(countStarted, true);
+        assert.equal(findStarted, true);
+        assert.deepEqual(result.docs, [{ id: 1 }]);
+        assert.equal(result.count, 5);
+    });
+
     console.log(`\n${passed} tests passed`);
     if (process.exitCode) process.exit(process.exitCode);
 })();

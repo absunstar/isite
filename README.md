@@ -48,6 +48,32 @@ iSite is a Node.js web framework used by Social Browser and other applications. 
 
 ---
 
+## Core v14: Smart Code `findMany` optimization
+
+Core v14 keeps legacy `collection.findMany()` unchanged and adds explicit faster choices discovered from the full Smart Code usage scan:
+
+```js
+const docs = await collection.findManyNoCount(options);
+const { list, count } = await collection.findManyConcurrent(options);
+```
+
+Cached forms are also available:
+
+```js
+collection.findManyNoCountCached(options, { ttl: 15000 });
+collection.findManyConcurrentCached(options, { ttl: 15000 });
+```
+
+Analyze a Smart Code checkout:
+
+```bash
+SMART_CODE_DIR=/path/to/smart-code npm run smart-code:findmany
+```
+
+See `docs/core-v14.md` for details.
+
+---
+
 # Highlights
 
 - Fast indexed routing for exact routes.
