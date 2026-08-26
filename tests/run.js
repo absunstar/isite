@@ -1033,6 +1033,53 @@ function routingSite() {
         assert.equal(typeof c.findByIdsBudgeted, 'function');
     });
 
+
+    await test('Core v11 project scanner extracts Smart Code-style site, response, request and collection APIs', () => {
+        const compatSite = {
+            connectCollection() { return { addOne() {}, findMany() {}, removeMany() {} }; },
+            get() {}, post() {}, callRoute() {}, isFileExistsSync() {}, fromJson() {}, readFileSync() {}, writeFile() {},
+            path: { join() {} }, security: { getUserFinger() {} }, health() { return {}; }, compat: {},
+        };
+        require('../lib/core-v11.js')(compatSite);
+        const root = path.join(__dirname, 'compat', 'smart-code-fixture');
+        const report = compatSite.compat.scanProject(root);
+        assert.ok(report.filesScanned >= 2);
+        assert.ok(report.usage.site.some(x => x.name === 'connectCollection' && x.serverCount > 0));
+        assert.ok(report.usage.site.some(x => x.name === 'callRoute' && x.serverCount > 0));
+        assert.ok(report.usage.res.some(x => x.name === 'render' && x.serverCount > 0));
+        assert.ok(report.usage.req.some(x => x.name === 'session.lang' && x.serverCount > 0));
+        assert.ok(report.usage.collection.some(x => x.name === 'addOne' && x.serverCount > 0));
+        assert.ok(report.usage.collection.some(x => x.name === 'findMany' && x.serverCount > 0));
+        assert.ok(report.usage.collection.some(x => x.name === 'removeMany' && x.serverCount > 0));
+        assert.ok(report.usage.prototype.some(x => x.name === 'like'));
+    });
+
+    await test('Core v11 project verifier treats application-added site helpers as custom, not broken iSite APIs', () => {
+        const compatSite = {
+            connectCollection() { return { addOne() {}, findMany() {}, removeMany() {} }; },
+            get() {}, post() {}, callRoute() {}, isFileExistsSync() {}, fromJson() {}, readFileSync() {}, writeFile() {},
+            path: { join() {} }, security: { getUserFinger() {} }, health() { return {}; }, compat: {},
+        };
+        require('../lib/core-v11.js')(compatSite);
+        const root = path.join(__dirname, 'compat', 'smart-code-fixture');
+        const result = compatSite.compat.verifyProject(root, {
+            requiredSiteApis: ['get', 'post', 'connectCollection', 'path.join'],
+            requiredCollectionApis: ['addOne', 'findMany', 'removeMany'],
+        });
+        assert.equal(result.ok, true);
+        assert.ok(Array.isArray(result.customOrProjectSiteApis));
+    });
+
+    await test('Core v11 usage comparison detects removed server API usage', () => {
+        const compatSite = { health() { return {}; }, compat: {} };
+        require('../lib/core-v11.js')(compatSite);
+        const expected = { usage: { site: [{ name: 'get', serverCount: 1 }], res: [], req: [], collection: [], prototype: [] } };
+        const actual = { usage: { site: [], res: [], req: [], collection: [], prototype: [] } };
+        const result = compatSite.compat.compareProjectUsage(expected, actual);
+        assert.equal(result.ok, false);
+        assert.deepEqual(result.missing, [{ category: 'site', name: 'get' }]);
+    });
+
     console.log(`\n${passed} tests passed`);
     if (process.exitCode) process.exit(process.exitCode);
 })();

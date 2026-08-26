@@ -1,0 +1,40 @@
+{
+  "name": "absunstar/smart-code",
+  "source": "GitHub repository master branch",
+  "requiredSiteApis": [
+    "get",
+    "post",
+    "callRoute",
+    "connectCollection",
+    "isFileExistsSync",
+    "fromJson",
+    "readFileSync",
+    "writeFile",
+    "path.join",
+    "security.getUserFinger"
+  ],
+  "requiredCollectionApis": [
+    "addOne",
+    "findMany",
+    "removeMany"
+  ],
+  "legacyPrototypeHelpers": [
+    "like",
+    "contains",
+    "test"
+  ],
+  "representativeEntryPoints": [
+    "cms.js",
+    "erp.js",
+    "souq.js",
+    "club.js",
+    "lawyer.js",
+    "medical.js",
+    "academy.js",
+    "employee.js",
+    "pharmacy.js",
+    "restaurant.js",
+    "smartcode.js"
+  ],
+  "note": "This baseline protects APIs confirmed in Smart Code. Run smart-code:scan against a local checkout to generate the complete usage matrix."
+}

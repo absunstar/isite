@@ -1,6 +1,6 @@
 {
   "name": "isite",
-  "version": "2026.08.26-v10",
+  "version": "2026.08.26-v11",
   "description": "Create High Level Multi-Language Web Site [Fast and Easy] ",
   "main": "index.js",
   "repository": {
@@ -33,7 +33,11 @@
     "benchmark": "node benchmarks/performance.js",
     "verify": "npm run check && npm test && npm run http-test && npm run smoke && npm run benchmark",
     "smoke": "node tests/smoke-init.js",
-    "http-test": "node tests/http-download.js"
+    "http-test": "node tests/http-download.js",
+    "smart-code:scan": "node tests/smart-code-harness.js --scan",
+    "smart-code:verify": "node tests/smart-code-harness.js --verify",
+    "smart-code:baseline": "node tests/smart-code-harness.js --baseline",
+    "verify:full": "npm run verify && npm run smart-code:verify"
   },
   "author": {
     "name": "Absunstar",

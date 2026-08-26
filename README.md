@@ -1,6 +1,6 @@
 # iSite
 
-**Current version:** `2026.08.26-v10`
+**Current version:** `2026.08.26-v11`
 
 iSite is a Node.js web framework used by Social Browser and other applications. It provides routing, file serving, server-side parsing, sessions, security integration, MongoDB helpers, WebSocket support, caching, diagnostics, reliability primitives, high-throughput database helpers, and backward-compatible legacy APIs.
 
@@ -3405,6 +3405,92 @@ Use in HTML:
 ```html
 <label>##word.user_name##</label>
 <label>##word.user_email##</label>
+```
+
+---
+
+
+# Smart Code Real-World Compatibility
+
+Smart Code is the primary real-world compatibility target for iSite. Core v11 adds a project scanner and compatibility gate that can analyze a local Smart Code checkout without executing its business logic.
+
+Scan a checkout:
+
+```bash
+SMART_CODE_DIR=/path/to/smart-code npm run smart-code:scan
+```
+
+Verify APIs used by Smart Code against the current iSite runtime:
+
+```bash
+SMART_CODE_DIR=/path/to/smart-code npm run smart-code:verify
+```
+
+Generate a full usage manifest:
+
+```bash
+SMART_CODE_DIR=/path/to/smart-code npm run smart-code:baseline
+```
+
+Run the normal iSite verification and then the Smart Code gate:
+
+```bash
+SMART_CODE_DIR=/path/to/smart-code npm run verify:full
+```
+
+Programmatic API:
+
+```js
+const report = site.compat.scanProject('/path/to/smart-code');
+
+console.log(report.summary);
+console.log(report.usage.site);
+console.log(report.usage.collection);
+```
+
+Verify a project with explicitly required legacy APIs:
+
+```js
+const result = site.compat.verifyProject('/path/to/smart-code', {
+  requiredSiteApis: [
+    'get',
+    'post',
+    'callRoute',
+    'connectCollection',
+    'readFileSync',
+    'writeFile',
+    'security.getUserFinger',
+  ],
+  requiredCollectionApis: [
+    'addOne',
+    'findMany',
+    'removeMany',
+  ],
+});
+
+if (!result.ok) {
+  throw new Error('Smart Code compatibility failed');
+}
+```
+
+The scanner separates server-side files from `site_files/js` client code so browser-side `site.*` calls do not become false server compatibility failures. Application-defined `site.*` helpers are reported separately and are not treated as missing iSite APIs unless they are explicitly pinned as required.
+
+Compare two project usage manifests:
+
+```js
+const diff = site.compat.compareProjectUsage(oldReport, newReport);
+
+console.log(diff.missing);
+console.log(diff.added);
+```
+
+Write a UTF-8 manifest:
+
+```js
+site.compat.writeProjectManifest(
+  '/path/to/smart-code',
+  './smart-code-usage.json'
+);
 ```
 
 ---
