@@ -43,6 +43,9 @@ try {
         const result = site.compat.verifyProject(smartCodeDir, {
             requiredSiteApis: baseline.requiredSiteApis,
             requiredCollectionApis: baseline.requiredCollectionApis,
+            requiredResponseApis: baseline.requiredResponseApis,
+            requiredRequestApis: baseline.requiredRequestApis,
+            requiredPrototypeHelpers: baseline.legacyPrototypeHelpers,
         });
         console.log('Smart Code compatibility');
         console.log('files:', result.report.filesScanned);

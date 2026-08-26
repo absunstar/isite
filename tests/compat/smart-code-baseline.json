@@ -1,6 +1,6 @@
 {
   "name": "absunstar/smart-code",
-  "source": "GitHub repository master branch",
+  "source": "Uploaded full Smart Code source scan (2026-08-26)",
   "requiredSiteApis": [
     "get",
     "post",
@@ -14,8 +14,25 @@
     "security.getUserFinger"
   ],
   "requiredCollectionApis": [
-    "addOne",
     "findMany",
+    "add",
+    "edit",
+    "delete",
+    "findOne",
+    "find",
+    "update",
+    "createUnique",
+    "deleteDuplicate",
+    "aggregate",
+    "ObjectId",
+    "deleteMany",
+    "insertMany",
+    "findAll",
+    "get",
+    "deleteAll",
+    "addOne",
+    "updateOne",
+    "updateAll",
     "removeMany"
   ],
   "legacyPrototypeHelpers": [
@@ -36,5 +53,25 @@
     "restaurant.js",
     "smartcode.js"
   ],
-  "note": "This baseline protects APIs confirmed in Smart Code. Run smart-code:scan against a local checkout to generate the complete usage matrix."
+  "note": "Generated from the full uploaded Smart Code source. Project-defined collection method newCode is intentionally excluded.",
+  "filesScanned": 1019,
+  "bytesScanned": 14728177,
+  "requiredResponseApis": [
+    "json",
+    "render",
+    "redirect",
+    "end",
+    "set",
+    "status",
+    "txt",
+    "send",
+    "download",
+    "sendStatus",
+    "htmlContent"
+  ],
+  "requiredRequestApis": [
+    "getUserFinger",
+    "word",
+    "hasFeature"
+  ]
 }
