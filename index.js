@@ -286,6 +286,7 @@ module.exports = function init(options) {
     ____0.diagnostics = require('./lib/performance.js')(____0);
     ____0.coreV3 = require('./lib/core-v3.js')(____0);
     ____0.coreV4 = require('./lib/core-v4.js')(____0);
+    ____0.coreV5 = require('./lib/core-v5.js')(____0);
 
     ____0.routing = require('./lib/routing.js')(____0);
 

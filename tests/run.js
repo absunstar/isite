@@ -375,6 +375,110 @@ function routingSite() {
         d.close();
     });
 
+
+    await test('Core v5 stableKey is deterministic and order-insensitive for object keys', () => {
+        const site = {};
+        require('../lib/core-v4.js')(site);
+        require('../lib/core-v5.js')(site);
+        assert.equal(site.stableKey({ b: 2, a: 1 }), site.stableKey({ a: 1, b: 2 }));
+        const long = site.stableKey({ x: 'z'.repeat(2000) });
+        assert.ok(long.startsWith('sha1:'));
+    });
+
+    await test('Core v5 AdaptiveCache enforces entry and byte budgets', () => {
+        const site = {};
+        require('../lib/core-v4.js')(site);
+        require('../lib/core-v5.js')(site);
+        const c = new site.AdaptiveCache({ maxEntries: 2, maxBytes: 1024, ttl: 1000 });
+        c.set('a', 'A'); c.set('b', 'B'); c.get('a'); c.set('c', 'C');
+        assert.equal(c.get('b'), undefined);
+        assert.equal(c.get('a'), 'A');
+        assert.equal(c.get('c'), 'C');
+        assert.ok(c.stats().evictions >= 1);
+    });
+
+    await test('Core v5 query cache de-duplicates inflight loads and caches results', async () => {
+        const site = {};
+        require('../lib/core-v3.js')(site);
+        require('../lib/core-v4.js')(site);
+        require('../lib/core-v5.js')(site);
+        let runs = 0;
+        const loader = async () => { runs++; await new Promise(r => setTimeout(r, 3)); return { id: 7 }; };
+        const opts = { where: { id: 7 }, select: { name: 1 } };
+        const [a, b] = await Promise.all([
+            site.query.cached('users', 'findOne', opts, loader),
+            site.query.cached('users', 'findOne', { select: { name: 1 }, where: { id: 7 } }, loader),
+        ]);
+        const c = await site.query.cached('users', 'findOne', opts, loader);
+        assert.equal(runs, 1); assert.equal(a.id, 7); assert.equal(b.id, 7); assert.equal(c.id, 7);
+        assert.equal(site.query.invalidate('users'), 1);
+    });
+
+    await test('Core v5 static precompression caches Brotli output', async () => {
+        const os = require('node:os');
+        const fs = require('node:fs');
+        const path = require('node:path');
+        const dir = fs.mkdtempSync(path.join(os.tmpdir(), 'isite-v5-'));
+        const file = path.join(dir, 'asset.js');
+        fs.writeFileSync(file, 'const hello = "world";\n'.repeat(500));
+        const site = {};
+        require('../lib/core-v4.js')(site);
+        require('../lib/core-v5.js')(site);
+        const a = await site.staticAssets.precompress(file, { encoding: 'br' });
+        const b = await site.staticAssets.precompress(file, { encoding: 'br' });
+        assert.equal(a.encoding, 'br'); assert.ok(a.size < a.originalSize); assert.equal(b.cached, true);
+        fs.rmSync(dir, { recursive: true, force: true });
+    });
+
+
+    await test('Core v5 encoding negotiation honors q values and disabled encodings', () => {
+        const site = {};
+        require('../lib/core-v4.js')(site);
+        require('../lib/core-v5.js')(site);
+        assert.equal(site.staticAssets.chooseEncoding('gzip;q=1, br;q=0.5'), 'gzip');
+        assert.equal(site.staticAssets.chooseEncoding('br;q=0, gzip;q=0.8'), 'gzip');
+        assert.equal(site.staticAssets.chooseEncoding('deflate;q=0, gzip;q=0'), null);
+        assert.equal(site.staticAssets.chooseEncoding('gzip, br'), 'br');
+    });
+
+    await test('Mongo v5 fast reads use one find call and writes invalidate new query cache', async () => {
+        const site = {
+            options: { mongodb: { enabled: true, url: 'mongodb://fake', db: 'main', collection: 'x', limit: 100, prefix: { db: '', collection: '' }, config: {} } },
+            databaseList: [], databaseCollectionList: [], log() {}, on() {},
+            removeRefObject: x => x, fn: { isDate: () => false }, getDateTime: x => x,
+        };
+        let invalidations = 0, findCalls = 0;
+        site.query = { invalidate(name) { invalidations++; assert.equal(name, 'main.users'); return 1; } };
+        const mongo = require('../lib/mongodb.js')(site);
+        const fake = {
+            find(where, options) { findCalls++; return { toArray: async () => [{ id: 1 }, { id: 2 }] }; },
+            insertOne: async () => ({ insertedId: 'abc' }),
+        };
+        mongo.connectCollection = (obj, cb) => cb(null, fake);
+        const docs = await new Promise((resolve, reject) => mongo.findManyFast({ dbName: 'main', collectionName: 'users', where: {} }, (e, v) => e ? reject(e) : resolve(v)));
+        assert.equal(findCalls, 1); assert.equal(docs.length, 2);
+        await new Promise((resolve, reject) => mongo.insertOne({ dbName: 'main', collectionName: 'users', doc: { id: 3 } }, (e) => e ? reject(e) : resolve()));
+        assert.equal(invalidations, 1);
+    });
+
+
+    await test('Mongo v5 findPageFast returns data and count from one aggregate call', async () => {
+        const site = {
+            options: { mongodb: { enabled: true, url: 'mongodb://fake', db: 'main', collection: 'x', limit: 50, prefix: { db: '', collection: '' }, config: {} } },
+            databaseList: [], databaseCollectionList: [], log() {}, on() {},
+            removeRefObject: x => x, fn: { isDate: () => false }, getDateTime: x => x,
+        };
+        const mongo = require('../lib/mongodb.js')(site);
+        let aggregateCalls = 0; let pipelineSeen;
+        mongo.connectCollection = (obj, cb) => cb(null, {
+            aggregate(pipeline) { aggregateCalls++; pipelineSeen = pipeline; return { toArray: async () => [{ data: [{ id: 2 }], meta: [{ count: 11 }] }] }; },
+        });
+        const out = await new Promise((resolve, reject) => mongo.findPageFast({ dbName: 'main', collectionName: 'users', where: { active: true }, sort: { id: -1 }, skip: 5, limit: 10 }, (e, list, count) => e ? reject(e) : resolve({ list, count })));
+        assert.equal(aggregateCalls, 1); assert.equal(out.count, 11); assert.equal(out.list[0].id, 2);
+        assert.equal(pipelineSeen[0].$match.active, true);
+        assert.equal(pipelineSeen[1].$facet.data.some(x => x.$limit === 10), true);
+    });
+
     console.log(`\n${passed} tests passed`);
     if (process.exitCode) process.exit(process.exitCode);
 })();
