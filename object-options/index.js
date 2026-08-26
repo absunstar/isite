@@ -331,7 +331,19 @@ function setOptions(_options, ____0) {
   startupOptions.event(____0);
   startupOptions.prototype(____0);
   startupOptions.safty(____0);
-  startupOptions.numbers(____0);
+  let numbersReady = false;
+  const initNumbers = function () {
+    if (numbersReady) return ____0.stringfiy;
+    numbersReady = true;
+    require('./lib/numbers.js')(____0);
+    return ____0.stringfiy;
+  };
+  Object.defineProperty(____0, 'stringfiy', {
+    configurable: true,
+    enumerable: true,
+    get() { return initNumbers(); },
+    set(value) { numbersReady = true; Object.defineProperty(____0, 'stringfiy', { configurable: true, enumerable: true, writable: true, value }); },
+  });
   startupOptions.features(____0);
   dir_arr.forEach((f) => {
     ____0.addFeature(f);

@@ -461,7 +461,23 @@ module.exports = function init(options) {
     ____0.logs = startupServices.logs(____0).fn;
 
     if (____0.options.security.enabled) {
-        ____0.security = require('./lib/security.js')(____0);
+        ____0.$users = ____0.connectCollection({ collection: ____0.options.security.users_collection, db: ____0.options.security.db });
+        ____0.$roles = ____0.connectCollection({ collection: ____0.options.security.roles_collection, db: ____0.options.security.db });
+        let securityValue;
+        let securityLoading = false;
+        const initSecurity = function () {
+            if (securityValue !== undefined) return securityValue;
+            if (securityLoading) return securityValue;
+            securityLoading = true;
+            try {
+                securityValue = require('./lib/security.js')(____0);
+                Object.defineProperty(____0, 'security', { configurable: true, enumerable: true, writable: true, value: securityValue });
+                return securityValue;
+            } finally { securityLoading = false; }
+        };
+        Object.defineProperty(____0, 'security', { configurable: true, enumerable: true, get: initSecurity,
+            set(value) { securityValue = value; Object.defineProperty(____0, 'security', { configurable: true, enumerable: true, writable: true, value }); } });
+        Object.defineProperty(____0, '_initSecurity', { configurable: true, enumerable: false, value: initSecurity });
     }
 
     ____0.cookie = startupServices.cookie;

@@ -1,6 +1,6 @@
 {
   "name": "isite",
-  "version": "2026.08.26-v30",
+  "version": "2026.08.26-v32",
   "description": "Create High Level Multi-Language Web Site [Fast and Easy] ",
   "main": "index.js",
   "repository": {
@@ -31,7 +31,7 @@
     "check": "node tests/static-check.js",
     "test": "node tests/run.js",
     "benchmark": "node benchmarks/performance.js",
-    "verify": "npm run check && npm test && npm run core-bundle-test && npm run service-bundle-test && npm run service-bundle-nomongo-test && npm run startup-bundle-v28-test && npm run lazy-metadata-v29-test && npm run service-bundle-sloppy-test && npm run object-options-bundle-test && npm run from123-v25-test && npm run lazy-core-v26-test && npm run lazy-core-v3-v27-test && npm run lazy-readpool-v30-test && npm run compat:framework && npm run http-compat && npm run http-v17 && npm run startup-test && npm run startup-v22-test && npm run http-test && npm run smoke && npm run benchmark",
+    "verify": "npm run check && npm test && npm run core-bundle-test && npm run service-bundle-test && npm run service-bundle-nomongo-test && npm run startup-bundle-v28-test && npm run lazy-metadata-v29-test && npm run service-bundle-sloppy-test && npm run object-options-bundle-test && npm run from123-v25-test && npm run lazy-core-v26-test && npm run lazy-core-v3-v27-test && npm run lazy-readpool-v30-test && npm run lazy-security-v31-test && npm run lazy-numbers-v32-test && npm run compat:framework && npm run http-compat && npm run http-v17 && npm run startup-test && npm run startup-v22-test && npm run http-test && npm run smoke && npm run benchmark",
     "smoke": "node tests/smoke-init.js",
     "http-test": "node tests/http-download.js",
     "smart-code:scan": "node tests/smart-code-harness.js --scan",
@@ -65,7 +65,9 @@
     "service-bundle-nomongo-test": "node tests/service-bundle-nomongo-sync.js",
     "startup-bundle-v28-test": "node tests/startup-bundle-v28.js",
     "lazy-metadata-v29-test": "node tests/lazy-metadata-v29.js",
-    "lazy-readpool-v30-test": "node tests/lazy-readpool-v30.js"
+    "lazy-readpool-v30-test": "node tests/lazy-readpool-v30.js",
+    "lazy-security-v31-test": "node tests/lazy-security-v31.js",
+    "lazy-numbers-v32-test": "node tests/lazy-numbers-v32.js"
   },
   "author": {
     "name": "Absunstar",

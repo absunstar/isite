@@ -1,6 +1,6 @@
 # iSite
 
-**Current version:** `2026.08.26-v30`
+**Current version:** `2026.08.26-v31`
 
 ## Core v30 — startup-safe lazy collection read pools
 
@@ -4129,3 +4129,9 @@ The release policy for startup work is now benchmark-champion based: newer candi
 Core v29 defers loading `package.json` and `node:module` until their public APIs are first used when they are not required by the startup configuration. `site.package` and `site.Module` remain own enumerable public properties and preserve their legacy values. The optional `ISITE_COMPILE_CACHE=1` path still loads `node:module` immediately, and package-version logging still works when `log:true`.
 
 This release was adopted under the fastest-version policy only after interleaved cold-process benchmarks beat v28 across minimal, MongoDB, and MongoDB+Security profiles while all historical compatibility gates remained green.
+
+## Core v32 startup champion
+
+Core v32 removes `object-options/lib/numbers.js` from the cold-start bundle. The legacy `site.stringfiy()` API remains an own enumerable property and materializes synchronously from the original module on first access. This avoids parsing and allocating the Arabic number-word lookup tables in applications that never use the helper.
+
+v32 was promoted under the benchmark-champion policy only after beating v31 in the final minimal, MongoDB, and MongoDB+Security cold-start profiles and passing all framework, parser, HTTP, smoke, and Smart Code compatibility gates. See `docs/core-v32.md`.

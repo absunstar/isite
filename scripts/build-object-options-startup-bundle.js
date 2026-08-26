@@ -3,7 +3,7 @@ const fs = require('node:fs');
 const path = require('node:path');
 const root = path.resolve(__dirname, '..');
 const modules = [
-  ['fn','fn.js'], ['safty','safty.js'], ['numbers','numbers.js'], ['prototype','prototype.js'],
+  ['fn','fn.js'], ['safty','safty.js'], ['prototype','prototype.js'],
   ['strings','strings.js'], ['features','features.js'], ['constMod','const.js'], ['event','event.js']
 ];
 function generate() {

@@ -1,0 +1,11 @@
+'use strict';
+const assert=require('node:assert/strict');
+const init=require('../index.js');
+const site=init({name:'lazy-numbers',apps:false,stdin:false,help:false,log:false,port:0,mongodb:{enabled:false},security:{enabled:false},session:{enabled:false,save:false,storage:'file',timeout:1,memoryTimeout:1}});
+const file=require.resolve('../object-options/lib/numbers.js');
+assert.equal(require.cache[file], undefined, 'numbers.js must stay unloaded during cold init');
+const d=Object.getOwnPropertyDescriptor(site,'stringfiy'); assert.ok(d&&d.enumerable&&typeof d.get==='function');
+const fn=site.stringfiy; assert.equal(typeof fn,'function'); assert.ok(require.cache[file]); assert.equal(site.stringfiy,fn); assert.equal(site.stringfiy(123,'ar'),'مائةوثلاثةوعشرون');
+const d2=Object.getOwnPropertyDescriptor(site,'stringfiy'); assert.ok(d2&&Object.prototype.hasOwnProperty.call(d2,'value')&&d2.enumerable);
+console.log('PASS v32 number words helper is lazy and behaviorally compatible');
+process.exit(0);
