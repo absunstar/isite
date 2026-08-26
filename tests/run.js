@@ -665,6 +665,374 @@ function routingSite() {
         assert.equal(c.batchStats()[0].batches, 1);
     });
 
+
+    await test('Core v8 structured trace is bounded, filterable and context-aware', async () => {
+        const site = { databaseList: [], databaseCollectionList: [] };
+        require('../lib/core-v4.js')(site);
+        require('../lib/core-v5.js')(site);
+        require('../lib/core-v6.js')(site);
+        require('../lib/core-v7.js')(site);
+        require('../lib/core-v8.js')(site);
+        site.trace.configure({ maxEntries: 10 });
+        const ctx = site.context.create({ operation: 'trace-test', requestId: 'r1' });
+        await site.context.run(ctx, async () => {
+            site.trace.info('hello', { a: 1 });
+            site.trace.warn('warn');
+        });
+        const recent = site.trace.recent(10, { requestId: 'r1' });
+        assert.equal(recent.length, 2);
+        assert.equal(recent[0].operation, 'trace-test');
+        assert.equal(recent[0].contextId, ctx.id);
+        assert.equal(site.trace.stats().byLevel.info, 1);
+        assert.equal(site.health().trace.entries, 2);
+    });
+
+    await test('Core v8 resource registry closes tracked resources once', async () => {
+        const site = {};
+        require('../lib/core-v3.js')(site);
+        require('../lib/core-v4.js')(site);
+        require('../lib/core-v5.js')(site);
+        require('../lib/core-v6.js')(site);
+        require('../lib/core-v7.js')(site);
+        require('../lib/core-v8.js')(site);
+        let closes = 0;
+        const id = site.resources.add({ async close() { closes++; } }, { id: 'db' });
+        assert.equal(id, 'db'); assert.equal(site.resources.count(), 1);
+        assert.equal(await site.resources.close('db'), true);
+        assert.equal(closes, 1); assert.equal(site.resources.count(), 0);
+        assert.equal(await site.resources.close('db'), false);
+    });
+
+    await test('Core v8 async mapLimit preserves order and concurrency bound', async () => {
+        const site = {};
+        require('../lib/core-v8.js')(site);
+        let active = 0, maxActive = 0;
+        const result = await site.async.mapLimit([1,2,3,4,5,6], 2, async n => {
+            active++; maxActive = Math.max(maxActive, active);
+            await new Promise(r => setTimeout(r, 2)); active--; return n * 2;
+        });
+        assert.deepEqual(result, [2,4,6,8,10,12]);
+        assert.equal(maxActive, 2);
+        assert.deepEqual(await site.async.filterLimit([1,2,3,4], 2, async n => n % 2 === 0), [2,4]);
+    });
+
+    await test('Core v8 JSON array streaming emits valid JSON without full buffering', async () => {
+        const { Writable } = require('node:stream');
+        const site = {};
+        require('../lib/core-v8.js')(site);
+        let text = '';
+        const writable = new Writable({ write(chunk, enc, cb) { text += chunk.toString(); cb(); } });
+        const result = await site.stream.jsonArray((async function* () { yield { id: 1 }; yield { id: 2 }; })(), writable);
+        assert.equal(result.rows, 2);
+        assert.deepEqual(JSON.parse(text), [{ id: 1 }, { id: 2 }]);
+        assert.equal(result.bytes, Buffer.byteLength(text));
+    });
+
+    await test('Core v8 static manifest diff identifies only changed assets', async () => {
+        const site = {};
+        require('../lib/core-v4.js')(site);
+        require('../lib/core-v5.js')(site);
+        require('../lib/core-v6.js')(site);
+        require('../lib/core-v7.js')(site);
+        require('../lib/core-v8.js')(site);
+        const prev = { files: [{ path: '/a.js', size: 10, mtimeMs: 1 }, { path: '/b.css', size: 20, mtimeMs: 1 }, { path: '/old.js', size: 1, mtimeMs: 1 }] };
+        const curr = { files: [{ path: '/a.js', size: 10, mtimeMs: 1 }, { path: '/b.css', size: 25, mtimeMs: 2 }, { path: '/new.js', size: 3, mtimeMs: 1 }] };
+        const diff = site.staticAssets.diffManifest(prev, curr);
+        assert.deepEqual(diff.changedFiles.map(x => x.path).sort(), ['/b.css', '/new.js']);
+        assert.deepEqual(diff.removed.map(x => x.path), ['/old.js']);
+        assert.deepEqual(diff.unchanged.map(x => x.path), ['/a.js']);
+    });
+
+    await test('Core v8 query plans cache stable shapes and instantiate without mutating template', () => {
+        const site = {};
+        require('../lib/core-v4.js')(site);
+        require('../lib/core-v5.js')(site);
+        require('../lib/core-v6.js')(site);
+        require('../lib/core-v7.js')(site);
+        require('../lib/core-v8.js')(site);
+        const a = site.queryPlan.compile('main.users', 'findMany', { limit: 50, sort: { id: -1 } });
+        const b = site.queryPlan.compile('main.users', 'findMany', { sort: { id: -1 }, limit: 50 });
+        assert.equal(a, b);
+        const opts = site.queryPlan.instantiate(a, { skip: 100 });
+        assert.equal(opts.limit, 50); assert.equal(opts.skip, 100);
+        assert.equal(a.options.skip, undefined);
+        assert.ok(site.queryPlan.stats().entries >= 1);
+        assert.ok(site.health().queryPlans.entries >= 1);
+    });
+
+    await test('Core v8 remains additive and does not replace legacy collection aliases', () => {
+        const site = {
+            strings: Array.from({ length: 10 }, (_, i) => 's' + i), on() {}, collectionList: [], collectionByGuid: new Map(), hide: () => 'v8-guid',
+            options: { mongodb: { db: 'd', collection: 'c', identity: { enabled: false }, limit: 100 } },
+            mongodb: { collections_indexed: { c: { nextID: 1 } } }, log() {}, toInt: Number,
+        };
+        require('../lib/core-v8.js')(site);
+        const c = require('../lib/collection.js')(site, { db: 'd', collection: 'c', identity: { enabled: false } });
+        assert.equal(c.find, c.findOne);
+        assert.equal(c.get, c.findOne);
+        assert.equal(typeof c.findMany, 'function');
+        assert.equal(typeof c.add, 'function');
+        assert.equal(typeof c.update, 'function');
+        assert.equal(typeof c.delete, 'function');
+    });
+
+
+    await test('Core v9 Mongo telemetry aggregates execution efficiency without changing queries', () => {
+        const site = {};
+        require('../lib/core-v3.js')(site);
+        require('../lib/core-v4.js')(site);
+        require('../lib/core-v5.js')(site);
+        require('../lib/core-v6.js')(site);
+        require('../lib/core-v7.js')(site);
+        require('../lib/core-v8.js')(site);
+        require('../lib/core-v9.js')(site);
+        site.mongoTelemetry.record({ collection: 'main.users', operation: 'findMany', ms: 12, docsExamined: 1000, keysExamined: 1000, nReturned: 10, indexName: 'active_1' });
+        site.mongoTelemetry.record({ collection: 'main.users', operation: 'findMany', ms: 8, docsExamined: 500, keysExamined: 500, nReturned: 10, indexName: 'active_1' });
+        const report = site.mongoTelemetry.report();
+        assert.equal(report.length, 1);
+        assert.equal(report[0].count, 2);
+        assert.equal(report[0].avgMs, 10);
+        assert.equal(report[0].scanRatio, 75);
+        assert.equal(site.mongoTelemetry.inefficient({ minScanRatio: 20, minDocsExamined: 100 }).length, 1);
+        assert.equal(site.health().mongoTelemetry.entries, 2);
+    });
+
+    await test('Core v9 Mongo explain extraction reads winning index execution stats', () => {
+        const site = {};
+        require('../lib/core-v9.js')(site);
+        const row = site.mongoTelemetry.extractExplain({
+            executionStats: {
+                totalDocsExamined: 25,
+                totalKeysExamined: 30,
+                nReturned: 5,
+                executionTimeMillis: 3,
+                executionStages: { stage: 'FETCH', inputStage: { stage: 'IXSCAN', indexName: 'email_1' } },
+            },
+        });
+        assert.deepEqual(row, { docsExamined: 25, keysExamined: 30, nReturned: 5, executionTimeMs: 3, indexName: 'email_1', stage: 'IXSCAN' });
+    });
+
+    await test('Core v9 response cache supports tags, stable keys and inflight deduplication', async () => {
+        const site = {};
+        require('../lib/core-v3.js')(site);
+        require('../lib/core-v4.js')(site);
+        require('../lib/core-v5.js')(site);
+        require('../lib/core-v9.js')(site);
+        const keyA = site.responseCache.key({ method: 'GET', host: 'example', url: '/api?a=1', vary: { lang: 'en' } });
+        const keyB = site.responseCache.key({ url: '/api?a=1', host: 'example', method: 'GET', vary: { lang: 'en' } });
+        assert.equal(keyA, keyB);
+        let loads = 0;
+        const [a, b] = await Promise.all([
+            site.responseCache.getOrLoad(keyA, async () => { loads++; await new Promise(r => setTimeout(r, 5)); return { status: 200, headers: { 'content-type': 'application/json' }, body: '{"ok":true}' }; }, { ttl: 1000, tags: ['users'] }),
+            site.responseCache.getOrLoad(keyA, async () => { loads++; return { body: 'bad' }; }, { ttl: 1000, tags: ['users'] }),
+        ]);
+        assert.equal(loads, 1);
+        assert.equal(a.body, '{"ok":true}');
+        assert.equal(b.body, '{"ok":true}');
+        assert.equal(site.responseCache.invalidateTag('users'), 1);
+        assert.equal(site.responseCache.get(keyA), undefined);
+    });
+
+    await test('Core v9 response cache can apply cached HTTP responses without changing response helpers', () => {
+        const site = {};
+        require('../lib/core-v3.js')(site);
+        require('../lib/core-v9.js')(site);
+        const state = { headers: {} };
+        const res = {
+            status(code) { state.status = code; return this; },
+            set(name, value) { state.headers[name] = value; return this; },
+            end(body) { state.body = body; },
+        };
+        const ok = site.responseCache.apply(res, { status: 201, headers: { 'content-type': 'text/plain' }, body: 'cached' });
+        assert.equal(ok, true);
+        assert.equal(state.status, 201);
+        assert.equal(state.headers['content-type'], 'text/plain');
+        assert.equal(state.body, 'cached');
+    });
+
+    await test('Core v9 remains additive and preserves legacy collection aliases', () => {
+        const site = {
+            strings: Array.from({ length: 10 }, (_, i) => 's' + i), on() {}, collectionList: [], collectionByGuid: new Map(), hide: () => 'v9-guid',
+            options: { mongodb: { db: 'd', collection: 'c', identity: { enabled: false }, limit: 100 } },
+            mongodb: { collections_indexed: { c: { nextID: 1 } } }, log() {}, toInt: Number,
+        };
+        require('../lib/core-v9.js')(site);
+        const c = require('../lib/collection.js')(site, { db: 'd', collection: 'c', identity: { enabled: false } });
+        assert.equal(c.find, c.findOne);
+        assert.equal(c.get, c.findOne);
+        assert.equal(typeof c.findMany, 'function');
+        assert.equal(typeof c.add, 'function');
+        assert.equal(typeof c.update, 'function');
+        assert.equal(typeof c.delete, 'function');
+    });
+
+
+    await test('Core v9 response cache stale-while-revalidate returns stale value and refreshes once', async () => {
+        const site = {};
+        require('../lib/core-v3.js')(site);
+        require('../lib/core-v4.js')(site);
+        require('../lib/core-v5.js')(site);
+        require('../lib/core-v9.js')(site);
+        site.responseCache.set('stale-key', { body: 'old' }, { ttl: 1, staleTTL: 1000, tags: ['x'] });
+        await new Promise(r => setTimeout(r, 5));
+        let loads = 0;
+        const value = await site.responseCache.getOrLoad('stale-key', async () => { loads++; return { body: 'new' }; }, { ttl: 1000, staleTTL: 1000, staleWhileRevalidate: true, tags: ['x'] });
+        assert.equal(value.body, 'old');
+        await new Promise(r => setTimeout(r, 5));
+        assert.equal(loads, 1);
+        assert.equal(site.responseCache.get('stale-key').body, 'new');
+    });
+
+    await test('Mongo v9 explainQuery is opt-in and records executionStats telemetry', async () => {
+        const fakeExplain = {
+            executionStats: {
+                totalDocsExamined: 12,
+                totalKeysExamined: 12,
+                nReturned: 3,
+                executionTimeMillis: 2,
+                executionStages: { stage: 'FETCH', inputStage: { stage: 'IXSCAN', indexName: 'active_1' } },
+            },
+        };
+        const fakeCollection = {
+            find() { return { limit() { return this; }, explain() { return Promise.resolve(fakeExplain); } }; },
+        };
+        const site = {
+            options: { mongodb: { enabled: true, db: 'd', collection: 'c', host: 'localhost', port: '27017', protocal: 'mongodb://', prefix: { db: '', collection: '' }, config: {} } },
+            databaseList: [], databaseCollectionList: [{ name: 'c', dbName: 'd', collection: fakeCollection }],
+            on() {}, call() {}, log() {}, fn: { isDate: () => false }, removeRefObject: x => x,
+            getDateTime: x => x,
+        };
+        require('../lib/core-v9.js')(site);
+        const mongo = require('../lib/mongodb.js')(site);
+        const explain = await new Promise((resolve, reject) => mongo.explainQuery({ dbName: 'd', collectionName: 'c', where: { active: true }, operation: 'findMany' }, (err, value) => err ? reject(err) : resolve(value)));
+        assert.equal(explain, fakeExplain);
+        const recent = site.mongoTelemetry.recent(10);
+        assert.equal(recent.length, 1);
+        assert.equal(recent[0].indexName, 'active_1');
+        assert.equal(recent[0].docsExamined, 12);
+        assert.equal(recent[0].nReturned, 3);
+    });
+
+
+
+    await test('Core v10 response-cache collection bindings invalidate only explicitly bound tags', () => {
+        const site = {};
+        require('../lib/core-v3.js')(site);
+        require('../lib/core-v9.js')(site);
+        require('../lib/core-v10.js')(site);
+        site.responseCache.set('users-list', { body: 'users' }, { ttl: 10000, tags: ['users'] });
+        site.responseCache.set('dashboard', { body: 'dashboard' }, { ttl: 10000, tags: ['dashboard'] });
+        site.responseCache.set('other', { body: 'other' }, { ttl: 10000, tags: ['other'] });
+        site.responseCache.bindCollection('main.users', ['users', 'dashboard']);
+        const out = site.responseCache.invalidateCollection('main.users', { operation: 'updateOne' });
+        assert.equal(out.bound, true);
+        assert.equal(out.invalidated, 2);
+        assert.equal(site.responseCache.get('users-list'), undefined);
+        assert.equal(site.responseCache.get('dashboard'), undefined);
+        assert.equal(site.responseCache.get('other').body, 'other');
+        assert.equal(site.responseCache.invalidationStats().bindings, 1);
+    });
+
+    await test('Core v10 unbound Mongo collections do not invalidate response cache', () => {
+        const site = {};
+        require('../lib/core-v3.js')(site);
+        require('../lib/core-v9.js')(site);
+        require('../lib/core-v10.js')(site);
+        site.responseCache.set('safe', { body: 'keep' }, { ttl: 10000, tags: ['safe'] });
+        const out = site.responseCache.invalidateCollection('main.unbound', { operation: 'deleteOne' });
+        assert.equal(out.bound, false);
+        assert.equal(out.invalidated, 0);
+        assert.equal(site.responseCache.get('safe').body, 'keep');
+    });
+
+    await test('Core v10 response-cache warming deduplicates concurrent loaders', async () => {
+        const site = {};
+        require('../lib/core-v3.js')(site);
+        require('../lib/core-v9.js')(site);
+        require('../lib/core-v10.js')(site);
+        let loads = 0;
+        const loader = async () => { loads++; await new Promise(r => setTimeout(r, 5)); return { body: 'warm' }; };
+        const [a, b] = await Promise.all([
+            site.responseCache.warm('warm-key', loader, { ttl: 10000 }),
+            site.responseCache.warm('warm-key', loader, { ttl: 10000 }),
+        ]);
+        assert.equal(loads, 1);
+        assert.equal(a.body, 'warm');
+        assert.equal(b.body, 'warm');
+        assert.equal(site.responseCache.warmStats().loaded, 1);
+    });
+
+    await test('Core v10 Mongo budgets observe telemetry without changing telemetry results', () => {
+        const site = {};
+        require('../lib/core-v3.js')(site);
+        require('../lib/core-v4.js')(site);
+        require('../lib/core-v9.js')(site);
+        require('../lib/core-v10.js')(site);
+        site.mongoBudget.set('main.users', 'findManyFast', { warnMs: 10, maxTimeMS: 50 });
+        const row = site.mongoTelemetry.record({ collection: 'main.users', operation: 'findManyFast', ms: 20, nReturned: 1 });
+        assert.equal(row.ms, 20);
+        assert.equal(site.mongoBudget.stats().warnings, 1);
+        assert.equal(site.mongoBudget.stats().exceeded, 0);
+        assert.equal(site.mongoBudget.get('main.users', 'findManyFast').maxTimeMS, 50);
+        assert.equal(site.health().mongoBudget.rules, 1);
+    });
+
+    await test('Mongo v10 write-cache bridge preserves query invalidation and uses response bindings only when configured', () => {
+        let queryInvalidated = 0;
+        let responseInvalidated = 0;
+        const site = {
+            options: { mongodb: { enabled: true, db: 'main', collection: 'users', host: 'localhost', port: '27017', protocal: 'mongodb://', prefix: { db: '', collection: '' }, config: {} } },
+            databaseList: [], databaseCollectionList: [], on() {}, call() {}, log() {}, fn: { isDate: () => false }, removeRefObject: x => x, getDateTime: x => x,
+            query: { invalidate(name) { queryInvalidated++; assert.equal(name, 'main.users'); return 1; } },
+            responseCache: { invalidateCollection(name, meta) { responseInvalidated++; assert.equal(name, 'main.users'); assert.equal(meta.operation, 'updateOne'); return { bound: true }; } },
+        };
+        const mongo = require('../lib/mongodb.js')(site);
+        const out = mongo.invalidateWriteCaches({ dbName: 'main', collectionName: 'users' }, 'updateOne');
+        assert.equal(queryInvalidated, 1);
+        assert.equal(responseInvalidated, 1);
+        assert.equal(out.query, 1);
+    });
+
+    await test('Core v10 budgeted collection reads pass maxTimeMS only through new opt-in APIs', async () => {
+        let seen = null;
+        const site = {
+            strings: Array.from({ length: 10 }, (_, i) => 's' + i), on() {}, collectionList: [], collectionByGuid: new Map(), hide: () => 'v10-guid',
+            options: { mongodb: { db: 'd', collection: 'c', identity: { enabled: false }, limit: 100 } },
+            mongodb: {
+                collections_indexed: { c: { nextID: 1 } },
+                findManyFast(options, cb) { seen = options; cb(null, [{ id: 1 }]); },
+            },
+            mongoBudget: { get() { return { maxTimeMS: 77 }; } },
+            log() {}, toInt: Number,
+        };
+        const c = require('../lib/collection.js')(site, { db: 'd', collection: 'c', identity: { enabled: false } });
+        const docs = await c.findManyBudgeted({ where: { active: true }, limit: 10 });
+        assert.equal(docs.length, 1);
+        assert.equal(seen.maxTimeMS, 77);
+        assert.equal(typeof c.findMany, 'function');
+        assert.equal(c.find, c.findOne);
+        assert.equal(c.get, c.findOne);
+    });
+
+    await test('Core v10 remains additive and preserves parser and legacy collection contracts', () => {
+        const site = {
+            strings: Array.from({ length: 10 }, (_, i) => 's' + i), on() {}, collectionList: [], collectionByGuid: new Map(), hide: () => 'v10-guid',
+            options: { mongodb: { db: 'd', collection: 'c', identity: { enabled: false }, limit: 100 } },
+            mongodb: { collections_indexed: { c: { nextID: 1 } } }, log() {}, toInt: Number,
+        };
+        require('../lib/core-v10.js')(site);
+        const c = require('../lib/collection.js')(site, { db: 'd', collection: 'c', identity: { enabled: false } });
+        assert.equal(c.find, c.findOne);
+        assert.equal(c.get, c.findOne);
+        assert.equal(typeof c.findMany, 'function');
+        assert.equal(typeof c.add, 'function');
+        assert.equal(typeof c.update, 'function');
+        assert.equal(typeof c.delete, 'function');
+        assert.equal(typeof c.findManyBudgeted, 'function');
+        assert.equal(typeof c.findPageBudgeted, 'function');
+        assert.equal(typeof c.findByIdsBudgeted, 'function');
+    });
+
     console.log(`\n${passed} tests passed`);
     if (process.exitCode) process.exit(process.exitCode);
 })();
