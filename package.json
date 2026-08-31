@@ -1,6 +1,6 @@
 {
   "name": "isite",
-  "version": "2026.08.26-v32",
+  "version": "2026.08.31-v36",
   "description": "Create High Level Multi-Language Web Site [Fast and Easy] ",
   "main": "index.js",
   "repository": {
@@ -67,7 +67,8 @@
     "lazy-metadata-v29-test": "node tests/lazy-metadata-v29.js",
     "lazy-readpool-v30-test": "node tests/lazy-readpool-v30.js",
     "lazy-security-v31-test": "node tests/lazy-security-v31.js",
-    "lazy-numbers-v32-test": "node tests/lazy-numbers-v32.js"
+    "lazy-numbers-v32-test": "node tests/lazy-numbers-v32.js",
+    "session-user-provider-v36-test": "node tests/session-user-provider-v36.js"
   },
   "author": {
     "name": "Absunstar",

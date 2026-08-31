@@ -1,6 +1,6 @@
 # iSite
 
-**Current version:** `2026.08.26-v31`
+**Current version:** `2026.08.31-v34`
 
 ## Core v30 — startup-safe lazy collection read pools
 
@@ -4135,3 +4135,22 @@ This release was adopted under the fastest-version policy only after interleaved
 Core v32 removes `object-options/lib/numbers.js` from the cold-start bundle. The legacy `site.stringfiy()` API remains an own enumerable property and materializes synchronously from the original module on first access. This avoids parsing and allocating the Arabic number-word lookup tables in applications that never use the helper.
 
 v32 was promoted under the benchmark-champion policy only after beating v31 in the final minimal, MongoDB, and MongoDB+Security cold-start profiles and passing all framework, parser, HTTP, smoke, and Smart Code compatibility gates. See `docs/core-v32.md`.
+
+
+## Core v33 high-volume translation renderer
+
+Core v33 keeps the existing iSite translation API and `##word.*##` syntax unchanged, but removes the main scaling bottleneck on pages with thousands of template tokens.
+
+- `parser.handleMatches()` now replaces supported template tokens in one RegExp pass instead of calling `String.replace()` once per token and recursively rescanning the whole document.
+- Nested tokens remain compatible: additional passes occur only when rendered values introduce more `##...##` tokens.
+- Word values are cached per request, so repeated navigation/footer/card labels do not repeat language and host resolution work.
+- `req.word(name)` also has a per-request cache while preserving host-specific `hostList` behavior and the original fallback to the word name.
+- Public APIs, translation JSON shape, `site.word()`, `req.word()`, `##word.name##`, and `word(---name)` remain compatible.
+
+Synthetic translation benchmark on this build (Node.js, 10,000 unique `##word.*##` tokens) reduced token replacement from roughly 1.16 s with the legacy algorithm to roughly 2.3 ms with the v33 renderer in the local benchmark environment. Exact timings vary by CPU and document shape; the architectural improvement is from repeated whole-string replacement toward linear token scanning.
+
+## Core v34 Social Browser identity and browser-login proof
+
+Core v34 preserves the existing Social Browser request identity contract while separating browser identity from authentication proof. Existing applications keep the same `req.browserHeader`, `req.browserName`, `req.browserID`, and `req.browserUUID` semantics. New code can also use the explicit aliases `req.browserFullID` and `req.browserCanonicalID`.
+
+When `X-Browser-Token` is present, iSite parses it as the opaque `req.browserToken` value and exposes non-secret state through `req.browserAuth`. iSite does not treat the token as authenticated by itself: the application/licensing layer must verify the proof. The token value is never inserted into `req.features`; only the boolean-style `browser.auth-token` feature is added.
